@@ -7,11 +7,18 @@ Portale educativo trilingue (IT, ES, EN), parte dell'ecosistema MARCELUS AI LAB.
 ## Release
 
 - **v0.1** — Home conversazionale, M01 approvato, glossario, laboratorio e fonti.
-- **v0.2 (preparata, in attesa del pacchetto)** — catalogo M01–M06 con stati editoriali, area Risorse, area Video e slide, un video ufficiale Anthropic collegato senza incorporamento YouTube.
+- **v0.2 (pubblicata)** — catalogo M01–M06 con stati editoriali, area Risorse, area Video e slide, un video ufficiale Anthropic collegato senza incorporamento YouTube.
+- **v0.3 (preparata, in attesa del pacchetto)** — percorso introduttivo «Che cos'è un prompt e come si scrive?» (IT/ES/EN), collegamento alla Biblioteca Prometeus dalla sezione Risorse e quattro video tutorial esterni selezionati. M01 rimane invariato; M03 resta in revisione.
 
 M02–M06 rimangono bozze; in v0.2 vengono mostrati **solo titolo e obiettivo**, con indicazione «In revisione editoriale». L'unica lezione completa pubblicata resta M01.
 
-## Pubblicare la release v0.2
+## Pubblicare la release v0.3
+
+Carica **`site-v0.3.zip`** nella radice del repository tramite [Upload files](https://github.com/manzo8b/manzo-ai/upload/main), senza estrarlo. Il workflow pubblica automaticamente la versione più recente disponibile. Attendere un run riuscito prima di verificare `/it/prompt-mastery/che-cos-e-un-prompt/`, `/it/risorse/` e `/it/video-e-slide/` e le corrispondenti versioni ES/EN.
+
+Dettagli editoriali e verifiche: [Registro video e percorso v0.3](docs/VIDEO_E_PROMPT_V03_REGISTRO.md).
+
+## Procedura storica v0.2
 
 1. Caricare **`site-v0.2.zip`** nella radice del repository tramite [Upload files](https://github.com/manzo8b/manzo-ai/upload/main), senza estrarre il file.
 2. Il workflow [Deploy MANZO AI](https://github.com/manzo8b/manzo-ai/actions) si attiva automaticamente.
