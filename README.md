@@ -6,13 +6,19 @@ Portale educativo trilingue (IT, ES, EN), parte dell'ecosistema MARCELUS AI LAB.
 
 ## Release
 
+- **v0.4 (preparata, in attesa del pacchetto)** — otto slide 16:9 M01, visualizzatore localizzato, PDF/PowerPoint italiano e guida docente. Collegamenti da Home, Academy, M01, Risorse e Video. [Dettagli della release](docs/SLIDE_M01_V04_RELEASE.md).
+
 - **v0.1** — Home conversazionale, M01 approvato, glossario, laboratorio e fonti.
 - **v0.2 (pubblicata)** — catalogo M01–M06 con stati editoriali, area Risorse, area Video e slide, un video ufficiale Anthropic collegato senza incorporamento YouTube.
 - **v0.3 (preparata, in attesa del pacchetto)** — percorso introduttivo «Che cos'è un prompt e come si scrive?» (IT/ES/EN), collegamento alla Biblioteca Prometeus dalla sezione Risorse e quattro video tutorial esterni selezionati. M01 rimane invariato; M03 resta in revisione.
 
 M02–M06 rimangono bozze; in v0.2 vengono mostrati **solo titolo e obiettivo**, con indicazione «In revisione editoriale». L'unica lezione completa pubblicata resta M01.
 
-## Pubblicare la release v0.3
+## Pubblicare la release v0.4
+
+Caricare **`site-v0.4.zip`** tramite [Upload files](https://github.com/manzo8b/manzo-ai/upload/main) senza estrarlo. Il workflow controlla le tre pagine, le otto immagini e i download PDF/PPTX, quindi pubblica la release più recente. Dopo il deploy verificare navigazione, schermo intero e download nel browser. Non considerare le slide definitivamente approvate prima della revisione visuale.
+
+## Procedura storica v0.3
 
 Carica **`site-v0.3.zip`** nella radice del repository tramite [Upload files](https://github.com/manzo8b/manzo-ai/upload/main), senza estrarlo. Il workflow pubblica automaticamente la versione più recente disponibile. Attendere un run riuscito prima di verificare `/it/prompt-mastery/che-cos-e-un-prompt/`, `/it/risorse/` e `/it/video-e-slide/` e le corrispondenti versioni ES/EN.
 
