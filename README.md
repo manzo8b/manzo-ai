@@ -23,6 +23,14 @@ M02–M06 rimangono bozze; in v0.2 vengono mostrati **solo titolo e obiettivo**,
 
 Il workflow conserva il supporto al file precedente `site-v0.1.zip` finché il nuovo archivio non è presente.
 
+## Collegamento didattico a Prometeus Marcelus
+
+La **Biblioteca Prometeus Marcelus** è la risorsa archivistica collegata per spiegare cosa sia un prompt, come strutturarlo e come valutarlo con esercizi commentati. L'integrazione nella pagina Risorse, in M03 e nel Laboratorio è documentata in [INTEGRAZIONE_BIBLIOTECA_PROMETEUS.md](docs/INTEGRAZIONE_BIBLIOTECA_PROMETEUS.md).
+
+- Biblioteca pubblica IT: https://manzo8b.github.io/marcelus-v-v01/it/library/
+- Non importare automaticamente l'intero catalogo e non presentare le voci come prompt tutti testati.
+- Lo stato della release v0.2 pubblicata **non cambia** con questa nota documentale.
+
 ## Principi
 
 - **Nessun chatbot o API AI**: la ricerca è un indice locale delle risorse del sito.
