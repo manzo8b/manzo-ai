@@ -1,0 +1,64 @@
+name: Deploy MANZO AI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - site-v0.1.zip
+      - .github/workflows/deploy-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: manzo-ai-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check publication package
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f site-v0.1.zip ]; then
+            echo "::notice::Upload site-v0.1.zip to the repository root before publishing."
+            exit 1
+          fi
+          unzip -t site-v0.1.zip >/dev/null
+      - name: Extract and inspect static site
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          unzip -q site-v0.1.zip -d _site
+          test -s _site/index.html
+          test -s _site/it/index.html
+          test -s _site/es/index.html
+          test -s _site/en/index.html
+          test -s _site/it/impara/che-cos-e-l-intelligenza-artificiale/index.html
+          test -s _site/style.css
+          test -s _site/app.js
+          test -s _site/logo.svg
+          test -s _site/sitemap.xml
+          test -f _site/.nojekyll
+          echo "Static files validated."
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
