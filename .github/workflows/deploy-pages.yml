@@ -6,6 +6,7 @@ on:
     paths:
       - site-v0.1.zip
       - site-v0.2.zip
+      - site-v0.3.zip
   workflow_dispatch:
 
 permissions:
@@ -31,7 +32,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ -f site-v0.2.zip ]; then
+          if [ -f site-v0.3.zip ]; then
+            archive=site-v0.3.zip
+          elif [ -f site-v0.2.zip ]; then
             archive=site-v0.2.zip
           elif [ -f site-v0.1.zip ]; then
             archive=site-v0.1.zip
@@ -50,6 +53,14 @@ jobs:
           if [ "$SITE_ARCHIVE" = "site-v0.2.zip" ]; then
             for locale_path in it/academy es/academia en/academy it/risorse es/recursos en/resources it/video-e-slide es/videos-y-diapositivas en/videos-and-slides; do
               test -s "_site/$locale_path/index.html"
+            done
+          fi
+          if [ "$SITE_ARCHIVE" = "site-v0.3.zip" ]; then
+            for new_page in it/prompt-mastery/che-cos-e-un-prompt es/prompt-mastery/que-es-un-prompt en/prompt-mastery/what-is-a-prompt; do
+              test -s "_site/$new_page/index.html"
+            done
+            for lang in it es en; do
+              test -s "_site/$lang/index.html"
             done
           fi
           test -s _site/index.html
