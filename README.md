@@ -1,24 +1,38 @@
 # MANZO AI — Knowledge & Prompt Lab
 
-Portale educativo trilingue (IT, ES, EN), parte di MARCELUS AI LAB.
+Portale educativo trilingue (IT, ES, EN), parte dell'ecosistema MARCELUS AI LAB.
 
-## Pubblicazione GitHub Pages
+**Sito pubblico:** https://manzo8b.github.io/manzo-ai/
 
-Questo repository usa un pacchetto statico verificato localmente. **Il sito non viene pubblicato finché non viene caricato il pacchetto** `site-v0.1.zip`.
+## Release
 
-1. Caricare in radice, con **Add file → Upload files**, il file **`site-v0.1.zip`** fornito nel progetto (non estrarlo).
-2. Aprire **Settings → Pages** e impostare **Source: GitHub Actions**.
-3. In **Actions**, controllare il workflow **Deploy MANZO AI**. Se necessario, eseguirlo con *Run workflow*.
-4. Dopo un deploy riuscito, aprire https://manzo8b.github.io/manzo-ai/ e verificare la Home IT, ES, EN, la ricerca, il quiz, il glossario e i link.
+- **v0.1** — Home conversazionale, M01 approvato, glossario, laboratorio e fonti.
+- **v0.2 (preparata, in attesa del pacchetto)** — catalogo M01–M06 con stati editoriali, area Risorse, area Video e slide, un video ufficiale Anthropic collegato senza incorporamento YouTube.
 
-## Integrità del progetto
+M02–M06 rimangono bozze; in v0.2 vengono mostrati **solo titolo e obiettivo**, con indicazione «In revisione editoriale». L'unica lezione completa pubblicata resta M01.
 
-- La prima release contiene soltanto materiale editoriale già approvato (M01) e il prototipo di navigazione, glossario e laboratorio.
-- M02–M06 e il resto dei prompt rimangono in revisione.
-- La ricerca è locale: **non è un chatbot AI**. Nessun account o tracciamento opzionale.
-- Le informazioni legali sono informative iniziali da aggiornare se cambiano servizi e trattamenti.
-- Canonical/hreflang e sitemap assumono la base URL `https://manzo8b.github.io/manzo-ai/`.
+## Pubblicare la release v0.2
 
-Per rigenerare il sito, conservare il sorgente separato della release e seguire la documentazione originale. Non mescolare questa release con il portfolio `marcelus-v-v01`.
+1. Caricare **`site-v0.2.zip`** nella radice del repository tramite [Upload files](https://github.com/manzo8b/manzo-ai/upload/main), senza estrarre il file.
+2. Il workflow [Deploy MANZO AI](https://github.com/manzo8b/manzo-ai/actions) si attiva automaticamente.
+3. Controllare che il workflow sia riuscito prima di aprire il sito pubblico.
+4. Verificare gli indirizzi:
+   - IT: `/it/academy/`, `/it/risorse/`, `/it/video-e-slide/`
+   - ES: `/es/academia/`, `/es/recursos/`, `/es/videos-y-diapositivas/`
+   - EN: `/en/academy/`, `/en/resources/`, `/en/videos-and-slides/`
 
-**Stato:** configurazione pronta; pubblicazione subordinata al caricamento del pacchetto e alla configurazione Pages.
+Il workflow conserva il supporto al file precedente `site-v0.1.zip` finché il nuovo archivio non è presente.
+
+## Principi
+
+- **Nessun chatbot o API AI**: la ricerca è un indice locale delle risorse del sito.
+- Nessun login, tracciamento opzionale o database.
+- M01 approvato, moduli successivi ancora da revisionare.
+- Video YouTube solo come link esterni, senza incorporamento e con attribuzione.
+- Slide e nuovi download saranno creati e pubblicati dopo la revisione con il proprietario.
+
+## Codice sorgente
+
+L'archivio delle sorgenti v0.2 è mantenuto separato dal pacchetto di distribuzione, per agevolare aggiornamenti e test. Il workflow attuale pubblica l'archivio statico caricato.
+
+**Non mescolare MANZO AI con il portfolio `marcelus-v-v01`.**
