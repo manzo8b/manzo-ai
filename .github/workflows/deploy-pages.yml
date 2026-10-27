@@ -8,6 +8,7 @@ on:
       - site-v0.2.zip
       - site-v0.3.zip
       - site-v0.4.zip
+      - site-v0.5.zip
   workflow_dispatch:
 
 permissions:
@@ -33,7 +34,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ -f site-v0.4.zip ]; then
+          if [ -f site-v0.5.zip ]; then
+            archive=site-v0.5.zip
+          elif [ -f site-v0.4.zip ]; then
             archive=site-v0.4.zip
           elif [ -f site-v0.3.zip ]; then
             archive=site-v0.3.zip
@@ -75,6 +78,36 @@ jobs:
             done
             test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pdf
             test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pptx
+          fi
+          if [ "$SITE_ARCHIVE" = "site-v0.5.zip" ]; then
+            for course in \
+              it/impara/come-funziona-un-modello-linguistico \
+              it/impara/come-costruire-un-prompt-efficace \
+              it/impara/come-verificare-le-risposte-ai \
+              it/impara/progettare-un-workflow-ai \
+              it/impara/ai-storia-lavoro-societa \
+              es/aprende/como-funciona-un-modelo-de-lenguaje \
+              es/aprende/como-construir-un-prompt-eficaz \
+              es/aprende/como-verificar-las-respuestas-de-ia \
+              es/aprende/disenar-un-flujo-de-trabajo-con-ia \
+              es/aprende/ia-historia-trabajo-sociedad \
+              en/learn/how-a-language-model-works \
+              en/learn/how-to-build-an-effective-prompt \
+              en/learn/how-to-verify-ai-answers \
+              en/learn/designing-an-ai-workflow \
+              en/learn/ai-history-work-and-society; do
+              test -s "_site/$course/index.html"
+              grep -q 'answer-reveal' "_site/$course/index.html"
+            done
+            for slide_page in it/slides/che-cos-e-davvero-l-intelligenza-artificiale es/diapositivas/que-es-la-inteligencia-artificial en/slides/what-is-artificial-intelligence; do
+              test -s "_site/$slide_page/index.html"
+            done
+            for n in 01-copertina 02-definizione-ai 03-machine-learning 04-ai-generativa 05-addestramento-e-risposta 06-vita-e-lavoro 07-esercizio 08-conclusioni; do
+              test -s "_site/assets/slides/m01-it/$n.webp"
+            done
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pdf
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pptx
+            test "$(find _site -name index.html | wc -l)" -eq 52
           fi
           test -s _site/index.html
           test -s _site/it/index.html
