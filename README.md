@@ -6,7 +6,7 @@ Portale educativo trilingue (IT, ES, EN), parte di MARCELUS AI LAB.
 
 Questo repository usa un pacchetto statico verificato localmente. **Il sito non viene pubblicato finché non viene caricato il pacchetto** `site-v0.1.zip`.
 
-1. Caricare in radice, con **Add file → Upload files**, il file `MANZO_AI_GitHub_Pages_Files_v0.1.zip` fornito nel progetto, **rinominandolo `site-v0.1.zip`** (non estrarlo).
+1. Caricare in radice, con **Add file → Upload files**, il file **`site-v0.1.zip`** fornito nel progetto (non estrarlo).
 2. Aprire **Settings → Pages** e impostare **Source: GitHub Actions**.
 3. In **Actions**, controllare il workflow **Deploy MANZO AI**. Se necessario, eseguirlo con *Run workflow*.
 4. Dopo un deploy riuscito, aprire https://manzo8b.github.io/manzo-ai/ e verificare la Home IT, ES, EN, la ricerca, il quiz, il glossario e i link.
