@@ -4,6 +4,12 @@ Portale educativo trilingue (IT, ES, EN), parte dell'ecosistema MARCELUS AI LAB.
 
 **Sito pubblico:** https://manzo8b.github.io/manzo-ai/
 
+## Current project milestone · 27 October 2026
+
+- **Live release (verified): v0.5**, six complete approved lessons M01–M06 in IT/ES/EN. GitHub Pages deploy 27 October 2026 succeeded.
+- **Next release (binary upload pending): v0.6 — Critical Thinking Edition.** Eight new resources per language (three crosswords, three dated news analyses and two decision dilemmas), plus localized hub: 79 HTML pages total. [Scope and QA](docs/MANZO_AI_V06_RELEASE.md).
+- The GitHub Actions workflow is ready to prioritize `site-v0.6.zip` once uploaded to main. Its successful workflow completion must be checked before declaring the new pages public.
+
 ## Release
 
 - **v0.4 (pubblicata il 27 ottobre 2026)** — otto slide 16:9 M01, visualizzatore localizzato, PDF/PowerPoint italiano e guida docente. Collegamenti da Home, Academy, M01, Risorse e Video. [Dettagli della release](docs/SLIDE_M01_V04_RELEASE.md).
