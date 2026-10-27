@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - site-v0.1.zip
+      - site-v0.2.zip
   workflow_dispatch:
 
 permissions:
@@ -30,17 +31,27 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ ! -f site-v0.1.zip ]; then
-            echo "::notice::Upload site-v0.1.zip to the repository root before publishing."
+          if [ -f site-v0.2.zip ]; then
+            archive=site-v0.2.zip
+          elif [ -f site-v0.1.zip ]; then
+            archive=site-v0.1.zip
+          else
+            echo "::error::No MANZO AI release archive found."
             exit 1
           fi
-          unzip -t site-v0.1.zip >/dev/null
+          echo "SITE_ARCHIVE=$archive" >> "$GITHUB_ENV"
+          unzip -t "$archive" >/dev/null
       - name: Extract and inspect static site
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p _site
-          unzip -q site-v0.1.zip -d _site
+          unzip -q "$SITE_ARCHIVE" -d _site
+          if [ "$SITE_ARCHIVE" = "site-v0.2.zip" ]; then
+            for locale_path in it/academy es/academia en/academy it/risorse es/recursos en/resources it/video-e-slide es/videos-y-diapositivas en/videos-and-slides; do
+              test -s "_site/$locale_path/index.html"
+            done
+          fi
           test -s _site/index.html
           test -s _site/it/index.html
           test -s _site/es/index.html
