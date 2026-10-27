@@ -6,17 +6,17 @@ Portale educativo trilingue (IT, ES, EN), parte dell'ecosistema MARCELUS AI LAB.
 
 ## Release
 
-- **v0.4 (preparata, in attesa del pacchetto)** — otto slide 16:9 M01, visualizzatore localizzato, PDF/PowerPoint italiano e guida docente. Collegamenti da Home, Academy, M01, Risorse e Video. [Dettagli della release](docs/SLIDE_M01_V04_RELEASE.md).
+- **v0.4 (pubblicata il 27 ottobre 2026)** — otto slide 16:9 M01, visualizzatore localizzato, PDF/PowerPoint italiano e guida docente. Collegamenti da Home, Academy, M01, Risorse e Video. [Dettagli della release](docs/SLIDE_M01_V04_RELEASE.md).
 
 - **v0.1** — Home conversazionale, M01 approvato, glossario, laboratorio e fonti.
 - **v0.2 (pubblicata)** — catalogo M01–M06 con stati editoriali, area Risorse, area Video e slide, un video ufficiale Anthropic collegato senza incorporamento YouTube.
-- **v0.3 (preparata, in attesa del pacchetto)** — percorso introduttivo «Che cos'è un prompt e come si scrive?» (IT/ES/EN), collegamento alla Biblioteca Prometeus dalla sezione Risorse e quattro video tutorial esterni selezionati. M01 rimane invariato; M03 resta in revisione.
+- **v0.3 (versione storica, incorporata nel percorso v0.4)** — percorso introduttivo «Che cos'è un prompt e come si scrive?» (IT/ES/EN), collegamento alla Biblioteca Prometeus dalla sezione Risorse e quattro video tutorial esterni selezionati. M01 rimane invariato; M03 resta in revisione.
 
-M02–M06 rimangono bozze; in v0.2 vengono mostrati **solo titolo e obiettivo**, con indicazione «In revisione editoriale». L'unica lezione completa pubblicata resta M01.
+**Decisione editoriale del 27 ottobre 2026:** il Product Owner ha approvato i contenuti didattici completi di **M02–M06**, preparati in IT/ES/EN. La pubblicazione online delle lezioni complete è **ancora da effettuare**: nel pacchetto v0.4 il catalogo mostra tuttora i titoli, gli obiettivi e lo stato precedente «In revisione editoriale». La lezione integrale pubblicata e già verificata editorialmente resta M01. [Registro dell'approvazione M02–M06](docs/APPROVAZIONE_M02_M06_2026-10-27.md).
 
-## Pubblicare la release v0.4
+## Release v0.4 — deployment completato, collaudo umano residuo
 
-Caricare **`site-v0.4.zip`** tramite [Upload files](https://github.com/manzo8b/manzo-ai/upload/main) senza estrarlo. Il workflow controlla le tre pagine, le otto immagini e i download PDF/PPTX, quindi pubblica la release più recente. Dopo il deploy verificare navigazione, schermo intero e download nel browser. Non considerare le slide definitivamente approvate prima della revisione visuale.
+**`site-v0.4.zip`** è presente nel repository e il workflow [Deploy MANZO AI](https://github.com/manzo8b/manzo-ai/actions) ha completato con successo il deployment del 27 ottobre 2026 (commit `20d72370`). Restano da verificare a mano navigazione delle otto slide M01, schermo intero e download su desktop e smartphone. Non considerare le slide grafiche definitivamente approvate prima della revisione visuale. L'approvazione dei moduli testuali M02–M06 non cambia questo vincolo.
 
 ## Procedura storica v0.3
 
@@ -48,7 +48,7 @@ La **Biblioteca Prometeus Marcelus** è la risorsa archivistica collegata per sp
 
 - **Nessun chatbot o API AI**: la ricerca è un indice locale delle risorse del sito.
 - Nessun login, tracciamento opzionale o database.
-- M01 approvato, moduli successivi ancora da revisionare.
+- M01 approvato e online; M02–M06 approvati editorialmente dal Product Owner il 27 ottobre 2026 ma **non ancora pubblicati come lezioni complete**.
 - Video YouTube solo come link esterni, senza incorporamento e con attribuzione.
 - Slide e nuovi download saranno creati e pubblicati dopo la revisione con il proprietario.
 
