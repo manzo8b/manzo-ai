@@ -4,6 +4,10 @@ Portale educativo trilingue (IT, ES, EN), parte dell'ecosistema MARCELUS AI LAB.
 
 **Sito pubblico:** https://manzo8b.github.io/manzo-ai/
 
+## v0.7 — Technical Prompt Engineering Lab (ready for binary upload)
+
+Approved scope: an original technical lab in IT / ES / EN inspired by Anthropic's `Prompting 101` video, used as an **optional reference** rather than embedded or reproduced course material. Includes prompt architecture, XML boundaries, JSON Schema, structured output, test fixtures and an offline Python checker. **82 static HTML pages in the v0.7 build**. No LLM benchmarks were performed. The existing v0.6 site stays live until `site-v0.7.zip` is uploaded and the publishing workflow succeeds. [Full release notes](docs/MANZO_AI_V07_TECHNICAL_COURSE.md).
+
 ## Current project milestone · 27 October 2026
 
 - **Live release (verified): v0.5**, six complete approved lessons M01–M06 in IT/ES/EN. GitHub Pages deploy 27 October 2026 succeeded.
