@@ -1,0 +1,44 @@
+name: MANZO AI Chromatic QA
+
+on:
+  pull_request:
+    paths:
+      - 'theme/**'
+      - '.github/workflows/deploy-pages.yml'
+      - '.github/workflows/theme-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Extract latest approved release and apply ONLY the visual overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          unzip -t site-v0.7.zip >/dev/null
+          mkdir -p _site
+          unzip -q site-v0.7.zip -d _site
+          printf '\n' >> _site/style.css
+          cat theme/learning-colors.css >> _site/style.css
+          python3 theme/check-theme.py --site _site --archive site-v0.7.zip --theme theme/learning-colors.css
+      - name: Install Chromium for responsive smoke tests
+        run: |
+          python3 -m pip install playwright==1.55.0
+          python3 -m playwright install chromium
+      - name: Test visual differentiation, URLs and mobile behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _preview
+          ln -s ../_site _preview/manzo-ai
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory _preview >/tmp/manzo-http.log 2>&1 &
+          python3 theme/browser-smoke.py
