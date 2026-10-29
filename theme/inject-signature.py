@@ -13,6 +13,27 @@ SIGNATURES = {
     "en": "A project of the MANZO AI ecosystem",
 }
 
+CONTACT_LABELS = {
+    "it": "Contatti e servizi",
+    "es": "Contacto y servicios",
+    "en": "Contact and services",
+}
+CONTACT_EMAIL = "marcelo2020.it@gmail.com"
+
+def add_contact_header(html: str, language: str) -> str:
+    if 'data-manzo-contact="1"' in html:
+        raise ValueError("Duplicate MANZO AI contact header")
+    label = CONTACT_LABELS.get(language, CONTACT_LABELS["it"])
+    contact = (
+        '<div class="manzo-contact-header" data-manzo-contact="1">'
+        '<a href="mailto:' + CONTACT_EMAIL + '" aria-label="' + label + ': ' + CONTACT_EMAIL + '">'
+        '<span>' + label + '</span><strong>' + CONTACT_EMAIL + '</strong></a></div>'
+    )
+    body = re.search(r"<body\b[^>]*>", html, re.I)
+    if not body:
+        raise ValueError("No HTML body for contact")
+    return html[:body.end()] + contact + html[body.end():]
+
 def insert_signature(html: str, language: str) -> str:
     if 'data-manzo-signature="1"' in html:
         raise ValueError("Duplicate MANZO AI signature")
@@ -52,10 +73,12 @@ def main() -> None:
                 raise SystemExit("Branding missing or duplicated: " + str(page))
             if "manzo-mark.svg" not in content:
                 raise SystemExit("Branding image missing: " + str(page))
+            if content.count('data-manzo-contact="1"') != 1 or "mailto:" + CONTACT_EMAIL not in content:
+                raise SystemExit("Contact missing or duplicated: " + str(page))
         else:
             if not re.search(r"<body(?:\s|>)", content, re.I):
                 raise SystemExit("Page has no body element: " + str(page))
-            updated = insert_signature(content, lang)
+            updated = add_contact_header(insert_signature(content, lang), lang)
             page.write_text(updated, encoding="utf-8")
     print(f"MANZO AI footer branding: {len(files)} static pages {'verified' if args.verify_only else 'updated'}")
 

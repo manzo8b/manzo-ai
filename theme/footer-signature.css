@@ -8,3 +8,13 @@
 .manzo-identity-tail{padding:18px;margin-top:36px;background:#F2F5F8;color:#173C5C}
 @media(max-width:600px){.manzo-identity-signature{padding:16px 8px 4px}.manzo-identity-signature a{max-width:100%}}
 @media print{.manzo-identity-signature{display:none!important}}
+
+
+/* Contact & services email at the top of every MANZO AI page. */
+.manzo-contact-header{display:flex;justify-content:flex-end;align-items:center;min-height:38px;background:#E9F1FF;border-bottom:1px solid #C8D8E6;padding:7px max(20px,calc((100vw - 1120px)/2));font:600 12px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+.manzo-contact-header a{display:inline-flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:4px 12px;min-height:25px;color:#153C61;text-decoration:none}
+.manzo-contact-header strong{color:#244F9B;font-size:13px;overflow-wrap:anywhere}
+.manzo-contact-header a:hover strong{text-decoration:underline}
+.manzo-contact-header a:focus-visible{outline:3px solid #B13F28;outline-offset:3px}
+@media(max-width:600px){.manzo-contact-header{padding:8px 14px;justify-content:center}.manzo-contact-header a{justify-content:center;font-size:11px}}
+@media print{.manzo-contact-header{display:none!important}}
