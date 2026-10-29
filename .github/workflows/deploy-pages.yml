@@ -13,6 +13,9 @@ on:
       - site-v0.7.zip
       - theme/learning-colors.css
       - theme/check-theme.py
+      - theme/manzo-mark.svg
+      - theme/inject-signature.py
+      - theme/footer-signature.css
       - .github/workflows/deploy-pages.yml
   workflow_dispatch:
 
@@ -73,6 +76,11 @@ jobs:
             printf '\n' >> _site/style.css
             cat theme/learning-colors.css >> _site/style.css
             python3 theme/check-theme.py --site _site --archive "$SITE_ARCHIVE" --theme theme/learning-colors.css
+            mkdir -p _site/assets
+            cp theme/manzo-mark.svg _site/assets/manzo-mark.svg
+            cat theme/footer-signature.css >> _site/style.css
+            python3 theme/inject-signature.py --site _site
+            python3 theme/inject-signature.py --site _site --verify-only
           fi
           if [ "$SITE_ARCHIVE" = "site-v0.2.zip" ]; then
             for locale_path in it/academy es/academia en/academy it/risorse es/recursos en/resources it/video-e-slide es/videos-y-diapositivas en/videos-and-slides; do

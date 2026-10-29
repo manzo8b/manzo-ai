@@ -30,6 +30,11 @@ jobs:
           printf '\n' >> _site/style.css
           cat theme/learning-colors.css >> _site/style.css
           python3 theme/check-theme.py --site _site --archive site-v0.7.zip --theme theme/learning-colors.css
+          mkdir -p _site/assets
+          cp theme/manzo-mark.svg _site/assets/manzo-mark.svg
+          cat theme/footer-signature.css >> _site/style.css
+          python3 theme/inject-signature.py --site _site
+          python3 theme/inject-signature.py --site _site --verify-only
       - name: Install Chromium for responsive smoke tests
         run: |
           python3 -m pip install playwright==1.55.0
