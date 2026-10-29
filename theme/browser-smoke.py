@@ -25,7 +25,7 @@ with sync_playwright() as p:
         page.goto(f"{origin}/it/")
         assert "linear-gradient" in page.locator(".home-hero").evaluate("(e)=>getComputedStyle(e).backgroundImage")
         feature_colors = page.locator(".grid-3>.feature").evaluate_all("(xs)=>xs.map(x=>getComputedStyle(x).backgroundColor)")
-        assert len(set(feature_colors)) >= 4, feature_colors
+        assert len(set(feature_colors)) >= 3, feature_colors  # three-card home grids restart nth-child counts
         page.goto(f"{origin}/it/pensiero-critico/")
         challenge_colors = page.locator(".challenge-card").evaluate_all("(xs)=>xs.map(x=>getComputedStyle(x).backgroundColor)")
         assert len(set(challenge_colors)) >= 4, challenge_colors
