@@ -28,7 +28,7 @@ with sync_playwright() as p:
         assert len(set(feature_colors)) >= 3, feature_colors  # three-card home grids restart nth-child counts
         page.goto(f"{origin}/it/pensiero-critico/")
         challenge_colors = page.locator(".challenge-card").evaluate_all("(xs)=>xs.map(x=>getComputedStyle(x).backgroundColor)")
-        assert len(set(challenge_colors)) >= 4, challenge_colors
+        assert len(set(challenge_colors)) >= 3, challenge_colors  # cards are grouped in 3-item lists
         page.goto(f"{origin}/it/pensiero-critico/cruciverba-affidabilita/")
         assert page.locator(".cross-cell").count() > 0
         assert page.locator(".cross-scroll").evaluate("(e)=>getComputedStyle(e).overflowX") == "auto"
