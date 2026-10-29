@@ -1,0 +1,10 @@
+
+/* MANZO AI shared identity signature: static footer only, all three languages. */
+.manzo-identity-signature{display:flex;justify-content:center;align-items:center;margin:24px auto 0;padding:17px 12px 4px;border-top:1px solid rgba(100,120,140,.28);max-width:1100px}
+.manzo-identity-signature a{display:inline-flex;align-items:center;justify-content:center;gap:11px;min-height:44px;border:1px solid rgba(120,140,160,.3);border-radius:10px;padding:6px 12px;text-decoration:none;background:rgba(255,255,255,.08);color:inherit;font:600 12px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+.manzo-identity-signature img{width:34px;height:33px;object-fit:contain;flex:none}
+.manzo-identity-signature a:hover{border-color:#0C615D;box-shadow:0 0 0 1px #0C615D}
+.manzo-identity-signature a:focus-visible{outline:3px solid #B13F28;outline-offset:3px}
+.manzo-identity-tail{padding:18px;margin-top:36px;background:#F2F5F8;color:#173C5C}
+@media(max-width:600px){.manzo-identity-signature{padding:16px 8px 4px}.manzo-identity-signature a{max-width:100%}}
+@media print{.manzo-identity-signature{display:none!important}}
