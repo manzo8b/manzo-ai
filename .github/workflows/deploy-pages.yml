@@ -10,6 +10,7 @@ on:
       - site-v0.4.zip
       - site-v0.5.zip
       - site-v0.6.zip
+      - site-v0.7.zip
   workflow_dispatch:
 
 permissions:
@@ -35,7 +36,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [ -f site-v0.6.zip ]; then
+          if [ -f site-v0.7.zip ]; then
+            archive=site-v0.7.zip
+          elif [ -f site-v0.6.zip ]; then
             archive=site-v0.6.zip
           elif [ -f site-v0.5.zip ]; then
             archive=site-v0.5.zip
@@ -158,6 +161,23 @@ jobs:
             test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pptx
             test "$(find _site -name index.html | wc -l)" -eq 79
             test -s _site/app.js
+          fi
+          if [ "$SITE_ARCHIVE" = "site-v0.7.zip" ]; then
+            for path in it/prompt-mastery/laboratorio-tecnico es/prompt-mastery/laboratorio-tecnico en/prompt-mastery/technical-lab; do
+              test -s "_site/$path/index.html"
+              grep -q 'technical-article' "_site/$path/index.html"
+              grep -q 'ysPbXH0LpIE' "_site/$path/index.html"
+            done
+            for document in golden_cases.json predictions_example.json check_outputs.py; do
+              test -s "_site/assets/prompting101/$document"
+            done
+            python3 "_site/assets/prompting101/check_outputs.py" "_site/assets/prompting101/golden_cases.json" "_site/assets/prompting101/predictions_example.json"
+            for old_resource in it/pensiero-critico es/pensamiento-critico en/critical-thinking it/impara/come-costruire-un-prompt-efficace es/aprende/como-construir-un-prompt-eficaz en/learn/how-to-build-an-effective-prompt; do
+              test -s "_site/$old_resource/index.html"
+            done
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pdf
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pptx
+            test "$(find _site -name index.html | wc -l)" -eq 82
           fi
           test -s _site/index.html
           test -s _site/it/index.html
