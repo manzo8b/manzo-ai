@@ -1,0 +1,189 @@
+/* MANZO AI | Navigazione pedagogica cromatica | v0.7.1 | 2026-10-29
+   Il colore distingue informazioni, pratica, pensiero critico, verifica.
+   Applicato DOPO style.css, senza cambiare contenuti o funzionalita'.
+   Testo lungo, codice e stampa mantengono superfici leggibili. */
+:root{
+  --teal:#0C615D;
+  --cobalt:#244F9B;
+  --coral:#B13F28;
+  --violet:#67439A;
+  --amber:#7B4B10;
+  --tint-teal:#E6F4EE;
+  --tint-blue:#E9F1FF;
+  --tint-coral:#FFF0E9;
+  --tint-violet:#F2ECFF;
+  --tint-amber:#FFF2D9;
+  --bg:#FCFBF8;
+  --rail:#EEF2FB;
+  --pale:#E6F4EE;
+  --line:#D9E0E3;
+}
+/* Orientamento: attivo e hover leggibili, anche senza conoscere il colore. */
+.rail{
+  background:linear-gradient(165deg,#E9F1FF 0%,#F3EFFC 72%,#F6F1E8 100%);
+  border-right:2px solid #AFC3E7;
+}
+.rail .brand{color:#143C56}
+.rail .brand img{background:#FFF;border-radius:11px;padding:3px;box-shadow:0 2px 10px #143C5614}
+.rail .nav-title{color:#244F9B;font-weight:800}
+.rail .nav-link{color:#263F50;border-left:4px solid transparent;padding-left:12px}
+.rail .nav-link:hover{background:#DDE9FF;color:var(--cobalt);border-left-color:var(--violet)}
+.rail .nav-link[aria-current=page]{
+  background:#D9E7FE;color:#183F83;border-left-color:var(--cobalt);
+  box-shadow:inset 0 0 0 1px #C3D5F2;font-weight:750;
+}
+.rail .nav-link[aria-current=page] svg{stroke-width:2.2}
+.rail .rail-lang a[aria-current=page]{background:var(--tint-violet);color:var(--violet);border-color:#C8B3ED}
+.topbar{border-bottom:2px solid #E0E7F3;background:#FFFFFF}
+.topbar .top-label{color:var(--cobalt);font-weight:700}
+.usermark span{background:var(--coral)}
+.site-footer{border-top:4px solid var(--cobalt)}
+a:focus-visible,button:focus-visible,input:focus-visible,
+select:focus-visible,summary:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+/* Azioni primarie coerenti e visibili. */
+.solid,.searchbox button{
+  color:#FFF;background:var(--teal);border-color:var(--teal);
+  box-shadow:0 3px 0 #0747441C;
+}
+.solid:hover,.searchbox button:hover{background:#084D4A}
+.ghost{border-color:#9AB2DE;background:var(--tint-blue);color:var(--cobalt);font-weight:700}
+.ghost:hover{background:#DAE6FE}
+.chip{border-color:#D2DCEA;box-shadow:0 2px 9px #1D467008}
+.chip:nth-child(5n+1){background:var(--tint-blue);border-color:#C0D2F2}
+.chip:nth-child(5n+2){background:var(--tint-teal);border-color:#B7DDD0}
+.chip:nth-child(5n+3){background:var(--tint-coral);border-color:#EBC7B9}
+.chip:nth-child(5n+4){background:var(--tint-violet);border-color:#D0BFED}
+.chip:nth-child(5n+5){background:var(--tint-amber);border-color:#E7D09F}
+.chip b{color:var(--cobalt)}
+.chip:nth-child(5n+2) b{color:var(--teal)}
+.chip:nth-child(5n+3) b{color:var(--coral)}
+.chip:nth-child(5n+4) b{color:var(--violet)}
+.chip:nth-child(5n+5) b{color:var(--amber)}
+/* Home: apertura piu' viva ma niente testo su gradienti saturi. */
+.home-hero{
+  max-width:990px;
+  background:linear-gradient(120deg,#EAF2FF 0%,#FFFFFF 48%,#FFF1E7 100%);
+  border:1px solid #CAD7EF;border-top:6px solid var(--cobalt);
+  border-radius:24px;padding:clamp(28px,5vw,54px) clamp(18px,4vw,42px);
+  box-shadow:0 14px 38px #26478B0D;
+}
+.home-hero .eyebrow{color:var(--cobalt)}
+.home-hero h1{color:#18334D}
+.home-hero .searchbox{border:2px solid #A1BEE1;box-shadow:0 9px 27px #244F9B13}
+.search-hint{color:#50636B}
+/* Card tematiche: numero, fascia e fondo rendono percepibile il cambio di attivita'. */
+.grid-3>.feature{
+  border-top:5px solid var(--cobalt);background:var(--tint-blue);
+  box-shadow:0 5px 16px #233C6810;
+}
+.grid-3>.feature:nth-child(5n+2){border-top-color:var(--teal);background:var(--tint-teal)}
+.grid-3>.feature:nth-child(5n+3){border-top-color:var(--coral);background:var(--tint-coral)}
+.grid-3>.feature:nth-child(5n+4){border-top-color:var(--violet);background:var(--tint-violet)}
+.grid-3>.feature:nth-child(5n+5){border-top-color:var(--amber);background:var(--tint-amber)}
+.grid-3>.feature .feature-icon{border-color:#ABC4EC;background:#FFF;color:var(--cobalt)}
+.grid-3>.feature:nth-child(5n+2) .feature-icon{color:var(--teal);border-color:#A9D4C3}
+.grid-3>.feature:nth-child(5n+3) .feature-icon{color:var(--coral);border-color:#E2B5A4}
+.grid-3>.feature:nth-child(5n+4) .feature-icon{color:var(--violet);border-color:#C2B0DF}
+.grid-3>.feature:nth-child(5n+5) .feature-icon{color:var(--amber);border-color:#DAC697}
+.grid-3>.feature .tail{color:var(--cobalt);font-weight:750}
+.grid-3>.feature:nth-child(5n+2) .tail{color:var(--teal)}
+.grid-3>.feature:nth-child(5n+3) .tail{color:var(--coral)}
+.grid-3>.feature:nth-child(5n+4) .tail{color:var(--violet)}
+.grid-3>.feature:nth-child(5n+5) .tail{color:var(--amber)}
+.section-heading h2{color:#183D61}
+.block-section>.section-heading .eyebrow{color:var(--cobalt)}
+.activity-strip{
+  background:linear-gradient(120deg,#E9F1FF 0%,#F2ECFF 65%,#FFF2D9 100%);
+  border-left:5px solid var(--violet);border-top:1px solid #C7D1E9;
+}
+.activity-strip h2{color:#273F79}
+/* Catalogo, moduli e risorse: alternanza misurata di accenti. */
+.module-card,.entry{background:#FFF;border-left:4px solid var(--cobalt)}
+.module-card:nth-child(5n+2),.list-rows>.entry:nth-child(5n+2){border-left-color:var(--teal)}
+.module-card:nth-child(5n+3),.list-rows>.entry:nth-child(5n+3){border-left-color:var(--coral)}
+.module-card:nth-child(5n+4),.list-rows>.entry:nth-child(5n+4){border-left-color:var(--violet)}
+.module-card:nth-child(5n+5),.list-rows>.entry:nth-child(5n+5){border-left-color:var(--amber)}
+.entry:hover{background:#F8FAFF;border-color:#AEC4EA}
+.entry .meta-line{color:var(--cobalt)}
+.module-card .solid{background:var(--cobalt)}
+.module-card .solid:hover{background:#183A78}
+.page-section-title,.section-heading h2{border-left:4px solid var(--cobalt);padding-left:12px}
+.tag{background:var(--tint-blue);color:#244F9B;border-color:#C4D4ED;font-weight:650}
+/* Articoli: titoli forti, citazioni e spiegazioni distinte. */
+.article h2{border-top-color:#C7D7EB;border-left:4px solid var(--cobalt);padding-left:16px;color:#1B4065}
+.article h3{color:var(--teal)}
+.article-layout .table-of-contents{border-top:4px solid var(--violet);background:#FAF8FF}
+.table-of-contents strong{color:var(--violet)}
+.table-of-contents a:hover{color:var(--violet)}
+.article blockquote{background:var(--tint-violet);border-left-color:var(--violet)}
+.callout{background:var(--tint-amber);border-color:#E6CD98;border-left:4px solid var(--amber)}
+.callout p{color:#5B421F}
+.answer-reveal{background:var(--tint-blue);border-left:4px solid var(--cobalt)}
+.answer-reveal summary{color:var(--cobalt)}
+/* Verifica: scelta, domande e feedback hanno gerarchia propria. */
+.question{border-top:4px solid var(--amber);background:#FFFDF8}
+.question:nth-child(3n+2){border-top-color:var(--violet)}
+.question:nth-child(3n+3){border-top-color:var(--cobalt)}
+.question label{background:#F2F4FA}
+.question label:has(input:checked){background:var(--tint-teal);box-shadow:inset 0 0 0 1px #A4D1C3}
+.question input{accent-color:var(--teal)}
+/* Pensiero critico: tre famiglie di risorse con accenti distinguibili. */
+.challenge-highlight{
+  background:linear-gradient(125deg,#163E6C 0%,#0C615D 100%);
+  border-color:#163E6C;color:#FFF;
+}
+.challenge-highlight h2,.challenge-highlight p{color:#FFF}
+.challenge-highlight .solid{background:#FFF;color:#164461;border-color:#FFF;box-shadow:none}
+.challenge-highlight .solid:hover{background:#E9F1FF}
+.challenge-card{border-top:5px solid var(--cobalt);background:var(--tint-blue)}
+.challenge-card:nth-child(5n+2){border-top-color:var(--teal);background:var(--tint-teal)}
+.challenge-card:nth-child(5n+3){border-top-color:var(--coral);background:var(--tint-coral)}
+.challenge-card:nth-child(5n+4){border-top-color:var(--violet);background:var(--tint-violet)}
+.challenge-card:nth-child(5n+5){border-top-color:var(--amber);background:var(--tint-amber)}
+.challenge-kicker{color:var(--cobalt)}
+.challenge-card:nth-child(5n+2) .challenge-kicker{color:var(--teal)}
+.challenge-card:nth-child(5n+3) .challenge-kicker{color:var(--coral)}
+.challenge-card:nth-child(5n+4) .challenge-kicker{color:var(--violet)}
+.challenge-card:nth-child(5n+5) .challenge-kicker{color:var(--amber)}
+.challenge-note{border-left-color:var(--violet);background:var(--tint-violet)}
+/* Cruciverba: mantenere leggibili celle, lettere e feedback. */
+.cross-scroll{background:var(--tint-blue);border:2px solid #B7C9EA}
+.cross-block{background:#D6DEEE}
+.cross-cell{box-shadow:inset 0 0 0 1px #B3C6DF}
+.cross-cell.is-selected{background:#DCE9FF}
+.cross-cell.is-error{background:#FCE5E0;box-shadow:inset 0 0 0 2px var(--coral)}
+.cross-clue[aria-pressed="true"]{background:var(--tint-violet);border-color:var(--violet)}
+.cross-clue b{color:var(--cobalt)}
+.cross-clue:focus-visible{outline-color:var(--coral)}
+/* Dilemmi: scelta e motivazione con chiaro feedback. */
+.dilemma-option{border-left:4px solid var(--violet)}
+.dilemma-option:has(input:checked){background:var(--tint-violet);border-color:var(--violet)}
+.dilemma-option input{accent-color:var(--violet)}
+.dilemma-feedback{background:var(--tint-amber);border-left-color:var(--amber)}
+/* Slide e laboratorio tecnico senza alterare i controlli JS. */
+.slide-viewer{border-top:5px solid var(--cobalt)}
+.slide-controls{background:var(--tint-blue)}
+.slide-thumb[aria-pressed="true"]{border-color:var(--violet);box-shadow:0 0 0 2px #D8C9F1}
+.slide-descriptions{border-left:4px solid var(--violet);background:var(--tint-violet)}
+.technical-article pre{border:2px solid #235F72}
+.technical-article h2{border-left-color:var(--violet)}
+/* Mobili: nessun elemento cromatico provoca overflow. */
+@media(max-width:760px){
+  .home-hero{padding:27px 17px;border-radius:16px}
+  .activity-strip{padding:20px}
+  .challenge-highlight{padding:21px}
+  .main{overflow-wrap:anywhere}
+}
+@media(prefers-reduced-motion:reduce){
+  .feature,.nav-link,.chip{transition:none}
+}
+/* La stampa privilegia la gerarchia testuale, non superfici colorate. */
+@media print{
+  .rail,.topbar,.mobile-toggle,.site-footer{display:none!important}
+  body,.main,.page,.home-hero,.activity-strip,.challenge-highlight,
+  .challenge-card,.feature,.entry,.question,.callout,.answer-reveal{
+    background:#FFF!important;color:#111!important;box-shadow:none!important;
+  }
+  .challenge-highlight h2,.challenge-highlight p{color:#111!important}
+  .article h2{color:#111!important}
+}
