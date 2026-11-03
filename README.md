@@ -1,5 +1,9 @@
 # MANZO AI — Knowledge & Prompt Lab
 
+## Revisione visiva · 3 novembre 2026
+
+Interfaccia professionale con struttura conversazionale conservata: tipografia di sistema, superfici neutre, tinte leggere, ricerca e sidebar più sobrie. Overlay CSS su tutte le 82 pagine originali; nessun cambiamento ai contenuti o alle funzioni. [Intervento e verifiche](docs/MANZO_AI_PROFESSIONAL_REFINEMENT.md). Le note di rilascio seguenti sono il registro storico del progetto.
+
 Portale educativo trilingue (IT, ES, EN), parte dell'ecosistema MARCELUS AI LAB.
 
 **Sito pubblico:** https://manzo8b.github.io/manzo-ai/

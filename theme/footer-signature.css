@@ -18,3 +18,16 @@
 .manzo-contact-header a:focus-visible{outline:3px solid #B13F28;outline-offset:3px}
 @media(max-width:600px){.manzo-contact-header{padding:8px 14px;justify-content:center}.manzo-contact-header a{justify-content:center;font-size:11px}}
 @media print{.manzo-contact-header{display:none!important}}
+
+/* Quiet professional identity, aligned with the conversational workspace. */
+.manzo-contact-header{background:#f7f7f5;border-bottom:1px solid #ebebe5;font:400 11px/1.5 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;padding-top:6px;padding-bottom:6px;min-height:34px}
+.manzo-contact-header a{color:#73736b;font-weight:400;gap:10px}
+.manzo-contact-header strong{color:#45453e;font-size:11px;font-weight:500}
+.site-footer{background:#fff;border-top:1px solid #e8e8e1;color:#77776e;font-size:11px;line-height:1.7}
+.site-footer a{color:#55554e}
+.manzo-identity-tail{background:#fafaf7;color:#66665f}
+.manzo-identity-signature{border-top:1px solid #e8e8e1;margin-top:22px}
+.manzo-identity-signature a{font-size:10px;font-weight:400;border:0;box-shadow:none;background:transparent;gap:8px;padding:4px;color:#717169}
+.manzo-identity-signature img{width:25px;height:25px}
+.manzo-identity-signature a:hover{box-shadow:none;color:#222}
+@media(max-width:600px){.manzo-contact-header{padding:7px 14px}.manzo-contact-header a{font-size:10px}.manzo-contact-header strong{font-size:10px}}
