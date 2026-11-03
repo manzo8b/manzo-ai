@@ -28,3 +28,8 @@ Limiti: nessun audit completo WCAG o axe; nessuna misura Lighthouse o Core Web V
 
 ## Riproduzione e rollback
 Il workflow di produzione già presente estrae `site-v0.7.zip`, concatena `theme/learning-colors.css`, esegue il controllo di invarianza, aggiunge firma/contatto e pubblica Oracle City. Ripetere in una directory pulita: non eseguire il controllo di invarianza dopo le iniezioni HTML o sul risultato di una compilazione precedente. Per rollback ripristinare i due file CSS alla revisione precedente mediante un nuovo commit.
+
+## Completamento della landing — 3 novembre
+Su richiesta del proprietario, logo originale e scritta MANZO AI si assemblano da frammenti geometrici in circa 2,7 secondi. L’esempio HTML allegato è stato letto come riferimento, senza eseguirne automaticamente il codice. Implementazione originale adattata al logo effettivo, con 36 frammenti temporanei, pulsante Replay, nessun audio, nessun blocco delle lingue. Ripristino degli elementi reali a fine animazione; fallback statico senza JavaScript e con movimento ridotto. Effetto limitato alla scelta lingua.
+
+Aggiunta revisione hash al CSS condiviso per evitare che la cache mostri il tema precedente dopo la pubblicazione. Controlli di integrità dell’archivio eseguiti prima delle iniezioni autorizzate; archivio e contenuti didattici rimangono invariati. Browser: osservati stato running, 36 frammenti, tre lingue utilizzabili e stato complete senza frammenti residui. Movimento ridotto verificato nel codice, non emulato in questa sessione.

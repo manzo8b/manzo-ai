@@ -1,0 +1,16 @@
+.assembly-stage{position:relative;isolation:isolate;overflow:clip;max-width:940px!important;min-height:75vh;padding-top:clamp(50px,9vh,100px)!important;padding-bottom:44px!important}
+.assembly-emblem{position:relative;width:112px;height:112px;margin:0 auto;isolation:isolate}
+.assembly-emblem>img{display:block;width:100%;height:100%}
+.assembly-stage>h1{position:relative;font-size:clamp(44px,10vw,86px);line-height:1.08;letter-spacing:-.06em;font-weight:500;margin:18px 0}
+.assembly-fragment{position:absolute;inset:0;background-size:100% 100%;background-repeat:no-repeat;pointer-events:none}
+.assembly-title-layer{position:absolute;inset:0;pointer-events:none;color:#202020}
+.assembly-type{display:flex;align-items:center;justify-content:center;white-space:nowrap;color:#202020}
+.assembly-ring{position:absolute;inset:-32px;border:1px solid #b5bdb5;border-radius:50%;pointer-events:none;z-index:-1}
+.assembly-ring:after{content:'';position:absolute;inset:-12px;border:1px dashed #cbd0c7;border-radius:50%}
+.assembly-stage>.grid-3{max-width:600px;margin:36px auto 0}
+.assembly-stage>.grid-3>.feature{min-height:125px!important;padding:22px;transition:transform .25s,box-shadow .25s}
+.assembly-replay{margin-top:30px;border:1px solid #dfdfd7;border-radius:99px;background:#fff;color:#65655c;padding:9px 18px;min-height:44px;font-family:inherit;font-size:12px;line-height:1.4;cursor:pointer}
+.assembly-replay:hover{color:#202020;background:#f7f7f2}.assembly-replay:disabled{opacity:.45;cursor:default}
+.assembly-replay:focus-visible{outline:2px solid #315e58;outline-offset:4px}
+@media(max-width:760px){.assembly-stage{padding-left:22px!important;padding-right:22px!important}.assembly-stage>.grid-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.assembly-stage>.grid-3>.feature{padding:18px 8px;min-height:110px!important;gap:14px}.assembly-stage>.grid-3 .feature strong{font-size:13px}.assembly-stage>.grid-3 .tail{font-size:10px}.assembly-emblem{width:100px;height:100px}}
+@media(prefers-reduced-motion:reduce){.assembly-fragment,.assembly-ring,.assembly-replay{display:none!important}}
