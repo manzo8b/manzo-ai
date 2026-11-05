@@ -275,7 +275,7 @@ def svg_page(index,title,frames):
  top=94; bottom=41; gap=12
  ph=(H-top-bottom-gap*(len(frames)-1))/len(frames)
  a=[f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">',defs(),rect(0,0,W,H,"#101221"),rect(0,0,W,94,"#12182d")]
- a += [t(28,56,"ORACLE",53,"#ffffff",950),t(290,56,"CITY",53,"#dc3e48",950),t(690,39,"NUMERO 02",24,"#c9afe6",850),t(690,72,title.upper(),22,"#fff",850)]
+ a += [t(28,56,"ORACLE",53,"#ffffff",950),t(290,56,"CITY",53,"#dc3e48",950),t(540,37,f"NUMERO 02 · TAVOLA {index:02d}",21,"#c9afe6",850),t(540,71,title.upper(),min(21,int(730/max(1,len(title)))), "#fff",850)]
  for i,(scene,people,speech) in enumerate(frames):
   y=top+i*(ph+gap)
   a.append(f'<g clip-path="url(#cut{i})"><defs><clipPath id="cut{i}"><rect x="9" y="{y}" width="{W-18}" height="{ph}" rx="4"/></clipPath></defs>')
