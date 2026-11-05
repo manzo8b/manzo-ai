@@ -343,7 +343,7 @@ def patch_site(site):
  xml=sitemap.read_text(encoding="utf-8")
  for route in ("/manzo-ai/it/risorse/oracle-city/","/manzo-ai/"+BASE+"/"):
   url="https://manzo8b.github.io"+route
-  if url not in xml:
+  if f"<loc>{url}</loc>" not in xml:
    assert "</urlset>" in xml
    xml=xml.replace("</urlset>",f'<url><loc>{url}</loc></url></urlset>')
  sitemap.write_text(xml,encoding="utf-8")
