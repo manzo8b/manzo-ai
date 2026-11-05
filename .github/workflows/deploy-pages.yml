@@ -12,6 +12,7 @@ on:
       - site-v0.6.zip
       - site-v0.7.zip
       - editorial/oracle-city/**
+      - theme/publish-oracle-city-n02.py
       - editorial/podcast/**
       - theme/publish-podcast.py
       - theme/publish-oracle-city.py
@@ -214,6 +215,10 @@ jobs:
           test -s _site/sitemap.xml
           test -f _site/.nojekyll
           python3 theme/publish-oracle-city.py --site _site --edition editorial/oracle-city/numero-01
+          python3 -m pip install --quiet pillow cairosvg reportlab
+          python3 theme/publish-oracle-city-n02.py --site _site
+          test -s _site/it/risorse/oracle-city/numero-02/ORACLE_CITY_Numero_02_Trecento_Copie.pdf
+          test "$(find _site/it/risorse/oracle-city/numero-02 -name 'pagina-??.webp' | wc -l)" -eq 13
           python3 theme/publish-podcast.py --site _site --edition editorial/podcast/ep00
           echo "Static files validated."
       - name: Configure Pages
