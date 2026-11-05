@@ -105,7 +105,7 @@ def city_art(w,h,seed):
  for i in range(20):
   px=int(i*w/19-20); hh=rng.randint(int(h*.26),int(h*.73))
   a.append(rect(px,h-hh,54,hh,"#18213b",0,"#090d1e",2))
-  for wy in range(h-hh+14,h-18,30):
+  for wy in range(int(h-hh+14),int(h-18),30):
    for wx in range(px+10,px+47,18):
     if rng.random()<.55:a.append(rect(wx,wy,7,13,"#eaaa69"))
  a.append(path(f"M0,{h-36} Q{w//2},{h-94} {w},{h-28} L{w},{h} H0 Z","#101427"))
@@ -113,7 +113,7 @@ def city_art(w,h,seed):
 def papers_art(w,h,seed):
  rng=random.Random(seed); a=[]
  for i in range(16):
-  x=rng.randint(50,w-130); y=rng.randint(15,h-80)
+  x=rng.randint(50,w-130); y=rng.randint(15,int(h-80))
   rot=rng.randint(-21,21)
   a.append(f'<g transform="translate({x} {y}) rotate({rot})">'+rect(0,0,80,105,"#f2e6d4",3,"#142037",2)+rect(10,14,55,4,"#8791a7")+rect(10,28,48,3,"#a9b1bd")+rect(10,41,57,3,"#a9b1bd")+rect(10,54,43,3,"#a9b1bd")+'</g>')
  return "".join(a)
