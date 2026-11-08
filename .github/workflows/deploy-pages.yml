@@ -20,6 +20,7 @@ on:
       - theme/manzo-mark.svg
       - theme/inject-signature.py
       - theme/footer-signature.css
+      - theme/rewrite-owner-urls.py
       - .github/workflows/deploy-pages.yml
   workflow_dispatch:
 
@@ -215,6 +216,8 @@ jobs:
           test -f _site/.nojekyll
           python3 theme/publish-oracle-city.py --site _site --edition editorial/oracle-city/numero-01
           python3 theme/publish-podcast.py --site _site --edition editorial/podcast/ep00
+          # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
+          python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
           echo "Static files validated."
       - name: Configure Pages
         uses: actions/configure-pages@v5
