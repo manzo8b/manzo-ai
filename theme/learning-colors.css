@@ -312,3 +312,54 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .article pre{max-width:100%;overflow-x:auto;white-space:pre}
 .article table{max-width:100%;overflow-x:auto}
 @media(max-width:760px){.article-layout{grid-template-columns:minmax(0,1fr)}.article table{display:block}.main{overflow-wrap:anywhere}}
+
+/* TECHNICAL LAB READABILITY FIX | 2026-11-08
+   The previous dark code theme kept pale glyphs after the card surface was
+   changed to ivory. Force readable ink across every descendant, including
+   inline syntax spans, while retaining local horizontal scrolling. */
+.technical-article pre{
+  background:#F6F6F2 !important;
+  border:1px solid #C9CEC8;
+  color:#202E2A !important;
+  -webkit-text-fill-color:#202E2A !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+  line-height:1.65;
+  font-size:.92rem;
+  tab-size:2;
+  max-width:100%;
+  overflow-x:auto;
+  white-space:pre;
+  overflow-wrap:normal;
+  word-break:normal;
+  -webkit-overflow-scrolling:touch;
+}
+.technical-article pre *{
+  color:#202E2A !important;
+  -webkit-text-fill-color:#202E2A !important;
+  opacity:1 !important;
+  text-shadow:none !important;
+}
+.technical-article pre code{
+  background:transparent !important;
+  border:0 !important;
+  padding:0 !important;
+  font-size:inherit;
+  line-height:inherit;
+}
+.technical-article :not(pre)>code{
+  color:#25332F;
+  -webkit-text-fill-color:#25332F;
+  background:#EFF1EE;
+  overflow-wrap:anywhere;
+}
+@media(max-width:760px){
+  .technical-article pre{font-size:.82rem;padding:16px}
+}
+@media print{
+  .technical-article pre,.technical-article pre *{
+    color:#111 !important;
+    -webkit-text-fill-color:#111 !important;
+    background:#FFF !important;
+  }
+}
