@@ -28,13 +28,14 @@ with sync_playwright() as playwright:
                     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 2'), ('horizontal overflow',width,path,page.evaluate('document.documentElement.scrollWidth'))
                     menu.click()
                     assert menu.get_attribute('aria-expanded')=='true',(width,path,'open state')
-                    assert page.locator('.manzo-mobile-drawer').is_visible(),(width,path,'drawer')
+                    page.locator('.manzo-mobile-drawer').wait_for(state='visible',timeout=4000)
                     assert page.locator('.manzo-mobile-quick-portal').get_attribute('href')=='/manzo-ai/'
                     assert page.locator('.manzo-mobile-lang-link').count()==3
                     assert page.locator('.manzo-mobile-drawer').get_attribute('aria-hidden')=='false'
                     page.keyboard.press('Escape')
                     assert menu.get_attribute('aria-expanded')=='false',(width,path,'Esc close')
                     assert page.locator('.manzo-mobile-drawer').get_attribute('aria-hidden')=='true'
+                    page.locator('.manzo-mobile-drawer').wait_for(state='hidden',timeout=4000)
                     assert page.evaluate('document.documentElement.style.overflow')=='',(width,path,'scroll lock')
                 response=page.goto(f'{ORIGIN}/',wait_until='domcontentloaded')
                 assert response.status==200
