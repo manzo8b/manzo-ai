@@ -73,6 +73,14 @@ jobs:
           fi
           echo "SITE_ARCHIVE=$archive" >> "$GITHUB_ENV"
           unzip -t "$archive" >/dev/null
+      - name: Ensure FFmpeg for video lesson thumbnail
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -s editorial/video/prompt-engineering/Prompt_Engineering.mp4 ] && ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y ffmpeg
+          fi
       - name: Extract and inspect static site
         shell: bash
         run: |
@@ -224,6 +232,10 @@ jobs:
           python3 theme/publish-podcast.py --site _site --edition editorial/podcast/ep00
           python3 -m py_compile theme/publish-prompt-video.py
           python3 theme/publish-prompt-video.py --site _site --edition editorial/video/prompt-engineering
+          if [ -s editorial/video/prompt-engineering/Prompt_Engineering.mp4 ]; then
+            test -s _site/assets/media/prompt-engineering/copertina.jpg
+            test -s _site/it/video-e-slide/prompt-engineering/index.html
+          fi
           # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
           python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
           # Generate final SEO index ONLY after all published editorial pages exist.
