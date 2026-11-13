@@ -50,7 +50,7 @@ def patch_hub(page: Path, text: tuple[str,str,str,str]) -> bool:
     page.write_text(html[:close.start()]+card+html[close.start():],encoding='utf-8')
     return True
 
-def video_page(has_subtitles:bool, has_cover:bool) -> str:
+def video_page(has_subtitles:bool, has_cover:bool, upload_date: str | None = None) -> str:
     title = 'Prompt Engineering: dalla domanda al metodo professionale | MANZO AI'
     description = 'Una lezione video di 7 minuti e 54 secondi per imparare a progettare prompt chiari, valutare le risposte dell’intelligenza artificiale e migliorare il proprio metodo.'
     cover_url = ORIGIN + ASSETS + 'copertina.jpg'
@@ -67,6 +67,8 @@ def video_page(has_subtitles:bool, has_cover:bool) -> str:
         'thumbnailUrl':cover_url if has_cover else ORIGIN+'/manzo-ai/logo.svg',
         'publisher':{'@type':'Organization','name':'MANZO AI','url':ORIGIN+'/manzo-ai/'}
     }
+    if upload_date:
+        graph['uploadDate'] = upload_date
     subs = ('<track kind="captions" src="'+ASSETS+SUBTITLE+'" srclang="it" label="Italiano" default>' if has_subtitles else '')
     poster = (' poster="'+ASSETS+'copertina.jpg"' if has_cover else '')
     return f'''<!doctype html>
@@ -161,7 +163,12 @@ def main():
             cover.unlink(missing_ok=True)
     target = site/'it/video-e-slide/prompt-engineering/index.html'
     target.parent.mkdir(parents=True,exist_ok=True)
-    target.write_text(video_page(has_subs,cover.is_file()),encoding='utf-8')
+    # Read the media file's actual most recent Git commit date for video-rich metadata.
+    # Full history is fetched by the publishing workflow; never invent a date.
+    rel_src = src.relative_to(Path.cwd()) if src.is_relative_to(Path.cwd()) else src
+    git_date = subprocess.run(['git','log','-1','--format=%cI','--',str(rel_src)],capture_output=True,text=True)
+    upload_date = git_date.stdout.strip() if git_date.returncode == 0 and re.fullmatch(r'\\d{4}-\\d{2}-\\d{2}T.*',git_date.stdout.strip()) else None
+    target.write_text(video_page(has_subs,cover.is_file(),upload_date),encoding='utf-8')
     updated = []
     for rel,titles in HUBS.items():
         if patch_hub(site/rel,titles):updated.append(rel)
