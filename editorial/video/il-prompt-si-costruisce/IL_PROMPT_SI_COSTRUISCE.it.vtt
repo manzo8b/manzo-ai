@@ -1,0 +1,445 @@
+WEBVTT
+Kind: captions
+Language: it
+
+00:00:00.242 --> 00:00:04.722
+Benvenuti a questo nuovo approfondimento
+basato sul documento EP02 di Manzo AI.
+
+00:00:05.402 --> 00:00:09.522
+Oggi il nostro obiettivo è smontare una
+volta per tutte il mito della bacchetta
+
+00:00:09.581 --> 00:00:11.242
+magica dell'intelligenza artificiale.
+
+00:00:12.001 --> 00:00:14.761
+Troppo spesso infatti si pensa
+che basti buttare lì una frasetta
+
+00:00:14.782 --> 00:00:15.942
+per ottenere la magia, vero?
+
+00:00:16.442 --> 00:00:18.822
+Beh, in realtà le cose
+funzionano in modo molto diverso.
+
+00:00:19.562 --> 00:00:23.062
+Insieme esploreremo come ingegnerizzare
+prompt professionali e affidabili
+
+00:00:23.202 --> 00:00:26.622
+costruendoli letteralmente blocco
+dopo blocco, proprio come faremmo
+
+00:00:26.642 --> 00:00:27.862
+con una solida architettura.
+
+00:00:28.322 --> 00:00:31.602
+Insomma, passeremo da una semplice
+domandina improvvisata a un vero
+
+00:00:31.622 --> 00:00:32.922
+e proprio metodo professionale.
+
+00:00:33.322 --> 00:00:33.742
+Iniziamo.
+
+00:00:34.562 --> 00:00:36.902
+Partiremo dalla grammatica
+visiva dei mattoncini.
+
+00:00:37.202 --> 00:00:39.602
+Vedremo un esempio di base per
+l'organizzazione quotidiana,
+
+00:00:39.922 --> 00:00:42.362
+per poi scalare verso un
+esempio aziendale complesso.
+
+00:00:42.862 --> 00:00:46.762
+Dopodiché analizzeremo il metodo
+Prometeus Marcelus e infine chiuderemo
+
+00:00:46.802 --> 00:00:48.302
+con la biblioteca e la verifica.
+
+00:00:49.382 --> 00:00:53.042
+Sezione uno: il codice dei
+mattoncini, la grammatica visiva.
+
+00:00:54.062 --> 00:00:57.622
+Per iniziare con il piede giusto c'è
+un concetto assolutamente cruciale
+
+00:00:57.662 --> 00:01:02.242
+da interiorizzare: scrivere un prompt
+assomiglia molto meno a lanciare
+
+00:01:02.282 --> 00:01:05.922
+un incantesimo e molto più ad
+assemblare dei mattoncini a incastro,
+
+00:01:06.381 --> 00:01:07.601
+un po' come facevamo da bambini.
+
+00:01:08.301 --> 00:01:12.142
+Il sistema creato da Manzo AI
+utilizza un codice colori geniale
+
+00:01:12.182 --> 00:01:14.782
+per allontanarci dalle richieste
+caotiche fatte in una sola frase.
+
+00:01:15.542 --> 00:01:19.642
+Funziona così: il blu è l'obiettivo
+primario, il giallo definisce il
+
+00:01:19.661 --> 00:01:24.642
+contesto, il verde fornisce i dati
+in input, il corallo fissa i vincoli
+
+00:01:24.661 --> 00:01:28.422
+per limitare i rischi e il viola
+descrive come vogliamo l'output.
+
+00:01:29.182 --> 00:01:33.222
+Infine ci sono i due mattoncini più
+strategici: il turchese per la verifica
+
+00:01:33.241 --> 00:01:35.082
+e l'antracite per la supervisione umana.
+
+00:01:35.942 --> 00:01:39.442
+Ogni istruzione, anche la più
+complessa, prende vita esattamente
+
+00:01:39.482 --> 00:01:41.042
+così, incastrando questi moduli.
+
+00:01:42.082 --> 00:01:45.622
+Anche i leader del settore, come
+Anthropic, continuano a ripeterlo.
+
+00:01:46.082 --> 00:01:50.202
+Una richiesta grezza lascia semplicemente
+troppo spazio alle supposizioni dell'IA.
+
+00:01:50.842 --> 00:01:54.942
+Immaginiamo una torre costruita
+con un solo singolo mattone con su
+
+00:01:55.002 --> 00:01:56.702
+scritto magari: "Scrivi un articolo".
+
+00:01:57.301 --> 00:02:00.822
+Ovviamente traballa e crolla alla
+prima vera esigenza specifica.
+
+00:02:01.402 --> 00:02:05.741
+Al contrario, un prompt strutturato su
+più mattoni chiarisce fin dal principio
+
+00:02:05.782 --> 00:02:07.822
+il compito, il contesto e le regole.
+
+00:02:08.301 --> 00:02:08.862
+Il risultato?
+
+00:02:09.521 --> 00:02:12.841
+Controllo assoluto e una qualità
+che finalmente diventa prevedibile.
+
+00:02:13.802 --> 00:02:17.762
+Passiamo alla sezione due: esempio
+base, l'organizzazione personale.
+
+00:02:18.702 --> 00:02:21.781
+Caliamo tutto questo nella pratica
+e notiamo subito il contrasto.
+
+00:02:22.222 --> 00:02:25.002
+Da una parte abbiamo la tipica
+richiesta grezza: aiutami a
+
+00:02:25.042 --> 00:02:26.242
+organizzare la mia settimana.
+
+00:02:27.142 --> 00:02:29.862
+L'intelligenza artificiale qui
+deve praticamente inventarsi tutto.
+
+00:02:30.682 --> 00:02:33.622
+Dall'altra parte, invece, c'è
+un prompt costruito ad arte.
+
+00:02:34.242 --> 00:02:36.781
+Utilizza i mattoncini per
+dettare parametri esatti.
+
+00:02:37.242 --> 00:02:40.222
+Si usa il blocco giallo per indicare
+l'orario di lavoro, quello verde per
+
+00:02:40.262 --> 00:02:44.542
+l'elenco delle commissioni, il blocco
+corallo per i vincoli ferrei, come niente
+
+00:02:44.561 --> 00:02:48.742
+riunioni prima delle sette e mezza del
+mattino, e il viola per pretendere che
+
+00:02:48.762 --> 00:02:50.341
+il risultato sia una comoda tabella.
+
+00:02:50.922 --> 00:02:55.841
+La differenza in termini di precisione
+è letteralmente abissale Ma attenzione:
+
+00:02:56.142 --> 00:02:57.862
+il lavoro non si ferma all'output.
+
+00:02:58.202 --> 00:03:01.281
+Il mattoncino turchese, quello
+della verifica, entra in gioco
+
+00:03:01.302 --> 00:03:04.302
+per garantire che il piano sia
+funzionale e non solo bello da vedere.
+
+00:03:04.841 --> 00:03:07.381
+Invece di fidarsi ciecamente,
+si costringe il modello a
+
+00:03:07.462 --> 00:03:09.601
+porsi tre domande: è fattibile?
+
+00:03:09.922 --> 00:03:10.982
+Ci sono sovrapposizioni?
+
+00:03:11.421 --> 00:03:12.441
+Come posso adattarlo?
+
+00:03:13.221 --> 00:03:17.041
+È a tutti gli effetti una checklist di
+controllo qualità incorporata nel prompt.
+
+00:03:18.101 --> 00:03:21.101
+Sezione tre: alziamo l'asticella
+con l'esempio professionale.
+
+00:03:21.561 --> 00:03:22.781
+Compliance aziendale.
+
+00:03:23.742 --> 00:03:25.161
+Ora la posta in gioco si fa alta.
+
+00:03:25.482 --> 00:03:28.061
+Parliamo di compliance e
+procedure antiriciclaggio.
+
+00:03:28.762 --> 00:03:31.781
+In questo settore l'accuratezza non è
+certo un optional, è un obbligo di legge.
+
+00:03:32.481 --> 00:03:35.702
+Un prompt generico tipo: "Analizza
+questo cliente e dimmi se è
+
+00:03:35.742 --> 00:03:38.001
+rischioso", è estremamente pericoloso.
+
+00:03:38.742 --> 00:03:41.302
+L'approccio modulare, invece,
+cambia del tutto le carte in tavola.
+
+00:03:42.001 --> 00:03:45.841
+Definisce il ruolo dell'IA non come un
+giudice che emette sentenze, ma come
+
+00:03:45.882 --> 00:03:50.082
+un assistente metodologico che analizza
+freddamente un dossier fittizio, separando
+
+00:03:50.101 --> 00:03:54.001
+i fatti concreti dalle informazioni
+mancanti, senza mai permettersi
+
+00:03:54.122 --> 00:03:55.402
+di trarre la conclusione finale.
+
+00:03:56.362 --> 00:03:59.841
+Ed è in contesti come questo che
+brilla il mattoncino antracite,
+
+00:04:00.262 --> 00:04:03.942
+forse il più cruciale in ambito
+aziendale: la supervisione umana.
+
+00:04:04.682 --> 00:04:05.822
+Questa è la vera salvaguardia.
+
+00:04:06.281 --> 00:04:11.122
+Garantisce che l'IA si limiti a segnalare
+rischi o incongruenze documentali, ma
+
+00:04:11.202 --> 00:04:15.221
+l'autorità per la revisione finale e
+soprattutto la responsabilità della
+
+00:04:15.262 --> 00:04:20.142
+decisione rimane sempre rigorosamente
+nelle mani del professionista umano.
+
+00:04:20.841 --> 00:04:26.138
+L'IA, insomma, non preme mai il bottone
+rosso Per capire il livello di dettaglio,
+
+00:04:26.498 --> 00:04:30.218
+ecco come appare un output professionale
+generato con questo sistema: una
+
+00:04:30.278 --> 00:04:34.658
+tabella strutturata, asettica, basata
+solo sui fatti, che cita perfino le
+
+00:04:34.678 --> 00:04:36.378
+pagine esatte dei documenti analizzati.
+
+00:04:36.918 --> 00:04:41.438
+Si allinea perfettamente con gli standard
+di settore e notate l'avvertenza in
+
+00:04:41.478 --> 00:04:45.598
+basso: "simulazione didattica", a
+dimostrazione che l'intero perimetro
+
+00:04:45.658 --> 00:04:47.198
+di rischio è sotto stretto controllo.
+
+00:04:48.358 --> 00:04:51.418
+Sezione quattro: il metodo
+Prometeus Marcelus.
+
+00:04:51.858 --> 00:04:52.998
+Progettare il processo.
+
+00:04:53.938 --> 00:04:57.738
+Spostiamoci ora dalla scrittura della
+singola istruzione alla progettazione di
+
+00:04:57.758 --> 00:05:01.458
+un vero e proprio flusso di lavoro, il
+massimo livello del prompt engineering.
+
+00:05:02.318 --> 00:05:04.838
+Un vero progettista non si
+mette a digitare alla cieca.
+
+00:05:05.318 --> 00:05:07.058
+Segue sette fasi ben distinte.
+
+00:05:07.858 --> 00:05:11.878
+Prima l'ascolto per inquadrare il
+problema, poi si delimita l'ambito
+
+00:05:11.898 --> 00:05:15.538
+e si valuta il rischio, si chiedono
+i chiarimenti necessari e solo
+
+00:05:15.578 --> 00:05:19.378
+allora si passa alla progettazione,
+con il controllo ed alla consegna.
+
+00:05:20.218 --> 00:05:24.038
+Questo significa mappare minuziosamente
+l'intero problema prima ancora di
+
+00:05:24.098 --> 00:05:25.778
+testare una sola singola parola.
+
+00:05:26.738 --> 00:05:29.698
+E cosa si ottiene applicando
+rigorosamente queste sette fasi?
+
+00:05:30.318 --> 00:05:32.658
+Un'idea caotica diventa
+un processo chirurgico.
+
+00:05:33.298 --> 00:05:36.538
+Ad esempio, il risultato può essere
+un prompt completo pronto per essere
+
+00:05:36.598 --> 00:05:40.398
+testato per generare un workshop
+sull'intelligenza artificiale di 60
+
+00:05:40.438 --> 00:05:44.158
+minuti, accompagnato dalla sua brava
+checklist di verifica per l'apprendimento.
+
+00:05:44.598 --> 00:05:46.978
+Nessuna improvvisazione, solo struttura.
+
+00:05:48.038 --> 00:05:51.698
+Siamo arrivati alla sezione cinque:
+la biblioteca e la verifica,
+
+00:05:52.118 --> 00:05:53.258
+per andare oltre la teoria.
+
+00:05:54.298 --> 00:05:56.858
+Dove finiscono tutti questi
+prompt così ben costruiti?
+
+00:05:57.438 --> 00:06:00.178
+La risposta è nella biblioteca
+Prometeus Marcelus.
+
+00:06:00.698 --> 00:06:02.018
+Ma attenzione a non fraintendere.
+
+00:06:02.338 --> 00:06:05.138
+Trovare un prompt lì dentro
+non significa avere in tasca un
+
+00:06:05.178 --> 00:06:06.458
+trucchetto magico infallibile.
+
+00:06:06.898 --> 00:06:10.338
+È un archivio di strutture base
+testate nel mondo reale, che però
+
+00:06:10.378 --> 00:06:14.238
+richiedono sempre valutazione critica,
+adattamento al contesto specifico e un
+
+00:06:14.278 --> 00:06:16.338
+continuo e instancabile lavoro di test.
+
+00:06:17.338 --> 00:06:20.538
+Alla fine di tutto, l'intero
+approccio si condensa in una filosofia
+
+00:06:20.578 --> 00:06:24.338
+essenziale, la frase che dà il
+titolo al documento: "Il prompt si
+
+00:06:24.418 --> 00:06:26.758
+costruisce, la qualità si verifica".
+
+00:06:27.578 --> 00:06:31.258
+Non ci sono scorciatoie, bisogna
+incastrare un mattoncino dopo l'altro
+
+00:06:31.298 --> 00:06:34.798
+con precisione, senza mai delegare la
+responsabilità finale alla macchina.
+
+00:06:35.358 --> 00:06:38.488
+Avendo visto come una solida architettura
+può trasformare radicalmente i
+
+00:06:38.498 --> 00:06:42.658
+risultati, c'è da chiedersi: quale
+struttura costruiremo la prossima volta?
