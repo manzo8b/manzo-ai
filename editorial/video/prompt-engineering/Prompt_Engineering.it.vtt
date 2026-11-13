@@ -1,0 +1,545 @@
+WEBVTT
+Kind: captions
+Language: it
+
+00:00:00.254 --> 00:00:01.774
+Benvenuti a questo nuovo approfondimento.
+
+00:00:02.314 --> 00:00:06.494
+Oggi smontiamo un mito, quello della
+magia dell'intelligenza artificiale,
+
+00:00:06.914 --> 00:00:10.033
+per scoprire invece la rigorosa
+metodologia professionale che c'è dietro
+
+00:00:10.094 --> 00:00:11.814
+un prompt engineering davvero efficace.
+
+00:00:12.453 --> 00:00:16.413
+Sapete, spesso si pensa basti digitare una
+formuletta magica per ottenere risultati
+
+00:00:16.454 --> 00:00:18.034
+incredibili da un modello linguistico.
+
+00:00:18.474 --> 00:00:19.814
+Beh, la realtà è un po' diversa.
+
+00:00:20.494 --> 00:00:23.094
+Oggi vedremo insieme come
+trasformare una richiesta qualunque
+
+00:00:23.174 --> 00:00:26.794
+in un'istruzione ipercontrollata,
+passando dall'improvvisazione a un
+
+00:00:26.854 --> 00:00:30.814
+vero e proprio metodo di progettazione
+basato sull'ecosistema Manzo AI.
+
+00:00:31.794 --> 00:00:35.674
+Partiremo dall'illusione della magia,
+esploreremo le cinque domande fondamentali
+
+00:00:35.954 --> 00:00:37.494
+e vedremo l'evoluzione di un prompt.
+
+00:00:38.094 --> 00:00:41.134
+Poi passeremo alle strutture
+avanzate, affronteremo il cruciale
+
+00:00:41.194 --> 00:00:44.614
+test della realtà e chiuderemo con
+il ciclo iterativo professionale.
+
+00:00:45.594 --> 00:00:50.014
+L'illusione della magia, ovvero andiamo
+a sfatare il mito del comando perfetto.
+
+00:00:50.994 --> 00:00:54.074
+Allora, mettiamo in chiaro una
+cosa fin da subito: interagire
+
+00:00:54.114 --> 00:00:57.734
+con l'IA non è un incantesimo
+che ci regala la verità assoluta.
+
+00:00:58.333 --> 00:01:02.054
+Un prompt in fondo è semplicemente una
+specifica di lavoro e il confine tra
+
+00:01:02.094 --> 00:01:05.974
+un successo clamoroso e un fallimento
+totale sta tutto in quanto siamo
+
+00:01:06.014 --> 00:01:07.634
+chiari nel definire questo lavoro.
+
+00:01:08.474 --> 00:01:11.354
+Non dobbiamo trasformare il modello
+in un tuttologo onnisciente,
+
+00:01:11.734 --> 00:01:15.474
+ma fornirgli i binari giusti,
+precisissimi, su cui farlo correre.
+
+00:01:16.334 --> 00:01:20.274
+Cinque domande fondamentali: trasformare
+richieste vaghe in istruzioni chiare.
+
+00:01:21.334 --> 00:01:24.874
+Per lasciarci alle spalle quel fastidioso
+approccio per tentativi ed errori
+
+00:01:24.934 --> 00:01:26.554
+dobbiamo ancorarci a un kit di base.
+
+00:01:27.094 --> 00:01:31.454
+Pensateci: senza sapere a chi ci
+rivolgiamo o che formato ci serve, il
+
+00:01:31.494 --> 00:01:33.154
+modello andrà letteralmente a tentoni.
+
+00:01:33.614 --> 00:01:35.673
+Quindi chiediamoci sempre:
+qual è l'obiettivo?
+
+00:01:36.253 --> 00:01:37.033
+Che contesto serve?
+
+00:01:37.594 --> 00:01:38.734
+Chi è il destinatario finale?
+
+00:01:39.253 --> 00:01:41.574
+Vogliamo una tabella o un testo o un JSON?
+
+00:01:42.234 --> 00:01:44.494
+E infine, come misuriamo
+la qualità del risultato?
+
+00:01:45.514 --> 00:01:48.814
+Rispondere a queste cinque domande
+cancella ogni ambiguità e ci trasforma
+
+00:01:48.854 --> 00:01:50.414
+in veri progettisti di istruzioni.
+
+00:01:51.394 --> 00:01:54.774
+E questo ci porta a una vera e
+propria checklist di orientamento.
+
+00:01:55.334 --> 00:01:58.614
+Non è una rigida formula matematica,
+sia chiaro, ma una guida preziosissima.
+
+00:01:59.154 --> 00:02:00.714
+Ci assicura di aver coperto tutte le basi.
+
+00:02:01.154 --> 00:02:03.774
+Non dimenticheremo i vincoli,
+le informazioni in ingresso
+
+00:02:03.834 --> 00:02:04.894
+o i meccanismi di verifica.
+
+00:02:05.473 --> 00:02:08.514
+È esattamente l'impalcatura che
+serve per garantire un lavoro di
+
+00:02:08.554 --> 00:02:10.494
+altissima qualità e senza sorprese.
+
+00:02:11.454 --> 00:02:15.353
+L'evoluzione di un prompt: come
+scalare in complessità e chiarezza.
+
+00:02:16.274 --> 00:02:19.534
+Mettiamo la teoria in pratica e guardiamo
+questa trasformazione progressiva.
+
+00:02:20.194 --> 00:02:23.994
+Da una parte abbiamo un desiderio vago,
+il classico: "Fammi una strategia social",
+
+00:02:24.554 --> 00:02:26.374
+dall'altra una specifica definita.
+
+00:02:26.974 --> 00:02:27.914
+È un contrasto netto, vero?
+
+00:02:28.534 --> 00:02:31.474
+Con la prima versione l'IA ci darà
+consigli banalissimi e generici.
+
+00:02:31.853 --> 00:02:35.754
+Con la seconda, specificando il pubblico
+adulto e il budget pari a zero, il modello
+
+00:02:35.793 --> 00:02:39.514
+inizia finalmente a lavorare sul serio per
+noi, generando contenuti davvero mirati.
+
+00:02:40.594 --> 00:02:42.074
+Ma facciamo un ulteriore salto.
+
+00:02:42.554 --> 00:02:45.173
+La versione C rappresenta il
+vero design professionale.
+
+00:02:45.654 --> 00:02:48.774
+Qui inseriamo vincoli rigorosi,
+tipo nessun dato inventato.
+
+00:02:49.233 --> 00:02:52.894
+Chiediamo un output in formato
+tabellare, alleghiamo input specifici
+
+00:02:53.233 --> 00:02:56.594
+e introduciamo persino le ipotesi su
+come gestire eventuali dati mancanti.
+
+00:02:57.194 --> 00:03:00.774
+Insomma, un'istruzione letteralmente
+blindata che abbatte il margine
+
+00:03:00.814 --> 00:03:01.613
+di errore della macchina.
+
+00:03:02.134 --> 00:03:04.173
+Questo è il livello operativo
+che vogliamo raggiungere.
+
+00:03:05.254 --> 00:03:10.154
+Struttura avanzata e XML: un'applicazione
+nel mondo reale analizzata da Anthropic.
+
+00:03:11.829 --> 00:03:15.209
+Per capire come gestire i compiti
+eccezionalmente complessi, diamo
+
+00:03:15.230 --> 00:03:18.670
+un'occhiata a questo scenario reale
+pazzesco studiato dal team di Anthropic.
+
+00:03:19.329 --> 00:03:22.370
+Si tratta della valutazione di un
+incidente d'auto in Svezia usando
+
+00:03:22.430 --> 00:03:23.850
+un modulo manuale e uno schizzo.
+
+00:03:24.350 --> 00:03:27.010
+All'inizio un prompt troppo
+semplice ha fatto letteralmente
+
+00:03:27.049 --> 00:03:29.930
+allucinare l'IA, che lo ha scambiato
+per un incidente sugli sci.
+
+00:03:30.329 --> 00:03:30.890
+Incredibile, no?
+
+00:03:31.370 --> 00:03:34.930
+Questo ci dimostra palesemente che
+senza un contesto solido i modelli
+
+00:03:34.970 --> 00:03:36.250
+tirano semplicemente a indovinare.
+
+00:03:37.310 --> 00:03:40.989
+Ma guardate cosa succede se inseriamo
+la struttura statica e il significato
+
+00:03:41.049 --> 00:03:44.850
+di ogni singola voce del modulo svedese
+direttamente nel prompt di sistema.
+
+00:03:45.450 --> 00:03:45.750
+Magia?
+
+00:03:46.310 --> 00:03:47.269
+No, metodo.
+
+00:03:47.950 --> 00:03:51.370
+L'IA smette all'istante di inventare
+e diventa improvvisamente capace
+
+00:03:51.390 --> 00:03:54.769
+di analizzare con precisione
+chirurgica le caselle esatte spuntate
+
+00:03:54.790 --> 00:03:56.350
+per il veicolo A e il veicolo B.
+
+00:03:56.850 --> 00:04:00.070
+Inizia finalmente a estrarre fatti
+concreti dalla documentazione visiva.
+
+00:04:00.990 --> 00:04:04.390
+E questo miracolo accade perché
+imporre un rigorosissimo ordine
+
+00:04:04.430 --> 00:04:07.950
+delle operazioni impedisce all'IA
+di saltare a conclusioni affrettate.
+
+00:04:08.549 --> 00:04:11.109
+Pensateci: se le facessimo
+guardare prima quello schizzo
+
+00:04:11.130 --> 00:04:13.049
+confuso andrebbe subito in tilt.
+
+00:04:13.670 --> 00:04:16.430
+Obbligandola invece a leggere
+prima i dati oggettivi del modulo,
+
+00:04:16.769 --> 00:04:20.450
+le forniamo il contesto fattuale
+indispensabile per poter interpretare
+
+00:04:20.490 --> 00:04:21.890
+correttamente anche il disegno a mano.
+
+00:04:22.789 --> 00:04:24.950
+Un altro trucco fondamentale
+per blindare l'output?
+
+00:04:25.550 --> 00:04:28.090
+Usare i tag XML per incapsulare i dati.
+
+00:04:28.870 --> 00:04:32.150
+Separando in modo netto le istruzioni
+generali dai dati dinamici e
+
+00:04:32.169 --> 00:04:35.010
+chiedendo magari che il risultato
+sia racchiuso in un tag specifico
+
+00:04:35.050 --> 00:04:39.070
+come verdetto finale, rendiamo il
+risultato infinitamente più sicuro.
+
+00:04:39.630 --> 00:04:42.550
+In questo modo i dati sono già
+formattati alla perfezione, pronti per
+
+00:04:42.590 --> 00:04:45.669
+essere archiviati in modo automatico
+nei database aziendali senza alcun
+
+00:04:45.710 --> 00:04:50.642
+intoppo Il test della realtà, perché
+anche un buon prompt può fallire.
+
+00:04:51.682 --> 00:04:54.882
+Ora, nonostante una padronanza
+tecnica assoluta, dobbiamo restare
+
+00:04:54.921 --> 00:04:58.982
+estremamente vigili, perché la perfezione
+del prompt non azzera i rischi.
+
+00:04:59.482 --> 00:05:02.382
+Dobbiamo porci una domanda scomoda:
+perché una risposta scritta
+
+00:05:02.462 --> 00:05:04.102
+benissimo non è sempre vera?
+
+00:05:04.861 --> 00:05:07.982
+Ricordiamoci sempre che l'IA è
+progettata prima di tutto per essere
+
+00:05:08.022 --> 00:05:12.062
+discorsiva e collaborativa, e a
+volte, pur di accontentarci, sacrifica
+
+00:05:12.102 --> 00:05:13.682
+l'accuratezza e la verità oggettiva.
+
+00:05:14.662 --> 00:05:15.741
+L'allucinazione.
+
+00:05:16.462 --> 00:05:20.142
+Un modello linguistico è capacissimo di
+inventarsi fonti bibliografiche dal nulla
+
+00:05:20.522 --> 00:05:24.382
+o di perdersi dettagli vitali in documenti
+chilometrici, il tutto mantenendo un
+
+00:05:24.442 --> 00:05:26.942
+tono estremamente sicuro e convincente.
+
+00:05:27.722 --> 00:05:31.142
+Ecco perché la nostra supervisione
+umana resta e resterà sempre
+
+00:05:31.241 --> 00:05:33.262
+assolutamente non negoziabile.
+
+00:05:34.241 --> 00:05:36.582
+La fluidità non è sinonimo di accuratezza.
+
+00:05:37.162 --> 00:05:38.421
+L'eloquenza non è prova di verità.
+
+00:05:39.062 --> 00:05:41.122
+Una risposta scritta in un
+italiano impeccabile può
+
+00:05:41.162 --> 00:05:42.562
+nascondere errori madornali.
+
+00:05:43.202 --> 00:05:46.482
+E vi dirò di più: chiedere all'IA di
+citare le fonti non serve a nulla,
+
+00:05:46.921 --> 00:05:48.082
+se poi quelle fonti non esistono.
+
+00:05:48.542 --> 00:05:49.942
+È solo un falso senso di sicurezza.
+
+00:05:50.982 --> 00:05:54.082
+In sintesi, soprattutto in settori
+critici ad alto rischio come la
+
+00:05:54.142 --> 00:05:58.502
+sanità, la giurisprudenza o la finanza,
+l'autonomia della macchina non potrà
+
+00:05:58.662 --> 00:06:00.522
+mai sostituire la responsabilità umana.
+
+00:06:01.202 --> 00:06:04.082
+Le decisioni importanti
+pretendono controlli rigorosi.
+
+00:06:04.842 --> 00:06:07.822
+E, cosa altrettanto fondamentale,
+i confini della privacy
+
+00:06:07.861 --> 00:06:09.002
+vanno difesi a spada tratta.
+
+00:06:09.382 --> 00:06:13.142
+Non date mai e poi mai in pasto al
+modello dati sensibili non autorizzati.
+
+00:06:14.042 --> 00:06:18.722
+Il ciclo iterativo professionale: come
+padroneggiare la metodologia Manzo AI.
+
+00:06:19.582 --> 00:06:22.182
+Quindi come mitighiamo questi
+rischi per ottenere risultati
+
+00:06:22.241 --> 00:06:24.042
+davvero eccellenti in modo costante?
+
+00:06:24.741 --> 00:06:25.962
+La teoria da sola non basta.
+
+00:06:26.482 --> 00:06:30.022
+Ci serve un flusso di lavoro formale,
+come questo ciclo iterativo a cinque fasi.
+
+00:06:30.861 --> 00:06:34.042
+Questo approccio cambia tutto, sposta
+completamente la nostra attenzione.
+
+00:06:34.802 --> 00:06:37.602
+Non dobbiamo più farci venire l'ansia
+da prestazione per scrivere il prompt
+
+00:06:37.682 --> 00:06:41.082
+perfetto al primo colpo, ma dobbiamo
+invece gestire un processo di valutazione
+
+00:06:41.162 --> 00:06:43.262
+maturo, progressivo e strutturato.
+
+00:06:44.202 --> 00:06:46.102
+E qui ovviamente entra
+in gioco la pratica.
+
+00:06:46.662 --> 00:06:49.682
+Il laboratorio tecnico Manzo AI,
+con la sua eccezionale biblioteca
+
+00:06:49.702 --> 00:06:53.202
+di strutture, ci offre l'ecosistema
+ideale per compiere questo salto.
+
+00:06:53.861 --> 00:06:56.422
+Ci permette di passare dalle
+fredde nozioni teoriche ai test
+
+00:06:56.462 --> 00:06:59.722
+iterativi applicati sul campo, in
+un ambiente totalmente controllato.
+
+00:07:00.182 --> 00:07:03.302
+È esattamente così che la teoria
+si trasforma in un formidabile
+
+00:07:03.382 --> 00:07:04.562
+strumento di lavoro quotidiano.
+
+00:07:05.542 --> 00:07:07.102
+Il prompt è il punto di partenza.
+
+00:07:07.602 --> 00:07:09.342
+La competenza è nel metodo.
+
+00:07:10.222 --> 00:07:13.422
+Mettiamocelo in testa: la vera
+abilità oggi non è scovare la parola
+
+00:07:13.482 --> 00:07:15.102
+magica da inserire nel primo prompt.
+
+00:07:15.682 --> 00:07:18.642
+La vera competenza del professionista
+contemporaneo sta nel definire il
+
+00:07:18.662 --> 00:07:23.022
+lavoro sistematicamente, verificare i
+risultati con criteri oggettivi e affinare
+
+00:07:23.042 --> 00:07:24.642
+il tutto con una costanza infinita.
+
+00:07:25.726 --> 00:07:27.586
+E siamo arrivati alla fine
+di questo approfondimento.
+
+00:07:28.326 --> 00:07:31.506
+Vi invito a dare un'occhiata critica
+ai vostri flussi di lavoro quotidiani.
+
+00:07:32.066 --> 00:07:35.086
+Adottare un metodo così strutturato e
+disciplinato cambierà letteralmente le
+
+00:07:35.126 --> 00:07:36.786
+carte in tavola per i vostri risultati.
+
+00:07:37.786 --> 00:07:41.186
+La provocazione con cui vi lascio
+è questa: vi accontenterete ancora
+
+00:07:41.226 --> 00:07:44.606
+dell'illusione della magia o siete
+finalmente pronti a progettare le
+
+00:07:44.626 --> 00:07:48.286
+vostre interazioni con l'intelligenza
+artificiale usando una precisione e una
+
+00:07:48.326 --> 00:07:50.146
+metodologia del tutto professionali?
