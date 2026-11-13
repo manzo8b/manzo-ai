@@ -24,6 +24,9 @@ on:
       - theme/footer-signature.css
       - theme/rewrite-owner-urls.py
       - theme/build-seo.py
+      - theme/mobile-nav.js
+      - theme/mobile-nav.css
+      - theme/publish-navigation.py
       - googlee8540704606dd6ec.html
       - .github/workflows/deploy-pages.yml
   workflow_dispatch:
@@ -240,6 +243,13 @@ jobs:
           python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
           # Generate final SEO index ONLY after all published editorial pages exist.
           python3 theme/build-seo.py --site _site --base-url "https://${GITHUB_REPOSITORY_OWNER}.github.io/manzo-ai/"
+          # Final enhancement on all rendered pages, including editorial media and language landing.
+          node --check theme/mobile-nav.js
+          python3 -m py_compile theme/publish-navigation.py
+          python3 theme/publish-navigation.py --site _site
+          python3 theme/publish-navigation.py --site _site --verify-only
+          test -s _site/assets/mobile-nav.js
+          test -s _site/assets/mobile-nav.css
           test -s _site/sitemap.xml
           test -s _site/it/mappa-del-sito/index.html
           test -s _site/es/mapa-del-sitio/index.html
