@@ -167,7 +167,7 @@ def main():
     # Full history is fetched by the publishing workflow; never invent a date.
     rel_src = src.relative_to(Path.cwd()) if src.is_relative_to(Path.cwd()) else src
     git_date = subprocess.run(['git','log','-1','--format=%cI','--',str(rel_src)],capture_output=True,text=True)
-    upload_date = git_date.stdout.strip() if git_date.returncode == 0 and re.fullmatch(r'\\d{4}-\\d{2}-\\d{2}T.*',git_date.stdout.strip()) else None
+    upload_date = git_date.stdout.strip() if git_date.returncode == 0 and re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}T.*',git_date.stdout.strip()) else None
     target.write_text(video_page(has_subs,cover.is_file(),upload_date),encoding='utf-8')
     updated = []
     for rel,titles in HUBS.items():
