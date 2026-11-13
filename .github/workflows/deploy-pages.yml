@@ -266,6 +266,13 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: _site
+      - name: Allow artifact metadata to become visible
+        shell: bash
+        run: |
+          # Pages may query Actions before freshly uploaded artifact metadata has propagated.
+          # This wait precedes deployment in a NEW workflow run; don't rerun a run with
+          # the same artifact name, as it produces duplicate github-pages artifacts.
+          sleep 10
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
