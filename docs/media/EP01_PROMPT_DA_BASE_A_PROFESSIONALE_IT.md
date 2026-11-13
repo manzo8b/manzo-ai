@@ -2,7 +2,7 @@
 # Il prompt: da una semplice domanda a un'istruzione professionale
 **Fonte editoriale originale per NotebookLM / Video Overview · 13 novembre 2026**  
 **Lingua:** italiano · **Destinazione:** MANZO AI, sezione Video e slide / Media  
-**Formato desiderato:** video podcast esplicativo, dialogo naturale fra due voci, circa 9–12 minuti se il formato lo consente.  
+**Formato desiderato:** video podcast esplicativo, dialogo naturale fra due voci, circa 12–15 minuti se il formato lo consente.  
 **Pubblico:** principianti, freelance, formatori, professionisti, sviluppatori.  
 **Stato:** sorgente pronta per produzione; video non ancora generato né pubblicato.
 
@@ -90,10 +90,44 @@ Chiedere a un modello di progettare una pagina di un corso:
 
 Il pubblico del video deve vedere che il prompt definisce un processo e non soltanto una risposta.
 
+## Atto VIII · Prometeus Marcelus e la Biblioteca: dal prompt al metodo
+Dopo aver mostrato come si costruisce un prompt efficace, introdurre **Prometeus Marcelus** come metodo operativo dell'ecosistema MANZO AI: non una formula segreta né un modello di intelligenza artificiale autonomo, ma un modo strutturato di comprendere il bisogno, organizzare la richiesta e verificare il lavoro.
+
+**Dialogo suggerito fra le due voci.**
+
+**Voce 1:** «Ora sappiamo che cosa sia un prompt. Ma come facciamo a passare da una domanda confusa a un'istruzione realmente utile?»
+
+**Voce 2:** «Qui entra in gioco Prometeus Marcelus. La sua idea centrale è semplice: prima di chiedere qualcosa all'intelligenza artificiale, occorre capire quale problema vogliamo risolvere.»
+
+**Voce 1:** «Quindi non si tratta di scrivere parole particolarmente sofisticate?»
+
+**Voce 2:** «Esattamente. Il metodo può essere raccontato attraverso sette passaggi: ascoltare la richiesta, riconoscere il settore, valutare il rischio, chiarire i dati essenziali, costruire il prompt, verificare ciò che è stato ottenuto e consegnare un risultato riutilizzabile. È una struttura pratica, da adattare: non una sequenza obbligatoria per ogni domanda.»
+
+**Voce 1:** «Facciamo un esempio.»
+
+**Voce 2:** «Una persona dice: “Migliora il mio sito”. Prometeus non parte direttamente dai colori o dal codice. Chiede prima a chi si rivolge il sito, quali problemi esistono, che cosa va conservato, quali dispositivi contano e che cosa possiamo effettivamente verificare. Solo allora costruisce un'istruzione operativa e definisce come giudicare l'esito.»
+
+**Voce 1:** «E dove possiamo imparare a farlo?»
+
+**Voce 2:** «Nella Biblioteca Prometeus Marcelus, l'archivio di riferimento collegato a MANZO AI. Vi troviamo esempi e strutture di prompt da analizzare, adattare e migliorare. Non sono formule da copiare ciecamente: una voce in Biblioteca non significa automaticamente che sia stata testata, convalidata o adatta a ogni situazione.»
+
+**Voce 1:** «Quindi MANZO AI insegna i concetti, Prometeus ci accompagna nel metodo e la Biblioteca offre materiale con cui esercitarci.»
+
+**Voce 2:** «Proprio così. L'obiettivo è usare l'AI con maggiore autonomia, spirito critico e responsabilità.»
+
+**Tre elementi visuali da mostrare:**
+1. Diagramma in sette stazioni: **Ascolto → Ambito → Rischio → Chiarimenti → Progettazione → Verifica → Output**.
+2. Trasformazione della richiesta «Migliora il mio sito» in una specifica UX/UI concreta, con evidenza di obiettivo, vincoli e validazione.
+3. Rappresentazione dell'ecosistema **MANZO AI → Metodo Prometeus Marcelus → Biblioteca → Laboratorio e verifica**, con indirizzo autentico della Biblioteca: https://manzo8b.github.io/marcelus-v-v01/it/library/
+
+**Avvertenza editoriale:** non presentare Prometeus Marcelus come metodo scientificamente validato o migliore di tutti gli altri; descriverlo come approccio progettuale originale. Non dichiarare che tutti i prompt della Biblioteca siano stati testati. Evitare cifre sul catalogo se non verificate al momento della produzione.
+
+**Ponte verso la conclusione:** «A questo punto il prompt non è più soltanto una frase che scriviamo a un chatbot: diventa un piccolo progetto che sappiamo spiegare, controllare e migliorare.»
+
 ## Chiusura narrativa
 «Non vince chi scrive il prompt più lungo, né chi conosce una formula segreta. Lavora meglio chi sa definire un problema, fornire il contesto utile, chiedere un risultato verificabile e conservare la capacità di giudicare la risposta. Il prompt è il punto di partenza. La competenza è nel metodo.»
 
-**Invito finale:** «Su MANZO AI puoi passare dalla teoria alla pratica, esplorare gli esempi e allenarti nel laboratorio tecnico.»
+**Invito finale:** «Su MANZO AI puoi passare dalla teoria alla pratica, conoscere il metodo Prometeus Marcelus, esplorare la Biblioteca e allenarti nel laboratorio tecnico.»
 
 ## Glossario in sovraimpressione
 - **Prompt:** istruzione o input inviato al modello.
@@ -108,7 +142,7 @@ Il pubblico del video deve vedere che il prompt definisce un processo e non solt
 - **Human-in-the-loop:** revisione e decisione umana nel processo.
 
 ## Regia editoriale per il Video Overview
-Titolo a schermo: **IL PROMPT NON È MAGIA**. Sottotitolo: *Dalla prima domanda al metodo professionale*. Due voci naturali in italiano, tono energico e autorevole, senza enfasi pubblicitaria. Apertura immediata con il confronto «Fammi una strategia social» / «Obiettivo, pubblico, vincoli, formato, verifica». Mostrare progressivamente esempi A–B–C, grafica del ciclo iterativo, etichette brevi e leggibili. Design: bianco dominante, nero, accenti blu/verde/corallo/viola coerenti con MANZO AI. No estetica retro, no sfondi grigio carta, no slide dense o infografiche illeggibili. La narrazione deve essere comprensibile senza conoscere termini tecnici. Non attribuire a MANZO AI test o capacità non documentate. Inserire una dicitura finale: «Contenuto educativo realizzato con assistenza di AI generativa e revisione editoriale».
+Titolo a schermo: **IL PROMPT NON È MAGIA**. Sottotitolo: *Dalla prima domanda al metodo professionale*. Due voci naturali in italiano, tono energico e autorevole, senza enfasi pubblicitaria. Apertura immediata con il confronto «Fammi una strategia social» / «Obiettivo, pubblico, vincoli, formato, verifica». Mostrare progressivamente esempi A–B–C, grafica del ciclo iterativo, una sezione esplicita dedicata al metodo Prometeus Marcelus e alla Biblioteca, etichette brevi e leggibili. Design: bianco dominante, nero, accenti blu/verde/corallo/viola coerenti con MANZO AI. No estetica retro, no sfondi grigio carta, no slide dense o infografiche illeggibili. La narrazione deve essere comprensibile senza conoscere termini tecnici. Non attribuire a MANZO AI test o capacità non documentate. Inserire una dicitura finale: «Contenuto educativo realizzato con assistenza di AI generativa e revisione editoriale».
 
 ## Fonti metodologiche per verifica editoriale
 Queste fonti sono riferimenti da consultare e, se disponibili, importare separatamente come fonti in NotebookLM. Non dichiarare che ogni dettaglio del video sia una citazione diretta:
