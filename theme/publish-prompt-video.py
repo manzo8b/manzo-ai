@@ -17,6 +17,7 @@ PUBLIC = ORIGIN + ROUTE
 ASSETS = '/manzo-ai/assets/media/prompt-engineering/'
 FILE = 'Prompt_Engineering.mp4'
 SUBTITLE = 'Prompt_Engineering.it.vtt'
+SUBTITLE_SRT = 'Prompt_Engineering.it.srt'
 
 HUBS = {
     'it/video-e-slide/index.html': ('VIDEO LEZIONE · 7 MIN 54 SEC', 'Prompt Engineering: dalla domanda al metodo', 'Come progettare prompt più precisi, verificare le risposte e migliorare i risultati con esercizi concreti.', 'Guarda la video lezione'),
@@ -50,7 +51,7 @@ def patch_hub(page: Path, text: tuple[str,str,str,str]) -> bool:
     page.write_text(html[:close.start()]+card+html[close.start():],encoding='utf-8')
     return True
 
-def video_page(has_subtitles:bool, has_cover:bool, upload_date: str | None = None) -> str:
+def video_page(has_subtitles:bool, has_cover:bool, upload_date: str | None = None, has_srt: bool = False) -> str:
     title = 'Prompt Engineering: dalla domanda al metodo professionale | MANZO AI'
     description = 'Una lezione video di 7 minuti e 54 secondi per imparare a progettare prompt chiari, valutare le risposte dell’intelligenza artificiale e migliorare il proprio metodo.'
     cover_url = ORIGIN + ASSETS + 'copertina.jpg'
@@ -71,6 +72,7 @@ def video_page(has_subtitles:bool, has_cover:bool, upload_date: str | None = Non
         graph['uploadDate'] = upload_date
     subs = ('<track kind="captions" src="'+ASSETS+SUBTITLE+'" srclang="it" label="Italiano" default>' if has_subtitles else '')
     poster = (' poster="'+ASSETS+'copertina.jpg"' if has_cover else '')
+    subtitle_download = (f'<a class="btn btn-alt" href="{ASSETS}{SUBTITLE_SRT}" download>Scarica sottotitoli italiani SRT</a>' if has_srt else '')
     return f'''<!doctype html>
 <html lang="it"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -117,7 +119,7 @@ footer{{padding-bottom:40px;border-top:1px solid #dce6ee}}
 Il browser non supporta la riproduzione video. Puoi scaricare il file MP4 dal collegamento sottostante.
 </video>
 <figcaption class="small">Video didattico realizzato con NotebookLM e curatela editoriale del progetto MANZO AI.</figcaption>
-<div class="actions"><a class="btn" href="{ASSETS}{FILE}" download>Scarica il video MP4</a><a class="btn btn-alt" href="/manzo-ai/it/prompt-mastery/">Approfondisci Prompt Mastery</a></div>
+<div class="actions"><a class="btn" href="{ASSETS}{FILE}" download>Scarica il video MP4</a>{subtitle_download}<a class="btn btn-alt" href="/manzo-ai/it/prompt-mastery/">Approfondisci Prompt Mastery</a></div>
 </figure>
 <section><h2>Che cosa imparerai</h2>
 <ul><li>Come distinguere un prompt generico da un’istruzione utile e valutabile.</li><li>Le cinque domande essenziali: obiettivo, contesto, destinatario, formato e qualità.</li><li>Come usare esempi e strutture più precise per guidare la risposta.</li><li>Perché una risposta convincente non è necessariamente corretta.</li><li>Il ciclo professionale: definizione, generazione, verifica, miglioramento e iterazione.</li></ul>
@@ -158,6 +160,9 @@ def main():
     has_subs = (args.edition/SUBTITLE).is_file()
     if has_subs:
         shutil.copy2(args.edition/SUBTITLE,dest/SUBTITLE)
+    has_srt = (args.edition/SUBTITLE_SRT).is_file()
+    if has_srt:
+        shutil.copy2(args.edition/SUBTITLE_SRT,dest/SUBTITLE_SRT)
     cover = dest/'copertina.jpg'
     ffmpeg = shutil.which('ffmpeg')
     if ffmpeg:
@@ -172,14 +177,14 @@ def main():
     rel_src = src.relative_to(Path.cwd()) if src.is_relative_to(Path.cwd()) else src
     git_date = subprocess.run(['git','log','-1','--format=%cI','--',str(rel_src)],capture_output=True,text=True)
     upload_date = git_date.stdout.strip() if git_date.returncode == 0 and re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}T.*',git_date.stdout.strip()) else None
-    target.write_text(video_page(has_subs,cover.is_file(),upload_date),encoding='utf-8')
+    target.write_text(video_page(has_subs,cover.is_file(),upload_date,has_srt),encoding='utf-8')
     updated = []
     for rel,titles in HUBS.items():
         if patch_hub(site/rel,titles):updated.append(rel)
     assert (dest/FILE).stat().st_size == src.stat().st_size
     assert 'VideoObject' in target.read_text(encoding='utf-8')
     print('MANZO AI Prompt Engineering: video published, page created, cards added to',len(updated),'hub pages.')
-    print('Video size:',(dest/FILE).stat().st_size,'thumbnail:',cover.exists(),'captions:',has_subs)
+    print('Video size:',(dest/FILE).stat().st_size,'thumbnail:',cover.exists(),'captions:',has_subs,'SRT:',has_srt)
 
 if __name__=='__main__':
     main()
