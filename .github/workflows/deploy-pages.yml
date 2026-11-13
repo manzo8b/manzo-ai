@@ -13,7 +13,9 @@ on:
       - site-v0.7.zip
       - editorial/oracle-city/**
       - editorial/podcast/**
+      - editorial/video/prompt-engineering/**
       - theme/publish-podcast.py
+      - theme/publish-prompt-video.py
       - theme/publish-oracle-city.py
       - theme/learning-colors.css
       - theme/check-theme.py
@@ -218,6 +220,8 @@ jobs:
           test -f _site/.nojekyll
           python3 theme/publish-oracle-city.py --site _site --edition editorial/oracle-city/numero-01
           python3 theme/publish-podcast.py --site _site --edition editorial/podcast/ep00
+          python3 -m py_compile theme/publish-prompt-video.py
+          python3 theme/publish-prompt-video.py --site _site --edition editorial/video/prompt-engineering
           # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
           python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
           # Generate final SEO index ONLY after all published editorial pages exist.
