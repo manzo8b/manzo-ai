@@ -11,9 +11,9 @@
   }[lang];
   const base = PREFIX + lang + '/';
   const fallback = {
-    it:[['AI Academy','academy/'],['Prompt Mastery','prompt-mastery/'],['Laboratorio tecnico','prompt-mastery/laboratorio-tecnico/'],['Pensiero critico','pensiero-critico/'],['Risorse','risorse/'],['Video e slide','video-e-slide/']],
-    es:[['AI Academia','academia/'],['Prompt Mastery','prompt-mastery/'],['Laboratorio técnico','prompt-mastery/laboratorio-tecnico/'],['Pensamiento crítico','pensamiento-critico/'],['Recursos','recursos/'],['Vídeos y diapositivas','videos-y-diapositivas/']],
-    en:[['AI Academy','academy/'],['Prompt Mastery','prompt-mastery/'],['Technical lab','prompt-mastery/technical-lab/'],['Critical thinking','critical-thinking/'],['Resources','resources/'],['Videos and slides','videos-and-slides/']]
+    it:[['AI Academy','academy/'],['Prompt Mastery','prompt-mastery/che-cos-e-un-prompt/'],['Laboratorio tecnico','prompt-mastery/laboratorio-tecnico/'],['Pensiero critico','pensiero-critico/'],['Risorse','risorse/'],['Video e slide','video-e-slide/']],
+    es:[['AI Academia','academia/'],['Prompt Mastery','prompt-mastery/que-es-un-prompt/'],['Laboratorio técnico','prompt-mastery/laboratorio-tecnico/'],['Pensamiento crítico','pensamiento-critico/'],['Recursos','recursos/'],['Vídeos y diapositivas','videos-y-diapositivas/']],
+    en:[['AI Academy','academy/'],['Prompt Mastery','prompt-mastery/what-is-a-prompt/'],['Technical lab','prompt-mastery/technical-lab/'],['Critical thinking','critical-thinking/'],['Resources','resources/'],['Videos and slides','videos-and-slides/']]
   }[lang];
   const url = (href) => new URL(href, location.origin);
   const sameSite = (href) => {
