@@ -21,6 +21,7 @@ on:
       - theme/inject-signature.py
       - theme/footer-signature.css
       - theme/rewrite-owner-urls.py
+      - theme/build-seo.py
       - .github/workflows/deploy-pages.yml
   workflow_dispatch:
 
@@ -218,7 +219,13 @@ jobs:
           python3 theme/publish-podcast.py --site _site --edition editorial/podcast/ep00
           # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
           python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
-          echo "Static files validated."
+          # Generate final SEO index ONLY after all published editorial pages exist.
+          python3 theme/build-seo.py --site _site --base-url "https://${GITHUB_REPOSITORY_OWNER}.github.io/manzo-ai/"
+          test -s _site/sitemap.xml
+          test -s _site/it/mappa-del-sito/index.html
+          test -s _site/es/mapa-del-sitio/index.html
+          test -s _site/en/site-map/index.html
+          echo "Static files and SEO sitemap validated."
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
