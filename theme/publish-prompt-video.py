@@ -126,6 +126,10 @@ Il browser non supporta la riproduzione video. Puoi scaricare il file MP4 dal co
 <p>Il video è un punto di partenza. Usa il laboratorio e le risorse della piattaforma per sperimentare il metodo su problemi reali.</p>
 <div class="actions"><a class="btn btn-alt" href="/manzo-ai/it/risorse/">Esplora le risorse</a><a class="btn btn-alt" href="/manzo-ai/it/prompt-mastery/laboratorio-tecnico/">Apri il laboratorio tecnico</a><a class="btn btn-alt" href="/manzo-ai/it/">Torna alla Academy</a></div>
 </section>
+<section><h2>Prometeus Marcelus e la Biblioteca</h2>
+<p>Per passare dalle tecniche introduttive a un metodo operativo, puoi esplorare Prometeus Marcelus: un percorso che parte dalla comprensione del problema, organizza la richiesta e introduce criteri di verifica. La Biblioteca raccoglie esempi storici da studiare e adattare criticamente; la loro presenza non equivale a una validazione automatica.</p>
+<div class="actions"><a class="btn btn-alt" href="https://manzo8b.github.io/marcelus-v-v01/it/library/" target="_blank" rel="noopener noreferrer">Esplora la Biblioteca Prometeus Marcelus ↗</a></div>
+</section>
 <section><h2>Produzione, fonti e trasparenza</h2>
 <p>Video generato attraverso Google NotebookLM a partire da materiali didattici preparati per MANZO AI. Le spiegazioni hanno finalità formative; esempi e risposte di AI devono essere verificati rispetto al contesto e alle fonti appropriate.</p>
 <p class="small">La produzione sintetica del video non equivale a una validazione scientifica autonoma dei suoi contenuti.</p>
