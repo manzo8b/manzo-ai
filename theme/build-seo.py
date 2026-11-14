@@ -17,14 +17,14 @@ LOCALES = {'it': ('Mappa del sito', 'Tutte le risorse educative'),
            'es': ('Mapa del sitio', 'Todos los recursos educativos'),
            'en': ('Site map', 'All educational resources')}
 GROUP_NAMES = {
- 'it': {'academy':'Impara e Academy', 'prompt':'Prompt Mastery e laboratorio', 'critical':'Pensiero critico', 'media':'Risorse e media', 'other':'Altri percorsi'},
- 'es': {'academy':'Aprende y Academia', 'prompt':'Prompt Mastery y laboratorio', 'critical':'Pensamiento crítico', 'media':'Recursos y medios', 'other':'Otros itinerarios'},
- 'en': {'academy':'Learn and Academy', 'prompt':'Prompt Mastery and labs', 'critical':'Critical thinking', 'media':'Resources and media', 'other':'Other pathways'},
+ 'it': {'academy':'Impara e Academy', 'prompt':'Prompt Mastery e laboratorio', 'critical':'Pensiero critico', 'research':'Ricerca e dossier', 'media':'Risorse e media', 'other':'Altri percorsi'},
+ 'es': {'academy':'Aprende y Academia', 'prompt':'Prompt Mastery y laboratorio', 'critical':'Pensamiento crítico', 'research':'Investigación y dosieres', 'media':'Recursos y medios', 'other':'Otros itinerarios'},
+ 'en': {'academy':'Learn and Academy', 'prompt':'Prompt Mastery and labs', 'critical':'Critical thinking', 'research':'Research and dossiers', 'media':'Resources and media', 'other':'Other pathways'},
 }
 NAV = {
- 'it': [('AI Academy','academy/'), ('Prompt Mastery','prompt-mastery/'), ('Laboratorio tecnico','prompt-mastery/laboratorio-tecnico/'), ('AI Brain Challenge','pensiero-critico/'), ('Risorse','risorse/'), ('Video e podcast','video-e-slide/')],
- 'es': [('AI Academia','academia/'), ('Prompt Mastery','prompt-mastery/'), ('Laboratorio técnico','prompt-mastery/laboratorio-tecnico/'), ('AI Brain Challenge','pensamiento-critico/'), ('Recursos','recursos/'), ('Vídeos y podcast','videos-y-diapositivas/')],
- 'en': [('AI Academy','academy/'), ('Prompt Mastery','prompt-mastery/'), ('Technical lab','prompt-mastery/technical-lab/'), ('AI Brain Challenge','critical-thinking/'), ('Resources','resources/'), ('Videos and podcast','videos-and-slides/')],
+ 'it': [('AI Academy','academy/'), ('Prompt Mastery','prompt-mastery/'), ('Laboratorio tecnico','prompt-mastery/laboratorio-tecnico/'), ('Ricerca ACR','ricerca/acr/'), ('AI Brain Challenge','pensiero-critico/'), ('Risorse','risorse/'), ('Video e podcast','video-e-slide/')],
+ 'es': [('AI Academia','academia/'), ('Prompt Mastery','prompt-mastery/'), ('Laboratorio técnico','prompt-mastery/laboratorio-tecnico/'), ('Investigación ACR','investigacion/acr/'), ('AI Brain Challenge','pensamiento-critico/'), ('Recursos','recursos/'), ('Vídeos y podcast','videos-y-diapositivas/')],
+ 'en': [('AI Academy','academy/'), ('Prompt Mastery','prompt-mastery/'), ('Technical lab','prompt-mastery/technical-lab/'), ('ACR research','research/acr/'), ('AI Brain Challenge','critical-thinking/'), ('Resources','resources/'), ('Videos and podcast','videos-and-slides/')],
 }
 
 def url_for(path: Path, site: Path, base: str) -> str:
@@ -41,6 +41,7 @@ def page_title(text: str, fallback: str) -> str:
 def group_for(rel: str) -> str:
     if any(segment in rel for segment in ('/academy/', '/academia/', '/impara/', '/aprende/', '/learn/')): return 'academy'
     if '/prompt-mastery/' in rel: return 'prompt'
+    if any(segment in rel for segment in ('/ricerca/','/investigacion/','/research/')): return 'research'
     if any(segment in rel for segment in ('/pensiero-critico/', '/pensamiento-critico/', '/critical-thinking/')): return 'critical'
     if any(segment in rel for segment in ('/risorse/', '/recursos/', '/resources/', '/video-e-slide/', '/videos-y-diapositivas/', '/videos-and-slides/', '/podcast/', '/slides/', '/diapositivas/')): return 'media'
     return 'other'
@@ -58,7 +59,7 @@ def sitemap_page(site: Path, base: str, locale: str) -> None:
     css = 'body{margin:0;background:white;color:#18212b;font:16px/1.65 system-ui,sans-serif}header,main,footer{max-width:1080px;margin:auto;padding:24px}h1{font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.04em}h2{font-size:1.35rem;margin:32px 0 12px}a{color:#17578b}a:focus-visible{outline:3px solid #b13f28;outline-offset:3px}ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}li a{display:block;padding:12px 14px;border:1px solid #cbd8df;border-radius:12px;text-decoration:none;background:#f5f8fb}li a:hover{background:#e7f1fc}p{color:#4f5c68}'
     parts = [f'<!doctype html><html lang="{locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(heading)} | MANZO AI</title><meta name="description" content="{escape(intro)}: MANZO AI Knowledge &amp; Prompt Lab."><style>{css}</style></head><body>',
              f'<header><a href="{base}{locale}/">MANZO AI · {locale.upper()}</a></header><main><h1>{escape(heading)}</h1><p>{escape(intro)}</p>']
-    for group in ('academy','prompt','critical','media','other'):
+    for group in ('academy','prompt','critical','research','media','other')
         entries = sections.get(group, [])
         if entries:
             parts.append(f'<section><h2>{escape(GROUP_NAMES[locale][group])}</h2><ul>')

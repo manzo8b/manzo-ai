@@ -1,5 +1,10 @@
 # MANZO AI — Knowledge & Prompt Lab
 
+## Ricerca ACR · Dossier scientifico
+
+Il nuovo dossier di ricerca applicata sull'**Adaptive Cognitive Recursion** è disponibile in [italiano](https://manzo8b.github.io/manzo-ai/it/ricerca/acr/), [inglese](https://manzo8b.github.io/manzo-ai/en/research/acr/) e [spagnolo](https://manzo8b.github.io/manzo-ai/es/investigacion/acr/). Presenta ipotesi A/B/C, memoria verificata, pilota offline, metodi e fonti. **Nessuna superiorità ACR o Fibonacci è stata dimostrata tramite esperimenti LLM.** [Note di pubblicazione](docs/ACR_DOSSIER_RELEASE.md).
+
+
 **[Apri MANZO AI](https://manzo8b.github.io/manzo-ai/it/)** · **[Laboratorio tecnico](https://manzo8b.github.io/manzo-ai/it/prompt-mastery/laboratorio-tecnico/)** · [GitHub Actions](https://github.com/manzo8b/manzo-ai/actions)
 
 **Stato operativo verificato l'8 novembre 2026:** il workflow di deploy del ramo `main` è terminato con successo dopo la correzione dei tag XML e del contrasto dei blocchi di codice. L'archivio `site-v0.7.zip` è presente nel repository; gli appunti sulle versioni 0.4–0.7 qui sotto restano **cronologia storica**, non istruzioni sullo stato attuale di pubblicazione. Il collaudo visivo su dispositivi reali resta separato dal successo del workflow.

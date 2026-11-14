@@ -14,6 +14,8 @@ on:
       - editorial/oracle-city/**
       - editorial/podcast/**
       - editorial/video/prompt-engineering/**
+      - editorial/research/acr/**
+      - theme/publish-acr-dossier.py
       - theme/publish-podcast.py
       - theme/publish-prompt-video.py
       - theme/publish-oracle-city.py
@@ -239,6 +241,15 @@ jobs:
             test -s _site/assets/media/prompt-engineering/copertina.jpg
             test -s _site/it/video-e-slide/prompt-engineering/index.html
           fi
+          # Add the trilingual research dossier and hub links before canonical/SEO generation.
+          python3 -m py_compile theme/publish-acr-dossier.py
+          python3 theme/publish-acr-dossier.py --site _site
+          for research_page in it/ricerca/acr en/research/acr es/investigacion/acr; do
+            test -s "_site/$research_page/index.html"
+            grep -q 'data-acr-dossier' "_site/$research_page/index.html"
+          done
+          test -s _site/assets/research/acr/dossier.css
+          test -s _site/assets/research/acr/dossier.js
           # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
           python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
           # Generate final SEO index ONLY after all published editorial pages exist.

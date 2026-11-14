@@ -1,6 +1,8 @@
 /* MANZO AI | Mobile navigation v1.0 — progressive enhancement, no external dependencies */
 (() => {
   'use strict';
+  // The trilingual ACR dossier has its own accessible responsive masthead.
+  if (document.querySelector('[data-acr-dossier]')) return;
   const PREFIX = '/manzo-ai/';
   const lang = (location.pathname.match(/^\/manzo-ai\/(it|es|en)(?:\/|$)/) || [])[1] || 'it';
   const isPortal = location.pathname === PREFIX || location.pathname === PREFIX.slice(0,-1);
@@ -110,6 +112,17 @@
     });
     detail.append(summary,entries);nav.append(detail);
   });
+  // ACR research is a first-class discoverable section on all legacy site pages.
+  const researchRoute = {it:'ricerca/acr/',es:'investigacion/acr/',en:'research/acr/'}[lang];
+  const researchLabel = {it:'Ricerca ACR · Dossier',es:'Investigación ACR · Dosier',en:'ACR Research · Dossier'}[lang];
+  if (researchRoute && !seen.has(normalized(base+researchRoute))) {
+    const group=node('details','manzo-mobile-group');
+    group.open=normalized(location.pathname)===normalized(base+researchRoute);
+    group.append(node('summary','manzo-mobile-group-title',researchLabel));
+    const area=node('div','manzo-mobile-group-links');
+    area.append(anchor(base+researchRoute,researchLabel,'manzo-mobile-navlink'));
+    group.append(area);nav.append(group);
+  }
   const footer=node('div','manzo-mobile-drawer-footer');
   footer.append(node('h2','manzo-mobile-navtitle',copy.languages));
   const choices=node('div','manzo-mobile-lang');
