@@ -59,7 +59,7 @@ def sitemap_page(site: Path, base: str, locale: str) -> None:
     css = 'body{margin:0;background:white;color:#18212b;font:16px/1.65 system-ui,sans-serif}header,main,footer{max-width:1080px;margin:auto;padding:24px}h1{font-size:clamp(2rem,5vw,3.4rem);letter-spacing:-.04em}h2{font-size:1.35rem;margin:32px 0 12px}a{color:#17578b}a:focus-visible{outline:3px solid #b13f28;outline-offset:3px}ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}li a{display:block;padding:12px 14px;border:1px solid #cbd8df;border-radius:12px;text-decoration:none;background:#f5f8fb}li a:hover{background:#e7f1fc}p{color:#4f5c68}'
     parts = [f'<!doctype html><html lang="{locale}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(heading)} | MANZO AI</title><meta name="description" content="{escape(intro)}: MANZO AI Knowledge &amp; Prompt Lab."><style>{css}</style></head><body>',
              f'<header><a href="{base}{locale}/">MANZO AI · {locale.upper()}</a></header><main><h1>{escape(heading)}</h1><p>{escape(intro)}</p>']
-    for group in ('academy','prompt','critical','research','media','other')
+    for group in ('academy','prompt','critical','research','media','other'):
         entries = sections.get(group, [])
         if entries:
             parts.append(f'<section><h2>{escape(GROUP_NAMES[locale][group])}</h2><ul>')
