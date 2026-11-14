@@ -16,6 +16,7 @@ on:
       - editorial/video/prompt-engineering/**
       - editorial/research/acr/**
       - theme/publish-acr-dossier.py
+      - theme/build-seo.py
       - theme/publish-podcast.py
       - theme/publish-prompt-video.py
       - theme/publish-oracle-city.py
