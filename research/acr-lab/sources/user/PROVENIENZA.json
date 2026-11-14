@@ -1,0 +1,16 @@
+{
+  "received_zip": "files (1).zip",
+  "date": "2026-11-14",
+  "files": {
+    "MANZO_AI_ACR_v0.4.md": {
+      "sha256": "0895be9c343701e6eebb8eb581f3b69ec0b91a80c21b03e589e39ab13eafc413",
+      "size_bytes": 8576,
+      "note": "fonte allegata conservata integralmente"
+    },
+    "Fibonacci_Prompt_Engineering_v2.md": {
+      "sha256": "61524818f2f467137368b9b28bbe00967bd93e37ea16b31360f86bc3e67c2bf7",
+      "size_bytes": 6061,
+      "note": "fonte allegata conservata integralmente"
+    }
+  }
+}

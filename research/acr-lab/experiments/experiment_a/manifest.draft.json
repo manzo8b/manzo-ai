@@ -1,0 +1,44 @@
+{
+  "experiment_id": "ACR-EXP-A",
+  "version": "0.8-draft",
+  "status": "draft_not_preregistered",
+  "research_question": "Does validated selective memory reduce web UI regressions vs checklist-only?",
+  "primary_comparison": [
+    "C3",
+    "C2"
+  ],
+  "null_hypothesis": "C3 does not reduce regression rate relative to C2",
+  "arms": [
+    "C0",
+    "C1",
+    "C2",
+    "C3",
+    "C4"
+  ],
+  "tasks_planned": 12,
+  "repetitions_per_task_per_arm": 5,
+  "max_revisions": 6,
+  "memory_context_budget_tokens_max": 800,
+  "memory_window_revisions": 2,
+  "success_thresholds_provisional": {
+    "relative_regression_reduction_min": 0.3,
+    "cost_ratio_max": 1.5
+  },
+  "not_part_of_experiment": [
+    "fibonacci_checkpoint_schedule"
+  ],
+  "must_freeze_before_running": [
+    "tasks",
+    "test_catalog_and_versions",
+    "runner_environment",
+    "model_and_version",
+    "generation_settings",
+    "prompts",
+    "tokenizer",
+    "total_token_budget",
+    "seed_blocks",
+    "success_criteria",
+    "statistical_plan"
+  ],
+  "instrumentation_status": "C2/C3 offline replay on 2 fixed synthetic tasks completed; 4 runs, no LLM, no efficacy interpretation; provider/editor not connected"
+}

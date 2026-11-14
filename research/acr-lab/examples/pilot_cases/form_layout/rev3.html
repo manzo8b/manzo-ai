@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="it">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ACR Lab · Interfaccia sperimentale</title>
+<style>
+  *{box-sizing:border-box} html,body{margin:0;padding:0;width:100%}
+  body{font-family:system-ui,-apple-system,sans-serif;color:#202124;background:#fff}
+  .shell{max-width:1080px;margin:auto;padding:24px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .brand{font-weight:750;letter-spacing:.03em}
+  button{font:inherit;cursor:pointer;border:0;border-radius:8px;padding:10px 14px}
+  .menu-toggle{display:none;background:#e8e8e8;color:#111}
+  nav a{color:#202124;margin-left:16px;text-decoration:none}
+  main{padding:32px 0}
+  h1{font-size:clamp(30px,6vw,54px);line-height:1.1;letter-spacing:-.045em}
+  .lead{color:rgb(40,40,40);background:rgb(255,255,255);max-width:58ch;line-height:1.65}
+  .card{background:#f5f6f7;border-radius:14px;padding:24px;margin-top:30px;max-width:620px}
+  label{display:block;margin:0 0 10px}
+  input{font:inherit;padding:11px;width:min(100%,320px);border:1px solid #777;border-radius:8px}
+  .primary{background:#a22619;color:white}
+  #form-status{min-height:24px}
+  @media(max-width:600px){header{flex-wrap:wrap}.menu-toggle{display:block}nav{display:none;flex-basis:100%}
+    nav.open{display:block}nav a{display:block;margin:0;padding:12px 0}}
+</style></head>
+<body><div class="shell"><header><div class="brand">MANZO AI · MODULI</div>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-label="Apri menu" aria-expanded="false">Menu</button>
+<nav id="primary-menu" aria-label="Navigazione principale"><a href="#overview">Panoramica</a><a href="#contact">Contatti</a></nav></header>
+<main id="overview"><h1>Form e interfacce accessibili</h1>
+<p id="hero-lead" class="lead">Prototipo locale per verificare regressioni nella navigazione, nel contrasto e nei moduli.</p>
+<section class="card" id="contact"><h2>Richiedi informazioni</h2>
+<form id="email-form"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email">
+<button class="primary" type="submit">Invia</button></form><p id="form-status" role="status" aria-live="polite"></p></section>
+</main></div>
+<script>
+const toggle = document.querySelector('#menu-toggle');
+toggle.addEventListener('click', () => {
+  const nav = document.querySelector('#primary-menu'); nav.classList.toggle('open'); toggle.setAttribute('aria-expanded', String(nav.classList.contains('open')));
+});
+document.querySelector('#email-form').addEventListener('submit', event => {
+  event.preventDefault();
+  document.querySelector('#form-status').textContent = 'Richiesta registrata';
+});
+</script></body></html>

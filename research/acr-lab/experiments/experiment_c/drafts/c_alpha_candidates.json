@@ -1,0 +1,146 @@
+[
+  {
+    "task_id": "web_mobile_nav",
+    "level": "S0",
+    "payload": {
+      "scaffold": "",
+      "dynamic_task": "Revise a responsive webpage. Keep the navigation accessible and opening on mobile. Maintain the visible menu button and correct aria-expanded state."
+    },
+    "dynamic_sha256": "7dd035239771ff611aee8551b5d5ae80409fd39579676d93cb93f9cc0334c536",
+    "utf8_bytes": 184,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_mobile_nav",
+    "level": "S1",
+    "payload": {
+      "scaffold": "Return a patch plan with a precise list of the changed elements. Preserve every explicit invariant.",
+      "dynamic_task": "Revise a responsive webpage. Keep the navigation accessible and opening on mobile. Maintain the visible menu button and correct aria-expanded state."
+    },
+    "dynamic_sha256": "7dd035239771ff611aee8551b5d5ae80409fd39579676d93cb93f9cc0334c536",
+    "utf8_bytes": 283,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_mobile_nav",
+    "level": "S2",
+    "payload": {
+      "scaffold": "Return a patch plan with a precise list of changed elements. Preserve every explicit invariant. Verify changes against the supplied deterministic checklist and identify any untested requirement.",
+      "dynamic_task": "Revise a responsive webpage. Keep the navigation accessible and opening on mobile. Maintain the visible menu button and correct aria-expanded state."
+    },
+    "dynamic_sha256": "7dd035239771ff611aee8551b5d5ae80409fd39579676d93cb93f9cc0334c536",
+    "utf8_bytes": 378,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_mobile_nav",
+    "level": "S3",
+    "payload": {
+      "scaffold": "Return a patch plan with a precise list of changed elements. Preserve every explicit invariant. Verify changes against the supplied deterministic checklist and identify any untested requirement. Distinguish observations from hypotheses. Do not alter unrelated UI components. State which requested checks require an external test runner.",
+      "dynamic_task": "Revise a responsive webpage. Keep the navigation accessible and opening on mobile. Maintain the visible menu button and correct aria-expanded state."
+    },
+    "dynamic_sha256": "7dd035239771ff611aee8551b5d5ae80409fd39579676d93cb93f9cc0334c536",
+    "utf8_bytes": 520,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_form_validation",
+    "level": "S0",
+    "payload": {
+      "scaffold": "",
+      "dynamic_task": "Revise a form without changing required email validation. Preserve clear error feedback and a success confirmation when the input is valid."
+    },
+    "dynamic_sha256": "8c57230a0dd39c2bc2244975c9de9bb9784888543741e88411d64234ceb2438d",
+    "utf8_bytes": 175,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_form_validation",
+    "level": "S1",
+    "payload": {
+      "scaffold": "Return a patch plan with a precise list of the changed elements. Preserve every explicit invariant.",
+      "dynamic_task": "Revise a form without changing required email validation. Preserve clear error feedback and a success confirmation when the input is valid."
+    },
+    "dynamic_sha256": "8c57230a0dd39c2bc2244975c9de9bb9784888543741e88411d64234ceb2438d",
+    "utf8_bytes": 274,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_form_validation",
+    "level": "S2",
+    "payload": {
+      "scaffold": "Return a patch plan with a precise list of changed elements. Preserve every explicit invariant. Verify changes against the supplied deterministic checklist and identify any untested requirement.",
+      "dynamic_task": "Revise a form without changing required email validation. Preserve clear error feedback and a success confirmation when the input is valid."
+    },
+    "dynamic_sha256": "8c57230a0dd39c2bc2244975c9de9bb9784888543741e88411d64234ceb2438d",
+    "utf8_bytes": 369,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_form_validation",
+    "level": "S3",
+    "payload": {
+      "scaffold": "Return a patch plan with a precise list of changed elements. Preserve every explicit invariant. Verify changes against the supplied deterministic checklist and identify any untested requirement. Distinguish observations from hypotheses. Do not alter unrelated UI components. State which requested checks require an external test runner.",
+      "dynamic_task": "Revise a form without changing required email validation. Preserve clear error feedback and a success confirmation when the input is valid."
+    },
+    "dynamic_sha256": "8c57230a0dd39c2bc2244975c9de9bb9784888543741e88411d64234ceb2438d",
+    "utf8_bytes": 511,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_contrast",
+    "level": "S0",
+    "payload": {
+      "scaffold": "",
+      "dynamic_task": "Revise the homepage typography while maintaining sufficient text contrast. Preserve semantic headings and support a 390px mobile viewport."
+    },
+    "dynamic_sha256": "7d564d5f70a4b22efd84179f425b16710e0d7d0ed394d98e0b5cc96fee3b194b",
+    "utf8_bytes": 174,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_contrast",
+    "level": "S1",
+    "payload": {
+      "scaffold": "Return a patch plan with a precise list of the changed elements. Preserve every explicit invariant.",
+      "dynamic_task": "Revise the homepage typography while maintaining sufficient text contrast. Preserve semantic headings and support a 390px mobile viewport."
+    },
+    "dynamic_sha256": "7d564d5f70a4b22efd84179f425b16710e0d7d0ed394d98e0b5cc96fee3b194b",
+    "utf8_bytes": 273,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_contrast",
+    "level": "S2",
+    "payload": {
+      "scaffold": "Return a patch plan with a precise list of changed elements. Preserve every explicit invariant. Verify changes against the supplied deterministic checklist and identify any untested requirement.",
+      "dynamic_task": "Revise the homepage typography while maintaining sufficient text contrast. Preserve semantic headings and support a 390px mobile viewport."
+    },
+    "dynamic_sha256": "7d564d5f70a4b22efd84179f425b16710e0d7d0ed394d98e0b5cc96fee3b194b",
+    "utf8_bytes": 368,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  },
+  {
+    "task_id": "web_contrast",
+    "level": "S3",
+    "payload": {
+      "scaffold": "Return a patch plan with a precise list of changed elements. Preserve every explicit invariant. Verify changes against the supplied deterministic checklist and identify any untested requirement. Distinguish observations from hypotheses. Do not alter unrelated UI components. State which requested checks require an external test runner.",
+      "dynamic_task": "Revise the homepage typography while maintaining sufficient text contrast. Preserve semantic headings and support a 390px mobile viewport."
+    },
+    "dynamic_sha256": "7d564d5f70a4b22efd84179f425b16710e0d7d0ed394d98e0b5cc96fee3b194b",
+    "utf8_bytes": 510,
+    "exact_tokens": null,
+    "status": "PENDING_LOCKED_TOKENIZER_AND_BLIND_REVIEW"
+  }
+]
