@@ -1,0 +1,14 @@
+{
+  "experiment_id":"ACR-EXP-C",
+  "version":"0.7-draft",
+  "status":"draft_not_preregistered_not_run",
+  "ratio_definition":"S / (S + D), excluding fixed system instructions",
+  "studies":{
+    "C-alpha":{"dynamic_task":"byte_identical_across_arms","scaffold":"variable_relevant_content","total_budget":"variable"},
+    "C-beta":{"nominal_total_token_budgets":[1000,1500],"scaffold_ratios":[0.30,0.50,0.62,0.80],"tasks_planned":12,"repetitions":5,"arm_count":4,"total_length":"fixed_within_each_budget","task_semantics":"blind_review_required", "actual_tokenizer":"TO_BE_LOCKED"},
+    "C-confirmatory":{"status":"conditional_after_exploratory","ratios_near_62":[0.60,0.62,0.65],"held_out_tasks":true}
+  },
+  "primary_metric":"task_success_rate",
+  "design_warnings":["at_fixed_total_task_length_varies","semantic_equivalence_not_automatic","prompt_order_must_be_controlled"],
+  "must_lock_before_run":["task_set","template_library","equivalence_rubric","tokenizer","model","randomization","statistical_analysis","fixed_system_prompt"]
+}

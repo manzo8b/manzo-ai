@@ -1,0 +1,13 @@
+{
+  "study": "C-beta",
+  "status": "NOT_RUN",
+  "reason": "Actual model/tokenizer, semantically equivalent dynamic variants, independent blind review, and total budgets not frozen",
+  "proposed_ratios": [
+    0.3,
+    0.5,
+    0.62,
+    0.8
+  ],
+  "no_fake_padding": true,
+  "generated_variants": 0
+}

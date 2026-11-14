@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "manzo-acr-lab"
+version = "0.9.0"
+description = "Experimental governance and evaluation of selective AI memory"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["jsonschema>=4.21,<5"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+browser = ["playwright>=1.48,<2"]
+llm = ["openai>=2,<4", "tiktoken>=0.9,<1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+acr = ["*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+# Playwright runs the optional real-browser smoke test using a local Chromium.
+# The browser executable is external; set ACR_CHROMIUM_BIN if needed.

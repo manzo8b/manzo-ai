@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+build/
+dist/
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+.env
+experiments/experiment_a/results/*
+!experiments/experiment_a/results/.gitkeep
+
+# Never commit prompts/outputs from real trials
+experiments/experiment_a/results/
+local_runs/
+*.key
+.DS_Store

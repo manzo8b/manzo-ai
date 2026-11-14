@@ -1,0 +1,15 @@
+{
+  "experiment_id":"ACR-EXP-B",
+  "version":"0.7-draft",
+  "status":"draft_not_preregistered_not_run",
+  "max_revisions":10,
+  "critical_tests_each_revision":true,
+  "deep_audit_budget_per_arm":5,
+  "arms":{
+    "B-FIB":{"checkpoints":[1,2,3,5,8]},
+    "B-UNIF":{"checkpoints":[2,4,6,8,10]},
+    "B-EVENT":{"trigger":"development-set threshold and fallback TO BE LOCKED", "max_deep_audits":5}
+  },
+  "primary_metric":"regressions_per_100_eligible_test_transitions",
+  "must_lock_before_run":["event_threshold","fallback","audit_catalog","task_set","model","sample_plan","analysis"]
+}
