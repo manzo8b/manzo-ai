@@ -44,7 +44,7 @@ def test(page,route,expected_kind,screen,width):
  assert ink=='#172e44',(screen,width,'ink',ink)
  if screen.endswith('product'):
   assert page.locator('.product-card').count()==3
-  assert page.locator('.btn-primary').is_enabled()
+  assert page.locator('.btn-primary').first.is_enabled()
  if screen.endswith('console'):
   assert page.locator('#lc-metric-0').inner_text()=='2 / 3'
   assert page.locator('#lc-tab-student').is_enabled()
