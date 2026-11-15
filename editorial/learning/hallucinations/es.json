@@ -13,20 +13,20 @@
     "start": "Explorar el programa",
     "try": "Abrir los casos",
     "tag1": "Nivel profesional",
-    "tag2": "5 horas · duración orientativa",
-    "tag3": "10 ejercicios + cuestionario",
-    "metric1": "5 módulos",
+    "tag2": "6 h 15 min · duración orientativa",
+    "tag3": "14 casos + cuestionarios",
+    "metric1": "6 módulos",
     "metric1b": "conceptos y método",
-    "metric2": "10 casos",
-    "metric2b": "finanzas, AML, legal",
-    "metric3": "8 fuentes",
+    "metric2": "14 casos",
+    "metric2b": "finanzas, AML, coding, legal",
+    "metric3": "12 fuentes",
     "metric3b": "primarias y académicas",
     "programK": "El itinerario",
     "programH": "Comprender el fallo. Gobernar la respuesta.",
-    "programD": "El curso distingue problemas diferentes: hechos inventados, datos obsoletos, errores de cálculo, referencias inexistentes y conclusiones sin respaldo. Cada uno exige una verificación específica.",
+    "programD": "El curso distingue alucinaciones, errores de cálculo, información obsoleta y conclusiones no respaldadas. Un módulo especializado examina riesgos del código IA no verificado en entregas reales y relaciones con clientes.",
     "practiceK": "Laboratorio profesional",
     "practiceH": "Diez expedientes, diez decisiones",
-    "practiceD": "Examina el resultado, redacta tu valoración y compárala con el criterio del revisor. Todos los casos son simulados y los datos ficticios se identifican expresamente.",
+    "practiceD": "Diez casos transversales y cuatro escenarios especializados en programación, disponibles en un capítulo propio. Todas las situaciones y cifras son simulaciones explícitas.",
     "methodK": "Método operativo",
     "methodH": "MANZO VERIFY",
     "methodD": "Protocolo educativo original para que los resultados de IA sean cuestionables y auditables. No es una norma acreditada ni un instrumento científicamente validado.",
@@ -75,7 +75,8 @@
       "p": [
         "Una alucinación de IA generativa consiste en producir contenido falso o no fiel al contexto disponible, a menudo con un tono convincente. El término resulta útil, pero no debe emplearse para cualquier resultado insatisfactorio. Un error aritmético, una cita ausente y una norma desactualizada requieren diagnósticos diferentes.",
         "Los modelos lingüísticos aprenden regularidades estadísticas y generan texto. Esta capacidad no incluye por sí misma la verificación de cada afirmación frente a documentos auténticos. Kalai y colaboradores (2025) analizan cómo ciertos procedimientos de entrenamiento y evaluación pueden favorecer las conjeturas frente al reconocimiento de la incertidumbre.",
-        "Un informe que confunde EBITDA con resultado neto presenta un error de interpretación contable. Un informe que inventa unas cuentas anuales que nunca consultó podría contener una alucinación. Diferenciar los casos determina cómo corregirlos."
+        "Un informe que confunde EBITDA con resultado neto presenta un error de interpretación contable. Un informe que inventa unas cuentas anuales que nunca consultó podría contener una alucinación. Diferenciar los casos determina cómo corregirlos.",
+        "Incluso una respuesta correcta por casualidad puede resultar inadecuada para auditoría si nadie sabe reconstruir de dónde proceden los datos. La revisión profesional examina tanto la exactitud de la afirmación como la fiabilidad del proceso utilizado. Un resultado sin trazabilidad no debe convertirse automáticamente en la base de una decisión relevante."
       ],
       "evidence": "Regla editorial: la ausencia de una fuente no demuestra que una afirmación sea falsa. Debe figurar como no verificada hasta disponer de evidencias suficientes.",
       "sources": [
@@ -90,7 +91,8 @@
       "p": [
         "Las instrucciones ambiguas, la falta de documentos, las premisas falsas y la información obsoleta pueden aumentar el riesgo. Preguntar «¿qué sanciones recibió la empresa?» supone de antemano que existieron sanciones: primero hay que comprobar esa premisa.",
         "Las citas formales tampoco son pruebas. Puede inventarse un número de sentencia, un DOI o una dirección web; una fuente auténtica también puede utilizarse para sostener una conclusión que no contiene. La comprobación incluye existencia, autenticidad, relevancia, fecha e interpretación.",
-        "El grounding y la generación aumentada por recuperación (RAG) pueden ayudar a conectar respuestas con evidencias, pero no garantizan exactitud. Hay que comprobar el documento recuperado, su vigencia y la correspondencia de la cita. Las instrucciones maliciosas presentes en documentos recuperados siguen siendo contenido no confiable."
+        "El grounding y la generación aumentada por recuperación (RAG) pueden ayudar a conectar respuestas con evidencias, pero no garantizan exactitud. Hay que comprobar el documento recuperado, su vigencia y la correspondencia de la cita. Las instrucciones maliciosas presentes en documentos recuperados siguen siendo contenido no confiable.",
+        "Redactar mejores prompts puede reducir ambigüedades, pero no sustituye las pruebas. Precisar fechas y restricciones mejora la pregunta; no demuestra que la respuesta sea verdadera. Cuando se recupera una fuente, hay que leer el fragmento pertinente y separar hechos, hipótesis y conclusiones."
       ],
       "evidence": "Control mínimo: identificar la afirmación, localizar la fuente primaria, leer el fragmento pertinente y comprobar fecha y contexto. La fluidez del texto no mide su veracidad.",
       "sources": [
@@ -105,7 +107,8 @@
       "p": [
         "El método comprende siete acciones: IDENTIFICAR la afirmación, establecer su CONTEXTO, localizar la FUENTE, CONTRASTAR el contenido, CLASIFICAR el resultado, aplicar SUPERVISIÓN humana y DOCUMENTAR todo el proceso. Es una propuesta educativa de MANZO AI, no una norma acreditada.",
         "Se distinguen tres estados: verificado (respaldo suficiente dentro de un alcance definido), no verificado (evidencia insuficiente o ausente) y refutado (evidencias fiables incompatibles con la afirmación). Cada estado debe vincularse a una fecha y a una afirmación concreta.",
-        "El registro incluye identificador, afirmación, fuente primaria, localización exacta, fecha y versión, estado, impacto, persona revisora y acción. Sin esta trazabilidad, incluso una decisión acertada puede resultar imposible de reproducir."
+        "El registro incluye identificador, afirmación, fuente primaria, localización exacta, fecha y versión, estado, impacto, persona revisora y acción. Sin esta trazabilidad, incluso una decisión acertada puede resultar imposible de reproducir.",
+        "Una revisión rigurosa también registra lo que no ha podido comprobarse. «No verificado» es una conclusión provisional sobre una afirmación y un conjunto delimitado de evidencias, no una excusa. El historial debe poder actualizarse sin borrar decisiones anteriores."
       ],
       "evidence": "La pregunta profesional no es solamente «¿es correcto?», sino «¿con qué pruebas puede otro especialista repetir esta comprobación?»",
       "sources": [
@@ -119,7 +122,8 @@
       "p": [
         "En finanzas, una cifra incorrecta puede distorsionar valoraciones, informes para inversores o controles internos. Hay que verificar ejercicio, moneda, definición contable y perímetro de consolidación. Una cantidad aparentemente precisa también exige recalcularla.",
         "En AML/CFT, una alerta es un indicador de riesgo y no una prueba automática de blanqueo. La IA puede ayudar en la detección y el análisis, pero debe distinguirse entre anomalías, investigaciones y decisiones de las funciones autorizadas. Cualquier medida sobre una cuenta requiere fundamento legal y procedimental propio.",
-        "En investigación jurídica, una sentencia no autenticada no debe presentarse como precedente firme. Comprueba órgano, identificador, fecha, texto original y pertinencia. El artículo 14 del Reglamento europeo de IA se dirige a la supervisión de sistemas de alto riesgo y no establece una obligación idéntica para todos los chatbots."
+        "En investigación jurídica, una sentencia no autenticada no debe presentarse como precedente firme. Comprueba órgano, identificador, fecha, texto original y pertinencia. El artículo 14 del Reglamento europeo de IA se dirige a la supervisión de sistemas de alto riesgo y no establece una obligación idéntica para todos los chatbots.",
+        "En un informe jurídico o regulatorio no basta con encontrar un artículo auténtico que contenga la palabra buscada. Importan vigencia temporal, jurisdicción, sujetos y excepciones. Aplicar una norma correcta al destinatario equivocado puede resultar tan dañino como inventarla."
       ],
       "evidence": "ESMA recuerda que las decisiones de las empresas de inversión siguen siendo responsabilidad de sus órganos de administración, aunque se apoyen en herramientas de IA.",
       "sources": [
@@ -134,13 +138,31 @@
       "p": [
         "La revisión humana no consiste en añadir una firma al final. Requiere competencia, acceso a las pruebas, tiempo suficiente y capacidad real para corregir, suspender o rechazar el resultado. El sesgo de automatización puede convertir un texto convincente en una verdad aparente.",
         "Los controles deben ser proporcionales al impacto. Un borrador interno puede precisar una revisión ordinaria; un informe regulatorio, un análisis de M&A o una decisión sobre derechos exige comprobaciones más sólidas, responsabilidades claras y escalado documentado.",
-        "El profesional también debe saber cuándo no decidir: declarar un dato no verificado, pedir documentación adicional o suspender la publicación puede ser la opción responsable."
+        "El profesional también debe saber cuándo no decidir: declarar un dato no verificado, pedir documentación adicional o suspender la publicación puede ser la opción responsable.",
+        "La supervisión humana debe ser proporcional al impacto. Sin documentación, tiempo o conocimientos para cuestionar una respuesta, la revisión es puramente formal. Poder detener una decisión y explicar una reserva documentada forma parte del control."
       ],
       "evidence": "La calidad no consiste solamente en producir muchos resultados, sino en poder utilizarlos con evidencias, límites expresos y personas responsables.",
       "sources": [
         "F2",
         "F6",
         "F7"
+      ]
+    },
+    {
+      "title": "Alucinaciones en programación, calidad del software y riesgo comercial",
+      "duration": "75 min",
+      "p": [
+        "En programación, lo plausible puede ser engañosamente concreto: un método inexistente puede parecer parte de un SDK, una dependencia inventada puede presentarse como oficial, una configuración puede aparentar estar actualizada y un modelo puede afirmar que se ejecutaron pruebas que jamás se realizaron. Son afirmaciones comprobables. La diferencia entre lo que describe el modelo y lo que demuestran el repositorio, el entorno y la documentación no se salva con confianza.",
+        "Existe otro riesgo cuando el código se ejecuta pero no satisface requisitos de autorización, robustez o protección de datos. Una demo lograda puede ocultar accesos entre tenants, errores de concurrencia o defectos que solo aparecen en producción. No todos estos problemas son alucinaciones; distinguirlos forma parte del criterio técnico.",
+        "Para proveedores de bancos, grupos industriales o empresas con operaciones críticas, un defecto puede afectar la disponibilidad, la integridad de la información, los costes de reparación y la relación comercial. Penalizaciones, controversias, falta de renovación y responsabilidades no son automáticas: dependen de los hechos, los contratos y la normativa. El valor profesional reside en controlar el riesgo antes de entregar.",
+        "El capítulo especializado desarrolla un ejemplo de autorización multi-tenant, la cadena que conecta el fallo técnico con las consecuencias comerciales, ocho controles con evidencias, cuatro casos y una evaluación. La aprobación debe apoyarse en builds y pruebas ejecutados, dependencias verificadas, revisión independiente y documentación reproducible."
+      ],
+      "evidence": "GitHub, OWASP y NIST documentan prácticas de verificación, y un estudio de USENIX Security 2025 analiza nombres de paquetes inventados por modelos de programación. [F9–F12]",
+      "sources": [
+        "F9",
+        "F10",
+        "F11",
+        "F12"
       ]
     }
   ],
