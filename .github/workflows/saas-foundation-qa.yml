@@ -50,6 +50,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m unittest discover -s product/core/tests -v
+          python3 -m unittest discover -s product/backend/tests -p 'test_*.py' -v
       - name: Install PostgreSQL client
         run: |
           set -euo pipefail
