@@ -51,6 +51,10 @@ def test(page,route,expected_kind,screen,width):
  if width==390 and expected_kind in ('product','console'):
   assert page.locator('.manzo-mobile-bar').count()==0,(screen,'duplicate global nav')
   assert page.locator('header').first.is_visible(),(screen,'own header missing')
+  header=page.locator('header').first.bounding_box()
+  assert header is not None and header['height']<=110,(screen,'too-tall mobile masthead',header)
+  label=page.locator('header .mark,header .wordmark').first.bounding_box()
+  assert label is not None and label['x']>=10,(screen,'brand touches screen edge',label)
  if screen.endswith('console'):
   assert page.locator('#lc-metric-0').inner_text()=='2 / 3'
   assert page.locator('#lc-tab-student').is_enabled()
