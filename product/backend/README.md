@@ -25,6 +25,14 @@ L'organizzazione (tenant) non è una stringa affidabile inviata dal browser. Nel
 
 Tutte le tabelle usano RLS con politica di accesso restrittiva; `app_private` NON è uno schema da esporre via PostgREST. I client ricevono soltanto i grant SELECT alle risorse autorizzate, nessuna scrittura diretta.
 
+## Incremento Learning B2B v0.3 — funzioni testate
+
+La nuova migrazione [`0002_learning_b2b.sql`](migrations/0002_learning_b2b.sql) aggiunge la gestione dei posti per organizzazione, l'iscrizione autorizzata ai corsi, la persistenza dei moduli completati, la correzione server-side dei quiz e l'audit trail. Le policy impediscono a studenti privi di una licenza valida di consultare le versioni dei corsi riservati.
+
+I flussi sono verificati in PostgreSQL 16 temporaneo, compresa una prova concorrente per l'ultimo posto libero. **Nessun endpoint web, sistema di login, database cloud o pagamento è stato attivato.**
+
+Guida e condizioni: [Learning B2B MVP](LEARNING_B2B_MVP.md).
+
 ## Contratto API portabile (solo progettazione)
 
 Il file [`contracts/openapi.json`](contracts/openapi.json) definisce le future API per consultazione corsi e iscrizioni, invio risposte con **valutazione server-side**, licenze derivate dal backend, avvio controllato dell'agente e Checkout con prezzo determinato **soltanto dal server**. L'endpoint webhook dovrà validare la firma su raw body e l'idempotenza.

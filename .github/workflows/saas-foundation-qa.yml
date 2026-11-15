@@ -61,11 +61,17 @@ jobs:
           set -euo pipefail
           psql -v ON_ERROR_STOP=1 -f product/backend/tests/000_auth_fixture.sql
           psql -v ON_ERROR_STOP=1 -f product/backend/migrations/0001_foundation.sql
+          psql -v ON_ERROR_STOP=1 -f product/backend/migrations/0002_learning_b2b.sql
       - name: Execute cross-tenant RLS and billing isolation assertions
         run: |
           set -euo pipefail
           psql -v ON_ERROR_STOP=1 -f product/backend/tests/010_rls_checks.sql
+          psql -v ON_ERROR_STOP=1 -f product/backend/tests/020_learning_b2b_flows.sql
+      - name: Verify atomic seat assignment under concurrent connections
+        run: |
+          set -euo pipefail
+          python3 product/backend/tests/learning_seat_concurrency_smoke.py
       - name: Security contract result
         run: |
-          echo "Verified only: ephemeral Postgres schema, tenant RLS, private billing tables and Python policies."
+          echo "Verified only: ephemeral Postgres schema, tenant RLS, Learning B2B workflows, private billing tables and Python policies."
           echo "Not verified: production authentication, Supabase project configuration, external billing, PCI/GDPR, or live deployments."
