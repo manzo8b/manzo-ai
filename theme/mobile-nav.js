@@ -1,8 +1,13 @@
 /* MANZO AI | Mobile navigation v1.0 — progressive enhancement, no external dependencies */
 (() => {
   'use strict';
-  // The trilingual ACR dossier has its own accessible responsive masthead.
-  if (document.querySelector('[data-acr-dossier]')) return;
+  // Standalone product and research surfaces already implement their own
+  // responsive mastheads and language switchers. Avoid duplicate navigation.
+  if (
+    document.querySelector('[data-acr-dossier]') ||
+    document.documentElement.hasAttribute('data-product-preview') ||
+    document.documentElement.hasAttribute('data-learning-console')
+  ) return;
   const PREFIX = '/manzo-ai/';
   const lang = (location.pathname.match(/^\/manzo-ai\/(it|es|en)(?:\/|$)/) || [])[1] || 'it';
   const isPortal = location.pathname === PREFIX || location.pathname === PREFIX.slice(0,-1);
