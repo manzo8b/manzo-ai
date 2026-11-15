@@ -30,7 +30,7 @@ def test_locale(page,locale,mobile=False):
  page.locator('#inspect-input').fill('<img src=x onerror="window.__unsafe=true"> The law requires all firms to do this.')
  page.locator('#inspect-text').click()
  assert page.evaluate('window.__unsafe') is None
- page.locator('#team-seats').fill('45')
+ page.locator('#team-seats').evaluate("(el) => {el.value='45';el.dispatchEvent(new Event('input',{bubbles:true}));}")
  assert page.locator('#team-seats-label').inner_text()=='45'
  assert '45' in page.locator('#team-summary').inner_text()
  assert page.locator('input[type=password]').count()==0
@@ -45,7 +45,7 @@ def test_locale(page,locale,mobile=False):
  assert page.locator('#learning').is_visible()
 
 with sync_playwright() as pw:
- browser=pw.chromium.launch(headless=True,args=['--no-sandbox'],accept_downloads=True)
+ browser=pw.chromium.launch(headless=True,args=['--no-sandbox'])
  for loc in ROUTES:
   for mobile in (False,True):
    page=browser.new_page(viewport={'width':390 if mobile else 1366,'height':844},accept_downloads=True,is_mobile=mobile)
