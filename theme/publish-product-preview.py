@@ -163,8 +163,8 @@ def inject_home(page,loc,d):
  <p style="font-size:1.03rem;color:#4c647c;max-width:780px;line-height:1.65">{e(d['lead'])}</p>
  <p style="font-size:.82rem;color:#526f84">{e(d['status'])}</p>
  <a href="{e(url)}" style="display:inline-block;background:#174d85;color:#fff;border-radius:13px;padding:12px 18px;text-decoration:none;font-weight:740">{e(d['action'])} ↗</a></section>'''
- close=re.search(r'</main\\s*>',html,flags=re.I)
- if close is None:close=re.search(r'</body\\s*>',html,flags=re.I)
+ close=re.search(r'</main\s*>',html,flags=re.I)
+ if close is None:close=re.search(r'</body\s*>',html,flags=re.I)
  if close is None:raise RuntimeError('No main/body closing: '+str(page))
  page.write_text(html[:close.start()]+block+html[close.start():],encoding='utf-8')
 
