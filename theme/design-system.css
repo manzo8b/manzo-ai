@@ -989,3 +989,94 @@ body[data-ma-surface="landing"] .ma-scene-note{
     margin-left:auto;
   }
 }
+
+/* Visual refinement v1.1 — retain composition but introduce real energy.
+   Saturated accessible cobalt, clear greens, assertive CTA and expressive
+   contrasting product chapter; no black/ivory, no generic gradients. */
+:root{
+  --ma-ink:#142841;
+  --ma-copy:#27435a;
+  --ma-muted:#47637a;
+  --ma-blue:#2158ed;
+  --ma-blue-deep:#173fc0;
+  --ma-teal:#086f68;
+  --ma-teal-deep:#005b56;
+  --ma-coral:#b34c2d;
+  --ma-soft-blue:#e5edff;
+  --ma-soft-teal:#d9f5e9;
+  --ma-soft-orange:#ffeadf;
+  --ma-stroke:#bdcee0;
+  --cobalt:#2158ed;
+  --teal:#086f68;
+  --coral:#b34c2d;
+  --tint-blue:#e5edff;
+  --tint-teal:#d9f5e9;
+  --tint-coral:#ffeadf;
+}
+body[data-ma-surface="landing"] .home-hero{
+  background:#d9f4e9!important;
+  border-top:5px solid #2158ed;
+}
+body[data-ma-surface="landing"] .home-hero h1{
+  color:#132a52!important;
+  font-weight:650!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene{
+  background:#204eeb!important;
+  color:#fff!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene .ma-scene-title{
+  color:#fff!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene .ma-stage{
+  border-top-color:#708dff;
+}
+body[data-ma-surface="landing"] .ma-product-scene .ma-stage span{
+  color:#b3f7dc!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene .ma-stage strong{
+  color:#fff!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene .ma-scene-link{
+  background:#fff!important;
+  color:#1945cb!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene .ma-scene-link:hover{
+  background:#d9f7f0!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene .ma-scene-note{
+  color:#e1e8ff!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:first-child{
+  background:#d1f4e5!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:nth-child(2){
+  background:#dce8ff!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3n+3){
+  background:#ffe5d6!important;
+}
+body[data-ma-surface="landing"] [data-manzo-product-preview]{
+  background:#dce8ff!important;
+  border-left:5px solid #2158ed!important;
+}
+body[data-product-preview] .hero{background:#d7f4e7!important}
+body[data-product-preview] .product-card:first-child{background:#d5f4e4!important}
+body[data-product-preview] .product-card:nth-child(2){background:#dce7ff!important}
+body[data-product-preview] .product-card:nth-child(3){background:#ffe5d7!important}
+body[data-learning-console] .hero{background:#e0ebff!important}
+body[data-learning-console] .metric:first-child{background:#dce8ff!important}
+body[data-learning-console] .metric:nth-child(2){background:#d2f3e4!important}
+body[data-learning-console] .metric:nth-child(3){background:#ffe3d5!important}
+body[data-learning-console] .metric:nth-child(4){background:#e7f0ff!important}
+body[data-ma-surface="learning"] .article h2,
+body[data-ma-surface="research"] .article h2{
+  color:#183fc0!important;
+}
+body[data-ma-surface] :is(.solid,.searchbox button):focus-visible{
+ outline:3px solid #e4542c;
+ outline-offset:4px;
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-ma-surface="landing"] .ma-product-scene{transition:none}
+}
