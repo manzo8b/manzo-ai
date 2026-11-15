@@ -211,6 +211,12 @@ ALTER TABLE app_private.feature_usage FORCE ROW LEVEL SECURITY;
 ALTER TABLE app_private.billing_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE app_private.billing_events FORCE ROW LEVEL SECURITY;
 
+-- Service access is for trusted backend processes ONLY.
+-- Supabase's service_role has BYPASSRLS, but still requires object privileges.
+-- NEVER expose this role's key or a database connection string to the browser.
+GRANT USAGE ON SCHEMA app,app_private TO service_role;
+GRANT SELECT,INSERT,UPDATE,DELETE ON ALL TABLES IN SCHEMA app,app_private TO service_role;
+
 -- Clients can read ONLY. All mutations must be server-authorized.
 GRANT USAGE ON SCHEMA app TO authenticated;
 GRANT SELECT ON
