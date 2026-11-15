@@ -65,6 +65,10 @@ with sync_playwright() as pw:
      assert page.locator('[data-hc-case]').count()==4
      assert page.locator('#hc-quiz-data').count()==1
      assert page.locator('[data-hc-submit]').is_enabled()
+    if width==390:
+     number=page.locator('.ma-guide-key>strong').bounding_box()
+     explanation=page.locator('.ma-guide-key>small').bounding_box()
+     assert number and explanation and number['x']+number['width']<=explanation['x']+2,(locale,kind,'module label overlap',number,explanation)
     assert page.evaluate('localStorage.length')==0
     assert page.evaluate('sessionStorage.length')==0
     if width==390:
@@ -74,8 +78,10 @@ with sync_playwright() as pw:
     if locale=='it' and kind=='core':
      folder=Path('design-review-screenshots')
      folder.mkdir(exist_ok=True)
-     root.scroll_into_view_if_needed()
-     page.screenshot(path=str(folder/f'guided-learning-{width}.png'),full_page=False,animations='disabled')
+     page.locator('.ma-guide-head').scroll_into_view_if_needed()
+     page.evaluate("window.scrollBy(0,-70)")
+     page.wait_for_timeout(80)
+     page.screenshot(path=str(folder/f'guided-learning-head-{width}.png'),full_page=False,animations='disabled')
      img=page.screenshot(type='jpeg',quality=43,full_page=False,animations='disabled')
      print('MA_LEARN_VISUAL|'+str(width)+'|'+base64.b64encode(img).decode('ascii'),flush=True)
     page.close()
