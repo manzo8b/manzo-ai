@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Real-browser smoke checks of the CSS-only release overlay (Chromium)."""
+"""Chromium smoke: Precision & Motion final layer and preserved interactions."""
 import sys
 from playwright.sync_api import sync_playwright
 
@@ -20,15 +20,15 @@ with sync_playwright() as p:
             response = page.goto(f"{origin}/{path}", wait_until="domcontentloaded")
             assert response is not None and response.status == 200, path
             assert page.locator("h1").count() == 1, path
-            assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--cobalt').trim()") == "#244F9B", path
-            assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--violet').trim()") == "#67439A", path
+            assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ma-blue').trim()") == "#1b609b", path
+            assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ma-ink').trim()") == "#172e44", path
         page.goto(f"{origin}/it/")
-        assert "linear-gradient" in page.locator(".home-hero").evaluate("(e)=>getComputedStyle(e).backgroundImage")
+        assert page.locator(".home-hero").evaluate("(e)=>getComputedStyle(e).backgroundImage") == "none"
         feature_colors = page.locator(".grid-3>.feature").evaluate_all("(xs)=>xs.map(x=>getComputedStyle(x).backgroundColor)")
-        assert len(set(feature_colors)) >= 3, feature_colors  # three-card home grids restart nth-child counts
+        assert len(set(feature_colors)) >= 3, feature_colors  # varied, flat-color field composition
         page.goto(f"{origin}/it/pensiero-critico/")
         challenge_colors = page.locator(".challenge-card").evaluate_all("(xs)=>xs.map(x=>getComputedStyle(x).backgroundColor)")
-        assert len(set(challenge_colors)) >= 3, challenge_colors  # cards are grouped in 3-item lists
+        assert len(set(challenge_colors)) >= 3, challenge_colors  # learning tasks keep distinct but restrained area colours
         page.goto(f"{origin}/it/pensiero-critico/cruciverba-affidabilita/")
         assert page.locator(".cross-cell").count() > 0
         assert page.locator(".cross-scroll").evaluate("(e)=>getComputedStyle(e).overflowX") == "auto"
@@ -40,6 +40,6 @@ with sync_playwright() as p:
             assert mobile.locator("h1").is_visible(), path
             # Crosswords may overflow inside their scrollable container but not on the body.
             assert mobile.evaluate("document.documentElement.scrollWidth <= innerWidth + 2"), "mobile overflow: "+path
-        print("Chromium smoke: 9 page types, three languages, real colors and mobile layout OK.")
+        print("Chromium smoke: 9 page types, three languages, intentional flat fields, real colors and mobile layout OK.")
     finally:
         browser.close()
