@@ -1,0 +1,398 @@
+{
+  "head": {
+    "title1": "When AI",
+    "title2": "invents reality",
+    "kicker": "MANZO AI · PROFESSIONAL LEARNING / 01",
+    "desc": "Hallucinations, evidence and human oversight: a professional course for finance, compliance, legal and other high-accountability environments.",
+    "strap": "A convincing answer is not necessarily a defensible one. Trace what it claims, establish its sources and decide who can authorize its use.",
+    "program": "Curriculum",
+    "practice": "Case lab",
+    "assessment": "Assessment",
+    "sources": "Sources",
+    "back": "Back to MANZO AI",
+    "start": "Explore the curriculum",
+    "try": "Open the case lab",
+    "tag1": "Professional level",
+    "tag2": "5 hours · indicative",
+    "tag3": "10 cases + quiz",
+    "metric1": "5 modules",
+    "metric1b": "concepts and method",
+    "metric2": "10 cases",
+    "metric2b": "finance, AML, legal",
+    "metric3": "8 sources",
+    "metric3b": "primary and academic",
+    "programK": "The curriculum",
+    "programH": "Understand the failure. Govern the answer.",
+    "programD": "The course separates different failures: fabricated facts, obsolete information, arithmetic errors, nonexistent references and unsupported conclusions. Each calls for a different verification procedure.",
+    "practiceK": "Professional case lab",
+    "practiceH": "Ten files, ten decisions",
+    "practiceD": "Examine the output, write your assessment and compare it with the reviewer’s rationale. All cases are simulations; fictional data are explicitly identified.",
+    "methodK": "Operating method",
+    "methodH": "MANZO VERIFY",
+    "methodD": "An original educational protocol designed to make AI outputs contestable and auditable. It is not an accredited standard or a validated scientific instrument.",
+    "quizK": "Assessment",
+    "quizH": "Test your judgement",
+    "quizD": "Ten questions on decisions, evidence and conceptual distinctions. Scores are educational, not a professional certification.",
+    "crossK": "Applied vocabulary",
+    "crossH": "Verification crossword",
+    "crossD": "Eight clues: seven horizontal and one vertical. Answers use Italian technical terms, without spaces or accents; this is a multilingual terminology exercise.",
+    "sourceK": "Verified bibliography",
+    "sourceH": "From primary sources to accountable decisions",
+    "sourceD": "An authentic source does not necessarily prove the claim attached to it. Read the original in its proper jurisdiction, period and context.",
+    "closing": "MANZO AI — From generation to accountability",
+    "notice": "Educational use only. Simulations are not legal, investment or AML advice. Your answers are not sent to or stored on any server.",
+    "exerciseLabel": "Your assessment",
+    "compare": "Compare with review",
+    "hide": "Hide review",
+    "exInput": "Write at least 20 characters of analysis before comparing.",
+    "exReady": "You may compare your response.",
+    "correct": "Correct",
+    "incorrect": "Review required",
+    "select": "Select an answer.",
+    "next": "Next question",
+    "finish": "Show result",
+    "score": "Score",
+    "restart": "Start again",
+    "quizEnd": "This is a formative score, not a credential. Revisit high-risk scenarios and document your decisions.",
+    "cell": "Cell row/column",
+    "crossSuccess": "Crossword completed correctly.",
+    "crossResult": "{correct} correct cells out of {total}; {filled} filled.",
+    "crossReset": "Grid cleared.",
+    "reset": "Reset grid",
+    "crossCheck": "Check crossword",
+    "across": "Across",
+    "down": "Down",
+    "courseLabel": "Professional course",
+    "quizCheck": "Submit answer",
+    "exerciseProgress": "Cases reviewed",
+    "statusLabel": "Output verifiability",
+    "protocol": "Seven-stage protocol"
+  },
+  "modules": [
+    {
+      "title": "What hallucinations are — and what they are not",
+      "duration": "35 min",
+      "p": [
+        "In generative AI, hallucinations describe false claims or statements not faithful to the available context, often expressed with confidence. The term is useful but should not become a label for every unsatisfactory output. A calculation error, an absent citation and an outdated rule require distinct diagnoses.",
+        "Language models learn statistical patterns and generate text. That ability does not itself entail a factual check against authentic documents. Kalai and colleagues (2025) analyze how training and evaluation conditions may reward guessing rather than acknowledging uncertainty.",
+        "An audit memo that mistakes EBITDA for net income contains a data interpretation error. A memo that invents an annual report it never consulted may contain a hallucination. Precision begins by distinguishing these failures."
+      ],
+      "evidence": "Editorial rule: the absence of a source does not establish falsehood. Mark a claim as unverified until the available evidence supports a stronger conclusion.",
+      "sources": [
+        "F1",
+        "F2",
+        "F5"
+      ]
+    },
+    {
+      "title": "Where risk originates",
+      "duration": "40 min",
+      "p": [
+        "Ambiguous instructions, absent documents, false premises and stale information can increase risk. A question such as 'Which sanctions did the company receive?' already assumes sanctions exist. Verify the premise before answering.",
+        "Formal citations are not proof. A case number, DOI or URL may be fabricated; conversely, a genuine document may be invoked for a conclusion it does not support. Verification covers existence, authenticity, relevance, date and interpretation.",
+        "Grounding and retrieval-augmented generation can improve evidence alignment, but are not factual guarantees. Confirm that the right document was retrieved, that it is current and that the cited section supports the exact claim. Instructions embedded in retrieved documents may also be malicious."
+      ],
+      "evidence": "Minimum check: identify the claim, find the primary source, read the relevant passage and confirm time and context. Fluent writing does not measure factual accuracy.",
+      "sources": [
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    {
+      "title": "MANZO VERIFY: the evidence chain",
+      "duration": "55 min",
+      "p": [
+        "The protocol has seven actions: IDENTIFY the claim, establish CONTEXT, locate the SOURCE, CROSS-CHECK against the evidence, CLASSIFY the result, apply human OVERSIGHT and DOCUMENT the process. It is MANZO AI's educational method, not an accredited standard.",
+        "Three statuses prevent premature conclusions: verified (adequate supporting evidence within a defined scope), unverified (missing or insufficient evidence) and contradicted (reliable evidence is incompatible with the claim). Each status is claim-specific and time-bound.",
+        "An evidence register records the claim ID, statement, primary source, precise location in the source, date and version, status, impact, reviewer and action. Without that trail, a correct decision may still be impossible to reproduce or audit."
+      ],
+      "evidence": "The key question is not merely 'Is it right?' but 'What evidence lets another competent reviewer repeat this check?'",
+      "sources": [
+        "F2",
+        "F3"
+      ]
+    },
+    {
+      "title": "Finance, compliance and law: the cost of false certainty",
+      "duration": "40 min",
+      "p": [
+        "In finance, a wrong figure may distort a valuation, investor communication or internal assessment. The evidence must match the accounting period, currency, financial definition and consolidation perimeter. Exact-looking figures still need recalculation.",
+        "In AML/CFT, an alert is a risk indicator rather than automatic proof of money laundering. AI may support screening and analysis, but anomalies, investigations and authorized decisions must remain distinct. Restrictions on an account require their own legal and procedural basis.",
+        "In legal research, an unverified judgement should not be offered as a certain precedent. Check the issuing authority, identifier, date, original text and relevance. Article 14 of the EU AI Act addresses human oversight requirements for high-risk AI systems, not every chatbot."
+      ],
+      "evidence": "ESMA emphasizes that decisions by investment firms remain the responsibility of management bodies even when AI-based tools are involved.",
+      "sources": [
+        "F6",
+        "F7",
+        "F8"
+      ]
+    },
+    {
+      "title": "Human oversight and output governance",
+      "duration": "40 min",
+      "p": [
+        "Human review is not a signature attached after generation. It requires expertise, access to evidence, sufficient time and real authority to amend, block or reject the output. Automation bias becomes especially dangerous when confident presentation is mistaken for truth.",
+        "Controls should match the impact of the decision. An internal draft may need routine review; regulatory reports, M&A analysis and decisions affecting rights warrant enhanced checks, clear ownership and documented escalation.",
+        "A professional must know when not to decide. Marking a claim unverified, requesting more information or suspending publication can be the most responsible outcome."
+      ],
+      "evidence": "Quality is not merely the volume of outputs created: it is the proportion that can be used with adequate evidence, disclosed limitations and accountable decision-makers.",
+      "sources": [
+        "F2",
+        "F6",
+        "F7"
+      ]
+    }
+  ],
+  "method": [
+    [
+      "01",
+      "IDENTIFY",
+      "Break the answer into individually checkable claims"
+    ],
+    [
+      "02",
+      "CONTEXT",
+      "Specify jurisdiction, time, scope and intended use"
+    ],
+    [
+      "03",
+      "SOURCE",
+      "Locate primary evidence and identify its version"
+    ],
+    [
+      "04",
+      "CROSS-CHECK",
+      "Match the exact claim to the relevant passage"
+    ],
+    [
+      "05",
+      "CLASSIFY",
+      "Verified, unverified or contradicted"
+    ],
+    [
+      "06",
+      "OVERSIGHT",
+      "Assign review, escalation and decision authority"
+    ],
+    [
+      "07",
+      "DOCUMENT",
+      "Record the evidence, amendments, date and owner"
+    ]
+  ],
+  "cases": [
+    [
+      "Financial analysis",
+      "The unsupported growth figure",
+      "The AI reports: 'Last quarter’s revenue increased by 18%.' The prompt includes no company, accounting period or financial documents.",
+      "Identify missing inputs and rewrite the prompt to require clarification before calculating.",
+      "Do not approve the 18%. Request the entity, quarter, source statements, perimeter and calculation method. Label the figure unverified until supported."
+    ],
+    [
+      "Accounting",
+      "An error that is not necessarily a hallucination",
+      "2025 revenue: €8,000,000. 2026 revenue: €9,200,000. The AI writes: '25% increase.'",
+      "Recalculate the percentage, classify the problem and correct the wording.",
+      "(9,200,000 − 8,000,000) / 8,000,000 = 15%. This is a demonstrable arithmetic error, not necessarily a hallucination."
+    ],
+    [
+      "Audit",
+      "EBITDA is not net income",
+      "File: EBITDA €2,400,000; net income €700,000; net financial debt €1,700,000. AI reports net income €2,400,000 and debt €170,000.",
+      "Find both discrepancies and specify the evidence that must be logged.",
+      "Net income is €700,000, not EBITDA of €2,400,000. Net debt is €1,700,000. Trace both amounts to the same reporting period."
+    ],
+    [
+      "AML/CFT",
+      "From alert to accusation",
+      "A system flags unusual transfers and concludes: 'The customer is laundering money; immediately freeze the account.' The file contains only alerts.",
+      "Separate risk indicators from proven facts and account measures; describe the escalation.",
+      "An alert is not proof. Conduct the required review with authorized specialists. Any account restriction needs an independent legal and procedural basis."
+    ],
+    [
+      "Legal",
+      "The missing precedent",
+      "The AI cites a judgement by number and date; an initial search in one legal database produces no result.",
+      "Define the checks required before citing it in professional advice.",
+      "Suspend use, search appropriate legal repositories, authenticate the original text and check relevance. A missing result in one database does not prove nonexistence."
+    ],
+    [
+      "Regulatory",
+      "One article applied to every system",
+      "AI says: 'Article 14 of the AI Act imposes identical oversight requirements on every chatbot.'",
+      "Check the relevant class of AI systems and the scope of the provision.",
+      "Article 14 sets oversight requirements for high-risk AI systems. Do not generalize them to every chatbot; verify the current legislation and classification."
+    ],
+    [
+      "M&A",
+      "A disappearing liability",
+      "Simulated due diligence file: 'Net debt at closing: EUR 1.7m. Material tax exposure: pending verification.' The AI claims there is no net debt and no tax risk.",
+      "Separate documented facts, residual uncertainty and unjustified inferences.",
+      "Record €1.7m net debt. The tax exposure remains under investigation, not zero. Obtain dedicated due diligence evidence."
+    ],
+    [
+      "Market data",
+      "A quotation labelled 'live'",
+      "An AI presents a stock price as live without documented access to current exchange data.",
+      "List the minimum checks before using the price in a report.",
+      "Confirm instrument, ticker, venue, currency, timestamp and provider. Without reliable current-market evidence, classify the price as unverified."
+    ],
+    [
+      "Research",
+      "True source, false conclusion",
+      "A study examines 120 firms in one sector. The AI writes: 'The method works across every European industry.'",
+      "Evaluate the generalizability and evidentiary relevance of this claim.",
+      "A sector-specific sample does not support universal effectiveness. Limit the conclusion to the studied population unless other evidence exists."
+    ],
+    [
+      "Integrated audit",
+      "Four claims to hold",
+      "An AI report includes a ratio with no formula, an unauthenticated case, an AML accusation stated as fact and a law cited without its scope.",
+      "Create four claim IDs with status, missing evidence, impact, corrective action and release decision.",
+      "Hold publication. Verify formula, case record, AML evidence and statutory scope, assigning appropriately qualified reviewers to each claim."
+    ]
+  ],
+  "quiz": [
+    [
+      "AI states €4.1m net profit without documents or citations. What status is justified?",
+      [
+        "Demonstrably false",
+        "Unverified",
+        "Verified because it is specific",
+        "Automatically contradicted"
+      ],
+      [
+        1
+      ],
+      "A missing source does not, by itself, establish that the amount is false."
+    ],
+    [
+      "A study covers 120 companies in one sector, but AI extrapolates to all European firms. What is the issue?",
+      [
+        "Currency conversion",
+        "Unsupported generalization",
+        "Double counting",
+        "Current information"
+      ],
+      [
+        1
+      ],
+      "The study population does not substantiate the wider conclusion."
+    ],
+    [
+      "An AI bibliography provides a DOI. What is the best relevance check?",
+      [
+        "Count its digits",
+        "Ask three chatbots",
+        "Open the record and read the pertinent passage",
+        "Check whether the title sounds technical"
+      ],
+      [
+        2
+      ],
+      "Existence, metadata and claim-to-source relevance must all be verified."
+    ],
+    [
+      "An AML alert alone proves that a customer has committed money laundering.",
+      [
+        "True",
+        "False"
+      ],
+      [
+        1
+      ],
+      "An alert requires assessment; it is not an automatic finding of wrongdoing."
+    ],
+    [
+      "Which steps belong in a documentary audit?",
+      [
+        "Identify source date and version",
+        "Check the cited passage",
+        "Treat chatbot agreement as proof",
+        "Record reviewer and corrections"
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      "Provenance, relevance and traceability matter; model consensus is not independent evidence."
+    ],
+    [
+      "Article 14 of the EU AI Act covers human oversight requirements for high-risk AI systems.",
+      [
+        "True",
+        "False"
+      ],
+      [
+        0
+      ],
+      "Article 14 specifically concerns high-risk AI systems."
+    ],
+    [
+      "Revenue rises from €8m to €9.2m. The percentage increase is:",
+      [
+        "12%",
+        "15%",
+        "18%",
+        "25%"
+      ],
+      [
+        1
+      ],
+      "The increase is €1.2m divided by the original €8m: 15%."
+    ],
+    [
+      "A RAG system retrieves a document containing instructions to bypass safeguards. What should it do?",
+      [
+        "Follow them because they were retrieved",
+        "Treat them as untrusted content",
+        "Follow them for internal reports",
+        "Replace review with a citation"
+      ],
+      [
+        1
+      ],
+      "Retrieved content may contain prompt injection and does not override system rules."
+    ],
+    [
+      "A due diligence note says 'tax exposure: pending verification' but AI says 'no tax exposure'. The conclusion is:",
+      [
+        "Proof of zero exposure",
+        "A faithful translation",
+        "Unsupported",
+        "A correct calculation"
+      ],
+      [
+        2
+      ],
+      "Pending investigation cannot be turned into an absence of risk."
+    ],
+    [
+      "What best supports approval of an AI output used in a high-impact decision?",
+      [
+        "Flawless grammar",
+        "Confident tone",
+        "Agreement of several models",
+        "Adequate evidence and documented expert review"
+      ],
+      [
+        3
+      ],
+      "High-impact use needs appropriate evidence, oversight and ownership."
+    ]
+  ],
+  "clues": [
+    [
+      "Documentary origin and chain of custody of information",
+      "Possibility of adverse consequences",
+      "Documentary origin supporting a statement",
+      "Ability to reconstruct data and reviews",
+      "Adjective relating to the value of evidence",
+      "Activity checking correctness or compliance",
+      "Circumstances necessary to interpret information"
+    ],
+    "Property of a statement that can be checked against evidence"
+  ]
+}

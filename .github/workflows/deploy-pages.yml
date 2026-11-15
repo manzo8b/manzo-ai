@@ -15,6 +15,8 @@ on:
       - editorial/podcast/**
       - editorial/video/prompt-engineering/**
       - editorial/research/acr/**
+      - editorial/learning/hallucinations/**
+      - theme/publish-hallucinations.py
       - theme/publish-acr-dossier.py
       - theme/build-seo.py
       - theme/publish-podcast.py
@@ -251,6 +253,16 @@ jobs:
           done
           test -s _site/assets/research/acr/dossier.css
           test -s _site/assets/research/acr/dossier.js
+          # Deploy the professional course in all three portal languages.
+          python3 -m py_compile theme/publish-hallucinations.py
+          node --check editorial/learning/hallucinations/course.js
+          python3 theme/publish-hallucinations.py --site _site
+          python3 theme/publish-hallucinations.py --site _site --verify-only
+          for course_page in it/impara/allucinazioni-ai-verificabilita en/learn/ai-hallucinations-verification es/aprende/alucinaciones-ia-verificacion; do
+            test -s "_site/$course_page/index.html"
+            grep -q 'hx-quiz-data' "_site/$course_page/index.html"
+            grep -q 'hx-cross-grid' "_site/$course_page/index.html"
+          done
           # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
           python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
           # Generate final SEO index ONLY after all published editorial pages exist.
