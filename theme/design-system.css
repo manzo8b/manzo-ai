@@ -935,3 +935,21 @@ body[data-ma-surface="landing"] .ma-scene-note{
     gap:.55rem;
   }
 }
+
+/* Final screenshot refinement: avoid three-line headline on wide Product Lab. */
+@media(min-width:1100px){
+  body[data-product-preview] .hero-layout{
+    grid-template-columns:minmax(0,1.8fr) minmax(0,.5fr);
+  }
+  body[data-product-preview] .hero h1{
+    max-width:29ch;
+    font-size:clamp(3rem,4.15vw,4.8rem);
+  }
+}
+/* In the mobile archive, the permanent navigation carries wayfinding.
+   The old micro contact masthead was wasting the first touch viewport. */
+@media(max-width:760px){
+  body[data-ma-surface] [data-manzo-contact="1"]{
+    display:none!important;
+  }
+}
