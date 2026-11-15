@@ -25,6 +25,12 @@ L'organizzazione (tenant) non è una stringa affidabile inviata dal browser. Nel
 
 Tutte le tabelle usano RLS con politica di accesso restrittiva; `app_private` NON è uno schema da esporre via PostgREST. I client ricevono soltanto i grant SELECT alle risorse autorizzate, nessuna scrittura diretta.
 
+## Contratto API portabile (solo progettazione)
+
+Il file [`contracts/openapi.json`](contracts/openapi.json) definisce le future API per consultazione corsi e iscrizioni, invio risposte con **valutazione server-side**, licenze derivate dal backend, avvio controllato dell'agente e Checkout con prezzo determinato **soltanto dal server**. L'endpoint webhook dovrà validare la firma su raw body e l'idempotenza.
+
+**Non esiste oggi nessun endpoint HTTP attivo.** Il contratto OpenAPI serve a verificare ora le superfici di autorizzazione e a mantenere la migrazione indipendente dal provider. I test automatici rifiutano campi di prezzo/punteggio/budget inseriti dal browser.
+
 ## Importante prima della migrazione in Supabase
 
 1. Creare **un progetto MANZO AI nuovo**, con regione, piano e policy di trattamento dati approvati.
