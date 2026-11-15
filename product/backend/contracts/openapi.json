@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "MANZO AI · SaaS API design contract",
-    "version": "0.2.0-design",
-    "description": "DESIGN ONLY — NO ENDPOINTS DEPLOYED. Portable B2B Learning, Verify and Studio API contract. Authentication, tenant authorization, billing, quotas and model integrations must be implemented server-side; do not treat this document as a running service.",
+    "version": "0.3.0-design",
+    "description": "DESIGN ONLY — NO ENDPOINTS DEPLOYED. Learning B2B Postgres routines are testable in ephemeral CI but no login, API server, hosted DB, team license purchase or billing is connected.",
     "x-manzo-implementation-status": "unimplemented-design-contract"
   },
   "tags": [
@@ -162,6 +162,71 @@
           },
           "403": {
             "description": "Membership missing",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "learning"
+        ],
+        "operationId": "enrollLearningStudent",
+        "summary": "Enroll a currently licensed member in a published course",
+        "description": "Only a server-authorized owner, admin or instructor may enroll. Learner's identity, seat grant and course status are validated server-side. This API is not deployed.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrganizationId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrollmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Enrollment is active",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnrollmentReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "No authorization or active seat",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Course unavailable",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -560,6 +625,237 @@
           }
         }
       }
+    },
+    "/v1/organizations/{organizationId}/learning/seats": {
+      "post": {
+        "tags": [
+          "learning"
+        ],
+        "operationId": "assignLearningSeat",
+        "summary": "Assign an active organization seat to an existing member",
+        "description": "Backend-only mutation. Owner/admin authentication and an active organization grant are required. Seat quota is checked atomically against concurrent requests. THIS API IS NOT DEPLOYED.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrganizationId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LearningSeatRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Seat assigned or previously assigned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearningSeatReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not an organization administrator",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "No free seats or license inactive",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/{organizationId}/learning/seats/{memberId}": {
+      "delete": {
+        "tags": [
+          "learning"
+        ],
+        "operationId": "releaseLearningSeat",
+        "summary": "Release organization seat, revoking active enrollments",
+        "description": "Backend-only mutation. Only verified owner/admin. Billing grant remains server-owned.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrganizationId"
+          },
+          {
+            "$ref": "#/components/parameters/MemberId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Seat released or already absent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearningSeatReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not authorized",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/{organizationId}/learning/progress": {
+      "get": {
+        "tags": [
+          "learning"
+        ],
+        "operationId": "listLearningProgress",
+        "summary": "Read authenticated learner progress (or authorized instructor report)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrganizationId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tenant-scoped historical progress, including records after license revocation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProgressReceipt"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Organization membership missing",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "learning"
+        ],
+        "operationId": "completeLearningModule",
+        "summary": "Record a valid published module completion under verified actor identity",
+        "description": "Server derives member user ID from verified session, confirms active grant, enrollment and published version, then performs an idempotent upsert. Client cannot provide scores or user ID. API NOT DEPLOYED.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/OrganizationId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressSubmission"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Module completion recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressReceipt"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "License or enrollment missing",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Module/version unavailable",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -590,6 +886,16 @@
           "type": "string",
           "format": "uuid"
         }
+      },
+      "MemberId": {
+        "name": "memberId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": "User identity must be checked against verified organization membership."
       }
     },
     "schemas": {
@@ -877,6 +1183,126 @@
           "checkoutUrl": {
             "type": "string",
             "format": "uri"
+          }
+        }
+      },
+      "LearningSeatRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "memberUserId"
+        ],
+        "properties": {
+          "memberUserId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Target must already be verified member of organization; caller must be owner/admin."
+          }
+        }
+      },
+      "LearningSeatReceipt": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "result",
+          "memberUserId"
+        ],
+        "properties": {
+          "result": {
+            "type": "string",
+            "enum": [
+              "assigned",
+              "already_assigned",
+              "released",
+              "not_assigned"
+            ]
+          },
+          "memberUserId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "EnrollmentRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "memberUserId",
+          "courseId"
+        ],
+        "properties": {
+          "memberUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "EnrollmentReceipt": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "enrollmentId",
+          "state"
+        ],
+        "properties": {
+          "enrollmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "type": "string",
+            "const": "active"
+          }
+        }
+      },
+      "ProgressSubmission": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "courseId",
+          "versionId",
+          "moduleKey"
+        ],
+        "properties": {
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "versionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "moduleKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[A-Za-z0-9_.-]+$"
+          }
+        }
+      },
+      "ProgressReceipt": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "progressId",
+          "moduleKey",
+          "state"
+        ],
+        "properties": {
+          "progressId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "moduleKey": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string",
+            "const": "completed"
           }
         }
       }
