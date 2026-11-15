@@ -23,6 +23,11 @@ The demo is intentionally honest about what it can do *now*.
 - `core/tests/test_webhook_security.py` — replay, tampering, malformed header and signature tests
 - `backend/migrations/0001_foundation.sql` — tenant-scoped database schema, read-only RLS, private billing ledgers
 - `backend/contracts/openapi.json` — documented but unimplemented portable Learning/Verify/Studio + billing API contract
+- `backend/migrations/0002_learning_b2b.sql` — tested seat allocation, enrollment, course progress, private quiz scoring
+- `backend/tests/020_learning_b2b_flows.sql` — cross-organization and revocation scenarios
+- `backend/tests/learning_seat_concurrency_smoke.py` — two concurrent requests to the last licensed seat
+- `backend/LEARNING_B2B_MVP.md` — technical scope, UX target and go-live constraints
+
 
 - `backend/tests/000_auth_fixture.sql` and `010_rls_checks.sql` — ephemeral SQL security tests
 - `.github/workflows/saas-foundation-qa.yml` — automated PostgreSQL 16 security checks
