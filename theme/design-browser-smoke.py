@@ -41,7 +41,7 @@ def test(page,route,expected_kind,screen,width):
  body_color=page.evaluate('getComputedStyle(document.body).backgroundColor')
  assert body_color=='rgb(255, 255, 255)',(screen,width,'paper',body_color)
  ink=page.evaluate("getComputedStyle(document.body).getPropertyValue('--ma-ink').trim()")
- assert ink=='#172e44',(screen,width,'ink',ink)
+ assert ink=='#142841',(screen,width,'ink',ink)
  if expected_kind=='landing':
   assert page.locator('[data-ma-home-scene="1"]').count()==1
   assert page.locator('.ma-product-scene a[href*="/prodotto/"],.ma-product-scene a[href*="/product/"],.ma-product-scene a[href*="/producto/"]').count()==1
