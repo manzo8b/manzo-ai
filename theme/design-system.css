@@ -1154,3 +1154,225 @@ body[data-learning-console] .course-card{border:1px solid #bed7ed!important}
   transition:none!important;
  }
 }
+
+/* MANZO AI · Home visual correction v1.3
+   Keep original document structure, navigation, real search and content.
+   Replace low-energy pastel FEATURE surfaces with strong, designed objects.
+   Contrast validated per intended ink/background pairing. */
+body[data-ma-surface="landing"] .home-hero{
+ background:#fff!important;
+ border:0!important;
+ border-left:7px solid #2158ed!important;
+ box-shadow:inset 0 -1px 0 #cfdaee!important;
+}
+body[data-ma-surface="landing"] .home-hero h1{
+ color:#122852!important;
+ letter-spacing:-.064em;
+ font-weight:660!important;
+}
+body[data-ma-surface="landing"] .home-hero .eyebrow,
+body[data-ma-surface="landing"] .home-hero .kicker{
+ color:#1d51db!important;
+}
+body[data-ma-surface="landing"] .home-hero .searchbox{
+ border:2px solid #8da9ed!important;
+ background:#fff!important;
+ box-shadow:0 8px 26px #1740ae13!important;
+ border-radius:12px!important;
+}
+body[data-ma-surface="landing"] .home-hero .searchbox:focus-within{
+ border-color:#2158ed!important;
+ box-shadow:0 0 0 4px #2158ed18!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene{
+ background:#2158ed!important;
+ border:0!important;
+ border-radius:21px!important;
+ box-shadow:0 19px 52px #2149ac3a!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene .ma-scene-link{
+ border-radius:10px!important;
+ box-shadow:0 6px 18px #142d6828!important;
+}
+body[data-ma-surface="landing"] .ma-product-scene .ma-scene-link:focus-visible{
+ outline:3px solid #ffb07c;outline-offset:4px;
+}
+/* Three cinematic BUT functional cards. White text on blue/teal,
+   dark ink on vivid peach. No weak light-green/light-blue backgrounds. */
+body[data-ma-surface="landing"] .grid-3>.feature{
+ position:relative!important;
+ overflow:hidden!important;
+ border:1px solid transparent!important;
+ border-radius:22px!important;
+ padding:clamp(1.75rem,2.7vw,2.9rem)!important;
+ box-shadow:0 10px 28px #19395f22!important;
+ min-height:clamp(230px,22vw,315px);
+ transition:
+  transform .3s cubic-bezier(.22,1,.36,1),
+  box-shadow .3s cubic-bezier(.22,1,.36,1),
+  background-color .2s ease!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3n+1){
+ background:#204ee5!important;
+ color:#fff!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3n+2){
+ background:#006f68!important;
+ color:#fff!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3n+3){
+ background:#ffab73!important;
+ color:#172c45!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:before{
+ content:"";
+ position:absolute;
+ width:clamp(125px,19vw,295px);
+ height:clamp(125px,19vw,295px);
+ border:2px solid currentColor;
+ border-radius:50%;
+ right:-13%;
+ top:-31%;
+ opacity:.13;
+ pointer-events:none;
+ box-shadow:0 0 0 21px #ffffff13,0 0 0 48px #ffffff0d;
+ transform:translate(0,0) rotate(0);
+ transition:transform .45s cubic-bezier(.22,1,.36,1);
+}
+body[data-ma-surface="landing"] .grid-3>.feature:after{
+ content:"↗";
+ position:absolute;
+ right:clamp(16px,2.5vw,28px);
+ bottom:clamp(15px,2.5vw,27px);
+ display:grid;
+ place-items:center;
+ width:38px;height:38px;
+ border-radius:50%;
+ font-weight:800;
+ line-height:1;
+ font-size:1.2rem;
+ background:#ffffff2c;
+ color:inherit;
+ pointer-events:none;
+ transition:transform .28s cubic-bezier(.22,1,.36,1),
+ background-color .2s ease;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3n+3):after{
+ background:#172c451c;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:hover,
+body[data-ma-surface="landing"] .grid-3>.feature:focus-within{
+ transform:translateY(-7px)!important;
+ box-shadow:0 25px 55px #19395f39!important;
+ filter:none!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:hover:before,
+body[data-ma-surface="landing"] .grid-3>.feature:focus-within:before{
+ transform:translate(-22px,15px) rotate(13deg);
+}
+body[data-ma-surface="landing"] .grid-3>.feature:hover:after,
+body[data-ma-surface="landing"] .grid-3>.feature:focus-within:after{
+ transform:translate(4px,-4px);
+ background:#ffffff50;
+}
+body[data-ma-surface="landing"] .grid-3>.feature :is(h2,h3,h4){
+ color:inherit!important;
+ font-size:clamp(1.4rem,2vw,2.25rem);
+ letter-spacing:-.043em;
+ line-height:1.16;
+ font-weight:670;
+ position:relative;z-index:1;
+}
+body[data-ma-surface="landing"] .grid-3>.feature :is(p,li,small,.tail,.feature-icon,.eyebrow){
+ color:inherit!important;
+ position:relative;z-index:1;
+}
+body[data-ma-surface="landing"] .grid-3>.feature p{
+ opacity:.94;
+ line-height:1.65;
+ max-width:43ch;
+}
+body[data-ma-surface="landing"] .grid-3>.feature a:not(.solid){
+ color:inherit!important;
+ font-weight:710;
+ text-decoration-color:currentColor;
+ position:relative;
+ z-index:2;
+}
+body[data-ma-surface="landing"] .grid-3>.feature a:focus-visible{
+ outline:3px solid #fff4c3!important;
+ outline-offset:4px!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3n+3) a:focus-visible{
+ outline-color:#173f8d!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature .feature-icon{
+ display:inline-flex;
+ min-width:35px;
+ min-height:35px;
+ justify-content:flex-start;
+ align-items:center;
+ font-size:clamp(1.5rem,2vw,2rem);
+}
+body[data-ma-surface="landing"] .grid-3>.feature .tail{
+ display:inline-flex;
+ align-items:center;
+ gap:.3rem;
+ max-width:calc(100% - 54px);
+ margin-top:auto;
+ text-decoration:underline;
+ text-underline-offset:6px;
+}
+/* Strong commercial handoff, one concise saturated banner rather than
+   another pale product box. Its title and CTA remain visible. */
+body[data-ma-surface="landing"] [data-manzo-product-preview]{
+ background:#183b9a!important;
+ border:0!important;
+ border-left:7px solid #ff9064!important;
+ border-radius:22px!important;
+ box-shadow:0 17px 38px #173a892b!important;
+ color:#fff!important;
+}
+body[data-ma-surface="landing"] [data-manzo-product-preview] :is(h2,h3,p,small,strong,span){
+ color:#fff!important;
+}
+body[data-ma-surface="landing"] [data-manzo-product-preview] a{
+ background:#ffe1ac!important;
+ color:#17355a!important;
+ border-color:#ffe1ac!important;
+ border-radius:10px!important;
+ font-weight:760!important;
+}
+body[data-ma-surface="landing"] [data-manzo-product-preview] a:hover{
+ background:#fff!important;
+}
+/* Existing site-wide CTA and feature cards retain their real semantics. */
+@media(max-width:760px){
+ body[data-ma-surface="landing"] .home-hero{
+  border-left:4px solid #2158ed!important;
+ }
+ body[data-ma-surface="landing"] .grid-3>.feature{
+  min-height:210px;
+  padding:1.65rem!important;
+  border-radius:17px!important;
+ }
+ body[data-ma-surface="landing"] [data-manzo-product-preview]{
+  border-radius:17px!important;
+ }
+}
+@media(hover:none),(prefers-reduced-motion:reduce){
+ body[data-ma-surface="landing"] .grid-3>.feature:hover{
+  transform:none!important;
+ }
+ body[data-ma-surface="landing"] .grid-3>.feature:hover:before,
+ body[data-ma-surface="landing"] .grid-3>.feature:hover:after{
+  transform:none!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-ma-surface="landing"] .grid-3>.feature,
+ body[data-ma-surface="landing"] .grid-3>.feature:before,
+ body[data-ma-surface="landing"] .grid-3>.feature:after{
+  transition:none!important;
+ }
+}
