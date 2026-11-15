@@ -2,6 +2,7 @@
 -- Replaces the auth.users table and auth.uid() function in an ephemeral
 -- PostgreSQL CI container with verified-session-like test inputs.
 CREATE ROLE authenticated NOLOGIN;
+CREATE ROLE service_role NOLOGIN BYPASSRLS; -- test-only analogue of a server-side service credential
 CREATE SCHEMA auth;
 CREATE TABLE auth.users (id uuid PRIMARY KEY);
 CREATE FUNCTION auth.uid()
