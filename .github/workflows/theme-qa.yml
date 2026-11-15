@@ -56,6 +56,8 @@ jobs:
           python3 theme/publish-oracle-city.py --site _site --edition editorial/oracle-city/numero-01
           python3 theme/publish-podcast.py --site _site --edition editorial/podcast/ep00
           python3 theme/publish-prompt-video.py --site _site --edition editorial/video/prompt-engineering
+          # The research dossier must exist in QA as it does in production.
+          python3 theme/publish-acr-dossier.py --site _site
           python3 -m py_compile theme/publish-hallucinations.py theme/hallucinations-browser-smoke.py
           node --check editorial/learning/hallucinations/course.js
           python3 theme/publish-hallucinations.py --site _site
