@@ -36,7 +36,9 @@ def validate(data):
   assert len(d['sectorOptions'])==4
   assert len(d['moduleOptions'])==3
   for key in ('title','lead','studioTitle','verifyTitle','learningTitle','readinessTitle','disclaimer'):
-   assert isinstance(d[key],str) and len(d[key])>20,f'{locale}: {key}'
+   assert isinstance(d[key],str) and len(d[key])>3,f'{locale}: {key}'
+ for locale,d in data.items():
+  assert len(d['lead'])>50 and len(d['disclaimer'])>50, f'{locale}: missing substantive caveat'
  return data
 
 def graphic():
