@@ -50,6 +50,10 @@ jobs:
           node --check editorial/learning/hallucinations/course.js
           python3 theme/publish-hallucinations.py --site _site
           python3 theme/publish-hallucinations.py --site _site --verify-only
+          python3 -m py_compile theme/publish-hallucinations-coding.py theme/hallucinations-coding-browser-smoke.py
+          node --check editorial/learning/hallucinations/coding.js
+          python3 theme/publish-hallucinations-coding.py --site _site
+          python3 theme/publish-hallucinations-coding.py --site _site --verify-only
           python3 theme/build-seo.py --site _site --base-url "https://manzo8b.github.io/manzo-ai/"
           node --check theme/mobile-nav.js
           python3 theme/publish-navigation.py --site _site
@@ -68,3 +72,4 @@ jobs:
           python3 theme/browser-smoke.py
           python3 theme/mobile-browser-smoke.py
           python3 theme/hallucinations-browser-smoke.py
+          python3 theme/hallucinations-coding-browser-smoke.py

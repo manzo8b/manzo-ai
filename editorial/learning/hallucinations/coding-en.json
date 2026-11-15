@@ -1,0 +1,299 @@
+{
+  "locale": "en",
+  "title": "The code that looked correct",
+  "subtitle": "Hallucinations in software development, quality assurance and accountability to the client",
+  "eyebrow": "MODULE 06 · ENGINEERING ASSURANCE",
+  "lead": "An application may compile, display a polished interface and pass a sales demonstration, yet remain unfit for production. When generative models contribute code, the difference between 'it works on my machine' and 'we can release it' must be supported by evidence.",
+  "thesis": "Enterprise clients do not purchase lines of code. They purchase operational continuity, data protection, maintainability, risk management and trust.",
+  "labels": {
+    "home": "Back to the course",
+    "program": "Chapter",
+    "risks": "Technical risks",
+    "cases": "Case lab",
+    "gate": "Quality gate",
+    "sources": "References",
+    "time": "75 minutes · specialist module",
+    "sourceNote": "The references document risks and control practices. Cases and financial figures are learning simulations, not incidents attributed to real companies.",
+    "casePrompt": "Write your technical assessment",
+    "reveal": "Compare with expert review",
+    "hide": "Hide review",
+    "min": "Write at least 30 characters to unlock the model review.",
+    "ready": "Ready to compare your assessment.",
+    "quizLabel": "Specialist assessment",
+    "quizLead": "Four decisions for a technical lead. This is not a syntax test: evaluate the quality of the evidence.",
+    "check": "Check answer",
+    "next": "Continue",
+    "results": "Your result",
+    "restart": "Try again",
+    "completed": "A formative result; real-world releases need technical evidence and proper authorization.",
+    "back": "Return to the full course",
+    "impact": "The chain of impact",
+    "economic": "Do not invent economic impact",
+    "riskTitle": "Distinguishing hallucinations from vulnerabilities",
+    "principle": "Release accountability remains human"
+  },
+  "chapters": [
+    {
+      "id": "01",
+      "title": "A demo is not a delivery",
+      "deck": "Software can look finished while lacking the conditions needed to entrust it with real operations.",
+      "paragraphs": [
+        "In professional development, quality is not the number of features, visual polish or the speed at which a developer replies to a client. A screen can be excellent while the backend mishandles permissions; a function can work for a happy-path example and fail on unexpected input; a payment routine can look fine in a presentation and lose consistency when two requests arrive simultaneously.",
+        "Generative assistance can accelerate the production of components and possible solutions. It does not automatically shorten the work required to understand dependencies, validate business rules, test behavior and show that a change has not broken the surrounding system. Code production speed and release quality are different measures.",
+        "The risk increases when a professional substitutes trust in the output's presentation for independent review. Well-commented code is not a code review. A 'tests passed' statement written by the model is not a CI run. An example resembling official documentation does not prove compatibility with the library version actually installed."
+      ],
+      "note": "GitHub recommends running tests and static analysis, then checking AI-generated code against project intent and context before accepting it. [F9]",
+      "refs": [
+        "F9",
+        "F11"
+      ]
+    },
+    {
+      "id": "02",
+      "title": "What a coding hallucination actually is",
+      "deck": "Not every software defect is a hallucination; some hallucinations, however, produce serious defects.",
+      "paragraphs": [
+        "A model may invent a method name, attribute unsupported capabilities to a library or recommend a plausible but nonexistent dependency. It may generate syntactically consistent settings that the actual framework version does not recognize. It might even describe tests as executed when no commands were run. The difference between plausible prose and technical reality is directly checkable here.",
+        "Other failures are different in kind. Incomplete validation, missing authorization, race conditions and inefficient algorithms can all be engineering mistakes even when nothing has been fabricated. They need no hallucination label to be serious. A precise diagnosis separates invented facts, faulty implementation and unsupported assurances.",
+        "Research by Spracklen and colleagues, presented at USENIX Security 2025, examined 576,000 code samples from 16 models and identified many nonexistent package names. Its reported rates belong to that experiment; they should not be mistaken for universal probabilities for today's projects. The result nevertheless illustrates why dependency suggestions require independent verification."
+      ],
+      "points": [
+        [
+          "Fabricated APIs or methods",
+          "Check signature, version and behavior against documentation and the actually installed library."
+        ],
+        [
+          "Imaginary packages",
+          "Check package name, publisher, origin, integrity and lockfile before installation; consider slopsquatting."
+        ],
+        [
+          "Invented configuration fields",
+          "Validate against real schemas, tools and tests in the intended runtime."
+        ],
+        [
+          "Tests 'run' only in text",
+          "Require commands, logs and artifacts produced by CI, not the assistant's assertion."
+        ],
+        [
+          "Unsubstantiated security assurances",
+          "Do not equate a lack of warnings with a security assessment or compliance review."
+        ]
+      ],
+      "note": "USENIX research documents package-name hallucinations; OWASP discusses risks associated with unvalidated outputs downstream. [F10] [F12]",
+      "refs": [
+        "F10",
+        "F12"
+      ]
+    },
+    {
+      "id": "03",
+      "title": "From a software defect to commercial risk",
+      "deck": "Risk materializes when a weakness passes the controls and reaches users or customer operations.",
+      "paragraphs": [
+        "Consider a vendor delivering a multi-company invoicing portal. An AI-generated endpoint requires users to sign in, but never checks whether the requested invoice belongs to the user's company. The demo worked. The problem appears when a signed-in user requests an invoice associated with another tenant.",
+        "The defect could expose data, require emergency remediation, delay releases and trigger technical or legal investigations. The customer relationship now hinges on evidence: which checks were run, who approved the change, which negative test could have detected the issue, and what shows that the fix has not introduced new defects?",
+        "An enterprise customer might request contractual remedies, pause future work or decline to renew, but none of these consequences is automatic. Outcomes depend on the incident, applicable duties, contract terms and the supplier's response. This course does not present hypothetical outcomes as established losses."
+      ],
+      "note": "OWASP LLM05:2025 addresses insecure handling of generated output and distinguishes it from broader overreliance. [F10]",
+      "refs": [
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "id": "04",
+      "title": "Professional accountability",
+      "deck": "Using a generator does not transfer the duty of verification to the generator.",
+      "paragraphs": [
+        "Clients assess a solution against agreed requirements, service levels, reliability and contractual commitments. They need not know how many lines were typed manually, suggested by an assistant or produced by an agent. The delivery team must be able to explain the architecture, identify dependency provenance, reproduce tests and substantiate its security claims.",
+        "Poor professional practice is not the use of AI. It can be shipping unexecuted code, trusting an unknown package without due diligence, closing a ticket without regression tests or advertising a system as 'certified' without an appropriate assessment. Whether an actual loss creates legal liability depends on relevant law and contract terms.",
+        "Good engineers also know when to stop a release. Saying 'we do not yet have sufficient evidence' can be more professional than signing off on a system no one can account for. Quality is built through an observable chain of decisions, tests and occasionally justified refusals."
+      ],
+      "note": "The NIST Secure Software Development Framework describes secure development practices to integrate into the software lifecycle. [F11]",
+      "refs": [
+        "F9",
+        "F11"
+      ]
+    },
+    {
+      "id": "05",
+      "title": "Verifying before production",
+      "deck": "A sequence of quality gates turns approval into a documented judgement.",
+      "paragraphs": [
+        "Professional verification starts with the requirements. The code must solve the intended problem, not the model's imagined version of it. Next come reproducible builds, dependency checking, happy- and unhappy-path tests, authorization reviews, automated analysis and a human review of meaningful diffs.",
+        "In enterprise environments, teams must also establish how the software behaves under failure: timeouts, duplicate requests, partial transactions, network interruptions, concurrency and rollback. The acceptance criterion is not 'nothing went wrong during the demo', but 'sufficient evidence exists for the expected operating conditions'.",
+        "Every gate should leave an artifact: CI logs, test reports, dependency scans, review records, known limitations, authorized approval and a recovery plan. These checks cannot eliminate every vulnerability, but make the process inspectable and resist unsupported confidence."
+      ],
+      "note": "This learning checklist translates GitHub and NIST practices into a MANZO AI teaching tool; it does not constitute a security certification. [F9] [F11]",
+      "refs": [
+        "F9",
+        "F11"
+      ]
+    },
+    {
+      "id": "06",
+      "title": "The business value of verification",
+      "deck": "Review has an identifiable cost; skipping it can also have costs that are harder to predict.",
+      "paragraphs": [
+        "Risk analysis distinguishes the certain cost of controls from possible incident impacts. Inputs may include downtime, failed transactions, emergency staff, forensic work, recovery, mandatory notifications, contractual remedies and non-renewal risk. Each number needs an identified source or an explicitly stated assumption.",
+        "Purely fictional example: a critical service is unavailable for three hours and the business estimates the operational impact at €12,000 per hour. The modeled result is €36,000, excluding other potential costs. This is not an observed incident or an industry benchmark: it illustrates how to expose assumptions instead of inventing damages.",
+        "Large contracts do not excuse improvisation, just as using AI does not make a developer unprofessional. The competitive distinction is evidence: clients can verify that software was examined, tested, documented and that residual risks were disclosed. Trust begins well before the next contract."
+      ],
+      "note": "The financial example is an educational scenario. Its hours, figures and commercial outcomes are not evidence from an actual incident.",
+      "refs": [
+        "F9",
+        "F11"
+      ]
+    }
+  ],
+  "pipeline": [
+    [
+      "01",
+      "Generation",
+      "Plausible code, not yet examined"
+    ],
+    [
+      "02",
+      "Omission",
+      "No tenant, dependency or regression checks"
+    ],
+    [
+      "03",
+      "Release",
+      "The defect reaches real systems and users"
+    ],
+    [
+      "04",
+      "Incident",
+      "Possible downtime or data exposure"
+    ],
+    [
+      "05",
+      "Consequences",
+      "Remediation, disputes and rebuilding trust"
+    ]
+  ],
+  "gates": [
+    [
+      "Requirements and context",
+      "Ticket, acceptance criteria and constraints checked against the proposed change."
+    ],
+    [
+      "Reproducible execution",
+      "Build and tests executed in a defined environment with logs and revision ID."
+    ],
+    [
+      "Dependencies",
+      "Package provenance, versions, known vulnerabilities and lockfiles checked."
+    ],
+    [
+      "Edge conditions",
+      "Relevant negative, error-path, concurrency and regression tests executed."
+    ],
+    [
+      "Permissions and data",
+      "Identity, roles, tenant separation, privacy and sensitive-data access verified."
+    ],
+    [
+      "Analysis and review",
+      "Static analysis, security scanning and human review of relevant changes."
+    ],
+    [
+      "Operations",
+      "Monitoring, alerts, backup/rollback, incident response and availability requirements checked."
+    ],
+    [
+      "Acceptance",
+      "Residual risks, reviewer, approval and release notes recorded."
+    ]
+  ],
+  "codeExample": {
+    "title": "A vulnerability concealed by a successful demo",
+    "context": "Illustrative JavaScript pseudocode. The user is authenticated, but the invoice is retrieved by ID alone. This is an authorization flaw, not necessarily a hallucination.",
+    "before": "app.get('/api/invoices/:id', requireAuth, async (req, res) => {\n  const invoice = await db.invoice.findUnique({\n    where: { id: req.params.id }\n  });\n  res.json(invoice);\n});",
+    "after": "const invoice = await db.invoice.findFirst({\n  where: {\n    id: req.params.id,\n    tenantId: req.auth.tenantId\n  }\n});\nif (!invoice) return res.sendStatus(404);",
+    "takeaway": "Tenant filtering is only one part of remediation. Authorization policy, role checks, identity validity, missing-record handling, audit logging and cross-tenant tests also need attention."
+  },
+  "cases": [
+    {
+      "sector": "API & SDK",
+      "title": "A method invented for an SDK",
+      "scenario": "An assistant writes 'paymentClient.reverseSettlement(id)', claiming it exists in SDK v3.2. Official docs and the installed types contain no such method.",
+      "task": "Classify the issue. What evidence is needed before adopting an alternative method for payment refunds?",
+      "solution": "A method invented or falsely attributed to the SDK is a possible coding hallucination. Pause the integration; inspect the installed SDK version, changelog and types, locate a documented refund method, test in a sandbox and verify accounting behavior."
+    },
+    {
+      "sector": "Security & multitenancy",
+      "title": "Authentication is not authorization",
+      "scenario": "A multi-company portal has a login-protected route that fetches invoices using only the ID in the URL. A signed-in user can guess an ID belonging to another company.",
+      "task": "What is the concrete defect, and which negative test must block release?",
+      "solution": "Object-level access control is missing or insufficient. This need not be a hallucination. A cross-tenant request must not disclose an invoice; also test role policies, authorization rules and logs."
+    },
+    {
+      "sector": "Supply chain",
+      "title": "The package that should not exist",
+      "scenario": "AI recommends installing 'fictional-corporate-auth-guard' for enterprise SSO. The name is fictitious in this exercise and has not been checked in any registry.",
+      "task": "What would you inspect before installing an unknown dependency, and how does slopsquatting create risk?",
+      "solution": "Do not install it. Verify existence in a trusted registry, publisher, repository, maintenance, integrity, licenses and known vulnerabilities. Slopsquatting exploits malicious packages registered under names erroneously suggested by AI."
+    },
+    {
+      "sector": "Release governance",
+      "title": "'All tests passed' — without a log",
+      "scenario": "The model declares: 'Build successful, 100% of tests passed, production-ready.' No CI pipeline was run, and there is no log, commit ID or rollback plan. The customer operates a critical business service.",
+      "task": "Would you approve release? Identify the minimum artifacts and communicate the decision to the customer.",
+      "solution": "Hold release. The test claim is not verified. Request commit SHA, reproducible build, appropriate test reports, security scans, review, authorization and rollback plan. Explain which evidence is missing without promising zero risk."
+    }
+  ],
+  "quiz": [
+    {
+      "question": "An assistant suggests an SDK method absent from docs and installed types. What is the first defensible check?",
+      "options": [
+        "Cast the result to bypass typing",
+        "Verify the installed API and reproduce its behavior",
+        "Deploy it to find out",
+        "Ask the model to be more confident"
+      ],
+      "answer": 1,
+      "why": "The method's existence and signature must be verified in the actual library. Type casts cannot create a missing method."
+    },
+    {
+      "question": "An authenticated endpoint leaks invoices across tenants. Is this necessarily an AI hallucination?",
+      "options": [
+        "Yes, every generated vulnerability is a hallucination",
+        "No; it is an authorization flaw that may involve no fabricated fact",
+        "Yes, if the code compiles",
+        "No, because it has a login check"
+      ],
+      "answer": 1,
+      "why": "Missing authorization is a serious software flaw whether or not the model fabricated an API or fact."
+    },
+    {
+      "question": "A model writes 'all tests pass' although no CI run exists. How should the statement be classified?",
+      "options": [
+        "Verified by the model's report",
+        "Unverified because logs and artifacts are missing",
+        "Refuted without running any test",
+        "Sufficient for staging"
+      ],
+      "answer": 1,
+      "why": "The claim of executed tests lacks evidence; a real run with inspectable artifacts is needed."
+    },
+    {
+      "question": "Which quality gate is most defensible for an enterprise release?",
+      "options": [
+        "A successful demo and commercial sign-off",
+        "Compilation and no warnings",
+        "Documented requirements, tests, security, dependencies, approval and rollback",
+        "Agreement between two AI assistants"
+      ],
+      "answer": 2,
+      "why": "Releases require reproducible technical checks and clear approval, not plausible demos or model agreement."
+    }
+  ],
+  "sources": [
+    "F9",
+    "F10",
+    "F11",
+    "F12"
+  ]
+}

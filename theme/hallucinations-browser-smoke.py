@@ -20,9 +20,9 @@ WORDS=[
 def assert_page(page,locale,mobile):
     page.goto(urljoin(BASE,ROUTES[locale]),wait_until='load',timeout=30000)
     assert page.locator('h1').count()==1,locale
-    assert page.locator('.hx-module').count()==5,locale
+    assert page.locator('.hx-module').count()==6,locale
     assert page.locator('.hx-case').count()==10,locale
-    assert page.locator('.hx-source').count()==8,locale
+    assert page.locator('.hx-source').count()==12,locale
     assert page.locator('.hx-cell input').count()>60,locale
     assert page.locator('#hx-quiz-position').inner_text().strip()=='1 / 10',locale
     assert page.locator('.hx-q-options label').count()>=2,locale

@@ -33,6 +33,10 @@ SOURCES = [
     ('F6','European Union · AI Act','Regulation (EU) 2024/1689 — Articles 4 and 14','https://eur-lex.europa.eu/eli/reg/2024/1689'),
     ('F7','ESMA (30 May 2024)','AI in retail investment services — Public Statement','https://www.esma.europa.eu/press-news/esma-news/esma-provides-guidance-firms-using-artificial-intelligence-investment-services'),
     ('F8','FATF/GAFI (2025)','Money Laundering National Risk Assessment Guidance — risk-based analysis','https://www.fatf-gafi.org/content/fatf-gafi/en/publications/Methodsandtrends/Money-Laundering-National-Risk-Assessment-Guidance.html'),
+    ('F9','GitHub Docs','Review AI-generated code','https://docs.github.com/en/copilot/tutorials/review-ai-generated-code'),
+    ('F10','OWASP GenAI Security Project','LLM05:2025 Improper Output Handling','https://genai.owasp.org/llmrisk/llm052025-improper-output-handling/'),
+    ('F11','NIST · SP 800-218 (2022)','Secure Software Development Framework (SSDF) v1.1','https://csrc.nist.gov/pubs/sp/800/218/final'),
+    ('F12','Spracklen et al. · USENIX Security 2025','We Have a Package for You! Package hallucinations in coding models','https://www.usenix.org/conference/usenixsecurity25/presentation/spracklen'),
 ]
 
 def e(value):
@@ -45,7 +49,7 @@ def validate_data(locale, content):
     h = content['head']
     for key in ('title1','title2','desc','start','notice','quizCheck','crossCheck'):
         assert h.get(key), f'{locale}: missing {key}'
-    assert len(content['modules']) == 5, f'{locale}: expected five modules'
+    assert len(content['modules']) == 6, f'{locale}: expected six modules'
     assert len(content['cases']) == 10, f'{locale}: expected ten cases'
     assert len(content['quiz']) == 10, f'{locale}: expected ten quiz questions'
     assert len(content['method']) == 7
@@ -94,7 +98,7 @@ def build(locale, content):
       'author':{'@type':'Person','name':'Marcelo Fernandez'},
       'datePublished':'2026-11-15','dateModified':'2026-11-15',
       'educationalLevel':'Professional continuing education',
-      'timeRequired':'PT5H',
+      'timeRequired':'PT6H15M',
       'citation':[url for _ref,_author,_title,url in SOURCES]
     }
     html = [f'''<!doctype html><html lang="{locale}"><head><meta charset="utf-8">
@@ -267,10 +271,10 @@ def publish(site, verify_only=False):
         for token in ('data-hx-course','hx-quiz-data','hx-cross-grid','hx-case-answer-10','hx-source','hreflang'):
             assert token in html, f'{loc}: missing {token}'
         assert html.count('class="hx-case"')==10
-        assert html.count('class="hx-module"')==5
+        assert html.count('class="hx-module"')==6
         for hub in HUBS[loc]:
             assert (site/hub).read_text(encoding='utf-8').count('data-hx-feature="1"')==1
-    print(f'MANZO AI course: 3 locales, 5 modules, 10 cases, 10 quiz questions, {count} crossword letters, 8 sources; verify_only={verify_only}')
+    print(f'MANZO AI course: 3 locales, 6 modules, 10 core cases, 10 core quiz questions, {count} crossword letters, 12 sources; verify_only={verify_only}')
 
 if __name__=='__main__':
     arg=argparse.ArgumentParser()

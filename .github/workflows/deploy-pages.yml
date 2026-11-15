@@ -17,6 +17,7 @@ on:
       - editorial/research/acr/**
       - editorial/learning/hallucinations/**
       - theme/publish-hallucinations.py
+      - theme/publish-hallucinations-coding.py
       - theme/publish-acr-dossier.py
       - theme/build-seo.py
       - theme/publish-podcast.py
@@ -258,6 +259,15 @@ jobs:
           node --check editorial/learning/hallucinations/course.js
           python3 theme/publish-hallucinations.py --site _site
           python3 theme/publish-hallucinations.py --site _site --verify-only
+          # Editorial Engineering Assurance module: publish after the base course.
+          python3 -m py_compile theme/publish-hallucinations-coding.py
+          node --check editorial/learning/hallucinations/coding.js
+          python3 theme/publish-hallucinations-coding.py --site _site
+          python3 theme/publish-hallucinations-coding.py --site _site --verify-only
+          for coding_page in it/impara/allucinazioni-ai-verificabilita/coding en/learn/ai-hallucinations-verification/coding es/aprende/alucinaciones-ia-verificacion/coding; do
+            test -s "_site/$coding_page/index.html"
+            grep -q 'data-hc-module' "_site/$coding_page/index.html"
+          done
           for course_page in it/impara/allucinazioni-ai-verificabilita en/learn/ai-hallucinations-verification es/aprende/alucinaciones-ia-verificacion; do
             test -s "_site/$course_page/index.html"
             grep -q 'hx-quiz-data' "_site/$course_page/index.html"
