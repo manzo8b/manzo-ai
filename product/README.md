@@ -22,6 +22,8 @@ The demo is intentionally honest about what it can do *now*.
 - `core/webhook_security.py` — raw Stripe webhook HMAC verification helper (not a receiver)
 - `core/tests/test_webhook_security.py` — replay, tampering, malformed header and signature tests
 - `backend/migrations/0001_foundation.sql` — tenant-scoped database schema, read-only RLS, private billing ledgers
+- `backend/contracts/openapi.json` — documented but unimplemented portable Learning/Verify/Studio + billing API contract
+
 - `backend/tests/000_auth_fixture.sql` and `010_rls_checks.sql` — ephemeral SQL security tests
 - `.github/workflows/saas-foundation-qa.yml` — automated PostgreSQL 16 security checks
 - `theme/product-preview-browser-smoke.py` — browser QA for real interactions and input handling
