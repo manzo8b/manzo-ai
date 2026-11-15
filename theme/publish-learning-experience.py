@@ -156,7 +156,12 @@ def inject_hub(page,loc,d,routes):
  </a></div>
  <p class="ma-pathways-caption">{esc(labels['status'])}</p>
  </section>'''
- page.write_text(original[:main.end()]+band+original[main.end():],encoding='utf-8')
+ updated=original[:main.end()]+band+original[main.end():]
+ head=re.search(r'</head\s*>',updated,re.I)
+ if head is None:raise RuntimeError('No Academy head element '+str(page))
+ stylesheet=f'<link rel="stylesheet" data-ma-pathways-css="1" href="{CSS}">'
+ updated=updated[:head.start()]+stylesheet+updated[head.start():]
+ page.write_text(updated,encoding='utf-8')
 
 def publish(site,verify_only=False):
  locales=json.loads((SOURCE/'labels.json').read_text(encoding='utf-8'))
@@ -176,6 +181,8 @@ def publish(site,verify_only=False):
   hubhtml=hub.read_text(encoding='utf-8')
   if hubhtml.count(HUB_MARKER)!=1:
    raise RuntimeError('Missing or repeated Academy pathway '+loc)
+  if hubhtml.count('data-ma-pathways-css="1"')!=1:
+   raise RuntimeError('Unstyled Academy hub: missing CSS '+loc)
   if '/manzo-ai/'+base+'/' not in hubhtml or '/manzo-ai/'+coding+'/' not in hubhtml:
    raise RuntimeError('Wrong Academy learning links '+loc)
   d=locales[loc]
