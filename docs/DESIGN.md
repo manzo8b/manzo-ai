@@ -95,7 +95,7 @@ The CI screenshot evidence from the initial implementation was inspected directl
 The visual review identified three shortcomings and corresponding fixes:
 1. **Homepage**: original centered search composition remained generic. Added a real, localized Studio / Verify / Learning navigation narrative beside the original search on wide screens, stacking below it on phones.
 2. **Product Lab**: desktop headline wrapped unnecessarily over three lines. Broadened its reading measure while keeping the existing copy, hero focus and actual functional links.
-3. **Learning B2B mobile**: the portal-level mobile bar duplicated the console's native responsive header. Product Lab and Learning now use their built-in headers instead of the archive navigation overlay.
+3. **Learning B2B mobile**: the portal-level mobile bar duplicated the console's native responsive header. Product Lab and Learning now use their built-in headers instead of the archive navigation overlay. A follow-up screenshot revealed the old navigation stylesheet still overwrote their `.shell` display/width; this was also restored on the standalone mobile surfaces and is now asserted in QA.
 
 The ACR dossier's research-specific diagrams remain visually distinctive. Its original content, labels and scientific caveats are preserved, even when its deliberate visual treatments differ from the general marketing-site rules.
 
