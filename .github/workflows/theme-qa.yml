@@ -13,6 +13,7 @@ on:
     paths:
       - 'theme/**'
       - 'product/preview/**'
+      - 'product/learning-console/**'
       - 'product/core/**'
       - '.github/workflows/deploy-pages.yml'
       - '.github/workflows/theme-qa.yml'
@@ -63,6 +64,10 @@ jobs:
           node --check product/preview/preview.js
           python3 theme/publish-product-preview.py --site _site
           python3 theme/publish-product-preview.py --site _site --verify-only
+          python3 -m py_compile theme/publish-learning-console.py theme/learning-console-browser-smoke.py
+          node --check product/learning-console/console.js
+          python3 theme/publish-learning-console.py --site _site
+          python3 theme/publish-learning-console.py --site _site --verify-only
           python3 theme/build-seo.py --site _site --base-url "https://manzo8b.github.io/manzo-ai/"
           node --check theme/mobile-nav.js
           python3 theme/publish-navigation.py --site _site
@@ -83,3 +88,4 @@ jobs:
           python3 theme/hallucinations-browser-smoke.py
           python3 theme/hallucinations-coding-browser-smoke.py
           python3 theme/product-preview-browser-smoke.py
+          python3 theme/learning-console-browser-smoke.py
