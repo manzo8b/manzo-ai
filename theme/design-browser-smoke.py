@@ -42,6 +42,9 @@ def test(page,route,expected_kind,screen,width):
  assert body_color=='rgb(255, 255, 255)',(screen,width,'paper',body_color)
  ink=page.evaluate("getComputedStyle(document.body).getPropertyValue('--ma-ink').trim()")
  assert ink=='#172e44',(screen,width,'ink',ink)
+ if expected_kind=='landing':
+  assert page.locator('[data-ma-home-scene="1"]').count()==1
+  assert page.locator('.ma-product-scene a[href*="/prodotto/"],.ma-product-scene a[href*="/product/"],.ma-product-scene a[href*="/producto/"]').count()==1
  if screen.endswith('product'):
   assert page.locator('.product-card').count()==3
   assert page.locator('.btn-primary').first.is_enabled()
@@ -59,7 +62,7 @@ def test(page,route,expected_kind,screen,width):
  # Small first-viewport previews can be inspected from the CI job log.
  # Full-page captures remain in the 7-day GitHub Actions artifact.
  if (screen,width) in {
-    ('it-home',1440),('it-product',1440),('it-console',390),('it-research',768)
+    ('it-home',1440),('it-home',390),('it-product',1440),('it-console',390),('it-research',768)
  }:
   raw=page.screenshot(type='jpeg',quality=45,full_page=False,animations='disabled')
   print('MA_VISUAL_JPEG|'+screen+'|'+str(width)+'|'+base64.b64encode(raw).decode('ascii'),flush=True)
