@@ -1221,7 +1221,7 @@ body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3n+2){
  color:#fff!important;
 }
 body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3n+3){
- background:#ffab73!important;
+ background:#ff8f52!important;
  color:#172c45!important;
 }
 body[data-ma-surface="landing"] .grid-3>.feature:before{
@@ -1346,6 +1346,10 @@ body[data-ma-surface="landing"] [data-manzo-product-preview] a{
 body[data-ma-surface="landing"] [data-manzo-product-preview] a:hover{
  background:#fff!important;
 }
+body[data-ma-surface="landing"] [data-manzo-product-preview] a :is(span,strong,small){
+ color:#17355a!important;
+}
+
 /* Existing site-wide CTA and feature cards retain their real semantics. */
 @media(max-width:760px){
  body[data-ma-surface="landing"] .home-hero{
