@@ -16,6 +16,7 @@ The demo is intentionally honest about what it can do *now*.
 
 - `preview/content.json` — editorial interface copy for IT, EN and ES
 - `preview/preview.css` and `preview/preview.js` — dependency-free front-end
+- `learning-console/` — IT/EN/ES enterprise Learning user-experience simulation, strictly local and noindex
 - `theme/publish-product-preview.py` — deterministic static pages and homepage links
 - `core/entitlements.py` — reference policy engine for tenant/feature/quota decisions
 - `core/tests/test_entitlements.py` — tests for missing/suspended/expired/foreign-tenant grants
@@ -44,6 +45,7 @@ The demo is intentionally honest about what it can do *now*.
 | Database schema | migration for organizations, students, courses, results, grants and events | tested only on isolated PostgreSQL, never provisioned in a real project |
 | Webhook signature | verifies signed Stripe payloads and replay timestamp windows | does not receive payments or provision licences |
 | Locale + responsive | IT, EN, ES and small/large viewport browser checks | physical device & accessibility audit remain |
+| Learning B2B console | simulated seats, enrollments and student progress, browser-only | not connected to real accounts, data or payments |
 
 **Privacy:** preview fields and results exist only in current-page memory. The preview has no network requests in application JavaScript, no cookies, no analytics and no local/session storage. Users are explicitly warned not to paste confidential data.
 
