@@ -1380,3 +1380,36 @@ body[data-ma-surface="landing"] [data-manzo-product-preview] a :is(span,strong,s
   transition:none!important;
  }
 }
+
+/* Home review refinement: the original 7/5/4 grid left two-thirds of
+   the second row empty. Preserve all 3 features, but give the third card
+   a real full-width editorial role with responsive spatial balance. */
+@media(min-width:761px){
+ body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3):last-child{
+  grid-column:1/-1!important;
+  min-height:244px;
+  padding-right:clamp(13rem,30vw,23rem)!important;
+ }
+ body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3):last-child:before{
+  right:8%;
+  top:-40%;
+  width:300px;
+  height:300px;
+  opacity:.23;
+ }
+ body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3):last-child:after{
+  right:clamp(1.5rem,4vw,3rem);
+  bottom:clamp(1.5rem,4vw,3rem);
+ }
+ body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3):last-child :is(h2,h3){
+  max-width:28ch;
+  font-size:clamp(1.9rem,2.65vw,2.9rem);
+ }
+}
+@media(max-width:760px){
+ body[data-ma-surface="landing"] .grid-3>.feature:nth-child(3):last-child{
+  grid-column:auto!important;
+  min-height:210px;
+  padding-right:1.65rem!important;
+ }
+}
