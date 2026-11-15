@@ -89,20 +89,63 @@ with sync_playwright() as pw:
  for locale,hub in (('it','it/academy/'),('en','en/academy/'),('es','es/academia/')):
   for width in (1440,390):
    page=browser.new_page(viewport={'width':width,'height':900 if width>390 else 844},is_mobile=width==390)
+   errors=[]
+   page.on('pageerror',lambda exception:errors.append(str(exception)))
    page.goto(urljoin(BASE,hub),wait_until='load',timeout=40000)
    block=page.locator('[data-ma-pathways="v1"]')
-   assert block.count()==1,(locale,'missing Academy pathways')
-   assert page.locator('link[data-ma-pathways-css]').count()==1,(locale,'missing css asset')
-   assert block.locator('a.ma-pathway-option').count()==2,(locale,'missing tracks')
-   color=block.locator('.ma-pathway-primary').evaluate('(el)=>getComputedStyle(el).backgroundColor')
-   assert color=='rgb(33, 88, 237)',(locale,'unstyled Academy',color)
+   assert block.count()==1,(locale,'missing Academy catalog')
+   assert page.locator('link[data-ma-pathways-css]').count()==1,(locale,'missing CSS')
+   assert page.locator('script[data-ma-pathways-js]').count()==1,(locale,'missing search JS')
+   cards=block.locator('[data-ma-course-card]')
+   assert cards.count()==6,(locale,'catalog item count')
+   assert block.locator('[data-ma-count]').inner_text()=='6'
+   color=block.locator('.ma-catalog-hero').evaluate('(el)=>getComputedStyle(el).backgroundColor')
+   assert color=='rgb(29, 80, 221)',(locale,'weak/unloaded Academy design',color)
+   first_card=cards.first
+   art=first_card.locator('.ma-course-art').evaluate('(el)=>getComputedStyle(el).backgroundColor')
+   assert art=='rgb(33, 88, 237)',(locale,'unstyled card',art)
+   shadow=first_card.evaluate('(el)=>getComputedStyle(el).boxShadow')
+   assert shadow!='none',(locale,'modern card effect missing')
+   for anchor in cards.locator('.ma-course-link').all():
+    link=anchor.get_attribute('href')
+    assert link and link.startswith('/manzo-ai/'),(locale,'external or nonexistent catalog link',link)
+    response=page.request.get(urljoin('http://127.0.0.1:8765',link),timeout=10000)
+    assert response.status==200,(locale,'broken course link',link,response.status)
+   # Subject filters: two verification resources, one specialist coding resource.
+   block.locator('[data-ma-filter="verify"]').click()
+   assert block.locator('[data-ma-count]').inner_text()=='2'
+   assert block.locator('[data-ma-course-card]:visible').count()==2
+   block.locator('[data-ma-filter="coding"]').click()
+   assert block.locator('[data-ma-count]').inner_text()=='1'
+   assert block.locator('[data-ma-course-card]:visible').count()==1
+   # Search and no-match reset, with aria-live count.
+   query=block.locator('#ma-course-search')
+   block.locator('[data-ma-filter="all"]').click()
+   query.fill('coding' if locale=='it' else 'coding')
+   assert block.locator('[data-ma-count]').inner_text()=='1'
+   query.fill('manzo-nonexistent-search')
+   assert block.locator('[data-ma-count]').inner_text()=='0'
+   assert block.locator('[data-ma-empty]').is_visible()
+   block.locator('[data-ma-clear]').click()
+   assert block.locator('[data-ma-count]').inner_text()=='6'
+   assert block.locator('[data-ma-empty]').is_hidden()
+   if width==1440:
+    first_card.hover()
+    page.wait_for_timeout(380)
+    transform=first_card.evaluate('(el)=>getComputedStyle(el).transform')
+    assert transform!='none',(locale,'hover elevation not applied')
    if width==390:
     overflow=page.evaluate('document.documentElement.scrollWidth-window.innerWidth')
     assert overflow<=4,(locale,'Academy mobile overflow',overflow)
    if locale=='it':
     folder=Path('design-review-screenshots');folder.mkdir(exist_ok=True)
-    block.scroll_into_view_if_needed()
-    page.screenshot(path=str(folder/f'academy-pathways-{width}.png'),full_page=False,animations='disabled')
+    block.locator('.ma-catalog-hero').scroll_into_view_if_needed()
+    page.wait_for_timeout(90)
+    page.screenshot(path=str(folder/f'academy-hero-{width}.png'),full_page=False,animations='disabled')
+    block.locator('.ma-course-grid').scroll_into_view_if_needed()
+    page.wait_for_timeout(90)
+    page.screenshot(path=str(folder/f'academy-modern-cards-{width}.png'),full_page=False,animations='disabled')
+   assert not errors,(locale,errors)
    page.close()
  browser.close()
-print(f'PASS Guided Learning: {for_review} page/viewport combinations, six lesson controls, reset, courses and existing quiz/crossword preserved')
+print(f'PASS Guided Learning: {for_review} course views + 6 Academy catalog views, 6 live routes per locale, filters/search, card motion, module controls and unchanged assessment logic')
