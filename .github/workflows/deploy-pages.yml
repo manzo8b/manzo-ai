@@ -17,6 +17,8 @@ on:
       - editorial/research/acr/**
       - editorial/learning/hallucinations/**
       - product/preview/**
+      - product/learning-console/**
+      - theme/publish-learning-console.py
       - theme/publish-product-preview.py
       - theme/publish-hallucinations.py
       - theme/publish-hallucinations-coding.py
@@ -284,6 +286,16 @@ jobs:
             test -s "_site/$preview_page/index.html"
             grep -q 'noindex,follow' "_site/$preview_page/index.html"
             grep -q 'data-product-preview' "_site/$preview_page/index.html"
+          done
+          # Learning B2B dashboard is a nontransactional, noindex simulation.
+          python3 -m py_compile theme/publish-learning-console.py
+          node --check product/learning-console/console.js
+          python3 theme/publish-learning-console.py --site _site
+          python3 theme/publish-learning-console.py --site _site --verify-only
+          for learning_page in it/prodotto/learning-b2b en/product/learning-b2b es/producto/learning-b2b; do
+            test -s "_site/$learning_page/index.html"
+            grep -q 'noindex,follow' "_site/$learning_page/index.html"
+            grep -q 'data-learning-console' "_site/$learning_page/index.html"
           done
           # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
           python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
