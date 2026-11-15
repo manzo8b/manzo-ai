@@ -6,6 +6,8 @@ actual previously published courses, not invented course URLs.
 """
 from __future__ import annotations
 from urllib.parse import urljoin
+from pathlib import Path
+import base64
 from playwright.sync_api import sync_playwright
 
 BASE='http://127.0.0.1:8765/manzo-ai/'
@@ -69,6 +71,13 @@ with sync_playwright() as pw:
      overflow=page.evaluate('document.documentElement.scrollWidth-window.innerWidth')
      assert overflow<=4,(locale,kind,'horizontal overflow',overflow)
     assert not errors,(locale,kind,errors)
+    if locale=='it' and kind=='core':
+     folder=Path('design-review-screenshots')
+     folder.mkdir(exist_ok=True)
+     root.scroll_into_view_if_needed()
+     page.screenshot(path=str(folder/f'guided-learning-{width}.png'),full_page=False,animations='disabled')
+     img=page.screenshot(type='jpeg',quality=43,full_page=False,animations='disabled')
+     print('MA_LEARN_VISUAL|'+str(width)+'|'+base64.b64encode(img).decode('ascii'),flush=True)
     page.close()
     for_review+=1
  browser.close()
