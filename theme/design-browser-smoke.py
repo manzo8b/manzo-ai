@@ -48,6 +48,9 @@ def test(page,route,expected_kind,screen,width):
  if screen.endswith('product'):
   assert page.locator('.product-card').count()==3
   assert page.locator('.btn-primary').first.is_enabled()
+ if width==390 and expected_kind in ('product','console'):
+  assert page.locator('.manzo-mobile-bar').count()==0,(screen,'duplicate global nav')
+  assert page.locator('header').first.is_visible(),(screen,'own header missing')
  if screen.endswith('console'):
   assert page.locator('#lc-metric-0').inner_text()=='2 / 3'
   assert page.locator('#lc-tab-student').is_enabled()
