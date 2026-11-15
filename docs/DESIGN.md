@@ -100,3 +100,29 @@ The visual review identified three shortcomings and corresponding fixes:
 The ACR dossier's research-specific diagrams remain visually distinctive. Its original content, labels and scientific caveats are preserved, even when its deliberate visual treatments differ from the general marketing-site rules.
 
 **Remaining visual validation:** examine the final refreshed screenshots, especially narrow-screen console hierarchy and the homepage's first viewport after the navigation fix. Chromatic QA artifacts are diagnostic, not an independent accessibility certification.
+
+
+## Regole non negoziabili — aggiornamento Home / Academy
+
+Queste regole derivano dal feedback diretto di approvazione e correzione dell'identità visiva e sono **criteri permanenti di accettazione**, non consigli facoltativi:
+
+1. **Tutte le card del sito devono essere moderne e avere una risposta visiva misurabile.** Su desktop si usano movimento moderato, elevazione e ombra profonda al passaggio del mouse; sul focus tastiera si garantisce la stessa evidenza funzionale. Su mobile gli effetti non devono ostacolare i controlli e si rispettano le preferenze di movimento ridotto.
+2. **Mai un punto finale nei titoli di sezione** (H1–H6), in nessuna lingua. Questo è verificato dalla pipeline su tutto il sito tramite \`theme/publish-title-cleanup.py\`, senza manipolare il testo didattico.
+3. **Niente palette debole, smorta o carta avorio.** Il bianco rimane il piano di lettura, mentre i blocchi funzionali e le card principali possono essere saturi e riconoscibili, con adeguato contrasto tra testo e sfondo.
+4. **Non stravolgere l'architettura approvata.** La Home mantiene ricerca reale, contenuti, menu e percorsi; cambiano soprattutto la gerarchia cromatica, le card, gli stati interattivi e la definizione degli accenti.
+5. **Non copiare Coursera.** Adottare il catalogo filtrabile e la didattica modulare, con card originali e informazioni reali. Nessun rating, certificato o contenuto inventato.
+
+### Home v1.3 — valori visivi verificabili
+
+| Superficie | Colore previsto | Testo |
+|---|---|---|
+| Hero | Bianco \`#FFFFFF\`, accent line cobalto | Blu profondo |
+| Prima card | Cobalto \`#204EE5\` | Bianco |
+| Seconda card | Verde petrolio \`#006F68\` | Bianco |
+| Terza card | Arancio corallo \`#FF8F52\` | Blu profondo |
+| Scena prodotto | Blu \`#2158ED\` | Bianco |
+| Banner commerciale | Blu profondo \`#183B9A\` | Bianco, CTA oro tenue |
+
+Il test \`theme/design-browser-smoke.py\` verifica i valori CSS applicati dal browser alle prime tre card, la presenza delle ombre, l'elevazione hover e la larghezza mobile; la QA salva screenshot reali desktop e mobile.
+
+**La PR resta in attesa di approvazione visiva.** Nessuna modifica in questa iterazione dà per attivati login, corso commerciale, pagamenti o progressi persistenti.
