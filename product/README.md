@@ -19,6 +19,11 @@ The demo is intentionally honest about what it can do *now*.
 - `theme/publish-product-preview.py` — deterministic static pages and homepage links
 - `core/entitlements.py` — reference policy engine for tenant/feature/quota decisions
 - `core/tests/test_entitlements.py` — tests for missing/suspended/expired/foreign-tenant grants
+- `core/webhook_security.py` — raw Stripe webhook HMAC verification helper (not a receiver)
+- `core/tests/test_webhook_security.py` — replay, tampering, malformed header and signature tests
+- `backend/migrations/0001_foundation.sql` — tenant-scoped database schema, read-only RLS, private billing ledgers
+- `backend/tests/000_auth_fixture.sql` and `010_rls_checks.sql` — ephemeral SQL security tests
+- `.github/workflows/saas-foundation-qa.yml` — automated PostgreSQL 16 security checks
 - `theme/product-preview-browser-smoke.py` — browser QA for real interactions and input handling
 
 ## Current capabilities, actually implemented
@@ -28,7 +33,9 @@ The demo is intentionally honest about what it can do *now*.
 | Studio | builds and exports JSON requirements brief locally | not an AI generator |
 | Verify | uses documented text heuristics to flag potentially checkable claims | does not determine truth or hallucination |
 | Learning | configures a team license request profile locally | not a quote, enrolment or subscription |
-| SaaS policy contract | tests authorization decisions for tenant, validity and quota | no auth, trusted data source or database yet |
+| SaaS policy contract | tests authorization decisions for tenant, validity and quota | not connected to an authenticated backend |
+| Database schema | migration for organizations, students, courses, results, grants and events | tested only on isolated PostgreSQL, never provisioned in a real project |
+| Webhook signature | verifies signed Stripe payloads and replay timestamp windows | does not receive payments or provision licences |
 | Locale + responsive | IT, EN, ES and small/large viewport browser checks | physical device & accessibility audit remain |
 
 **Privacy:** preview fields and results exist only in current-page memory. The preview has no network requests in application JavaScript, no cookies, no analytics and no local/session storage. Users are explicitly warned not to paste confidential data.
@@ -54,6 +61,7 @@ A genuine MANZO AI SaaS needs:
 The GitHub Pages site is a non-transactional preview only. Once the market and technical gates are ready, deploy the actual SaaS app to a suitable provider. Keep the versioned editorial assets and this preview independent of backend choice. The existing source ZIP is preserved.
 
 See:
+- [Backend foundation and RLS tests](backend/README.md)
 - [SaaS Architecture ADR-001](../../docs/MANZO_AI_SAAS_ARCHITECTURE_ADR001_2026-11-15.md)
 - [Buyer Research](../../docs/MANZO_AI_BUYER_RESEARCH_2026-11-15.md)
 - [Product Release Gate](../../docs/MANZO_AI_PRODUCT_RELEASE_GATE_2026-11-15.md)
