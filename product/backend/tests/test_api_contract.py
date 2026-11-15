@@ -23,7 +23,7 @@ class ApiContractTests(unittest.TestCase):
         for p,methods in self.paths.items():
             self.assertTrue(p.startswith("/v1/"))
             for method,op in methods.items():
-                self.assertIn(method,("get","post"))
+                self.assertIn(method,("get","post","delete"))
                 ids.append(op["operationId"])
                 self.assertIn("responses",op)
                 self.assertTrue(op["summary"])
@@ -87,6 +87,21 @@ class ApiContractTests(unittest.TestCase):
             for operation in methods.values():
                 refs=[p["$ref"] for p in operation.get("parameters",[]) if "$ref" in p]
                 self.assertIn("#/components/parameters/OrganizationId",refs)
+
+    def test_learning_seats_and_progress_are_server_scoped(self):
+        paths=self.paths
+        org="/v1/organizations/{organizationId}/learning/"
+        self.assertIn("post",paths[org+"seats"])
+        self.assertIn("delete",paths[org+"seats/{memberId}"])
+        self.assertIn("post",paths[org+"enrollments"])
+        self.assertIn("post",paths[org+"progress"])
+        self.assertFalse(self.schemas["LearningSeatRequest"]["additionalProperties"])
+        self.assertEqual(set(self.schemas["LearningSeatRequest"]["properties"]),{"memberUserId"})
+        self.assertFalse(self.schemas["ProgressSubmission"]["additionalProperties"])
+        self.assertEqual(set(self.schemas["ProgressSubmission"]["properties"]),{"courseId","versionId","moduleKey"})
+        self.assertIn("verified",paths[org+"progress"]["post"]["description"].lower())
+        self.assertNotIn("price",self.schemas["EnrollmentRequest"]["properties"])
+        self.assertNotIn("score",self.schemas["ProgressSubmission"]["properties"])
 
     def test_no_real_provider_credentials_or_checkout_links(self):
         serialized=json.dumps(self.doc).lower()
