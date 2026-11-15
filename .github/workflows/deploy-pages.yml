@@ -43,6 +43,7 @@ on:
       - theme/publish-design-system.py
       - theme/design-browser-smoke.py
       - theme/publish-home-scene.py
+      - theme/publish-title-cleanup.py
       - theme/publish-navigation.py
       - googlee8540704606dd6ec.html
       - .github/workflows/deploy-pages.yml
@@ -326,6 +327,10 @@ jobs:
           python3 -m py_compile theme/publish-home-scene.py
           python3 theme/publish-home-scene.py --site _site
           python3 theme/publish-home-scene.py --site _site --verify-only
+          # Editorial invariant on ALL generated pages: no full stop at end of H1–H6.
+          python3 -m py_compile theme/publish-title-cleanup.py
+          python3 theme/publish-title-cleanup.py --site _site
+          python3 theme/publish-title-cleanup.py --site _site --verify-only
           test -s _site/assets/design-system.css
           test -s _site/assets/design-motion.js
           test -s _site/assets/mobile-nav.js
