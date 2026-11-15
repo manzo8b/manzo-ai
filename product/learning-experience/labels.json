@@ -38,7 +38,18 @@
     "practiceLabel": "Casi pratici",
     "quizLabel": "Quiz formativo",
     "crosswordLabel": "Cruciverba opzionale",
-    "assessmentNote": "Il quiz resta quello del corso originale: questa guida non modifica domande o punteggi."
+    "assessmentNote": "Il quiz resta quello del corso originale: questa guida non modifica domande o punteggi.",
+    "hub": {
+      "kicker": "ACADEMY · PERCORSI PROFESSIONALI",
+      "title": "Un percorso chiaro. Competenze applicabili.",
+      "desc": "Studia in sequenza oppure scegli un approfondimento. Ogni percorso distingue concetti, attività pratiche e autovalutazione.",
+      "firstTitle": "AI: allucinazioni e verificabilità",
+      "firstDesc": "6 moduli · 10 casi pratici · quiz e cruciverba",
+      "secondTitle": "Engineering Assurance",
+      "secondDesc": "6 capitoli · 4 scenari di coding · quality gate",
+      "open": "Esplora il corso",
+      "status": "Esperienza libera, senza account o tracciamento del progresso"
+    }
   },
   "en": {
     "name": "MANZO AI / GUIDED LEARNING",
@@ -79,7 +90,18 @@
     "practiceLabel": "Practice cases",
     "quizLabel": "Formative quiz",
     "crosswordLabel": "Optional crossword",
-    "assessmentNote": "The original quiz is unchanged; this guide does not change questions or scores."
+    "assessmentNote": "The original quiz is unchanged; this guide does not change questions or scores.",
+    "hub": {
+      "kicker": "ACADEMY · PROFESSIONAL PATHWAYS",
+      "title": "A clear path. Transferable skills.",
+      "desc": "Learn step by step or choose a specialist deep dive. Each track separates concepts, professional practice and self-assessment.",
+      "firstTitle": "AI hallucinations and verification",
+      "firstDesc": "6 modules · 10 practice cases · quiz and crossword",
+      "secondTitle": "Engineering Assurance",
+      "secondDesc": "6 chapters · 4 coding scenarios · quality gates",
+      "open": "Explore course",
+      "status": "Open learning without accounts or persistent progress"
+    }
   },
   "es": {
     "name": "MANZO AI / ITINERARIO GUIADO",
@@ -120,6 +142,17 @@
     "practiceLabel": "Casos prácticos",
     "quizLabel": "Cuestionario formativo",
     "crosswordLabel": "Crucigrama opcional",
-    "assessmentNote": "El cuestionario original sigue intacto; esta guía no modifica preguntas ni puntuaciones."
+    "assessmentNote": "El cuestionario original sigue intacto; esta guía no modifica preguntas ni puntuaciones.",
+    "hub": {
+      "kicker": "ACADEMY · ITINERARIOS PROFESIONALES",
+      "title": "Un itinerario claro. Competencias aplicables.",
+      "desc": "Estudia en orden o elige una especialización. Cada itinerario distingue conceptos, práctica profesional y autoevaluación.",
+      "firstTitle": "Alucinaciones IA y verificabilidad",
+      "firstDesc": "6 módulos · 10 casos prácticos · cuestionario y crucigrama",
+      "secondTitle": "Engineering Assurance",
+      "secondDesc": "6 capítulos · 4 casos de programación · controles de calidad",
+      "open": "Explorar curso",
+      "status": "Formación abierta sin cuentas ni seguimiento permanente"
+    }
   }
 }
