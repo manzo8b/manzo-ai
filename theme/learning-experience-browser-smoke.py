@@ -121,8 +121,9 @@ with sync_playwright() as pw:
    # Search and no-match reset, with aria-live count.
    query=block.locator('#ma-course-search')
    block.locator('[data-ma-filter="all"]').click()
-   query.fill('coding' if locale=='it' else 'coding')
-   assert block.locator('[data-ma-count]').inner_text()=='1'
+   query.fill('Engineering')
+   matched=block.locator('[data-ma-count]').inner_text()
+   assert matched=='1',(locale,'keyword search should match specialist module',matched,[x.get_attribute('data-ma-search')[:70] for x in cards.all()])
    query.fill('manzo-nonexistent-search')
    assert block.locator('[data-ma-count]').inner_text()=='0'
    assert block.locator('[data-ma-empty]').is_visible()
