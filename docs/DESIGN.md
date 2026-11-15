@@ -87,3 +87,16 @@ The source `site-v0.7.zip` and all editorial content are left unmodified. The ov
 The GitHub workflow's reported PASS validates technical rendering, baseline colour, page presence, basic overflow, JavaScript errors and representative interactions. It **does not** by itself establish award-level visual quality, a complete WCAG audit or Core Web Vitals performance. Review the screenshot evidence attached to the Chromatic QA run before treating the design as final.
 
 The full editorial archive has many page-specific exceptions. Future visual refinements should be incremental, documented with screenshots and cross-checked against mobile learning functionality. No content changes were authorized as part of this redesign.
+
+## Visual-review notes from the first screenshot pass
+
+The CI screenshot evidence from the initial implementation was inspected directly for the Italian homepage at 1440/390, the ACR scientific dossier at 768, Product Lab at 1440 and the Learning console at 390.
+
+The visual review identified three shortcomings and corresponding fixes:
+1. **Homepage**: original centered search composition remained generic. Added a real, localized Studio / Verify / Learning navigation narrative beside the original search on wide screens, stacking below it on phones.
+2. **Product Lab**: desktop headline wrapped unnecessarily over three lines. Broadened its reading measure while keeping the existing copy, hero focus and actual functional links.
+3. **Learning B2B mobile**: the portal-level mobile bar duplicated the console's native responsive header. Product Lab and Learning now use their built-in headers instead of the archive navigation overlay.
+
+The ACR dossier's research-specific diagrams remain visually distinctive. Its original content, labels and scientific caveats are preserved, even when its deliberate visual treatments differ from the general marketing-site rules.
+
+**Remaining visual validation:** examine the final refreshed screenshots, especially narrow-screen console hierarchy and the homepage's first viewport after the navigation fix. Chromatic QA artifacts are diagnostic, not an independent accessibility certification.
