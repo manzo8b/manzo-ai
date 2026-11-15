@@ -522,3 +522,40 @@ body[data-ma-surface] .ma-guidance h3{
 @media(prefers-reduced-motion:reduce){
  .ma-pathways *{transition:none!important}
 }
+
+/* Refined narrow-screen outcome summary: avoid collisions between the 06
+   module counter, its label and the preservation disclosure. */
+@media(max-width:760px){
+ .ma-guidance .ma-guide-key{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  grid-template-rows:auto auto auto;
+  gap:2px 14px;
+  align-items:center;
+ }
+ .ma-guidance .ma-guide-key>strong{
+  grid-column:1;
+  grid-row:1 / span 2;
+  align-self:center;
+  font-size:2.7rem;
+  line-height:1.05;
+ }
+ .ma-guidance .ma-guide-key>span{
+  grid-column:2;
+  grid-row:1;
+  align-self:end;
+  line-height:1.25;
+ }
+ .ma-guidance .ma-guide-key>small{
+  grid-column:2;
+  grid-row:2;
+  align-self:start;
+  line-height:1.48;
+  overflow-wrap:break-word;
+ }
+ .ma-guidance .ma-guide-key>.ma-guide-back{
+  grid-column:1 / -1;
+  grid-row:3;
+  margin-top:8px;
+ }
+}
