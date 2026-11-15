@@ -63,3 +63,45 @@
  reset.addEventListener('click',()=>{seen.clear();update()});
  update();
 })();
+/* Academy discovery — actual archive routes, client-side filter only.
+   No search requests, analytics, login, certificates or persistent data. */
+(()=>{
+ 'use strict';
+ const root=document.querySelector('[data-ma-pathways="v1"]');
+ if(!root)return;
+ const cards=[...root.querySelectorAll('[data-ma-course-card]')];
+ const filters=[...root.querySelectorAll('[data-ma-filter]')];
+ const input=root.querySelector('#ma-course-search');
+ const count=root.querySelector('[data-ma-count]');
+ const empty=root.querySelector('[data-ma-empty]');
+ const clear=root.querySelector('[data-ma-clear]');
+ if(!input||!count||cards.length!==6)return;
+ let active='all';
+ const plain=value=>(value||'').toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+ function update(){
+  const query=plain(input.value);
+  let visible=0;
+  cards.forEach(card=>{
+   const matchCategory=active==='all'||card.dataset.maCategory===active;
+   const matchText=!query||plain(card.dataset.maSearch).includes(query);
+   const show=matchCategory&&matchText;
+   card.hidden=!show;
+   if(show)visible++;
+  });
+  filters.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.maFilter===active)));
+  count.textContent=String(visible);
+  empty.hidden=visible!==0;
+ }
+ filters.forEach(button=>button.addEventListener('click',()=>{
+  active=button.dataset.maFilter;
+  update();
+ }));
+ input.addEventListener('input',update);
+ clear.addEventListener('click',()=>{
+  input.value='';
+  active='all';
+  update();
+  input.focus();
+ });
+ update();
+})();
