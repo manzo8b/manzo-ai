@@ -134,33 +134,88 @@ def inject(page,kind,loc,d,modules,main_route):
  html=html[:head.start()]+tag+html[head.start():]
  page.write_text(html,encoding='utf-8')
 
-def inject_hub(page,loc,d,routes):
+def course_card(item, labels, index):
+ # Every displayed card must have a matching, real archived route.
+ # Visual accents are pure CSS, not illustrations or fake institution logos.
+ label=labels['featured'] if index<2 else item['kind']
+ fact_list=''.join(f'<span>{esc(fact)}</span>' for fact in item['facts'])
+ art=f'''<div class="ma-course-art" aria-hidden="true">
+ <span class="ma-art-index">{esc(item['code'])}</span>
+ <span class="ma-art-mark"><i></i><i></i><i></i></span>
+ <span class="ma-art-identity">MANZO <b>AI</b></span>
+ </div>'''
+ return f'''<article class="ma-course-card ma-tone-{esc(item['tone'])}"
+   data-ma-course-card="1" data-ma-category="{esc(item['category'])}"
+   data-ma-search="{esc((item['title']+' '+item['description']+' '+' '.join(item['facts'])).lower())}">
+ <a class="ma-course-link" href="/manzo-ai/{esc(item['route'])}/">
+  {art}
+  <div class="ma-course-info">
+   <div class="ma-course-meta"><span class="ma-course-kind">{esc(item['kind'])}</span>
+    <span class="ma-course-series">{esc(label)}</span></div>
+   <h3>{esc(item['title'].rstrip('. '))}</h3>
+   <p>{esc(item['description'])}</p>
+   <div class="ma-course-facts">{fact_list}</div>
+   <span class="ma-course-cta">{esc(labels['open'])}<b aria-hidden="true">↗</b></span>
+  </div></a></article>'''
+
+def inject_hub(page,loc,d,routes,site):
  original=page.read_text(encoding='utf-8')
  if HUB_MARKER in original:raise RuntimeError('Duplicate pathway '+str(page))
  labels=d['hub']
  main=re.search(r'<main\b[^>]*>',original,re.I)
  if main is None:raise RuntimeError('No Academy main element in '+str(page))
- first='/manzo-ai/'+routes[0]+'/'
- second='/manzo-ai/'+routes[1]+'/'
- band=f'''<section {HUB_MARKER} class="ma-pathways" aria-label="{esc(labels['kicker'])}">
- <div class="ma-pathways-head"><p>{esc(labels['kicker'])}</p>
- <h2>{esc(labels['title'])}</h2><span>{esc(labels['desc'])}</span></div>
- <div class="ma-pathways-grid">
- <a href="{first}" class="ma-pathway-option ma-pathway-primary">
-  <small>01 / PROFESSIONAL LEARNING</small><strong>{esc(labels['firstTitle'])}</strong>
-  <span>{esc(labels['firstDesc'])}</span><em>{esc(labels['open'])} ↗</em>
- </a>
- <a href="{second}" class="ma-pathway-option ma-pathway-secondary">
-  <small>02 / ENGINEERING</small><strong>{esc(labels['secondTitle'])}</strong>
-  <span>{esc(labels['secondDesc'])}</span><em>{esc(labels['open'])} ↗</em>
- </a></div>
- <p class="ma-pathways-caption">{esc(labels['status'])}</p>
+ catalog=labels['catalog']
+ if len(catalog)!=6 or len(set(item['route'] for item in catalog))!=6:
+  raise RuntimeError('Academy catalog must list six distinct audited routes')
+ for item in catalog:
+  if not (site/item['route']/'index.html').is_file():
+   raise RuntimeError('Catalog advertises nonexistent learning resource: '+item['route'])
+ filters=''.join(
+  f'<button type="button" class="ma-filter" data-ma-filter="{esc(key)}"'
+  + (' aria-pressed="true"' if key=='all' else ' aria-pressed="false"')
+  + f'>{esc(label)}</button>'
+  for key,label in labels['filters']
+ )
+ cards=''.join(course_card(item,labels,i) for i,item in enumerate(catalog))
+ band=f'''<section {HUB_MARKER} class="ma-pathways ma-academy-catalog"
+  data-ma-academy-locale="{loc}" aria-label="{esc(labels['kicker'])}">
+ <div class="ma-catalog-hero">
+  <p class="ma-catalog-kicker">{esc(labels['kicker'])}</p>
+  <h2>{esc(labels['title'].rstrip('. '))}</h2>
+  <p class="ma-catalog-lead">{esc(labels['desc'])}</p>
+  <div class="ma-catalog-hero-decoration" aria-hidden="true"><span>AI</span><span>+</span><span>01</span></div>
+ </div>
+ <div class="ma-catalog-body">
+  <div class="ma-catalog-heading"><div><p class="ma-catalog-overline">MANZO AI / LIBRARY</p>
+   <h2>{esc(labels['catalogTitle'].rstrip('. '))}</h2>
+   <p>{esc(labels['catalogDescription'])}</p></div>
+   <span class="ma-catalog-count" role="status" aria-live="polite"><strong data-ma-count>6</strong> {esc(labels['catalogCount'])}</span>
+  </div>
+  <div class="ma-catalog-toolbar">
+   <label class="ma-catalog-search" for="ma-course-search">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.8" cy="10.8" r="7.2"/><path d="m16.2 16.2 5 5"/></svg>
+    <span class="ma-visually-hidden">{esc(labels['searchLabel'])}</span>
+    <input id="ma-course-search" type="search" placeholder="{esc(labels['searchPlaceholder'])}"
+      autocomplete="off" aria-label="{esc(labels['searchLabel'])}">
+   </label>
+   <div class="ma-filter-scroller" role="group" aria-label="{esc(labels['catalogTitle'])}">
+    {filters}
+   </div>
+  </div>
+  <div class="ma-course-grid" data-ma-course-grid>{cards}</div>
+  <div class="ma-catalog-empty" hidden data-ma-empty>
+   <strong>{esc(labels['empty'])}</strong>
+   <button type="button" data-ma-clear>{esc(labels['clear'])}</button>
+  </div>
+  <p class="ma-catalog-disclaimer">{esc(labels['disclaimer'])}</p>
+ </div>
  </section>'''
  updated=original[:main.end()]+band+original[main.end():]
  head=re.search(r'</head\s*>',updated,re.I)
  if head is None:raise RuntimeError('No Academy head element '+str(page))
  stylesheet=f'<link rel="stylesheet" data-ma-pathways-css="1" href="{CSS}">'
- updated=updated[:head.start()]+stylesheet+updated[head.start():]
+ script=f'<script src="{JS}" defer data-ma-pathways-js="1"></script>'
+ updated=updated[:head.start()]+stylesheet+script+updated[head.start():]
  page.write_text(updated,encoding='utf-8')
 
 def publish(site,verify_only=False):
@@ -177,12 +232,18 @@ def publish(site,verify_only=False):
  for loc,(base,coding) in ROUTES.items():
   hub=site/HUBS[loc]/'index.html'
   if not hub.is_file():raise RuntimeError('Academy hub missing '+str(hub))
-  if not verify_only:inject_hub(hub,loc,locales[loc],(base,coding))
+  if not verify_only:inject_hub(hub,loc,locales[loc],(base,coding),site)
   hubhtml=hub.read_text(encoding='utf-8')
   if hubhtml.count(HUB_MARKER)!=1:
    raise RuntimeError('Missing or repeated Academy pathway '+loc)
   if hubhtml.count('data-ma-pathways-css="1"')!=1:
    raise RuntimeError('Unstyled Academy hub: missing CSS '+loc)
+  if hubhtml.count('data-ma-pathways-js="1"')!=1:
+   raise RuntimeError('Uninteractive Academy hub: missing search/filter JS '+loc)
+  if hubhtml.count('data-ma-course-card="1"')!=6:
+   raise RuntimeError('Academy did not render six course cards '+loc)
+  if len(re.findall(r'<h[1-6][^>]*>\s*[^<]*\.\s*</h[1-6]>',hubhtml,re.I)):
+   raise RuntimeError('Unexpected terminal period in catalog heading '+loc)
   if '/manzo-ai/'+base+'/' not in hubhtml or '/manzo-ai/'+coding+'/' not in hubhtml:
    raise RuntimeError('Wrong Academy learning links '+loc)
   d=locales[loc]
