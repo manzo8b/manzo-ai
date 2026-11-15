@@ -1,0 +1,368 @@
+{
+  "it": {
+    "brand": "MANZO AI",
+    "nav": [
+      "Studio",
+      "Verify",
+      "Learning"
+    ],
+    "kicker": "PRODUCT LAB · ANTEPRIMA FUNZIONALE",
+    "title": "Dall'idea al risultato. Con prove, non promesse.",
+    "lead": "Tre percorsi per trasformare MANZO AI in una piattaforma professionale: progettazione digitale, verifica documentale e formazione aziendale. Questa anteprima esegue elaborazioni locali reali, ma non è ancora un servizio SaaS.",
+    "action": "Prova il laboratorio",
+    "back": "Torna a MANZO AI",
+    "status": "Anteprima senza account né pagamenti",
+    "disclaimer": "Demo locale: nessun modello AI, database o servizio di pagamento è collegato. Non incollare dati riservati. Nulla viene inviato a un server.",
+    "cards": [
+      [
+        "Studio",
+        "Dai forma a un brief strutturato",
+        "Definisci destinatari, obiettivi e vincoli; esporta una specifica riutilizzabile."
+      ],
+      [
+        "Verify",
+        "Separa affermazioni e prove",
+        "Individua affermazioni potenzialmente verificabili. Non confonde un flag con un errore accertato."
+      ],
+      [
+        "Learning",
+        "Progetta una licenza team",
+        "Configura un'ipotesi di percorso per un'organizzazione, senza preventivi automatici."
+      ]
+    ],
+    "studioTitle": "Un brief verificabile prima di generare",
+    "studioDesc": "Un agente operativo dovrebbe iniziare comprendendo obiettivi, pubblico e requisiti. Qui costruisci un documento strutturato nel browser: non viene generato alcun sito, né chiamata un modello.",
+    "clientLabel": "Tipo di progetto",
+    "clientOptions": [
+      "Sito professionale",
+      "Portale formativo",
+      "Dashboard aziendale",
+      "Servizio digitale"
+    ],
+    "goalLabel": "Obiettivo principale",
+    "goalPlaceholder": "Esempio: presentare servizi B2B e facilitare richieste di contatto",
+    "audienceLabel": "Destinatari",
+    "audiencePlaceholder": "Esempio: responsabili formazione di aziende con 20–250 addetti",
+    "constraintsLabel": "Requisiti e vincoli",
+    "constraintsPlaceholder": "Esempio: tre lingue, accessibilità, privacy e integrazione con CRM",
+    "previewTitle": "Specifica pronta per revisione",
+    "previewDesc": "Il documento esportato è una bozza di requisiti, non un progetto implementato.",
+    "generate": "Aggiorna la specifica",
+    "download": "Esporta JSON",
+    "empty": "Da definire",
+    "verifyTitle": "Il primo filtro non è la verità",
+    "verifyDesc": "Questa funzione usa regole locali per segnalare frasi che meritano una fonte. Non accerta se un'affermazione sia vera, falsa o un'allucinazione.",
+    "textLabel": "Testo da esaminare",
+    "textPlaceholder": "Esempio: Nel 2025 il fatturato è aumentato del 28%. La normativa obbliga tutte le imprese ad adottare questo sistema.",
+    "inspect": "Individua i claim",
+    "verified": "Da verificare",
+    "found": "Affermazioni candidate",
+    "noClaims": "Nessuna affermazione candidata individuata con queste semplici regole. Non significa che il testo sia corretto.",
+    "verifierHint": "Le regole privilegiano frasi con numeri, riferimenti normativi o formule categoriche. Sono possibili falsi positivi e omissioni.",
+    "evidenceTitle": "Prossimo passo umano",
+    "evidenceDesc": "Per ogni claim: individuare la fonte primaria, verificare pertinenza e data, registrare l'esito e decidere se utilizzare l'informazione.",
+    "learningTitle": "Dalla lezione alla licenza organizzativa",
+    "learningDesc": "Un sistema Learning commerciale richiederà iscrizioni, ruoli, progressi persistenti, licenze e fatturazione. Qui configuri soltanto un profilo di richiesta commerciale.",
+    "sectorLabel": "Profilo dell'organizzazione",
+    "sectorOptions": [
+      "Ente di formazione",
+      "Software house",
+      "Studio professionale",
+      "PMI / Team aziendale"
+    ],
+    "seatsLabel": "Numero indicativo di utenti",
+    "moduleLabel": "Percorso prioritario",
+    "moduleOptions": [
+      "Allucinazioni e verificabilità",
+      "Engineering Assurance",
+      "Prompt e workflow AI"
+    ],
+    "licenseTitle": "Profilo della proposta",
+    "licenseDisclaimer": "Non è un preventivo, non verifica disponibilità e non attiva un abbonamento.",
+    "programTitle": "Contenuto disponibile",
+    "programDesc": "Il corso pubblico sulle allucinazioni rimane accessibile gratuitamente come dimostrazione editoriale.",
+    "openCourse": "Apri il corso",
+    "readinessTitle": "Roadmap trasparente",
+    "readinessLead": "Ciò che è effettivamente disponibile e ciò che resta da costruire prima di vendere.",
+    "readiness": [
+      [
+        "Disponibile",
+        "Percorsi editoriali multilingue e quiz locali"
+      ],
+      [
+        "Disponibile",
+        "Brief strutturato e identificazione euristica dei claim"
+      ],
+      [
+        "Da realizzare",
+        "Account studenti e autorizzazioni multi-tenant"
+      ],
+      [
+        "Da realizzare",
+        "Backend dell'agente con costi e strumenti controllati"
+      ],
+      [
+        "Da realizzare",
+        "Checkout sicuro e gestione abbonamenti"
+      ],
+      [
+        "Da verificare",
+        "Audit di sicurezza e requisiti contrattuali enterprise"
+      ]
+    ],
+    "statusReady": "Disponibile",
+    "statusPending": "Da realizzare",
+    "statusVerify": "Da verificare",
+    "footer": "MANZO AI · Product Preview · Non raccoglie dati personali né gestisce pagamenti",
+    "copy": "Copia riepilogo",
+    "copied": "Riepilogo copiato",
+    "copyFail": "Copia non disponibile: utilizza l'esportazione del brief",
+    "claimCount": "Claim da controllare",
+    "noInput": "Inserisci un testo da analizzare.",
+    "productNote": "Una piattaforma credibile distingue funzionalità operative, dimostrazioni e capacità future."
+  },
+  "en": {
+    "brand": "MANZO AI",
+    "nav": [
+      "Studio",
+      "Verify",
+      "Learning"
+    ],
+    "kicker": "PRODUCT LAB · FUNCTIONAL PREVIEW",
+    "title": "From an idea to a result. Evidence before promises.",
+    "lead": "Three tracks for MANZO AI: digital production, documentary verification and enterprise learning. This preview performs actual local operations but is not yet an operating SaaS.",
+    "action": "Explore the lab",
+    "back": "Back to MANZO AI",
+    "status": "Preview without accounts or payments",
+    "disclaimer": "Local demo: no AI model, database or payment service is connected. Do not paste confidential information. No data is sent to a server.",
+    "cards": [
+      [
+        "Studio",
+        "Structure a project brief",
+        "Describe users, goals and constraints and export a reusable specification."
+      ],
+      [
+        "Verify",
+        "Separate claims from evidence",
+        "Identify statements that may require evidence. A flag is not proof of an error."
+      ],
+      [
+        "Learning",
+        "Configure a team-license brief",
+        "Explore an organizational learning plan without pretending to produce a firm quote."
+      ]
+    ],
+    "studioTitle": "A reviewable brief before generation",
+    "studioDesc": "A genuine agent must first understand objectives, users and constraints. This tool creates a local structured document; it does not generate a website or call a model.",
+    "clientLabel": "Project type",
+    "clientOptions": [
+      "Professional website",
+      "Learning portal",
+      "Business dashboard",
+      "Digital service"
+    ],
+    "goalLabel": "Primary goal",
+    "goalPlaceholder": "Example: present B2B services and streamline contact requests",
+    "audienceLabel": "Intended users",
+    "audiencePlaceholder": "Example: L&D managers at companies with 20–250 employees",
+    "constraintsLabel": "Requirements and constraints",
+    "constraintsPlaceholder": "Example: three languages, accessibility, privacy and CRM integration",
+    "previewTitle": "Specification ready for review",
+    "previewDesc": "The exported document is a requirements draft, not implemented software.",
+    "generate": "Update specification",
+    "download": "Export JSON",
+    "empty": "To define",
+    "verifyTitle": "The first filter is not truth",
+    "verifyDesc": "Local rules flag statements that may require evidence. They cannot determine whether a claim is true, false or hallucinated.",
+    "textLabel": "Text to inspect",
+    "textPlaceholder": "Example: Revenue increased by 28% in 2025. The law requires every company to use this system.",
+    "inspect": "Extract candidate claims",
+    "verified": "Needs evidence",
+    "found": "Candidate claims",
+    "noClaims": "These simple rules found no candidate claims. This does not mean the text is correct.",
+    "verifierHint": "Rules emphasize numbers, legal references and categorical language. False positives and omissions are expected.",
+    "evidenceTitle": "Human verification follows",
+    "evidenceDesc": "For each claim: locate a primary source, check date and relevance, record the result and decide whether to rely on it.",
+    "learningTitle": "From courses to organization licenses",
+    "learningDesc": "A commercial Learning product needs enrollments, roles, persistent progress, team licenses and billing. This tool only configures a request profile.",
+    "sectorLabel": "Organization profile",
+    "sectorOptions": [
+      "Training provider",
+      "Software company",
+      "Professional services firm",
+      "SME / Enterprise team"
+    ],
+    "seatsLabel": "Estimated number of users",
+    "moduleLabel": "Priority course",
+    "moduleOptions": [
+      "Hallucinations and verification",
+      "Engineering Assurance",
+      "Prompting and AI workflows"
+    ],
+    "licenseTitle": "Proposal profile",
+    "licenseDisclaimer": "This is not a quote, availability confirmation or active subscription.",
+    "programTitle": "Existing content",
+    "programDesc": "The public hallucinations course remains freely available as an editorial example.",
+    "openCourse": "Open course",
+    "readinessTitle": "Transparent roadmap",
+    "readinessLead": "What exists today versus what must be built before selling.",
+    "readiness": [
+      [
+        "Available",
+        "Multilingual editorial courses and local quizzes"
+      ],
+      [
+        "Available",
+        "Structured briefs and heuristic claim extraction"
+      ],
+      [
+        "To build",
+        "Student accounts and multi-tenant authorization"
+      ],
+      [
+        "To build",
+        "Agent backend with controlled costs and tools"
+      ],
+      [
+        "To build",
+        "Secure checkout and subscription management"
+      ],
+      [
+        "To verify",
+        "Security audit and enterprise contracting"
+      ]
+    ],
+    "statusReady": "Available",
+    "statusPending": "To build",
+    "statusVerify": "To verify",
+    "footer": "MANZO AI · Product Preview · No personal data collection or payments",
+    "copy": "Copy summary",
+    "copied": "Summary copied",
+    "copyFail": "Clipboard unavailable: use brief export",
+    "claimCount": "Claims to review",
+    "noInput": "Enter text to inspect.",
+    "productNote": "A credible platform distinguishes functioning features, demonstrations and future capabilities."
+  },
+  "es": {
+    "brand": "MANZO AI",
+    "nav": [
+      "Studio",
+      "Verify",
+      "Learning"
+    ],
+    "kicker": "PRODUCT LAB · VISTA PREVIA FUNCIONAL",
+    "title": "De la idea al resultado. Con pruebas, no promesas.",
+    "lead": "Tres caminos para MANZO AI: producción digital, verificación documental y formación empresarial. Esta vista previa realiza operaciones locales reales, pero todavía no es un SaaS operativo.",
+    "action": "Explorar el laboratorio",
+    "back": "Volver a MANZO AI",
+    "status": "Vista previa sin cuentas ni pagos",
+    "disclaimer": "Demo local: no se conecta ningún modelo de IA, base de datos ni servicio de pago. No pegues información confidencial. Nada se envía a un servidor.",
+    "cards": [
+      [
+        "Studio",
+        "Estructura un brief de proyecto",
+        "Define usuarios, objetivos y restricciones y exporta una especificación."
+      ],
+      [
+        "Verify",
+        "Separa afirmaciones y evidencias",
+        "Detecta declaraciones que requieren pruebas. Una alerta no demuestra un error."
+      ],
+      [
+        "Learning",
+        "Configura una propuesta para equipos",
+        "Explora una licencia para una organización sin generar un presupuesto vinculante."
+      ]
+    ],
+    "studioTitle": "Un brief revisable antes de generar",
+    "studioDesc": "Un agente real debe entender objetivos, usuarios y restricciones. Aquí puedes crear un documento estructurado local, sin generar una web ni llamar a un modelo.",
+    "clientLabel": "Tipo de proyecto",
+    "clientOptions": [
+      "Sitio profesional",
+      "Portal formativo",
+      "Panel empresarial",
+      "Servicio digital"
+    ],
+    "goalLabel": "Objetivo principal",
+    "goalPlaceholder": "Ejemplo: presentar servicios B2B y facilitar contactos",
+    "audienceLabel": "Usuarios destinatarios",
+    "audiencePlaceholder": "Ejemplo: responsables de formación de empresas de 20–250 empleados",
+    "constraintsLabel": "Requisitos y restricciones",
+    "constraintsPlaceholder": "Ejemplo: tres idiomas, accesibilidad, privacidad e integración con CRM",
+    "previewTitle": "Especificación lista para revisión",
+    "previewDesc": "El documento exportado es un borrador de requisitos, no software implementado.",
+    "generate": "Actualizar especificación",
+    "download": "Exportar JSON",
+    "empty": "Por definir",
+    "verifyTitle": "El primer filtro no equivale a la verdad",
+    "verifyDesc": "Las reglas locales señalan afirmaciones que podrían requerir pruebas. No determinan si son verdaderas, falsas o alucinaciones.",
+    "textLabel": "Texto para examinar",
+    "textPlaceholder": "Ejemplo: Los ingresos crecieron un 28% en 2025. La normativa obliga a todas las empresas a usar este sistema.",
+    "inspect": "Identificar afirmaciones",
+    "verified": "Pendiente de verificar",
+    "found": "Afirmaciones candidatas",
+    "noClaims": "Estas reglas sencillas no encontraron afirmaciones candidatas. No significa que el texto sea correcto.",
+    "verifierHint": "Las reglas detectan sobre todo números, normas y lenguaje categórico. Puede haber falsos positivos y omisiones.",
+    "evidenceTitle": "La verificación humana es necesaria",
+    "evidenceDesc": "Para cada afirmación: localizar una fuente primaria, comprobar fecha y relevancia, registrar el resultado y decidir su utilización.",
+    "learningTitle": "De las lecciones a licencias organizativas",
+    "learningDesc": "Un producto comercial necesitará inscripciones, roles, progreso guardado, licencias y facturación. Aquí solo se configura el perfil de una solicitud.",
+    "sectorLabel": "Perfil de la organización",
+    "sectorOptions": [
+      "Entidad de formación",
+      "Empresa de software",
+      "Despacho profesional",
+      "Pyme / Equipo empresarial"
+    ],
+    "seatsLabel": "Número estimado de usuarios",
+    "moduleLabel": "Curso prioritario",
+    "moduleOptions": [
+      "Alucinaciones y verificación",
+      "Engineering Assurance",
+      "Prompts y flujos de IA"
+    ],
+    "licenseTitle": "Perfil de propuesta",
+    "licenseDisclaimer": "No es un presupuesto, confirmación de disponibilidad ni suscripción activa.",
+    "programTitle": "Contenido disponible",
+    "programDesc": "El curso público sobre alucinaciones sigue disponible gratuitamente como muestra editorial.",
+    "openCourse": "Abrir el curso",
+    "readinessTitle": "Hoja de ruta transparente",
+    "readinessLead": "Lo que existe y lo que hay que desarrollar antes de vender.",
+    "readiness": [
+      [
+        "Disponible",
+        "Cursos editoriales multilingües y cuestionarios locales"
+      ],
+      [
+        "Disponible",
+        "Briefs estructurados y detección heurística de afirmaciones"
+      ],
+      [
+        "Pendiente",
+        "Cuentas de estudiantes y autorización multi-tenant"
+      ],
+      [
+        "Pendiente",
+        "Backend del agente con herramientas y costes controlados"
+      ],
+      [
+        "Pendiente",
+        "Checkout seguro y suscripciones"
+      ],
+      [
+        "Por verificar",
+        "Auditoría de seguridad y condiciones empresariales"
+      ]
+    ],
+    "statusReady": "Disponible",
+    "statusPending": "Pendiente",
+    "statusVerify": "Por verificar",
+    "footer": "MANZO AI · Vista previa · Sin datos personales ni pagos",
+    "copy": "Copiar resumen",
+    "copied": "Resumen copiado",
+    "copyFail": "Portapapeles no disponible: exporta el brief",
+    "claimCount": "Afirmaciones por verificar",
+    "noInput": "Introduce un texto.",
+    "productNote": "Una plataforma creíble distingue las funciones activas, las demostraciones y las capacidades futuras."
+  }
+}

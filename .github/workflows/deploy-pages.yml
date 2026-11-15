@@ -16,6 +16,8 @@ on:
       - editorial/video/prompt-engineering/**
       - editorial/research/acr/**
       - editorial/learning/hallucinations/**
+      - product/preview/**
+      - theme/publish-product-preview.py
       - theme/publish-hallucinations.py
       - theme/publish-hallucinations-coding.py
       - theme/publish-acr-dossier.py
@@ -272,6 +274,16 @@ jobs:
             test -s "_site/$course_page/index.html"
             grep -q 'hx-quiz-data' "_site/$course_page/index.html"
             grep -q 'hx-cross-grid' "_site/$course_page/index.html"
+          done
+          # Product preview is deliberately nontransactional and noindex.
+          python3 -m py_compile theme/publish-product-preview.py
+          node --check product/preview/preview.js
+          python3 theme/publish-product-preview.py --site _site
+          python3 theme/publish-product-preview.py --site _site --verify-only
+          for preview_page in it/prodotto en/product es/producto; do
+            test -s "_site/$preview_page/index.html"
+            grep -q 'noindex,follow' "_site/$preview_page/index.html"
+            grep -q 'data-product-preview' "_site/$preview_page/index.html"
           done
           # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
           python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
