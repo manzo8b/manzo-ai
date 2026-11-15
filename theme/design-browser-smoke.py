@@ -7,6 +7,7 @@ This is not a human visual review or a full WCAG/axe audit.
 """
 from __future__ import annotations
 from pathlib import Path
+import base64
 from urllib.parse import urljoin
 from playwright.sync_api import sync_playwright
 
@@ -55,6 +56,13 @@ def test(page,route,expected_kind,screen,width):
  # Allow non-blocking reveal to settle before a full-page capture.
  page.wait_for_timeout(2100)
  page.screenshot(path=str(DEST/f'{screen}-{width}.png'),full_page=True,animations='disabled')
+ # Small first-viewport previews can be inspected from the CI job log.
+ # Full-page captures remain in the 7-day GitHub Actions artifact.
+ if (screen,width) in {
+    ('it-home',1440),('it-product',1440),('it-console',390),('it-research',768)
+ }:
+  raw=page.screenshot(type='jpeg',quality=45,full_page=False,animations='disabled')
+  print('MA_VISUAL_JPEG|'+screen+'|'+str(width)+'|'+base64.b64encode(raw).decode('ascii'),flush=True)
  print(f'PASS DESIGN {screen} {width}px: {actual}; paper {body_color}; h1 OK; screenshot captured.')
 
 with sync_playwright() as pw:
