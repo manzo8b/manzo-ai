@@ -86,5 +86,23 @@ with sync_playwright() as pw:
      print('MA_LEARN_VISUAL|'+str(width)+'|'+base64.b64encode(img).decode('ascii'),flush=True)
     page.close()
     for_review+=1
+ for locale,hub in (('it','it/academy/'),('en','en/academy/'),('es','es/academia/')):
+  for width in (1440,390):
+   page=browser.new_page(viewport={'width':width,'height':900 if width>390 else 844},is_mobile=width==390)
+   page.goto(urljoin(BASE,hub),wait_until='load',timeout=40000)
+   block=page.locator('[data-ma-pathways="v1"]')
+   assert block.count()==1,(locale,'missing Academy pathways')
+   assert page.locator('link[data-ma-pathways-css]').count()==1,(locale,'missing css asset')
+   assert block.locator('a.ma-pathway-option').count()==2,(locale,'missing tracks')
+   color=block.locator('.ma-pathway-primary').evaluate('(el)=>getComputedStyle(el).backgroundColor')
+   assert color=='rgb(33, 88, 237)',(locale,'unstyled Academy',color)
+   if width==390:
+    overflow=page.evaluate('document.documentElement.scrollWidth-window.innerWidth')
+    assert overflow<=4,(locale,'Academy mobile overflow',overflow)
+   if locale=='it':
+    folder=Path('design-review-screenshots');folder.mkdir(exist_ok=True)
+    block.scroll_into_view_if_needed()
+    page.screenshot(path=str(folder/f'academy-pathways-{width}.png'),full_page=False,animations='disabled')
+   page.close()
  browser.close()
 print(f'PASS Guided Learning: {for_review} page/viewport combinations, six lesson controls, reset, courses and existing quiz/crossword preserved')
