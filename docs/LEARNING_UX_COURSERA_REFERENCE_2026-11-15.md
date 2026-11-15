@@ -50,3 +50,20 @@ This branch should undergo CI and visual review before merging. **Do not automat
 - Coursera Teaching & Learning Team, [Commitment to Learning](https://blog.coursera.org/courseras-commitment-to-learning-how-we-support-skill-development/)
 - Coursera Help Center, [Taking assignments](https://www.coursera.support/s/article/learner-000001563?language=en_US)
 - Coursera Research, [Drivers of Retention in Online Degree Programs](https://www.coursera.org/about/press/wp-content/uploads/2022/05/Courseras-Drivers-of-Retention-in-Online-Degree-Programs-Report-1.pdf)
+
+## Iterazione richiesta — catalogo professionale, card con effetto, titoli senza punto
+
+Le due prime schede statiche non erano sufficienti per evocare l'esperienza di scoperta di Coursera. L'iterazione v1.2 introduce:
+
+- Un catalogo di **sei risorse già esistenti**, in tre lingue, con pagine reali controllate in fase di build: il corso sulle allucinazioni, il modulo specialistico sul coding e quattro lezioni dell'archivio relative a modelli linguistici, prompt, verifica e workflow.
+- Scelta per argomento, ricerca locale, numero di risultati, stato senza corrispondenze e ripristino dei filtri. Il risultato non usa account o motori remoti.
+- Tipologie veritiere di contenuto: corso, modulo specialistico, singola lezione. Nessuna recensione, iscrizione, università, attestato o durata inventati.
+- Card interamente navigabili, con illustrazione astratta originale (solo CSS), elevazione, profondità, spostamento della freccia e passaggio luminoso che rispetta la preferenza di movimento ridotto.
+- La stessa logica di interazione discreta è stata estesa alle card già presenti in home, nei moduli e nel Product Lab, senza cambiarne struttura o testo.
+- **Vincolo permanente sui titoli:** `theme/publish-title-cleanup.py` opera esclusivamente sulle intestazioni visibili H1–H6 in tutte le pagine HTML generate, eliminando i punti finali e rifiutando un futuro build che li reintroduca. Non altera testi dei paragrafi, domande o risposte.
+
+### Verifiche aggiuntive
+
+La CI controlla per ciascuna lingua: sei risorse e relativi link validi, filtraggio `Verifica` e `Sviluppo`, ricerca, conteggio, azzeramento dei filtri, colorazione della card, ombra/elevazione, assenza di scroll orizzontale su smartphone. Il contatore dei titoli H1–H6 viene verificato in tutte le pagine pubblicate.
+
+Il controllo delle funzionalità e la revisione visiva restano distinti: l'approvazione dell'aspetto spetta al proprietario del progetto. **Questo PR non va integrato senza approvazione esplicita.**
