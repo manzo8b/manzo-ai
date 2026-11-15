@@ -446,6 +446,23 @@ body[data-ma-surface="research"] [data-acr-dossier] a:focus-visible{
   outline-offset:4px;
 }
 
+/* Critical-thinking activities: functional variety, no rainbow treatment. */
+body[data-ma-surface="research"] .challenge-card{
+  background:#eef5fa;
+  border-color:transparent;
+  border-radius:12px;
+  box-shadow:none;
+}
+body[data-ma-surface="research"] .challenge-card:nth-child(3n+2){
+  background:#e9f6ee;
+}
+body[data-ma-surface="research"] .challenge-card:nth-child(3n+3){
+  background:#fff1e8;
+}
+body[data-ma-surface="research"] :is(.challenge-note,.challenge-kicker){
+  color:var(--ma-copy);
+}
+
 /* Product Lab (Persuade + Operate): whole-colour fields, one real preview,
    and only useful in-product panel borders. No gradient furniture. */
 body[data-product-preview] .site-head{
