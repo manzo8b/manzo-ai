@@ -43,6 +43,14 @@ INSERT INTO app_private.feature_grants(organization_id,feature,status,valid_unti
 INSERT INTO app_private.feature_usage(organization_id,feature,consumed) VALUES
  ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','verify.process',3);
 
+-- Licensed learners get course content; unlicensed members get catalog only.
+INSERT INTO app_private.feature_grants(organization_id,feature,status,valid_until,quota) VALUES
+ ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','learning.seats','active',now()+interval '30 days',1),
+ ('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb','learning.seats','active',now()+interval '30 days',1);
+INSERT INTO app_private.learning_seats(organization_id,user_id) VALUES
+ ('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','22222222-2222-4222-8222-222222222222'),
+ ('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb','33333333-3333-4333-8333-333333333333');
+
 -- Idempotent provider event receipt: one logical event may be retried.
 INSERT INTO app_private.billing_events(provider,provider_event_id,event_type)
 VALUES ('stripe','evt_test_duplicate_123','checkout.session.completed')
