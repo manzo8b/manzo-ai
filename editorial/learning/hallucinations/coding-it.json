@@ -1,0 +1,299 @@
+{
+  "locale": "it",
+  "title": "Il codice che sembrava corretto",
+  "subtitle": "Allucinazioni nello sviluppo software, controllo qualità e responsabilità verso il cliente",
+  "eyebrow": "MODULO 06 · ENGINEERING ASSURANCE",
+  "lead": "Un’applicazione può compilare, mostrare una schermata impeccabile e superare una dimostrazione commerciale, ma restare inadatta alla produzione. Quando il codice nasce anche da un modello generativo, la differenza tra «funziona sul mio computer» e «possiamo consegnarlo» deve essere sostenuta da prove.",
+  "thesis": "Un cliente enterprise non acquista righe di codice. Acquista continuità operativa, tutela dei dati, manutenzione, controllo del rischio e fiducia.",
+  "labels": {
+    "home": "Torna al corso",
+    "program": "Lezione",
+    "risks": "Rischi tecnici",
+    "cases": "Laboratorio",
+    "gate": "Quality gate",
+    "sources": "Riferimenti",
+    "time": "75 minuti · modulo specialistico",
+    "sourceNote": "Le fonti documentano i rischi e le pratiche di controllo. I casi e le cifre sono simulazioni didattiche, non incidenti realmente attribuiti a un'azienda.",
+    "casePrompt": "Redigi il tuo giudizio tecnico",
+    "reveal": "Confronta con la revisione",
+    "hide": "Nascondi la revisione",
+    "min": "Scrivi almeno 30 caratteri per aprire il criterio di valutazione.",
+    "ready": "Risposta pronta per il confronto.",
+    "quizLabel": "Verifica specialistica",
+    "quizLead": "Quattro decisioni da responsabile tecnico. Non è un test di sintassi: valuta la qualità delle prove.",
+    "check": "Verifica risposta",
+    "next": "Prosegui",
+    "results": "Risultato",
+    "restart": "Ripeti il quiz",
+    "completed": "Punteggio formativo; per una consegna reale sono richieste evidenze tecniche e autorizzazione appropriata.",
+    "back": "Torna al percorso generale",
+    "impact": "La catena dell'impatto",
+    "economic": "L'impatto economico non va inventato",
+    "riskTitle": "Distinguere allucinazione e vulnerabilità",
+    "principle": "La firma sul rilascio resta umana"
+  },
+  "chapters": [
+    {
+      "id": "01",
+      "title": "La demo non è la consegna",
+      "deck": "Il software può apparire completo mentre mancano le condizioni per affidargli processi reali.",
+      "paragraphs": [
+        "Nel lavoro professionale, la qualità non coincide con l’effetto visivo, il numero di funzionalità o la velocità con cui si risponde al cliente. Una schermata può essere eccellente mentre il backend gestisce male i permessi; una funzione può restituire i valori attesi per il caso felice e fallire su input imprevisti; una procedura di pagamento può funzionare durante la presentazione e perdere coerenza quando due richieste arrivano contemporaneamente.",
+        "L’assistenza generativa rende più rapido produrre componenti e ipotesi di soluzione. Non accorcia automaticamente il tempo necessario per comprenderne le dipendenze, validare le regole di business, provare il comportamento reale e dimostrare che un cambiamento non compromette il resto del sistema. La velocità di scrittura e la qualità del rilascio sono grandezze differenti.",
+        "Il punto critico arriva quando il professionista sostituisce la revisione con la fiducia nella forma dell’output. Una risposta ben commentata non è una revisione del codice; un blocco «test passed» scritto dall’AI non è il risultato di una pipeline CI; un esempio che sembra conforme alla documentazione non dimostra di essere compatibile con la versione installata."
+      ],
+      "note": "GitHub raccomanda di eseguire test e analisi statica e di verificare contesto, intento e requisiti del progetto prima di accettare codice generato. [F9]",
+      "refs": [
+        "F9",
+        "F11"
+      ]
+    },
+    {
+      "id": "02",
+      "title": "Che cosa significa allucinare mentre si programma",
+      "deck": "Non tutti i difetti di codice sono allucinazioni, ma alcune allucinazioni possono generare difetti gravi.",
+      "paragraphs": [
+        "Un modello può inventare il nome di un metodo, attribuire a una libreria capacità che non possiede o suggerire una dipendenza apparentemente credibile ma inesistente. Può produrre una configurazione coerente nella sintassi e non riconosciuta dalla versione effettiva del framework. Oppure può descrivere come «eseguiti» test che non sono stati lanciati. Qui la distanza fra testo plausibile e realtà tecnica è direttamente verificabile.",
+        "Altri problemi hanno natura diversa: una validazione incompleta, un controllo di accesso assente, una race condition o un algoritmo inefficiente possono essere errori progettuali anche quando nessun fatto è stato inventato. Non è necessario chiamarli tutti allucinazioni per riconoscerne la gravità. Per una diagnosi corretta occorre separare invenzione, implementazione difettosa e dichiarazione non dimostrata.",
+        "La ricerca di Spracklen e colleghi, presentata a USENIX Security 2025, ha analizzato 576.000 campioni di codice ottenuti da 16 modelli e ha identificato numerosi nomi di pacchetti inesistenti. Le percentuali rilevate appartengono a quel disegno sperimentale: non sono il rischio universale di un progetto odierno. Sono tuttavia una dimostrazione concreta del fatto che anche i suggerimenti di dipendenze richiedono una verifica indipendente."
+      ],
+      "points": [
+        [
+          "API o metodi inesistenti",
+          "Confrontare firma, versione e comportamento con documentazione e libreria realmente installata."
+        ],
+        [
+          "Pacchetti immaginari",
+          "Verificare nome, publisher, provenienza, checksum e lockfile prima di installare; il rischio comprende lo slopsquatting."
+        ],
+        [
+          "Configurazioni inventate",
+          "Validare schema e opzioni mediante strumenti reali e test sul runtime previsto."
+        ],
+        [
+          "Test «eseguiti» soltanto nel testo",
+          "Richiedere comandi, log e artefatti generati dalla CI, non una dichiarazione dell’assistente."
+        ],
+        [
+          "Garanzie di sicurezza non dimostrate",
+          "Non confondere l’assenza di warning con una valutazione di sicurezza o conformità."
+        ]
+      ],
+      "note": "La ricerca USENIX documenta allucinazioni nei nomi dei pacchetti; la classificazione OWASP dei rischi di output riguarda le conseguenze di contenuti non validati. [F10] [F12]",
+      "refs": [
+        "F10",
+        "F12"
+      ]
+    },
+    {
+      "id": "03",
+      "title": "Dal difetto tecnico al rischio commerciale",
+      "deck": "Il rischio si manifesta quando una fragilità supera i controlli e raggiunge il sistema o il cliente.",
+      "paragraphs": [
+        "Immaginiamo un fornitore che consegni a un gruppo con più sedi un portale per fatture e autorizzazioni. Un endpoint generato dall’AI contiene una protezione di autenticazione, ma non verifica che l’utente sia autorizzato a leggere i dati della società proprietaria della fattura. La demo ha funzionato; l’errore emerge quando un utente autenticato prova a leggere un documento di un altro tenant.",
+        "Il difetto può esporre dati, richiedere un intervento urgente, fermare il rilascio successivo e attivare indagini tecniche e legali. La gestione del cliente diventa una questione di credibilità: quando sono state eseguite le verifiche? Chi ha approvato il codice? Quale test avrebbe potuto rilevare il problema? Quali evidenze dimostrano che la correzione non ne introduce altri?",
+        "Un cliente enterprise può chiedere rimedi contrattuali, sospendere nuovi incarichi o non rinnovare il rapporto, ma queste non sono conseguenze automatiche. Dipendono dalla gravità dell’incidente, dagli obblighi sottoscritti, dalle regole applicabili e dalla risposta del fornitore. Il corso evita di trasformare scenari possibili in fatti verificati."
+      ],
+      "note": "OWASP LLM05:2025 distingue l'handling insicuro degli output dai problemi generali di eccessiva dipendenza e ne descrive possibili impatti sui sistemi. [F10]",
+      "refs": [
+        "F10",
+        "F11"
+      ]
+    },
+    {
+      "id": "04",
+      "title": "La responsabilità del professionista",
+      "deck": "Utilizzare un generatore non trasferisce al generatore il dovere di verifica.",
+      "paragraphs": [
+        "Il committente valuta un risultato rispetto a requisiti, servizio, affidabilità e accordi. Non ha l’obbligo di sapere quanti frammenti siano stati scritti manualmente, suggeriti da un assistente o prodotti da un agente. Chi consegna deve poter spiegare le scelte architetturali, identificare la provenienza delle dipendenze, riprodurre i test e sostenere il livello di sicurezza dichiarato.",
+        "La negligenza professionale non consiste nell’usare strumenti AI. Consiste, per esempio, nel consegnare codice mai eseguito, accettare librerie sconosciute senza verifica, chiudere una richiesta senza test di regressione o presentare come «certificata» una soluzione che non ha superato alcuna valutazione appropriata. La responsabilità giuridica di un eventuale danno dipende comunque dalle leggi e dai contratti applicabili.",
+        "Un buon sviluppatore sa anche fermare una consegna. Dire «non dispongo ancora delle evidenze» può essere più professionale che firmare un rilascio non compreso. La qualità nasce da una catena osservabile di decisioni, controlli ed eventuali rinunce."
+      ],
+      "note": "Il NIST SSDF descrive pratiche di sviluppo sicuro integrabili nel ciclo di vita del software: protezione della catena, review, analisi e test. [F11]",
+      "refs": [
+        "F9",
+        "F11"
+      ]
+    },
+    {
+      "id": "05",
+      "title": "Verificare prima di un rilascio",
+      "deck": "Una sequenza di quality gate trasforma l'approvazione in un giudizio documentato.",
+      "paragraphs": [
+        "Un controllo professionale inizia dai requisiti. Il codice deve risolvere il problema corretto, non soltanto una versione immaginata dal modello. A seguire servono una compilazione riproducibile, verifica delle dipendenze, test su casi normali e anomali, controllo dei permessi e delle superfici esposte, analisi automatizzata e revisione del diff da una persona competente.",
+        "Nel contesto enterprise va inoltre dimostrato come il sistema si comporta in caso di errore: timeout, richieste duplicate, transazioni incomplete, perdita di connettività, concorrenza e rollback. Il criterio di accettazione non è «nessun problema visibile alla demo», ma «evidenze sufficienti per lo scenario operativo previsto».",
+        "Ogni gate produce un artefatto: esiti CI, report di test, risultato della scansione dipendenze, note di code review, elenco delle limitazioni note, approvazione del responsabile e piano di ripristino. Il gate non elimina ogni possibile vulnerabilità, ma rende controllabile il processo e più difficile nascondere un’incertezza sotto una risposta convincente."
+      ],
+      "note": "La checklist traduce indicazioni di GitHub e NIST in un protocollo formativo MANZO AI. Non è una certificazione di sicurezza. [F9] [F11]",
+      "refs": [
+        "F9",
+        "F11"
+      ]
+    },
+    {
+      "id": "06",
+      "title": "Il valore economico della verifica",
+      "deck": "La revisione ha un costo misurabile; anche non verificarla può averne uno, spesso meno prevedibile.",
+      "paragraphs": [
+        "Per stimare il rischio occorre distinguere costo certo del controllo e impatti potenziali dell’incidente. Le variabili possono includere ore di indisponibilità, transazioni non elaborate, costo del personale di emergenza, attività forense, ripristino, obblighi di comunicazione, rimedi contrattuali e rischio di mancato rinnovo. Ogni importo richiede una fonte o un’ipotesi dichiarata.",
+        "Esempio puramente simulato: un servizio critico resta indisponibile per tre ore e l’impresa attribuisce a ciascuna ora un impatto operativo stimato di 12.000 euro. Il valore ipotetico è 36.000 euro prima di eventuali altre voci. Non è un dato di mercato né una previsione affidabile: serve a insegnare a dichiarare gli assunti anziché inventare danni.",
+        "La grandezza dell’incarico non giustifica l’improvvisazione, così come l’uso di AI non squalifica un professionista. La differenza competitiva è la capacità di produrre evidenze: un cliente può verificare che il lavoro sia stato analizzato, testato, documentato e che i rischi residui siano espliciti. La fiducia si costruisce così, molto prima del prossimo contratto."
+      ],
+      "note": "Il modello economico è un esercizio illustrativo; importi, ore e conseguenze commerciali non provengono da incidenti reali.",
+      "refs": [
+        "F9",
+        "F11"
+      ]
+    }
+  ],
+  "pipeline": [
+    [
+      "01",
+      "Generazione",
+      "Codice plausibile, ma non ancora controllato"
+    ],
+    [
+      "02",
+      "Omissione",
+      "Nessuna verifica su tenant, dipendenze o regressioni"
+    ],
+    [
+      "03",
+      "Rilascio",
+      "Il difetto raggiunge ambiente e utenti reali"
+    ],
+    [
+      "04",
+      "Incidente",
+      "Possibile indisponibilità o esposizione di dati"
+    ],
+    [
+      "05",
+      "Conseguenze",
+      "Intervento tecnico, contestazioni e fiducia da ricostruire"
+    ]
+  ],
+  "gates": [
+    [
+      "Requisiti e contesto",
+      "Il ticket, i criteri di accettazione e i vincoli sono stati confrontati con il diff."
+    ],
+    [
+      "Esecuzione riproducibile",
+      "Build e test eseguiti su ambiente definito, con log e identificativo della revisione."
+    ],
+    [
+      "Dipendenze",
+      "Pacchetti, versioni, provenienza e vulnerabilità noti verificati; lockfile coerente."
+    ],
+    [
+      "Comportamenti limite",
+      "Test negativi, errori, input inattesi, race condition e regressioni pertinenti."
+    ],
+    [
+      "Autorizzazioni e dati",
+      "Controlli di identità, ruoli, tenant, privacy e accesso ai dati sensibili."
+    ],
+    [
+      "Analisi e code review",
+      "Static analysis, security scan e revisione umana dei cambiamenti rilevanti."
+    ],
+    [
+      "Operatività",
+      "Osservabilità, allarmi, backup/rollback, procedure d’incidente e disponibilità."
+    ],
+    [
+      "Accettazione",
+      "Rischi residui, revisore, approvazione e release note registrati."
+    ]
+  ],
+  "codeExample": {
+    "title": "Una vulnerabilità nascosta dietro una demo riuscita",
+    "context": "Pseudocodice JavaScript illustrativo. L’utente è autenticato, ma la fattura viene cercata soltanto tramite ID. È un esempio di carenza di autorizzazione, non necessariamente di allucinazione.",
+    "before": "app.get('/api/invoices/:id', requireAuth, async (req, res) => {\n  const invoice = await db.invoice.findUnique({\n    where: { id: req.params.id }\n  });\n  res.json(invoice);\n});",
+    "after": "const invoice = await db.invoice.findFirst({\n  where: {\n    id: req.params.id,\n    tenantId: req.auth.tenantId\n  }\n});\nif (!invoice) return res.sendStatus(404);",
+    "takeaway": "Il filtro sul tenant è soltanto una parte della correzione. Vanno verificati anche policy di autorizzazione, ruoli, validità dell’identità, gestione dell’assenza di risultati, audit log e test cross-tenant."
+  },
+  "cases": [
+    {
+      "sector": "API & SDK",
+      "title": "Un metodo inventato nella documentazione",
+      "scenario": "L’assistente scrive «paymentClient.reverseSettlement(id)», dichiarando che è supportato dalla versione 3.2 del SDK. La documentazione ufficiale e i tipi installati non riportano quel metodo.",
+      "task": "Classifica l’errore e descrivi quali evidenze servono prima di utilizzare una procedura alternativa per rimborsare un pagamento.",
+      "solution": "Si tratta di un’API inventata o attribuita senza riscontro: possibile allucinazione tecnica. Congelare l’integrazione; verificare versione, changelog e tipi installati, cercare l’API documentata, creare test in sandbox e controllare le conseguenze contabili dei rimborsi. Non dedurre un metodo dal solo nome plausibile."
+    },
+    {
+      "sector": "Security & multitenancy",
+      "title": "Autenticazione non significa autorizzazione",
+      "scenario": "In un portale multi-azienda, una rotta protetta da login recupera una fattura con il solo ID presente nell’URL. Un utente autenticato può conoscere un ID appartenente a un’altra società.",
+      "task": "Qual è il problema concreto? Quale test negativo dovrebbe bloccare il rilascio?",
+      "solution": "La vulnerabilità riguarda un controllo di accesso all’oggetto mancante o insufficiente. Non è necessariamente un’allucinazione. Il test deve richiedere una fattura di un altro tenant e verificare che la risposta non riveli alcun dato, con controlli anche su ruoli, log e policy."
+    },
+    {
+      "sector": "Supply chain",
+      "title": "Il pacchetto che non doveva esistere",
+      "scenario": "L’AI consiglia di installare «fictional-corporate-auth-guard», presentato come modulo affidabile per SSO. Il nome è fittizio in questo esercizio e non è stato verificato in alcun registry.",
+      "task": "Che cosa controlli prima di installare una dipendenza sconosciuta e quale rischio emerge se qualcuno registra un nome suggerito da un modello?",
+      "solution": "Non eseguire l’installazione. Verificare che il pacchetto esista in un registry affidabile, publisher, repository, manutenzione, integrità, licenza e vulnerabilità. Il rischio di slopsquatting riguarda pacchetti malevoli registrati sotto nomi suggeriti erroneamente dall’AI."
+    },
+    {
+      "sector": "Release governance",
+      "title": "«Tutti i test superati»: senza un solo log",
+      "scenario": "Il modello conclude: «Build riuscita, 100% dei test superati, pronta per produzione». Nessuna pipeline CI è stata eseguita e non esistono log, commit identificato o piano di rollback. Il cliente gestisce un servizio operativo critico.",
+      "task": "Decidi se autorizzare il rilascio e indica gli artefatti minimi da richiedere; formula una comunicazione professionale al cliente.",
+      "solution": "Bloccare il rilascio: la dichiarazione di test non è verificata. Richiedere SHA/commit, build riproducibile, test e copertura pertinenti, security scan, review, autorizzazione e rollback. Comunicare il motivo della sospensione in termini di evidenze mancanti, senza promettere una data o sicurezza assoluta."
+    }
+  ],
+  "quiz": [
+    {
+      "question": "Un assistente propone un metodo del SDK che non compare nella documentazione o nei tipi della versione installata. Quale verifica è prioritaria?",
+      "options": [
+        "Aggiungere un cast per eliminare l’errore",
+        "Verificare l’API della versione installata e testarne l’esistenza",
+        "Passare la funzione in produzione per osservare il risultato",
+        "Richiedere al modello di affermare con maggiore sicurezza"
+      ],
+      "answer": 1,
+      "why": "L’esistenza e la firma dell’API vanno accertate nella dipendenza reale. Un cast non crea un metodo inesistente."
+    },
+    {
+      "question": "Un endpoint autenticato restituisce fatture di altri tenant. È necessariamente un’allucinazione?",
+      "options": [
+        "Sì, ogni vulnerabilità generata è un’allucinazione",
+        "No, è una vulnerabilità di autorizzazione e potrebbe non implicare alcuna invenzione",
+        "Sì, purché il codice compili",
+        "No, perché l’autenticazione è già presente"
+      ],
+      "answer": 1,
+      "why": "Un difetto di autorizzazione è un problema reale anche se la soluzione non contiene API inventate. Non tutte le vulnerabilità sono allucinazioni."
+    },
+    {
+      "question": "Il modello scrive «tutti i test passano» ma non è stata eseguita alcuna CI. Quale stato assegni alla dichiarazione?",
+      "options": [
+        "Verificata perché l’AI produce il report",
+        "Non verificata: mancano log e artefatti",
+        "Smentita senza alcuna necessità di test",
+        "Conforme per ambienti di staging"
+      ],
+      "answer": 1,
+      "why": "L'asserzione che siano stati eseguiti test non è supportata. Occorre un’esecuzione reale con report verificabili."
+    },
+    {
+      "question": "Quale combinazione costituisce il quality gate più difendibile per un rilascio enterprise?",
+      "options": [
+        "Demo riuscita e approvazione commerciale",
+        "Codice compilato e assenza di warning",
+        "Requisiti, test, sicurezza, dependency review, approvazione e rollback documentati",
+        "Concordanza di due assistenti AI"
+      ],
+      "answer": 2,
+      "why": "La qualità del rilascio richiede verifiche tecniche e autorizzazioni riproducibili, non soltanto plausibilità o dimostrazioni."
+    }
+  ],
+  "sources": [
+    "F9",
+    "F10",
+    "F11",
+    "F12"
+  ]
+}
