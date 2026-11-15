@@ -1,4 +1,25 @@
-# MANZO AI — Knowledge & Prompt Lab
+# MANZO AI — Studio · Verify · Learning
+
+**Progetto digitale in sviluppo** · IT / EN / ES · [Sito pubblico](https://manzo8b.github.io/manzo-ai/it/) · [Product Lab](https://manzo8b.github.io/manzo-ai/it/prodotto/)
+
+MANZO AI combina progettazione di workflow digitali, verificabilità degli output AI e formazione professionale. Il codice e gli strumenti editoriali sono versionati su GitHub; la strategia prevede licenze B2B e un'eventuale acquisizione futura soltanto sulla base di asset e risultati verificabili.
+
+### Stato attuale — 15 novembre 2026
+
+| Area | Stato verificabile | Limite |
+|---|---|---|
+| Sito e corsi | Portale pubblico multilingue, corsi ed esercizi | Non esiste ancora una LMS commerciale con progressi persistenti |
+| Product Lab | Demo con brief JSON, filtro euristico di claim e configuratore team | Nessun modello AI, login, database o checkout attivo |
+| Backend SaaS | Migrazione SQL e controlli RLS su PostgreSQL isolato, contratto API documentato | Nessun backend produttivo è stato creato |
+| Billing | Contratti locali di autorizzazione e verifica della firma dei webhook | Nessun incasso o abbonamento attivato |
+| Clienti | Ricerca dei segmenti commerciali documentata | Nessun cliente o fatturato qui attestato |
+
+**Architettura e roadmap:** [Product Lab](product/README.md) · [Database e security QA](product/backend/README.md) · [Architettura SaaS](docs/MANZO_AI_SAAS_ARCHITECTURE_ADR001_2026-11-15.md) · [Mercati potenziali](docs/MANZO_AI_BUYER_RESEARCH_2026-11-15.md) · [Release gates](docs/MANZO_AI_PRODUCT_RELEASE_GATE_2026-11-15.md).
+
+> La sezione seguente contiene il registro editoriale e le note storiche del sito: versioni e stati precedenti non rappresentano la piattaforma SaaS attuale.
+
+---
+
 
 ## Ricerca ACR · Dossier scientifico
 
