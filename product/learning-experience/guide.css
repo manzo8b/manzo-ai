@@ -429,3 +429,96 @@ body[data-ma-surface] .ma-guidance h3{
   animation:none!important;transition:none!important;
  }
 }
+
+/* Academy discovery: structured pathway, not an LMS enrollment claim */
+.ma-pathways{
+ margin:clamp(1.6rem,3.2vw,3rem) 0 clamp(2rem,4vw,4rem);
+ border-top:6px solid #2458ed;
+ padding:clamp(1.4rem,2.8vw,2.6rem);
+ background:#f0f4ff;
+ color:#173457;
+ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+}
+.ma-pathways .ma-pathways-head p{
+ color:#1e50d8;
+ font-size:.79rem;
+ font-weight:790;
+ letter-spacing:.13em;
+ margin:0 0 12px;
+}
+.ma-pathways .ma-pathways-head h2{
+ font-size:clamp(1.75rem,3.4vw,3.5rem);
+ font-weight:660;
+ letter-spacing:-.062em;
+ line-height:1.1;
+ color:#173456!important;
+ max-width:21ch;
+ margin:0 0 17px;
+}
+.ma-pathways .ma-pathways-head span{
+ display:block;
+ font-size:1rem;
+ line-height:1.65;
+ max-width:73ch;
+ color:#345674;
+}
+.ma-pathways-grid{
+ display:grid;
+ grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);
+ gap:14px;
+ margin:clamp(1.5rem,3vw,2.8rem) 0 0;
+}
+.ma-pathway-option{
+ display:flex;
+ flex-direction:column;
+ align-items:flex-start;
+ padding:clamp(1.55rem,3vw,2.8rem);
+ min-height:240px;
+ gap:12px;
+ text-decoration:none!important;
+ background:#2158ed;
+ color:#fff!important;
+ transition:transform .18s ease,filter .18s ease;
+}
+.ma-pathway-option:hover{transform:translateY(-3px);filter:brightness(.96)}
+.ma-pathway-option small{
+ font-size:.74rem;
+ letter-spacing:.09em;
+ font-weight:790;
+ opacity:.88;
+}
+.ma-pathway-option strong{
+ font-size:clamp(1.35rem,2.15vw,2.1rem);
+ letter-spacing:-.042em;
+ font-weight:640;
+ line-height:1.2;
+ color:inherit!important;
+}
+.ma-pathway-option span{
+ font-size:.91rem;
+ line-height:1.62;
+ color:inherit!important;
+}
+.ma-pathway-option em{
+ font-style:normal;
+ font-size:.85rem;
+ font-weight:770;
+ border-bottom:2px solid currentColor;
+ padding-bottom:4px;
+ margin-top:auto;
+}
+.ma-pathway-option.ma-pathway-secondary{background:#08766d}
+.ma-pathways .ma-pathways-caption{
+ font-size:.8rem;
+ color:#456486;
+ margin:16px 0 0;
+}
+.ma-pathways a:focus-visible{outline:3px solid #ff673f;outline-offset:4px}
+@media(max-width:760px){
+ .ma-pathways{padding:1.3rem}
+ .ma-pathways-grid{grid-template-columns:1fr}
+ .ma-pathway-option{min-height:190px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ma-pathways *{transition:none!important}
+}
