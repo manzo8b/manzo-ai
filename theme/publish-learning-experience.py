@@ -24,6 +24,8 @@ ROUTES={
  'es':('es/aprende/alucinaciones-ia-verificacion','es/aprende/alucinaciones-ia-verificacion/coding'),
 }
 MARKER='data-ma-learning-guide="v1"'
+HUBS={'it':'it/academy','en':'en/academy','es':'es/academia'}
+HUB_MARKER='data-ma-pathways="v1"'
 CSS='/manzo-ai/assets/learning-experience/guide.css'
 JS='/manzo-ai/assets/learning-experience/guide.js'
 
@@ -132,6 +134,30 @@ def inject(page,kind,loc,d,modules,main_route):
  html=html[:head.start()]+tag+html[head.start():]
  page.write_text(html,encoding='utf-8')
 
+def inject_hub(page,loc,d,routes):
+ original=page.read_text(encoding='utf-8')
+ if HUB_MARKER in original:raise RuntimeError('Duplicate pathway '+str(page))
+ labels=d['hub']
+ main=re.search(r'<main\b[^>]*>',original,re.I)
+ if main is None:raise RuntimeError('No Academy main element in '+str(page))
+ first='/manzo-ai/'+routes[0]+'/'
+ second='/manzo-ai/'+routes[1]+'/'
+ band=f'''<section {HUB_MARKER} class="ma-pathways" aria-label="{esc(labels['kicker'])}">
+ <div class="ma-pathways-head"><p>{esc(labels['kicker'])}</p>
+ <h2>{esc(labels['title'])}</h2><span>{esc(labels['desc'])}</span></div>
+ <div class="ma-pathways-grid">
+ <a href="{first}" class="ma-pathway-option ma-pathway-primary">
+  <small>01 / PROFESSIONAL LEARNING</small><strong>{esc(labels['firstTitle'])}</strong>
+  <span>{esc(labels['firstDesc'])}</span><em>{esc(labels['open'])} ↗</em>
+ </a>
+ <a href="{second}" class="ma-pathway-option ma-pathway-secondary">
+  <small>02 / ENGINEERING</small><strong>{esc(labels['secondTitle'])}</strong>
+  <span>{esc(labels['secondDesc'])}</span><em>{esc(labels['open'])} ↗</em>
+ </a></div>
+ <p class="ma-pathways-caption">{esc(labels['status'])}</p>
+ </section>'''
+ page.write_text(original[:main.end()]+band+original[main.end():],encoding='utf-8')
+
 def publish(site,verify_only=False):
  locales=json.loads((SOURCE/'labels.json').read_text(encoding='utf-8'))
  if set(locales)!=set(ROUTES):raise RuntimeError('Incomplete translation dictionaries')
@@ -144,6 +170,14 @@ def publish(site,verify_only=False):
   if (assets/name).read_bytes()!=(SOURCE/name).read_bytes():raise RuntimeError('Asset missing '+name)
  reviewed=0
  for loc,(base,coding) in ROUTES.items():
+  hub=site/HUBS[loc]/'index.html'
+  if not hub.is_file():raise RuntimeError('Academy hub missing '+str(hub))
+  if not verify_only:inject_hub(hub,loc,locales[loc],(base,coding))
+  hubhtml=hub.read_text(encoding='utf-8')
+  if hubhtml.count(HUB_MARKER)!=1:
+   raise RuntimeError('Missing or repeated Academy pathway '+loc)
+  if '/manzo-ai/'+base+'/' not in hubhtml or '/manzo-ai/'+coding+'/' not in hubhtml:
+   raise RuntimeError('Wrong Academy learning links '+loc)
   d=locales[loc]
   core=json.loads((ORIGINAL/f'{loc}.json').read_text(encoding='utf-8'))
   code=json.loads((ORIGINAL/f'coding-{loc}.json').read_text(encoding='utf-8'))
@@ -163,7 +197,7 @@ def publish(site,verify_only=False):
     anchor=f'ma-learn-unit-{i}' if kind=='core' else f'hc-section-{i:02}'
     if f'id="{anchor}"' not in html:raise RuntimeError('Broken module anchor '+anchor)
    reviewed+=1
- print(f'MANZO AI guided learning: {reviewed} pages, 3 locales, 12 maps + in-memory study progress; verify_only={verify_only}')
+ print(f'MANZO AI guided learning: {reviewed} course pages, 3 Academy hubs, 3 locales, 12 maps + in-memory study progress; verify_only={verify_only}')
 
 if __name__=='__main__':
  p=argparse.ArgumentParser()
