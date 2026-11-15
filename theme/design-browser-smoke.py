@@ -43,6 +43,20 @@ def test(page,route,expected_kind,screen,width):
  ink=page.evaluate("getComputedStyle(document.body).getPropertyValue('--ma-ink').trim()")
  assert ink=='#142841',(screen,width,'ink',ink)
  if expected_kind=='landing':
+  features=page.locator('.grid-3>.feature')
+  assert features.count()>=3,(screen,'home feature cards missing')
+  expected=['rgb(32, 78, 229)','rgb(0, 111, 104)','rgb(255, 143, 82)']
+  actual=[features.nth(i).evaluate('(el)=>getComputedStyle(el).backgroundColor') for i in range(3)]
+  assert actual==expected,(screen,width,'pastel home cards survived',actual)
+  assert page.locator('.home-hero').evaluate('(el)=>getComputedStyle(el).backgroundColor')=='rgb(255, 255, 255)',(screen,'home hero not white')
+  assert page.locator('.home-hero .ma-product-scene').evaluate('(el)=>getComputedStyle(el).backgroundColor')=='rgb(33, 88, 237)',(screen,'product scene missing contrast')
+  assert all(features.nth(i).evaluate('(el)=>getComputedStyle(el).boxShadow')!='none' for i in range(3)),(screen,'feature depth missing')
+  if width==1440:
+   features.first.hover()
+   page.wait_for_timeout(350)
+   assert features.first.evaluate('(el)=>getComputedStyle(el).transform')!='none',(screen,'interactive card effect missing')
+  if width==390:
+   assert page.evaluate('document.documentElement.scrollWidth-window.innerWidth')<=4,(screen,'horizontal overflow')
   assert page.locator('[data-ma-home-scene="1"]').count()==1
   assert page.locator('.ma-product-scene a[href*="/prodotto/"],.ma-product-scene a[href*="/product/"],.ma-product-scene a[href*="/producto/"]').count()==1
  if screen.endswith('product'):
