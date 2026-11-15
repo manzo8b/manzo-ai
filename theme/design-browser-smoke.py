@@ -52,6 +52,9 @@ def test(page,route,expected_kind,screen,width):
   assert page.locator('.home-hero .ma-product-scene').evaluate('(el)=>getComputedStyle(el).backgroundColor')=='rgb(33, 88, 237)',(screen,'product scene missing contrast')
   assert all(features.nth(i).evaluate('(el)=>getComputedStyle(el).boxShadow')!='none' for i in range(3)),(screen,'feature depth missing')
   if width==1440:
+   first_box=features.first.bounding_box()
+   last_box=features.nth(2).bounding_box()
+   assert first_box and last_box and last_box['width']>first_box['width']+180,(screen,'third featured card still leaves large empty grid row',first_box,last_box)
    features.first.hover()
    page.wait_for_timeout(350)
    assert features.first.evaluate('(el)=>getComputedStyle(el).transform')!='none',(screen,'interactive card effect missing')
