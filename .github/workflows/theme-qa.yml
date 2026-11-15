@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - 'theme/mobile-nav.js'
+      - 'theme/design-system.css'
+      - 'theme/design-motion.js'
+      - 'theme/publish-design-system.py'
+      - 'theme/design-browser-smoke.py'
       - 'theme/mobile-nav.css'
       - 'theme/publish-navigation.py'
       - 'theme/mobile-browser-smoke.py'
@@ -72,6 +76,10 @@ jobs:
           node --check theme/mobile-nav.js
           python3 theme/publish-navigation.py --site _site
           python3 theme/publish-navigation.py --site _site --verify-only
+          python3 -m py_compile theme/publish-design-system.py theme/design-browser-smoke.py
+          node --check theme/design-motion.js
+          python3 theme/publish-design-system.py --site _site
+          python3 theme/publish-design-system.py --site _site --verify-only
       - name: Install Chromium for responsive smoke tests
         run: |
           python3 -m pip install playwright==1.55.0
@@ -89,3 +97,12 @@ jobs:
           python3 theme/hallucinations-coding-browser-smoke.py
           python3 theme/product-preview-browser-smoke.py
           python3 theme/learning-console-browser-smoke.py
+          python3 theme/design-browser-smoke.py
+      - name: Upload screenshot evidence for the design review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manzo-design-evidence
+          path: design-review-screenshots/
+          if-no-files-found: ignore
+          retention-days: 7
