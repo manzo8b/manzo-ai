@@ -953,3 +953,39 @@ body[data-ma-surface="landing"] .ma-scene-note{
     display:none!important;
   }
 }
+
+/* Standalone product header fix: legacy mobile-nav.css contains an unscoped
+   .shell {width:100%;display:block!important} rule. On self-contained product
+   surfaces restore their intrinsic responsive header/layout composition. */
+@media(max-width:760px){
+  body[data-product-preview] .shell,
+  body[data-learning-console] .shell{
+    width:calc(100% - 30px)!important;
+    max-width:1180px;
+    margin-inline:auto!important;
+  }
+  body[data-product-preview] .head-line{
+    display:flex!important;
+    align-items:center;
+    justify-content:space-between;
+    gap:.85rem;
+    min-height:70px;
+  }
+  body[data-product-preview] .hero-layout,
+  body[data-product-preview] .work-layout{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+  }
+  body[data-learning-console] .header-inner{
+    display:flex!important;
+    align-items:center;
+    justify-content:space-between;
+    gap:.6rem;
+    min-height:68px;
+  }
+  body[data-learning-console] .header-inner .langs{
+    width:auto;
+    flex:0 0 auto;
+    margin-left:auto;
+  }
+}
