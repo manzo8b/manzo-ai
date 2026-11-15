@@ -810,3 +810,128 @@ body[data-ma-surface].ma-motion-ready .ma-reveal.ma-inview{
     border:2px solid var(--ma-stroke);
   }
 }
+
+/* Product narrative built from actual Studio / Verify / Learning operations.
+   The search remains the real homepage search; the right-side scene is a real
+   navigation surface, never a fabricated chart or model-generated metric. */
+body[data-ma-surface="landing"] .home-hero:has(.ma-product-scene){
+  position:relative;
+  min-height:570px;
+  text-align:left!important;
+  padding-right:43%;
+  display:block;
+}
+body[data-ma-surface="landing"] .home-hero:has(.ma-product-scene) :is(h1,p,.searchbox,.search-hint,.chips){
+  margin-left:0;
+  margin-right:0;
+  text-align:left;
+}
+body[data-ma-surface="landing"] .home-hero:has(.ma-product-scene) h1{
+  max-width:12ch;
+  font-size:clamp(2.8rem,4.1vw,4.85rem);
+  line-height:1.04;
+}
+body[data-ma-surface="landing"] .home-hero:has(.ma-product-scene) .searchbox{
+  width:min(100%,610px);
+  max-width:100%;
+}
+body[data-ma-surface="landing"] .home-hero:has(.ma-product-scene) .search-hint{
+  max-width:56ch;
+}
+body[data-ma-surface="landing"] .ma-product-scene{
+  position:absolute;
+  top:50%;
+  right:clamp(1.5rem,3vw,3.2rem);
+  transform:translateY(-50%);
+  width:min(36%,410px);
+  background:#fff;
+  padding:clamp(1.6rem,2.3vw,2.6rem);
+  box-shadow:none;
+  color:var(--ma-ink);
+}
+body[data-ma-surface="landing"] .ma-scene-title{
+  margin:0 0 1.5rem!important;
+  font-size:clamp(1.22rem,1.65vw,1.55rem)!important;
+  line-height:1.23!important;
+  font-weight:650;
+  color:var(--ma-ink)!important;
+  letter-spacing:-.024em;
+}
+body[data-ma-surface="landing"] .ma-stages{display:grid;gap:0}
+body[data-ma-surface="landing"] .ma-stage{
+  display:grid;
+  grid-template-columns:minmax(73px,.65fr) minmax(0,1.35fr);
+  gap:1rem;
+  align-items:baseline;
+  padding:1.05rem 0;
+  border-top:1px solid #d5e6e8;
+}
+body[data-ma-surface="landing"] .ma-stage span{
+  color:var(--ma-teal-deep);
+  font-size:.85rem;
+  font-weight:750;
+}
+body[data-ma-surface="landing"] .ma-stage strong{
+  color:#36546a;
+  font-size:clamp(.87rem,1.02vw,1rem);
+  line-height:1.45;
+  font-weight:520;
+}
+body[data-ma-surface="landing"] .ma-scene-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  min-height:46px;
+  padding:.7rem 1.05rem;
+  background:var(--ma-blue);
+  color:#fff;
+  font-size:.89rem;
+  font-weight:700;
+  text-decoration:none;
+  border-radius:8px;
+  margin-top:1.15rem;
+  transition:background .18s ease,transform .18s ease;
+}
+body[data-ma-surface="landing"] .ma-scene-link:hover{
+  background:var(--ma-blue-deep);
+  transform:translateY(-2px);
+}
+body[data-ma-surface="landing"] .ma-scene-link:active{transform:scale(.98)}
+body[data-ma-surface="landing"] .ma-scene-note{
+  font-size:.8rem!important;
+  margin:1rem 0 0!important;
+  line-height:1.5!important;
+  color:#587282!important;
+}
+@media(max-width:1250px){
+  body[data-ma-surface="landing"] .home-hero:has(.ma-product-scene){
+    min-height:0;
+    padding-right:clamp(1.2rem,4.3vw,4.2rem);
+  }
+  body[data-ma-surface="landing"] .ma-product-scene{
+    position:static;
+    transform:none;
+    width:100%;
+    margin-top:2.2rem;
+    max-width:680px;
+  }
+  body[data-ma-surface="landing"] .home-hero:has(.ma-product-scene) h1{
+    max-width:17ch;
+  }
+}
+@media(max-width:650px){
+  body[data-ma-surface="landing"] .home-hero:has(.ma-product-scene){
+    padding:2.7rem 1.25rem;
+  }
+  body[data-ma-surface="landing"] .home-hero:has(.ma-product-scene) h1{
+    font-size:clamp(2.35rem,9vw,3.3rem);
+    max-width:100%;
+  }
+  body[data-ma-surface="landing"] .ma-product-scene{
+    padding:1.5rem 1.2rem;
+  }
+  body[data-ma-surface="landing"] .ma-stage{
+    grid-template-columns:minmax(75px,.68fr) minmax(0,1.32fr);
+    gap:.55rem;
+  }
+}
