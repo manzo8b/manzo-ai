@@ -82,6 +82,9 @@ jobs:
           node --check theme/design-motion.js
           python3 theme/publish-design-system.py --site _site
           python3 theme/publish-design-system.py --site _site --verify-only
+          python3 -m py_compile theme/publish-home-scene.py
+          python3 theme/publish-home-scene.py --site _site
+          python3 theme/publish-home-scene.py --site _site --verify-only
       - name: Install Chromium for responsive smoke tests
         run: |
           python3 -m pip install playwright==1.55.0
