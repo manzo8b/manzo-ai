@@ -1080,3 +1080,77 @@ body[data-ma-surface] :is(.solid,.searchbox button):focus-visible{
 @media(prefers-reduced-motion:reduce){
  body[data-ma-surface="landing"] .ma-product-scene{transition:none}
 }
+
+/* MANZO AI v1.2 — Card Motion Contract (global, controlled)
+   Explicit user requirement: cards feel modern and responsive without
+   destabilizing their existing layout or changing educational content.
+   Applies to genuine website features, learning modules and product panels. */
+body[data-ma-surface="landing"] .grid-3>.feature,
+body[data-ma-surface] .module-card,
+body[data-ma-surface] .entry,
+body[data-product-preview] .product-card,
+body[data-learning-console] .course-card{
+ position:relative;
+ isolation:isolate;
+ border-radius:18px!important;
+ box-shadow:0 5px 17px #16355e14!important;
+ transition:
+  transform .28s cubic-bezier(.2,.8,.2,1),
+  box-shadow .28s cubic-bezier(.2,.8,.2,1),
+  filter .22s ease!important;
+}
+body[data-ma-surface="landing"] .grid-3>.feature:hover,
+body[data-ma-surface="landing"] .grid-3>.feature:focus-within,
+body[data-ma-surface] .module-card:hover,
+body[data-ma-surface] .module-card:focus-within,
+body[data-ma-surface] .entry:hover,
+body[data-ma-surface] .entry:focus-within,
+body[data-product-preview] .product-card:hover,
+body[data-product-preview] .product-card:focus-within,
+body[data-learning-console] .course-card:hover,
+body[data-learning-console] .course-card:focus-within{
+ transform:translateY(-5px)!important;
+ box-shadow:0 23px 49px #15365b30!important;
+ filter:saturate(1.08);
+}
+/* Embedded CTAs move independently — small prompt feedback, not animation. */
+body[data-ma-surface] :is(.feature,.module-card,.entry,.product-card,.course-card) a:not(.ma-course-link){
+ transition:color .18s ease,background-color .18s ease,transform .22s ease;
+}
+body[data-ma-surface] :is(.feature,.module-card,.entry,.product-card,.course-card) a:not(.ma-course-link):focus-visible{
+ outline:3px solid #f16a44;
+ outline-offset:3px;
+}
+body[data-product-preview] .product-card .card-number{
+ font-weight:790;
+ color:#1f4fce;
+}
+body[data-learning-console] .course-card{border:1px solid #bed7ed!important}
+@media(max-width:760px){
+ body[data-ma-surface="landing"] .grid-3>.feature,
+ body[data-ma-surface] .module-card,
+ body[data-ma-surface] .entry,
+ body[data-product-preview] .product-card,
+ body[data-learning-console] .course-card{
+  border-radius:14px!important;
+  box-shadow:0 4px 13px #16355e15!important;
+ }
+}
+@media(hover:none), (prefers-reduced-motion:reduce){
+ body[data-ma-surface="landing"] .grid-3>.feature:hover,
+ body[data-ma-surface] .module-card:hover,
+ body[data-ma-surface] .entry:hover,
+ body[data-product-preview] .product-card:hover,
+ body[data-learning-console] .course-card:hover{
+  transform:none!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body[data-ma-surface="landing"] .grid-3>.feature,
+ body[data-ma-surface] .module-card,
+ body[data-ma-surface] .entry,
+ body[data-product-preview] .product-card,
+ body[data-learning-console] .course-card{
+  transition:none!important;
+ }
+}
