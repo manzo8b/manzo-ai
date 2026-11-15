@@ -7,9 +7,9 @@ CREATE TABLE auth.users (id uuid PRIMARY KEY);
 CREATE FUNCTION auth.uid()
 RETURNS uuid
 LANGUAGE sql STABLE
-AS $
+AS $fixture$
   SELECT NULLIF(current_setting('request.jwt.claim.sub',true),'')::uuid
-$;
+$fixture$;
 GRANT USAGE ON SCHEMA auth TO authenticated;
 GRANT EXECUTE ON FUNCTION auth.uid() TO authenticated;
 INSERT INTO auth.users(id) VALUES
