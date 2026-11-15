@@ -56,6 +56,12 @@ BEGIN
  IF (SELECT count(*) FROM app_private.billing_events WHERE provider_event_id='evt_test_duplicate_123') <> 1 THEN
    RAISE EXCEPTION 'Webhook idempotency uniqueness failed';
  END IF;
+ IF NOT has_table_privilege('service_role','app_private.billing_events','INSERT') THEN
+   RAISE EXCEPTION 'Trusted service cannot write billing events';
+ END IF;
+ IF NOT has_table_privilege('service_role','app_private.feature_grants','UPDATE') THEN
+   RAISE EXCEPTION 'Trusted service cannot manage grants';
+ END IF;
  -- DB integrity: a record may not refer to a course version from another course.
  BEGIN
   INSERT INTO app.learning_attempts(organization_id,course_id,user_id,version_id,assessment_id)
