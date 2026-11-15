@@ -44,6 +44,8 @@ def verify_stripe_signature(
         return False
 
     entries = [part.strip().split("=", 1) for part in signature_header.split(",")]
+    if any(len(item) != 2 for item in entries):
+        return False
     timestamps = [value for key, value in entries if key == "t"]
     versions = [value for key, value in entries if key == "v1"]
 
