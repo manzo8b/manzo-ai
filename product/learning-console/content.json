@@ -1,0 +1,293 @@
+{
+  "it": {
+    "title": "Una piattaforma che segue il lavoro di ogni studente",
+    "subtitle": "Dalla licenza aziendale al progresso formativo: esplora il funzionamento previsto di MANZO AI Learning B2B.",
+    "kicker": "MANZO AI / LEARNING B2B / PROTOTIPO INTERATTIVO",
+    "back": "Torna al Product Lab",
+    "demo": "Simulazione locale · nessun account reale",
+    "warning": "Questa console è un prototipo interattivo con persone e organizzazioni inventate. Le azioni modificano solo lo stato temporaneo del browser: non creano account, iscrizioni, risultati ufficiali o pagamenti.",
+    "adminTab": "Amministrazione",
+    "studentTab": "Vista studente",
+    "reset": "Ripristina simulazione",
+    "org": "Organizzazione dimostrativa",
+    "stats": [
+      [
+        "Posti occupati",
+        "di 3 disponibili"
+      ],
+      [
+        "Iscrizioni attive",
+        "corsi assegnati"
+      ],
+      [
+        "Corsi disponibili",
+        "catalogo formativo"
+      ],
+      [
+        "Progressione media",
+        "su iscrizioni attive"
+      ]
+    ],
+    "adminTitle": "Licenze e apprendimento, in un unico pannello",
+    "adminLead": "Un responsabile può controllare posti, iscrizioni e progressi. La logica definitiva sarà autorizzata e registrata dal backend, non da questa demo.",
+    "seatCol": "Licenza",
+    "enrollCol": "Iscrizioni",
+    "progressCol": "Progressi",
+    "actionCol": "Gestione",
+    "studentCol": "Studente",
+    "seatActive": "Attiva",
+    "seatMissing": "Assente",
+    "assign": "Assegna posto",
+    "release": "Libera posto",
+    "noSeat": "Nessun posto disponibile",
+    "seatAdded": "Posto assegnato a",
+    "seatReleased": "Posto liberato da",
+    "seatAlready": "Questa persona ha già una licenza",
+    "enrollTitle": "Assegna un corso a uno studente",
+    "studentPick": "Studente",
+    "coursePick": "Corso",
+    "enroll": "Iscrivi al corso",
+    "enrolled": "Iscrizione attivata per",
+    "enrollAlready": "Iscrizione già attiva",
+    "enrollNoSeat": "Prima assegna una licenza attiva",
+    "activeEnrollment": "Attivo",
+    "revokedEnrollment": "Revocato",
+    "studentTitle": "La formazione vista dallo studente",
+    "studentLead": "Scegli un profilo fittizio per osservare la progressione. Questa selezione non rappresenta un'autenticazione.",
+    "courseModules": "moduli completati",
+    "complete": "Completa un modulo (simulazione)",
+    "finished": "Percorso completato",
+    "noCourses": "Nessun corso attualmente assegnato",
+    "unlicensed": "Accesso ai corsi riservati non disponibile: occorre una licenza attiva",
+    "moduleLogged": "Modulo completato per",
+    "noLogin": "Nessuna identità reale è stata autenticata",
+    "eventsTitle": "Registro delle azioni simulate",
+    "eventsEmpty": "Nessuna azione in questa sessione",
+    "eventsLead": "Eventi visibili soltanto durante questa simulazione, non salvati nel backend.",
+    "howTitle": "Cosa c'è dietro questo prototipo",
+    "howLead": "Le regole equivalenti per quote, isolamento, progressi e quiz sono già testate in PostgreSQL. Mancano ancora il servizio API, il provider di identità, la persistenza cloud e i pagamenti.",
+    "capabilities": [
+      [
+        "Testato in PostgreSQL",
+        "Quote, accessi fra aziende, iscrizioni, avanzamento e calcolo dei quiz"
+      ],
+      [
+        "Solo dimostrazione visuale",
+        "Dashboard amministratore, studente e registro degli eventi"
+      ],
+      [
+        "Da implementare",
+        "Login, sessioni, API, database gestito, gestione pagamenti e report enterprise"
+      ]
+    ],
+    "courses": [
+      "Allucinazioni AI e verificabilità",
+      "Engineering Assurance nel coding"
+    ],
+    "personNames": [
+      "Studente 01",
+      "Studente 02",
+      "Studente 03",
+      "Studente 04"
+    ],
+    "simReset": "Stato dimostrativo ripristinato",
+    "sales": "Un'esperienza da valutare con clienti B2B prima di attivare il SaaS.",
+    "labelPreview": "SIMULAZIONE",
+    "labelQA": "TESTATO",
+    "labelTodo": "DA IMPLEMENTARE"
+  },
+  "en": {
+    "title": "A platform that follows every learner's progress",
+    "subtitle": "From organization licenses to learning progress: explore the planned MANZO AI Learning B2B experience.",
+    "kicker": "MANZO AI / LEARNING B2B / INTERACTIVE PROTOTYPE",
+    "back": "Back to Product Lab",
+    "demo": "Local simulation · no real accounts",
+    "warning": "This console is an interactive prototype with fictional people and organizations. Actions change temporary browser state only; they do not create accounts, official enrollments, results or payments.",
+    "adminTab": "Organization admin",
+    "studentTab": "Learner view",
+    "reset": "Reset simulation",
+    "org": "Demonstration organization",
+    "stats": [
+      [
+        "Assigned seats",
+        "out of 3 available"
+      ],
+      [
+        "Active enrollments",
+        "assigned courses"
+      ],
+      [
+        "Available courses",
+        "learning catalog"
+      ],
+      [
+        "Average progress",
+        "for active enrollments"
+      ]
+    ],
+    "adminTitle": "Licenses and learning, in one workspace",
+    "adminLead": "An administrator can review seats, enrollments and progress. The eventual backend—not this preview—will authorize and record real actions.",
+    "seatCol": "License",
+    "enrollCol": "Enrollments",
+    "progressCol": "Progress",
+    "actionCol": "Manage",
+    "studentCol": "Learner",
+    "seatActive": "Active",
+    "seatMissing": "Unassigned",
+    "assign": "Assign seat",
+    "release": "Release seat",
+    "noSeat": "No more seats available",
+    "seatAdded": "Seat assigned to",
+    "seatReleased": "Seat released from",
+    "seatAlready": "Learner already has an active seat",
+    "enrollTitle": "Enroll a learner in a course",
+    "studentPick": "Learner",
+    "coursePick": "Course",
+    "enroll": "Enroll in course",
+    "enrolled": "Enrollment activated for",
+    "enrollAlready": "Already enrolled",
+    "enrollNoSeat": "Assign an active seat first",
+    "activeEnrollment": "Active",
+    "revokedEnrollment": "Revoked",
+    "studentTitle": "Learning from the learner's perspective",
+    "studentLead": "Select a fictional learner to explore progress. This selection is not authentication.",
+    "courseModules": "modules completed",
+    "complete": "Complete a module (simulation)",
+    "finished": "Course completed",
+    "noCourses": "No courses currently assigned",
+    "unlicensed": "Restricted course access unavailable: an active license is required",
+    "moduleLogged": "Module completed for",
+    "noLogin": "No real identity has been authenticated",
+    "eventsTitle": "Simulated action log",
+    "eventsEmpty": "No actions in this session",
+    "eventsLead": "Events exist in temporary browser state only and are not stored in a backend.",
+    "howTitle": "What powers this prototype",
+    "howLead": "Equivalent rules for quotas, tenant separation, progress and quiz grading are tested in PostgreSQL. API endpoints, identity, cloud persistence and payments remain to be built.",
+    "capabilities": [
+      [
+        "Verified in PostgreSQL",
+        "Seat quotas, tenant access, enrollment, progress and server-scored quizzes"
+      ],
+      [
+        "Visual demonstration only",
+        "Organization and learner dashboards, in-browser activity log"
+      ],
+      [
+        "Still to implement",
+        "Authentication, sessions, API, managed database, billing and enterprise reports"
+      ]
+    ],
+    "courses": [
+      "AI hallucinations and verification",
+      "Engineering Assurance for coding"
+    ],
+    "personNames": [
+      "Learner 01",
+      "Learner 02",
+      "Learner 03",
+      "Learner 04"
+    ],
+    "simReset": "Demonstration state reset",
+    "sales": "An experience to validate with B2B buyers before activating the SaaS.",
+    "labelPreview": "SIMULATED",
+    "labelQA": "VERIFIED",
+    "labelTodo": "TO BUILD"
+  },
+  "es": {
+    "title": "Una plataforma que acompaña el progreso de cada estudiante",
+    "subtitle": "Desde las licencias de una empresa hasta el avance formativo: explora la experiencia prevista de MANZO AI Learning B2B.",
+    "kicker": "MANZO AI / LEARNING B2B / PROTOTIPO INTERACTIVO",
+    "back": "Volver al Product Lab",
+    "demo": "Simulación local · sin cuentas reales",
+    "warning": "Esta consola es un prototipo interactivo con personas y organizaciones ficticias. Las acciones modifican solo el estado temporal del navegador: no crean cuentas, inscripciones, resultados oficiales ni pagos.",
+    "adminTab": "Administración",
+    "studentTab": "Vista estudiante",
+    "reset": "Restablecer simulación",
+    "org": "Organización de demostración",
+    "stats": [
+      [
+        "Plazas ocupadas",
+        "de 3 disponibles"
+      ],
+      [
+        "Inscripciones activas",
+        "cursos asignados"
+      ],
+      [
+        "Cursos disponibles",
+        "catálogo formativo"
+      ],
+      [
+        "Progreso medio",
+        "de las inscripciones activas"
+      ]
+    ],
+    "adminTitle": "Licencias y aprendizaje en un mismo espacio",
+    "adminLead": "La persona responsable puede revisar plazas, inscripciones y avances. En el producto definitivo el backend deberá autorizar y registrar estas acciones.",
+    "seatCol": "Licencia",
+    "enrollCol": "Inscripciones",
+    "progressCol": "Avance",
+    "actionCol": "Gestión",
+    "studentCol": "Estudiante",
+    "seatActive": "Activa",
+    "seatMissing": "Sin licencia",
+    "assign": "Asignar plaza",
+    "release": "Liberar plaza",
+    "noSeat": "No quedan plazas disponibles",
+    "seatAdded": "Plaza asignada a",
+    "seatReleased": "Plaza liberada de",
+    "seatAlready": "La persona ya tiene licencia activa",
+    "enrollTitle": "Inscribe a un estudiante en un curso",
+    "studentPick": "Estudiante",
+    "coursePick": "Curso",
+    "enroll": "Inscribir en curso",
+    "enrolled": "Inscripción activada para",
+    "enrollAlready": "Inscripción ya activa",
+    "enrollNoSeat": "Primero asigna una licencia activa",
+    "activeEnrollment": "Activa",
+    "revokedEnrollment": "Revocada",
+    "studentTitle": "La formación desde la perspectiva del estudiante",
+    "studentLead": "Selecciona una persona ficticia para ver su avance. Esta selección no equivale a autenticarse.",
+    "courseModules": "módulos completados",
+    "complete": "Completar un módulo (simulación)",
+    "finished": "Curso completado",
+    "noCourses": "No hay cursos asignados",
+    "unlicensed": "No se permite acceder a cursos restringidos sin una licencia activa",
+    "moduleLogged": "Módulo completado para",
+    "noLogin": "No se ha autenticado ninguna identidad real",
+    "eventsTitle": "Registro de acciones simuladas",
+    "eventsEmpty": "Sin acciones en esta sesión",
+    "eventsLead": "Los eventos solo existen en la memoria temporal del navegador y no se guardan en el backend.",
+    "howTitle": "Qué hay detrás del prototipo",
+    "howLead": "Las reglas correspondientes a cuotas, separación de clientes, progreso y corrección de cuestionarios ya se prueban en PostgreSQL. Quedan pendientes API, identidad, persistencia cloud y pagos.",
+    "capabilities": [
+      [
+        "Verificado en PostgreSQL",
+        "Cuotas, separación de empresas, inscripciones, avance y corrección de cuestionarios"
+      ],
+      [
+        "Solo demostración visual",
+        "Paneles de administrador y estudiante, registro temporal"
+      ],
+      [
+        "Pendiente de implementar",
+        "Acceso, sesiones, API, base de datos gestionada, pagos e informes empresariales"
+      ]
+    ],
+    "courses": [
+      "Alucinaciones IA y verificación",
+      "Engineering Assurance en programación"
+    ],
+    "personNames": [
+      "Estudiante 01",
+      "Estudiante 02",
+      "Estudiante 03",
+      "Estudiante 04"
+    ],
+    "simReset": "Estado de demostración restablecido",
+    "sales": "Una experiencia que debemos validar con clientes B2B antes de activar el SaaS.",
+    "labelPreview": "SIMULADO",
+    "labelQA": "VERIFICADO",
+    "labelTodo": "PENDIENTE"
+  }
+}
