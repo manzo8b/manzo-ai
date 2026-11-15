@@ -1,0 +1,398 @@
+{
+  "head": {
+    "title1": "Cuando la IA",
+    "title2": "inventa la realidad",
+    "kicker": "MANZO AI · FORMACIÓN PROFESIONAL / 01",
+    "desc": "Alucinaciones, evidencias y supervisión humana: un curso avanzado para finanzas, cumplimiento normativo, asesoría jurídica y entornos regulados.",
+    "strap": "Una respuesta convincente no siempre es defendible. Hay que saber qué afirma, de dónde procede y quién puede autorizar su utilización.",
+    "program": "Programa",
+    "practice": "Laboratorio",
+    "assessment": "Evaluación",
+    "sources": "Fuentes",
+    "back": "Volver a MANZO AI",
+    "start": "Explorar el programa",
+    "try": "Abrir los casos",
+    "tag1": "Nivel profesional",
+    "tag2": "5 horas · duración orientativa",
+    "tag3": "10 ejercicios + cuestionario",
+    "metric1": "5 módulos",
+    "metric1b": "conceptos y método",
+    "metric2": "10 casos",
+    "metric2b": "finanzas, AML, legal",
+    "metric3": "8 fuentes",
+    "metric3b": "primarias y académicas",
+    "programK": "El itinerario",
+    "programH": "Comprender el fallo. Gobernar la respuesta.",
+    "programD": "El curso distingue problemas diferentes: hechos inventados, datos obsoletos, errores de cálculo, referencias inexistentes y conclusiones sin respaldo. Cada uno exige una verificación específica.",
+    "practiceK": "Laboratorio profesional",
+    "practiceH": "Diez expedientes, diez decisiones",
+    "practiceD": "Examina el resultado, redacta tu valoración y compárala con el criterio del revisor. Todos los casos son simulados y los datos ficticios se identifican expresamente.",
+    "methodK": "Método operativo",
+    "methodH": "MANZO VERIFY",
+    "methodD": "Protocolo educativo original para que los resultados de IA sean cuestionables y auditables. No es una norma acreditada ni un instrumento científicamente validado.",
+    "quizK": "Evaluación",
+    "quizH": "Pon a prueba tu criterio",
+    "quizD": "Diez preguntas sobre decisiones, evidencias y distinciones conceptuales. La puntuación es formativa, no una certificación profesional.",
+    "crossK": "Vocabulario aplicado",
+    "crossH": "Crucigrama de verificabilidad",
+    "crossD": "Ocho definiciones: siete horizontales y una vertical. Las respuestas utilizan términos técnicos italianos, sin espacios ni tildes, como ejercicio de terminología multilingüe.",
+    "sourceK": "Bibliografía verificable",
+    "sourceH": "De las fuentes primarias a las decisiones responsables",
+    "sourceD": "Una fuente auténtica no demuestra automáticamente la afirmación que se le atribuye. Hay que leerla en su jurisdicción, periodo y contexto.",
+    "closing": "MANZO AI — De la generación a la responsabilidad",
+    "notice": "Uso exclusivamente educativo. Los casos simulados no son asesoramiento legal, financiero ni AML. Las respuestas no se envían ni almacenan en servidores.",
+    "exerciseLabel": "Tu valoración",
+    "compare": "Comparar con la revisión",
+    "hide": "Ocultar la revisión",
+    "exInput": "Escribe al menos 20 caracteres antes de comparar.",
+    "exReady": "Ya puedes contrastar tu respuesta.",
+    "correct": "Correcto",
+    "incorrect": "Necesita revisión",
+    "select": "Selecciona una respuesta.",
+    "next": "Siguiente pregunta",
+    "finish": "Mostrar resultado",
+    "score": "Puntuación",
+    "restart": "Volver a empezar",
+    "quizEnd": "Este resultado es formativo, no una credencial. Revisa los casos de mayor riesgo y documenta tus decisiones.",
+    "cell": "Casilla fila/columna",
+    "crossSuccess": "Crucigrama completado correctamente.",
+    "crossResult": "{correct} casillas correctas de {total}; {filled} completadas.",
+    "crossReset": "Cuadrícula restablecida.",
+    "reset": "Borrar cuadrícula",
+    "crossCheck": "Comprobar crucigrama",
+    "across": "Horizontales",
+    "down": "Verticales",
+    "courseLabel": "Curso profesional",
+    "quizCheck": "Confirmar respuesta",
+    "exerciseProgress": "Casos revisados",
+    "statusLabel": "Verificabilidad del resultado",
+    "protocol": "Protocolo de siete fases"
+  },
+  "modules": [
+    {
+      "title": "Qué es una alucinación y qué no lo es",
+      "duration": "35 min",
+      "p": [
+        "Una alucinación de IA generativa consiste en producir contenido falso o no fiel al contexto disponible, a menudo con un tono convincente. El término resulta útil, pero no debe emplearse para cualquier resultado insatisfactorio. Un error aritmético, una cita ausente y una norma desactualizada requieren diagnósticos diferentes.",
+        "Los modelos lingüísticos aprenden regularidades estadísticas y generan texto. Esta capacidad no incluye por sí misma la verificación de cada afirmación frente a documentos auténticos. Kalai y colaboradores (2025) analizan cómo ciertos procedimientos de entrenamiento y evaluación pueden favorecer las conjeturas frente al reconocimiento de la incertidumbre.",
+        "Un informe que confunde EBITDA con resultado neto presenta un error de interpretación contable. Un informe que inventa unas cuentas anuales que nunca consultó podría contener una alucinación. Diferenciar los casos determina cómo corregirlos."
+      ],
+      "evidence": "Regla editorial: la ausencia de una fuente no demuestra que una afirmación sea falsa. Debe figurar como no verificada hasta disponer de evidencias suficientes.",
+      "sources": [
+        "F1",
+        "F2",
+        "F5"
+      ]
+    },
+    {
+      "title": "Dónde se origina el riesgo",
+      "duration": "40 min",
+      "p": [
+        "Las instrucciones ambiguas, la falta de documentos, las premisas falsas y la información obsoleta pueden aumentar el riesgo. Preguntar «¿qué sanciones recibió la empresa?» supone de antemano que existieron sanciones: primero hay que comprobar esa premisa.",
+        "Las citas formales tampoco son pruebas. Puede inventarse un número de sentencia, un DOI o una dirección web; una fuente auténtica también puede utilizarse para sostener una conclusión que no contiene. La comprobación incluye existencia, autenticidad, relevancia, fecha e interpretación.",
+        "El grounding y la generación aumentada por recuperación (RAG) pueden ayudar a conectar respuestas con evidencias, pero no garantizan exactitud. Hay que comprobar el documento recuperado, su vigencia y la correspondencia de la cita. Las instrucciones maliciosas presentes en documentos recuperados siguen siendo contenido no confiable."
+      ],
+      "evidence": "Control mínimo: identificar la afirmación, localizar la fuente primaria, leer el fragmento pertinente y comprobar fecha y contexto. La fluidez del texto no mide su veracidad.",
+      "sources": [
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    {
+      "title": "MANZO VERIFY: cadena de evidencias",
+      "duration": "55 min",
+      "p": [
+        "El método comprende siete acciones: IDENTIFICAR la afirmación, establecer su CONTEXTO, localizar la FUENTE, CONTRASTAR el contenido, CLASIFICAR el resultado, aplicar SUPERVISIÓN humana y DOCUMENTAR todo el proceso. Es una propuesta educativa de MANZO AI, no una norma acreditada.",
+        "Se distinguen tres estados: verificado (respaldo suficiente dentro de un alcance definido), no verificado (evidencia insuficiente o ausente) y refutado (evidencias fiables incompatibles con la afirmación). Cada estado debe vincularse a una fecha y a una afirmación concreta.",
+        "El registro incluye identificador, afirmación, fuente primaria, localización exacta, fecha y versión, estado, impacto, persona revisora y acción. Sin esta trazabilidad, incluso una decisión acertada puede resultar imposible de reproducir."
+      ],
+      "evidence": "La pregunta profesional no es solamente «¿es correcto?», sino «¿con qué pruebas puede otro especialista repetir esta comprobación?»",
+      "sources": [
+        "F2",
+        "F3"
+      ]
+    },
+    {
+      "title": "Finanzas, cumplimiento y derecho: el coste de una falsa certeza",
+      "duration": "40 min",
+      "p": [
+        "En finanzas, una cifra incorrecta puede distorsionar valoraciones, informes para inversores o controles internos. Hay que verificar ejercicio, moneda, definición contable y perímetro de consolidación. Una cantidad aparentemente precisa también exige recalcularla.",
+        "En AML/CFT, una alerta es un indicador de riesgo y no una prueba automática de blanqueo. La IA puede ayudar en la detección y el análisis, pero debe distinguirse entre anomalías, investigaciones y decisiones de las funciones autorizadas. Cualquier medida sobre una cuenta requiere fundamento legal y procedimental propio.",
+        "En investigación jurídica, una sentencia no autenticada no debe presentarse como precedente firme. Comprueba órgano, identificador, fecha, texto original y pertinencia. El artículo 14 del Reglamento europeo de IA se dirige a la supervisión de sistemas de alto riesgo y no establece una obligación idéntica para todos los chatbots."
+      ],
+      "evidence": "ESMA recuerda que las decisiones de las empresas de inversión siguen siendo responsabilidad de sus órganos de administración, aunque se apoyen en herramientas de IA.",
+      "sources": [
+        "F6",
+        "F7",
+        "F8"
+      ]
+    },
+    {
+      "title": "Supervisión humana y gobernanza del resultado",
+      "duration": "40 min",
+      "p": [
+        "La revisión humana no consiste en añadir una firma al final. Requiere competencia, acceso a las pruebas, tiempo suficiente y capacidad real para corregir, suspender o rechazar el resultado. El sesgo de automatización puede convertir un texto convincente en una verdad aparente.",
+        "Los controles deben ser proporcionales al impacto. Un borrador interno puede precisar una revisión ordinaria; un informe regulatorio, un análisis de M&A o una decisión sobre derechos exige comprobaciones más sólidas, responsabilidades claras y escalado documentado.",
+        "El profesional también debe saber cuándo no decidir: declarar un dato no verificado, pedir documentación adicional o suspender la publicación puede ser la opción responsable."
+      ],
+      "evidence": "La calidad no consiste solamente en producir muchos resultados, sino en poder utilizarlos con evidencias, límites expresos y personas responsables.",
+      "sources": [
+        "F2",
+        "F6",
+        "F7"
+      ]
+    }
+  ],
+  "method": [
+    [
+      "01",
+      "IDENTIFY",
+      "Dividir la respuesta en afirmaciones comprobables"
+    ],
+    [
+      "02",
+      "CONTEXT",
+      "Determinar jurisdicción, fecha, ámbito y finalidad"
+    ],
+    [
+      "03",
+      "SOURCE",
+      "Encontrar evidencia primaria y su versión"
+    ],
+    [
+      "04",
+      "CROSS-CHECK",
+      "Comparar la afirmación con el fragmento pertinente"
+    ],
+    [
+      "05",
+      "CLASSIFY",
+      "Verificado, no verificado o refutado"
+    ],
+    [
+      "06",
+      "OVERSIGHT",
+      "Asignar revisión, escalado y autoridad de decisión"
+    ],
+    [
+      "07",
+      "DOCUMENT",
+      "Registrar pruebas, cambios, fecha y responsable"
+    ]
+  ],
+  "cases": [
+    [
+      "Análisis financiero",
+      "El crecimiento no acreditado",
+      "La IA afirma: «Los ingresos aumentaron un 18% en el último trimestre». El prompt no incluye empresa, periodo contable ni documentos.",
+      "Identifica los datos que faltan y redacta un prompt que exija aclaraciones antes del cálculo.",
+      "No aprobar el 18%. Solicitar entidad, trimestre, estados financieros, perímetro y metodología. Mantener la cifra como no verificada."
+    ],
+    [
+      "Contabilidad",
+      "Un error no es siempre una alucinación",
+      "Ingresos 2025: 8.000.000 €. Ingresos 2026: 9.200.000 €. La IA escribe: «Aumento del 25%».",
+      "Recalcula el porcentaje, clasifica el fallo y corrige el texto.",
+      "(9.200.000 − 8.000.000) / 8.000.000 = 15%. Es un error aritmético demostrado, no necesariamente una alucinación."
+    ],
+    [
+      "Auditoría",
+      "EBITDA no equivale a beneficio neto",
+      "Expediente: EBITDA 2.400.000 €; resultado neto 700.000 €; deuda financiera neta 1.700.000 €. La IA indica resultado neto 2.400.000 € y deuda 170.000 €.",
+      "Detecta ambos errores y señala las pruebas que deben registrarse.",
+      "El resultado neto es 700.000 €, no 2.400.000 €. La deuda neta es 1.700.000 €. Comprobar las partidas originales y el ejercicio."
+    ],
+    [
+      "AML/CFT",
+      "De la alerta a la acusación",
+      "Un sistema detecta transferencias inusuales y concluye: «El cliente blanquea dinero; hay que congelar inmediatamente la cuenta». Solo hay alertas.",
+      "Diferencia indicios, hechos acreditados y medidas sobre la cuenta; propone una escalada.",
+      "Una alerta no demuestra responsabilidad. Investigar conforme al procedimiento con personal autorizado. Cualquier restricción necesita fundamento propio."
+    ],
+    [
+      "Asesoría jurídica",
+      "El precedente no localizado",
+      "La IA cita una sentencia con número y fecha. Una primera búsqueda en un repertorio no devuelve resultados.",
+      "Define cómo autenticar la referencia antes de utilizarla en un dictamen.",
+      "Suspender su uso y consultar registros adecuados, el texto original y su relevancia. No encontrarla en una sola base no demuestra que no exista."
+    ],
+    [
+      "Regulación",
+      "Un artículo aplicado a todos",
+      "La IA sostiene: «El artículo 14 del AI Act exige idéntica supervisión a todos los chatbots».",
+      "Comprueba categoría del sistema, alcance y versión vigente.",
+      "El artículo 14 establece requisitos para sistemas de alto riesgo. No generalizar a todos los chatbots."
+    ],
+    [
+      "M&A",
+      "El pasivo desaparecido",
+      "Expediente ficticio: «Net debt at closing: EUR 1.7m. Material tax exposure: pending verification». La IA dice que no hay deuda ni riesgo fiscal.",
+      "Separa hechos, incertidumbre y conclusiones sin apoyo.",
+      "Registrar una deuda neta de 1,7 millones de euros. La exposición fiscal está pendiente de verificación; no equivale a riesgo nulo."
+    ],
+    [
+      "Mercados",
+      "Una cotización que parece «en directo»",
+      "El sistema ofrece un precio bursátil supuestamente en tiempo real sin acceso acreditado a datos actuales.",
+      "Enumera las comprobaciones antes de incluir el precio en un informe.",
+      "Verificar instrumento, ticker, mercado, divisa, hora y proveedor. Sin fuente adecuada, el precio queda no verificado."
+    ],
+    [
+      "Investigación",
+      "Fuente verdadera, conclusión falsa",
+      "Un estudio examina 120 empresas de un solo sector. La IA declara: «Funciona en todas las industrias europeas».",
+      "Valora representatividad y generalización.",
+      "Una muestra sectorial no demuestra eficacia universal. Limitar la conclusión a los casos estudiados y buscar evidencia adicional."
+    ],
+    [
+      "Auditoría integral",
+      "Cuatro afirmaciones en suspenso",
+      "Un informe generado incluye un ratio sin fórmula, una sentencia no autenticada, una acusación AML presentada como hecho y una norma sin ámbito.",
+      "Registra cuatro afirmaciones con su estado, evidencia ausente, riesgo, corrección y decisión de publicación.",
+      "No publicar en este estado. Comprobar cálculo, referencia judicial, indicios AML y pertinencia normativa con revisores especializados."
+    ]
+  ],
+  "quiz": [
+    [
+      "La IA informa de 4,1 millones de euros de beneficio sin documentos ni citas. ¿Qué estado procede?",
+      [
+        "Falsedad demostrada",
+        "No verificado",
+        "Verificado por la precisión",
+        "Refutado automáticamente"
+      ],
+      [
+        1
+      ],
+      "La falta de fuente no basta para demostrar que el importe sea falso."
+    ],
+    [
+      "Un estudio de 120 empresas de un sector se extrapola a todas las empresas europeas. ¿Qué problema hay?",
+      [
+        "Conversión de divisas",
+        "Generalización no respaldada",
+        "Doble contabilidad",
+        "Información vigente"
+      ],
+      [
+        1
+      ],
+      "La población estudiada no sostiene esa conclusión universal."
+    ],
+    [
+      "Una bibliografía generada contiene un DOI. ¿Cómo verificas su relevancia?",
+      [
+        "Contar los caracteres",
+        "Consultar tres chatbots",
+        "Abrir el registro y leer el fragmento pertinente",
+        "Confiar en el título técnico"
+      ],
+      [
+        2
+      ],
+      "La existencia y los metadatos no bastan sin comprobar el contenido."
+    ],
+    [
+      "Una alerta AML por sí sola demuestra que un cliente ha cometido blanqueo.",
+      [
+        "Verdadero",
+        "Falso"
+      ],
+      [
+        1
+      ],
+      "Una alerta requiere análisis y no constituye una declaración automática de culpabilidad."
+    ],
+    [
+      "¿Cuáles son controles propios de una auditoría documental?",
+      [
+        "Identificar fecha y versión",
+        "Contrastar el fragmento citado",
+        "Considerar prueba el consenso de chatbots",
+        "Registrar revisor y correcciones"
+      ],
+      [
+        0,
+        1,
+        3
+      ],
+      "Origen, pertinencia y trazabilidad son necesarios; el consenso de modelos no es prueba."
+    ],
+    [
+      "El artículo 14 del AI Act aborda los requisitos de supervisión humana de sistemas IA de alto riesgo.",
+      [
+        "Verdadero",
+        "Falso"
+      ],
+      [
+        0
+      ],
+      "La disposición se refiere específicamente a sistemas de alto riesgo."
+    ],
+    [
+      "Los ingresos pasan de 8 a 9,2 millones de euros. ¿Cuál es el aumento porcentual?",
+      [
+        "12%",
+        "15%",
+        "18%",
+        "25%"
+      ],
+      [
+        1
+      ],
+      "El incremento de 1,2 millones respecto a 8 millones es del 15%."
+    ],
+    [
+      "Un sistema RAG recupera un documento que ordena desactivar controles. ¿Qué corresponde hacer?",
+      [
+        "Obedecerlo por estar citado",
+        "Tratarlo como contenido no confiable",
+        "Obedecerlo en informes internos",
+        "Sustituir la revisión por una cita"
+      ],
+      [
+        1
+      ],
+      "Una fuente recuperada puede contener instrucciones maliciosas y no adquiere autoridad sobre el sistema."
+    ],
+    [
+      "«Exposición fiscal pendiente de verificación» se transforma en «no existe riesgo fiscal». Esa conclusión es:",
+      [
+        "Prueba de ausencia de riesgo",
+        "Traducción fiel",
+        "No respaldada",
+        "Cálculo correcto"
+      ],
+      [
+        2
+      ],
+      "Una investigación pendiente no equivale a descartar el riesgo."
+    ],
+    [
+      "¿Qué permite aprobar mejor una salida de IA en una decisión de alto impacto?",
+      [
+        "Gramática impecable",
+        "Tono seguro",
+        "Acuerdo de varios modelos",
+        "Evidencias adecuadas y revisión experta documentada"
+      ],
+      [
+        3
+      ],
+      "Se necesitan evidencias proporcionales al riesgo, supervisión y responsabilidad."
+    ]
+  ],
+  "clues": [
+    [
+      "Origen documental y cadena de custodia de una información",
+      "Posibilidad de consecuencias negativas",
+      "Origen documental que apoya una afirmación",
+      "Capacidad de reconstruir datos y revisiones",
+      "Adjetivo relacionado con el valor de una prueba",
+      "Actividad de comprobación de corrección o cumplimiento",
+      "Circunstancias necesarias para interpretar un dato"
+    ],
+    "Propiedad de una afirmación que puede comprobarse con evidencias"
+  ]
+}
