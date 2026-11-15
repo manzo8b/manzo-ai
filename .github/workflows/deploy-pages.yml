@@ -16,6 +16,8 @@ on:
       - editorial/video/prompt-engineering/**
       - editorial/research/acr/**
       - editorial/learning/hallucinations/**
+      - product/learning-experience/**
+      - theme/publish-learning-experience.py
       - product/preview/**
       - product/learning-console/**
       - theme/publish-learning-console.py
@@ -273,6 +275,11 @@ jobs:
           node --check editorial/learning/hallucinations/coding.js
           python3 theme/publish-hallucinations-coding.py --site _site
           python3 theme/publish-hallucinations-coding.py --site _site --verify-only
+          # New learning scaffolding uses only the already published content.
+          python3 -m py_compile theme/publish-learning-experience.py
+          node --check product/learning-experience/guide.js
+          python3 theme/publish-learning-experience.py --site _site
+          python3 theme/publish-learning-experience.py --site _site --verify-only
           for coding_page in it/impara/allucinazioni-ai-verificabilita/coding en/learn/ai-hallucinations-verification/coding es/aprende/alucinaciones-ia-verificacion/coding; do
             test -s "_site/$coding_page/index.html"
             grep -q 'data-hc-module' "_site/$coding_page/index.html"
