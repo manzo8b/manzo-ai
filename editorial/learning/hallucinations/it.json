@@ -13,20 +13,20 @@
     "start": "Esplora il programma",
     "try": "Apri i casi",
     "tag1": "Livello professionale",
-    "tag2": "5 ore · durata indicativa",
-    "tag3": "10 esercizi + quiz",
-    "metric1": "5 moduli",
+    "tag2": "6 h 15 min · durata indicativa",
+    "tag3": "14 casi + quiz",
+    "metric1": "6 moduli",
     "metric1b": "teoria e metodo",
-    "metric2": "10 casi",
-    "metric2b": "finanza, AML, legal",
-    "metric3": "8 fonti",
+    "metric2": "14 casi",
+    "metric2b": "finanza, AML, coding, legal",
+    "metric3": "12 fonti",
     "metric3b": "primarie e scientifiche",
     "programK": "Il percorso",
     "programH": "Comprendere l’errore. Governare la risposta.",
-    "programD": "Il corso distingue fenomeni spesso confusi: una falsità generata, un dato obsoleto, un calcolo errato, una fonte inesistente e una conclusione non sostenuta dalle prove. Per ciascuno, cambia la verifica necessaria.",
+    "programD": "Il corso distingue allucinazioni, errori di calcolo, informazioni obsolete e conclusioni senza prove. Un modulo specialistico affronta le conseguenze del codice AI non verificato nella produzione software e nei rapporti con i clienti.",
     "practiceK": "Laboratorio professionale",
     "practiceH": "Dieci dossier, dieci decisioni",
-    "practiceD": "Analizza l’output, scrivi una valutazione e confrontala con il criterio di revisione. I casi sono simulati; la presenza di dati o società fittizie è dichiarata, non nascosta.",
+    "practiceD": "Dieci dossier trasversali e quattro casi specialistici di coding, in una sezione dedicata. Le situazioni e le cifre sono simulazioni esplicite.",
     "methodK": "Metodo operativo",
     "methodH": "MANZO VERIFY",
     "methodD": "Protocollo didattico originale per rendere gli output contestabili e tracciabili. Non è uno standard normativo né uno strumento scientificamente validato.",
@@ -75,7 +75,8 @@
       "p": [
         "L’allucinazione di un modello generativo è la produzione di contenuti falsi o non fedeli al contesto, spesso formulati in modo plausibile e sicuro. Il termine è utile, ma non deve diventare un’etichetta generica per ogni risultato insoddisfacente. Un errore aritmetico, una fonte non indicata e una regola normativa superata richiedono diagnosi diverse.",
         "I modelli linguistici apprendono regolarità nei dati e generano sequenze di testo; questa competenza non comporta una verifica automatica di ciascuna affermazione contro documenti autentici. Lo studio di Kalai e colleghi (2025) analizza come alcuni metodi di addestramento e valutazione possano incentivare il tentativo di indovinare anziché riconoscere l’incertezza.",
-        "Una relazione di audit che afferma «utile netto: 2,4 milioni» perché confonde EBITDA e utile netto presenta un errore di lettura dei dati. Una relazione che inventa un bilancio mai consultato può invece contenere un’allucinazione. L’azione correttiva dipende da questa distinzione."
+        "Una relazione di audit che afferma «utile netto: 2,4 milioni» perché confonde EBITDA e utile netto presenta un errore di lettura dei dati. Una relazione che inventa un bilancio mai consultato può invece contenere un’allucinazione. L’azione correttiva dipende da questa distinzione.",
+        "Anche una risposta corretta per coincidenza può essere inutilizzabile in un audit se nessuno sa ricostruire da quali dati è stata ottenuta. La professionalità richiede quindi una doppia valutazione: accuratezza dell’affermazione e affidabilità del processo con cui l’affermazione è stata prodotta. Un risultato non verificabile non dovrebbe diventare automaticamente una premessa di una decisione."
       ],
       "evidence": "Regola editoriale: non definire falsa un’affermazione solo perché manca la fonte; classificarla come non verificata finché le evidenze non consentono un giudizio più forte.",
       "sources": [
@@ -90,7 +91,8 @@
       "p": [
         "Le condizioni di rischio includono istruzioni ambigue, informazioni assenti, richieste fondate su presupposti inesistenti e uso di conoscenze non aggiornate. Chiedere «quali sanzioni ha ricevuto la società?» presuppone che le sanzioni esistano: il primo controllo consiste nell’accertare il presupposto.",
         "La presenza di citazioni formali non risolve il problema. Un numero di sentenza, un DOI o un link possono essere inventati; viceversa, un documento autentico può essere citato a sostegno di una conclusione che non contiene. La verifica comprende esistenza, autenticità, pertinenza, periodo e interpretazione.",
-        "Il grounding e i sistemi di recupero documentale (RAG) possono migliorare l’ancoraggio alle evidenze, ma non garantiscono accuratezza. Devono essere verificati i documenti recuperati, il loro aggiornamento e la corrispondenza puntuale tra passaggio citato e affermazione. Anche istruzioni malevole contenute nelle fonti recuperate vanno trattate come dati non attendibili."
+        "Il grounding e i sistemi di recupero documentale (RAG) possono migliorare l’ancoraggio alle evidenze, ma non garantiscono accuratezza. Devono essere verificati i documenti recuperati, il loro aggiornamento e la corrispondenza puntuale tra passaggio citato e affermazione. Anche istruzioni malevole contenute nelle fonti recuperate vanno trattate come dati non attendibili.",
+        "Il prompting riduce ambiguità ma non sostituisce fonti, verifiche e controlli. Specificare contesto, periodo e vincoli migliora la domanda; non rende vera la risposta. Se una fonte viene recuperata, occorre leggerne la parte pertinente e controllare se l'assistente abbia confuso dato, ipotesi e conclusione."
       ],
       "evidence": "Controllo minimo: identificare il claim, individuare la fonte primaria, leggere il passaggio rilevante, verificare data e contesto. La fluidità del testo non è un indicatore di verità.",
       "sources": [
@@ -105,7 +107,8 @@
       "p": [
         "Il metodo si articola in sette azioni: IDENTIFICARE il claim; CONTESTUALIZZARLO; RINTRACCIARE la fonte; CONFRONTARE l’affermazione con il documento; CLASSIFICARE l’esito; SUPERVISIONARE la decisione; DOCUMENTARE il percorso. La sequenza è una proposta didattica MANZO AI, non uno standard accreditato.",
         "Tre stati evitano conclusioni premature: verificato (evidenze sufficienti nel contesto dichiarato), non verificato (evidenze mancanti o insufficienti), smentito (evidenze affidabili incompatibili). L’esito riguarda la singola affermazione e deve riportare il momento e il perimetro del controllo.",
-        "Il registro delle evidenze include Claim ID, testo del claim, fonte primaria, localizzazione nel documento, data e versione, stato, rischio, revisore e azione. L’assenza del registro può trasformare una correzione valida in un processo impossibile da ricostruire."
+        "Il registro delle evidenze include Claim ID, testo del claim, fonte primaria, localizzazione nel documento, data e versione, stato, rischio, revisore e azione. L’assenza del registro può trasformare una correzione valida in un processo impossibile da ricostruire.",
+        "In una revisione seria si documenta anche ciò che non è stato possibile controllare. La formula «non verificato» non è una scorciatoia: è una decisione provvisoria, riferita a un claim e a un insieme preciso di evidenze. Quando emergono nuove fonti, il registro deve poter essere aggiornato senza perdere la storia della valutazione."
       ],
       "evidence": "Il professionista non chiede soltanto «è corretto?». Chiede: «Quale evidenza specifica consente a un altro revisore di ripetere il controllo?»",
       "sources": [
@@ -119,7 +122,8 @@
       "p": [
         "In finanza, una cifra sbagliata può alterare confronti, valutazioni, comunicazioni agli investitori o verifiche interne. La fonte deve essere coerente con periodo, valuta, definizione contabile e livello di consolidamento. La presenza di una cifra precisa non esenta dal ricalcolo.",
         "Nell’AML/CFT un alert è un indicatore che richiede valutazione, non una prova automatica di riciclaggio. Il sistema può supportare lo screening e l’analisi, ma deve distinguere anomalie, verifiche e decisioni spettanti a persone e funzioni autorizzate. L’eventuale misura sul rapporto richiede autonomo fondamento normativo e procedurale.",
-        "Nella ricerca giuridica, una sentenza non rintracciata non va presentata come precedente certo. Occorre verificare autorità, identificativo, data, testo e rilevanza. Quanto all’AI Act, l’articolo 14 riguarda i requisiti di supervisione dei sistemi classificati ad alto rischio: non introduce un obbligo identico per ogni chatbot."
+        "Nella ricerca giuridica, una sentenza non rintracciata non va presentata come precedente certo. Occorre verificare autorità, identificativo, data, testo e rilevanza. Quanto all’AI Act, l’articolo 14 riguarda i requisiti di supervisione dei sistemi classificati ad alto rischio: non introduce un obbligo identico per ogni chatbot.",
+        "Nella redazione di un parere o di una relazione regolamentare non basta ritrovare un testo con la stessa parola chiave. Bisogna stabilirne efficacia temporale, territorio, soggetti interessati e rapporto con eventuali eccezioni. Un articolo autentico applicato al soggetto sbagliato può produrre una conclusione altrettanto dannosa di una disposizione inventata."
       ],
       "evidence": "ESMA ricorda che le decisioni delle imprese d’investimento restano responsabilità degli organi di gestione, anche quando sono supportate dall’AI.",
       "sources": [
@@ -134,13 +138,31 @@
       "p": [
         "L’occhio umano non è un timbro apposto dopo la generazione. Una revisione efficace richiede competenza, tempo, accesso alle prove e possibilità reale di correggere, sospendere o rifiutare il risultato. Il rischio di automation bias aumenta quando una risposta ben scritta viene trattata come corretta per la sola qualità espositiva.",
         "Le verifiche devono essere proporzionate alle conseguenze. Una bozza interna può richiedere una revisione ordinaria; una relazione normativa, un’analisi M&A o una valutazione capace di incidere sui diritti richiedono controlli rafforzati, responsabilità chiare ed escalation documentata.",
-        "Il professionista decide quando non decidere: può classificare un claim come non verificato, chiedere dati aggiuntivi o interrompere l’uso dell’output. Questa disciplina riduce i danni derivanti dall’apparente sicurezza dell’AI."
+        "Il professionista decide quando non decidere: può classificare un claim come non verificato, chiedere dati aggiuntivi o interrompere l’uso dell’output. Questa disciplina riduce i danni derivanti dall’apparente sicurezza dell’AI.",
+        "L’approvazione umana deve essere proporzionata alla posta in gioco. Un revisore che non dispone della documentazione, del tempo o della competenza per contestare il risultato non sta esercitando una supervisione effettiva. La possibilità di interrompere un processo e registrare motivatamente una riserva è parte del controllo, non un fallimento del progetto."
       ],
       "evidence": "Una buona organizzazione non misura soltanto quanti output genera, ma quanti sono utilizzabili con evidenze, limiti dichiarati e responsabilità identificabili.",
       "sources": [
         "F2",
         "F6",
         "F7"
+      ]
+    },
+    {
+      "title": "Allucinazioni nel coding, affidabilità del software e rischio commerciale",
+      "duration": "75 min",
+      "p": [
+        "Nel coding la plausibilità assume una forma particolarmente insidiosa: un metodo inesistente può sembrare parte di un SDK, una libreria inventata può essere presentata come dipendenza ufficiale, una configurazione può sembrare aggiornata e una risposta può dichiarare test che nessuno ha eseguito. L’output è tecnicamente controllabile: la differenza fra ciò che il modello descrive e ciò che il repository, il runtime o la documentazione dimostrano non va lasciata alla fiducia.",
+        "Un rischio di natura diversa emerge quando il codice è realmente eseguibile ma non soddisfa requisiti di autorizzazione, robustezza o protezione dei dati. Una demo efficace può occultare una vulnerabilità di accesso fra tenant, un problema di concorrenza o un errore che compare soltanto in produzione. Non tutti questi difetti sono allucinazioni: identificarne correttamente la causa è parte della competenza dello sviluppatore.",
+        "Quando un fornitore consegna software a banche, gruppi industriali o imprese con processi critici, il difetto può incidere su continuità operativa, integrità delle informazioni, costi di ripristino e rapporto commerciale. Penali, contestazioni, mancati rinnovi e responsabilità non vanno dati per scontati: dipendono dal contesto, dai contratti e dalle evidenze. Il valore del professionista risiede nella capacità di limitare il rischio prima della consegna.",
+        "Il dossier specialistico collegato approfondisce il tema con un esempio di autorizzazione multi-tenant, un flusso di impatto commerciale, otto quality gate verificabili, quattro casi di studio e un assessment dedicato. L’approvazione del rilascio deve poggiare su build e test eseguiti, dipendenze controllate, revisione indipendente e documentazione riproducibile."
+      ],
+      "evidence": "GitHub, OWASP e NIST documentano l’importanza di validare codice e output, mentre uno studio USENIX Security 2025 analizza l'invenzione di pacchetti da parte dei coding model. [F9–F12]",
+      "sources": [
+        "F9",
+        "F10",
+        "F11",
+        "F12"
       ]
     }
   ],
