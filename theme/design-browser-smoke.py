@@ -87,6 +87,13 @@ def test(page,route,expected_kind,screen,width):
  }:
   raw=page.screenshot(type='jpeg',quality=45,full_page=False,animations='disabled')
   print('MA_VISUAL_JPEG|'+screen+'|'+str(width)+'|'+base64.b64encode(raw).decode('ascii'),flush=True)
+ if screen=='it-home' and width in (1440,390):
+  features=page.locator('.grid-3>.feature')
+  features.first.scroll_into_view_if_needed()
+  page.wait_for_timeout(320)
+  page.screenshot(path=str(DEST/f'it-home-feature-cards-{width}.png'),full_page=False,animations='disabled')
+  frame=page.screenshot(type='jpeg',quality=48,full_page=False,animations='disabled')
+  print('MA_HOME_CARDS_VISUAL|'+str(width)+'|'+base64.b64encode(frame).decode('ascii'),flush=True)
  print(f'PASS DESIGN {screen} {width}px: {actual}; paper {body_color}; h1 OK; screenshot captured.')
 
 with sync_playwright() as pw:
