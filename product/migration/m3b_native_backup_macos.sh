@@ -12,13 +12,13 @@ info() { printf '%s\n' "$*"; }
 [[ -z "${CI:-}" && -z "${GITHUB_ACTIONS:-}" ]] || fail 'Backup remoto vietato in CI.'
 command -v shasum >/dev/null || fail 'shasum non disponibile.'
 
-# PostgreSQL 18 pg_dump supports older server 17.11. Restore target should be >=18.
+# Prefer PostgreSQL 17 pg_dump for Supabase PostgreSQL 17.11. Fallback to 18 when needed.
 PG_BIN=''
 for candidate in \
-  '/Applications/Postgres.app/Contents/Versions/18/bin' \
-  "${HOME}/Applications/Postgres.app/Contents/Versions/18/bin" \
   '/Applications/Postgres.app/Contents/Versions/17/bin' \
-  "${HOME}/Applications/Postgres.app/Contents/Versions/17/bin"
+  "${HOME}/Applications/Postgres.app/Contents/Versions/17/bin" \
+  '/Applications/Postgres.app/Contents/Versions/18/bin' \
+  "${HOME}/Applications/Postgres.app/Contents/Versions/18/bin"
 do
   if [[ -x "$candidate/pg_dump" && -x "$candidate/pg_restore" && -x "$candidate/psql" ]]; then
     PG_BIN="$candidate"
@@ -26,7 +26,7 @@ do
   fi
 done
 if [[ -z "$PG_BIN" ]]; then
-  command -v pg_dump >/dev/null || fail 'pg_dump non trovato: controlla Postgres.app 18 o 17.'
+  command -v pg_dump >/dev/null || fail 'pg_dump non trovato: controlla Postgres.app 17 o 18.'
   command -v pg_restore >/dev/null || fail 'pg_restore non trovato.'
   command -v psql >/dev/null || fail 'psql non trovato.'
   PG_BIN="$(dirname "$(command -v pg_dump)")"
