@@ -1,6 +1,6 @@
 # MANZO AI · Product Platform (pre-commercial foundation)
 
-**Status:** functional local preview and unit-tested policy contracts; **NOT** an operating SaaS, hosted billing service or multi-tenant application.
+**Status (16 Nov 2026):** real Supabase Auth pilot and 15 RLS-protected application tables now deployed, plus trilingual My Learning UI and source-only verified read API; **NOT** a live commercial LMS, operating AI agent, billing service or fully tested multi-tenant app. My Learning's API flag remains OFF.
 
 ## Product purpose
 
@@ -40,9 +40,9 @@ The demo is intentionally honest about what it can do *now*.
 |---|---|---|
 | Studio | builds and exports JSON requirements brief locally | not an AI generator |
 | Verify | uses documented text heuristics to flag potentially checkable claims | does not determine truth or hallucination |
-| Learning | configures a team license request profile locally | not a quote, enrolment or subscription |
+| Learning | team-license local demonstration plus verified My Learning UI in private pilot | live enrollments/progress API is OFF; not an active subscription |
 | SaaS policy contract | tests authorization decisions for tenant, validity and quota | not connected to an authenticated backend |
-| Database schema | migration for organizations, students, courses, results, grants and events | tested only on isolated PostgreSQL, never provisioned in a real project |
+| Database schema | 15 RLS-protected application tables and migrations 0001–0003 deployed in dedicated Supabase MANZO AI project | no tenant/customer data, API or live authorization journeys yet |
 | Webhook signature | verifies signed Stripe payloads and replay timestamp windows | does not receive payments or provision licences |
 | Locale + responsive | IT, EN, ES and small/large viewport browser checks | physical device & accessibility audit remain |
 | Learning B2B console | simulated seats, enrollments and student progress, browser-only | not connected to real accounts, data or payments |
@@ -67,7 +67,7 @@ A genuine MANZO AI SaaS needs:
 
 ## Deployment and migration
 
-The GitHub Pages site is a non-transactional preview only. Once the market and technical gates are ready, deploy the actual SaaS app to a suitable provider. Keep the versioned editorial assets and this preview independent of backend choice. The existing source ZIP is preserved.
+The GitHub Pages site is an editorial portal and non-transactional product demonstration with a restricted Auth pilot and My Learning API disabled. Once recovery, tenant tests, legal and hosting gates pass, deploy a commercial SaaS frontend to a suitable provider. Keep the versioned editorial assets and this preview independent of backend choice. The existing source ZIP is preserved.
 
 See:
 - [Backend foundation and RLS tests](backend/README.md)
