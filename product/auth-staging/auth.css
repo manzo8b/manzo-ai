@@ -89,3 +89,16 @@ h2{font-size:clamp(1.5rem,2.4vw,2.45rem);line-height:1.1;letter-spacing:-.055em;
 }
 @media(hover:none){.feature:hover,.button:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+
+/* On small viewports, make real sign-in immediately reachable before the
+   explanatory features, without changing the semantic document order. */
+@media(max-width:950px){
+ .grid{display:flex;flex-direction:column}
+ .intro{display:contents}
+ .intro>.eyebrow{order:1;margin-bottom:0}
+ .intro>h1{order:2;margin:0}
+ .intro>.lead{order:3;margin:0}
+ .intro>.back{order:4;margin:0}
+ .grid>.card{order:5}
+ .intro>.features{order:6;margin-top:0}
+}
