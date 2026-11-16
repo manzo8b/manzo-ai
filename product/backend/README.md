@@ -1,7 +1,7 @@
 # MANZO AI · Backend Foundation v0.1
 
-**Stato:** migrazione SQL e test automatici pronti, nessun database MANZO AI attivato.  
-**Destinazione prevista:** progetto PostgreSQL/Supabase esclusivo, nella regione da scegliere.  
+**Stato verificato 16/11/2026:** progetto MANZO AI Supabase **attivo**, PostgreSQL 17.11 in eu-west-1, 15 tabelle applicative con RLS, migrazioni 0001–0003 applicate, Auth pilota con 1 account. **Nessuna organizzazione, iscrizione, corso aziendale, progresso persistente, Edge Function o pagamento in produzione.**  
+**Catalogo M3 (0004):** collaudato soltanto in staging isolato, non applicato al database live.  
 **Non eseguire su Oiko o su altri database esistenti.**
 
 ## Principio di sicurezza
@@ -29,7 +29,7 @@ Tutte le tabelle usano RLS con politica di accesso restrittiva; `app_private` NO
 
 La nuova migrazione [`0002_learning_b2b.sql`](migrations/0002_learning_b2b.sql) aggiunge la gestione dei posti per organizzazione, l'iscrizione autorizzata ai corsi, la persistenza dei moduli completati, la correzione server-side dei quiz e l'audit trail. Le policy impediscono a studenti privi di una licenza valida di consultare le versioni dei corsi riservati.
 
-I flussi sono verificati in PostgreSQL 16 temporaneo, compresa una prova concorrente per l'ultimo posto libero. **Nessun endpoint web, sistema di login, database cloud o pagamento è stato attivato.**
+I flussi sono verificati in PostgreSQL 16 temporaneo, compresa la concorrenza sull'ultimo posto libero. **Un database cloud e l'autenticazione pilota sono attivi**, ma non esiste un endpoint Learning distribuito, una licenza, un'iscrizione o un pagamento reali. Il workspace My Learning resta con API disabilitata fino al test cross-tenant live.
 
 Guida e condizioni: [Learning B2B MVP](LEARNING_B2B_MVP.md).
 
@@ -37,7 +37,7 @@ Guida e condizioni: [Learning B2B MVP](LEARNING_B2B_MVP.md).
 
 Il file [`contracts/openapi.json`](contracts/openapi.json) definisce le future API per consultazione corsi e iscrizioni, invio risposte con **valutazione server-side**, licenze derivate dal backend, avvio controllato dell'agente e Checkout con prezzo determinato **soltanto dal server**. L'endpoint webhook dovrà validare la firma su raw body e l'idempotenza.
 
-**Non esiste oggi nessun endpoint HTTP attivo.** Il contratto OpenAPI serve a verificare ora le superfici di autorizzazione e a mantenere la migrazione indipendente dal provider. I test automatici rifiutano campi di prezzo/punteggio/budget inseriti dal browser.
+**Non esiste oggi nessun endpoint HTTP Learning attivo.** Il contratto OpenAPI serve a verificare ora le superfici di autorizzazione e a mantenere la migrazione indipendente dal provider. I test automatici rifiutano campi di prezzo/punteggio/budget inseriti dal browser.
 
 ## Importante prima della migrazione in Supabase
 
