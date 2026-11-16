@@ -1,0 +1,1311 @@
+{
+  "schema_version": "1.0",
+  "scope": "git-main-source-only",
+  "audit_date": "2026-11-16",
+  "repository": "manzo8b/manzo-ai",
+  "tree_sha": "76656f6aba305204128bdea776c8debc95c0a1f6",
+  "source_files_total": 154,
+  "tree_truncated": false,
+  "published_base_archive": "site-v0.7.zip",
+  "important": "NOT a final rendered site inventory. Github Actions generates additional pages/assets after ZIP extraction; run product/migration/audit_release.py on the finished _site separately.",
+  "categories": {
+    "ci-cd": {
+      "count": 4,
+      "bytes": 34981
+    },
+    "project-config": {
+      "count": 4,
+      "bytes": 14987
+    },
+    "documentation": {
+      "count": 25,
+      "bytes": 150540
+    },
+    "learning-curriculum": {
+      "count": 10,
+      "bytes": 159923
+    },
+    "editorial-media": {
+      "count": 13,
+      "bytes": 6646088
+    },
+    "audiovisual": {
+      "count": 10,
+      "bytes": 21589269
+    },
+    "research-publication": {
+      "count": 4,
+      "bytes": 412167
+    },
+    "auth-frontend": {
+      "count": 10,
+      "bytes": 59076
+    },
+    "backend-tests-contracts": {
+      "count": 8,
+      "bytes": 81527
+    },
+    "backend-api-source": {
+      "count": 4,
+      "bytes": 25505
+    },
+    "database-migration": {
+      "count": 3,
+      "bytes": 30597
+    },
+    "policy-reference": {
+      "count": 4,
+      "bytes": 12139
+    },
+    "public-demo": {
+      "count": 7,
+      "bytes": 61555
+    },
+    "learning-ux": {
+      "count": 3,
+      "bytes": 50074
+    },
+    "release-archive": {
+      "count": 7,
+      "bytes": 22450246
+    },
+    "build-and-design": {
+      "count": 38,
+      "bytes": 314571
+    }
+  },
+  "entries": [
+    {
+      "path": ".github/workflows/auth-staging-qa.yml",
+      "sha": "7eb0e4e21f41a2c000681312df5ccf62f0f1234c",
+      "size_bytes": 4817,
+      "category": "ci-cd",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": ".github/workflows/deploy-pages.yml",
+      "sha": "896d05e64a373b576d6a170b0d38053a7bf437d8",
+      "size_bytes": 20841,
+      "category": "ci-cd",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": ".github/workflows/saas-foundation-qa.yml",
+      "sha": "9799233b6f114da3e094f0d44a47003a8d251469",
+      "size_bytes": 3151,
+      "category": "ci-cd",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": ".github/workflows/theme-qa.yml",
+      "sha": "b85e68e6e7697868b9de56d6b15a078a98ca5f08",
+      "size_bytes": 6172,
+      "category": "ci-cd",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": ".gitignore",
+      "sha": "30493427a3dc983525def7ad78b039cff352eacb",
+      "size_bytes": 395,
+      "category": "project-config",
+      "target": "github-version-control",
+      "notes": "source configuration or root document"
+    },
+    {
+      "path": "README.md",
+      "sha": "40ace2ec1b8ad524c34452556580f44d0f18f490",
+      "size_bytes": 9301,
+      "category": "project-config",
+      "target": "github-version-control",
+      "notes": "source configuration or root document"
+    },
+    {
+      "path": "docs/ACR_DOSSIER_RELEASE.md",
+      "sha": "e3830696248e66400dd8f9095341c1d6d4571c88",
+      "size_bytes": 2352,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/APPROVAZIONE_M02_M06_2026-10-27.md",
+      "sha": "2ecf6e435813ada2c246e93eea72eaf0df11597e",
+      "size_bytes": 2751,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/DESIGN.md",
+      "sha": "91a9eabe86afadb449967d1d92768de50843066b",
+      "size_bytes": 10600,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/ENGINEERING_ASSURANCE_MODULE_2026-11-15.md",
+      "sha": "1bf71f00973dffdd0982dd6ff58d4e9b9724219b",
+      "size_bytes": 4298,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/INTEGRAZIONE_BIBLIOTECA_PROMETEUS.md",
+      "sha": "c001a5095645819e471b9289bc4bbd5bc13fa5cb",
+      "size_bytes": 3924,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/LEARNING_UX_COURSERA_REFERENCE_2026-11-15.md",
+      "sha": "0d37be73eb15997e32e7686d9e840ae80b8c40a6",
+      "size_bytes": 7463,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_AUTH_INCIDENT_001_2026-11-16.md",
+      "sha": "342ce1d838801cf9f9d493f0f8766d3c88c3e764",
+      "size_bytes": 2837,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_AUTH_INVITE_ONLY_STAGING_2026-11-16.md",
+      "sha": "72a5d913d41efdd42a70562f6983d5de9cc99a22",
+      "size_bytes": 7698,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_AUTH_PILOT_RELEASE_2026-11-16.md",
+      "sha": "dcf2a804272a83d1c261c70d98016bf39664c000",
+      "size_bytes": 4552,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_BUYER_RESEARCH_2026-11-15.md",
+      "sha": "ad87e036f9c060ab2cf6a5cc8c42b7fe1e97f82f",
+      "size_bytes": 8460,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_PHASE_2_COMMERCIAL_ACTIVATION_2026-11-16.md",
+      "sha": "b286d7291f641931a465a791f57b97d41e270d82",
+      "size_bytes": 9104,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_PRODUCT_RELEASE_GATE_2026-11-15.md",
+      "sha": "aab4a0a9b67aae0910ba3e5a147a3a532e708458",
+      "size_bytes": 6467,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_PROFESSIONAL_REFINEMENT.md",
+      "sha": "e394bbc53b57807980cd24da10626153e47e8f0b",
+      "size_bytes": 4810,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_SAAS_ARCHITECTURE_ADR001_2026-11-15.md",
+      "sha": "5bcceb9a61a542bde729abfe16fa3d2264431899",
+      "size_bytes": 9073,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_SUPABASE_LIVE_FOUNDATION_2026-11-16.md",
+      "sha": "69fa122912da26f84554c8b5178e627aa46df6f8",
+      "size_bytes": 4294,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_V05_RELEASE.md",
+      "sha": "24d6d3a5a2a8fe51d9677a5ebedc0a6303746286",
+      "size_bytes": 2370,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_V06_RELEASE.md",
+      "sha": "7e7f459579bdee94a09e8fe5d6a4d945a8e36e39",
+      "size_bytes": 3366,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_V071_COLOR_AUDIT.md",
+      "sha": "ad82ffeabdb8209555c5f5af345d4d8af8d4b41a",
+      "size_bytes": 2773,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/MANZO_AI_V07_TECHNICAL_COURSE.md",
+      "sha": "bdd1931ba9a9c8863b38d12fd4a082812ee2a7ac",
+      "size_bytes": 2884,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/PROFESSIONAL_AI_HALLUCINATIONS_COURSE_2026-11-15.md",
+      "sha": "963b2926addb197b607d5c92610d9394687c0dbc",
+      "size_bytes": 3323,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/SEO_GOOGLE_SEARCH_CONSOLE_2026-11-13.md",
+      "sha": "237cd5271cc8535a61f7e162010f36901b3bece6",
+      "size_bytes": 4988,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/SLIDE_M01_V04_RELEASE.md",
+      "sha": "02b84ad21f3d774cc131523d588acafa4f88edc7",
+      "size_bytes": 2335,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/VIDEO_E_PROMPT_V03_REGISTRO.md",
+      "sha": "028f8a418be7b3f037011eb8dcc751a70b168acc",
+      "size_bytes": 3483,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/media/EP01_PROMPT_DA_BASE_A_PROFESSIONALE_IT.md",
+      "sha": "2be3d1987fa743d67e839efff5858d888f7f884a",
+      "size_bytes": 14756,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "docs/media/EP02_IL_PROMPT_A_MATTONCINI_LEGO_MANZO_AI_IT.md",
+      "sha": "faf6e3282f5dddeea6e697f42b49a824941dbab2",
+      "size_bytes": 21579,
+      "category": "documentation",
+      "target": "github-version-control",
+      "notes": "no runtime migration"
+    },
+    {
+      "path": "editorial/learning/hallucinations/coding-en.json",
+      "sha": "1e4185e85cae4f79b31a47685d51f4662d779ce1",
+      "size_bytes": 18619,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/learning/hallucinations/coding-es.json",
+      "sha": "deee01c040d7c69033c1cefd388e336f5fdaab19",
+      "size_bytes": 19137,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/learning/hallucinations/coding-it.json",
+      "sha": "ab80e5b5d56561663989e12dcef884265ba1924a",
+      "size_bytes": 20880,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/learning/hallucinations/coding.css",
+      "sha": "b43ed9eebd8948458397a1451866861a1c2ef8df",
+      "size_bytes": 8933,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/learning/hallucinations/coding.js",
+      "sha": "11844a5a32b8354929afce6d9a3f91155d6cc074",
+      "size_bytes": 3702,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/learning/hallucinations/course.css",
+      "sha": "c5c8f74b63a63371ee4b2bc8824c96028486926e",
+      "size_bytes": 11397,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/learning/hallucinations/course.js",
+      "sha": "00591b065a0360abdb92f272a045c1d80b59822b",
+      "size_bytes": 7137,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/learning/hallucinations/en.json",
+      "sha": "76a12047d6dfe4673d6baa2d02785cdd5593c0a9",
+      "size_bytes": 22029,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/learning/hallucinations/es.json",
+      "sha": "71456d18640b0179d1737d33f451009cb0fbb2e9",
+      "size_bytes": 23263,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/learning/hallucinations/it.json",
+      "sha": "ca3ea59b29e18a6143caeaccd6e2a3e7c9287f55",
+      "size_bytes": 24826,
+      "category": "learning-curriculum",
+      "target": "database-candidate",
+      "notes": "course content and exercises; keep authoritative Git source"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/ORACLE_CITY_Numero_01_La_Risposta_Perfetta.pdf",
+      "sha": "5fc14bd3845abb04ac36f4aad84b8e0b92557a1c",
+      "size_bytes": 2927424,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/copertina.jpg",
+      "sha": "d8208e95c96a877f86be28fdf7f5e58d8bf55b7f",
+      "size_bytes": 528112,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/copertina.webp",
+      "sha": "be8b5c1ffaa69af57df3cd47b1f3e48f0dc88a2c",
+      "size_bytes": 286630,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/index.html",
+      "sha": "fcf988fd0d9c64eedbac19d7c3fce3498b6c887c",
+      "size_bytes": 7682,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/pagina-01.webp",
+      "sha": "a4bad0b01b46fafa712795c9f08b59ada4fbe78c",
+      "size_bytes": 358188,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/pagina-02.webp",
+      "sha": "71b3d3fc0c7f800c2b0c044e91703d77e15770eb",
+      "size_bytes": 361366,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/pagina-03.webp",
+      "sha": "61a96c2aa8736bd500b9e4a00625002fef864177",
+      "size_bytes": 364086,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/pagina-04.webp",
+      "sha": "a3837d3730bd9d2d617552be760524aab9522ebe",
+      "size_bytes": 339894,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/pagina-05.webp",
+      "sha": "90c20f60a04ef8b5b29af47854e9d9f28ca269e1",
+      "size_bytes": 288278,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/pagina-06.webp",
+      "sha": "28ed1745f3aab4668b7f0e567b71a18bba767d52",
+      "size_bytes": 260978,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/pagina-07.webp",
+      "sha": "d0a75c3c8f276d4fd4e160138573a7908cbe0fc4",
+      "size_bytes": 290020,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/pagina-08.webp",
+      "sha": "ba521b1f693c73cc8d7b2708bde6f40970aed8de",
+      "size_bytes": 294666,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/oracle-city/numero-01/pagina-09.webp",
+      "sha": "4d3cd0fbd7afd7e85bc2bc5da8654b3834b64210",
+      "size_bytes": 338764,
+      "category": "editorial-media",
+      "target": "public-asset-candidate",
+      "notes": "retain publication status and public URLs"
+    },
+    {
+      "path": "editorial/podcast/ep00/YOUTUBE_KIT.md",
+      "sha": "855cf45c33437ca7cad9bcc756d21e1fb986a06a",
+      "size_bytes": 3167,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "editorial/podcast/ep00/copertina.svg",
+      "sha": "4efb6c4be43022348f33c9ad69cc1699234cdf00",
+      "size_bytes": 3227,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "editorial/podcast/ep00/ep00-it.srt",
+      "sha": "931458ba792fcc922e23636700d35897e17c7f7a",
+      "size_bytes": 5327,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "editorial/podcast/ep00/ep00-it.vtt",
+      "sha": "741363a9aaa03c2f173ccd5cac3f6731b8b60c40",
+      "size_bytes": 5158,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "editorial/research/acr/content.json",
+      "sha": "8f1e03f7f78f660cf6429ad75e4b7c2c1a17bbba",
+      "size_bytes": 27613,
+      "category": "research-publication",
+      "target": "github-static-and-optional-storage",
+      "notes": "authoritative research content/versioning"
+    },
+    {
+      "path": "editorial/research/acr/dossier.css",
+      "sha": "9123170c1e253e25547509da28ec0e4fc8b40d3c",
+      "size_bytes": 19994,
+      "category": "research-publication",
+      "target": "github-static-and-optional-storage",
+      "notes": "authoritative research content/versioning"
+    },
+    {
+      "path": "editorial/research/acr/dossier.js",
+      "sha": "c40d5756d9a9b1b57b3e6f5ce387edd639d8f3a2",
+      "size_bytes": 1732,
+      "category": "research-publication",
+      "target": "github-static-and-optional-storage",
+      "notes": "authoritative research content/versioning"
+    },
+    {
+      "path": "editorial/research/acr/hero_desktop.png",
+      "sha": "2426319c5bd8b2fdffd063d46fabe0c03daec4e8",
+      "size_bytes": 362828,
+      "category": "research-publication",
+      "target": "github-static-and-optional-storage",
+      "notes": "authoritative research content/versioning"
+    },
+    {
+      "path": "editorial/video/il-prompt-si-costruisce/IL_PROMPT_SI_COSTRUISCE.it.srt",
+      "sha": "f2176d3e8086a5a8ba70674a122868d3458f3710",
+      "size_bytes": 11008,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "editorial/video/il-prompt-si-costruisce/IL_PROMPT_SI_COSTRUISCE.it.vtt",
+      "sha": "178cd81c74fec591624bdae884b77b88376824b6",
+      "size_bytes": 10676,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "editorial/video/prompt-engineering/Prompt_Engineering.it.srt",
+      "sha": "9ad298bc4743b3a2c307638d220fb298cf8d1c8e",
+      "size_bytes": 13565,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "editorial/video/prompt-engineering/Prompt_Engineering.it.vtt",
+      "sha": "f5108b35488ee6ccda847f70142336a94d0a764d",
+      "size_bytes": 13117,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "editorial/video/prompt-engineering/Prompt_Engineering.mp4",
+      "sha": "155ea66b2f3955f0507d3fc6090e7e1fd463e6e9",
+      "size_bytes": 21521988,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "editorial/video/prompt-engineering/README.md",
+      "sha": "7deadccce28e1d8e24a2f2db44faabec06f0986f",
+      "size_bytes": 2036,
+      "category": "audiovisual",
+      "target": "review-before-storage",
+      "notes": "copy only approved/published assets"
+    },
+    {
+      "path": "googlee8540704606dd6ec.html",
+      "sha": "07a1b3f2b5b7e2698378489d99bed801839a7a8f",
+      "size_bytes": 53,
+      "category": "project-config",
+      "target": "github-version-control",
+      "notes": "source configuration or root document"
+    },
+    {
+      "path": "product/README.md",
+      "sha": "9faca294487c16175a985a5aab726a7dc91e7950",
+      "size_bytes": 5238,
+      "category": "project-config",
+      "target": "github-version-control",
+      "notes": "source configuration or root document"
+    },
+    {
+      "path": "product/auth-staging/auth.css",
+      "sha": "c8f3c4fe840903cc1310acf659a77a23873b2d71",
+      "size_bytes": 8689,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/auth-staging/config.json",
+      "sha": "cffa63311c51952be8a5e6d1c004075dbe18e85e",
+      "size_bytes": 423,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/auth-staging/content.json",
+      "sha": "2d4c14989f2ccb99ae30855cfb46f9f30584960e",
+      "size_bytes": 13782,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/auth-staging/package.json",
+      "sha": "999ec79fa85a5ad4d1916eff68be07a52d6ca526",
+      "size_bytes": 568,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/auth-staging/privacy.json",
+      "sha": "391ba32cf0bd963e414c385d7ff1eaf178679236",
+      "size_bytes": 11030,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/auth-staging/src/app.js",
+      "sha": "61c66939f9cdab0860b34f928823067e07fcd5cd",
+      "size_bytes": 8418,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/auth-staging/src/auth-policy.mjs",
+      "sha": "00c0d47e448b6feb74e83f872f321a0b7f8a5707",
+      "size_bytes": 3507,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/auth-staging/tests/auth-form-lifecycle.test.mjs",
+      "sha": "1b52669595807f8bf57ebbb8be80b1d9d6d054d5",
+      "size_bytes": 6207,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/auth-staging/tests/auth-policy.test.mjs",
+      "sha": "3dfeece133bfa17358dc6daeba56ecfd1ce757d4",
+      "size_bytes": 4642,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/auth-staging/tests/fake-supabase-sdk.mjs",
+      "sha": "023dda943bccb0791bf9e60db86bab5cf652c0a4",
+      "size_bytes": 1810,
+      "category": "auth-frontend",
+      "target": "keep-until-hosting-cutover",
+      "notes": "Supabase Auth connection and private invite-only pages"
+    },
+    {
+      "path": "product/backend/LEARNING_B2B_MVP.md",
+      "sha": "cae30d138565a4f2ab37873b95992e25ddccb12d",
+      "size_bytes": 7219,
+      "category": "backend-tests-contracts",
+      "target": "github-version-control",
+      "notes": "backend tooling and source"
+    },
+    {
+      "path": "product/backend/README.md",
+      "sha": "850e9fc4805ec2bcfe09d0ecc7551a7064d2936f",
+      "size_bytes": 7083,
+      "category": "backend-tests-contracts",
+      "target": "github-version-control",
+      "notes": "backend tooling and source"
+    },
+    {
+      "path": "product/backend/contracts/openapi.json",
+      "sha": "21e08a67331ebc9c63faf142cb4c60b4e368a4ca",
+      "size_bytes": 38283,
+      "category": "backend-tests-contracts",
+      "target": "github-version-control",
+      "notes": "backend tooling and source"
+    },
+    {
+      "path": "product/backend/edge/README.md",
+      "sha": "0971494886b2856245fd075e9ffcce7300e3bcf1",
+      "size_bytes": 6841,
+      "category": "backend-api-source",
+      "target": "edge-functions-candidate",
+      "notes": "source only; requires security and deployment gates"
+    },
+    {
+      "path": "product/backend/edge/learning-api/index.ts",
+      "sha": "74dd50186a6bc8f424ba214d1382af6af09adf68",
+      "size_bytes": 6094,
+      "category": "backend-api-source",
+      "target": "edge-functions-candidate",
+      "notes": "source only; requires security and deployment gates"
+    },
+    {
+      "path": "product/backend/edge/learning-api/router.mjs",
+      "sha": "d50711e2a56a68f73807b5d2de4df2ddd9ac9716",
+      "size_bytes": 6095,
+      "category": "backend-api-source",
+      "target": "edge-functions-candidate",
+      "notes": "source only; requires security and deployment gates"
+    },
+    {
+      "path": "product/backend/edge/tests/router.test.mjs",
+      "sha": "9d0e1892594f45f490eb384a14c74cf7d6377b21",
+      "size_bytes": 6475,
+      "category": "backend-api-source",
+      "target": "edge-functions-candidate",
+      "notes": "source only; requires security and deployment gates"
+    },
+    {
+      "path": "product/backend/migrations/0001_foundation.sql",
+      "sha": "97371ef99f25d8a8fc4ee60e4692c27cedd4acb8",
+      "size_bytes": 12485,
+      "category": "database-migration",
+      "target": "supabase-migrations",
+      "notes": "0001-0003 already applied; never replay blindly"
+    },
+    {
+      "path": "product/backend/migrations/0002_learning_b2b.sql",
+      "sha": "26e5b8f01250b3deec867ebe1d73181f810cc861",
+      "size_bytes": 17594,
+      "category": "database-migration",
+      "target": "supabase-migrations",
+      "notes": "0001-0003 already applied; never replay blindly"
+    },
+    {
+      "path": "product/backend/migrations/0003_live_event_trigger_permissions.sql",
+      "sha": "52e2ee2aaa5a075c32b46a8c91a227f3d296e5a4",
+      "size_bytes": 518,
+      "category": "database-migration",
+      "target": "supabase-migrations",
+      "notes": "0001-0003 already applied; never replay blindly"
+    },
+    {
+      "path": "product/backend/tests/000_auth_fixture.sql",
+      "sha": "d4fc49b818e79de11ca90f35befab5872052887f",
+      "size_bytes": 958,
+      "category": "backend-tests-contracts",
+      "target": "github-version-control",
+      "notes": "backend tooling and source"
+    },
+    {
+      "path": "product/backend/tests/010_rls_checks.sql",
+      "sha": "fab6ce6c2c71feafcc6f63859311c98c811a81c9",
+      "size_bytes": 9183,
+      "category": "backend-tests-contracts",
+      "target": "github-version-control",
+      "notes": "backend tooling and source"
+    },
+    {
+      "path": "product/backend/tests/020_learning_b2b_flows.sql",
+      "sha": "0dce0baae67b1b2ff49f8d58eeca7f58f29c92bb",
+      "size_bytes": 9678,
+      "category": "backend-tests-contracts",
+      "target": "github-version-control",
+      "notes": "backend tooling and source"
+    },
+    {
+      "path": "product/backend/tests/learning_seat_concurrency_smoke.py",
+      "sha": "dea5e97b4dac0817d7b32fd2116c531d2de55816",
+      "size_bytes": 2679,
+      "category": "backend-tests-contracts",
+      "target": "github-version-control",
+      "notes": "backend tooling and source"
+    },
+    {
+      "path": "product/backend/tests/test_api_contract.py",
+      "sha": "b63a96d8707998f041da578b6e12c7fb7da763d4",
+      "size_bytes": 6444,
+      "category": "backend-tests-contracts",
+      "target": "github-version-control",
+      "notes": "backend tooling and source"
+    },
+    {
+      "path": "product/core/entitlements.py",
+      "sha": "bf7660be834e0a00bddc1a04b4650d02778988dd",
+      "size_bytes": 3432,
+      "category": "policy-reference",
+      "target": "github-version-control",
+      "notes": "not deployed server logic"
+    },
+    {
+      "path": "product/core/tests/test_entitlements.py",
+      "sha": "c5d4e5ccec9b46c4bf19e850210fdff3cdcd6892",
+      "size_bytes": 3357,
+      "category": "policy-reference",
+      "target": "github-version-control",
+      "notes": "not deployed server logic"
+    },
+    {
+      "path": "product/core/tests/test_webhook_security.py",
+      "sha": "79863b95e9187437d5e507c86e65a7a8e1ac7d3b",
+      "size_bytes": 2846,
+      "category": "policy-reference",
+      "target": "github-version-control",
+      "notes": "not deployed server logic"
+    },
+    {
+      "path": "product/core/webhook_security.py",
+      "sha": "6002eb296dfd39e0c003cb24e7252b3b0aedb735",
+      "size_bytes": 2504,
+      "category": "policy-reference",
+      "target": "github-version-control",
+      "notes": "not deployed server logic"
+    },
+    {
+      "path": "product/learning-console/README.md",
+      "sha": "8d184ab366ce5286ea59aab5408180509f9cada2",
+      "size_bytes": 3137,
+      "category": "public-demo",
+      "target": "github-static",
+      "notes": "client-only simulation; do not import simulated data as real"
+    },
+    {
+      "path": "product/learning-console/console.css",
+      "sha": "610294ee3ecab5b427decf208472bb8bdf2b472e",
+      "size_bytes": 8351,
+      "category": "public-demo",
+      "target": "github-static",
+      "notes": "client-only simulation; do not import simulated data as real"
+    },
+    {
+      "path": "product/learning-console/console.js",
+      "sha": "fe66fc10f8432395109accf6b5c44508a931d17f",
+      "size_bytes": 7747,
+      "category": "public-demo",
+      "target": "github-static",
+      "notes": "client-only simulation; do not import simulated data as real"
+    },
+    {
+      "path": "product/learning-console/content.json",
+      "sha": "09576c5459f0b0a7893a9ea1e74075829fad34a6",
+      "size_bytes": 12042,
+      "category": "public-demo",
+      "target": "github-static",
+      "notes": "client-only simulation; do not import simulated data as real"
+    },
+    {
+      "path": "product/learning-experience/guide.css",
+      "sha": "41b4b93d86309e8ba98835ec9f65cf6be7c4cc2b",
+      "size_bytes": 26130,
+      "category": "learning-ux",
+      "target": "github-frontend",
+      "notes": "UX and labels; backend progress later"
+    },
+    {
+      "path": "product/learning-experience/guide.js",
+      "sha": "36e5be7ee10e77fc758837954a71b55540d9a2b1",
+      "size_bytes": 4152,
+      "category": "learning-ux",
+      "target": "github-frontend",
+      "notes": "UX and labels; backend progress later"
+    },
+    {
+      "path": "product/learning-experience/labels.json",
+      "sha": "4890d77b2bc6466927e23b9a6b67fe2b5e3e3864",
+      "size_bytes": 19792,
+      "category": "learning-ux",
+      "target": "github-frontend",
+      "notes": "UX and labels; backend progress later"
+    },
+    {
+      "path": "product/preview/content.json",
+      "sha": "fc76e043dd619113e230ef5784f185c8ac0e5134",
+      "size_bytes": 16826,
+      "category": "public-demo",
+      "target": "github-static",
+      "notes": "client-only simulation; do not import simulated data as real"
+    },
+    {
+      "path": "product/preview/preview.css",
+      "sha": "5a91a1daf0da1c27306485e7737f028648f1f0f9",
+      "size_bytes": 9027,
+      "category": "public-demo",
+      "target": "github-static",
+      "notes": "client-only simulation; do not import simulated data as real"
+    },
+    {
+      "path": "product/preview/preview.js",
+      "sha": "c4215f3e806a4f3b823ad613aa393a234127a13f",
+      "size_bytes": 4425,
+      "category": "public-demo",
+      "target": "github-static",
+      "notes": "client-only simulation; do not import simulated data as real"
+    },
+    {
+      "path": "site-v0.1.zip",
+      "sha": "bd645343cc163a19400f7d648aa38ffda525d3cf",
+      "size_bytes": 188636,
+      "category": "release-archive",
+      "target": "github-version-control",
+      "notes": "legacy archive; v0.7 is current public base"
+    },
+    {
+      "path": "site-v0.2.zip",
+      "sha": "e4b1cea4874c3a502c2d4a29b21d7a47ef9e1e3d",
+      "size_bytes": 214240,
+      "category": "release-archive",
+      "target": "github-version-control",
+      "notes": "legacy archive; v0.7 is current public base"
+    },
+    {
+      "path": "site-v0.3.zip",
+      "sha": "59ca3d55e276a5b240481785d5d68459beeb0f40",
+      "size_bytes": 228974,
+      "category": "release-archive",
+      "target": "github-version-control",
+      "notes": "legacy archive; v0.7 is current public base"
+    },
+    {
+      "path": "site-v0.4.zip",
+      "sha": "a6188bd52a1f4b65f13b2dd9d66268278ab73cd3",
+      "size_bytes": 5327209,
+      "category": "release-archive",
+      "target": "github-version-control",
+      "notes": "legacy archive; v0.7 is current public base"
+    },
+    {
+      "path": "site-v0.5.zip",
+      "sha": "015ac3a727a031ef9d6158fb0e895dab54a54a96",
+      "size_bytes": 5408087,
+      "category": "release-archive",
+      "target": "github-version-control",
+      "notes": "legacy archive; v0.7 is current public base"
+    },
+    {
+      "path": "site-v0.6.zip",
+      "sha": "ca78b6e3729cd8aad4581ac45f8f9fcfc9c08be9",
+      "size_bytes": 5525002,
+      "category": "release-archive",
+      "target": "github-version-control",
+      "notes": "legacy archive; v0.7 is current public base"
+    },
+    {
+      "path": "site-v0.7.zip",
+      "sha": "5854cccd8c1c3ac87bba170654e1a0efc7858aea",
+      "size_bytes": 5558098,
+      "category": "release-archive",
+      "target": "github-version-control",
+      "notes": "legacy archive; v0.7 is current public base"
+    },
+    {
+      "path": "theme/auth-interaction-browser-smoke.py",
+      "sha": "eae1ffd2e2553e14b1029797c89afa4355d63be5",
+      "size_bytes": 4220,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/auth-pilot-live-browser-smoke.py",
+      "sha": "91d3995dea6333889b42cca160d1901c857dcec7",
+      "size_bytes": 4720,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/auth-staging-browser-smoke.py",
+      "sha": "faf36e49a4d74a40b242a8a28709e1a7857f7ec1",
+      "size_bytes": 3568,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/browser-smoke.py",
+      "sha": "b469da646aaa3d8cdeb425d4bb42876f718ba9d0",
+      "size_bytes": 2848,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/build-seo.py",
+      "sha": "f897d461ffb64375b10e7bd45af703e5e1347285",
+      "size_bytes": 10228,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/check-theme.py",
+      "sha": "fcea6aa7d19ec17e9491d465564e37bc6908ee8f",
+      "size_bytes": 2665,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/design-browser-smoke.py",
+      "sha": "d8c0ab57f40266dd00eab63741a5501892d4e3c0",
+      "size_bytes": 6797,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/design-motion.js",
+      "sha": "5e62a7deb37b65b735176a72c3620a5b9cd2943d",
+      "size_bytes": 2810,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/design-system.css",
+      "sha": "958a12da350c28af31b7e4cfe40396f7233ff749",
+      "size_bytes": 42398,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/footer-signature.css",
+      "sha": "3614f9f90055c7cb4450eebab3bcb6841fa1a3b7",
+      "size_bytes": 3139,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/hallucinations-browser-smoke.py",
+      "sha": "4b995a15ce57589e498931c527172cce37dc03b9",
+      "size_bytes": 3368,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/hallucinations-coding-browser-smoke.py",
+      "sha": "8533b1467acec9d1ea93c1500c95eb5d26ca1017",
+      "size_bytes": 2881,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/inject-signature.py",
+      "sha": "d3d4defb4509304b1b0aac3738057a7ef5c46385",
+      "size_bytes": 6134,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/landing-assembly.css",
+      "sha": "0d1bcd7d27ea3d59a0a9fa9f7a3e66ddd66f849f",
+      "size_bytes": 2097,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/landing-assembly.js",
+      "sha": "ce3f265f18b28c54257212a2b2df66878e3c26fe",
+      "size_bytes": 3628,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/learning-colors.css",
+      "sha": "6c67881fff28cabec34e4dc783a35ebe4d1c889b",
+      "size_bytes": 26253,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/learning-console-browser-smoke.py",
+      "sha": "7512549f56611d57d9b07a0652a44627a61394c2",
+      "size_bytes": 4478,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/learning-experience-browser-smoke.py",
+      "sha": "3206fa50a8748f8a432a9ea4e661cc78163b4cb8",
+      "size_bytes": 8505,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/manzo-mark.svg",
+      "sha": "f257080306dc13fa2615cfd5180dea5d1ddbc248",
+      "size_bytes": 1220,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/mobile-browser-smoke.py",
+      "sha": "a76cca5ba7dfaa1a636bda785ed75f626fdfcf5b",
+      "size_bytes": 3713,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/mobile-nav.css",
+      "sha": "892c9c62004b91396d914dbdf03e2852a42e7317",
+      "size_bytes": 7472,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/mobile-nav.js",
+      "sha": "f349111b4d2489f420066bbc7aae5aead0a1b215",
+      "size_bytes": 11136,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/product-preview-browser-smoke.py",
+      "sha": "1740ba832d3c28505cbfbd7052c3e45adab834c1",
+      "size_bytes": 3254,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-acr-dossier.py",
+      "sha": "6c3731f14f85c006d87cbefe67f36fb4157b7021",
+      "size_bytes": 17913,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-auth-staging.py",
+      "sha": "5bb2ba6b4bb7982286abb706ec3f090cbbb85109",
+      "size_bytes": 12593,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-design-system.py",
+      "sha": "8fd272cb109786c28537c858ee6e6bab9fbc18cc",
+      "size_bytes": 4254,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-hallucinations-coding.py",
+      "sha": "90c0ffd4bbae25c8862de3ccaa69f7db64b7ab41",
+      "size_bytes": 13854,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-hallucinations.py",
+      "sha": "95550b253033d249a912a94ed57f9cd153a8d651",
+      "size_bytes": 19103,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-home-scene.py",
+      "sha": "a7d0ce34837b7918be82bfe98d4d8fc29d47edfa",
+      "size_bytes": 3530,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-learning-console.py",
+      "sha": "9fa50bca9cd76041c8eec451993cb63516600203",
+      "size_bytes": 9933,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-learning-experience.py",
+      "sha": "d8c32c696944069ee1812f355a77c1b8690be99f",
+      "size_bytes": 14227,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-navigation.py",
+      "sha": "9ab77eb825111fc40440dff2eab5ff42b064ad55",
+      "size_bytes": 2845,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-oracle-city.py",
+      "sha": "fd2d94bdb8e417e2b78bedc71214a933080382aa",
+      "size_bytes": 4315,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-podcast.py",
+      "sha": "1f7f84769c6c23875d736f32a3b39bf1ce69b36f",
+      "size_bytes": 10932,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-product-preview.py",
+      "sha": "d4c49d23fb8d54b4809adc5677849ca0697ee704",
+      "size_bytes": 13127,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-prompt-video.py",
+      "sha": "67fd8962d1fe093eba1d808692a2afc0bd08cbc5",
+      "size_bytes": 13900,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/publish-title-cleanup.py",
+      "sha": "840dadb2976262afcad1d94149fe0c90c171c23e",
+      "size_bytes": 3806,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    },
+    {
+      "path": "theme/rewrite-owner-urls.py",
+      "sha": "69ca9806e1c62cd5dcb78d720533a954b09c1d21",
+      "size_bytes": 2707,
+      "category": "build-and-design",
+      "target": "github-pipeline",
+      "notes": "preserve SEO, navigation, design and generation pipeline"
+    }
+  ]
+}
