@@ -172,6 +172,9 @@ if(root){
       event.currentTarget.reset();
       recoveryEvent=false;
       expiredInvite=false;
+      if(result.data?.user?.email){
+        byId("auth-user-email").textContent=result.data.user.email;
+      }
       show("verified");
       feedback(t.passwordUpdated,false);
     }catch{
