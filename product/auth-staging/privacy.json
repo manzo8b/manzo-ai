@@ -1,0 +1,143 @@
+{
+  "it": {
+    "title": "Privacy e account Learning B2B",
+    "lead": "Informazioni sul trattamento dei dati usati per accedere alla piattaforma formativa riservata di MANZO AI",
+    "review": "Ambiente pilota · accesso soltanto su invito · nessuna vendita o iscrizione pubblica",
+    "sections": [
+      [
+        "Titolare e contatti",
+        "Il progetto MANZO AI è curato da Marcelo Javier Fernandez Caballero. Per informazioni sul trattamento dei dati, richieste di accesso, correzione o cancellazione scrivi a marcelo2020.it@gmail.com."
+      ],
+      [
+        "A chi si applica",
+        "Questa informativa riguarda esclusivamente l’accesso a Learning B2B, non la consultazione libera del sito divulgativo. Non sono consentite registrazioni pubbliche. Gli account vengono invitati dall’amministratore."
+      ],
+      [
+        "Dati trattati",
+        "Indirizzo email, identificativo di autenticazione, stato di conferma dell’indirizzo, informazioni tecniche sulle sessioni e sugli accessi. Supabase Auth gestisce password e procedure di recupero. La password non viene letta né conservata dal codice di MANZO AI. Quando il laboratorio aziendale sarà attivato, i dati potranno includere organizzazione, iscrizioni, progressi e verifiche; tali funzioni non sono ancora accessibili ai clienti."
+      ],
+      [
+        "Finalità e basi giuridiche",
+        "Gestire gli inviti, verificare l’identità, consentire l’accesso richiesto, recuperare l’account e proteggere l’ambiente da accessi non autorizzati. Le basi giuridiche applicabili possono comprendere l’esecuzione di accordi o attività richieste dall’interessato e il legittimo interesse alla sicurezza. L’uso commerciale richiederà una revisione specifica della base giuridica e dei contratti con le organizzazioni."
+      ],
+      [
+        "Fornitori e localizzazione",
+        "L’autenticazione è gestita attraverso Supabase; le pagine sono ospitate su GitHub Pages. Il database applicativo MANZO AI è in Irlanda (eu-west-1). Questa localizzazione, da sola, non garantisce che ogni trattamento o servizio accessorio avvenga esclusivamente nell’Unione europea. Le condizioni, le eventuali garanzie sui trasferimenti e i subfornitori vanno verificati prima di coinvolgere utenti esterni."
+      ],
+      [
+        "Sessioni e tecnologie",
+        "Per mantenere la sessione dopo i link di invito e recupero, l’interfaccia di prova utilizza l’archiviazione di sessione del browser (sessionStorage), oltre alle connessioni indispensabili con Supabase Auth. Non vengono introdotti cookie pubblicitari né sistemi di profilazione. Chiudere il browser termina la persistenza locale della sessione; la revoca server di eventuali token già emessi segue le modalità di Supabase Auth."
+      ],
+      [
+        "Conservazione",
+        "L’account viene mantenuto finché l’accesso al pilota è autorizzato. È possibile richiederne la disattivazione o cancellazione al referente. Dati tecnici e log possono seguire tempi di conservazione del fornitore e obblighi applicabili. Prima del rilascio a clienti esterni saranno definiti e documentati termini di conservazione e procedure automatiche di cancellazione."
+      ],
+      [
+        "Diritti degli interessati",
+        "Puoi richiedere accesso, rettifica, cancellazione, limitazione, opposizione quando applicabile e informazioni sulla portabilità. Puoi presentare reclamo al Garante per la protezione dei dati personali o all’autorità di controllo competente."
+      ],
+      [
+        "Stato del servizio",
+        "Questa è un’area pilota, non un sistema commerciale operativo. Non vengono gestiti pagamenti, certificati accreditati o campagne pubblicitarie. Prima del primo cliente esterno è necessaria la validazione completa della documentazione privacy e delle procedure operative."
+      ]
+    ],
+    "contact": "Contatta MANZO AI",
+    "back": "Torna all’accesso",
+    "updated": "Ultima revisione: 16 novembre 2026",
+    "home": "Torna a MANZO AI"
+  },
+  "en": {
+    "title": "Privacy and Learning B2B accounts",
+    "lead": "How personal information is processed for MANZO AI’s invitation-only learning access",
+    "review": "Pilot environment · invitation-only access · no sales or public registration",
+    "sections": [
+      [
+        "Controller and contact",
+        "MANZO AI is curated by Marcelo Javier Fernandez Caballero. For information, access, correction or deletion requests, contact marcelo2020.it@gmail.com."
+      ],
+      [
+        "Who this covers",
+        "This notice covers only Learning B2B account access, not browsing the public educational site. Public sign-ups are not permitted. Accounts are invited by the administrator."
+      ],
+      [
+        "Data processed",
+        "Email, authentication user ID, email confirmation status and technical access/session information. Supabase Auth manages passwords and recovery. MANZO AI client code does not read or store your password. A future business learning service may also process organization, enrollment, progress and assessment records; external customer access is not yet available."
+      ],
+      [
+        "Purposes and legal basis",
+        "Issuing invitations, verifying identity, granting requested access, recovering accounts and securing the system. Applicable legal grounds may include performance of an agreement or a service requested by the data subject and legitimate interests in security. Business use requires separate review of legal grounds and customer contracts."
+      ],
+      [
+        "Providers and data location",
+        "Authentication uses Supabase and the web interface is hosted by GitHub Pages. MANZO AI’s application database is hosted in Ireland (eu-west-1). This alone does not establish that all processing and provider services stay within the EU. Processor terms and potential international transfer safeguards must be checked before external enrollment."
+      ],
+      [
+        "Sessions and technical storage",
+        "The pilot interface uses browser session storage (sessionStorage) to maintain a session during invitation and recovery links, plus the required connection to Supabase Auth. No advertising cookies or profiling are added. Closing the browser ends local persistence; server-side token revocation follows Supabase Auth behavior."
+      ],
+      [
+        "Retention",
+        "Accounts are kept while pilot access is authorized. You may request deactivation or deletion from the project contact. Technical records may follow provider retention and applicable obligations. An exact retention policy and operational deletion workflow must be completed before external clients enroll."
+      ],
+      [
+        "Your rights",
+        "You may request access, rectification, erasure, restriction, objection when applicable and information on data portability. You can complain to the Italian data protection authority or another competent supervisory authority."
+      ],
+      [
+        "Pilot status",
+        "This is a pilot environment, not a commercially available training service. It does not process payments, accredited certificates or advertising. Full privacy and operational review is required before external clients are onboarded."
+      ]
+    ],
+    "contact": "Contact MANZO AI",
+    "back": "Back to sign-in",
+    "updated": "Last revised: 16 November 2026",
+    "home": "Back to MANZO AI"
+  },
+  "es": {
+    "title": "Privacidad y cuentas Learning B2B",
+    "lead": "Información sobre el tratamiento de datos para acceder al aprendizaje privado de MANZO AI",
+    "review": "Entorno piloto · acceso por invitación · sin ventas ni registro público",
+    "sections": [
+      [
+        "Responsable y contacto",
+        "MANZO AI está dirigido por Marcelo Javier Fernandez Caballero. Para consultas o solicitudes de acceso, rectificación o supresión, escribe a marcelo2020.it@gmail.com."
+      ],
+      [
+        "Ámbito",
+        "Esta información se aplica solamente al acceso Learning B2B, no a la navegación del sitio divulgativo. No se permite el registro público. Las cuentas se crean mediante invitación del administrador."
+      ],
+      [
+        "Datos tratados",
+        "Correo electrónico, identificador de autenticación, confirmación de email e información técnica sobre sesiones y accesos. Supabase Auth gestiona las contraseñas y su recuperación. El código de MANZO AI no lee ni conserva tu contraseña. En el futuro, el servicio empresarial podrá registrar organizaciones, matrículas, progreso y evaluaciones; todavía no se permite el acceso de clientes externos."
+      ],
+      [
+        "Finalidades y bases jurídicas",
+        "Gestionar invitaciones, verificar la identidad, permitir el acceso solicitado, recuperar cuentas y proteger el entorno. Las bases jurídicas podrán incluir la ejecución de un acuerdo o solicitud del interesado y el interés legítimo en la seguridad. El uso comercial exigirá una revisión de las bases jurídicas y de los contratos."
+      ],
+      [
+        "Proveedores y localización",
+        "La autenticación se gestiona con Supabase y las páginas se alojan en GitHub Pages. La base de datos de MANZO AI está en Irlanda (eu-west-1). Esa localización no garantiza que todos los servicios se procesen exclusivamente en la UE. Deben revisarse los proveedores y las posibles garantías para transferencias internacionales antes de incorporar clientes."
+      ],
+      [
+        "Sesiones y almacenamiento",
+        "La interfaz piloto utiliza almacenamiento de sesión del navegador (sessionStorage) para enlaces de invitación y recuperación, así como conexiones necesarias con Supabase Auth. No añade cookies publicitarias ni perfilado. El cierre del navegador termina la persistencia local; la revocación de tokens en el servidor depende de Supabase Auth."
+      ],
+      [
+        "Conservación",
+        "La cuenta se conserva mientras esté autorizado el acceso al piloto. Puedes solicitar la desactivación o supresión al contacto del proyecto. Los registros técnicos pueden conservarse según el proveedor y los requisitos aplicables. Antes de admitir clientes externos se documentarán plazos concretos y procedimientos de eliminación."
+      ],
+      [
+        "Derechos",
+        "Puedes solicitar acceso, rectificación, supresión, limitación, oposición cuando corresponda e información sobre portabilidad. Puedes reclamar ante la autoridad italiana de protección de datos u otra autoridad competente."
+      ],
+      [
+        "Estado del piloto",
+        "Este es un entorno piloto y no un servicio formativo comercial. No procesa pagos, certificados acreditados ni publicidad. Antes de incorporar clientes externos será necesaria una revisión completa de privacidad y procedimientos."
+      ]
+    ],
+    "contact": "Contactar con MANZO AI",
+    "back": "Volver al acceso",
+    "updated": "Última revisión: 16 de noviembre de 2026",
+    "home": "Volver a MANZO AI"
+  }
+}
