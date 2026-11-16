@@ -17,6 +17,7 @@ on:
       - 'theme/academy-journeys.js'
       - 'theme/fix-learning-anchors.py'
       - 'theme/site-integrity-audit.py'
+      - 'theme/seo-final-polish.py'
       - 'theme/academy-journeys-browser-smoke.py'
       - 'theme/home-showcase-browser-smoke.py'
       - 'theme/design-motion.js'
@@ -117,6 +118,10 @@ jobs:
           python3 -m py_compile theme/publish-title-cleanup.py
           python3 theme/publish-title-cleanup.py --site _site
           python3 theme/publish-title-cleanup.py --site _site --verify-only
+          # Final editorial SEO polish after all public pages are generated.
+          python3 -m py_compile theme/seo-final-polish.py
+          python3 theme/seo-final-polish.py --site _site
+          python3 theme/seo-final-polish.py --site _site --verify-only
           # Cross-site audit: broken links, HTML IDs, in-page anchors and language.
           python3 -m py_compile theme/site-integrity-audit.py
           python3 theme/site-integrity-audit.py --site _site
