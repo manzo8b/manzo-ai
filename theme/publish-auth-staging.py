@@ -79,8 +79,8 @@ def render(loc,text,settings):
     <span class="tag">{e(text['private'])}</span></div>
    <p id="auth-view-title" class="auth-title-fallback"></p>
    <section class="view" id="auth-disabled">
-    {view_header('disabled',text['disabled'])}
-    <p class="auth-error-box">{e(text['disabled'])}</p>
+    {view_header('disabled',text['disabledTitle'])}
+    <p class="auth-info">{e(text['disabled'])}</p>
    </section>
    <section class="view" id="auth-pending" hidden>
     {view_header('pending',text['loading'])}
