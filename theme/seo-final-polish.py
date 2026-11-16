@@ -155,7 +155,7 @@ def polish(page:Path, site:Path) -> str:
 
     hub=(rel=="index.html" or rel in [l+"/index.html" for l in LOCALES]
          or rel in [l+"/"+route+"/index.html" for l,route in
-                     [("it","academy"),("en","academy"),("es","academia")]
+                     [("it","academy"),("en","academy"),("es","academia")]]
          or rel in [l+"/"+route+"/index.html" for l,route in MAPS.items()])
     if hub and get_tag(html,"property","og:type"):
         html=put(html,"property","og:type","website",replace=True)
