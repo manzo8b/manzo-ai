@@ -62,7 +62,7 @@ L'inventario sorgente firmato da SHA Git e dimensioni è in `product/migration/g
 | M0 | Audit di sorgenti Git e struttura database | Inventario con SHA + schema reale letto in sicurezza | **Completato** |
 | M1 | Audit della **build finale** (ZIP + publisher + auth + SEO) | 111 HTML, 62 altri file, 0 link locali mancanti, 172/173 SHA invariati dopo correzione | **PASS — deploy 43864931269** |
 | M2 | Progettare contratto editoriale e mappa IT/EN/ES | Generator metadata-only di 2 percorsi/6 varianti, SHA stabili, test e CI; nessun quiz privato esportato | **PASS tecnico — import non eseguito** |
-| M3 | Backup verificato e import controllato di prova | Dati di prova isolati, checksum corrispondenti, ripristino e idempotenza | Da eseguire |
+| M3 | M3a: schema isolato e doppio import/rollback in PostgreSQL CI; M3b: import reale solo dopo backup verificato | 2/6/36 record in CI, 0 dopo rollback, permessi RLS chiusi; restore live ancora mancante | **M3a PASS; M3b BLOCCATA (backup Free)** |
 | M4 | Valutare Storage e migrare solo media appropriati | File approvati, SHA verificato, accesso pubblico/privato corretto | Da eseguire |
 | M5 | Hardening Edge API e collegamento frontend con feature flag | JWT, RLS tenant A/B, CORS, 401/403, rate limit, fallback | Da eseguire |
 | M6 | Attivazione organizzazioni, ruoli, corsi e progressi B2B | Test E2E, revoca, privacy/export e studio UX su desktop/mobile | Da eseguire |
@@ -129,3 +129,9 @@ L'inventario dell'artefatto GitHub Pages successivo al fix della PR #25 registra
 Il generatore M2 è stato testato su tutti e sei i JSON editoriali originali. Produce 2 corsi, 6 varianti IT/EN/ES, 36 unità, 42 autovalutazioni localizzate e 42 casi localizzati, esportando soltanto metadati. Gate **M2 PASS tecnico** per il contratto editoriale, **nessuna importazione DB**. Dettagli: `docs/MANZO_AI_CONTENT_CONTRACT_M2_2026-11-16.md`.
 
 **Passo seguente M3:** pianificazione e verifica backup, schema pubblico isolato dai tenant, import idempotente in dry-run e test negativi di autorizzazione prima di qualsivoglia scrittura a Supabase.
+
+### Aggiornamento M3 — 16/11/2026
+
+Il contratto pubblico M2 ha una migrazione SQL di isolamento pronta ma **non applicata** al progetto Supabase reale: `product/backend/migrations/0004_public_catalog_m3.sql`. Il generatore `product/migration/prepare_m3_sql.py` produce import JSONB deterministico in transazione con **ROLLBACK per impostazione predefinita**. Il workflow `m3-isolated-catalog-qa.yml` prova rollback, due import idempotenti, negazione `anon/authenticated` e RLS forzata su quattro tabelle in PostgreSQL usa-e-getta.
+
+Supabase MANZO AI Free non ha backup giornalieri gestiti. **M3b non può partire prima di un dump logico e restore dimostrati**, da eseguire in ambiente privato senza trasferire credenziali in GitHub o chat. Guida: `docs/MANZO_AI_M3_EXECUTION_REPORT_2026-11-16.md`.
