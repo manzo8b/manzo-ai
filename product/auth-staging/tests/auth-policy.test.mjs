@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {AUTH_ROUTES,ORIGIN,MIN_PASSWORD_LENGTH,exactCallback,validEmail,
-  validPassword,confirmedUser,authState,safetyConfig,classifyPasswordError} from "../src/auth-policy.mjs";
+  validPassword,confirmedUser,authState,safetyConfig,classifyPasswordError,classifyRecoveryError} from "../src/auth-policy.mjs";
 
 const good={
  enabled:true, authMode:"invite-only", requireEmailVerification:true,
@@ -67,4 +67,14 @@ test("password changes map Supabase Auth codes into non-sensitive actionable sta
   assert.equal(classifyPasswordError({code:"unknown_422",status:422}),"rejected");
   assert.equal(classifyPasswordError({message:"password: SECRET-PASSWORD"}),"generic");
   assert.equal(classifyPasswordError(null),"generic");
+});
+
+test("recovery errors distinguish exhausted email quota from unauthorized test recipients",()=>{
+  assert.equal(classifyRecoveryError({code:"over_email_send_rate_limit",status:429}),"email_limit");
+  assert.equal(classifyRecoveryError({code:"email_address_not_authorized",status:400}),"restricted_email");
+  assert.equal(classifyRecoveryError({code:"over_request_rate_limit",status:429}),"rate_limit");
+  assert.equal(classifyRecoveryError({code:"unknown",status:429}),"rate_limit");
+  assert.equal(classifyRecoveryError({code:"email_provider_disabled",status:400}),"unavailable");
+  assert.equal(classifyRecoveryError({message:"test sensitive text"}),"generic");
+  assert.equal(classifyRecoveryError(null),"generic");
 });
