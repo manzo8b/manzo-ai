@@ -32,7 +32,7 @@
     "errorGeneric": "Operazione non riuscita. Riprova più tardi.",
     "errorValidation": "Controlla il formato dell'indirizzo email e la password.",
     "sent": "Se l'indirizzo è valido, riceverai le istruzioni via email.",
-    "passwordUpdated": "Password aggiornata. Puoi accedere nuovamente.",
+    "passwordUpdated": "Password aggiornata correttamente. La sessione rimane attiva: puoi uscire e accedere nuovamente per verificarla.",
     "signedOut": "Sessione terminata.",
     "disabled": "Area in preparazione. Nessun accesso è ancora attivo.",
     "loading": "Verifica della sessione in corso",
@@ -42,7 +42,15 @@
     "sdkError": "Il servizio di autenticazione non è disponibile in questa anteprima.",
     "footer": "Anteprima privata · Dati e accessi separati dalla dimostrazione pubblica",
     "disabledTitle": "Accesso in preparazione",
-    "privacyLink": "Informativa privacy per gli account"
+    "privacyLink": "Informativa privacy per gli account",
+    "passwordSame": "La nuova password è uguale a quella già impostata. Prova a uscire e ad accedere con questa password oppure scegline una diversa.",
+    "passwordWeak": "Password non accettata: scegline una più robusta, con almeno 12 caratteri, lettere, numeri e un simbolo.",
+    "passwordReauth": "Per modificare la password devi autenticarti nuovamente. Esci e accedi con la password attuale, oppure usa il recupero password.",
+    "passwordSession": "La sessione non è più valida. Esci e accedi di nuovo, oppure usa il recupero password.",
+    "passwordExpired": "Il collegamento email è scaduto o è già stato utilizzato. Se puoi accedere con la password attuale, non serve un nuovo invito.",
+    "passwordRejected": "Supabase non ha accettato la modifica della password. Potrebbe non soddisfare i requisiti o coincidere con quella già impostata. Prova ad accedere con la password attuale oppure scegline una diversa.",
+    "linkExpired": "Il link email è scaduto o è già stato utilizzato. Il tuo account può comunque essere attivo: prova ad accedere con la password attuale.",
+    "passwordChange": "Cambia password"
   },
   "en": {
     "pageTitle": "Student and business access",
@@ -77,7 +85,7 @@
     "errorGeneric": "The request could not be completed. Try again later.",
     "errorValidation": "Check the email format and password.",
     "sent": "If the address is valid, recovery instructions will be sent.",
-    "passwordUpdated": "Password updated. You can sign in again.",
+    "passwordUpdated": "Password updated successfully. Your session is still active; sign out and sign in again to confirm.",
     "signedOut": "Session ended.",
     "disabled": "Workspace being prepared. Sign-in is not yet enabled.",
     "loading": "Checking your session",
@@ -87,7 +95,15 @@
     "sdkError": "Authentication is unavailable in this preview.",
     "footer": "Private preview · Accounts kept separate from the public demonstration",
     "disabledTitle": "Access being prepared",
-    "privacyLink": "Account privacy notice"
+    "privacyLink": "Account privacy notice",
+    "passwordSame": "This is the same as your existing password. Try signing out and signing in with it, or choose a different password.",
+    "passwordWeak": "Password rejected: choose a stronger password with at least 12 characters, letters, numbers and a symbol.",
+    "passwordReauth": "Please authenticate again before changing your password. Sign out and sign back in, or use password recovery.",
+    "passwordSession": "Your session is no longer valid. Sign out and sign back in, or use password recovery.",
+    "passwordExpired": "This email link has expired or was already used. If your current password works, no new invitation is needed.",
+    "passwordRejected": "Supabase rejected the password change. It may not meet security requirements or might be your current password. Try signing in with your existing password or choose another one.",
+    "linkExpired": "This email link has expired or was already used. Your account may still be active: try signing in with your current password.",
+    "passwordChange": "Change password"
   },
   "es": {
     "pageTitle": "Acceso para estudiantes y empresas",
@@ -122,7 +138,7 @@
     "errorGeneric": "No se pudo completar la operación. Vuelve a intentarlo.",
     "errorValidation": "Comprueba el formato del correo y la contraseña.",
     "sent": "Si la dirección es válida, recibirás instrucciones por correo.",
-    "passwordUpdated": "Contraseña actualizada. Puedes iniciar sesión de nuevo.",
+    "passwordUpdated": "Contraseña actualizada correctamente. La sesión sigue activa: puedes salir y volver a entrar para comprobarlo.",
     "signedOut": "Sesión finalizada.",
     "disabled": "Área en preparación. El acceso todavía no está habilitado.",
     "loading": "Comprobando la sesión",
@@ -132,6 +148,14 @@
     "sdkError": "La autenticación no está disponible en esta vista previa.",
     "footer": "Vista privada · Accesos independientes de la demostración pública",
     "disabledTitle": "Acceso en preparación",
-    "privacyLink": "Información de privacidad de las cuentas"
+    "privacyLink": "Información de privacidad de las cuentas",
+    "passwordSame": "La nueva contraseña coincide con la actual. Prueba a cerrar sesión e iniciar con ella, o elige otra.",
+    "passwordWeak": "Contraseña rechazada: elige una más robusta, con al menos 12 caracteres, letras, números y un símbolo.",
+    "passwordReauth": "Debes autenticarte de nuevo antes de cambiar la contraseña. Cierra sesión e inicia de nuevo o utiliza la recuperación.",
+    "passwordSession": "La sesión ya no es válida. Cierra sesión e inicia de nuevo o recupera tu contraseña.",
+    "passwordExpired": "El enlace del correo ha caducado o ya se ha utilizado. Si tu contraseña actual funciona, no necesitas otra invitación.",
+    "passwordRejected": "Supabase rechazó el cambio de contraseña. Puede no cumplir los requisitos o ser igual a la actual. Intenta entrar con la contraseña existente o elige una distinta.",
+    "linkExpired": "El enlace de correo ha caducado o ya se ha utilizado. Tu cuenta podría seguir activa: prueba a iniciar sesión con la contraseña actual.",
+    "passwordChange": "Cambiar contraseña"
   }
 }
