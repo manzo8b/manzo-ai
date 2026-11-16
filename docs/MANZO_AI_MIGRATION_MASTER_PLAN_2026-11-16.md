@@ -107,7 +107,7 @@ Non dichiarare completata la migrazione se manca anche solo uno dei seguenti con
 
 **Eseguiti:** audit GitHub e Supabase in sola lettura; manifest dei 154 file sorgente; scanner post-build, test automatici e CI separata dalla pubblicazione; questo piano.
 
-**Non eseguiti:** import contenuti, nuove tabelle o bucket, API deployate, hosting, utenti/ruoli aggiunti, password modificate, pagamenti. Successivamente è stato recuperato l'artefatto completo del deploy GitHub Actions `43852683965`: **111 HTML (109 `index.html`), 62 asset/file tecnici, 15 pagine `noindex`, 6/6 pagine Auth/private protette**. È emerso **un collegamento mancante** in `it/video-e-slide/prompt-engineering/index.html` verso `/manzo-ai/it/prompt-mastery/`. Il gate M1 rimane aperto fino alla correzione e alla nuova build QA. Vedere `docs/MANZO_AI_RENDERED_RELEASE_AUDIT_2026-11-16.md`.
+**Non eseguiti:** import contenuti, nuove tabelle o bucket, API deployate, hosting, utenti/ruoli aggiunti, password modificate, pagamenti. Successivamente è stato recuperato l'artefatto completo del deploy GitHub Actions `43852683965`: **111 HTML (109 `index.html`), 62 asset/file tecnici, 15 pagine `noindex`, 6/6 pagine Auth/privacy marcate `noindex`**. È emerso **un collegamento mancante** in `it/video-e-slide/prompt-engineering/index.html` verso `/manzo-ai/it/prompt-mastery/`. Il gate M1 rimane aperto fino alla correzione e alla nuova build QA. Vedere `docs/MANZO_AI_RENDERED_RELEASE_AUDIT_2026-11-16.md`.
 
 **Prossima attività:** correggere l'unico collegamento locale mancante, generare una build QA e acquisire nuovamente il manifest finale. Dopo il PASS di M1 si prepara lo schema contenuti e il dry-run di import.
 
