@@ -1,0 +1,217 @@
+#!/usr/bin/env python3
+"""MANZO AI: goal-based, accessible learning journeys built from REAL Academy cards.
+
+No synthetic credentials, enrolments, progress or learner analytics. Links and
+lesson titles are read directly from the published Academy in IT/EN/ES.
+Safe, reversible enhancement to the generated release; source ZIP untouched.
+"""
+from __future__ import annotations
+
+import argparse
+from html import escape, unescape
+from pathlib import Path
+import re
+import shutil
+import hashlib
+
+ROOT = Path(__file__).resolve().parent
+ASSETS = ("academy-journeys.css", "academy-journeys.js")
+MARKER = 'data-ma-journeys="v1"'
+BASE = "/manzo-ai/"
+ROUTES = {"it":"academy", "en":"academy", "es":"academia"}
+
+COPY = {
+ "it": {
+  "eyebrow":"MANZO AI / PERCORSI GUIDATI",
+  "title":"Non sai da dove iniziare?",
+  "subtitle":"Scegli un obiettivo e segui una sequenza ragionata di lezioni già disponibili. Nessuna iscrizione e nessun avanzamento fittizio",
+  "tabs":["Capire l’AI","Verificare le risposte","AI e sviluppo"],
+  "goals":[
+    ("Fondamenta pratiche","Per capire come funziona un modello, scrivere un buon prompt e organizzare il lavoro"),
+    ("Risposte affidabili","Per separare una risposta plausibile da una verificata e applicare la catena delle prove"),
+    ("Coding con controllo","Per preparare richieste chiare, verificare gli output e valutare il rischio nel codice AI"),
+  ],
+  "step":"Passaggio",
+  "start":"Inizia da qui",
+  "open":"Apri la lezione",
+  "cta":"Apri la prima tappa",
+  "download":"Stampa il percorso",
+  "disclaimer":"Percorsi editoriali orientativi · Studio libero · Nessuna certificazione o progresso sincronizzato",
+ },
+ "en": {
+  "eyebrow":"MANZO AI / GUIDED LEARNING",
+  "title":"Not sure where to begin?",
+  "subtitle":"Choose an outcome and follow an evidence-based sequence of lessons already available. No enrollment or fictional progress",
+  "tabs":["Understand AI","Verify answers","AI and coding"],
+  "goals":[
+    ("Practical foundations","Learn how models work, write useful prompts and organize your workflow"),
+    ("Trustworthy answers","Distinguish plausible claims from verified evidence and apply a verification workflow"),
+    ("Responsible coding","Write clear requests, validate outputs and evaluate risks in AI-generated software"),
+  ],
+  "step":"Step",
+  "start":"Start here",
+  "open":"Open lesson",
+  "cta":"Open the first step",
+  "download":"Print learning plan",
+  "disclaimer":"Editorial learning suggestions · Open access · No accredited credentials or synced progress",
+ },
+ "es": {
+  "eyebrow":"MANZO AI / ITINERARIOS GUIADOS",
+  "title":"¿No sabes por dónde empezar?",
+  "subtitle":"Elige un objetivo y sigue una secuencia razonada de clases ya publicadas. Sin inscripción ni progreso ficticio",
+  "tabs":["Comprender la IA","Verificar respuestas","IA y desarrollo"],
+  "goals":[
+    ("Fundamentos prácticos","Aprende cómo funcionan los modelos, cómo escribir prompts y organizar el trabajo"),
+    ("Respuestas fiables","Distingue afirmaciones plausibles de pruebas verificadas y aprende un método de contraste"),
+    ("Código bajo control","Plantea instrucciones claras, comprueba resultados y evalúa riesgos en el software generado"),
+  ],
+  "step":"Paso",
+  "start":"Empieza aquí",
+  "open":"Abrir lección",
+  "cta":"Abrir la primera etapa",
+  "download":"Imprimir itinerario",
+  "disclaimer":"Itinerarios editoriales orientativos · Acceso libre · Sin certificados ni progreso sincronizado",
+ }
+}
+
+# Three deliberately curated educational sequences. Indices refer exclusively to
+# the existing six Academy cards, whose destinations are verified at build time.
+SEQUENCES = ((2,3,5), (2,4,0), (3,4,1))
+CARD = re.compile(
+ r'<article\b(?=[^>]*\bdata-ma-course-card=["\']1["\'])[^>]*>.*?</article\s*>',
+ re.I | re.S)
+LINK = re.compile(r'<a\b[^>]*\bhref="([^"]+)"',re.I)
+H3 = re.compile(r'<h3\b[^>]*>(.*?)</h3>',re.I|re.S)
+CAT = re.compile(r'data-ma-category="([^"]+)"')
+SECTION_OPEN = re.compile(r'<section\b(?=[^>]*\bdata-ma-pathways=["\']v1["\'])[^>]*>',re.I|re.S)
+SECTIONS = re.compile(r'</?section\b[^>]*>',re.I|re.S)
+
+def e(text): return escape(str(text),quote=True)
+
+def card_info(site,lang):
+ p=site/lang/ROUTES[lang]/"index.html"
+ if not p.exists():raise RuntimeError("Missing Academy page: "+str(p))
+ doc=p.read_text(encoding="utf-8")
+ cards=CARD.findall(doc)
+ if len(cards)!=6:raise RuntimeError(f"Expected 6 Academy cards, got {len(cards)}: {lang}")
+ result=[]
+ for markup in cards:
+  href=LINK.search(markup)
+  title=H3.search(markup)
+  cat=CAT.search(markup)
+  if not href or not title or not cat:raise RuntimeError("Incomplete Academy card "+lang)
+  target=unescape(href.group(1))
+  if not target.startswith(f"{BASE}{lang}/") or not target.endswith("/"):
+   raise RuntimeError("Unexpected Academy href "+target)
+  path=site/target[len(BASE):]/"index.html"
+  if not path.is_file():raise RuntimeError("Broken Academy href "+str(path))
+  label=unescape(re.sub(r"<[^>]+>","",title.group(1))).strip()
+  if not label:raise RuntimeError("Empty card title")
+  result.append((target,label,cat.group(1)))
+ expected=["verify","coding","fundamentals","prompt","verify","workflow"]
+ if [item[2] for item in result]!=expected:raise RuntimeError("Academy taxonomy changed")
+ if len({r[0] for r in result})!=6:raise RuntimeError("Duplicate Academy URLs")
+ return result
+
+def catalog_end(doc):
+ m=SECTION_OPEN.search(doc)
+ if not m:raise RuntimeError("Academy catalog not found")
+ depth=1
+ for t in SECTIONS.finditer(doc,m.end()):
+  if t.group().startswith("</"): depth-=1
+  else:depth+=1
+  if depth==0:return t.end()
+ raise RuntimeError("Unbalanced Academy catalog")
+
+def render(lang,cards):
+ d=COPY[lang]
+ tabs="".join(
+  f'<button class="ma-journey-choice" type="button" data-ma-journey-choice="{n}" '
+  f'aria-controls="ma-journey-panel-{lang}-{n}" aria-pressed="{str(n==0).lower()}">'
+  f'<span class="ma-journey-choice-number">0{n+1}</span>{e(label)}</button>'
+  for n,label in enumerate(d["tabs"])
+ )
+ panels=[]
+ for n,route in enumerate(SEQUENCES):
+  heading,subtitle=d["goals"][n]
+  steps=[]
+  for i,index in enumerate(route):
+   href,label,_=cards[index]
+   steps.append(
+    '<li class="ma-journey-step">'
+    f'<span class="ma-journey-step-order">{i+1:02d}</span>'
+    '<div class="ma-journey-step-body">'
+    f'<span class="ma-journey-step-caption">{e(d["start"] if i==0 else d["step"])}</span>'
+    f'<a href="{e(href)}" class="ma-journey-step-title">{e(label)}'
+    '<span aria-hidden="true">↗</span></a>'
+    '</div></li>'
+   )
+  first=cards[route[0]][0]
+  panels.append(
+   f'<div class="ma-journey-panel" id="ma-journey-panel-{lang}-{n}" data-ma-journey-panel="{n}">'
+   '<div class="ma-journey-panel-copy">'
+   f'<span class="ma-journey-panel-index">MANZO AI / 0{n+1}</span>'
+   f'<h3>{e(heading)}</h3><p>{e(subtitle)}</p>'
+   f'<a class="ma-journey-start" href="{e(first)}">{e(d["cta"])}'
+   '<span aria-hidden="true">↗</span></a>'
+   '</div>'
+   '<ol class="ma-journey-steps">'+''.join(steps)+'</ol>'
+   '</div>'
+  )
+ return (
+  f'<section class="ma-learning-journey" {MARKER} aria-labelledby="ma-journey-title-{lang}">'
+  '<div class="ma-journey-intro">'
+  f'<p class="ma-journey-eyebrow">{e(d["eyebrow"])}</p>'
+  f'<h2 id="ma-journey-title-{lang}">{e(d["title"])}</h2>'
+  f'<p class="ma-journey-subtitle">{e(d["subtitle"])}</p>'
+  '</div>'
+  f'<div class="ma-journey-choices" role="group" aria-label="{e(d["title"])}">'+tabs+'</div>'
+  +''.join(panels)+
+  '<div class="ma-journey-footer">'
+  f'<p>{e(d["disclaimer"])}</p>'
+  f'<button type="button" class="ma-journey-print" data-ma-journey-print>{e(d["download"])}'
+  '<span aria-hidden="true">↗</span></button>'
+  '</div></section>'
+ )
+
+def apply(site,verify_only=False):
+ assets=site/"assets"
+ for name in ASSETS:
+  src=ROOT/name
+  target=assets/name
+  if not src.is_file():raise RuntimeError("Missing publisher asset "+name)
+  if not verify_only:
+   assets.mkdir(parents=True,exist_ok=True);shutil.copyfile(src,target)
+  if not target.is_file() or src.read_bytes()!=target.read_bytes():raise RuntimeError("Asset mismatch "+name)
+ version=hashlib.sha256(b"".join((ROOT/name).read_bytes() for name in ASSETS)).hexdigest()[:12]
+ links=(f'<link rel="stylesheet" href="{BASE}assets/academy-journeys.css?v={version}" data-ma-journey-asset="css">'
+        f'<script defer src="{BASE}assets/academy-journeys.js?v={version}" data-ma-journey-asset="js"></script>')
+ for lang in COPY:
+  p=site/lang/ROUTES[lang]/"index.html"
+  doc=p.read_text(encoding="utf-8")
+  cards=card_info(site,lang)
+  if verify_only:
+   if doc.count(MARKER)!=1:raise RuntimeError("Missing/duplicate journey: "+lang)
+   if doc.count('data-ma-journey-choice=')!=3 or doc.count('data-ma-journey-panel=')!=3:
+    raise RuntimeError("Journey controls missing: "+lang)
+   if doc.count('data-ma-journey-asset=')!=2:raise RuntimeError("Journey assets missing")
+   if f'academy-journeys.css?v={version}' not in doc:raise RuntimeError("Version mismatch "+lang)
+   for route in SEQUENCES:
+    for index in route:
+     if f'href="{e(cards[index][0])}"' not in doc:raise RuntimeError("Broken journey route")
+   continue
+  if MARKER in doc or 'data-ma-journey-asset=' in doc:raise RuntimeError("Duplicate journey")
+  offset=catalog_end(doc)
+  doc=doc[:offset]+render(lang,cards)+doc[offset:]
+  where=re.search(r'</head\s*>',doc,re.I)
+  if not where:raise RuntimeError("Head missing: "+lang)
+  doc=doc[:where.start()]+links+doc[where.start():]
+  p.write_text(doc,encoding="utf-8")
+ print("MANZO AI Academy guided learning: 3 paths × 3 languages; verified="+str(verify_only))
+
+if __name__=="__main__":
+ parser=argparse.ArgumentParser()
+ parser.add_argument("--site",type=Path,required=True)
+ parser.add_argument("--verify-only",action="store_true")
+ args=parser.parse_args()
+ apply(args.site,args.verify_only)

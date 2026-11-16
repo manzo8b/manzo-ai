@@ -12,6 +12,10 @@ on:
       - 'theme/publish-title-cleanup.py'
       - 'theme/publish-home-showcase.py'
       - 'theme/home-showcase.css'
+      - 'theme/publish-academy-journeys.py'
+      - 'theme/academy-journeys.css'
+      - 'theme/academy-journeys.js'
+      - 'theme/academy-journeys-browser-smoke.py'
       - 'theme/home-showcase-browser-smoke.py'
       - 'theme/design-motion.js'
       - 'theme/publish-design-system.py'
@@ -99,6 +103,10 @@ jobs:
           python3 -m py_compile theme/publish-home-showcase.py theme/home-showcase-browser-smoke.py
           python3 theme/publish-home-showcase.py --site _site
           python3 theme/publish-home-showcase.py --site _site --verify-only
+          python3 -m py_compile theme/publish-academy-journeys.py theme/academy-journeys-browser-smoke.py
+          node --check theme/academy-journeys.js
+          python3 theme/publish-academy-journeys.py --site _site
+          python3 theme/publish-academy-journeys.py --site _site --verify-only
           # Editorial invariant on ALL generated pages: no full stop at end of H1–H6.
           python3 -m py_compile theme/publish-title-cleanup.py
           python3 theme/publish-title-cleanup.py --site _site
@@ -123,6 +131,7 @@ jobs:
           python3 theme/learning-console-browser-smoke.py
           python3 theme/design-browser-smoke.py
           python3 theme/home-showcase-browser-smoke.py
+          python3 theme/academy-journeys-browser-smoke.py
       - name: Upload screenshot evidence for the design review
         if: always()
         uses: actions/upload-artifact@v4
