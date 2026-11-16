@@ -1,0 +1,73 @@
+name: MANZO AI Auth Staging QA
+
+on:
+  pull_request:
+    paths:
+      - 'product/auth-staging/**'
+      - 'theme/publish-auth-staging.py'
+      - 'theme/auth-staging-browser-smoke.py'
+      - '.github/workflows/auth-staging-qa.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'product/auth-staging/**'
+      - 'theme/publish-auth-staging.py'
+      - 'theme/auth-staging-browser-smoke.py'
+      - '.github/workflows/auth-staging-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-private-auth:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pinned Auth client and builder
+        run: npm install --prefix product/auth-staging --no-fund --no-audit
+      - name: Unit-test invite-only authentication policy
+        run: npm run test --prefix product/auth-staging
+      - name: Build a self-hosted Auth JavaScript bundle
+        run: npm run build --prefix product/auth-staging
+      - name: Verify source safety and public-release separation
+        run: |
+          set -euo pipefail
+          node --check product/auth-staging/dist/auth-app.js
+          python3 -m py_compile theme/publish-auth-staging.py theme/auth-staging-browser-smoke.py
+          test -s product/auth-staging/dist/auth-app.js
+          grep -q '"enabled": false' product/auth-staging/config.json
+          ! grep -q "publish-auth-staging.py" .github/workflows/deploy-pages.yml
+          ! grep -q "publish-auth-staging.py" .github/workflows/theme-qa.yml
+      - name: Generate three UNLINKED preview pages in temporary test site
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          python3 theme/publish-auth-staging.py --site _site --enable
+          python3 theme/publish-auth-staging.py --site _site --enable --verify-only
+      - name: Install browser
+        run: |
+          python3 -m pip install playwright==1.55.0
+          python3 -m playwright install chromium
+      - name: Test desktop and mobile without opening live Auth
+        run: |
+          set -euo pipefail
+          mkdir -p _preview
+          ln -s ../_site _preview/manzo-ai
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory _preview >/tmp/manzo-auth-http.log 2>&1 &
+          python3 theme/auth-staging-browser-smoke.py
+      - name: Archive review screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manzo-auth-staging-review
+          path: auth-review-screenshots/
+          if-no-files-found: ignore
+          retention-days: 7
