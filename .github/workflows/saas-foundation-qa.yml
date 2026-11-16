@@ -51,6 +51,18 @@ jobs:
           set -euo pipefail
           python3 -m unittest discover -s product/core/tests -v
           python3 -m unittest discover -s product/backend/tests -p 'test_*.py' -v
+      - name: Check the Learning B2B request-policy module
+        run: |
+          set -euo pipefail
+          node --test product/backend/edge/tests/router.test.mjs
+      - name: Install Deno for Supabase Edge adapter type checking
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Type-check server-only Supabase Edge Function
+        run: |
+          set -euo pipefail
+          deno check product/backend/edge/learning-api/index.ts
       - name: Install PostgreSQL client
         run: |
           set -euo pipefail
