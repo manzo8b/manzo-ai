@@ -135,3 +135,18 @@ Il dump applicativo include **`app` e `app_private`** (15 tabelle e relative fun
 **Limite esplicito:** per M3b serve ancora ripristinare il dump in una destinazione isolata, confrontare RLS/utenti e predisporre il recupero delle impostazioni esterne Auth/SMTP e dei file Storage. Non eseguire ancora la migration `0004` sul Supabase reale.
 
 **Se il Mac è troppo vecchio per Postgres.app 17:** non tentare un dump con `pg_dump` 14/15/16 contro PostgreSQL 17.11; sarebbe incompatibile. Valutare un ambiente temporaneo compatibile o un backup tramite macchina remota affidabile con crittografia, senza pubblicare credenziali o file.
+
+
+### Aggiornamento compatibilità — Postgres.app 18 rilevato sul Mac
+
+La versione locale installata è **PostgreSQL 18**, mentre Supabase MANZO AI usa PostgreSQL **17.11**. La [documentazione PostgreSQL 18](https://www.postgresql.org/docs/18/app-pgdump.html) conferma che `pg_dump` di versione superiore può effettuare dump di server precedenti. Lo script `m3b_native_backup_macos.sh` ora cerca **prima Postgres.app 18**, poi 17, e utilizza `--quote-all-identifiers` per compatibilità fra versioni.
+
+**Attenzione:** un dump generato con `pg_dump` 18 **non è garantito ripristinabile su un server 17**. La prima prova di ripristino va quindi eseguita su un **database locale PostgreSQL 18 nuovo e separato**, mai sui database personali già presenti nel Postgres.app né sul progetto Supabase. Il test del solo `pg_restore --list` non dimostra un ripristino riuscito. Nessun altro pacchetto PostgreSQL è necessario per il backup iniziale.
+
+Primo controllo sul Mac, dal Terminale:
+
+```bash
+/Applications/Postgres.app/Contents/Versions/18/bin/pg_dump --version
+```
+
+Se il comando non trova il file, verificare il percorso reale delle applicazioni e il binario senza modificare la configurazione del server locale. Il controllo `pg_dump --version` non apre connessioni e non altera alcun database.

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# MANZO AI M3b: Docker-free PostgreSQL 17 backup for legacy macOS.
+# MANZO AI M3b: Docker-free PostgreSQL 17/18 client for Supabase PG17.
 # READ-ONLY. No Supabase CLI/Docker. Never share resulting files.
 set -euo pipefail
 umask 077
@@ -12,9 +12,11 @@ info() { printf '%s\n' "$*"; }
 [[ -z "${CI:-}" && -z "${GITHUB_ACTIONS:-}" ]] || fail 'Backup remoto vietato in CI.'
 command -v shasum >/dev/null || fail 'shasum non disponibile.'
 
-# pg_dump must be compatible with PostgreSQL 17.11 on Supabase.
+# PostgreSQL 18 pg_dump supports older server 17.11. Restore target should be >=18.
 PG_BIN=''
 for candidate in \
+  '/Applications/Postgres.app/Contents/Versions/18/bin' \
+  "${HOME}/Applications/Postgres.app/Contents/Versions/18/bin" \
   '/Applications/Postgres.app/Contents/Versions/17/bin' \
   "${HOME}/Applications/Postgres.app/Contents/Versions/17/bin"
 do
@@ -24,7 +26,7 @@ do
   fi
 done
 if [[ -z "$PG_BIN" ]]; then
-  command -v pg_dump >/dev/null || fail 'pg_dump non trovato: installa Postgres.app 17.'
+  command -v pg_dump >/dev/null || fail 'pg_dump non trovato: controlla Postgres.app 18 o 17.'
   command -v pg_restore >/dev/null || fail 'pg_restore non trovato.'
   command -v psql >/dev/null || fail 'psql non trovato.'
   PG_BIN="$(dirname "$(command -v pg_dump)")"
@@ -33,8 +35,8 @@ PG_DUMP="$PG_BIN/pg_dump"
 PG_RESTORE="$PG_BIN/pg_restore"
 PSQL="$PG_BIN/psql"
 version="$("$PG_DUMP" --version)"
-[[ "$version" =~ PostgreSQL\)\ 17\. ]] ||
-  fail "pg_dump 17 richiesto per Supabase 17.11. Versione rilevata: $version"
+[[ "$version" =~ PostgreSQL\)\ (17|18)\. ]] ||
+  fail "Serve pg_dump 17 o 18 per Supabase 17.11. Versione: $version"
 
 info 'MANZO AI — Backup PostgreSQL nativo, senza Docker.'
 info 'Apri Supabase MANZO AI > Connect > Session pooler.'
@@ -70,7 +72,7 @@ chmod 700 "$dest"
 printf 'INCOMPLETE; RESTORE NOT VERIFIED\n' > "$dest/STATUS.txt"
 info "Salvataggio esclusivamente sul Mac: $dest"
 
-if ! "$PG_DUMP" -Fc --no-owner \
+if ! "$PG_DUMP" -Fc --no-owner --quote-all-identifiers \
   --schema=app --schema=app_private \
   --file="$dest/application.dump" 2>/dev/null; then
   unset PGPASSWORD
@@ -82,7 +84,7 @@ fi
 chmod 600 "$dest/application.dump"
 
 full='NOT_AVAILABLE'
-if "$PG_DUMP" -Fc --no-owner --file="$dest/full_database.dump" 2>/dev/null &&
+if "$PG_DUMP" -Fc --no-owner --quote-all-identifiers --file="$dest/full_database.dump" 2>/dev/null &&
    [[ -s "$dest/full_database.dump" ]] &&
    "$PG_RESTORE" --list "$dest/full_database.dump" >/dev/null 2>&1; then
   full='ARCHIVE_VALID'
