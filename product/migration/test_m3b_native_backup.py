@@ -15,13 +15,15 @@ class M3bDockerlessBackupTests(unittest.TestCase):
         r = subprocess.run(["bash", "-n", str(SCRIPT)], capture_output=True, text=True)
         self.assertEqual(r.returncode, 0, r.stderr)
 
-    def test_compatible_native_pg17_without_cli_or_docker(self):
+    def test_compatible_pg18_or_pg17_without_cli_or_docker(self):
         s = self.body
         self.assertIn("Versions/17/bin", s)
+        self.assertIn("Versions/18/bin", s)
         self.assertIn('PG_DUMP="$PG_BIN/pg_dump"', s)
         self.assertIn('PG_RESTORE="$PG_BIN/pg_restore"', s)
-        self.assertIn('PostgreSQL\\)\\ 17\\.', s)
+        self.assertIn("(17|18)", s)
         self.assertNotRegex(s, r"(?m)^\s*(?:supabase|docker)\s")
+        self.assertIn("--quote-all-identifiers", s)
         self.assertNotIn("supabase db push", s)
         self.assertNotIn("supabase db reset", s)
 
