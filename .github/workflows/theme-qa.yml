@@ -15,6 +15,7 @@ on:
       - 'theme/publish-academy-journeys.py'
       - 'theme/academy-journeys.css'
       - 'theme/academy-journeys.js'
+      - 'theme/fix-learning-anchors.py'
       - 'theme/academy-journeys-browser-smoke.py'
       - 'theme/home-showcase-browser-smoke.py'
       - 'theme/design-motion.js'
@@ -107,6 +108,10 @@ jobs:
           node --check theme/academy-journeys.js
           python3 theme/publish-academy-journeys.py --site _site
           python3 theme/publish-academy-journeys.py --site _site --verify-only
+          # Legacy M02–M06 lesson subsections must have unique HTML anchors.
+          python3 -m py_compile theme/fix-learning-anchors.py
+          python3 theme/fix-learning-anchors.py --site _site
+          python3 theme/fix-learning-anchors.py --site _site --verify-only
           # Editorial invariant on ALL generated pages: no full stop at end of H1–H6.
           python3 -m py_compile theme/publish-title-cleanup.py
           python3 theme/publish-title-cleanup.py --site _site
