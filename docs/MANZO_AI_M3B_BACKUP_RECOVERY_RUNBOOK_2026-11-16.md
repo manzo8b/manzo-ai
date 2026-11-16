@@ -103,3 +103,35 @@ Il Security Advisor Supabase segnala la funzionalità di protezione dalle passwo
 - [Supabase — Database Backups](https://supabase.com/docs/guides/platform/backups)
 - [Supabase — CLI v3 breaking changes](https://supabase.com/changelog/supabase-cli-v3)
 - [Supabase — Backup/restore CLI](https://supabase.com/docs/guides/platform/migrating-within-supabase/backup-restore)
+
+
+---
+
+## Alternativa per Mac senza Docker — PostgreSQL 17 nativo
+
+**Questo metodo è preferibile se Docker Desktop non è supportato dal Mac.**
+Non richiede Docker né Supabase CLI e utilizza il programma ufficiale PostgreSQL `pg_dump`. L'ambiente reale è PostgreSQL 17.11; lo strumento di backup deve avere la **stessa major PostgreSQL 17** (la versione minore può differire).
+
+### Dove reperire strumenti compatibili
+
+- [Postgres.app — archivio Legacy](https://postgresapp.com/downloads_legacy.html): versione **2.7.10** con PostgreSQL **17.2**, disponibile anche per **macOS 10.13+**.
+- [Postgres.app Legacy 2.9.2](https://postgresapp.com/downloads_legacy.html): include PostgreSQL **17.7** e richiede macOS **10.15+**.
+- [PostgreSQL — download macOS](https://www.postgresql.org/download/macosx/) per compatibilità alternative.
+
+Questi installer sono prodotti separati da Docker. Verificare sul Mac la versione reale di macOS e scegliere soltanto quella supportata. Scaricare esclusivamente dai siti ufficiali. La scelta di PostgreSQL 17.2/17.7 non deve essere confusa con una modifica del server PostgreSQL 17.11 su Supabase: si installa **solo uno strumento client** (l'app include anche un server locale, che non è necessario avviare per il dump remoto).
+
+### Procedura
+
+1. Installare Postgres.app Legacy e assicurarsi che sia presente `/Applications/Postgres.app/Contents/Versions/17/bin/pg_dump`.
+2. Scaricare soltanto lo script `product/migration/m3b_native_backup_macos.sh` dal repository e salvarlo sul Mac in una cartella privata.
+3. Aprire [MANZO AI — Connect](https://supabase.com/dashboard/project/bjydnaejpxwubmxpnpnv) e selezionare **Session pooler** con porta **5432**. Conservare host e password sul Mac, senza condividerli.
+4. Nel Terminale eseguire `bash /percorso/privato/m3b_native_backup_macos.sh`. Il programma chiede solo l'hostname del pooler e la password **del database** (non SMTP Brevo), nascosta durante la digitazione.
+5. Lo script salva in `~/.manzo-ai/private-backups/` gli archivi applicativi (sempre) e un dump logico completo *se il ruolo Supabase dispone dei permessi necessari*. Chiude la connessione e calcola gli SHA-256.
+
+Il dump applicativo include **`app` e `app_private`** (15 tabelle e relative funzioni/privilegi); il dump completo è un tentativo aggiuntivo **best effort**. Il risultato `FULL_DATABASE_DUMP: ARCHIVE_VALID` significa solo che l'archivio è leggibile da `pg_restore --list`, **non** che il ripristino integrale sia stato provato.
+
+**Sicurezza:** password solo nel processo locale tramite `PGPASSWORD`, senza inserirla nella linea di comando di `pg_dump`; archivi con permessi ristretti, senza GitHub Actions o cartelle pubbliche. L'host viene verificato come pooler Supabase e il nome utente vincolato al ref MANZO AI.
+
+**Limite esplicito:** per M3b serve ancora ripristinare il dump in una destinazione isolata, confrontare RLS/utenti e predisporre il recupero delle impostazioni esterne Auth/SMTP e dei file Storage. Non eseguire ancora la migration `0004` sul Supabase reale.
+
+**Se il Mac è troppo vecchio per Postgres.app 17:** non tentare un dump con `pg_dump` 14/15/16 contro PostgreSQL 17.11; sarebbe incompatibile. Valutare un ambiente temporaneo compatibile o un backup tramite macchina remota affidabile con crittografia, senza pubblicare credenziali o file.
