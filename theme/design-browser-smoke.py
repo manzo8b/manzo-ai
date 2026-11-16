@@ -41,8 +41,25 @@ def test(page,route,expected_kind,screen,width):
  body_color=page.evaluate('getComputedStyle(document.body).backgroundColor')
  assert body_color=='rgb(255, 255, 255)',(screen,width,'paper',body_color)
  ink=page.evaluate("getComputedStyle(document.body).getPropertyValue('--ma-ink').trim()")
- assert ink=='#172e44',(screen,width,'ink',ink)
+ assert ink=='#142841',(screen,width,'ink',ink)
  if expected_kind=='landing':
+  features=page.locator('.grid-3>.feature')
+  assert features.count()>=3,(screen,'home feature cards missing')
+  expected=['rgb(32, 78, 229)','rgb(0, 111, 104)','rgb(255, 143, 82)']
+  actual=[features.nth(i).evaluate('(el)=>getComputedStyle(el).backgroundColor') for i in range(3)]
+  assert actual==expected,(screen,width,'pastel home cards survived',actual)
+  assert page.locator('.home-hero').evaluate('(el)=>getComputedStyle(el).backgroundColor')=='rgb(255, 255, 255)',(screen,'home hero not white')
+  assert page.locator('.home-hero .ma-product-scene').evaluate('(el)=>getComputedStyle(el).backgroundColor')=='rgb(33, 88, 237)',(screen,'product scene missing contrast')
+  assert all(features.nth(i).evaluate('(el)=>getComputedStyle(el).boxShadow')!='none' for i in range(3)),(screen,'feature depth missing')
+  if width==1440:
+   first_box=features.first.bounding_box()
+   last_box=features.nth(2).bounding_box()
+   assert first_box and last_box and last_box['width']>first_box['width']+180,(screen,'third featured card still leaves large empty grid row',first_box,last_box)
+   features.first.hover()
+   page.wait_for_timeout(350)
+   assert features.first.evaluate('(el)=>getComputedStyle(el).transform')!='none',(screen,'interactive card effect missing')
+  if width==390:
+   assert page.evaluate('document.documentElement.scrollWidth-window.innerWidth')<=4,(screen,'horizontal overflow')
   assert page.locator('[data-ma-home-scene="1"]').count()==1
   assert page.locator('.ma-product-scene a[href*="/prodotto/"],.ma-product-scene a[href*="/product/"],.ma-product-scene a[href*="/producto/"]').count()==1
  if screen.endswith('product'):
@@ -73,6 +90,13 @@ def test(page,route,expected_kind,screen,width):
  }:
   raw=page.screenshot(type='jpeg',quality=45,full_page=False,animations='disabled')
   print('MA_VISUAL_JPEG|'+screen+'|'+str(width)+'|'+base64.b64encode(raw).decode('ascii'),flush=True)
+ if screen=='it-home' and width in (1440,390):
+  features=page.locator('.grid-3>.feature')
+  features.first.scroll_into_view_if_needed()
+  page.wait_for_timeout(320)
+  page.screenshot(path=str(DEST/f'it-home-feature-cards-{width}.png'),full_page=False,animations='disabled')
+  frame=page.screenshot(type='jpeg',quality=48,full_page=False,animations='disabled')
+  print('MA_HOME_CARDS_VISUAL|'+str(width)+'|'+base64.b64encode(frame).decode('ascii'),flush=True)
  print(f'PASS DESIGN {screen} {width}px: {actual}; paper {body_color}; h1 OK; screenshot captured.')
 
 with sync_playwright() as pw:

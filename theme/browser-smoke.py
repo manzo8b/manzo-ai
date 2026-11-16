@@ -20,8 +20,8 @@ with sync_playwright() as p:
             response = page.goto(f"{origin}/{path}", wait_until="domcontentloaded")
             assert response is not None and response.status == 200, path
             assert page.locator("h1").count() == 1, path
-            assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ma-blue').trim()") == "#1b609b", path
-            assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ma-ink').trim()") == "#172e44", path
+            assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ma-blue').trim()") == "#2158ed", path
+            assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ma-ink').trim()") == "#142841", path
         page.goto(f"{origin}/it/")
         assert page.locator(".home-hero").evaluate("(e)=>getComputedStyle(e).backgroundImage") == "none"
         feature_colors = page.locator(".grid-3>.feature").evaluate_all("(xs)=>xs.map(x=>getComputedStyle(x).backgroundColor)")

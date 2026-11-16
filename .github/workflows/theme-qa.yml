@@ -6,6 +6,10 @@ on:
     paths:
       - 'theme/mobile-nav.js'
       - 'theme/design-system.css'
+      - 'product/learning-experience/**'
+      - 'theme/publish-learning-experience.py'
+      - 'theme/learning-experience-browser-smoke.py'
+      - 'theme/publish-title-cleanup.py'
       - 'theme/design-motion.js'
       - 'theme/publish-design-system.py'
       - 'theme/design-browser-smoke.py'
@@ -66,6 +70,10 @@ jobs:
           node --check editorial/learning/hallucinations/coding.js
           python3 theme/publish-hallucinations-coding.py --site _site
           python3 theme/publish-hallucinations-coding.py --site _site --verify-only
+          python3 -m py_compile theme/publish-learning-experience.py theme/learning-experience-browser-smoke.py
+          node --check product/learning-experience/guide.js
+          python3 theme/publish-learning-experience.py --site _site
+          python3 theme/publish-learning-experience.py --site _site --verify-only
           python3 -m py_compile theme/publish-product-preview.py theme/product-preview-browser-smoke.py
           node --check product/preview/preview.js
           python3 theme/publish-product-preview.py --site _site
@@ -85,6 +93,10 @@ jobs:
           python3 -m py_compile theme/publish-home-scene.py
           python3 theme/publish-home-scene.py --site _site
           python3 theme/publish-home-scene.py --site _site --verify-only
+          # Editorial invariant on ALL generated pages: no full stop at end of H1–H6.
+          python3 -m py_compile theme/publish-title-cleanup.py
+          python3 theme/publish-title-cleanup.py --site _site
+          python3 theme/publish-title-cleanup.py --site _site --verify-only
       - name: Install Chromium for responsive smoke tests
         run: |
           python3 -m pip install playwright==1.55.0
@@ -100,6 +112,7 @@ jobs:
           python3 theme/mobile-browser-smoke.py
           python3 theme/hallucinations-browser-smoke.py
           python3 theme/hallucinations-coding-browser-smoke.py
+          python3 theme/learning-experience-browser-smoke.py
           python3 theme/product-preview-browser-smoke.py
           python3 theme/learning-console-browser-smoke.py
           python3 theme/design-browser-smoke.py

@@ -1,0 +1,527 @@
+{
+  "it": {
+    "name": "MANZO AI / PERCORSO GUIDATO",
+    "title": "Impara, applica, verifica",
+    "description": "Una guida al percorso già pubblicato: obiettivi chiari, capitoli navigabili, pratica professionale e autovalutazione.",
+    "objectives": "Al termine saprai",
+    "outline": "Piano di studio",
+    "guide": "La tua progressione in questa visita",
+    "progressNote": "I segni di avanzamento rimangono solo in questa pagina e scompaiono quando la ricarichi. Non sono risultati ufficiali, non vengono trasmessi e non certificano il completamento del corso.",
+    "progress": "Sezioni contrassegnate",
+    "mark": "Segna come studiato",
+    "unmark": "Da rivedere",
+    "done": "Studiato",
+    "continue": "Continua dal prossimo capitolo",
+    "allDone": "Tutte le sezioni contrassegnate",
+    "reset": "Azzera questa sessione",
+    "content": "Teoria e metodo",
+    "practice": "Pratica con feedback",
+    "assessment": "Autovalutazione",
+    "sources": "Fonti e approfondimenti",
+    "noCertificate": "Valutazione formativa, non certificazione accreditata",
+    "detail": "Contenuti e risposte del corso originale invariati",
+    "coreOutcomes": [
+      "Distinguere allucinazioni, errori e informazioni non verificate",
+      "Rintracciare fonti primarie e documentare le verifiche",
+      "Valutare i rischi professionali in finanza, legal e coding"
+    ],
+    "codingOutcomes": [
+      "Riconoscere output di codice non dimostrati o inventati",
+      "Applicare controlli prima di una consegna al cliente",
+      "Motivare una decisione di rilascio con evidenze verificabili"
+    ],
+    "moduleLabel": "Modulo",
+    "codingLabel": "Capitolo",
+    "timeNote": "Tempo indicativo indicato nel programma",
+    "start": "Vai al capitolo",
+    "previous": "Percorso principale",
+    "practiceLabel": "Casi pratici",
+    "quizLabel": "Quiz formativo",
+    "crosswordLabel": "Cruciverba opzionale",
+    "assessmentNote": "Il quiz resta quello del corso originale: questa guida non modifica domande o punteggi.",
+    "hub": {
+      "kicker": "MANZO AI / ACADEMY",
+      "title": "Impara competenze che puoi applicare",
+      "desc": "Programmi, lezioni e laboratori per chi lavora con l'intelligenza artificiale",
+      "firstTitle": "AI: allucinazioni e verificabilità",
+      "firstDesc": "6 moduli · 10 casi pratici · quiz e cruciverba",
+      "secondTitle": "Engineering Assurance",
+      "secondDesc": "6 capitoli · 4 scenari di coding · quality gate",
+      "open": "Apri il percorso",
+      "status": "Esperienza libera, senza account o tracciamento del progresso",
+      "catalogTitle": "Esplora i percorsi",
+      "catalogDescription": "Scegli un argomento, confronta i contenuti disponibili e inizia da ciò che ti serve davvero",
+      "searchPlaceholder": "Cerca argomenti, lezioni o competenze",
+      "searchLabel": "Cerca nel catalogo",
+      "catalogCount": "percorsi disponibili",
+      "empty": "Nessun percorso corrisponde ai filtri selezionati",
+      "clear": "Mostra tutti",
+      "featured": "In evidenza",
+      "filters": [
+        [
+          "all",
+          "Tutti"
+        ],
+        [
+          "verify",
+          "Verifica e compliance"
+        ],
+        [
+          "coding",
+          "Sviluppo"
+        ],
+        [
+          "prompt",
+          "Prompt"
+        ],
+        [
+          "fundamentals",
+          "Fondamenti"
+        ],
+        [
+          "workflow",
+          "Workflow"
+        ]
+      ],
+      "disclaimer": "Tutti i contenuti sono consultabili liberamente · Non è previsto un certificato accreditato",
+      "catalog": [
+        {
+          "id": "hallucinations",
+          "category": "verify",
+          "tone": "blue",
+          "code": "AI / 01",
+          "route": "it/impara/allucinazioni-ai-verificabilita",
+          "title": "Allucinazioni AI e verificabilità",
+          "kind": "Corso professionale",
+          "description": "Impara a distinguere gli errori, ricostruire le prove e gestire le decisioni in finanza, legal e compliance",
+          "facts": [
+            "6 moduli",
+            "10 casi pratici",
+            "Quiz e cruciverba"
+          ]
+        },
+        {
+          "id": "coding",
+          "category": "coding",
+          "tone": "navy",
+          "code": "DEV / 02",
+          "route": "it/impara/allucinazioni-ai-verificabilita/coding",
+          "title": "Engineering Assurance nel coding",
+          "kind": "Modulo specialistico",
+          "description": "Verifica il codice generato dall'AI prima della consegna, con quality gate e casi di rischio commerciale",
+          "facts": [
+            "6 capitoli",
+            "4 scenari",
+            "Quality gate"
+          ]
+        },
+        {
+          "id": "model",
+          "category": "fundamentals",
+          "tone": "mint",
+          "code": "AI / 03",
+          "route": "it/impara/come-funziona-un-modello-linguistico",
+          "title": "Come funziona un modello linguistico",
+          "kind": "Lezione",
+          "description": "Comprendi il funzionamento di un LLM e i limiti delle risposte generate",
+          "facts": [
+            "Fondamenti",
+            "AI generativa"
+          ]
+        },
+        {
+          "id": "prompt",
+          "category": "prompt",
+          "tone": "orange",
+          "code": "LAB / 04",
+          "route": "it/impara/come-costruire-un-prompt-efficace",
+          "title": "Come costruire un prompt efficace",
+          "kind": "Lezione",
+          "description": "Definisci obiettivo, contesto e formato per ottenere risposte utili e controllabili",
+          "facts": [
+            "Prompting",
+            "Applicazione"
+          ]
+        },
+        {
+          "id": "checking",
+          "category": "verify",
+          "tone": "teal",
+          "code": "QA / 05",
+          "route": "it/impara/come-verificare-le-risposte-ai",
+          "title": "Come verificare le risposte AI",
+          "kind": "Lezione",
+          "description": "Impara a controllare affermazioni e fonti prima di riutilizzare un output",
+          "facts": [
+            "Verifica",
+            "Fonti"
+          ]
+        },
+        {
+          "id": "workflow",
+          "category": "workflow",
+          "tone": "violet",
+          "code": "OPS / 06",
+          "route": "it/impara/progettare-un-workflow-ai",
+          "title": "Progettare un workflow AI",
+          "kind": "Lezione",
+          "description": "Organizza attività, punti di controllo e responsabilità in un flusso di lavoro riproducibile",
+          "facts": [
+            "Workflow",
+            "Processi"
+          ]
+        }
+      ]
+    }
+  },
+  "en": {
+    "name": "MANZO AI / GUIDED LEARNING",
+    "title": "Learn, apply, verify",
+    "description": "A guide to the existing course: explicit goals, navigable lessons, professional practice and formative assessment.",
+    "objectives": "By the end, you can",
+    "outline": "Study plan",
+    "guide": "Your progress in this visit",
+    "progressNote": "Progress marks remain in this page only and disappear on refresh. They are not official grades, are not transmitted, and do not certify course completion.",
+    "progress": "Sections marked",
+    "mark": "Mark as studied",
+    "unmark": "Review again",
+    "done": "Studied",
+    "continue": "Continue to next section",
+    "allDone": "All sections marked",
+    "reset": "Reset this session",
+    "content": "Concepts and methods",
+    "practice": "Practice with feedback",
+    "assessment": "Self-assessment",
+    "sources": "Sources and further reading",
+    "noCertificate": "Formative assessment, not an accredited certificate",
+    "detail": "Original learning text and answer logic preserved",
+    "coreOutcomes": [
+      "Distinguish hallucinations from other errors and unverified claims",
+      "Locate primary sources and document evidence checks",
+      "Evaluate professional risks in finance, legal and coding"
+    ],
+    "codingOutcomes": [
+      "Identify invented or unsupported AI-generated code",
+      "Apply checks before delivery to a client",
+      "Justify release decisions with traceable evidence"
+    ],
+    "moduleLabel": "Module",
+    "codingLabel": "Chapter",
+    "timeNote": "Indicative times shown in the syllabus",
+    "start": "Open section",
+    "previous": "Core learning path",
+    "practiceLabel": "Practice cases",
+    "quizLabel": "Formative quiz",
+    "crosswordLabel": "Optional crossword",
+    "assessmentNote": "The original quiz is unchanged; this guide does not change questions or scores.",
+    "hub": {
+      "kicker": "MANZO AI / ACADEMY",
+      "title": "Learn skills you can put to work",
+      "desc": "Courses, lessons and hands-on practice for professionals working with artificial intelligence",
+      "firstTitle": "AI hallucinations and verification",
+      "firstDesc": "6 modules · 10 practice cases · quiz and crossword",
+      "secondTitle": "Engineering Assurance",
+      "secondDesc": "6 chapters · 4 coding scenarios · quality gates",
+      "open": "Explore learning path",
+      "status": "Open learning without accounts or persistent progress",
+      "catalogTitle": "Explore the learning paths",
+      "catalogDescription": "Choose a topic, compare available content and start with the skills you actually need",
+      "searchPlaceholder": "Search topics, lessons or skills",
+      "searchLabel": "Search the learning catalog",
+      "catalogCount": "learning paths available",
+      "empty": "No learning paths match your filters",
+      "clear": "Show all",
+      "featured": "Featured",
+      "filters": [
+        [
+          "all",
+          "All"
+        ],
+        [
+          "verify",
+          "Verification & compliance"
+        ],
+        [
+          "coding",
+          "Engineering"
+        ],
+        [
+          "prompt",
+          "Prompting"
+        ],
+        [
+          "fundamentals",
+          "Fundamentals"
+        ],
+        [
+          "workflow",
+          "Workflows"
+        ]
+      ],
+      "disclaimer": "Content is freely available · No accredited certificate is issued",
+      "catalog": [
+        {
+          "id": "hallucinations",
+          "category": "verify",
+          "tone": "blue",
+          "code": "AI / 01",
+          "route": "en/learn/ai-hallucinations-verification",
+          "title": "AI hallucinations and verification",
+          "kind": "Professional course",
+          "description": "Identify unsupported AI outputs, trace evidence and make defensible decisions in finance, legal and compliance",
+          "facts": [
+            "6 modules",
+            "10 case exercises",
+            "Quiz & crossword"
+          ]
+        },
+        {
+          "id": "coding",
+          "category": "coding",
+          "tone": "navy",
+          "code": "DEV / 02",
+          "route": "en/learn/ai-hallucinations-verification/coding",
+          "title": "Engineering Assurance for coding",
+          "kind": "Specialist module",
+          "description": "Review AI-generated code before delivery using quality gates and real-world commercial risk scenarios",
+          "facts": [
+            "6 chapters",
+            "4 scenarios",
+            "Quality gates"
+          ]
+        },
+        {
+          "id": "model",
+          "category": "fundamentals",
+          "tone": "mint",
+          "code": "AI / 03",
+          "route": "en/learn/how-a-language-model-works",
+          "title": "How a language model works",
+          "kind": "Lesson",
+          "description": "Understand how an LLM works and the limitations of generated responses",
+          "facts": [
+            "Fundamentals",
+            "Generative AI"
+          ]
+        },
+        {
+          "id": "prompt",
+          "category": "prompt",
+          "tone": "orange",
+          "code": "LAB / 04",
+          "route": "en/learn/how-to-build-an-effective-prompt",
+          "title": "How to build an effective prompt",
+          "kind": "Lesson",
+          "description": "Define objectives, context and output format for useful, testable responses",
+          "facts": [
+            "Prompting",
+            "Application"
+          ]
+        },
+        {
+          "id": "checking",
+          "category": "verify",
+          "tone": "teal",
+          "code": "QA / 05",
+          "route": "en/learn/how-to-verify-ai-answers",
+          "title": "How to verify AI answers",
+          "kind": "Lesson",
+          "description": "Check claims and sources before reusing AI-generated outputs",
+          "facts": [
+            "Verification",
+            "Sources"
+          ]
+        },
+        {
+          "id": "workflow",
+          "category": "workflow",
+          "tone": "violet",
+          "code": "OPS / 06",
+          "route": "en/learn/designing-an-ai-workflow",
+          "title": "Designing an AI workflow",
+          "kind": "Lesson",
+          "description": "Structure tasks, checkpoints and responsibilities into a repeatable workflow",
+          "facts": [
+            "Workflows",
+            "Processes"
+          ]
+        }
+      ]
+    }
+  },
+  "es": {
+    "name": "MANZO AI / ITINERARIO GUIADO",
+    "title": "Aprende, aplica, verifica",
+    "description": "Una guía del curso existente: objetivos claros, capítulos navegables, práctica profesional y evaluación formativa.",
+    "objectives": "Al finalizar podrás",
+    "outline": "Plan de estudio",
+    "guide": "Tu progreso en esta visita",
+    "progressNote": "Las marcas permanecen solamente en esta página y desaparecen al actualizarla. No son calificaciones oficiales, no se transmiten y no certifican haber terminado el curso.",
+    "progress": "Secciones marcadas",
+    "mark": "Marcar como estudiado",
+    "unmark": "Volver a revisar",
+    "done": "Estudiado",
+    "continue": "Seguir con el próximo capítulo",
+    "allDone": "Todas las secciones marcadas",
+    "reset": "Restablecer sesión",
+    "content": "Conceptos y método",
+    "practice": "Práctica con retroalimentación",
+    "assessment": "Autoevaluación",
+    "sources": "Fuentes y recursos",
+    "noCertificate": "Evaluación formativa, no certificación acreditada",
+    "detail": "Contenido original y lógica de respuestas sin modificar",
+    "coreOutcomes": [
+      "Distinguir alucinaciones, errores y afirmaciones sin verificar",
+      "Localizar fuentes primarias y documentar comprobaciones",
+      "Evaluar riesgos profesionales en finanzas, derecho y programación"
+    ],
+    "codingOutcomes": [
+      "Identificar código inventado o no verificado",
+      "Aplicar controles antes de entregar al cliente",
+      "Justificar decisiones de entrega con pruebas rastreables"
+    ],
+    "moduleLabel": "Módulo",
+    "codingLabel": "Capítulo",
+    "timeNote": "Duraciones indicativas del programa",
+    "start": "Abrir capítulo",
+    "previous": "Curso principal",
+    "practiceLabel": "Casos prácticos",
+    "quizLabel": "Cuestionario formativo",
+    "crosswordLabel": "Crucigrama opcional",
+    "assessmentNote": "El cuestionario original sigue intacto; esta guía no modifica preguntas ni puntuaciones.",
+    "hub": {
+      "kicker": "MANZO AI / ACADEMY",
+      "title": "Aprende habilidades que puedes aplicar",
+      "desc": "Cursos, lecciones y actividades prácticas para profesionales que trabajan con inteligencia artificial",
+      "firstTitle": "Alucinaciones IA y verificabilidad",
+      "firstDesc": "6 módulos · 10 casos prácticos · cuestionario y crucigrama",
+      "secondTitle": "Engineering Assurance",
+      "secondDesc": "6 capítulos · 4 casos de programación · controles de calidad",
+      "open": "Explorar itinerario",
+      "status": "Formación abierta sin cuentas ni seguimiento permanente",
+      "catalogTitle": "Explora los itinerarios",
+      "catalogDescription": "Elige un tema, compara los contenidos y empieza con las competencias que realmente necesitas",
+      "searchPlaceholder": "Busca temas, lecciones o habilidades",
+      "searchLabel": "Buscar en el catálogo",
+      "catalogCount": "itinerarios disponibles",
+      "empty": "Ningún itinerario coincide con los filtros seleccionados",
+      "clear": "Mostrar todos",
+      "featured": "Destacado",
+      "filters": [
+        [
+          "all",
+          "Todos"
+        ],
+        [
+          "verify",
+          "Verificación y cumplimiento"
+        ],
+        [
+          "coding",
+          "Desarrollo"
+        ],
+        [
+          "prompt",
+          "Prompts"
+        ],
+        [
+          "fundamentals",
+          "Fundamentos"
+        ],
+        [
+          "workflow",
+          "Flujos de trabajo"
+        ]
+      ],
+      "disclaimer": "Contenido disponible de forma abierta · No se otorga certificado acreditado",
+      "catalog": [
+        {
+          "id": "hallucinations",
+          "category": "verify",
+          "tone": "blue",
+          "code": "AI / 01",
+          "route": "es/aprende/alucinaciones-ia-verificacion",
+          "title": "Alucinaciones IA y verificación",
+          "kind": "Curso profesional",
+          "description": "Identifica resultados sin verificar, reconstruye pruebas y toma decisiones justificadas en finanzas y cumplimiento",
+          "facts": [
+            "6 módulos",
+            "10 casos prácticos",
+            "Cuestionario y crucigrama"
+          ]
+        },
+        {
+          "id": "coding",
+          "category": "coding",
+          "tone": "navy",
+          "code": "DEV / 02",
+          "route": "es/aprende/alucinaciones-ia-verificacion/coding",
+          "title": "Engineering Assurance en programación",
+          "kind": "Módulo especializado",
+          "description": "Revisa el código generado por IA antes de entregarlo, con controles de calidad y escenarios de riesgo",
+          "facts": [
+            "6 capítulos",
+            "4 escenarios",
+            "Controles de calidad"
+          ]
+        },
+        {
+          "id": "model",
+          "category": "fundamentals",
+          "tone": "mint",
+          "code": "AI / 03",
+          "route": "es/aprende/como-funciona-un-modelo-de-lenguaje",
+          "title": "Cómo funciona un modelo de lenguaje",
+          "kind": "Lección",
+          "description": "Comprende cómo funciona un LLM y los límites de las respuestas generadas",
+          "facts": [
+            "Fundamentos",
+            "IA generativa"
+          ]
+        },
+        {
+          "id": "prompt",
+          "category": "prompt",
+          "tone": "orange",
+          "code": "LAB / 04",
+          "route": "es/aprende/como-construir-un-prompt-eficaz",
+          "title": "Cómo construir un prompt eficaz",
+          "kind": "Lección",
+          "description": "Define objetivos, contexto y formato para obtener respuestas útiles y verificables",
+          "facts": [
+            "Prompting",
+            "Aplicación"
+          ]
+        },
+        {
+          "id": "checking",
+          "category": "verify",
+          "tone": "teal",
+          "code": "QA / 05",
+          "route": "es/aprende/como-verificar-las-respuestas-de-ia",
+          "title": "Cómo verificar respuestas de IA",
+          "kind": "Lección",
+          "description": "Comprueba afirmaciones y fuentes antes de reutilizar respuestas generadas",
+          "facts": [
+            "Verificación",
+            "Fuentes"
+          ]
+        },
+        {
+          "id": "workflow",
+          "category": "workflow",
+          "tone": "violet",
+          "code": "OPS / 06",
+          "route": "es/aprende/disenar-un-flujo-de-trabajo-con-ia",
+          "title": "Diseñar un flujo de trabajo con IA",
+          "kind": "Lección",
+          "description": "Organiza tareas, controles y responsabilidades en un flujo de trabajo repetible",
+          "facts": [
+            "Flujos de trabajo",
+            "Procesos"
+          ]
+        }
+      ]
+    }
+  }
+}
