@@ -28,7 +28,11 @@
    });
   });
   const print=section.querySelector("[data-ma-journey-print]");
-  if(print)print.addEventListener("click",()=>window.print());
+  if(print)print.addEventListener("click",()=>{
+   document.body.classList.add("ma-print-journey-mode");
+   window.print();
+  });
+  window.addEventListener("afterprint",()=>document.body.classList.remove("ma-print-journey-mode"));
   select(0);
  }
 })();
