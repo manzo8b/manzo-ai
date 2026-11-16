@@ -67,7 +67,7 @@ const adapt=()=>{
   }
  };
 };
-const protectedHandler=withSupabase({auth:"user"},async(req:Request,ctx)=>{
+const protectedHandler=withSupabase({auth:"user",cors:"disabled"},async(req:Request,ctx)=>{
  const origin=req.headers.get("Origin");
  if(origin&&allowed(origin)===null)return response(403,{code:"origin_not_allowed"},null);
  const actor=ctx.userClaims?.id;
