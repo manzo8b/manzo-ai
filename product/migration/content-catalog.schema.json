@@ -1,0 +1,257 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/manzo8b/manzo-ai/blob/main/product/migration/content-catalog.schema.json",
+  "title": "MANZO AI public editorial content catalog — M2",
+  "description": "Metadata-only contract. Not a database migration, private quiz bank, or certificate of completed course.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scope",
+    "source_of_truth",
+    "database_target",
+    "content_policy",
+    "summary",
+    "courses",
+    "variants"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "scope": {
+      "const": "editorial_public_metadata_only"
+    },
+    "source_of_truth": {
+      "type": "string",
+      "minLength": 1
+    },
+    "database_target": {
+      "const": "not_imported_pending_tenant_and_public_catalog_design"
+    },
+    "content_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quiz_answers_exported",
+        "user_data_exported",
+        "progress_exported",
+        "course_access_claimed",
+        "score_or_certification_claimed"
+      ],
+      "properties": {
+        "quiz_answers_exported": {
+          "const": false
+        },
+        "user_data_exported": {
+          "const": false
+        },
+        "progress_exported": {
+          "const": false
+        },
+        "course_access_claimed": {
+          "const": false
+        },
+        "score_or_certification_claimed": {
+          "const": false
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "courses",
+        "localized_variants",
+        "languages",
+        "localized_units",
+        "localized_public_self_assessment_items",
+        "localized_cases"
+      ],
+      "properties": {
+        "courses": {
+          "const": 2
+        },
+        "localized_variants": {
+          "const": 6
+        },
+        "languages": {
+          "const": [
+            "it",
+            "en",
+            "es"
+          ]
+        },
+        "localized_units": {
+          "const": 36
+        },
+        "localized_public_self_assessment_items": {
+          "const": 42
+        },
+        "localized_cases": {
+          "const": 42
+        }
+      }
+    },
+    "courses": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "mode",
+          "owner_tenant_id",
+          "b2b_enrollment_enabled",
+          "b2b_grading_enabled",
+          "canonical_locale"
+        ],
+        "properties": {
+          "key": {
+            "enum": [
+              "ai-hallucinations",
+              "engineering-assurance"
+            ]
+          },
+          "mode": {
+            "const": "public_learning"
+          },
+          "owner_tenant_id": {
+            "type": "null"
+          },
+          "b2b_enrollment_enabled": {
+            "const": false
+          },
+          "b2b_grading_enabled": {
+            "const": false
+          },
+          "canonical_locale": {
+            "const": "it"
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "course_key",
+          "locale",
+          "title",
+          "route",
+          "source_path",
+          "source_sha256",
+          "editorial_status",
+          "units",
+          "unit_count",
+          "public_self_assessment_count",
+          "public_case_count",
+          "private_assessment_ready",
+          "source_contains_public_answers"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "pattern": "^(ai-hallucinations|engineering-assurance):(it|en|es)$"
+          },
+          "course_key": {
+            "enum": [
+              "ai-hallucinations",
+              "engineering-assurance"
+            ]
+          },
+          "locale": {
+            "enum": [
+              "it",
+              "en",
+              "es"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "route": {
+            "type": "string",
+            "pattern": "^/manzo-ai/(it|en|es)/"
+          },
+          "source_path": {
+            "type": "string",
+            "pattern": "^editorial/learning/hallucinations/"
+          },
+          "source_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "editorial_status": {
+            "const": "published_static"
+          },
+          "unit_count": {
+            "const": 6
+          },
+          "public_self_assessment_count": {
+            "enum": [
+              4,
+              10
+            ]
+          },
+          "public_case_count": {
+            "enum": [
+              4,
+              10
+            ]
+          },
+          "private_assessment_ready": {
+            "const": false
+          },
+          "source_contains_public_answers": {
+            "const": true
+          },
+          "units": {
+            "type": "array",
+            "minItems": 6,
+            "maxItems": 6,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "key",
+                "position",
+                "title",
+                "duration"
+              ],
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "pattern": "^(core|coding)-0[1-6]$"
+                },
+                "position": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 6
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "duration": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
