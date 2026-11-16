@@ -60,6 +60,7 @@ def audit(site:Path):
         duplicate=[name for name,count in Counter(markup.ids).items() if count>1]
         if duplicate:issues.append(label+": duplicate DOM IDs: "+", ".join(duplicate[:5]))
     checked=0;anchors=0
+    supplemental={}
     for page,markup in parsed.items():
         for href in markup.hrefs:
             dest=destination(site,page,href)
@@ -72,11 +73,12 @@ def audit(site:Path):
                 continue
             if fragment:
                 anchors+=1
-                if target not in parsed:
+                if target not in parsed and target not in supplemental:
                     sub=Markup()
                     sub.feed(target.read_text(encoding="utf-8"))
-                    parsed[target]=sub
-                if fragment not in parsed[target].ids:
+                    supplemental[target]=sub
+                matched=parsed.get(target) or supplemental.get(target)
+                if fragment not in matched.ids:
                     issues.append(label+" -> missing fragment: "+href)
     if issues:
         for item in issues[:35]:print("ISSUE: "+item)
