@@ -1,0 +1,184 @@
+/* MANZO AI / Home Academy showcase
+   Shares the exact card visual language and actual links of the Academy.
+   This file styles ONLY the trilingual home; never overwrites learning exercises.
+*/
+body[data-ma-surface="landing"] .ma-home-showcase{
+  position:relative;
+  width:100%;
+  margin:clamp(64px,8vw,112px) auto clamp(70px,8vw,100px);
+  padding:clamp(20px,4vw,42px) 0 0;
+  border-top:1px solid #d8e3ee;
+  isolation:isolate;
+  text-align:left;
+  scroll-margin-top:5rem;
+}
+body[data-ma-surface="landing"] .ma-home-showcase::before{
+  content:"";
+  position:absolute;
+  top:-2px;
+  left:0;
+  width:96px;
+  height:4px;
+  border-radius:0 0 4px 4px;
+  background:#2158ed;
+}
+.ma-home-showcase *{box-sizing:border-box}
+.ma-home-showcase-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(145px,auto);
+  align-items:end;
+  gap:clamp(18px,3vw,44px);
+  margin-bottom:clamp(27px,3vw,43px);
+}
+.ma-home-showcase-heading{max-width:740px}
+body[data-ma-surface="landing"] .ma-home-showcase-eyebrow{
+  font-weight:800;
+  font-size:.74rem;
+  line-height:1.4;
+  letter-spacing:.16em;
+  color:#2158ed;
+  margin:0 0 15px;
+  text-transform:uppercase;
+}
+body[data-ma-surface="landing"] .ma-home-showcase h2{
+  margin:0 0 17px;
+  max-width:20ch;
+  font-size:clamp(2.3rem,5vw,4.7rem);
+  line-height:1.045;
+  font-weight:660;
+  letter-spacing:-.061em;
+  color:#142c4b;
+  text-wrap:balance;
+}
+body[data-ma-surface="landing"] .ma-home-showcase-description{
+  max-width:66ch;
+  font-size:clamp(.98rem,1.45vw,1.12rem);
+  line-height:1.68;
+  color:#425f77;
+  margin:0;
+}
+.ma-home-showcase-aside{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  justify-content:flex-end;
+  gap:12px;
+  padding-bottom:8px;
+  white-space:nowrap;
+}
+.ma-home-showcase-number{
+  display:inline-flex;
+  align-items:center;
+  min-height:37px;
+  padding:9px 13px;
+  background:#e9f1ff;
+  color:#1c4cbb;
+  font-size:.77rem;
+  line-height:1.3;
+  font-weight:790;
+  border-radius:99px;
+}
+.ma-home-showcase-language{
+  color:#698096;
+  font-size:.76rem;
+  font-weight:780;
+  letter-spacing:.13em;
+}
+.ma-home-showcase .ma-course-grid{
+  margin:0;
+  width:100%;
+  align-items:stretch;
+}
+.ma-home-showcase .ma-course-card{
+  min-width:0;
+  border-radius:20px;
+  box-shadow:0 7px 22px #1a3b6415;
+}
+.ma-home-showcase .ma-course-art{
+  overflow:hidden;
+}
+.ma-home-showcase .ma-course-card:hover,
+.ma-home-showcase .ma-course-card:focus-within{
+  border-color:#85a6e5;
+  box-shadow:0 25px 57px #1a3b6429;
+}
+.ma-home-showcase .ma-course-link:focus-visible{
+  outline:3px solid #2158ed;
+  outline-offset:-4px;
+}
+.ma-home-showcase-footer{
+  margin-top:clamp(21px,3.2vw,37px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+  border-top:1px solid #dbe6ee;
+  padding-top:23px;
+}
+body[data-ma-surface="landing"] .ma-home-showcase-footer p{
+  margin:0;
+  color:#4e667e;
+  font-size:.8rem;
+  line-height:1.55;
+  max-width:580px;
+}
+.ma-home-showcase-all{
+  display:inline-flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:21px;
+  min-height:46px;
+  padding:11px 15px 11px 20px;
+  border:1px solid #204fe4;
+  border-radius:12px;
+  text-decoration:none!important;
+  background:#2158ed;
+  color:white!important;
+  font-weight:760;
+  font-size:.87rem;
+  transition:transform .22s cubic-bezier(.2,.7,.2,1),
+    box-shadow .22s ease,background .22s ease;
+}
+.ma-home-showcase-all span{
+  display:inline-grid;
+  place-items:center;
+  width:25px;height:25px;
+  border-radius:50%;
+  background:#ffffff28;
+  font-size:1.14rem;
+  transition:transform .22s ease;
+}
+.ma-home-showcase-all:hover,
+.ma-home-showcase-all:focus-visible{
+  background:#143dba;
+  color:#fff!important;
+  transform:translateY(-3px);
+  box-shadow:0 12px 25px #1744af36;
+}
+.ma-home-showcase-all:is(:hover,:focus-visible) span{transform:translate(2px,-2px)}
+.ma-home-showcase-all:focus-visible{outline:3px solid #ff804e;outline-offset:3px}
+@media(max-width:980px){
+  .ma-home-showcase-intro{grid-template-columns:1fr}
+  .ma-home-showcase-aside{flex-direction:row;justify-content:flex-start;align-items:center;padding-bottom:0}
+}
+@media(max-width:700px){
+  body[data-ma-surface="landing"] .ma-home-showcase{margin-top:64px;margin-bottom:75px}
+  body[data-ma-surface="landing"] .ma-home-showcase h2{font-size:clamp(2.25rem,10vw,3.1rem);max-width:16ch}
+  .ma-home-showcase-footer{align-items:stretch}
+  .ma-home-showcase-all{width:100%}
+  .ma-home-showcase .ma-course-card{border-radius:17px}
+  .ma-home-showcase .ma-course-info{padding:21px}
+}
+@media(hover:none){
+  .ma-home-showcase .ma-course-card:hover{transform:none}
+  .ma-home-showcase-all:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .ma-home-showcase *, .ma-home-showcase *::before,
+  .ma-home-showcase *::after{transition:none!important;animation:none!important}
+  .ma-home-showcase .ma-course-card:hover,
+  .ma-home-showcase .ma-course-card:focus-within,
+  .ma-home-showcase-all:hover,
+  .ma-home-showcase-all:focus-visible{transform:none!important}
+}
