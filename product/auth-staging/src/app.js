@@ -78,7 +78,7 @@ if(root){
     show("pending");
     feedback(t.loading);
     // Supabase invokes auth event callbacks synchronously; defer client calls.
-    client.auth.onAuthStateChange((event)=>{
+    client.auth.onAuthStateChange((event,session)=>{
       if(event==="PASSWORD_RECOVERY"){
         recoveryEvent=true;
         show("update");
@@ -86,16 +86,15 @@ if(root){
       }else if(event==="SIGNED_OUT"){
         recoveryEvent=false;
         openSignIn();
-      }else if(event==="SIGNED_IN"||event==="TOKEN_REFRESHED"||event==="INITIAL_SESSION"){
+      }else if(event==="INITIAL_SESSION"){
+        // A missing session is NOT an unverified account. Show the normal
+        // sign-in form, rather than leaving users stuck in a warning state.
+        if(!session){openSignIn();return}
         if(!recoveryEvent)queueMicrotask(()=>{void verifiedSession()});
+      }else if(event==="SIGNED_IN"||event==="TOKEN_REFRESHED"){
+        if(session&&!recoveryEvent)queueMicrotask(()=>{void verifiedSession()});
       }
     });
-    // Some providers do not emit INITIAL_SESSION until after storage discovery.
-    Promise.resolve().then(async()=>{
-      const {data,error}=await client.auth.getSession();
-      if(error||!data?.session){openSignIn();return;}
-      if(!recoveryEvent)await verifiedSession();
-    }).catch(()=>{openSignIn();feedback(t.errorGeneric,true)});
   }
 
   root.querySelector("#auth-forgot").addEventListener("click",()=>{
