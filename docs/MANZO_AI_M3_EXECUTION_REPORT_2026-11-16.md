@@ -95,3 +95,11 @@ Al momento della preparazione: tre migrazioni del progetto MANZO AI applicate; 1
 **Non ancora fatto:** il backup recuperabile e il restore del Supabase Free reale, migration `0004` live, import effettivo su Supabase e policy di lettura pubblica. Il completamento M3a è un **gate tecnico**, non equivale a chiudere M3b.
 
 Una segnalazione di sicurezza distinta in Supabase Auth riguarda la protezione contro password compromesse disabilitata: [configurazione ufficiale](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection). Non costituisce un motivo per alterare gli utenti durante M3.
+
+## Addendum M3b — CLI v3 e backup privato (16/11/2026)
+
+È stata rilevata una modifica sostanziale pubblicata da Supabase il 4 novembre 2026: con la CLI v3 `db dump` senza `--remote` agisce sul database **locale**, non sul progetto ospitato. La vecchia documentazione per `--db-url` è deprecata. Riferimento: https://supabase.com/changelog/supabase-cli-v3 .
+
+La preparazione M3b comprende ora `product/migration/m3b_private_backup_macos.sh` e `docs/MANZO_AI_M3B_BACKUP_RECOVERY_RUNBOOK_2026-11-16.md`, con verifica della destinazione del progetto, esportazione privata via CLI v3, checksum, test dei guardrail e stato esplicito **RESTORE NOT VERIFIED**.
+
+La connessione e le credenziali di un Mac personale non sono accessibili a questi strumenti. **Il backup reale, il restore e la continuità Auth non sono stati eseguiti né verificati:** blocco live M3b invariato. Una fotografia dei conteggi del DB non equivale a un backup. Non applicare SQL `0004` al progetto fino a prova di recupero.
