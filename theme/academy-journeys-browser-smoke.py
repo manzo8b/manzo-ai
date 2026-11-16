@@ -43,6 +43,9 @@ def test(page,lang,route,width):
  page.evaluate("window.__maPrinted=false;window.print=()=>{window.__maPrinted=true}")
  section.locator("[data-ma-journey-print]").click()
  assert page.evaluate("window.__maPrinted")
+ assert page.evaluate("document.body.classList.contains(\"ma-print-journey-mode\")")
+ page.evaluate("window.dispatchEvent(new Event(\"afterprint\"))")
+ assert not page.evaluate("document.body.classList.contains(\"ma-print-journey-mode\")")
  assert not errors,errors
  DEST.mkdir(parents=True,exist_ok=True)
  page.screenshot(path=str(DEST/f"academy-journeys-{lang}-{width}.png"),full_page=True)
