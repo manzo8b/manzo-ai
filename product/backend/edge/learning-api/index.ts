@@ -23,18 +23,35 @@ const adapt=()=>{
  return {
   // Session-scoped RLS on every SELECT; no global trusted client can return
   // foreign-tenant records merely because the request guessed an org ID.
+  // Discover ONLY active organizations of the verified session, never from untrusted metadata.
+  listOrganizations:({actor}:{actor:string})=>sql.begin(async tx=>{
+   await tx`SET LOCAL ROLE authenticated`;
+   await tx`SELECT set_config('request.jwt.claim.sub',${actor},true)`;
+   return await tx`SELECT m.organization_id AS "organizationId",o.name,m.role
+     FROM app.memberships m JOIN app.organizations o ON o.id=m.organization_id
+     WHERE m.user_id=${actor}::uuid AND m.status='active'
+     ORDER BY o.name ASC LIMIT 25`;
+  }),
   listCourses:({actor,organizationId}:{actor:string,organizationId:string})=>sql.begin(async tx=>{
    await tx`SET LOCAL ROLE authenticated`;
    await tx`SELECT set_config('request.jwt.claim.sub',${actor},true)`;
    return await tx`SELECT id,organization_id AS "organizationId",slug,title,status FROM app.courses
      WHERE organization_id=${organizationId}::uuid ORDER BY created_at DESC LIMIT 100`;
   }),
+  // Student-side list: even tenant admins see only their OWN enrollments.
+  listEnrollments:({actor,organizationId}:{actor:string,organizationId:string})=>sql.begin(async tx=>{
+   await tx`SET LOCAL ROLE authenticated`;
+   await tx`SELECT set_config('request.jwt.claim.sub',${actor},true)`;
+   return await tx`SELECT id,course_id AS "courseId",status,created_at AS "createdAt"
+     FROM app.enrollments WHERE organization_id=${organizationId}::uuid AND user_id=${actor}::uuid
+     ORDER BY created_at DESC LIMIT 100`;
+  }),
   listProgress:({actor,organizationId}:{actor:string,organizationId:string})=>sql.begin(async tx=>{
    await tx`SET LOCAL ROLE authenticated`;
    await tx`SELECT set_config('request.jwt.claim.sub',${actor},true)`;
    return await tx`SELECT id,course_id AS "courseId",version_id AS "versionId",
       user_id AS "userId",module_key AS "moduleKey",completed_at AS "completedAt"
-      FROM app.learning_progress WHERE organization_id=${organizationId}::uuid
+      FROM app.learning_progress WHERE organization_id=${organizationId}::uuid AND user_id=${actor}::uuid
       ORDER BY completed_at DESC LIMIT 200`;
   }),
   assignSeat:async ({actor,organizationId,memberUserId}:{actor:string,organizationId:string,memberUserId:string})=>{
@@ -76,7 +93,7 @@ const protectedHandler=withSupabase({auth:"user",cors:"disabled"},async(req:Requ
  if(url.search||url.pathname.length>400)return response(400,{code:"invalid_request_url"},origin);
  const route=url.pathname.replace(/^\/functions\/v1\/learning-api(?=\/|$)/,"")
     .replace(/^\/learning-api(?=\/|$)/,"");
- if(!route.startsWith("/v1/organizations/"))return response(404,{code:"not_found"},origin);
+ if(!route.startsWith("/v1/organizations/") && route!=="/v1/learning/organizations")return response(404,{code:"not_found"},origin);
  let body:unknown=undefined;
  if(req.method==="POST"){
   if(req.headers.get("Content-Type")?.split(";")[0].trim().toLowerCase()!=="application/json")

@@ -2,12 +2,14 @@
   "openapi": "3.1.0",
   "info": {
     "title": "MANZO AI · SaaS API design contract",
-    "version": "0.4.0-staging-adapter",
-    "description": "Learning B2B Edge Functions adapter is implemented in source and tested for request policy; NOT DEPLOYED, not live. Identity/DB integration must be exercised in a new dedicated staging project. Agent and payments APIs are design-only.",
+    "version": "0.5.0-my-learning-source-only",
+    "description": "Learning B2B Edge Functions adapter and verified My Learning read-only client implemented and QA-tested in source. NOT DEPLOYED: tenant integration, recovery and rate limits are go-live gates. Studio and billing remain design-only.",
     "x-manzo-implementation-status": "staging-source-only",
     "x-manzo-implemented-endpoints": [
+      "GET /v1/learning/organizations",
       "GET /v1/organizations/{organizationId}/learning/courses",
       "GET /v1/organizations/{organizationId}/learning/progress",
+      "GET /v1/organizations/{organizationId}/learning/enrollments",
       "POST /v1/organizations/{organizationId}/learning/seats",
       "DELETE /v1/organizations/{organizationId}/learning/seats/{memberId}",
       "POST /v1/organizations/{organizationId}/learning/enrollments",
@@ -148,7 +150,7 @@
           "learning"
         ],
         "operationId": "listMyEnrollments",
-        "summary": "List enrollments for authenticated member; administrators may receive tenant-scoped team records",
+        "summary": "List only the verified user's own enrollments in the requested organization",
         "parameters": [
           {
             "$ref": "#/components/parameters/OrganizationId"
@@ -160,9 +162,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Enrollment"
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "enrollments"
+                  ],
+                  "properties": {
+                    "enrollments": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MyEnrollment"
+                      }
+                    }
                   }
                 }
               }
@@ -188,7 +199,8 @@
               }
             }
           }
-        }
+        },
+        "description": "The backend filters by the verified actor AND organization ID; even tenant administrators get only their own enrollments in My Learning."
       },
       "post": {
         "tags": [
@@ -893,6 +905,60 @@
           }
         }
       }
+    },
+    "/v1/learning/organizations": {
+      "get": {
+        "tags": [
+          "learning"
+        ],
+        "operationId": "listMyLearningOrganizations",
+        "summary": "Discover only active organizations for the verified user",
+        "description": "Authenticated student only. No user ID or organization ID is accepted from the browser. Source-only until the Learning API rollout.",
+        "responses": {
+          "200": {
+            "description": "Verified account's active organization memberships",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "organizations"
+                  ],
+                  "properties": {
+                    "organizations": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MyOrganization"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No valid session or insufficient membership",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "No valid session or insufficient membership",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1356,6 +1422,65 @@
             "type": "string"
           },
           "completedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "MyOrganization": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "organizationId",
+          "name",
+          "role"
+        ],
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "owner",
+              "admin",
+              "instructor",
+              "learner"
+            ]
+          }
+        }
+      },
+      "MyEnrollment": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "courseId",
+          "status",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "completed",
+              "revoked"
+            ]
+          },
+          "createdAt": {
             "type": "string",
             "format": "date-time"
           }

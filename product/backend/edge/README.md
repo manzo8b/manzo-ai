@@ -1,6 +1,8 @@
 # MANZO AI · Learning B2B Edge API
 
-**Status: SOURCE-ONLY STAGING ADAPTER. NO ENDPOINTS DEPLOYED.**  
+**Status: SOURCE-ONLY STAGING ADAPTER. NO ENDPOINTS DEPLOYED.**
+
+**My Learning read-only increment:** the verified-user organization list and personally assigned enrollments are now in the source adapter. Existing progress read is explicitly filtered to the actor, including for admins. These are not remotely available until the Edge Function is deployed and security-tested. The separate My Learning frontend is published with API feature flag **OFF**.  
 Do not connect the existing public Academy or students to this directory until a dedicated MANZO AI Supabase project exists, has been security-tested, and has appropriate privacy notice and support procedures.
 
 ## What this adds
@@ -14,7 +16,9 @@ Do not connect the existing public Academy or students to this directory until a
 ### Endpoints represented in the source
 
 \`\`\`text
+GET    /v1/learning/organizations
 GET    /v1/organizations/:organizationId/learning/courses
+GET    /v1/organizations/:organizationId/learning/enrollments
 GET    /v1/organizations/:organizationId/learning/progress
 POST   /v1/organizations/:organizationId/learning/seats
 DELETE /v1/organizations/:organizationId/learning/seats/:memberId
@@ -85,3 +89,12 @@ Useful official references:
 - https://supabase.com/docs/guides/functions/connect-to-postgres
 - https://supabase.com/docs/guides/functions/secrets
 - https://supabase.github.io/server/interfaces/index.UserClaims.html
+
+## My Learning API production boundary
+
+- `GET /v1/learning/organizations` derives active organizations from verified Auth actor using RLS; rejects client-supplied identities.
+- `GET /v1/organizations/{id}/learning/enrollments` returns **only the authenticated actor's enrollments**, never the organization roster.
+- `GET .../progress` similarly filters by verified `user_id` in addition to RLS; no team scores in this student endpoint.
+- UI shows server-backed module completion **counts only**; no inferred percentages, certifications, or course links without approved content versions.
+- Published pilot uses `"workspaceApiEnabled":false` and does **not** call the API. Enabling requires real JWT, CORS, RLS, tenant A/B, rate limit and backup/DR tests.
+- Never publish a direct pooler URL or privileged key. `app_private` remains an unexposed schema.

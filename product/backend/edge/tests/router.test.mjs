@@ -12,6 +12,8 @@ const version="dddddddd-dddd-4ddd-8ddd-ddddddddddda";
 const base=`/v1/organizations/${org}/learning`;
 const called=[];
 const data={
+ listOrganizations:async args=>{called.push(["organizations",args]);return [{organizationId:org,name:"Enterprise Test",role:"learner"}]},
+ listEnrollments:async args=>{called.push(["enrollments",args]);return [{courseId:course,status:"active"}]},
  listCourses:async args=>{called.push(["courses",args]);return [{id:course,title:"Demo",status:"published"}]},
  listProgress:async args=>{called.push(["progress",args]);return [{module_key:"intro",user_id:student}]},
  assignSeat:async args=>{called.push(["seat",args]);return "assigned"},
@@ -25,8 +27,8 @@ async function run(method,route,body,as=actor,provider=data){
  return dispatchLearning({method,path:route,body,actor:as,data:provider});
 }
 test("API routes exactly match the defined Learning vertical",()=>{
- assert.equal(ENDPOINTS.length,7);
- assert.equal(new Set(ENDPOINTS).size,7);
+ assert.equal(ENDPOINTS.length,9);
+ assert.equal(new Set(ENDPOINTS).size,9);
  assert.equal(MAX_BODY_BYTES,8192);
 });
 test("identity missing or forged is rejected before touching DB",async()=>{
@@ -112,4 +114,24 @@ test("unknown resource and path traversal cannot select fallback route",async()=
  const response=await run("GET",base+"/private-answer-keys");
  assert.equal(response.status,404);
  assert.equal(called.length,0);
+});
+
+test("My Learning organization list derives member identity only from verified Auth",async()=>{
+ const result=await run("GET","/v1/learning/organizations");
+ assert.equal(result.status,200);
+ assert.deepEqual(called[0],["organizations",{actor}]);
+ assert.equal(result.body.organizations[0].organizationId,org);
+ assert.equal((await run("POST","/v1/learning/organizations",{userId:foreign})).status,405);
+ assert.equal(called.length,0);
+});
+test("My Learning enrollments are queried with a verified actor AND org",async()=>{
+ const result=await run("GET",base+"/enrollments");
+ assert.equal(result.status,200);
+ assert.deepEqual(called[0],["enrollments",{actor,organizationId:org}]);
+ assert.equal(result.body.enrollments[0].status,"active");
+ const unauthorized=await run("GET",`/v1/organizations/${otherOrg}/learning/enrollments`,undefined,actor,{
+   listEnrollments:async()=>{throw Error("LEARNING_NOT_ADMIN")}
+ });
+ assert.equal(unauthorized.status,403);
+ assert.equal(unauthorized.body.code,"not_authorized");
 });

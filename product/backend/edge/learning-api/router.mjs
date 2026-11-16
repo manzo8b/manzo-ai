@@ -45,7 +45,9 @@ function checkAnswers(answers) {
 }
 export const MAX_BODY_BYTES = 8192;
 export const ENDPOINTS = Object.freeze([
+  "GET /v1/learning/organizations",
   "GET /v1/organizations/{organizationId}/learning/courses",
+  "GET /v1/organizations/{organizationId}/learning/enrollments",
   "GET /v1/organizations/{organizationId}/learning/progress",
   "POST /v1/organizations/{organizationId}/learning/seats",
   "DELETE /v1/organizations/{organizationId}/learning/seats/{memberId}",
@@ -61,6 +63,12 @@ export const ENDPOINTS = Object.freeze([
 export async function dispatchLearning({method,path,body,actor,data}) {
   if (!isId(actor)) return issue(401,"authentication_required");
   if (!data || typeof data !== "object") return issue(503,"service_not_configured");
+  // Tenant discovery is scoped to the verified actor, never a browser-selected user.
+  if (path === "/v1/learning/organizations") {
+    if (method !== "GET") return issue(405,"method_not_allowed");
+    try { return result(200,{organizations:await data.listOrganizations({actor})}); }
+    catch(error){ return safeError(error); }
+  }
   const match = ROUTE.exec(path);
   if (!match) return issue(404,"not_found");
   const [,organizationId,operation,memberId]=match;
@@ -70,6 +78,8 @@ export async function dispatchLearning({method,path,body,actor,data}) {
   try {
     if (operation === "courses" && method === "GET" && !memberId)
       return result(200,{ courses: await data.listCourses({actor,organizationId}) });
+    if (operation === "enrollments" && method === "GET" && !memberId)
+      return result(200,{enrollments: await data.listEnrollments({actor,organizationId}) });
     if (operation === "progress" && method === "GET" && !memberId)
       return result(200,{ progress: await data.listProgress({actor,organizationId}) });
     if (operation === "seats" && method === "POST" && !memberId) {
