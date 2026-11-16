@@ -59,3 +59,17 @@ export function classifyPasswordError(error){
   if(error?.status===422)return "rejected";
   return "generic";
 }
+
+/**
+ * A recovery request can fail at the email-delivery gateway even when the
+ * account itself is valid. Translate only public Supabase Auth codes; never
+ * disclose whether the requested email is registered.
+ */
+export function classifyRecoveryError(error){
+  const code=typeof error?.code==="string"?error.code.toLowerCase():"";
+  if(code==="over_email_send_rate_limit")return "email_limit";
+  if(code==="email_address_not_authorized")return "restricted_email";
+  if(["over_request_rate_limit","over_email_send_rate_limit"].includes(code)||error?.status===429)return "rate_limit";
+  if(code==="email_provider_disabled")return "unavailable";
+  return "generic";
+}
