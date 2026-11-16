@@ -72,10 +72,10 @@ $manzo_validation$;
 
 INSERT INTO content_public.catalog_courses
   (course_key, mode, canonical_locale, b2b_enrollment_enabled, b2b_grading_enabled)
-SELECT c->>'key', c->>'mode', c->>'canonical_locale',
-       (c->>'b2b_enrollment_enabled')::boolean,
-       (c->>'b2b_grading_enabled')::boolean
-FROM _manzo_m3_doc p CROSS JOIN LATERAL jsonb_array_elements(p.doc->'courses') AS c
+SELECT c.value->>'key', c.value->>'mode', c.value->>'canonical_locale',
+       (c.value->>'b2b_enrollment_enabled')::boolean,
+       (c.value->>'b2b_grading_enabled')::boolean
+FROM _manzo_m3_doc p CROSS JOIN LATERAL jsonb_array_elements(p.doc->'courses') AS c(value)
 ON CONFLICT (course_key) DO UPDATE
 SET mode = EXCLUDED.mode, canonical_locale = EXCLUDED.canonical_locale,
     b2b_enrollment_enabled = EXCLUDED.b2b_enrollment_enabled,
@@ -91,14 +91,14 @@ INSERT INTO content_public.catalog_localizations
   (course_key, locale, title, route, source_path, source_sha256,
    editorial_status, unit_count, public_self_assessment_count,
    public_case_count, source_contains_public_answers, private_assessment_ready)
-SELECT v->>'course_key', v->>'locale', v->>'title', v->>'route',
-       v->>'source_path', v->>'source_sha256', v->>'editorial_status',
-       (v->>'unit_count')::integer,
-       (v->>'public_self_assessment_count')::integer,
-       (v->>'public_case_count')::integer,
-       (v->>'source_contains_public_answers')::boolean,
-       (v->>'private_assessment_ready')::boolean
-FROM _manzo_m3_doc p CROSS JOIN LATERAL jsonb_array_elements(p.doc->'variants') AS v
+SELECT v.value->>'course_key', v.value->>'locale', v.value->>'title', v.value->>'route',
+       v.value->>'source_path', v.value->>'source_sha256', v.value->>'editorial_status',
+       (v.value->>'unit_count')::integer,
+       (v.value->>'public_self_assessment_count')::integer,
+       (v.value->>'public_case_count')::integer,
+       (v.value->>'source_contains_public_answers')::boolean,
+       (v.value->>'private_assessment_ready')::boolean
+FROM _manzo_m3_doc p CROSS JOIN LATERAL jsonb_array_elements(p.doc->'variants') AS v(value)
 ON CONFLICT (course_key, locale) DO UPDATE
 SET title=EXCLUDED.title, route=EXCLUDED.route,
     source_path=EXCLUDED.source_path, source_sha256=EXCLUDED.source_sha256,
@@ -125,11 +125,11 @@ IS DISTINCT FROM
 
 INSERT INTO content_public.catalog_units
     (course_key, locale, unit_key, position, title, duration)
-SELECT v->>'course_key', v->>'locale', u->>'key',
-       (u->>'position')::integer, u->>'title', u->>'duration'
+SELECT v.value->>'course_key', v.value->>'locale', u.value->>'key',
+       (u.value->>'position')::integer, u.value->>'title', u.value->>'duration'
 FROM _manzo_m3_doc p
-CROSS JOIN LATERAL jsonb_array_elements(p.doc->'variants') AS v
-CROSS JOIN LATERAL jsonb_array_elements(v->'units') AS u
+CROSS JOIN LATERAL jsonb_array_elements(p.doc->'variants') AS v(value)
+CROSS JOIN LATERAL jsonb_array_elements(v.value->'units') AS u(value)
 ON CONFLICT (course_key, locale, unit_key) DO UPDATE
 SET position=EXCLUDED.position, title=EXCLUDED.title, duration=EXCLUDED.duration
 WHERE (catalog_units.position, catalog_units.title, catalog_units.duration)
