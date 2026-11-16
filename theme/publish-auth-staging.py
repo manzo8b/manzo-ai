@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 from html import escape
 import json
+import os
 from pathlib import Path
 import shutil
 
@@ -22,6 +23,9 @@ ROUTES={
  'es':'es/producto/learning-b2b/acceso',
 }
 PRODUCT={'it':'it/prodotto','en':'en/product','es':'es/producto'}
+PRIVACY={'it':'it/prodotto/learning-b2b/privacy',
+         'en':'en/product/learning-b2b/privacy',
+         'es':'es/producto/learning-b2b/privacidad'}
 MARKER='data-manzo-auth="v1"'
 
 def e(value):return escape(str(value),quote=True)
@@ -36,7 +40,7 @@ def render(loc,text,settings):
  parent=BASE+PRODUCT[loc]+'/'
  config={key:value for key,value in settings.items() if key!='note'}
  config['callback']=ORIGIN+BASE+route
- assert config['enabled'] is False,'No live authentication without explicit release gate'
+ assert type(config['enabled']) is bool
  assert config['authMode']=='invite-only' and config['requireEmailVerification'] is True
  links=''.join(f'<a href="{BASE}{p}/" hreflang="{l}" lang="{l}"'
                +(' aria-current="page"' if l==loc else '')+f'>{l.upper()}</a>'
@@ -131,7 +135,7 @@ def render(loc,text,settings):
     <button id="auth-open-update" type="button" class="link-button">{e(text['newPasswordTitle'])}</button>
    </section>
    <p id="auth-status" class="message" aria-live="polite" role="status" data-level="info"></p>
-   <p class="privacy">{e(text['privacy'])}</p>
+   <p class="privacy">{e(text['privacy'])} <a href="{BASE}{PRIVACY[loc]}/">{e(text['privacyLink'])}</a></p>
   </div>
  </div>
 </div></main>
@@ -141,11 +145,54 @@ def render(loc,text,settings):
 <script type="application/json" id="auth-config">{safe_json(config)}</script>
 </body></html>'''
 
-def publish(site:Path,verify_only:bool,enabled:bool):
- if not enabled:raise RuntimeError('Auth publisher requires explicit --enable; public deployment must NOT call it')
+def render_privacy(loc: str, text: dict, source: dict)->str:
+    """Account-only pilot notice; no generated legal assertions or scripts."""
+    access=f'{BASE}{ROUTES[loc]}/'
+    sections=''.join(
+      f'<section class="privacy-section"><h2>{e(title.rstrip(". "))}</h2>'
+      f'<p>{e(paragraph)}</p></section>'
+      for title,paragraph in source['sections']
+    )
+    return f'''<!doctype html><html lang="{loc}"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>MANZO AI | {e(source['title'])}</title>
+<link rel="stylesheet" href="{BASE}assets/auth/auth.css">
+</head><body data-manzo-auth-privacy="v1">
+<header class="masthead"><div class="shell">
+<a class="logo" href="{BASE}{loc}/">MANZO <span>AI</span><small>LEARNING B2B</small></a>
+<a class="back" href="{access}">{e(source['back'])} <span aria-hidden="true">↗</span></a>
+</div></header>
+<main class="main"><div class="shell">
+<article class="privacy-document">
+<p class="eyebrow">MANZO AI / LEARNING B2B</p>
+<h1>{e(source['title'].rstrip('. '))}</h1>
+<p class="lead">{e(source['lead'])}</p>
+<p class="privacy-review">{e(source['review'])}</p>
+{sections}
+<p class="privacy-contact"><a href="mailto:marcelo2020.it@gmail.com">{e(source['contact'])}</a></p>
+<p class="privacy-updated">{e(source['updated'])}</p>
+<a class="back" href="{access}">{e(source['back'])} ↗</a>
+</article></div></main>
+<footer class="footer"><div class="shell">
+<a href="{BASE}{loc}/">{e(source['home'])}</a><strong>MANZO AI · LEARNING B2B</strong>
+</div></footer>
+</body></html>'''
+
+def publish(site:Path,verify_only:bool,enabled:bool,live_auth:bool=False):
+ if not enabled:raise RuntimeError('Auth publisher requires explicit --enable')
+ if live_auth and os.getenv('MANZO_AUTH_PILOT_RELEASE')!='restricted-invite-only':
+  raise RuntimeError('Live Auth publication requires explicit staging release flag')
  content=json.loads((SOURCE/'content.json').read_text(encoding='utf-8'))
  config=json.loads((SOURCE/'config.json').read_text(encoding='utf-8'))
- if set(content)!=set(ROUTES):raise RuntimeError('Three locales required')
+ notices=json.loads((SOURCE/'privacy.json').read_text(encoding='utf-8'))
+ config['enabled']=bool(live_auth)
+ if config.get('authMode')!='invite-only' or config.get('requireEmailVerification') is not True:
+  raise RuntimeError('Incorrect Auth mode; do not publish')
+ if set(content)!=set(ROUTES) or set(notices)!=set(ROUTES):
+  raise RuntimeError('Three locales and privacy notices required')
  assets=site/'assets'/'auth'
  if not verify_only:
   assets.mkdir(parents=True,exist_ok=True)
@@ -157,25 +204,37 @@ def publish(site:Path,verify_only:bool,enabled:bool):
    page=site/path/'index.html'
    page.parent.mkdir(parents=True,exist_ok=True)
    page.write_text(render(locale,content[locale],config),encoding='utf-8')
+   privacy_page=site/PRIVACY[locale]/'index.html'
+   privacy_page.parent.mkdir(parents=True,exist_ok=True)
+   privacy_page.write_text(render_privacy(locale,content[locale],notices[locale]),encoding='utf-8')
  for locale,path in ROUTES.items():
   page=site/path/'index.html'
   if not page.is_file():raise RuntimeError('Missing route '+path)
   html=page.read_text(encoding='utf-8')
   if html.count(MARKER)!=1:raise RuntimeError('Duplicate/missing auth app '+path)
   if html.count('noindex,nofollow')!=1:raise RuntimeError('Auth page indexed '+path)
-  if html.count('"enabled":false')!=1:raise RuntimeError('Unexpectedly enabled auth '+path)
+  expected='"enabled":true' if live_auth else '"enabled":false'
+  if html.count(expected)!=1:raise RuntimeError('Unexpected auth activation '+path)
+  privacy_path=site/PRIVACY[locale]/'index.html'
+  if not privacy_path.is_file():raise RuntimeError('Missing privacy notice '+locale)
+  privacy_html=privacy_path.read_text(encoding='utf-8')
+  if privacy_html.count('data-manzo-auth-privacy="v1"')!=1 or 'marcelo2020.it@gmail.com' not in privacy_html:
+   raise RuntimeError('Invalid account privacy page '+locale)
+  if html.count(f'href="{BASE}{PRIVACY[locale]}/"')!=1:
+   raise RuntimeError('Access page lacks account privacy link '+locale)
   for required in ('auth-signin-form','auth-update-form','auth-recover-form','auth-status',
                    'auth-config','auth-locales','auth-signout','auth-pending'):
    if required not in html:raise RuntimeError('Auth UX missing '+required)
   if html.count('auth-app.js')!=1:raise RuntimeError('Duplicate app bundle '+path)
  for name in ('auth.css','auth-app.js'):
   if not (assets/name).is_file():raise RuntimeError('Missing asset '+name)
- print(f'PASS: 3 unlinked invite-only Auth staging pages, all disabled, all noindex; verify_only={verify_only}')
+ print(f'PASS: 3 invite-only Auth pages, 3 privacy notices, noindex; live_auth={live_auth}, verified={verify_only}')
 
 if __name__=='__main__':
  p=argparse.ArgumentParser()
  p.add_argument('--site',required=True,type=Path)
  p.add_argument('--enable',action='store_true')
  p.add_argument('--verify-only',action='store_true')
+ p.add_argument('--live-auth',action='store_true')
  a=p.parse_args()
- publish(a.site,a.verify_only,a.enable)
+ publish(a.site,a.verify_only,a.enable,a.live_auth)
