@@ -139,7 +139,7 @@ Il dump applicativo include **`app` e `app_private`** (15 tabelle e relative fun
 
 ### Aggiornamento compatibilità — Postgres.app 18 rilevato sul Mac
 
-La versione locale installata è **PostgreSQL 18**, mentre Supabase MANZO AI usa PostgreSQL **17.11**. La [documentazione PostgreSQL 18](https://www.postgresql.org/docs/18/app-pgdump.html) conferma che `pg_dump` di versione superiore può effettuare dump di server precedenti. Lo script `m3b_native_backup_macos.sh` ora cerca **prima Postgres.app 18**, poi 17, e utilizza `--quote-all-identifiers` per compatibilità fra versioni.
+La versione locale installata è **PostgreSQL 18**, mentre Supabase MANZO AI usa PostgreSQL **17.11**. La [documentazione PostgreSQL 18](https://www.postgresql.org/docs/18/app-pgdump.html) conferma che `pg_dump` di versione superiore può effettuare dump di server precedenti. Lo script `m3b_native_backup_macos.sh` ora cerca **prima Postgres.app 17**, poi 18, e utilizza `--quote-all-identifiers` per compatibilità fra versioni. L'esportazione effettivamente eseguita è stata effettuata con `pg_dump 17.7`.
 
 **Attenzione:** un dump generato con `pg_dump` 18 **non è garantito ripristinabile su un server 17**. La prima prova di ripristino va quindi eseguita su un **database locale PostgreSQL 18 nuovo e separato**, mai sui database personali già presenti nel Postgres.app né sul progetto Supabase. Il test del solo `pg_restore --list` non dimostra un ripristino riuscito. Nessun altro pacchetto PostgreSQL è necessario per il backup iniziale.
 
@@ -150,3 +150,30 @@ Primo controllo sul Mac, dal Terminale:
 ```
 
 Se il comando non trova il file, verificare il percorso reale delle applicazioni e il binario senza modificare la configurazione del server locale. Il controllo `pg_dump --version` non apre connessioni e non altera alcun database.
+
+
+---
+
+## Verbale operativo M3b — riscontri del 16 novembre 2026
+
+**Origine delle evidenze:** schermate Terminale mostrate dal curatore; confronto autonomo in sola lettura con il progetto Supabase tramite query SQL. Non sono stati trasferiti dump o credenziali su GitHub.
+
+| Verifica | Risultato |
+|---|---|
+| Esportazione privata dal pooler MANZO AI | `application.dump` e `full_database.dump` creati sul Mac con `pg_dump 17.7` |
+| Integrità backup | Checksum SHA-256 `PASS` per gli archivi; `full_database.dump`: `ARCHIVE_VALID` |
+| Ripristino di `application.dump` | `RESTORE APPLICATIVO: PASS`, con `--single-transaction --exit-on-error --no-owner --no-privileges` in PostgreSQL locale **18.1** |
+| RLS e struttura locale | 15 tabelle, 15 RLS abilitate, 15 forzate, 8 policy, 20 chiavi esterne |
+| Confronto indipendente Supabase live | 15/15/15, 8 policy e 20 FK, corrispondenza numerica perfetta |
+| Record applicativi | 0 nelle 15 tabelle locali; 0 nelle 15 tabelle live |
+| Backup Auth: `auth.users` | Sezione dati presente, **1** record |
+| Backup Auth: `auth.identities` | Sezione dati presente, **1** record |
+| Backup Auth: `auth.sessions` | Sezione dati presente, **1** record |
+| Confronto indipendente Auth live | `users=1`, `identities=1`, `sessions=1`, tutte le cardinalità coincidenti |
+| Migrazione SQL `0004` live | **NON applicata**; nessuna tabella in `content_public/content_internal` |
+
+**Interpretazione:** il recupero del **database applicativo** è stato collaudato con successo in un DB PostgreSQL temporaneo, preservando lo schema, l'integrità referenziale, le policy RLS e le cardinalità attuali. Il backup generale comprende record delle tabelle di Auth, ma **non** è stato ripristinato un ambiente Auth completo; per il test applicativo è stata usata una struttura `auth.users` simulata, senza credenziali. L'uso di `--no-privileges` significa che il restore non prova i grant originali. La presenza di una riga di sessione non garantisce validità o riutilizzabilità della sessione dopo un ripristino.
+
+**Gate ancora aperti:** documentazione/custodia cifrata del backup, convalida dei grant e delle funzioni privilegiate, procedura di ricostituzione della configurazione Supabase Auth e Brevo (senza esporre segreti), valutazione dei rischi specifici di applicazione della nuova DDL. Il completo ripristino della piattaforma Supabase non è certificato.
+
+**Decisione di sicurezza:** non eseguire automaticamente la migration `0004` finché i gate residui non sono stati esaminati. Le verifiche restanti possono proseguire in sola lettura, senza modificare gli utenti o la produzione.
