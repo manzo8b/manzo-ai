@@ -19,6 +19,7 @@ class M3bDockerlessBackupTests(unittest.TestCase):
         s = self.body
         self.assertIn("Versions/17/bin", s)
         self.assertIn("Versions/18/bin", s)
+        self.assertLess(s.index("Versions/17/bin"), s.index("Versions/18/bin"), "Prefer matching major 17 for Supabase 17.11")
         self.assertIn('PG_DUMP="$PG_BIN/pg_dump"', s)
         self.assertIn('PG_RESTORE="$PG_BIN/pg_restore"', s)
         self.assertIn("(17|18)", s)
