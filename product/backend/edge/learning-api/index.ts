@@ -1,6 +1,6 @@
 /**
  * MANZO AI · Learning API Edge adapter — NOT DEPLOYED.
- * Auth derives actor ONLY from Supabase verified ctx.userClaims.sub.
+ * Auth derives actor ONLY from Supabase verified ctx.userClaims.id.
  * Reads: RLS-scoped database role; writes: private server functions.
  * No client-side SQL, credential, score, billing or entitlement updates.
  */
@@ -9,14 +9,14 @@ import postgres from "npm:postgres@3.4.7";
 import { dispatchLearning, MAX_BODY_BYTES } from "./router.mjs";
 
 const ORIGIN=Deno.env.get("MANZO_ALLOWED_ORIGIN")||"";
-const URL=Deno.env.get("MANZO_DB_POOLER_URL")||"";
+const DATABASE_URL=Deno.env.get("MANZO_DB_POOLER_URL")||"";
 let connection:ReturnType<typeof postgres>|undefined;
 const db=()=>{
- if(!URL)throw Error("missing_backend_configuration");
- if(!connection)connection=postgres(URL,{max:1,prepare:false,ssl:"require",connect_timeout:5,idle_timeout:5,max_lifetime:60});
+ if(!DATABASE_URL)throw Error("missing_backend_configuration");
+ if(!connection)connection=postgres(DATABASE_URL,{max:1,prepare:false,ssl:"require",connect_timeout:5,idle_timeout:5,max_lifetime:60});
  return connection;
 };
-const allowed=(origin:string|null)=>!origin?{}:(origin===ORIGIN&&ORIGIN?{"Access-Control-Allow-Origin":origin,Vary:"Origin"}:null);
+const allowed=(origin:string|null):Record<string,string>|null=>!origin?{}:(origin===ORIGIN&&ORIGIN?{"Access-Control-Allow-Origin":origin,Vary:"Origin"}:null);
 const response=(status:number,body:unknown,origin:string|null)=>Response.json(body,{status,headers:{"Cache-Control":"no-store",...(allowed(origin)||{})}});
 const adapt=()=>{
  const sql=db();
@@ -70,7 +70,7 @@ const adapt=()=>{
 const protectedHandler=withSupabase({auth:"user"},async(req:Request,ctx)=>{
  const origin=req.headers.get("Origin");
  if(origin&&allowed(origin)===null)return response(403,{code:"origin_not_allowed"},null);
- const actor=ctx.userClaims?.sub;
+ const actor=ctx.userClaims?.id;
  if(typeof actor!=="string"||!actor)return response(401,{code:"authentication_required"},origin);
  const url=new URL(req.url);
  if(url.search||url.pathname.length>400)return response(400,{code:"invalid_request_url"},origin);
@@ -87,7 +87,7 @@ const protectedHandler=withSupabase({auth:"user"},async(req:Request,ctx)=>{
   if(new TextEncoder().encode(raw).byteLength>MAX_BODY_BYTES)return response(413,{code:"payload_too_large"},origin);
   try{body=JSON.parse(raw)}catch{return response(400,{code:"invalid_json"},origin)}
  }
- if(!URL)return response(503,{code:"service_not_configured"},origin);
+ if(!DATABASE_URL)return response(503,{code:"service_not_configured"},origin);
  const outcome=await dispatchLearning({actor,method:req.method,path:route,body,data:adapt()});
  return response(outcome.status,outcome.body,origin);
 });
