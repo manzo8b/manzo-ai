@@ -61,10 +61,16 @@ class ApiContractTests(unittest.TestCase):
         org="/v1/organizations/{organizationId}/learning/"
         methods={"GET":"get","POST":"post","DELETE":"delete"}
         declared=self.doc["info"]["x-manzo-implemented-endpoints"]
-        self.assertEqual(len(declared),7)
+        self.assertEqual(len(declared),9)
         for label in declared:
             method,path=label.split(" ",1)
             self.assertIn(methods[method],self.paths[path])
+        self.assertIn("get",self.paths["/v1/learning/organizations"])
+        self.assertIn("200",self.paths["/v1/learning/organizations"]["get"]["responses"])
+        self.assertEqual(
+            self.paths[org+"enrollments"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["properties"]["enrollments"]["type"],
+            "array",
+        )
         attempt=self.paths[org+"attempts"]["post"]
         self.assertIn("200",attempt["responses"])
         self.assertNotIn("202",attempt["responses"])
