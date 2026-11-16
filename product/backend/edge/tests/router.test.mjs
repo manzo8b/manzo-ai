@@ -28,7 +28,7 @@ async function run(method,route,body,as=actor,provider=data){
 }
 test("API routes exactly match the defined Learning vertical",()=>{
  assert.equal(ENDPOINTS.length,9);
- assert.equal(new Set(ENDPOINTS).size,7);
+ assert.equal(new Set(ENDPOINTS).size,9);
  assert.equal(MAX_BODY_BYTES,8192);
 });
 test("identity missing or forged is rejected before touching DB",async()=>{
