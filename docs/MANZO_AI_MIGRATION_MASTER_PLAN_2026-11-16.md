@@ -60,7 +60,7 @@ L'inventario sorgente firmato da SHA Git e dimensioni è in `product/migration/g
 | Fase | Attività | Gate di accettazione | Stato |
 |---|---|---|---|
 | M0 | Audit di sorgenti Git e struttura database | Inventario con SHA + schema reale letto in sicurezza | **Completato** |
-| M1 | Audit della **build finale** (ZIP + publisher + auth + SEO) | Tutte le route HTML/media e metadati censiti, nessun link locale irrisolto | **Da eseguire** |
+| M1 | Audit della **build finale** (ZIP + publisher + auth + SEO) | Tutte le route HTML/media e metadati censiti, nessun link locale irrisolto | **Misurato: 111 HTML, 1 collegamento mancante; gate non superato** |
 | M2 | Progettare contratto editoriale e mappa IT/EN/ES | Id stabili, versioni, attribuzione, locale, diff dry-run | Da eseguire |
 | M3 | Backup verificato e import controllato di prova | Dati di prova isolati, checksum corrispondenti, ripristino e idempotenza | Da eseguire |
 | M4 | Valutare Storage e migrare solo media appropriati | File approvati, SHA verificato, accesso pubblico/privato corretto | Da eseguire |
@@ -107,9 +107,9 @@ Non dichiarare completata la migrazione se manca anche solo uno dei seguenti con
 
 **Eseguiti:** audit GitHub e Supabase in sola lettura; manifest dei 154 file sorgente; scanner post-build, test automatici e CI separata dalla pubblicazione; questo piano.
 
-**Non eseguiti:** import contenuti, nuove tabelle o bucket, API deployate, hosting, utenti/ruoli aggiunti, password modificate, pagamenti. La directory `_site` completa non era disponibile nel runtime di audit; perciò **il censimento finale delle route è ancora aperto**.
+**Non eseguiti:** import contenuti, nuove tabelle o bucket, API deployate, hosting, utenti/ruoli aggiunti, password modificate, pagamenti. Successivamente è stato recuperato l'artefatto completo del deploy GitHub Actions `43852683965`: **111 HTML (109 `index.html`), 62 asset/file tecnici, 15 pagine `noindex`, 6/6 pagine Auth/private protette**. È emerso **un collegamento mancante** in `it/video-e-slide/prompt-engineering/index.html` verso `/manzo-ai/it/prompt-mastery/`. Il gate M1 rimane aperto fino alla correzione e alla nuova build QA. Vedere `docs/MANZO_AI_RENDERED_RELEASE_AUDIT_2026-11-16.md`.
 
-**Prossima attività:** riprodurre la build finale in CI, archiviare il manifest generato esternamente a `_site` e certificare i riferimenti. Solo dopo si prepara lo schema contenuti e il dry-run di import.
+**Prossima attività:** correggere l'unico collegamento locale mancante, generare una build QA e acquisire nuovamente il manifest finale. Dopo il PASS di M1 si prepara lo schema contenuti e il dry-run di import.
 
 ## 8. Sorgenti e riferimenti
 
