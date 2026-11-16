@@ -1,0 +1,51 @@
+name: MANZO AI Migration Inventory QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'product/migration/**'
+      - 'docs/MANZO_AI_MIGRATION_MASTER_PLAN_2026-11-16.md'
+      - '.github/workflows/migration-inventory-qa.yml'
+  pull_request:
+    paths:
+      - 'product/migration/**'
+      - 'docs/MANZO_AI_MIGRATION_MASTER_PLAN_2026-11-16.md'
+      - '.github/workflows/migration-inventory-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-source-and-inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test read-only inventory scanner
+        run: |
+          set -euo pipefail
+          python3 -m py_compile product/migration/audit_release.py product/migration/test_audit_release.py
+          python3 -m unittest discover -s product/migration -p 'test_*.py' -v
+      - name: Check source inventory metadata
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          m=json.loads(Path('product/migration/github-source-inventory-2026-11-16.json').read_text())
+          assert m['source_files_total']==154
+          assert m['scope']=='git-main-source-only'
+          assert not m['tree_truncated']
+          assert len(m['entries'])==154
+          assert len({x['path'] for x in m['entries']})==154
+          assert m['published_base_archive']=='site-v0.7.zip'
+          assert Path('product/migration/audit_release.py').exists()
+          print('PASS source-baseline integrity (historical snapshot, not final site build)')
+          PY
