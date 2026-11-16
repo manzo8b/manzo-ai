@@ -50,7 +50,11 @@
     "passwordExpired": "Il collegamento email è scaduto o è già stato utilizzato. Se puoi accedere con la password attuale, non serve un nuovo invito.",
     "passwordRejected": "Supabase non ha accettato la modifica della password. Potrebbe non soddisfare i requisiti o coincidere con quella già impostata. Prova ad accedere con la password attuale oppure scegline una diversa.",
     "linkExpired": "Il link email è scaduto o è già stato utilizzato. Il tuo account può comunque essere attivo: prova ad accedere con la password attuale.",
-    "passwordChange": "Cambia password"
+    "passwordChange": "Cambia password",
+    "recoveryEmailLimit": "Invio email bloccato: Supabase ha raggiunto il limite orario del servizio di prova. Nessun link è stato inviato. Evita altri tentativi per ora; per un uso affidabile è necessario configurare un servizio SMTP dedicato.",
+    "recoveryRestrictedEmail": "Il servizio email di prova di Supabase non è autorizzato a recapitare a questo indirizzo. Nessun link è stato inviato: occorre configurare un servizio SMTP dedicato.",
+    "recoveryRateLimit": "Troppe richieste di recupero. Nessun link è stato inviato. Evita tentativi ripetuti e riprova dopo la fine del blocco temporaneo.",
+    "recoveryUnavailable": "L'invio delle email di recupero non è disponibile. Nessun link è stato inviato; contatta l'amministratore della piattaforma."
   },
   "en": {
     "pageTitle": "Student and business access",
@@ -103,7 +107,11 @@
     "passwordExpired": "This email link has expired or was already used. If your current password works, no new invitation is needed.",
     "passwordRejected": "Supabase rejected the password change. It may not meet security requirements or might be your current password. Try signing in with your existing password or choose another one.",
     "linkExpired": "This email link has expired or was already used. Your account may still be active: try signing in with your current password.",
-    "passwordChange": "Change password"
+    "passwordChange": "Change password",
+    "recoveryEmailLimit": "Email sending is blocked: Supabase's trial email service has reached its hourly quota. No link was sent. Avoid retrying for now; reliable delivery requires a dedicated SMTP provider.",
+    "recoveryRestrictedEmail": "Supabase's trial email service is not authorized to deliver to this address. No link was sent; a dedicated SMTP provider must be configured.",
+    "recoveryRateLimit": "Too many recovery requests. No link was sent. Avoid repeated attempts and retry after the temporary limit clears.",
+    "recoveryUnavailable": "Password recovery email is unavailable. No link was sent; contact the platform administrator."
   },
   "es": {
     "pageTitle": "Acceso para estudiantes y empresas",
@@ -156,6 +164,10 @@
     "passwordExpired": "El enlace del correo ha caducado o ya se ha utilizado. Si tu contraseña actual funciona, no necesitas otra invitación.",
     "passwordRejected": "Supabase rechazó el cambio de contraseña. Puede no cumplir los requisitos o ser igual a la actual. Intenta entrar con la contraseña existente o elige una distinta.",
     "linkExpired": "El enlace de correo ha caducado o ya se ha utilizado. Tu cuenta podría seguir activa: prueba a iniciar sesión con la contraseña actual.",
-    "passwordChange": "Cambiar contraseña"
+    "passwordChange": "Cambiar contraseña",
+    "recoveryEmailLimit": "Envío bloqueado: el servicio de correo de prueba de Supabase ha alcanzado el límite por hora. No se ha enviado ningún enlace. Evita nuevos intentos por ahora; para un envío fiable se necesita SMTP propio.",
+    "recoveryRestrictedEmail": "El servicio de correo de prueba de Supabase no está autorizado para entregar a esta dirección. No se ha enviado ningún enlace; es necesario configurar SMTP propio.",
+    "recoveryRateLimit": "Demasiadas solicitudes de recuperación. No se ha enviado ningún enlace. Evita repetir la solicitud e inténtalo cuando termine el bloqueo temporal.",
+    "recoveryUnavailable": "El correo de recuperación no está disponible. No se ha enviado ningún enlace; contacta con el administrador."
   }
 }
