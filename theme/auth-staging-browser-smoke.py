@@ -37,7 +37,7 @@ with sync_playwright() as pw:
    assert page.locator('body[data-manzo-auth="v1"]').count()==1
    assert page.locator("html").get_attribute("lang")==locale
    assert page.locator("meta[name=robots]").get_attribute("content").startswith("noindex,nofollow")
-   assert page.locator("#auth-status").inner_text().strip()
+   assert page.locator("#auth-status").inner_text().strip()==""
    assert page.locator("#auth-disabled").is_visible()
    for view in ("signin","recover","update","verified","pending"):
     assert page.locator("#auth-"+view).is_hidden(),(locale,width,view)
