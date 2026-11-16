@@ -2,9 +2,18 @@
   "openapi": "3.1.0",
   "info": {
     "title": "MANZO AI · SaaS API design contract",
-    "version": "0.3.0-design",
-    "description": "DESIGN ONLY — NO ENDPOINTS DEPLOYED. Learning B2B Postgres routines are testable in ephemeral CI but no login, API server, hosted DB, team license purchase or billing is connected.",
-    "x-manzo-implementation-status": "unimplemented-design-contract"
+    "version": "0.4.0-staging-adapter",
+    "description": "Learning B2B Edge Functions adapter is implemented in source and tested for request policy; NOT DEPLOYED, not live. Identity/DB integration must be exercised in a new dedicated staging project. Agent and payments APIs are design-only.",
+    "x-manzo-implementation-status": "staging-source-only",
+    "x-manzo-implemented-endpoints": [
+      "GET /v1/organizations/{organizationId}/learning/courses",
+      "GET /v1/organizations/{organizationId}/learning/progress",
+      "POST /v1/organizations/{organizationId}/learning/seats",
+      "DELETE /v1/organizations/{organizationId}/learning/seats/{memberId}",
+      "POST /v1/organizations/{organizationId}/learning/enrollments",
+      "POST /v1/organizations/{organizationId}/learning/progress",
+      "POST /v1/organizations/{organizationId}/learning/attempts"
+    ]
   },
   "tags": [
     {
@@ -83,9 +92,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Course"
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "courses"
+                  ],
+                  "properties": {
+                    "courses": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Course"
+                      }
+                    }
                   }
                 }
               }
@@ -245,7 +263,7 @@
         ],
         "operationId": "submitLearningAttempt",
         "summary": "Submit selections for server-side evaluation",
-        "description": "The client NEVER supplies score, reviewer, completion status or course entitlement. The backend checks course version, enrollment and question-answer keys before recording the result.",
+        "description": "Single-choice assessment v0.4: answers object maps question IDs to a single option. Server verifies membership, active license, enrollment and the private answer key. No client-provided scores.",
         "parameters": [
           {
             "$ref": "#/components/parameters/OrganizationId"
@@ -262,8 +280,8 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "Attempt received for assessment",
+          "200": {
+            "description": "Answer selections graded and recorded by trusted backend; numeric score not trusted from client and not included in this receipt.",
             "content": {
               "application/json": {
                 "schema": {
@@ -304,6 +322,16 @@
           },
           "409": {
             "description": "Assessment version not accepted",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unknown, malformed or missing assessment answers",
             "content": {
               "application/problem+json": {
                 "schema": {
@@ -761,9 +789,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ProgressReceipt"
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "progress"
+                  ],
+                  "properties": {
+                    "progress": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/LearningProgressRecord"
+                      }
+                    }
                   }
                 }
               }
@@ -987,13 +1024,13 @@
       },
       "AttemptSubmission": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
           "courseId",
           "versionId",
           "assessmentId",
-          "selections"
+          "answers"
         ],
-        "additionalProperties": false,
         "properties": {
           "courseId": {
             "type": "string",
@@ -1005,46 +1042,31 @@
           },
           "assessmentId": {
             "type": "string",
-            "maxLength": 160
+            "pattern": "^[A-Za-z0-9_.:-]{1,160}$"
           },
-          "selections": {
-            "type": "array",
-            "minItems": 1,
-            "maxItems": 300,
-            "items": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
-                "questionId",
-                "optionIds"
-              ],
-              "properties": {
-                "questionId": {
-                  "type": "string",
-                  "maxLength": 160
-                },
-                "optionIds": {
-                  "type": "array",
-                  "minItems": 1,
-                  "maxItems": 20,
-                  "uniqueItems": true,
-                  "items": {
-                    "type": "string",
-                    "maxLength": 160
-                  }
-                }
+          "answers": {
+            "type": "object",
+            "minProperties": 1,
+            "maxProperties": 40,
+            "additionalProperties": false,
+            "patternProperties": {
+              "^[A-Za-z0-9_.:-]{1,160}$": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
               }
-            }
+            },
+            "description": "Each question ID maps to a single selected option ID. The private answer key stays in the database. No client score or reviewer."
           }
         }
       },
       "AttemptReceipt": {
         "type": "object",
+        "additionalProperties": false,
         "required": [
           "attemptId",
           "state"
         ],
-        "additionalProperties": false,
         "properties": {
           "attemptId": {
             "type": "string",
@@ -1052,11 +1074,7 @@
           },
           "state": {
             "type": "string",
-            "enum": [
-              "accepted",
-              "needs_review",
-              "rejected"
-            ]
+            "const": "recorded"
           }
         }
       },
@@ -1303,6 +1321,43 @@
           "state": {
             "type": "string",
             "const": "completed"
+          }
+        }
+      },
+      "LearningProgressRecord": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "courseId",
+          "versionId",
+          "userId",
+          "moduleKey",
+          "completedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "courseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "versionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "moduleKey": {
+            "type": "string"
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       }

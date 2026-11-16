@@ -1,4 +1,4 @@
-"""Verify the intentionally unimplemented MANZO AI API design contract."""
+"""Verify a source-implemented, NOT DEPLOYED Learning API and design-only non-Learning contract."""
 import json
 import re
 import unittest
@@ -14,8 +14,9 @@ class ApiContractTests(unittest.TestCase):
         cls.paths=cls.doc["paths"]
         cls.schemas=cls.doc["components"]["schemas"]
 
-    def test_explicitly_unimplemented(self):
-        self.assertEqual(self.doc["info"]["x-manzo-implementation-status"],"unimplemented-design-contract")
+    def test_source_only_implementation_status(self):
+        self.assertEqual(self.doc["info"]["x-manzo-implementation-status"],"staging-source-only")
+        self.assertIn("NOT DEPLOYED",self.doc["info"]["description"])
         self.assertNotIn("servers",self.doc)
 
     def test_every_operation_has_unique_id_and_response(self):
@@ -52,9 +53,24 @@ class ApiContractTests(unittest.TestCase):
 
     def test_attempt_scores_are_not_client_submitted(self):
         body=self.schemas["AttemptSubmission"]
-        self.assertEqual(set(body["properties"]),{"courseId","versionId","assessmentId","selections"})
+        self.assertEqual(set(body["properties"]),{"courseId","versionId","assessmentId","answers"})
         self.assertFalse(body["additionalProperties"])
         self.assertNotIn("score",body["properties"])
+
+    def test_learning_source_endpoints_and_responses_are_consistent(self):
+        org="/v1/organizations/{organizationId}/learning/"
+        methods={"GET":"get","POST":"post","DELETE":"delete"}
+        declared=self.doc["info"]["x-manzo-implemented-endpoints"]
+        self.assertEqual(len(declared),7)
+        for label in declared:
+            method,path=label.split(" ",1)
+            self.assertIn(methods[method],self.paths[path])
+        attempt=self.paths[org+"attempts"]["post"]
+        self.assertIn("200",attempt["responses"])
+        self.assertNotIn("202",attempt["responses"])
+        self.assertEqual(self.schemas["AttemptReceipt"]["properties"]["state"]["const"],"recorded")
+        self.assertEqual(self.paths[org+"courses"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["properties"]["courses"]["type"],"array")
+        self.assertEqual(self.paths[org+"progress"]["get"]["responses"]["200"]["content"]["application/json"]["schema"]["properties"]["progress"]["type"],"array")
 
     def test_budget_not_user_controlled(self):
         body=self.schemas["AgentRequest"]
