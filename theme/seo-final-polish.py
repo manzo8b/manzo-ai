@@ -131,7 +131,7 @@ def polish(page:Path, site:Path) -> str:
         if suffix is None:
             raise RuntimeError("Short description requires editorial review: "+rel)
         separator=" " if original_desc.endswith((".", "!", "?")) else ". "
-        desc=squeeze(original_desc.rstrip(". ")+separator+suffix)
+        desc=squeeze(original_desc.strip()+separator+suffix)
         if len(desc)<75:
             raise RuntimeError("Description remains too short: "+rel)
         html=put(html,"name","description",desc,replace=True)
