@@ -44,6 +44,8 @@ on:
       - theme/design-browser-smoke.py
       - theme/publish-home-scene.py
       - theme/publish-title-cleanup.py
+      - product/auth-staging/**
+      - theme/publish-auth-staging.py
       - theme/publish-navigation.py
       - googlee8540704606dd6ec.html
       - .github/workflows/deploy-pages.yml
@@ -345,6 +347,37 @@ jobs:
           cp googlee8540704606dd6ec.html _site/googlee8540704606dd6ec.html
           cmp googlee8540704606dd6ec.html _site/googlee8540704606dd6ec.html
           echo "Static files, SEO sitemap and Google verification validated."
+      # Live login URLs are reserved for internal invited users only.
+      # The source config remains disabled; release requires an explicit flag.
+      # This step runs after SEO, navigation, visual and heading smoke to avoid
+      # changing the approved Home/Academy or including auth in public sitemap.
+      - name: Install Node 22 for audited auth bundle
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Publish invite-only Learning B2B pilot and privacy notices
+        shell: bash
+        env:
+          MANZO_AUTH_PILOT_RELEASE: restricted-invite-only
+        run: |
+          set -euo pipefail
+          npm install --prefix product/auth-staging --no-audit --no-fund
+          npm run test --prefix product/auth-staging
+          npm run build --prefix product/auth-staging
+          node --check product/auth-staging/dist/auth-app.js
+          python3 -m py_compile theme/publish-auth-staging.py
+          python3 theme/publish-auth-staging.py --site _site --enable --live-auth
+          python3 theme/publish-auth-staging.py --site _site --enable --live-auth --verify-only
+          test -f _site/it/prodotto/learning-b2b/accesso/index.html
+          test -f _site/en/product/learning-b2b/sign-in/index.html
+          test -f _site/es/producto/learning-b2b/acceso/index.html
+          test -f _site/it/prodotto/learning-b2b/privacy/index.html
+          test -f _site/en/product/learning-b2b/privacy/index.html
+          test -f _site/es/producto/learning-b2b/privacidad/index.html
+          ! grep -q 'learning-b2b/accesso' _site/sitemap.xml
+          ! grep -q 'learning-b2b/sign-in' _site/sitemap.xml
+          ! grep -q 'learning-b2b/privacidad' _site/sitemap.xml
+          echo "Auth pilot release gated, unlinked, noindex and privacy-noticed."
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
