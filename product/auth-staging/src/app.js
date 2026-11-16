@@ -7,7 +7,7 @@
  * The module never loads team data or makes payments.
  */
 import {createClient} from "@supabase/supabase-js";
-import {safetyConfig,validEmail,validPassword,confirmedUser,classifyPasswordError} from "./auth-policy.mjs";
+import {safetyConfig,validEmail,validPassword,confirmedUser,classifyPasswordError,classifyRecoveryError} from "./auth-policy.mjs";
 
 const root=document.querySelector("[data-manzo-auth]");
 if(root){
@@ -140,7 +140,18 @@ if(root){
     try{
       // Use one exact, audited redirect path. Never accept a next URL from input.
       const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:cfg.callback});
-      if(error){feedback(t.errorGeneric,true);return}
+      if(error){
+        const type=classifyRecoveryError(error);
+        const messages={
+          email_limit:t.recoveryEmailLimit,
+          restricted_email:t.recoveryRestrictedEmail,
+          rate_limit:t.recoveryRateLimit,
+          unavailable:t.recoveryUnavailable,
+          generic:t.errorGeneric
+        };
+        feedback(messages[type]||t.errorGeneric,true);
+        return;
+      }
       form.reset();
       feedback(t.sent);
     }catch{feedback(t.errorGeneric,true)}
