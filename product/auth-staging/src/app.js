@@ -59,7 +59,7 @@ if(root){
   }
   if(!safetyConfig(cfg,locale)){
     show("disabled");
-    feedback(t.disabled);
+    feedback("");
   }else{
     client=createClient(cfg.url,cfg.publishableKey,{
       auth:{
