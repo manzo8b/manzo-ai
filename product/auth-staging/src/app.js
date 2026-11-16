@@ -113,7 +113,10 @@ if(root){
   root.querySelector("#auth-signin-form").addEventListener("submit",async event=>{
     event.preventDefault();
     if(!client||busy)return;
-    const data=new FormData(event.currentTarget);
+    // Event.currentTarget is cleared once dispatch finishes; keep the form
+    // reference before any await so a successful Auth response stays success.
+    const form=event.currentTarget;
+    const data=new FormData(form);
     const email=String(data.get("email")||"").trim();
     const password=String(data.get("password")||"");
     if(!validEmail(email)||!password){feedback(t.errorValidation,true);return}
@@ -123,28 +126,31 @@ if(root){
       if(result.error){feedback(t.errorCredentials,true);return}
       expiredInvite=false;
       await verifiedSession();
-      event.currentTarget.reset();
+      form.reset();
     }catch{feedback(t.errorGeneric,true)}
     finally{lock(false)}
   });
   root.querySelector("#auth-recover-form").addEventListener("submit",async event=>{
     event.preventDefault();
     if(!client||busy)return;
-    const email=String(new FormData(event.currentTarget).get("email")||"").trim();
+    const form=event.currentTarget;
+    const email=String(new FormData(form).get("email")||"").trim();
     if(!validEmail(email)){feedback(t.errorValidation,true);return}
     lock(true);
     try{
       // Use one exact, audited redirect path. Never accept a next URL from input.
-      await client.auth.resetPasswordForEmail(email,{redirectTo:cfg.callback});
+      const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:cfg.callback});
+      if(error){feedback(t.errorGeneric,true);return}
+      form.reset();
       feedback(t.sent);
-      event.currentTarget.reset();
     }catch{feedback(t.errorGeneric,true)}
     finally{lock(false)}
   });
   root.querySelector("#auth-update-form").addEventListener("submit",async event=>{
     event.preventDefault();
     if(!client||busy)return;
-    const password=String(new FormData(event.currentTarget).get("password")||"");
+    const form=event.currentTarget;
+    const password=String(new FormData(form).get("password")||"");
     if(!validPassword(password)){feedback(t.errorValidation,true);return}
     lock(true);
     try{
@@ -169,7 +175,7 @@ if(root){
       // (e.g. network/token issue) and must never turn success into a
       // false "Operation failed" message. Keep the verified session;
       // users may sign out explicitly to test a fresh login.
-      event.currentTarget.reset();
+      form.reset();
       recoveryEvent=false;
       expiredInvite=false;
       if(result.data?.user?.email){
