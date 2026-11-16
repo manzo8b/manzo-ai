@@ -6,6 +6,7 @@ on:
       - 'product/auth-staging/**'
       - 'theme/publish-auth-staging.py'
       - 'theme/auth-staging-browser-smoke.py'
+      - 'theme/auth-pilot-live-browser-smoke.py'
       - '.github/workflows/auth-staging-qa.yml'
   push:
     branches: [main]
@@ -41,10 +42,11 @@ jobs:
         run: |
           set -euo pipefail
           node --check product/auth-staging/dist/auth-app.js
-          python3 -m py_compile theme/publish-auth-staging.py theme/auth-staging-browser-smoke.py
+          python3 -m py_compile theme/publish-auth-staging.py theme/auth-staging-browser-smoke.py theme/auth-pilot-live-browser-smoke.py
           test -s product/auth-staging/dist/auth-app.js
           grep -q '"enabled": false' product/auth-staging/config.json
-          ! grep -q "publish-auth-staging.py" .github/workflows/deploy-pages.yml
+          # Auth publishing must remain gated with an explicit release token.
+          test "$(grep -c 'MANZO_AUTH_PILOT_RELEASE' theme/publish-auth-staging.py)" -ge 1
           ! grep -q "publish-auth-staging.py" .github/workflows/theme-qa.yml
       - name: Generate three UNLINKED preview pages in temporary test site
         run: |
@@ -63,6 +65,21 @@ jobs:
           ln -s ../_site _preview/manzo-ai
           python3 -m http.server 8765 --bind 127.0.0.1 --directory _preview >/tmp/manzo-auth-http.log 2>&1 &
           python3 theme/auth-staging-browser-smoke.py
+      - name: Generate LIVE-mode pilot pages in isolated QA site
+        env:
+          MANZO_AUTH_PILOT_RELEASE: restricted-invite-only
+        run: |
+          set -euo pipefail
+          mkdir -p _pilot_site
+          python3 theme/publish-auth-staging.py --site _pilot_site --enable --live-auth
+          python3 theme/publish-auth-staging.py --site _pilot_site --enable --live-auth --verify-only
+      - name: Verify real sign-in UI without inviting users
+        run: |
+          set -euo pipefail
+          mkdir -p _pilot_preview
+          ln -s ../_pilot_site _pilot_preview/manzo-ai
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory _pilot_preview >/tmp/manzo-auth-pilot-http.log 2>&1 &
+          python3 theme/auth-pilot-live-browser-smoke.py
       - name: Archive review screenshots
         if: always()
         uses: actions/upload-artifact@v4
