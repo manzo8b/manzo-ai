@@ -63,7 +63,7 @@ def verify_page(page,locale,route,width):
  assert page.locator('[aria-pressed="true"]').count()==1
  # Selecting another real organization changes the data, not an invented metric.
  page.locator("#mw-organizations button").nth(1).click()
- page.wait_for_function('document.querySelector("#mw-courses h3")?.textContent.includes("<img src=x")')
+ page.locator("#mw-courses h3").filter(has_text="<img src=x onerror=alert(1)>").wait_for(state="visible")
  assert page.locator("#mw-courses img").count()==0, "Untrusted title executed as HTML"
  assert page.locator("#mw-courses h3").inner_text()=="<img src=x onerror=alert(1)>"
  assert page.locator("#mw-courses .mw-course-progress").inner_text().startswith("0 ")
