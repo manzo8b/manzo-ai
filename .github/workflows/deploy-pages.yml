@@ -49,6 +49,7 @@ on:
       - theme/academy-journeys.css
       - theme/academy-journeys.js
       - theme/fix-learning-anchors.py
+      - theme/site-integrity-audit.py
       - theme/home-showcase-browser-smoke.py
       - theme/publish-title-cleanup.py
       - product/auth-staging/**
@@ -354,6 +355,9 @@ jobs:
           python3 -m py_compile theme/publish-title-cleanup.py
           python3 theme/publish-title-cleanup.py --site _site
           python3 theme/publish-title-cleanup.py --site _site --verify-only
+          # Cross-site audit: broken links, HTML IDs, in-page anchors and language.
+          python3 -m py_compile theme/site-integrity-audit.py
+          python3 theme/site-integrity-audit.py --site _site
           test -s _site/assets/design-system.css
           test -s _site/assets/design-motion.js
           test -s _site/assets/mobile-nav.js
