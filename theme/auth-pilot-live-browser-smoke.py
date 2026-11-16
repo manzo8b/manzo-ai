@@ -27,7 +27,19 @@ with sync_playwright() as pw:
    page.on("request",lambda req:remote.append(req.url) if "supabase.co" in req.url else None)
    page.route("**/*.supabase.co/**",lambda request:request.abort())
    page.goto(urljoin(BASE,access),wait_until="load",timeout=35000)
-   page.locator("#auth-signin").wait_for(state="visible",timeout=12000)
+   try:
+    page.locator("#auth-signin").wait_for(state="visible",timeout=9000)
+   except Exception:
+    print("AUTH_DIAGNOSTIC",{
+      "locale":locale,"width":width,
+      "view":page.locator('body').get_attribute('data-view'),
+      "messages":page.locator('#auth-status').inner_text(),
+      "config_enabled":json.loads(page.locator('#auth-config').text_content()).get("enabled"),
+      "script_present":page.locator('script[src*="auth-app"]').count(),
+      "errors":errors,
+      "console_problems":page.evaluate("window.__AUTH_TEST_ERRORS || []"),
+    },flush=True)
+    raise
    assert page.locator("#auth-disabled").is_hidden(),(locale,width,"disabled")
    cfg=json.loads(page.locator("#auth-config").text_content())
    assert cfg["enabled"] is True and cfg["authMode"]=="invite-only"
