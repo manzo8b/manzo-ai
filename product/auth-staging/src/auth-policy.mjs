@@ -42,3 +42,20 @@ export function safetyConfig(config,locale){
   if(config.callback!==exactCallback(locale))return false;
   return true;
 }
+
+/**
+ * Classify server-side Supabase Auth password errors without exposing
+ * raw API strings, password text or potentially sensitive response bodies.
+ * An HTTP 422 alone does not identify the exact cause of rejection.
+ */
+export function classifyPasswordError(error){
+  const code=typeof error?.code==="string"?error.code.toLowerCase():"";
+  if(code==="same_password")return "same";
+  if(code==="weak_password")return "weak";
+  if(["reauthentication_needed","reauthentication_required"].includes(code))return "reauth";
+  if(["session_not_found","bad_jwt","invalid_jwt","refresh_token_not_found",
+      "refresh_token_already_used","user_not_found"].includes(code))return "session";
+  if(["otp_expired","email_link_not_valid","flow_state_expired"].includes(code))return "expired";
+  if(error?.status===422)return "rejected";
+  return "generic";
+}

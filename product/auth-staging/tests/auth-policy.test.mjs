@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {AUTH_ROUTES,ORIGIN,MIN_PASSWORD_LENGTH,exactCallback,validEmail,
-  validPassword,confirmedUser,authState,safetyConfig} from "../src/auth-policy.mjs";
+  validPassword,confirmedUser,authState,safetyConfig,classifyPasswordError} from "../src/auth-policy.mjs";
 
 const good={
  enabled:true, authMode:"invite-only", requireEmailVerification:true,
@@ -56,4 +56,15 @@ test("a verified login never implies tenant membership or license",()=>{
  const user={id:"11111111-1111-4111-8111-111111111111",email:"student@example.test",email_confirmed_at:"2026-11-16T10:00:00Z"};
  assert.equal(authState(user),"verified_no_access");
  assert.equal(authState(user,[{role:"owner",grant:"paid"}]),"verified_no_access");
+});
+
+test("password changes map Supabase Auth codes into non-sensitive actionable states",()=>{
+  assert.equal(classifyPasswordError({code:"same_password",status:422}),"same");
+  assert.equal(classifyPasswordError({code:"weak_password",status:422}),"weak");
+  assert.equal(classifyPasswordError({code:"reauthentication_needed",status:422}),"reauth");
+  assert.equal(classifyPasswordError({code:"session_not_found",status:401}),"session");
+  assert.equal(classifyPasswordError({code:"otp_expired",status:403}),"expired");
+  assert.equal(classifyPasswordError({code:"unknown_422",status:422}),"rejected");
+  assert.equal(classifyPasswordError({message:"password: SECRET-PASSWORD"}),"generic");
+  assert.equal(classifyPasswordError(null),"generic");
 });

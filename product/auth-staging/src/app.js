@@ -7,7 +7,7 @@
  * The module never loads team data or makes payments.
  */
 import {createClient} from "@supabase/supabase-js";
-import {safetyConfig,validEmail,validPassword,confirmedUser} from "./auth-policy.mjs";
+import {safetyConfig,validEmail,validPassword,confirmedUser,classifyPasswordError} from "./auth-policy.mjs";
 
 const root=document.querySelector("[data-manzo-auth]");
 if(root){
@@ -18,7 +18,11 @@ if(root){
   const views=["disabled","signin","recover","update","verified","pending"];
   const status=byId("auth-status");
   const submitButtons=[...root.querySelectorAll('button[type="submit"]')];
-  let client=null,originMode="login",busy=false,recoveryEvent=false;
+  let client=null,busy=false,recoveryEvent=false;
+  // Supabase redirects with ?error_code=otp_expired when the one-time
+  // invitation is expired/already consumed. This is NOT proof that the
+  // current authenticated session is invalid.
+  let expiredInvite=new URLSearchParams(window.location.search).get("error_code")==="otp_expired";
   const title=byId("auth-view-title");
 
   function feedback(msg,error=false){
@@ -51,11 +55,11 @@ if(root){
     }
     byId("auth-user-email").textContent=data.user.email||"";
     show("verified");
-    feedback(t.verified);
+    feedback(expiredInvite?t.linkExpired:t.verified,Boolean(expiredInvite));
   }
   function openSignIn(){
     show("signin");
-    feedback("");
+    feedback(expiredInvite?t.linkExpired:"",Boolean(expiredInvite));
   }
   if(!safetyConfig(cfg,locale)){
     show("disabled");
@@ -117,6 +121,7 @@ if(root){
     try{
       const result=await client.auth.signInWithPassword({email,password});
       if(result.error){feedback(t.errorCredentials,true);return}
+      expiredInvite=false;
       await verifiedSession();
       event.currentTarget.reset();
     }catch{feedback(t.errorGeneric,true)}
@@ -143,15 +148,38 @@ if(root){
     if(!validPassword(password)){feedback(t.errorValidation,true);return}
     lock(true);
     try{
+      // Supabase returns a specific AuthApiError (often HTTP 422); never
+      // hide it under "Operation failed", and never echo a password to logs.
       const result=await client.auth.updateUser({password});
-      if(result.error){feedback(t.errorGeneric,true);return}
+      if(result.error){
+        const type=classifyPasswordError(result.error);
+        const messages={
+          same:t.passwordSame,
+          weak:t.passwordWeak,
+          reauth:t.passwordReauth,
+          session:t.passwordSession,
+          expired:t.passwordExpired,
+          rejected:t.passwordRejected,
+          generic:t.errorGeneric
+        };
+        feedback(messages[type]||t.errorGeneric,true);
+        return;
+      }
+      // Password is ALREADY updated. Signing out can fail independently
+      // (e.g. network/token issue) and must never turn success into a
+      // false "Operation failed" message. Keep the verified session;
+      // users may sign out explicitly to test a fresh login.
       event.currentTarget.reset();
       recoveryEvent=false;
-      await client.auth.signOut({scope:"local"});
-      openSignIn();
-      feedback(t.passwordUpdated);
-    }catch{feedback(t.errorGeneric,true)}
-    finally{lock(false)}
+      expiredInvite=false;
+      if(result.data?.user?.email){
+        byId("auth-user-email").textContent=result.data.user.email;
+      }
+      show("verified");
+      feedback(t.passwordUpdated,false);
+    }catch{
+      feedback(t.errorGeneric,true);
+    }finally{lock(false)}
   });
   root.querySelector("#auth-signout").addEventListener("click",async()=>{
     if(!client||busy)return;
