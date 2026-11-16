@@ -1,0 +1,27 @@
+# MANZO AI — never commit credentials, keys or customer data.
+.env
+.env.*
+!.env.example
+.envrc
+*.pem
+*.p12
+*.pfx
+*.keystore
+*.sqlite
+*.sqlite3
+*.db
+credentials.json
+service-account*.json
+secrets.*
+!secrets.example
+supabase/functions/.env
+supabase/functions/.env.*
+product/backend/edge/.env
+product/backend/edge/.env.*
+node_modules/
+.deno/
+__pycache__/
+*.pyc
+.coverage
+.pytest_cache/
+.DS_Store
