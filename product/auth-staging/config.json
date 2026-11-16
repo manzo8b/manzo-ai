@@ -1,0 +1,9 @@
+{
+  "enabled": false,
+  "projectRef": "bjydnaejpxwubmxpnpnv",
+  "url": "https://bjydnaejpxwubmxpnpnv.supabase.co",
+  "publishableKey": "sb_publishable_90TcgLNrnbDoBIWRUoC93g_bCQLlimk",
+  "authMode": "invite-only",
+  "requireEmailVerification": true,
+  "note": "Client-side publishable key, not a service-role credential. Disabled until Auth email confirmation, exact redirects, privacy and invitation flow are verified."
+}
