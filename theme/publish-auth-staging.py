@@ -132,7 +132,7 @@ def render(loc,text,settings):
      <strong id="auth-user-email"></strong></div>
     <p class="view-lead">{e(text['waitingText'])}</p>
     <button type="button" class="button" id="auth-signout">{e(text['signOut'])} <span aria-hidden="true">↗</span></button>
-    <button id="auth-open-update" type="button" class="link-button">{e(text['newPasswordTitle'])}</button>
+    <button id="auth-open-update" type="button" class="link-button">{e(text['passwordChange'])}</button>
    </section>
    <p id="auth-status" class="message" aria-live="polite" role="status" data-level="info"></p>
    <p class="privacy">{e(text['privacy'])} <a href="{BASE}{PRIVACY[loc]}/">{e(text['privacyLink'])}</a></p>
