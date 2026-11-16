@@ -119,7 +119,7 @@ footer{{padding-bottom:40px;border-top:1px solid #dce6ee}}
 Il browser non supporta la riproduzione video. Puoi scaricare il file MP4 dal collegamento sottostante.
 </video>
 <figcaption class="small">Video didattico realizzato con NotebookLM e curatela editoriale del progetto MANZO AI.</figcaption>
-<div class="actions"><a class="btn" href="{ASSETS}{FILE}" download>Scarica il video MP4</a>{subtitle_download}<a class="btn btn-alt" href="/manzo-ai/it/prompt-mastery/">Approfondisci Prompt Mastery</a></div>
+<div class="actions"><a class="btn" href="{ASSETS}{FILE}" download>Scarica il video MP4</a>{subtitle_download}<a class="btn btn-alt" href="/manzo-ai/it/prompt-mastery/che-cos-e-un-prompt/">Approfondisci Prompt Mastery</a></div>
 </figure>
 <section><h2>Che cosa imparerai</h2>
 <ul><li>Come distinguere un prompt generico da un’istruzione utile e valutabile.</li><li>Le cinque domande essenziali: obiettivo, contesto, destinatario, formato e qualità.</li><li>Come usare esempi e strutture più precise per guidare la risposta.</li><li>Perché una risposta convincente non è necessariamente corretta.</li><li>Il ciclo professionale: definizione, generazione, verifica, miglioramento e iterazione.</li></ul>
