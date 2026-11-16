@@ -56,6 +56,14 @@ with sync_playwright() as pw:
    assert page.evaluate('sessionStorage.length')==0
    assert not remote,(locale,width,"unexpected live Supabase request",remote)
    assert not errors,(locale,width,errors)
+   # An invitation can expire AFTER the user has a usable password.
+   # The login page must not hide sign-in behind a generic error.
+   page.goto(urljoin(BASE,access)+"?error=access_denied&error_code=otp_expired",wait_until="load")
+   page.locator("#auth-signin").wait_for(state="visible",timeout=9000)
+   assert page.locator("#auth-status").get_attribute("data-level")=="error",(locale,"expired invite warning missing")
+   assert page.locator("#auth-status").inner_text().strip(),(locale,"expired link explanation missing")
+   assert page.locator("#auth-signin-form").is_visible(),(locale,"expired link wrongly blocked login")
+   assert not remote,(locale,width,"expired link unexpectedly made Auth request",remote)
    response=page.goto(urljoin(BASE,privacy),wait_until="load")
    assert response.status==200,(locale,width,response.status)
    assert page.locator('body[data-manzo-auth-privacy="v1"]').count()==1
