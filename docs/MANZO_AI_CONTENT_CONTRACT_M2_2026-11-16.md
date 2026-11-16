@@ -77,3 +77,11 @@ Questi sono **nomi di progetto, non tabelle esistenti**. Le autorizzazioni andra
 M2 prepara un contratto verificabile senza cambiare produzione. Al superamento della QA, la modifica può essere integrata in `main` senza deploy delle pagine statiche. La prima migrazione SQL/Storage richiede ancora un gate distinto; l'accesso Supabase già funzionante rimane intatto.
 
 **Riferimenti:** [Piano maestro](MANZO_AI_MIGRATION_MASTER_PLAN_2026-11-16.md), [Audit build](MANZO_AI_RENDERED_RELEASE_AUDIT_2026-11-16.md), [Docs Supabase Database Security](https://supabase.com/docs/guides/database/secure-data), [Supabase Storage policies](https://supabase.com/docs/guides/storage/security/access-control).
+
+## QA finale M2 — esito verificato
+
+La [run GitHub Actions 43865791659](https://github.com/manzo8b/manzo-ai/actions/runs/43865791659) ha concluso con esito positivo le verifiche del generatore, test di regressione e produzione dell'artefatto `manzo-ai-m2-public-catalog-preview` (id `14225581355`). L'artefatto è stato ispezionato: contiene **2 percorsi, 6 varianti (IT/EN/ES), 36 unità localizzate, 42 item di autovalutazione localizzati, 42 casi localizzati**. Nessun contenuto individuale delle domande o soluzione è incluso.
+
+**M1 risolto:** il deploy successivo alla PR #25 (run `43864931269`) contiene 0 riferimenti interni mancanti; tutti gli altri 172 file rimangono identici nei checksum, con una sola pagina video modificata.
+
+Questo certifica il contratto di metadati **M2**; non certifica ancora la validazione JSON Schema completa con una libreria terza né l'import di dati in Supabase. Le tabelle applicative rimangono immutate.
