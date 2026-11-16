@@ -5,6 +5,8 @@ on:
     paths:
       - 'product/auth-staging/**'
       - 'theme/publish-auth-staging.py'
+      - 'theme/publish-my-learning.py'
+      - 'theme/my-learning-browser-smoke.py'
       - 'theme/auth-staging-browser-smoke.py'
       - 'theme/auth-pilot-live-browser-smoke.py'
       - 'theme/auth-interaction-browser-smoke.py'
@@ -43,7 +45,8 @@ jobs:
         run: |
           set -euo pipefail
           node --check product/auth-staging/dist/auth-app.js
-          python3 -m py_compile theme/publish-auth-staging.py theme/auth-staging-browser-smoke.py theme/auth-pilot-live-browser-smoke.py theme/auth-interaction-browser-smoke.py
+          node --check product/auth-staging/dist/workspace.js
+          python3 -m py_compile theme/publish-auth-staging.py theme/publish-my-learning.py theme/my-learning-browser-smoke.py theme/auth-staging-browser-smoke.py theme/auth-pilot-live-browser-smoke.py theme/auth-interaction-browser-smoke.py
           test -s product/auth-staging/dist/auth-app.js
           grep -q '"enabled": false' product/auth-staging/config.json
           # Auth publishing must remain gated with an explicit release token.
@@ -81,6 +84,18 @@ jobs:
           ln -s ../_pilot_site _pilot_preview/manzo-ai
           python3 -m http.server 8766 --bind 127.0.0.1 --directory _pilot_preview >/tmp/manzo-auth-pilot-http.log 2>&1 &
           python3 theme/auth-pilot-live-browser-smoke.py
+      - name: Publish separate read-only My Learning workspace (API OFF)
+        env:
+          MANZO_AUTH_PILOT_RELEASE: restricted-invite-only
+        run: |
+          set -euo pipefail
+          python3 theme/publish-my-learning.py --site _pilot_site --live-auth
+          python3 theme/publish-my-learning.py --site _pilot_site --live-auth --verify-only
+          ! grep -q 'workspace-qa@example.invalid' product/auth-staging/dist/workspace.js
+          for page in it/prodotto/learning-b2b/mio-percorso en/product/learning-b2b/my-learning es/producto/learning-b2b/mi-aprendizaje; do
+            grep -q 'noindex,nofollow,noarchive' "_pilot_site/$page/index.html"
+            grep -q '"workspaceApiEnabled":false' "_pilot_site/$page/index.html"
+          done
       - name: Produce isolated mock-Auth bundle (never published)
         run: |
           set -euo pipefail
@@ -101,6 +116,34 @@ jobs:
           ln -s ../_mock_site _mock_preview/manzo-ai
           python3 -m http.server 8767 --bind 127.0.0.1 --directory _mock_preview >/tmp/manzo-auth-mock-http.log 2>&1 &
           python3 theme/auth-interaction-browser-smoke.py
+      - name: Build independent My Learning API mock (never deployed)
+        run: |
+          set -euo pipefail
+          mkdir -p _workspace_mock_site _workspace_enabled_site
+          cp -a _pilot_site/. _workspace_mock_site/
+          (
+            cd product/auth-staging
+            ./node_modules/.bin/esbuild src/workspace.js --bundle --format=iife --platform=browser --target=es2022               --alias:@supabase/supabase-js=./tests/fake-workspace-supabase-sdk.mjs               --outfile=../../_workspace_mock_site/assets/auth/workspace.js
+          )
+          cp -a _workspace_mock_site/. _workspace_enabled_site/
+          python3 - <<'PY'
+          from pathlib import Path
+          for path in Path("_workspace_enabled_site").rglob("index.html"):
+              data=path.read_text(encoding="utf-8")
+              if 'data-manzo-workspace="v1"' in data:
+                  assert '"workspaceApiEnabled":false' in data
+                  path.write_text(data.replace('"workspaceApiEnabled":false','"workspaceApiEnabled":true'),encoding="utf-8")
+          PY
+          ! grep -q 'workspace-qa@example.invalid' product/auth-staging/dist/workspace.js
+      - name: Validate My Learning UX with isolated authenticated fake services
+        run: |
+          set -euo pipefail
+          mkdir -p _workspace_preview_off _workspace_preview_on
+          ln -s ../_workspace_mock_site _workspace_preview_off/manzo-ai
+          ln -s ../_workspace_enabled_site _workspace_preview_on/manzo-ai
+          python3 -m http.server 8768 --bind 127.0.0.1 --directory _workspace_preview_off >/tmp/manzo-workspace-off.log 2>&1 &
+          python3 -m http.server 8769 --bind 127.0.0.1 --directory _workspace_preview_on >/tmp/manzo-workspace-on.log 2>&1 &
+          python3 theme/my-learning-browser-smoke.py
       - name: Archive review screenshots
         if: always()
         uses: actions/upload-artifact@v4
