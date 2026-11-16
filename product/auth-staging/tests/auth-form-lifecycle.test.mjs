@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import vm from "node:vm";
+import {classifyRecoveryError} from "../src/auth-policy.mjs";
 
 // Run the actual browser module with a tiny DOM/Auth double. The simulated
 // dispatch clears event.currentTarget immediately after the synchronous handler
@@ -37,7 +38,9 @@ function createHarness(authOverrides={}){
     passwordUpdated:"UPDATED",errorGeneric:"ERROR",
     errorCredentials:"CREDENTIALS",errorValidation:"VALIDATION",
     newPasswordHelp:"PASSWORD HELP",unauthorized:"NOT VERIFIED",
-    linkExpired:"EXPIRED",passwordRejected:"REJECTED"
+    linkExpired:"EXPIRED",passwordRejected:"REJECTED",
+    recoveryEmailLimit:"EMAIL QUOTA",recoveryRestrictedEmail:"RECIPIENT RESTRICTED",
+    recoveryRateLimit:"RATE LIMIT",recoveryUnavailable:"UNAVAILABLE"
   };
   const document={
     querySelector(selector){return selector==="[data-manzo-auth]"?root:null},
@@ -66,7 +69,7 @@ function createHarness(authOverrides={}){
     URLSearchParams,FormData:TestFormData,queueMicrotask,
     createClient:()=>({auth}),
     safetyConfig:()=>true,validEmail:()=>true,validPassword:()=>true,
-    confirmedUser:()=>true,classifyPasswordError:()=> "rejected"
+    confirmedUser:()=>true,classifyPasswordError:()=> "rejected",classifyRecoveryError
   },{filename:"auth-app.js"});
   async function submit(formId,fields){
     const form=node(formId);
@@ -110,7 +113,24 @@ test("password change stays successful when event.currentTarget becomes null",as
 test("recovery API rejection cannot display a false success notice",async()=>{
   const {submit}=createHarness({async resetPasswordForEmail(){return {error:{status:429,code:"over_email_send_rate_limit"}}}});
   const result=await submit("auth-recover-form",{email:"tester@example.test"});
-  assert.equal(result.status.textContent,"ERROR");
+  assert.equal(result.status.textContent,"EMAIL QUOTA");
   assert.equal(result.status.dataset.level,"error");
   assert.equal(result.form.resetCount,0);
+});
+
+test("unauthorized trial email recipients receive an actionable failure",async()=>{
+  const {submit}=createHarness({async resetPasswordForEmail(){return {error:{status:400,code:"email_address_not_authorized"}}}});
+  const result=await submit("auth-recover-form",{email:"tester@example.test"});
+  assert.equal(result.status.textContent,"RECIPIENT RESTRICTED");
+  assert.equal(result.status.dataset.level,"error");
+  assert.equal(result.form.resetCount,0);
+});
+
+test("all three published locales explain recovery email delivery failures",()=>{
+  const translations=JSON.parse(readFileSync(new URL("../content.json",import.meta.url),"utf8"));
+  for(const locale of ["it","en","es"]){
+    for(const key of ["recoveryEmailLimit","recoveryRestrictedEmail","recoveryRateLimit","recoveryUnavailable"]){
+      assert.ok(translations[locale][key]?.length>30,locale+" missing "+key);
+    }
+  }
 });
