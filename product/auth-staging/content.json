@@ -41,7 +41,8 @@
     "privacy": "Per gestire un account Supabase Auth memorizza email e dati tecnici della sessione. Questo spazio è in fase di collaudo e non abilita pagamenti o certificazioni.",
     "sdkError": "Il servizio di autenticazione non è disponibile in questa anteprima.",
     "footer": "Anteprima privata · Dati e accessi separati dalla dimostrazione pubblica",
-    "disabledTitle": "Accesso in preparazione"
+    "disabledTitle": "Accesso in preparazione",
+    "privacyLink": "Informativa privacy per gli account"
   },
   "en": {
     "pageTitle": "Student and business access",
@@ -85,7 +86,8 @@
     "privacy": "Supabase Auth stores email and technical session data to manage accounts. This is a staging experience: no payments or accredited certificates.",
     "sdkError": "Authentication is unavailable in this preview.",
     "footer": "Private preview · Accounts kept separate from the public demonstration",
-    "disabledTitle": "Access being prepared"
+    "disabledTitle": "Access being prepared",
+    "privacyLink": "Account privacy notice"
   },
   "es": {
     "pageTitle": "Acceso para estudiantes y empresas",
@@ -129,6 +131,7 @@
     "privacy": "Supabase Auth almacena el correo y datos técnicos de la sesión para gestionar las cuentas. Esta área está en pruebas: no hay pagos ni certificados acreditados.",
     "sdkError": "La autenticación no está disponible en esta vista previa.",
     "footer": "Vista privada · Accesos independientes de la demostración pública",
-    "disabledTitle": "Acceso en preparación"
+    "disabledTitle": "Acceso en preparación",
+    "privacyLink": "Información de privacidad de las cuentas"
   }
 }
