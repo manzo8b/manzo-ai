@@ -60,8 +60,8 @@ L'inventario sorgente firmato da SHA Git e dimensioni è in `product/migration/g
 | Fase | Attività | Gate di accettazione | Stato |
 |---|---|---|---|
 | M0 | Audit di sorgenti Git e struttura database | Inventario con SHA + schema reale letto in sicurezza | **Completato** |
-| M1 | Audit della **build finale** (ZIP + publisher + auth + SEO) | Tutte le route HTML/media e metadati censiti, nessun link locale irrisolto | **Misurato: 111 HTML, 1 collegamento mancante; gate non superato** |
-| M2 | Progettare contratto editoriale e mappa IT/EN/ES | Id stabili, versioni, attribuzione, locale, diff dry-run | Da eseguire |
+| M1 | Audit della **build finale** (ZIP + publisher + auth + SEO) | 111 HTML, 62 altri file, 0 link locali mancanti, 172/173 SHA invariati dopo correzione | **PASS — deploy 43864931269** |
+| M2 | Progettare contratto editoriale e mappa IT/EN/ES | Generator metadata-only di 2 percorsi/6 varianti, SHA stabili, test e CI; nessun quiz privato esportato | **PASS tecnico — import non eseguito** |
 | M3 | Backup verificato e import controllato di prova | Dati di prova isolati, checksum corrispondenti, ripristino e idempotenza | Da eseguire |
 | M4 | Valutare Storage e migrare solo media appropriati | File approvati, SHA verificato, accesso pubblico/privato corretto | Da eseguire |
 | M5 | Hardening Edge API e collegamento frontend con feature flag | JWT, RLS tenant A/B, CORS, 401/403, rate limit, fallback | Da eseguire |
@@ -121,3 +121,11 @@ Non dichiarare completata la migrazione se manca anche solo uno dei seguenti con
 - `docs/MANZO_AI_SAAS_ARCHITECTURE_ADR001_2026-11-15.md`
 - `product/backend/migrations/0001_foundation.sql`, `0002_learning_b2b.sql`, `0003_live_event_trigger_permissions.sql`
 - Documentazione ufficiale: https://supabase.com/docs/guides/deployment · https://supabase.com/docs/guides/storage · https://supabase.com/docs/guides/database/postgres/row-level-security
+
+### Aggiornamento verificato del 16/11/2026
+
+L'inventario dell'artefatto GitHub Pages successivo al fix della PR #25 registra **0 collegamenti interni mancanti**, mantenendo **111 HTML e 62 altri file**. I checksum indicano un solo file HTML modificato su 173: `it/video-e-slide/prompt-engineering/index.html`. Gate **M1 PASS**; si conserva il rapporto storico del difetto in `docs/MANZO_AI_RENDERED_RELEASE_AUDIT_2026-11-16.md`.
+
+Il generatore M2 è stato testato su tutti e sei i JSON editoriali originali. Produce 2 corsi, 6 varianti IT/EN/ES, 36 unità, 42 autovalutazioni localizzate e 42 casi localizzati, esportando soltanto metadati. Gate **M2 PASS tecnico** per il contratto editoriale, **nessuna importazione DB**. Dettagli: `docs/MANZO_AI_CONTENT_CONTRACT_M2_2026-11-16.md`.
+
+**Passo seguente M3:** pianificazione e verifica backup, schema pubblico isolato dai tenant, import idempotente in dry-run e test negativi di autorizzazione prima di qualsivoglia scrittura a Supabase.

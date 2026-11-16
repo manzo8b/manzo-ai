@@ -67,3 +67,11 @@ Rotte attualmente presenti sotto lo stesso prefisso:
 - Manifest source: `product/migration/github-source-inventory-2026-11-16.json`
 - Scanner post-build: `product/migration/audit_release.py`
 - CI QA dedicata: `.github/workflows/migration-inventory-qa.yml`
+
+## Verifica successiva alla correzione — gate M1 PASS
+
+- **Pull request #25** integrata in `main`, commit `424d3c4a8c40ffbfab74e9eb5ccbd7693f4b4644`.
+- **Deploy** [43864931269](https://github.com/manzo8b/manzo-ai/actions/runs/43864931269) concluso con successo; artifact `github-pages` id `14223664464`.
+- Inventario completo ripetuto sul nuovo artifact: **173 file = 111 HTML + 62 asset/altri file**; 109 `index.html`; **15 pagine noindex**, di cui **6/6 Auth/privacy**; **0 collegamenti locali mancanti**; **0 titoli H1–H6 terminanti con punto**.
+- Hash SHA-256 confrontati con l'artifact precedente `14219400739`: **172 file immutati**, **1 file modificato**, esclusivamente `it/video-e-slide/prompt-engineering/index.html` con nuovo collegamento alla lezione realmente esistente.
+- **Esito M1: PASS** per inventario, link interni, protezione SEO delle pagine private e regressione hash. Il controllo non equivale a test esteso di link esterni, JS dinamico o sicurezza B2B.
