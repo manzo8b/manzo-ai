@@ -29,7 +29,7 @@ def safe_json(value):
  return json.dumps(value,ensure_ascii=False,separators=(',',':')).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
 
 def view_header(view,heading):
- return f'<h2 id="auth-{view}-title">{e(heading)}</h2>'
+ return f'<h2 id="auth-{view}-title">{e(str(heading).rstrip(". "))}</h2>'
 
 def render(loc,text,settings):
  route=ROUTES[loc]+'/'
