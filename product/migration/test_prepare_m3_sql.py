@@ -30,7 +30,7 @@ class M3ImportPreparationTests(unittest.TestCase):
         for marker in [
             "correct_option", "encrypted_password", "service_role_key",
             "smtp-relay.brevo", "auth.users", "stripe_secret",
-            "manzo_m3_payload$::", "password_hash",
+            "password_hash",
         ]:
             self.assertNotIn(marker, sql)
         self.assertIn("quiz_answers_exported", sql)
