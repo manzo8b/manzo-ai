@@ -66,7 +66,7 @@ Le routine private proteggono licenze, quote, iscrizioni e valutazioni. I test c
 \`product/backend/edge/learning-api/router.mjs\` è una policy HTTP **provider-neutral**: valida rigorosamente UUID, contenuto JSON e campi ammessi, non accetta punteggi né identità di sessione provenienti dalla richiesta, e rende gli errori senza esporre segreti.
 
 \`product/backend/edge/learning-api/index.ts\` è un adapter **Supabase Edge Functions NON DEPLOYED**. Propone:
-- autenticazione reale con \`withSupabase({auth:'user'})\` e identità derivata da \`ctx.userClaims.sub\`;
+- autenticazione reale con \`withSupabase({auth:'user'})\` e identità derivata da \`ctx.userClaims.id\`;
 - query di lettura sotto ruolo PostgreSQL \`authenticated\` e \`request.jwt.claim.sub\` impostato soltanto nel contesto transazionale;
 - comandi di scrittura attraverso le funzioni SQL private già verificate su due tenant;
 - CORS con singolo origin esplicito, nessun \`*\`, payload limitato, query SQL parametrizzate, credenziali PostgreSQL solo in variabili segrete dell'ambiente backend;
