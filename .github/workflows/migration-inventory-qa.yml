@@ -6,6 +6,7 @@ on:
     paths:
       - 'product/migration/**'
       - 'docs/MANZO_AI_MIGRATION_MASTER_PLAN_2026-11-16.md'
+      - 'docs/MANZO_AI_CONTENT_CONTRACT_M2_2026-11-16.md'
       - '.github/workflows/migration-inventory-qa.yml'
   pull_request:
     paths:
@@ -33,6 +34,28 @@ jobs:
           set -euo pipefail
           python3 -m py_compile product/migration/audit_release.py product/migration/test_audit_release.py
           python3 -m unittest discover -s product/migration -p 'test_*.py' -v
+      - name: Build public metadata-only content catalog
+        run: |
+          set -euo pipefail
+          python3 product/migration/build_catalog.py --root . --output /tmp/manzo-ai-m2-content-catalog.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('/tmp/manzo-ai-m2-content-catalog.json').read_text(encoding='utf-8'))
+          schema=json.loads(Path('product/migration/content-catalog.schema.json').read_text(encoding='utf-8'))
+          assert schema['properties']['schema_version']['const']==data['schema_version']
+          assert set(data)==set(schema['properties'])
+          assert len(data['variants'])==6
+          assert all(not x['private_assessment_ready'] for x in data['variants'])
+          print('PASS generated M2 metadata-only catalog contract')
+          PY
+      - name: Upload dry-run catalog artifact (not website content)
+        uses: actions/upload-artifact@v4
+        with:
+          name: manzo-ai-m2-public-catalog-preview
+          path: /tmp/manzo-ai-m2-content-catalog.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Check source inventory metadata
         run: |
           set -euo pipefail
