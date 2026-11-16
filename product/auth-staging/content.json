@@ -3,7 +3,7 @@
     "pageTitle": "Accesso studenti e aziende",
     "brand": "LEARNING B2B",
     "kicker": "MANZO AI / ACCESSO RISERVATO",
-    "hero": "Competenze verificate. Accesso riservato",
+    "hero": "Competenze verificate, accesso riservato",
     "subtitle": "Una nuova area per studenti, formatori e organizzazioni. Prima l'identità, poi l'accesso ai corsi assegnati.",
     "private": "Accesso su invito",
     "privateText": "Le organizzazioni autorizzano gli studenti. La registrazione pubblica non è disponibile.",
@@ -40,13 +40,14 @@
     "statusLabel": "Stato accesso",
     "privacy": "Per gestire un account Supabase Auth memorizza email e dati tecnici della sessione. Questo spazio è in fase di collaudo e non abilita pagamenti o certificazioni.",
     "sdkError": "Il servizio di autenticazione non è disponibile in questa anteprima.",
-    "footer": "Anteprima privata · Dati e accessi separati dalla dimostrazione pubblica"
+    "footer": "Anteprima privata · Dati e accessi separati dalla dimostrazione pubblica",
+    "disabledTitle": "Accesso in preparazione"
   },
   "en": {
     "pageTitle": "Student and business access",
     "brand": "LEARNING B2B",
     "kicker": "MANZO AI / PRIVATE ACCESS",
-    "hero": "Verified learning. Private access",
+    "hero": "Verified learning, private access",
     "subtitle": "A new workspace for students, trainers and organizations. Verify identity before accessing assigned learning.",
     "private": "Invitation-only access",
     "privateText": "Organizations authorize students. Public registration is not available.",
@@ -83,13 +84,14 @@
     "statusLabel": "Access status",
     "privacy": "Supabase Auth stores email and technical session data to manage accounts. This is a staging experience: no payments or accredited certificates.",
     "sdkError": "Authentication is unavailable in this preview.",
-    "footer": "Private preview · Accounts kept separate from the public demonstration"
+    "footer": "Private preview · Accounts kept separate from the public demonstration",
+    "disabledTitle": "Access being prepared"
   },
   "es": {
     "pageTitle": "Acceso para estudiantes y empresas",
     "brand": "LEARNING B2B",
     "kicker": "MANZO AI / ACCESO PRIVADO",
-    "hero": "Aprendizaje verificado. Acceso privado",
+    "hero": "Aprendizaje verificado, acceso privado",
     "subtitle": "Una nueva área para estudiantes, formadores y organizaciones. Primero la identidad; después, los cursos asignados.",
     "private": "Acceso por invitación",
     "privateText": "Las organizaciones autorizan a los estudiantes. No hay registro público.",
@@ -126,6 +128,7 @@
     "statusLabel": "Estado del acceso",
     "privacy": "Supabase Auth almacena el correo y datos técnicos de la sesión para gestionar las cuentas. Esta área está en pruebas: no hay pagos ni certificados acreditados.",
     "sdkError": "La autenticación no está disponible en esta vista previa.",
-    "footer": "Vista privada · Accesos independientes de la demostración pública"
+    "footer": "Vista privada · Accesos independientes de la demostración pública",
+    "disabledTitle": "Acceso en preparación"
   }
 }
