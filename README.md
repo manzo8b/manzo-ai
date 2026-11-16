@@ -4,15 +4,18 @@
 
 MANZO AI combina progettazione di workflow digitali, verificabilità degli output AI e formazione professionale. Il codice e gli strumenti editoriali sono versionati su GitHub; la strategia prevede licenze B2B e un'eventuale acquisizione futura soltanto sulla base di asset e risultati verificabili.
 
-### Stato attuale — 15 novembre 2026
+### Stato verificato — 16 novembre 2026
 
 | Area | Stato verificabile | Limite |
 |---|---|---|
-| Sito e corsi | Portale pubblico multilingue, corsi ed esercizi | Non esiste ancora una LMS commerciale con progressi persistenti |
-| Product Lab | Demo con brief JSON, filtro euristico di claim e configuratore team | Nessun modello AI, login, database o checkout attivo |
-| Backend SaaS | Migrazione SQL e controlli RLS su PostgreSQL isolato, contratto API documentato | Nessun backend produttivo è stato creato |
+| Sito e corsi | Portale multilingue, Academy, sei risorse evidenziate, tre percorsi guidati e test QA | Nessun LMS commerciale attivo con progressi persistentemente collegati |
+| Product Lab | Studio brief JSON, Verify euristico e demo Learning, separati dal pilota Auth reale | Nessun modello AI produttivo, scoring B2B o checkout attivo |
+| Backend SaaS | Progetto Supabase MANZO AI attivo: 15 tabelle, 3 migrazioni applicate, Auth verificata, SMTP di prova | Nessuna Edge Function distribuita; zero organizzazioni, iscrizioni o dati Learning B2B |
 | Billing | Contratti locali di autorizzazione e verifica della firma dei webhook | Nessun incasso o abbonamento attivato |
-| Clienti | Ricerca dei segmenti commerciali documentata | Nessun cliente o fatturato qui attestato |
+| My Learning | Nuovo workspace autenticato IT/EN/ES e letture API utente in codice, testati con mock isolati | Pagina pilota pubblicata con API disattivata; nessun corso o avanzamento inventato |\n| Clienti | Ricerca dei segmenti commerciali documentata | Nessun cliente, incasso o fatturato attestato |
+
+
+**Piano del prossimo salto:** [My Learning v0.1 e gate di attivazione](docs/MANZO_AI_MY_LEARNING_V01_RELEASE_GATE_2026-11-16.md) · [Audit commerciale](docs/MANZO_AI_SAAS_COMMERCIAL_PRODUCT_REVIEW_2026-11-16.md). Le note successive sono storiche e non sostituiscono lo stato verificato qui sopra.
 
 **Architettura e roadmap:** [Product Lab](product/README.md) · [Database e security QA](product/backend/README.md) · [Architettura SaaS](docs/MANZO_AI_SAAS_ARCHITECTURE_ADR001_2026-11-15.md) · [Mercati potenziali](docs/MANZO_AI_BUYER_RESEARCH_2026-11-15.md) · [Release gates](docs/MANZO_AI_PRODUCT_RELEASE_GATE_2026-11-15.md).
 
