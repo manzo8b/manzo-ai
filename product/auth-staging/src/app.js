@@ -63,9 +63,15 @@ if(root){
   }else{
     client=createClient(cfg.url,cfg.publishableKey,{
       auth:{
-        flowType:"pkce",
+        // For an admin-initiated invitation on a static client, use the
+        // token-bearing redirect handled by Supabase JS's implicit flow.
+        // PKCE needs a verifier generated in the same client session and
+        // cannot be assumed for server-initiated invite links.
+        flowType:"implicit",
         autoRefreshToken:true,
         persistSession:true,
+        storage:window.sessionStorage, // short-lived pilot; not localStorage
+        storageKey:"manzo-learning-b2b-session",
         detectSessionInUrl:true,
       },
     });
