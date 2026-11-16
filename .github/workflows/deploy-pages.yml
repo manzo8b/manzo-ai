@@ -55,6 +55,7 @@ on:
       - theme/publish-title-cleanup.py
       - product/auth-staging/**
       - theme/publish-auth-staging.py
+      - theme/publish-my-learning.py
       - theme/publish-navigation.py
       - googlee8540704606dd6ec.html
       - .github/workflows/deploy-pages.yml
@@ -408,6 +409,25 @@ jobs:
           ! grep -q 'learning-b2b/sign-in' _site/sitemap.xml
           ! grep -q 'learning-b2b/privacidad' _site/sitemap.xml
           echo "Auth pilot release gated, unlinked, noindex and privacy-noticed."
+      - name: Publish protected My Learning read-only shell (Edge API OFF)
+        shell: bash
+        env:
+          MANZO_AUTH_PILOT_RELEASE: restricted-invite-only
+        run: |
+          set -euo pipefail
+          node --check product/auth-staging/dist/workspace.js
+          python3 -m py_compile theme/publish-my-learning.py
+          python3 theme/publish-my-learning.py --site _site --live-auth
+          python3 theme/publish-my-learning.py --site _site --live-auth --verify-only
+          for page in it/prodotto/learning-b2b/mio-percorso en/product/learning-b2b/my-learning es/producto/learning-b2b/mi-aprendizaje; do
+            test -s "_site/$page/index.html"
+            grep -q '"workspaceApiEnabled":false' "_site/$page/index.html"
+            grep -q 'noindex,nofollow,noarchive' "_site/$page/index.html"
+          done
+          ! grep -q 'workspace-qa@example.invalid' _site/assets/auth/workspace.js
+          ! grep -q 'learning-b2b/my-learning' _site/sitemap.xml
+          ! grep -q 'learning-b2b/mio-percorso' _site/sitemap.xml
+          echo "My Learning private pilot published; database API disabled pending E2E security gates."
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
