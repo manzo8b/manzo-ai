@@ -26,13 +26,14 @@ const adapt=()=>{
   listCourses:({actor,organizationId}:{actor:string,organizationId:string})=>sql.begin(async tx=>{
    await tx`SET LOCAL ROLE authenticated`;
    await tx`SELECT set_config('request.jwt.claim.sub',${actor},true)`;
-   return await tx`SELECT id,slug,title,status FROM app.courses
+   return await tx`SELECT id,organization_id AS "organizationId",slug,title,status FROM app.courses
      WHERE organization_id=${organizationId}::uuid ORDER BY created_at DESC LIMIT 100`;
   }),
   listProgress:({actor,organizationId}:{actor:string,organizationId:string})=>sql.begin(async tx=>{
    await tx`SET LOCAL ROLE authenticated`;
    await tx`SELECT set_config('request.jwt.claim.sub',${actor},true)`;
-   return await tx`SELECT id,course_id,version_id,user_id,module_key,completed_at
+   return await tx`SELECT id,course_id AS "courseId",version_id AS "versionId",
+      user_id AS "userId",module_key AS "moduleKey",completed_at AS "completedAt"
       FROM app.learning_progress WHERE organization_id=${organizationId}::uuid
       ORDER BY completed_at DESC LIMIT 200`;
   }),
