@@ -19,7 +19,7 @@
 | HTML senza `lang` | **1** |
 | HTML con direttiva `noindex` | **15** |
 | HTML privi di `noindex` | **96** |
-| Pagine Auth/privacy protette da `noindex` | **6 su 6** |
+| Pagine Auth/privacy marcate `noindex` | **6 su 6** |
 | Pagine con link locale mancante rilevato | **1** |
 | Pagine con `h1`–`h6` terminante con punto | **0** |
 | Dimensione totale estratta | **36.618.263 byte** |
@@ -47,7 +47,7 @@ Rotte attualmente presenti sotto lo stesso prefisso:
 
 ## Controlli SEO e privacy
 
-- Le **sei** pagine private (accesso e privacy IT/EN/ES) sono correttamente `noindex`.
+- Le **sei** pagine di accesso e privacy IT/EN/ES sono correttamente `noindex`. Questo è un controllo SEO, **non un meccanismo di autorizzazione**: la protezione dei dati deve avvenire con Supabase Auth, API e RLS.
 - Le pagine senza canonical sono soltanto `404.html`, la verifica Google e le sei pagine private: **non è automaticamente un errore per queste pagine**.
 - Nessun titolo `h1`–`h6` con punto finale è stato trovato nel build controllato.
 - Il controllo link riguarda gli attributi HTML `href`/`src` verso la medesima piattaforma: non è ancora un crawler di tutte le destinazioni esterne o dei riferimenti CSS/JS dinamici.
