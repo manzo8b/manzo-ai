@@ -156,7 +156,17 @@
  .ma-journey-choice:hover,.ma-journey-step:hover,.ma-journey-start:hover{transform:none!important}
 }
 @media print{
- body > :not(main):not([data-ma-surface]){display:none!important}
+ body.ma-print-journey-mode .manzo-contact-header,
+ body.ma-print-journey-mode .manzo-mobile-bar,
+ body.ma-print-journey-mode header,
+ body.ma-print-journey-mode footer,
+ body.ma-print-journey-mode .sidebar,
+ body.ma-print-journey-mode .rail,
+ body.ma-print-journey-mode #skip{display:none!important}
+ body.ma-print-journey-mode #shell,
+ body.ma-print-journey-mode #shell .page,
+ body.ma-print-journey-mode main{width:100%!important;max-width:none!important;display:block!important;margin:0!important;padding:0!important}
+ body.ma-print-journey-mode main > :not(.ma-learning-journey){display:none!important}
  .ma-learning-journey{margin:10mm auto;border:0;box-shadow:none;background:white}
  .ma-journey-choices,.ma-journey-print{display:none!important}
  .ma-journey-panel[hidden]{display:none!important}
