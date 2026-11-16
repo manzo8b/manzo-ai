@@ -7,6 +7,7 @@ on:
       - 'theme/publish-auth-staging.py'
       - 'theme/auth-staging-browser-smoke.py'
       - 'theme/auth-pilot-live-browser-smoke.py'
+      - 'theme/auth-interaction-browser-smoke.py'
       - '.github/workflows/auth-staging-qa.yml'
   push:
     branches: [main]
@@ -42,7 +43,7 @@ jobs:
         run: |
           set -euo pipefail
           node --check product/auth-staging/dist/auth-app.js
-          python3 -m py_compile theme/publish-auth-staging.py theme/auth-staging-browser-smoke.py theme/auth-pilot-live-browser-smoke.py
+          python3 -m py_compile theme/publish-auth-staging.py theme/auth-staging-browser-smoke.py theme/auth-pilot-live-browser-smoke.py theme/auth-interaction-browser-smoke.py
           test -s product/auth-staging/dist/auth-app.js
           grep -q '"enabled": false' product/auth-staging/config.json
           # Auth publishing must remain gated with an explicit release token.
@@ -80,6 +81,26 @@ jobs:
           ln -s ../_pilot_site _pilot_preview/manzo-ai
           python3 -m http.server 8766 --bind 127.0.0.1 --directory _pilot_preview >/tmp/manzo-auth-pilot-http.log 2>&1 &
           python3 theme/auth-pilot-live-browser-smoke.py
+      - name: Produce isolated mock-Auth bundle (never published)
+        run: |
+          set -euo pipefail
+          mkdir -p _mock_site
+          cp -a _pilot_site/. _mock_site/
+          (
+            cd product/auth-staging
+            ./node_modules/.bin/esbuild src/app.js --bundle --format=iife --platform=browser --target=es2022 \
+              --alias:@supabase/supabase-js=./tests/fake-supabase-sdk.mjs \
+              --outfile=../../_mock_site/assets/auth/auth-app.js
+          )
+          grep -q 'student@example.invalid' _mock_site/assets/auth/auth-app.js
+          ! grep -q 'student@example.invalid' product/auth-staging/dist/auth-app.js
+      - name: End-to-end test ALL Auth async form handlers with isolated mock SDK
+        run: |
+          set -euo pipefail
+          mkdir -p _mock_preview
+          ln -s ../_mock_site _mock_preview/manzo-ai
+          python3 -m http.server 8767 --bind 127.0.0.1 --directory _mock_preview >/tmp/manzo-auth-mock-http.log 2>&1 &
+          python3 theme/auth-interaction-browser-smoke.py
       - name: Archive review screenshots
         if: always()
         uses: actions/upload-artifact@v4
