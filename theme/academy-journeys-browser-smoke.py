@@ -59,7 +59,7 @@ def main():
   page.goto(f"{BASE}/it/academy/",wait_until="domcontentloaded")
   first=page.locator('[data-ma-journey-choice="0"]')
   first.hover()
-  assert first.evaluate("(x)=>getComputedStyle(x).transitionDuration") in ("0s","0s, 0s, 0s, 0s")
+  assert first.evaluate("(x)=>getComputedStyle(x).transitionDuration.split(\",\").every(v=>v.trim()===\"0s\")"), "Transitions must be disabled in reduced-motion mode"
   page.close()
   browser.close()
  print("PASS: 3 guided journeys × IT/EN/ES, choices, steps, print, mobile, focus, reduced motion")
