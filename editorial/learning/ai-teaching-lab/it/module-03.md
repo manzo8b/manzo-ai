@@ -262,9 +262,10 @@ Questa esercitazione **fa parte dei due laboratori del modulo**; usa soltanto si
 
 1. Analizza destinatari, prerequisiti, lingua, ostacoli prevedibili e obiettivo osservabile. Evita categorie fisse di «studenti visivi» o «uditivi»
 2. Scegli una domanda che apra la storia: «Oggi fa freddo: significa che il clima si sta raffreddando?»
-3. Prepara tre scene coerenti: episodio iniziale, differenza fra osservazione e serie di lungo periodo, prova su ciò che si può dedurre
-4. Scrivi un copione di 50–70 secondi con trascrizione identica e una versione testuale consultabile senza audio
-5. Progetta una decisione interattiva con feedback, verifica accuratezza delle fonti, contrasto, sottotitoli, licenze e accessibilità
+3. Scegli e motiva il modello o la piattaforma adatta a immagini, audio, video o interattività: confronta ChatGPT Images, Nano Banana e altre opzioni in base al risultato, non a una classifica
+4. Prepara tre scene coerenti: episodio iniziale, differenza fra osservazione e serie di lungo periodo, prova su ciò che si può dedurre
+5. Scrivi un copione di 50–70 secondi con trascrizione identica e una versione testuale consultabile senza audio
+6. Progetta una decisione interattiva con feedback, verifica accuratezza delle fonti, contrasto, sottotitoli, licenze e accessibilità
 
 ### Prompt da copiare e controllare
 
@@ -276,6 +277,7 @@ DATI CONSENTITI: osservazione inventata «oggi fa freddo»; non ho fornito dati 
 VINCOLI: niente statistiche inventate, niente immagini di alunni, nessun requisito di ascolto obbligatorio; evita musica e animazioni decorative, prevedi sottotitoli e trascrizione.
 OUTPUT: (1) storyboard di tre slide con titolo, messaggio e descrizione visiva; (2) copione audio o video di circa un minuto con trascrizione; (3) domanda interattiva e feedback per scelta corretta ed errata.
 VERIFICA: indica le frasi per cui servirebbe una fonte e una checklist su coerenza, segmentazione, segnali visivi, accessibilità e possibilità di lavorare senza tecnologia.
+SCELTA DEL MODELLO: per fotografie illustrative confronta ChatGPT Images e Gemini Nano Banana; per audio valuta NotebookLM/Gemini Notebook; per video un modello video come Veo; per la ramificazione H5P usa regole, non un modello generativo. Non indicare un vincitore assoluto: confronta limiti, controllo, privacy, costo e accessibilità.
 ```
 
 ### Un possibile risultato, simulato per il corso
@@ -290,6 +292,7 @@ VERIFICA: indica le frasi per cui servirebbe una fonte e una checklist su coeren
 - Fonte controllata per ogni affermazione fattuale
 - Interazione con feedback e riprova
 - Licenze e riuso verificati
+- La scelta di modello o piattaforma è motivata e non confonde un editor con il modello generativo
 
 **Da conservare nel portfolio:** Portfolio multimediale: storyboard di tre slide, copione, trascrizione, scelta interattiva, checklist qualità
 
