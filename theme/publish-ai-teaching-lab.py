@@ -274,13 +274,16 @@ def publish(site,verify=False):
         studio_html=studio_source.read_text(encoding="utf-8")
         studio_html=studio_html.replace('<meta name="robots" content="noindex,nofollow">',"")
         studio_title="Laboratorio di produzione multimediale · AI Teaching Lab | MANZO AI"
+        original_studio_title="<title>Studio multimediale · AI Teaching Lab | MANZO AI</title>"
+        if original_studio_title not in studio_html:
+            raise RuntimeError("Production studio title changed; check SEO injection")
         studio_html=studio_html.replace(
-            "<title>"+studio_title+"</title>",
+            original_studio_title,
             "<title>"+studio_title+"</title>"+
             seo(studio_title,
                 "Studio didattico autonomo per progettare, verificare ed esportare slide, script audio e attività interattive.",
                 "LearningResource",BASE+ROUTE+"/laboratorio-multimediale/"))
-        studio_path=target/"laboratorio-multimediale"/"index.html"
+        if '<meta name="description"' not in studio_html:\n            raise RuntimeError("Production studio is missing a description")\n        studio_path=target/"laboratorio-multimediale"/"index.html"
         studio_path.parent.mkdir(parents=True,exist_ok=True)
         studio_path.write_text(studio_html,encoding="utf-8")
         for i,m in enumerate(course["modules"],1):
