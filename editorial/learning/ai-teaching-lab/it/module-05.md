@@ -60,7 +60,7 @@ Anche un test riuscito non rende automaticamente legittimo l'uso in ogni situazi
 
 ### 5. Le regole contano quanto il prompt
 
-Nel contesto educativo europeo, bisogna distinguere le finalità e il rischio concreto di ciascun sistema. L'AI Act non classifica automaticamente ogni chatbot di supporto a un docente come sistema ad alto rischio. Il GDPR richiede attenzione ai dati personali, ai ruoli e alle basi giuridiche; le indicazioni dell'istituto e delle autorità competenti restano imprescindibili. La verifica del 20 ottobre 2026 del Garante richiamata nei materiali del corso riguarda uno schema in discussione e non può essere trasformata automaticamente in regola definitiva per tutte le scuole. La nostra formazione fornisce criteri, non consulenza legale personalizzata.
+Nel contesto educativo europeo, bisogna distinguere le finalità e il rischio concreto di ciascun sistema. L'AI Act non classifica automaticamente ogni chatbot di supporto a un docente come sistema ad alto rischio. Il GDPR richiede attenzione ai dati personali, ai ruoli e alle basi giuridiche; le indicazioni dell'istituto e delle autorità competenti restano imprescindibili. Il parere favorevole con osservazioni espresso dal Garante il 20 ottobre 2026 riguarda uno schema di decreto ministeriale: non equivale, da solo, alla pubblicazione di un decreto definitivo né autorizza automaticamente l'uso di qualsiasi sistema nelle scuole. La nostra formazione fornisce criteri, non consulenza legale personalizzata.
 
 Regole e procedure hanno senso se proteggono un fine educativo. Con Papert torniamo allora alla domanda di partenza del corso: quale apprendimento stiamo rendendo possibile, e quale parte deve restare una scelta umana?
 
@@ -192,7 +192,7 @@ Questa esercitazione **fa parte dei due laboratori del modulo**; usa soltanto si
 ### Prompt da copiare e controllare
 
 ```text
-OBIETTIVO: creare una esperienza ramificata per riconoscere notizie non documentate.
+OBIETTIVO: creare un'esperienza ramificata per riconoscere notizie non documentate.
 CONTESTO: 10 minuti, scuola secondaria, tre scelte e feedback.
 DATI CONSENTITI: notizia inventata «tutti imparano meglio guardando video» priva di fonti.
 VINCOLI: nessun dato degli studenti, niente statistiche inventate, accessibile con tastiera e carta.
