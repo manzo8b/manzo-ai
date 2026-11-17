@@ -182,7 +182,7 @@ def publish(site,verify=False):
         if not dst.is_file() or dst.read_bytes()!=expected:raise RuntimeError("Data mismatch "+name)
     if not verify:
         target.mkdir(parents=True,exist_ok=True)
-        for name in ["assets.css","app.js","lesson.css","feature.css","presentation.css","presentation.js"]:
+        for name in ["assets.css","app.js","lesson.css","feature.css","presentation.css","presentation.js","production-studio.css","production-studio.js"]:
             shutil.copyfile(PREVIEW/name,target/name)
         home=(PREVIEW/"index.html").read_text(encoding="utf-8")
         home=home.replace('<meta name="robots" content="noindex,nofollow">',"")
@@ -268,6 +268,21 @@ def publish(site,verify=False):
         slidepath=target/"presentazione"/"index.html"
         slidepath.parent.mkdir(parents=True,exist_ok=True)
         slidepath.write_text(presentation,encoding="utf-8")
+        # Authoring studio is a separate, public, standalone learning activity:
+        # all project data and media stay on the user's device until export.
+        studio_source=PREVIEW/"laboratorio-multimediale"/"index.html"
+        studio_html=studio_source.read_text(encoding="utf-8")
+        studio_html=studio_html.replace('<meta name="robots" content="noindex,nofollow">',"")
+        studio_title="Laboratorio di produzione multimediale · AI Teaching Lab | MANZO AI"
+        studio_html=studio_html.replace(
+            "<title>"+studio_title+"</title>",
+            "<title>"+studio_title+"</title>"+
+            seo(studio_title,
+                "Studio didattico autonomo per progettare, verificare ed esportare slide, script audio e attività interattive.",
+                "LearningResource",BASE+ROUTE+"/laboratorio-multimediale/"))
+        studio_path=target/"laboratorio-multimediale"/"index.html"
+        studio_path.parent.mkdir(parents=True,exist_ok=True)
+        studio_path.write_text(studio_html,encoding="utf-8")
         for i,m in enumerate(course["modules"],1):
             text=(DATA/f"module-{i:02d}.md").read_text(encoding="utf-8")
             dest=target/f"modulo-{i:02d}"/"index.html"
@@ -284,13 +299,18 @@ def publish(site,verify=False):
         if 'content="noindex' in html or 'Non pubblicato' in html:raise RuntimeError("Incorrect public lesson status")
     vocab=target/"glossario"/"index.html"
     if not vocab.is_file() or "Pedagogia" not in vocab.read_text(encoding="utf-8"):raise RuntimeError("Public glossary missing")
+    studio=(target/"laboratorio-multimediale"/"index.html")
+    if not studio.is_file():raise RuntimeError("Missing multimedia production studio")
+    studio_html=studio.read_text(encoding="utf-8")
+    if 'id="studio-form"' not in studio_html or 'id="studio-download-html"' not in studio_html:
+        raise RuntimeError("Incomplete multimedia production studio")
     slides=(target/"presentazione"/"index.html")
     if not slides.is_file() or "15 slide" not in slides.read_text(encoding="utf-8"):raise RuntimeError("Slide reader missing")
     if (MEDIA/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip").is_file():
         slide_files=list((target/"media"/"slides").glob("slide-*.webp"))
         if len(slide_files)!=15:raise RuntimeError("Missing all original NotebookLM slide images")
         if not (target/"media"/"AI_per_Docenti.web.mp4").is_file():raise RuntimeError("Original video missing")
-    for asset in ["index.html","app.js","assets.css","lesson.css","feature.css","presentation.css","presentation.js"]:
+    for asset in ["index.html","app.js","assets.css","lesson.css","feature.css","presentation.css","presentation.js","production-studio.css","production-studio.js"]:
         if not (target/asset).is_file():raise RuntimeError("Missing asset "+asset)
     home=(target/"index.html").read_text(encoding="utf-8")
     if 'data-course-data-base="./data/"' not in home or 'content="noindex' in home:raise RuntimeError("Home not public")
