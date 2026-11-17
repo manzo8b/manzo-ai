@@ -20,6 +20,7 @@ MEDIA=SRC/"media"
 IMAGE_STUDIO=ROOT/"tools"/"ai-teaching-image-studio"/"index.html"
 VOICE_STUDIO=ROOT/"tools"/"ai-teaching-voice-studio"/"index.html"
 VIDEO_STUDIO=ROOT/"tools"/"ai-teaching-video-studio"/"index.html"
+MULTIMEDIA_WORKSPACE=ROOT/"tools"/"ai-teaching-workspace"/"index.html"
 ROUTE="it/formazione/ia-per-la-didattica"
 BASE="/manzo-ai/"
 MARKER='data-atl-feature="2026-11"'
@@ -249,6 +250,8 @@ def publish(site,verify=False):
         home=home.replace(entry,entry+voice_entry,1)
         video_entry='<a href="./studio-video/" data-atl-video-studio="v0.1" style="display:inline-flex;margin:12px 0 0 10px;padding:12px 18px;border-radius:14px;background:#6048b9;color:white;font-weight:750;text-decoration:none">Apri lo Studio video · storyboard e verifica ↗</a>'
         home=home.replace(voice_entry,voice_entry+video_entry,1)
+        workspace_entry='<a href="./workspace-multimediale/" data-atl-workspace="v0.1" style="display:inline-flex;margin:12px 0 0 10px;padding:12px 18px;border-radius:14px;background:#1b6559;color:white;font-weight:750;text-decoration:none">Apri il Workspace · unisci i tre studi ↗</a>'
+        home=home.replace(video_entry,video_entry+workspace_entry,1)
         (target/"index.html").write_text(home,encoding="utf-8")
         presentation=(PREVIEW/"presentazione"/"index.html").read_text(encoding="utf-8")
         presentation=presentation.replace('<meta name="robots" content="noindex,nofollow">',"")
@@ -303,6 +306,7 @@ def publish(site,verify=False):
         studio_html=studio_html.replace("</body>",'<div style="max-width:1100px;margin:1rem auto 2rem;padding:1.25rem;border:1px solid #cbd9f0;border-radius:20px;background:#f1f6ff;color:#193454"><strong>Studio immagini · nuovo laboratorio dedicato</strong><p>Progetta l’immagine, prepara il prompt, importa il risultato e verifica il materiale prima dell’approvazione docente. La generazione IA rimane esterna.</p><a href="../studio-immagini/" style="display:inline-block;padding:.8rem 1rem;border-radius:11px;background:#205beb;color:#fff;font-weight:700">Apri Studio immagini ↗</a></div></body>',1)
         studio_html=studio_html.replace("</body>",'<div style="max-width:1100px;margin:1rem auto 2rem;padding:1.25rem;border:1px solid #cbd9f0;border-radius:20px;background:#f1f6ff;color:#193454"><strong>Studio voce · narrazione didattica</strong><p>Scrivi il copione, registra dal microfono o importa una voce esterna, controlla la trascrizione e approva il materiale. Nessuna voce IA integrata.</p><a href="../studio-voce/" style="display:inline-block;padding:.8rem 1rem;border-radius:11px;background:#174c7b;color:#fff;font-weight:700">Apri Studio voce ↗</a></div></body>',1)
         studio_html=studio_html.replace("</body>",'<div style="max-width:1100px;margin:1rem auto 2rem;padding:1.25rem;border:1px solid #cbd9f0;border-radius:20px;background:#f1f6ff;color:#193454"><strong>Studio video · storyboard didattico</strong><p>Progetta scene, prepara l’anteprima, esporta un video locale silenzioso dove supportato, aggiungi sottotitoli e approva il progetto. La generazione IA resta esterna.</p><a href="../studio-video/" style="display:inline-block;padding:.8rem 1rem;border-radius:11px;background:#6048b9;color:#fff;font-weight:700">Apri Studio video ↗</a></div></body>',1)
+        studio_html=studio_html.replace("</body>",'<div style="max-width:1100px;margin:1rem auto 2rem;padding:1.25rem;border:1px solid #cbd9f0;border-radius:20px;background:#f1f6ff;color:#193454"><strong>Workspace multimediale · collega i tre studi</strong><p>Importa le schede di immagini, voce e video, verifica la coerenza pedagogica e prepara un manifest locale di consegna. Nessuna approvazione automatica.</p><a href="../workspace-multimediale/" style="display:inline-block;padding:.8rem 1rem;border-radius:11px;background:#1b6559;color:#fff;font-weight:700">Apri Workspace ↗</a></div></body>',1)
         studio_path.write_text(studio_html,encoding="utf-8")
         if not IMAGE_STUDIO.is_file():raise RuntimeError("Missing standalone image studio source")
         image_html=IMAGE_STUDIO.read_text(encoding="utf-8")
@@ -327,6 +331,14 @@ def publish(site,verify=False):
         video_dest=target/"studio-video"/"index.html"
         video_dest.parent.mkdir(parents=True,exist_ok=True)
         video_dest.write_text(video_html,encoding="utf-8")
+        if not MULTIMEDIA_WORKSPACE.is_file():raise RuntimeError("Missing multimedia workspace source")
+        workspace_html=MULTIMEDIA_WORKSPACE.read_text(encoding="utf-8")
+        if '<meta name="robots" content="noindex,follow">' not in workspace_html:
+            raise RuntimeError("Workspace source must disclose prototype status")
+        workspace_html=workspace_html.replace('<meta name="robots" content="noindex,follow">',seo("Workspace multimediale docenti | AI Teaching Lab | MANZO AI","Importa progetti degli Studi immagini, voce e video, verifica provenienza e prepara un kit didattico approvato dal docente.","LearningResource",BASE+ROUTE+"/workspace-multimediale/"),1)
+        workspace_dest=target/"workspace-multimediale"/"index.html"
+        workspace_dest.parent.mkdir(parents=True,exist_ok=True)
+        workspace_dest.write_text(workspace_html,encoding="utf-8")
         for i,m in enumerate(course["modules"],1):
             text=(DATA/f"module-{i:02d}.md").read_text(encoding="utf-8")
             dest=target/f"modulo-{i:02d}"/"index.html"
@@ -366,6 +378,13 @@ def publish(site,verify=False):
     if any(marker not in video_content for marker in ('id="scenes"','id="render"','id="captions"','id="approve"','captureStream','MediaRecorder')):
         raise RuntimeError("Video studio storyboard/captions/review incomplete")
     if '../studio-video/' not in studio_html:raise RuntimeError("No link from production studio to video studio")
+    workspace_page=target/"workspace-multimediale"/"index.html"
+    if not workspace_page.is_file():raise RuntimeError("Missing published multimedia workspace")
+    workspace_content=workspace_page.read_text(encoding="utf-8")
+    if any(marker not in workspace_content for marker in ('id="jsonfile"','id="approve"','id="exportJSON"','ai-teaching-lab-multimedia-kit-v0.1')):
+        raise RuntimeError("Incomplete multimedia workspace import/review/export")
+    if '../workspace-multimediale/' not in studio_html:
+        raise RuntimeError("Missing multimedia workspace navigation")
     slides=(target/"presentazione"/"index.html")
     if not slides.is_file() or "15 slide" not in slides.read_text(encoding="utf-8"):raise RuntimeError("Slide reader missing")
     if (MEDIA/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip").is_file():
@@ -379,6 +398,7 @@ def publish(site,verify=False):
     if 'data-atl-image-studio="v0.1"' not in home:raise RuntimeError("Home image studio link missing")
     if 'data-atl-voice-studio="v0.1"' not in home:raise RuntimeError("Home voice studio link missing")
     if 'data-atl-video-studio="v0.1"' not in home:raise RuntimeError("Home video studio link missing")
+    if 'data-atl-workspace="v0.1"' not in home:raise RuntimeError("Home workspace link missing")
     if not (target/"data"/"narrative.json").is_file():raise RuntimeError("Missing full narrative")
     presentation=json.loads((target/"data"/"presentation.json").read_text(encoding="utf-8"))
     if len(presentation["slides"])!=15:raise RuntimeError("Expected 15 presentation slides")
