@@ -7,7 +7,7 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const accent = {cobalt:"#1159ea",violet:"#7547cb",coral:"#d84d30",emerald:"#077c61",teal:"#007a8b"};
-  const state = {course:null,bank:null,scenarios:null,index:0};
+  const state = {course:null,bank:null,scenarios:null,narrative:null,index:0};
   function el(tag, cls, text) {
     const x=document.createElement(tag);
     if (cls) x.className=cls;
@@ -316,67 +316,161 @@
     return block;
   }
   function render() {
-    const m=state.course.modules[state.index],a=state.bank.modules.find(q=>q.module_id===m.id),branchScenario=state.scenarios.modules.find(q=>q.module_id===m.id);
+    const m=state.course.modules[state.index],
+          a=state.bank.modules.find(q=>q.module_id===m.id),
+          story=state.narrative.modules.find(q=>q.id===m.id),
+          decision=state.scenarios.modules.find(q=>q.module_id===m.id);
+    if(!m||!a||!story||!decision)throw Error("Il modulo non è completo");
     document.documentElement.style.setProperty("--accent",accent[m.accent]||"#1159ea");
     Array.from($("module-nav").children).forEach((b,i)=>b.setAttribute("aria-current",String(i===state.index)));
     const root=$("module-content");root.replaceChildren();
     const hero=el("header","module-hero");
-    add(hero,el("div","kicker","MODULO "+String(state.index+1).padStart(2,"0")+" / 05"),
-      heading("h2",m.title),paragraph(m.question),add(el("div","module-meta"),el("span","","4 ore previste"),el("span","","2 laboratori"),el("span","","Verifica interattiva")));
+    add(hero,el("div","kicker","PERCORSO DOCENTI · MODULO "+String(state.index+1).padStart(2,"0")+" / 05"),
+      heading("h2",m.title),
+      paragraph(story.subtitle,"module-subtitle"),
+      add(el("div","module-meta"),el("span","","Studio autonomo"),el("span","","2 laboratori guidati"),el("span","","4 ore indicative")));
     add(root,hero);
-    const outcomes=section("LEARNING OUTCOMES","Quello che saprai fare");
-    add(outcomes,list(m.outcomes));add(root,outcomes,conceptProbe(branchScenario));
-    const theory=section("TEORIA DOCUMENTATA","Capire prima di applicare");
-    add(theory,paragraph(m.urgent_teacher_challenge,"subtle"));
-    m.theory.paragraphs.forEach((p,i)=>{
-      const details=el("details","theory-accordion");
-      const summary=el("summary","",["Il concetto chiave","Quale rischio affrontiamo","Che cosa cambia nella lezione"][i]||"Approfondimento");
-      add(details,summary,paragraph(p));add(theory,details);
+
+    const welcome=section("COME INIZIARE","Qui impari anche da solo");
+    welcome.id="atl-start";
+    add(welcome,paragraph("Puoi studiare senza un formatore e senza conoscenze di programmazione. Segui il racconto, svolgi i laboratori usando soltanto esempi inventati, controlla i risultati e verifica la comprensione. Non serve un account per leggere il corso."));
+    const startSteps=el("div","self-study-steps");
+    [
+      ["01","Leggi","Comincia dalla storia e dalle spiegazioni. Se incontri parole nuove, consulta il glossario"],
+      ["02","Sperimenta","Copia il prompt pronto in uno strumento autorizzato, oppure analizza l'esempio simulato"],
+      ["03","Verifica","Correggi la bozza e confronta le risposte nelle attività interattive"]
+    ].forEach(([no,title,description])=>{
+      const card=el("div","self-study-step");
+      add(card,el("span","self-step-no",no),el("b","",title),paragraph(description));add(startSteps,card);
     });
-    const quote=el("div","quote");
-    add(quote,el("b","",m.theory.pedagogical_reference.name+" — insegnamento applicato"),paragraph(m.theory.pedagogical_reference.insight),paragraph("Parafrasi contestualizzata MANZO AI, non citazione letterale.","subtle"),external(m.theory.pedagogical_reference.source,"Apri la fonte del riferimento pedagogico"));
-    add(theory,quote);add(root,theory);
-    const method=section("METODOLOGIA MANZO AI","Sette passaggi, una decisione responsabile");
-    const grid=el("div","method-steps");
+    add(welcome,startSteps);
+    const goals=el("div","study-goals");
+    add(goals,heading("h4","Dopo questa lezione saprai"),
+      list(m.outcomes));
+    add(welcome,goals);
+    add(root,welcome,conceptProbe(decision));
+
+    const theory=section("COMPRENDERE","La storia che dà senso alla teoria");
+    theory.id="atl-theory";
+    add(theory,paragraph(story.lead,"narrative-intro"));
+    story.chapters.forEach((chapter,i)=>{
+      const segment=el("section","narrative-chapter");
+      add(segment,el("span","chapter-label","CAPITOLO "+String(i+1).padStart(2,"0")),
+        heading("h4",chapter.heading),paragraph(chapter.text));
+      add(theory,segment);
+    });
+    const pedagogy=el("div","pedagogy-note");
+    add(pedagogy,heading("h4","Un riferimento pedagogico da approfondire"),
+      paragraph(m.theory.pedagogical_reference.name+" — "+m.theory.pedagogical_reference.insight),
+      paragraph("Si tratta di una parafrasi didattica, non di una citazione letterale.","subtle"),
+      external(m.theory.pedagogical_reference.source,"Leggi il riferimento"));
+    add(theory,pedagogy);add(root,theory);
+
+    const glossary=section("PAROLE CHIARE","Un piccolo vocabolario per orientarsi");
+    glossary.id="atl-terms";
+    add(glossary,paragraph("Non occorre conoscere in anticipo queste espressioni. Puoi tornare al glossario in qualunque momento.","subtle"));
+    const gridGloss=el("dl","glossary-grid");
+    story.glossary.forEach(([term,definition])=>{
+      const item=el("div","glossary-item");add(item,el("dt","",term),el("dd","",definition));add(gridGloss,item);
+    });
+    add(glossary,gridGloss);add(root,glossary);
+
+    const method=section("PROPOSTA DI METODO","Come può aiutarci il metodo MANZO AI");
+    method.id="atl-method";
+    add(method,paragraph("MANZO AI propone sette domande per progettare, usare e controllare l'IA con senso didattico. È un percorso operativo sviluppato dal progetto MANZO AI: non è un obbligo, non sostituisce l'esperienza del docente e non è una teoria già validata attraverso studi sperimentali."));
+    const methodGrid=el("div","method-steps");
+    const descriptions=[
+      "Che problema concreto devo affrontare?",
+      "A quale classe e obiettivo mi rivolgo?",
+      "Quali errori, dati o barriere devo prevenire?",
+      "Che cosa devo chiarire prima di procedere?",
+      "Quale attività e quale prompt possono aiutarmi?",
+      "Come controllo fatti, accessibilità e apprendimento?",
+      "Che cosa consegno e di quali limiti sono responsabile?"
+    ];
     state.course.methodology.seven_steps.forEach((s,i)=>{
       const step=el("div","method-step");
-      add(step,el("span","",String(i+1).padStart(2,"0")),el("b","",s.label),el("small","",s.deliverable));add(grid,step);
+      add(step,el("span","",String(i+1).padStart(2,"0")),el("b","",s.label),
+        el("small","",descriptions[i]));add(methodGrid,step);
     });
-    add(method,grid,paragraph("Questo modello operativo non è una certificazione scientifica esterna; serve a documentare ogni scelta professionale.","subtle"));add(root,method);
-    const labs=section("LABORATORI AUTENTICI","I problemi di oggi, affrontati in pratica");
+    add(method,methodGrid,paragraph("Puoi modificare o non usare uno strumento IA se non risponde al bisogno didattico. Questo è un risultato professionale, non un errore.","subtle"));
+    add(root,method);
+
+    const labs=section("APPLICARE","Laboratori da fare, non soltanto da leggere");
+    labs.id="atl-labs";
+    add(labs,paragraph("Sei tu il partecipante. Ogni laboratorio contiene situazione, obiettivo, passi numerati, prompt pronto, esempio simulato e controllo. Puoi usare carta e penna: non è obbligatorio accedere a un sistema esterno.","subtle"));
     const cards=el("div","case-grid");
-    m.professional_cases.forEach((c,i)=>{
-      const p=el("div","case-card");
-      add(p,el("div","section-kicker","LABORATORIO "+(i+1)),heading("h4",c.title),paragraph(c.situation),paragraph(c.task),el("p","case-foot","Output · "+c.artifact),paragraph("Condizione di sicurezza: "+c.redline,"subtle"));add(cards,p);
+    story.labs.forEach((lab,i)=>{
+      const card=el("article","case-card lab-card");
+      add(card,el("div","lab-art","0"+(i+1)+" / LABORATORIO"),
+        heading("h4",lab.title),paragraph(lab.situation),
+        add(el("div","lab-goal"),el("b","","Che cosa devi ottenere"),paragraph(lab.goal)));
+      const steps=el("div","lab-steps");
+      add(steps,heading("h5","Che cosa fare, passo dopo passo"),list(lab.steps,true));
+      add(card,steps);
+      const promptSection=el("div","lab-prompt");
+      const bar=el("div","lab-prompt-head");
+      add(bar,el("strong","","Prompt pronto da provare"),
+        control("Copia il prompt",async()=>{
+          try{
+            if(!navigator.clipboard?.writeText)throw Error("clipboard unsupported");
+            await navigator.clipboard.writeText(lab.prompt);
+            feedback(promptSection,"Prompt copiato. Personalizzalo solo con dati inventati.",true);
+          }catch(_){feedback(promptSection,"Seleziona e copia il testo manualmente. Il prompt rimane leggibile qui sotto.");}
+        },"secondary"));
+      add(promptSection,bar,add(el("pre","lab-prompt-code"),el("code","",lab.prompt)),
+        paragraph("Non hai uno strumento autorizzato? Usa l'esempio simulato qui sotto per completare ugualmente il laboratorio.","subtle"));
+      add(card,promptSection);
+      const example=el("details","lab-example");
+      add(example,el("summary","","Guarda un esempio svolto (dopo aver provato)"),
+        paragraph("Esempio creato per la lezione, non risultato di un assistente interrogato in diretta.","subtle"),
+        el("blockquote","",lab.sample));
+      add(card,example);
+      const review=el("div","lab-review");
+      add(review,heading("h5","Controlla la qualità del risultato"),paragraph(lab.check),
+        el("p","lab-deliverable","Da conservare nel tuo portfolio: "+lab.deliverable));
+      add(card,review);add(cards,card);
     });
     add(labs,cards);
-    const link=el("a","full-lesson-link","Leggi il modulo completo con esercizi e soluzioni");
+    const link=el("a","full-lesson-link","Apri la lezione completa in formato lettura");
     const moduleNumber=String(state.index+1).padStart(2,"0");
     link.href=document.body.dataset.moduleBase ? document.body.dataset.moduleBase+moduleNumber+"/" : "../it/module-"+moduleNumber+".md";
     link.target=document.body.dataset.moduleBase?"_self":"_blank";link.rel="noopener noreferrer";
-    add(labs,paragraph("Il documento contiene consegne passo passo, esempi guidati, prompt e una guida di correzione.", "subtle"),link);add(root,labs,branchingSimulation(branchScenario));
-    const assess=section("VERIFICA FORMATIVA","Metti alla prova il tuo giudizio");
-    add(assess,paragraph("Le risposte rimangono solo in questa pagina durante la visita. Non c'è voto, salvataggio o attestato.","subtle"));
+    add(labs,paragraph("Preferisci leggere tutto come un capitolo continuo? Apri la versione integrale, con fonti e istruzioni anche per chi studia in autonomia.","subtle"),link);
+    add(root,labs);
+
+    const simulation=branchingSimulation(decision);
+    simulation.id="atl-decision";
+    add(root,simulation);
+
+    const assess=section("VALUTARE","Verifica ciò che hai imparato");
+    assess.id="atl-quiz";
+    add(assess,paragraph("Dopo le attività, rispondi alle domande e completa il cruciverba. Il feedback appare soltanto dopo il tuo tentativo. Nessun voto o avanzamento viene registrato.","subtle"));
     m.checkpoint.forEach((q,i)=>add(assess,singleChoice(q,i+1)));
     add(assess,multiChoice(a.multi_select),scenario(a.decision_scenario),matching(a.matching),crossword(a.crossword));
     const performance=el("div","assessment-block");
-    add(performance,heading("h4","Compito autentico"),paragraph(a.authentic_task.portfolio_artifact),
-      paragraph("Produci l'artefatto su un documento tuo, usando solo casi sintetici. La valutazione finale richiede un revisore umano.","subtle"),
-      heading("h4","Exit ticket"),paragraph(a.exit_ticket.question));
+    add(performance,heading("h4","Il tuo compito di conclusione"),
+      paragraph(a.authentic_task.portfolio_artifact),
+      paragraph("Prepara il materiale nel tuo documento personale, usando dati inventati; confronta quello che hai prodotto con l'obiettivo iniziale.","subtle"),
+      heading("h4","Una domanda da portare in classe"),paragraph(a.exit_ticket.question));
     add(assess,performance);add(root,assess);
-    const sources=section("RIFERIMENTI VERIFICABILI","Le fonti di questa unità");
+
+    const sources=section("APPROFONDIRE","Fonti e letture per continuare");
+    sources.id="atl-sources";
     const links=el("div","source-list");
     m.theory.sources.forEach((s,i)=>add(links,external(s.url,(i+1)+". "+s.title)));
-    add(sources,links,paragraph("Riferimenti datati e soggetti a verifica editoriale prima di ogni erogazione.","subtle"));add(root,sources);
+    add(sources,paragraph("Le fonti aiutano a distinguere i principi di ricerca dalle proposte operative di MANZO AI. Le situazioni dei laboratori sono esercitazioni inventate, non dati di ricerca."),links);
+    add(root,sources);
     root.focus({preventScroll:true});
   }
-  function init(course,bank,scenarios) {
+  function init(course,bank,scenarios,narrative) {
     if(!course||!bank||course.modules.length!==5||bank.modules.length!==5)throw Error("Contenuti formativi incompleti");
     const isEditorial=course.published===false&&course.status==="editorial_draft";
     const isPublic=course.published===true&&course.status==="public_beta"&&document.body.dataset.courseDataBase;
     if(!isEditorial&&!isPublic)throw Error("Stato di pubblicazione non riconosciuto");
     if(!scenarios||scenarios.modules.length!==5)throw Error("Simulazioni didattiche incomplete");
-    state.course=course;state.bank=bank;state.scenarios=scenarios;
+    if(!narrative||narrative.modules.length!==5)throw Error("Materiali narrativi mancanti");
+    state.course=course;state.bank=bank;state.scenarios=scenarios;state.narrative=narrative;
     const nav=$("module-nav");
     course.modules.forEach((m,i)=>{
       const b=el("button","nav-button");b.type="button";
@@ -390,8 +484,9 @@
   Promise.all([
     fetch(dataBase+"course.json").then(r=>{if(!r.ok)throw Error("corso HTTP "+r.status);return r.json()}),
     fetch(dataBase+"assessment-bank.json").then(r=>{if(!r.ok)throw Error("verifiche HTTP "+r.status);return r.json()}),
-    fetch(dataBase+"scenarios.json").then(r=>{if(!r.ok)throw Error("simulazioni HTTP "+r.status);return r.json()})
-  ]).then(d=>init(d[0],d[1],d[2])).catch(err=>{
+    fetch(dataBase+"scenarios.json").then(r=>{if(!r.ok)throw Error("simulazioni HTTP "+r.status);return r.json()}),
+    fetch(dataBase+"narrative.json").then(r=>{if(!r.ok)throw Error("narrazione HTTP "+r.status);return r.json()})
+  ]).then(d=>init(d[0],d[1],d[2],d[3])).catch(err=>{
     $("notice").textContent="Anteprima non disponibile: "+err.message+". Apri con un server HTTP locale dalla radice del repository; non usare file://.";
     $("notice").className="wrap notice";
   });
