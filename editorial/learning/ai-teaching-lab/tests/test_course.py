@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / "it"
 COURSE = json.loads((ROOT / "course.json").read_text(encoding="utf-8"))
 BANK = json.loads((ROOT / "assessment-bank.json").read_text(encoding="utf-8"))
+SCENES = json.loads((ROOT / "scenarios.json").read_text(encoding="utf-8"))
 
 
 class CourseQuality(unittest.TestCase):
@@ -151,6 +152,32 @@ class CourseQuality(unittest.TestCase):
                     self.assertTrue(1 <= entry["number"] <= 7)
                     self.assertTrue(entry["row"] >= 0 and entry["col"] >= 0)
                     self.assertTrue(entry["clue"])
+
+
+    def test_branching_simulations_and_transfer(self):
+        self.assertFalse(SCENES["published"])
+        self.assertEqual(len(SCENES["modules"]), 5)
+        for scene, course_module in zip(SCENES["modules"], COURSE["modules"]):
+            with self.subTest(module=scene["module_id"]):
+                self.assertEqual(scene["module_id"], course_module["id"])
+                self.assertEqual(scene["path_count"], 6)
+                self.assertEqual(len(scene["first"]), 3)
+                self.assertEqual(len({choice["label"] for choice in scene["first"]}), 3)
+                self.assertGreater(len(scene["setting"]), 100)
+                self.assertGreater(len(scene["reflection"]), 50)
+                theory = scene["mini_theory"]
+                self.assertEqual(len(theory["options"]), 3)
+                self.assertIn(theory["source"], [s["url"] for s in course_module["theory"]["sources"]]
+                              + [course_module["theory"]["pedagogical_reference"]["source"]])
+                self.assertIn(theory["correct"], [0,1,2])
+                for option in scene["first"]:
+                    self.assertEqual(len(option["routes"]), 2)
+                    self.assertTrue(any(route["good"] for route in option["routes"]))
+                    self.assertTrue(any(not route["good"] for route in option["routes"]))
+                    for route in option["routes"]:
+                        self.assertGreater(len(route["why"]), 35)
+                        self.assertGreater(len(route["transfer"]), 20)
+                        self.assertGreater(len(route["result"]), 40)
 
 if __name__ == "__main__":
     unittest.main()
