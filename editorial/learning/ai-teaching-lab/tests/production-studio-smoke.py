@@ -6,7 +6,7 @@ import base64
 import json
 import tempfile
 from pathlib import Path
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, expect
 
 BASE="http://127.0.0.1:8766/editorial/learning/ai-teaching-lab/preview/laboratorio-multimediale/"
 PNG=base64.b64decode("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9f8agPkAAAAASUVORK5CYII=")
@@ -93,7 +93,7 @@ with tempfile.TemporaryDirectory() as directory:
                 if page.locator("#studio-record-stop").is_enabled():
                     page.wait_for_timeout(900)
                     page.locator("#studio-record-stop").click()
-                    page.locator("#studio-record-download").wait_for(state="enabled",timeout=8000)
+                    expect(page.locator("#studio-record-download")).to_be_enabled(timeout=8000)
                     assert page.locator("#studio-record-preview").is_visible()
                     with page.expect_download() as audio_export:
                         page.locator("#studio-record-download").click()
@@ -105,7 +105,7 @@ with tempfile.TemporaryDirectory() as directory:
             if page.locator("#studio-video-create").is_enabled():
                 page.locator("#studio-video-seconds").select_option("2")
                 page.locator("#studio-video-create").click()
-                page.locator("#studio-video-download").wait_for(state="enabled",timeout=24000)
+                expect(page.locator("#studio-video-download")).to_be_enabled(timeout=24000)
                 assert page.locator("#studio-video-preview").is_visible()
                 with page.expect_download() as video_export:
                     page.locator("#studio-video-download").click()
