@@ -41,6 +41,12 @@ with sync_playwright() as playwright:
         assert page.locator("#atl-section-select").count()==1
         if width<=800: page.locator(".course-side-disclosure > summary").click()
         assert page.locator("#module-nav button").count() == 5
+        feedback_badge=page.locator("#atl-feedback-contact")
+        assert feedback_badge.is_visible()
+        assert feedback_badge.locator(".atl-feedback-label").inner_text()=="Feedback e suggerimenti"
+        assert feedback_badge.locator("strong").inner_text()=="marcelo2020.it@gmail.com"
+        assert feedback_badge.get_attribute("href").startswith("mailto:marcelo2020.it@gmail.com?subject=")
+        assert not page.evaluate("document.documentElement.scrollWidth > window.innerWidth + 2")
         assert page.locator(".atl-course-tabs a").count()==4
         assert page.locator("#competenze .atl-competencies-grid>div").count()==4
         assert page.locator(".module-outline").count()==5
