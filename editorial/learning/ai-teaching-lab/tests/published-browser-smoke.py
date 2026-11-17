@@ -18,6 +18,13 @@ with sync_playwright() as playwright:
         assert "Formazione docenti" in page.title()
         assert page.locator("header.module-hero").count()==1
         assert page.locator("#module-nav button").count()==5
+        assert page.locator(".atl-course-tabs a").count()==4
+        assert page.locator("#competenze .atl-competencies-grid>div").count()==4
+        assert page.locator(".module-outline").count()==5
+        assert page.locator(".course-session-step").count()==4
+        assert "CAPITOLO" not in page.locator("#atl-theory").inner_text()
+        assert page.locator(".narrative-bridge").count()>=4
+        assert page.locator(".course-next-section").count()==1
         assert page.locator("#presentazione-corso").is_visible()
         assert page.locator(".atl-intro-media-card").count()==2
         assert "20 h" in page.locator(".atl-intro-facts").inner_text()
