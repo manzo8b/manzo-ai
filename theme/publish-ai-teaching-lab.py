@@ -17,6 +17,7 @@ SRC=ROOT/"editorial"/"learning"/"ai-teaching-lab"
 DATA=SRC/"it"
 PREVIEW=SRC/"preview"
 MEDIA=SRC/"media"
+IMAGE_STUDIO=ROOT/"tools"/"ai-teaching-image-studio"/"index.html"
 ROUTE="it/formazione/ia-per-la-didattica"
 BASE="/manzo-ai/"
 MARKER='data-atl-feature="2026-11"'
@@ -237,6 +238,10 @@ def publish(site,verify=False):
                 '<a href="./media/'+n+'" download>'+label+' ↗</a>' for n,label in available_docs
             )+'</div>'
             home=re.sub(r'<div data-atl-deck-downloads>.*?</div>',links,home,count=1,flags=re.S)
+        entry='<a href="./studio-immagini/" data-atl-image-studio="v0.1" style="display:inline-flex;margin:12px 0 0;padding:12px 18px;border-radius:14px;background:#205beb;color:white;font-weight:750;text-decoration:none">Apri lo Studio immagini · progettazione e verifica ↗</a>'
+        anchor='<a class="studio-entry-action" href="./laboratorio-multimediale/">'
+        if home.count(anchor)!=1:raise RuntimeError("Image Studio landing anchor missing or repeated")
+        home=home.replace(anchor,entry+"\\n"+anchor,1)
         (target/"index.html").write_text(home,encoding="utf-8")
         presentation=(PREVIEW/"presentazione"/"index.html").read_text(encoding="utf-8")
         presentation=presentation.replace('<meta name="robots" content="noindex,nofollow">',"")
@@ -287,7 +292,17 @@ def publish(site,verify=False):
             raise RuntimeError("Production studio is missing a description")
         studio_path=target/"laboratorio-multimediale"/"index.html"
         studio_path.parent.mkdir(parents=True,exist_ok=True)
+        if studio_html.count("</body>")!=1:raise RuntimeError("Unexpected production studio body")
+        studio_html=studio_html.replace("</body>",'<div style="max-width:1100px;margin:1rem auto 2rem;padding:1.25rem;border:1px solid #cbd9f0;border-radius:20px;background:#f1f6ff;color:#193454"><strong>Studio immagini · nuovo laboratorio dedicato</strong><p>Progetta l’immagine, prepara il prompt, importa il risultato e verifica il materiale prima dell’approvazione docente. La generazione IA rimane esterna.</p><a href="../studio-immagini/" style="display:inline-block;padding:.8rem 1rem;border-radius:11px;background:#205beb;color:#fff;font-weight:700">Apri Studio immagini ↗</a></div></body>',1)
         studio_path.write_text(studio_html,encoding="utf-8")
+        if not IMAGE_STUDIO.is_file():raise RuntimeError("Missing standalone image studio source")
+        image_html=IMAGE_STUDIO.read_text(encoding="utf-8")
+        if image_html.count("</header>")!=1:raise RuntimeError("Unexpected image studio header")
+        image_html=image_html.replace("</header>",'<a href="../laboratorio-multimediale/" style="display:inline-block;margin-top:12px;font-weight:700">← Torna al laboratorio multimediale</a></header>',1)
+        image_html=image_html.replace('<meta name="theme-color" content="#ffffff">','<meta name="theme-color" content="#ffffff">'+seo("Studio immagini didattiche | AI Teaching Lab | MANZO AI","Progetta immagini formative, prepara prompt e verifica la qualità prima della decisione docente.","LearningResource",BASE+ROUTE+"/studio-immagini/"),1)
+        image_dest=target/"studio-immagini"/"index.html"
+        image_dest.parent.mkdir(parents=True,exist_ok=True)
+        image_dest.write_text(image_html,encoding="utf-8")
         for i,m in enumerate(course["modules"],1):
             text=(DATA/f"module-{i:02d}.md").read_text(encoding="utf-8")
             dest=target/f"modulo-{i:02d}"/"index.html"
@@ -309,6 +324,12 @@ def publish(site,verify=False):
     studio_html=studio.read_text(encoding="utf-8")
     if 'id="studio-form"' not in studio_html or 'id="studio-download-html"' not in studio_html:
         raise RuntimeError("Incomplete multimedia production studio")
+    image_studio=(target/"studio-immagini"/"index.html")
+    if not image_studio.is_file():raise RuntimeError("Missing published image studio")
+    image_content=image_studio.read_text(encoding="utf-8")
+    if 'id="approve"' not in image_content or 'id="upload"' not in image_content or "Non genera immagini con IA" not in image_content:
+        raise RuntimeError("Image Studio review/provenance flow incomplete")
+    if '../studio-immagini/' not in studio_html:raise RuntimeError("No link from production studio to image studio")
     slides=(target/"presentazione"/"index.html")
     if not slides.is_file() or "15 slide" not in slides.read_text(encoding="utf-8"):raise RuntimeError("Slide reader missing")
     if (MEDIA/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip").is_file():
@@ -319,6 +340,7 @@ def publish(site,verify=False):
         if not (target/asset).is_file():raise RuntimeError("Missing asset "+asset)
     home=(target/"index.html").read_text(encoding="utf-8")
     if 'data-course-data-base="./data/"' not in home or 'content="noindex' in home:raise RuntimeError("Home not public")
+    if 'data-atl-image-studio="v0.1"' not in home:raise RuntimeError("Home image studio link missing")
     if not (target/"data"/"narrative.json").is_file():raise RuntimeError("Missing full narrative")
     presentation=json.loads((target/"data"/"presentation.json").read_text(encoding="utf-8"))
     if len(presentation["slides"])!=15:raise RuntimeError("Expected 15 presentation slides")
