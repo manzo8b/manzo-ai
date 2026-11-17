@@ -239,5 +239,32 @@ class CourseQuality(unittest.TestCase):
         self.assertLess(sum(len(u.split()) for u in utterances), 1450)
         self.assertFalse(any("**TERZA VOCE:**" in x for x in utterances))
 
+
+    def test_course_presentation_and_uploaded_deck_source(self):
+        page=(ROOT.parent/"preview"/"index.html").read_text(encoding="utf-8")
+        self.assertIn('id="presentazione-corso"',page)
+        self.assertIn('data-atl-video-media',page)
+        self.assertIn('data-atl-deck-downloads',page)
+        self.assertIn('href="./presentazione/"',page)
+        self.assertLess(page.index('id="presentazione-corso"'),page.index('id="experience"'))
+        self.assertIn("20 h",page)
+        self.assertIn("Non occorre creare un account",page)
+        self.assertIn("non equivale a certificare",page)
+        self.assertEqual(page.count("Domande per discutere con i colleghi"),1)
+        data=json.loads((ROOT/"presentation.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(data["slides"]),15)
+        self.assertEqual(data["duration_podcast_seconds"]//60,7)
+        for slide in data["slides"]:
+            self.assertTrue(slide["title"])
+            self.assertTrue(slide["lead"])
+            self.assertTrue(slide["takeaway"])
+            self.assertGreaterEqual(len(slide["points"]),2)
+        self.assertIn("parafrasi",data["slides"][11]["points"][-1])
+        self.assertIn("GDPR",data["slides"][7]["takeaway"])
+        slide_page=(ROOT.parent/"preview"/"presentazione"/"index.html").read_text(encoding="utf-8")
+        self.assertIn('id="atl-present-slide"',slide_page)
+        self.assertIn('id="atl-present-next"',slide_page)
+        self.assertIn('data-slides-base="../../it/"',slide_page)
+
 if __name__ == "__main__":
     unittest.main()
