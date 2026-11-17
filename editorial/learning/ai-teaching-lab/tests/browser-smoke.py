@@ -39,7 +39,9 @@ with sync_playwright() as playwright:
             assert page.locator(".panel").count() >= 5
             assert page.locator(".method-step").count() == 7
             assert page.locator(".case-card").count() == 2
-            assert page.locator(".theory-accordion").count() == 3
+            assert page.locator(".lab-prompt-code").count() == 2
+            assert page.locator(".applied-step").count() == 5
+            assert page.locator(".narrative-chapter").count() >= 5
             assert page.locator(".branch-choices button").count() == 3
             page.locator(".branch-choices button").first.click()
             assert page.locator(".branch-choices button").count() == 2
@@ -50,7 +52,16 @@ with sync_playwright() as playwright:
             assert page.locator(".cross-cell input").count() > 0
             assert page.locator(".source-list a").count() >= 3
             assert page.locator("a.full-lesson-link").get_attribute("href") == "../it/module-%02d.md" % (i+1)
-            page.screenshot(path=str(evidence / ("module-%02d-%d.png" % (i+1, width))), full_page=True)
+            page.screenshot(path=str(evidence / ("module-%02d-%d.png" % (i+1, width))), full_page=False)
+        # Course-ending vocabulary is independently searchable and grouped.
+        assert page.locator("#atl-final-glossary").is_visible()
+        assert "47 voci" in page.locator("#atl-term-count").inner_text()
+        page.locator("#atl-term-search").fill("pedagogia")
+        assert page.locator(".term-card").count() >= 1
+        page.locator("#atl-term-search").fill("")
+        page.locator("#atl-term-group").select_option("Fondamenti educativi")
+        assert page.locator(".term-card").count() >= 7
+        page.locator("#atl-term-group").select_option("")
         page.locator("#module-nav button").first.click()
         first=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button", name="Verifica la risposta")).first
         q=course["modules"][0]["checkpoint"][0]
