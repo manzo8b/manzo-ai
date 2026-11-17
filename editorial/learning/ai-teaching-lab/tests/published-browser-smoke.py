@@ -130,6 +130,9 @@ with sync_playwright() as playwright:
         link=page.locator("a.full-lesson-link")
         reveal_fold(page, "a.full-lesson-link")
         assert link.get_attribute("href")=="./modulo-05/"
+        assert page.locator(".atl-final-disclosure").count()==1
+        assert not page.locator(".atl-final-disclosure").evaluate("(node)=>node.open")
+        page.locator(".atl-final-disclosure > summary").click()
         assert page.locator("#atl-final-glossary").is_visible()
         assert "79 voci" in page.locator("#atl-term-count").inner_text()
         assert page.locator('a[data-atl-glossary-page]').is_visible()
