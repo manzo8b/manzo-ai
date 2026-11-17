@@ -30,7 +30,7 @@ Quando una docente arriva a fine giornata con verifiche da preparare, materiale 
 - Comparare alternative IA e senza IA con una matrice replicabile
 - Motivare una decisione go/no-go
 
-## Per capire: un racconto e cinque idee fondamentali
+## Lettura di approfondimento · una storia che continua
 
 ### 1. La mattina in cui entra l’intelligenza artificiale
 
@@ -185,7 +185,7 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Rubrica** — Griglia con criteri e descrittori per giudicare un lavoro
 - **Dati sintetici** — Informazioni inventate per esercitarsi senza usare dati personali reali
 
-## Dalla lettura alla lezione successiva
+## Per continuare il percorso
 
 Una docente che sa progettare e controllare una bozza è pronta a fare il passo successivo: non solo chiedersi se un contenuto è utile, ma insegnare agli studenti a riconoscere quando è attendibile.
 
