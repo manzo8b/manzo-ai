@@ -497,3 +497,13 @@ body:not([data-module-base]) [data-atl-resource-glossary]{display:none!important
  .course-roadmap-disclosure{margin:12px 0}
 }
 @media(prefers-reduced-motion:reduce){.course-fold-arrow{transition:none}}
+
+/* The 79-term glossary remains discoverable but never adds 79 unsolicited cards. */
+.atl-final-disclosure{max-width:1210px;margin:28px auto;border:1px solid #b9d2ec;background:#f4f9ff;border-radius:19px;box-shadow:0 8px 26px #1749800a;overflow:hidden}
+.atl-final-disclosure>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;padding:19px clamp(17px,3vw,27px);color:#184a79;font-size:clamp(.95rem,1.4vw,1.16rem);font-weight:820;cursor:pointer}
+.atl-final-disclosure>summary::-webkit-details-marker{display:none}
+.atl-final-disclosure>summary::after{content:"⌄";font-size:1.2rem;color:#1b63c8}
+.atl-final-disclosure[open]>summary::after{content:"⌃"}
+.atl-final-disclosure[open]>summary{border-bottom:1px solid #c7dcf2}
+.atl-final-disclosure .final-glossary{padding:22px clamp(15px,3vw,29px)!important}
+@media(max-width:800px){.atl-final-disclosure{margin:20px 16px}.atl-final-disclosure>summary{padding:15px 17px}}
