@@ -59,7 +59,7 @@ with tempfile.TemporaryDirectory() as directory:
             assert page.locator(".studio-scene-editor").count()==3
             page.locator('[data-scene="0"] [data-field="title"]').fill("Da una domanda a un metodo")
             page.locator('[data-scene="0"] input[type="file"]').set_input_files(str(image))
-            assert "Immagine pronta" in page.locator('[data-scene="0"] .studio-file-state').inner_text()
+            page.locator('[data-scene="0"] .studio-file-state').get_by_text("Immagine pronta",exact=False).wait_for(timeout=10000)
             page.locator("#studio-next").click()
 
             # Script, quiz, all six formats are recognized and separate.
