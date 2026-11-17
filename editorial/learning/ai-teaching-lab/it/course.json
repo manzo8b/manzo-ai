@@ -450,6 +450,50 @@
           {
             "title": "Commissione europea · Qualità dei contenuti digitali",
             "url": "https://education.ec.europa.eu/document/making-informed-choices-on-digital-education-content-eu-guidelines-for-teachers-and-educators"
+          },
+          {
+            "title": "Documentazione ufficiale · Fotografie e immagini realistiche",
+            "url": "https://openai.com/it-IT/index/introducing-chatgpt-images-2-5/"
+          },
+          {
+            "title": "Approfondimento · Fotografie e immagini realistiche",
+            "url": "https://gemini.google/overview/image-generation/"
+          },
+          {
+            "title": "Documentazione ufficiale · Grafici, infografiche e schemi",
+            "url": "https://developers.openai.com/api/docs/guides/image-prompting"
+          },
+          {
+            "title": "Approfondimento · Grafici, infografiche e schemi",
+            "url": "https://deepmind.google/models/gemini-image/"
+          },
+          {
+            "title": "Documentazione ufficiale · Presentazioni e storyboard",
+            "url": "https://www.canva.com/help/generate-with-dreamlab/"
+          },
+          {
+            "title": "Approfondimento · Presentazioni e storyboard",
+            "url": "https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/"
+          },
+          {
+            "title": "Documentazione ufficiale · Dialoghi e podcast didattici",
+            "url": "https://blog.google/innovation-and-ai/products/notebooklm-audio-overviews/"
+          },
+          {
+            "title": "Documentazione ufficiale · Video o animazioni generative",
+            "url": "https://deepmind.google/models/veo/"
+          },
+          {
+            "title": "Approfondimento · Video o animazioni generative",
+            "url": "https://deepmind.google/models/veo/prompt-guide/"
+          },
+          {
+            "title": "Documentazione ufficiale · Percorsi interattivi con feedback",
+            "url": "https://h5p.org/branching-scenario"
+          },
+          {
+            "title": "Approfondimento · Percorsi interattivi con feedback",
+            "url": "https://h5p.org/interactive-video"
           }
         ],
         "pedagogical_reference": {
@@ -559,7 +603,89 @@
           "example": "«Una giornata fredda prova una tendenza?» · feedback motivato e secondo tentativo",
           "accessibility": "Pulsanti raggiungibili da tastiera e alternativa in testo"
         }
-      ]
+      ],
+      "generative_model_selection": {
+        "title": "Scegliere il modello generativo in base al contenuto",
+        "as_of": "2026-11-17",
+        "principle": "La valutazione parte dall'obiettivo didattico; nessun modello generativo è migliore per tutte le attività",
+        "examples": [
+          {
+            "medium": "Fotografie e immagini realistiche",
+            "model_families": [
+              "ChatGPT Images (famiglia GPT Image)",
+              "Gemini Nano Banana (modelli Gemini Image)"
+            ],
+            "platforms": [
+              "ChatGPT",
+              "Gemini"
+            ],
+            "check": "Evitare di presentare immagini sintetiche come fotografie documentali; verificare errori storici, scientifici e dettagli che potrebbero creare stereotipi."
+          },
+          {
+            "medium": "Grafici, infografiche e schemi",
+            "model_families": [
+              "ChatGPT Images",
+              "Gemini Nano Banana"
+            ],
+            "platforms": [
+              "Editor visuale e Canva per la revisione umana"
+            ],
+            "check": "Ricostruire manualmente dati, etichette, unità, proporzioni e fonti: una grafica generata può inventare cifre, oggetti o relazioni."
+          },
+          {
+            "medium": "Presentazioni e storyboard",
+            "model_families": [
+              "LLM per testo e struttura; modelli di immagini per illustrazioni"
+            ],
+            "platforms": [
+              "Canva / Dream Lab",
+              "NotebookLM / Gemini Notebook per lavoro sulle fonti"
+            ],
+            "check": "Controllare fonte di ogni affermazione, leggibilità, compatibilità mobile, testi originali e contrasti."
+          },
+          {
+            "medium": "Dialoghi e podcast didattici",
+            "model_families": [
+              "Servizi con generazione audio e dialoghi, non necessariamente modelli selezionabili dall'utente"
+            ],
+            "platforms": [
+              "NotebookLM / Gemini Notebook, Audio Overview"
+            ],
+            "check": "Riascoltare l'intero audio, correggere eventuali citazioni inesatte e fornire una trascrizione accessibile."
+          },
+          {
+            "medium": "Video o animazioni generative",
+            "model_families": [
+              "Google Veo (famiglia di modelli video)"
+            ],
+            "platforms": [
+              "Google Flow / Gemini secondo disponibilità",
+              "Editor video per il montaggio"
+            ],
+            "check": "Verificare coerenza delle scene, anomalie di movimento, accuratezza, diritti, eventuali didascalie e sottotitoli."
+          },
+          {
+            "medium": "Percorsi interattivi con feedback",
+            "model_families": [
+              "LLM facoltativo per redigere domande, alternative e spiegazioni"
+            ],
+            "platforms": [
+              "H5P Branching Scenario",
+              "Attività locali MANZO AI"
+            ],
+            "check": "Dichiarare quando il percorso usa regole predefinite: H5P non diventa un tutor IA solo perché contiene un quiz."
+          }
+        ],
+        "selection_criteria": [
+          "Obiettivo didattico e tipo di output: foto, infografica, video, podcast, slide o attività",
+          "Fedeltà ai dati e alle fonti fornite; rischio di inesattezze o rappresentazioni fittizie",
+          "Possibilità di correggere dettagli, mantenere coerenza e riutilizzare l'output",
+          "Contrasto, testo alternativo, trascrizione, sottotitoli e leggibilità dei materiali",
+          "Licenze, proprietà delle fonti, termini di utilizzo, costo effettivo, modalità di accesso e sicurezza",
+          "Rispetto delle policy scolastiche e protezione dei dati: nessun caricamento di fotografie, volti o informazioni identificabili di alunni su sistemi non autorizzati"
+        ],
+        "warning": "Il catalogo distingue famiglie di modelli, app e editor. Disponibilità e costi sono soggetti a modifica. Non caricare dati o immagini di studenti reali in strumenti non autorizzati."
+      }
     },
     {
       "id": "atl-04",
