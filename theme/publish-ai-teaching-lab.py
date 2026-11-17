@@ -9,6 +9,7 @@ from html import escape
 import json
 import re
 import shutil
+from zipfile import ZipFile
 from markdown import markdown
 
 ROOT=Path(__file__).resolve().parent.parent
@@ -206,6 +207,20 @@ def publish(site,verify=False):
                 (target/"media").mkdir(parents=True,exist_ok=True)
                 shutil.copyfile(src,target/"media"/name)
                 media_available[name]=True
+        # A single small ZIP stores unaltered slide artwork and the original podcast video.
+        bundle=MEDIA/"AI_Teaching_Lab_Originali_1_UPLOAD.zip"
+        expected_slides=[f"slide-{i:02d}.webp" for i in range(1,16)]
+        authentic_slides=False
+        if bundle.is_file():
+            with ZipFile(bundle) as z:
+                if not set(expected_slides+["AI_per_Docenti.web.mp4"]).issubset(z.namelist()):
+                    raise RuntimeError("Incomplete original slide/video bundle")
+                (target/"media"/"slides").mkdir(parents=True,exist_ok=True)
+                for filename in expected_slides:
+                    (target/"media"/"slides"/filename).write_bytes(z.read(filename))
+                (target/"media"/"AI_per_Docenti.web.mp4").write_bytes(z.read("AI_per_Docenti.web.mp4"))
+                authentic_slides=True
+                media_available["AI_per_Docenti.web.mp4"]=True
         if media_available.get("AI_per_Docenti.web.mp4"):
             home=re.sub(r'<div data-atl-video-media>.*?</div>',
                 '<div data-atl-video-media><video class="atl-intro-video-player" controls preload="metadata" playsinline aria-label="Video podcast AI per Docenti, durata 7 minuti e 4 secondi">'
@@ -231,6 +246,18 @@ def publish(site,verify=False):
                 "Quindici slide didattiche sulla progettazione con l'intelligenza artificiale, in una versione web accessibile.",
                 "LearningResource",BASE+ROUTE+"/presentazione/"))
         presentation=presentation.replace('data-slides-base="../../it/"','data-slides-base="../data/"')
+        if authentic_slides:
+            presentation=presentation.replace('data-slides-base="../data/"',
+                'data-slides-base="../data/" data-original-slide-base="../media/slides/"')
+            presentation=presentation.replace(
+               "15 slide · versione web testuale e accessibile dei materiali originali, con possibilità di consultare ogni passaggio.",
+               "15 slide originali realizzate con NotebookLM, preservate come immagini e accompagnate da un approfondimento testuale accessibile.")
+            presentation=presentation.replace(
+                "Le grafiche originali sono state realizzate in una presentazione illustrata. Qui il loro significato è proposto in formato testuale per una lettura più accessibile.",
+                "Queste sono le immagini originali delle slide di NotebookLM. L'approfondimento testuale è una risorsa distinta.")
+            home=home.replace("I file originali PDF e PowerPoint saranno scaricabili qui appena ospitati sul sito.",
+               "Le 15 slide originali sono nel lettore. Le versioni PDF e PowerPoint potranno essere aggiunte separatamente.")
+            (target/"index.html").write_text(home,encoding="utf-8")
         if available_docs:
             links='<div class="atl-present-files" data-atl-slide-files><strong>Materiali originali</strong>'+''.join(
                '<a href="../media/'+n+'" download>'+label+' ↗</a>' for n,label in available_docs
@@ -258,6 +285,10 @@ def publish(site,verify=False):
     if not vocab.is_file() or "Pedagogia" not in vocab.read_text(encoding="utf-8"):raise RuntimeError("Public glossary missing")
     slides=(target/"presentazione"/"index.html")
     if not slides.is_file() or "15 slide" not in slides.read_text(encoding="utf-8"):raise RuntimeError("Slide reader missing")
+    if (MEDIA/"AI_Teaching_Lab_Originali_1_UPLOAD.zip").is_file():
+        slide_files=list((target/"media"/"slides").glob("slide-*.webp"))
+        if len(slide_files)!=15:raise RuntimeError("Missing all original NotebookLM slide images")
+        if not (target/"media"/"AI_per_Docenti.web.mp4").is_file():raise RuntimeError("Original video missing")
     for asset in ["index.html","app.js","assets.css","lesson.css","feature.css","presentation.css","presentation.js"]:
         if not (target/asset).is_file():raise RuntimeError("Missing asset "+asset)
     home=(target/"index.html").read_text(encoding="utf-8")
