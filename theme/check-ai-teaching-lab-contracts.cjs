@@ -58,6 +58,8 @@ for(const id of ["kitfile","restorestatus","sample-brief","wk-all","wk1","wk5","
 }
 assert.ok(workspace.includes("validateStudyFile(raw)"),"Missing import validation");
 assert.ok(workspace.includes("imageName:get(s.imageName)"),"Video per-scene provenance dropped");
+assert.ok(workspace.includes("Provenienza e file — "),"HTML delivery must include declared asset provenance");
+assert.ok(workspace.includes("className=\"provenance-details\""),"Workspace UI must expose provenance");
 assert.ok(workspace.includes("approvazione finale verrà azzerata"),"Missing restoration disclaimer");
 assert.ok(workspace.includes("approved=false;approvedAt=null;changed=true"),"Restored kit needs a fresh review");
 assert.ok(workspace.includes(".layout>main{order:0!important"),"Mobile must show task before status");
@@ -103,6 +105,8 @@ const corruptVideo={...sampleVideo,scenes:[]};
 assert.throws(()=>validators.validateStudyFile(corruptVideo),/scene/,"Approved video without scenes must fail");
 const falseApproval={...sampleVideo,review:{c1:true,c2:true,c3:false,c4:true}};
 assert.throws(()=>validators.validateStudyFile(falseApproval),/controlli/,"Incomplete reviews must not pass");
+const nonBooleanApproval={...sampleVideo,review:{c1:"yes",c2:"yes",c3:"yes",c4:"yes"}};
+assert.throws(()=>validators.validateStudyFile(nonBooleanApproval),/controlli/,"Non-boolean checks must fail");
 assert.throws(()=>validators.validateStudyFile({schema:"invalid"}),/Formato/,"Unknown import schema must fail");
 
 const siteArg=process.argv.indexOf("--site");
