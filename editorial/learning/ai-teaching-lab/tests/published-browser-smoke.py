@@ -30,6 +30,9 @@ with sync_playwright() as playwright:
         assert "20 h" in page.locator(".atl-intro-facts").inner_text()
         assert page.locator("a.atl-intro-primary-action").count()==1
         assert page.locator("[data-atl-video-media] video").count() in (0,1)
+        bundle=Path(__file__).resolve().parents[1]/"media"/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip"
+        if bundle.exists():
+            assert page.locator("[data-atl-video-media] video").count()==1
         # No broken media links are generated before files are staged.
         if not page.locator("[data-atl-video-media] video").count():
             assert page.locator("[data-atl-video-media] .atl-intro-missing").is_visible()
@@ -39,7 +42,14 @@ with sync_playwright() as playwright:
         page.locator("#atl-present-next").click()
         assert page.locator("#atl-present-counter").inner_text()=="02 / 15"
         page.locator("#atl-present-select").select_option("11")
-        assert "La prospettiva pedagogica" in page.locator(".atl-slide-page h2").inner_text()
+        if page.locator(".atl-original-slide").count():
+            image=page.locator(".atl-original-slide")
+            assert "slide-12.webp" in image.get_attribute("src")
+            assert image.evaluate("(img)=>img.complete && img.naturalWidth > 0")
+            page.locator(".atl-slide-transcription summary").click()
+            assert "La prospettiva pedagogica" in page.locator(".atl-slide-reading h2").inner_text()
+        else:
+            assert "La prospettiva pedagogica" in page.locator(".atl-slide-page h2").inner_text()
         assert "parafrasi" in page.locator(".atl-present-side-note").inner_text()
         assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth+2")
         page.goto(COURSE,wait_until="networkidle")
