@@ -154,7 +154,16 @@
   }
   function renderScenes(data){
     const target=$("studio-scenes");target.replaceChildren();
-    data.forEach((s,i)=>target.append(sceneEditor(i,s)));
+    data.forEach((s,i)=>{
+      const disclosure=document.createElement("details");
+      disclosure.className="studio-scene-disclosure";
+      disclosure.name="studio-storyboard-scenes";
+      const summary=document.createElement("summary");
+      summary.textContent="Scena "+(i+1)+" · "+(["Il problema","La spiegazione","La verifica"][i]);
+      disclosure.append(summary,sceneEditor(i,s));
+      if(i===0)disclosure.open=true;
+      target.append(disclosure);
+    });
   }
   renderScenes(defaultScenes);
   function asDataURL(file){
