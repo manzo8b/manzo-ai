@@ -215,10 +215,11 @@ def publish(site,verify=False):
             with ZipFile(bundle) as z:
                 if not set(expected_slides+["AI_per_Docenti.web.mp4"]).issubset(z.namelist()):
                     raise RuntimeError("Incomplete original slide/video bundle")
-                (target/"media"/"slides").mkdir(parents=True,exist_ok=True)
-                for filename in expected_slides:
-                    (target/"media"/"slides"/filename).write_bytes(z.read(filename))
-                (target/"media"/"AI_per_Docenti.web.mp4").write_bytes(z.read("AI_per_Docenti.web.mp4"))
+                if not verify:
+                    (target/"media"/"slides").mkdir(parents=True,exist_ok=True)
+                    for filename in expected_slides:
+                        (target/"media"/"slides"/filename).write_bytes(z.read(filename))
+                    (target/"media"/"AI_per_Docenti.web.mp4").write_bytes(z.read("AI_per_Docenti.web.mp4"))
                 authentic_slides=True
                 media_available["AI_per_Docenti.web.mp4"]=True
         if media_available.get("AI_per_Docenti.web.mp4"):
