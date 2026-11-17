@@ -7,7 +7,7 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const accent = {cobalt:"#1159ea",violet:"#7547cb",coral:"#d84d30",emerald:"#077c61",teal:"#007a8b"};
-  const state = {course:null,bank:null,index:0};
+  const state = {course:null,bank:null,scenarios:null,index:0};
   function el(tag, cls, text) {
     const x=document.createElement(tag);
     if (cls) x.className=cls;
@@ -178,8 +178,73 @@
     }));
     return block;
   }
+  function conceptProbe(module) {
+    const block=section("PRIMA DI LEGGERE","Che cosa decideresti oggi?");
+    const q=module.mini_theory;
+    add(block,paragraph(q.probe));
+    const field=el("fieldset","assessment-block");
+    add(field,el("legend","","Seleziona un'ipotesi prima di aprire la teoria"));
+    q.options.forEach((opt,i)=>{
+      const label=el("label","choice"),inp=el("input");
+      inp.type="radio";inp.name="theory-probe";inp.value=String(i);
+      add(label,inp,el("span","",opt));add(field,label);
+    });
+    add(field,control("Confronta la mia ipotesi",()=>{
+      const selected=field.querySelector("input:checked");
+      if(!selected){feedback(field,"Scegli un'ipotesi per confrontarla con la teoria.");return}
+      const good=Number(selected.value)===q.correct;
+      feedback(field,(good?"Hai individuato il principio. ":"Quale premessa manca? ")+q.feedback,good);
+    }));
+    add(block,field,paragraph("Questa previsione è solo un esercizio formativo. Nessuna risposta viene registrata.","subtle"));
+    return block;
+  }
+  function branchingSimulation(s) {
+    const block=section("DECISION LAB / SIMULAZIONE","Una scelta cambia il problema");
+    add(block,paragraph("Due decisioni consecutive, tre strategie iniziali e sei esiti possibili. Nessun punteggio: valuta il ragionamento e la responsabilità." ,"subtle"));
+    const view=el("div","branch-stage"),head=el("h4"),lead=el("p"),choices=el("div","branch-choices"),after=el("div","branch-feedback"),actions=el("div","branch-actions");
+    add(view,head,lead,choices,after,actions);add(block,view);
+    function chooseFirst(selected) {
+      const p=s.first[selected];choices.replaceChildren();after.replaceChildren();actions.replaceChildren();
+      head.textContent="Conseguenza della prima scelta";
+      lead.textContent=p.challenge;
+      const note=el("div","branch-note",p.note);
+      add(after,note);
+      p.routes.forEach((route,i)=>{
+        add(choices,control(String.fromCharCode(65+i)+" · "+route.label,()=>finish(p,route),"secondary"));
+      });
+      const back=control("Cambia la prima scelta",start,"secondary");add(actions,back);
+      choices.querySelector("button")?.focus();
+    }
+    function finish(p,route){
+      choices.replaceChildren();after.replaceChildren();actions.replaceChildren();
+      head.textContent=route.good?"Decisione responsabile — e ora?":"Scelta problematica — come correggerla?";
+      lead.textContent=route.why;
+      const consequence=el("div","branch-outcome");
+      add(consequence,el("strong","",route.good?"Passaggio utilizzabile":"Intervento correttivo"),paragraph(route.result));
+      const reflection=el("div","branch-reflection");
+      add(reflection,heading("h4","Trasferisci nella tua classe"),paragraph(route.transfer),
+        paragraph(s.reflection,"subtle"));
+      const label=el("label","", "La mia revisione motivata (solo su questa pagina)");
+      label.htmlFor="branch-reason";
+      const text=el("textarea","text-reason");text.id="branch-reason";text.rows=4;
+      const confirm=control("Ho definito una revisione",()=>{
+        if(text.value.trim().length<30){feedback(after,"Formula una revisione concreta di almeno 30 caratteri.");return}
+        feedback(after,"Revisione formulata. Trasferiscila nel tuo portfolio personale: questo prototipo non la salva.",true);
+      });
+      add(after,consequence,reflection,label,text,confirm);
+      add(actions,control("Esplora una scelta diversa",start,"secondary"));
+    }
+    function start(){
+      head.textContent=s.title;
+      lead.textContent=s.setting+" "+s.key_question;
+      choices.replaceChildren();after.replaceChildren();actions.replaceChildren();
+      s.first.forEach((p,i)=>add(choices,control(String.fromCharCode(65+i)+" · "+p.label,()=>chooseFirst(i),"secondary")));
+    }
+    start();
+    return block;
+  }
   function render() {
-    const m=state.course.modules[state.index],a=state.bank.modules.find(q=>q.module_id===m.id);
+    const m=state.course.modules[state.index],a=state.bank.modules.find(q=>q.module_id===m.id),scenario=state.scenarios.modules.find(q=>q.module_id===m.id);
     document.documentElement.style.setProperty("--accent",accent[m.accent]||"#1159ea");
     Array.from($("module-nav").children).forEach((b,i)=>b.setAttribute("aria-current",String(i===state.index)));
     const root=$("module-content");root.replaceChildren();
@@ -188,10 +253,14 @@
       heading("h2",m.title),paragraph(m.question),add(el("div","module-meta"),el("span","","4 ore previste"),el("span","","2 laboratori"),el("span","","Verifica interattiva")));
     add(root,hero);
     const outcomes=section("LEARNING OUTCOMES","Quello che saprai fare");
-    add(outcomes,list(m.outcomes));add(root,outcomes);
+    add(outcomes,list(m.outcomes));add(root,outcomes,conceptProbe(scenario));
     const theory=section("TEORIA DOCUMENTATA","Capire prima di applicare");
     add(theory,paragraph(m.urgent_teacher_challenge,"subtle"));
-    m.theory.paragraphs.forEach((p,i)=>add(theory,heading("h4","Fondamento "+(i+1)),paragraph(p)));
+    m.theory.paragraphs.forEach((p,i)=>{
+      const details=el("details","theory-accordion");
+      const summary=el("summary","",["Il concetto chiave","Quale rischio affrontiamo","Che cosa cambia nella lezione"][i]||"Approfondimento");
+      add(details,summary,paragraph(p));add(theory,details);
+    });
     const quote=el("div","quote");
     add(quote,el("b","",m.theory.pedagogical_reference.name+" — insegnamento applicato"),paragraph(m.theory.pedagogical_reference.insight),paragraph("Parafrasi contestualizzata MANZO AI, non citazione letterale.","subtle"),external(m.theory.pedagogical_reference.source,"Apri la fonte del riferimento pedagogico"));
     add(theory,quote);add(root,theory);
@@ -210,9 +279,10 @@
     });
     add(labs,cards);
     const link=el("a","full-lesson-link","Leggi il modulo completo con esercizi e soluzioni");
-    link.href="../it/module-"+String(state.index+1).padStart(2,"0")+".md";
+    const moduleNumber=String(state.index+1).padStart(2,"0");
+    link.href=document.body.dataset.moduleBase ? document.body.dataset.moduleBase+moduleNumber+"/" : "../it/module-"+moduleNumber+".md";
     link.target="_blank";link.rel="noopener noreferrer";
-    add(labs,paragraph("Il documento contiene consegne passo passo, esempi guidati, prompt e una guida di correzione.", "subtle"),link);add(root,labs);
+    add(labs,paragraph("Il documento contiene consegne passo passo, esempi guidati, prompt e una guida di correzione.", "subtle"),link);add(root,labs,branchingSimulation(scenario));
     const assess=section("VERIFICA FORMATIVA","Metti alla prova il tuo giudizio");
     add(assess,paragraph("Le risposte rimangono solo in questa pagina durante la visita. Non c'è voto, salvataggio o attestato.","subtle"));
     m.checkpoint.forEach((q,i)=>add(assess,singleChoice(q,i+1)));
@@ -228,9 +298,10 @@
     add(sources,links,paragraph("Riferimenti datati e soggetti a verifica editoriale prima di ogni erogazione.","subtle"));add(root,sources);
     root.focus({preventScroll:true});
   }
-  function init(course,bank) {
+  function init(course,bank,scenarios) {
     if(!course||!bank||course.modules.length!==5||bank.modules.length!==5||course.published!==false)throw Error("Contratto editoriale non valido");
-    state.course=course;state.bank=bank;
+    if(!scenarios||scenarios.modules.length!==5)throw Error("Simulazioni didattiche incomplete");
+    state.course=course;state.bank=bank;state.scenarios=scenarios;
     const nav=$("module-nav");
     course.modules.forEach((m,i)=>{
       const b=el("button","nav-button");b.type="button";
@@ -240,10 +311,12 @@
     });
     $("experience").hidden=false;$("notice").hidden=true;render();
   }
+  const dataBase=document.body.dataset.courseDataBase||"../it/";
   Promise.all([
-    fetch("../it/course.json").then(r=>{if(!r.ok)throw Error("corso HTTP "+r.status);return r.json()}),
-    fetch("../it/assessment-bank.json").then(r=>{if(!r.ok)throw Error("verifiche HTTP "+r.status);return r.json()})
-  ]).then(d=>init(d[0],d[1])).catch(err=>{
+    fetch(dataBase+"course.json").then(r=>{if(!r.ok)throw Error("corso HTTP "+r.status);return r.json()}),
+    fetch(dataBase+"assessment-bank.json").then(r=>{if(!r.ok)throw Error("verifiche HTTP "+r.status);return r.json()}),
+    fetch(dataBase+"scenarios.json").then(r=>{if(!r.ok)throw Error("simulazioni HTTP "+r.status);return r.json()})
+  ]).then(d=>init(d[0],d[1],d[2])).catch(err=>{
     $("notice").textContent="Anteprima non disponibile: "+err.message+". Apri con un server HTTP locale dalla radice del repository; non usare file://.";
     $("notice").className="wrap notice";
   });
