@@ -7,6 +7,16 @@
   const form=$("studio-form");
   const phases=[...document.querySelectorAll(".studio-phase")];
   const buttons=[...document.querySelectorAll("#studio-steps button")];
+  const phaseSwitcher=document.querySelector(".studio-phase-switcher");
+  const processNote=document.querySelector(".studio-side-note");
+  const compact=window.matchMedia("(max-width:760px)");
+  function syncCompactNavigation(){
+    if(phaseSwitcher)phaseSwitcher.open=!compact.matches;
+    if(processNote)processNote.open=!compact.matches;
+  }
+  syncCompactNavigation();
+  if(compact.addEventListener)compact.addEventListener("change",syncCompactNavigation);
+  else if(compact.addListener)compact.addListener(syncCompactNavigation);
   const maxImage=2.5*1024*1024,maxAudio=8*1024*1024;
   const files={images:[null,null,null],audio:null};
   const defaultScenes=[
@@ -31,7 +41,7 @@
       ["Kit HTML locale di MANZO AI","Tre slide, script e verifica a regole esportabili anche senza un account.","https://manzo8b.github.io/manzo-ai/it/formazione/ia-per-la-didattica/"]]
   };
   function msg(message,ok){const area=$("studio-status");area.textContent=message;area.style.color=ok?"#087b5e":"#a14b25"}
-  function switchPhase(index){
+  function switchPhase(index,scrollToPanel=false){
     if(index<0||index>=phases.length)return;
     phase=index;
     phases.forEach((node,i)=>{node.hidden=i!==phase});
@@ -41,16 +51,22 @@
     $("studio-prev").disabled=phase===0;
     $("studio-next").textContent=phase===4?"Controlla la consegna":"Continua →";
     if(phase===4)renderPreview();
+    const label=$("studio-phase-switch-label");
+    if(label)label.textContent="Fase "+(phase+1)+" di 5 · "+(buttons[phase]?.querySelector("strong")?.textContent||"");
+    if(scrollToPanel){
+      if(compact.matches&&phaseSwitcher)phaseSwitcher.open=false;
+      document.querySelector(".studio-panel")?.scrollIntoView({block:"start",behavior:"auto"});
+    }
     msg("",true);
   }
-  buttons.forEach(b=>b.addEventListener("click",()=>switchPhase(Number(b.dataset.go))));
-  $("studio-prev").addEventListener("click",()=>switchPhase(phase-1));
+  buttons.forEach(b=>b.addEventListener("click",()=>switchPhase(Number(b.dataset.go),true)));
+  $("studio-prev").addEventListener("click",()=>switchPhase(phase-1,true));
   $("studio-next").addEventListener("click",()=>{
     if(phase===0&&!validateBasics())return;
     if(phase===2&&!validateScenes())return;
     if(phase===3&&!validateProduction())return;
     if(phase===4){checkDelivery();return}
-    switchPhase(phase+1);
+    switchPhase(phase+1,true);
   });
   function value(name){return String(form.elements[name]?.value||"").trim()}
   function sceneValue(i,name){return String(document.querySelector('[data-scene="'+i+'"] [data-field="'+name+'"]')?.value||"").trim()}
