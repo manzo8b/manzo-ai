@@ -26,6 +26,14 @@ with tempfile.TemporaryDirectory() as directory:
             assert page.locator(".studio-phase").count()==5
             assert page.locator("#studio-progress-text").inner_text()=="Fase 1 di 5"
             assert page.locator("#studio-form").count()==1
+            assert page.locator(".studio-phase-switcher").count()==1
+            if width<=760:
+                assert not page.locator(".studio-phase-switcher").evaluate("(node)=>node.open")
+                page.locator(".studio-phase-switcher > summary").click()
+                assert page.locator("#studio-steps button").first.is_visible()
+                page.locator(".studio-phase-switcher > summary").click()
+            else:
+                assert page.locator(".studio-phase-switcher").evaluate("(node)=>node.open")
             assert page.locator('input[name="title"]').input_value()=="Una giornata fredda cambia il clima?"
             assert not page.evaluate("document.documentElement.scrollWidth > window.innerWidth + 2"), page.evaluate("""() => ({
                 inner:innerWidth,
@@ -116,6 +124,7 @@ with tempfile.TemporaryDirectory() as directory:
             page.goto(BASE,wait_until="networkidle")
             page.locator("#studio-import").set_input_files(str(project_path))
             assert "Progetto importato" in page.locator("#studio-status").inner_text()
+            if width<=760: page.locator(".studio-phase-switcher > summary").click()
             page.locator('#studio-steps button[data-go="2"]').click()
             assert page.locator('[data-scene="0"] [data-field="title"]').input_value()=="Da una domanda a un metodo"
             assert "Immagine caricata" in page.locator('[data-scene="0"] .studio-file-state').inner_text()
