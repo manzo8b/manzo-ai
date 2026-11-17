@@ -179,6 +179,10 @@ Il corso attuale stima **5 × 4 ore = 20 ore**, senza validazione in una prova r
 
 Questo audit non è un rilascio delle attività proposte. Per il momento non modifica nessuna pagina pubblica, le cinque lezioni, i voti, le identità, i dati, il backend Supabase o la formazione a pagamento. Il lavoro di sviluppo dovrà seguire il ramo di progetto e superare i test già usati per la versione pubblica.
 
+### Osservazione di coerenza editoriale
+
+Nel `course.json` il corso risulta ancora contrassegnato con `status: editorial_draft` e `published: false`, mentre il publisher GitHub Pages lo distribuisce pubblicamente. **Non correggere automaticamente tali campi**: potrebbero indicare lo stato della validazione pedagogica e sono richiamati nei test. Occorre separare e documentare chiaramente *disponibilità pubblica della beta*, *maturità editoriale* e *validazione con docenti* prima di modificare lo schema.
+
 ## 9 · Riferimenti esterni suggeriti per l'espansione
 
 1. UNESCO (2024), *AI competency framework for teachers*: https://www.unesco.org/en/articles/ai-competency-framework-teachers
