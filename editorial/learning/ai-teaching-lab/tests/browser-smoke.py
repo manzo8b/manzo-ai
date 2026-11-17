@@ -29,6 +29,19 @@ with sync_playwright() as playwright:
         page.goto(BASE, wait_until="networkidle", timeout=30000)
         page.locator("#experience").wait_for(state="visible", timeout=10000)
         assert page.locator("#module-nav button").count() == 5
+        assert page.locator("#presentazione-corso").is_visible()
+        assert page.locator(".atl-intro-media-card").count() == 2
+        assert page.locator(".atl-intro-privacy").is_visible()
+        page.locator('a[href="./presentazione/"]').click()
+        page.wait_for_url(BASE+"presentazione/")
+        page.locator(".atl-slide-page h2").wait_for(timeout=10000)
+        assert page.locator("#atl-present-counter").inner_text()=="01 / 15"
+        page.locator("#atl-present-next").click()
+        assert page.locator("#atl-present-counter").inner_text()=="02 / 15"
+        page.locator("#atl-present-select").select_option("14")
+        assert "Una domanda per continuare" in page.locator(".atl-slide-page h2").inner_text()
+        page.goto(BASE,wait_until="networkidle")
+        page.locator("#experience").wait_for(state="visible",timeout=10000)
         assert page.locator(".atl-resource-link").count() == 11
         assert page.locator(".atl-resource-link:visible").count() == 4
         assert page.locator(".atl-resource-hub").is_visible()
