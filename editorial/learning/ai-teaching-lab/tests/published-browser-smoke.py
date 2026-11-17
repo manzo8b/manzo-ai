@@ -93,7 +93,7 @@ with sync_playwright() as playwright:
         assert page.locator(".branch-choices button").count()==3
         assert page.locator(".lab-prompt-code").count()==3
         reveal_fold(page, 'fieldset.assessment-block')
-        probe=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button",name="Confronta la mia ipotesi"))
+        probe=page.locator("fieldset.assessment-block").filter(has=page.locator('button:has-text("Confronta la mia ipotesi")'))
         assert probe.count()==1
         probe.locator("input").nth(1).check()
         probe.get_by_role("button",name="Confronta la mia ipotesi").click()
