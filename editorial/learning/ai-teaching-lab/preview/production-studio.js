@@ -150,6 +150,49 @@
       catch(_){msg("L'immagine non può essere letta.");image.value=""}
     });
     label.append(image);box.append(label,status);
+    const tools=document.createElement("div");tools.className="studio-scene-tools";
+    const build=document.createElement("button");build.type="button";build.className="studio-action studio-action-primary";build.textContent="Crea scheda PNG";
+    const prompt=document.createElement("button");prompt.type="button";prompt.className="studio-action studio-action-neutral";prompt.textContent="Prepara prompt per IA";
+    const download=document.createElement("button");download.type="button";download.className="studio-action studio-action-neutral";download.textContent="Scarica PNG";download.disabled=!files.images[i];
+    const preview=document.createElement("img");preview.className="studio-generated-image";preview.hidden=!files.images[i];
+    preview.alt="Anteprima della grafica per la scena "+(i+1);
+    if(files.images[i])preview.src=files.images[i];
+    const promptOutput=document.createElement("textarea");promptOutput.className="studio-prompt-output";
+    promptOutput.readOnly=true;promptOutput.rows=6;promptOutput.hidden=true;promptOutput.setAttribute("aria-label","Prompt per un modello IA esterno");
+    const copy=document.createElement("button");copy.type="button";copy.className="studio-action studio-action-neutral";
+    copy.textContent="Copia il prompt";copy.hidden=true;
+    const state=document.createElement("p");state.className="studio-file-state";state.setAttribute("role","status");
+    build.addEventListener("click",()=>{
+      try{
+        const png=makeSceneGraphic(i);
+        if(png.length>maxImage*1.4)throw Error("Grafica troppo grande");
+        files.images[i]=png;
+        const field=box.querySelector('[data-field="alt"]');
+        if(field&&!field.value.trim())field.value="Scheda visiva con il titolo e il contenuto della scena "+(i+1);
+        preview.src=png;preview.alt=field?.value||preview.alt;preview.hidden=false;download.disabled=false;
+        status.textContent="Grafica PNG pronta per la scena "+(i+1);
+        state.textContent="Scheda creata localmente e inserita nella microlezione. Puoi rigenerarla modificando i testi.";
+        msg("Scheda PNG generata e allegata al progetto.",true);
+      }catch(_){state.textContent="Impossibile creare la grafica in questo browser."}
+    });
+    prompt.addEventListener("click",()=>{
+      promptOutput.value=buildScenePrompt(i);promptOutput.hidden=false;copy.hidden=false;
+      state.textContent="Prompt modificabile tramite copia, da usare soltanto su un servizio IA autorizzato.";
+    });
+    copy.addEventListener("click",async()=>{
+      try{
+        await navigator.clipboard.writeText(promptOutput.value);
+        state.textContent="Prompt copiato: puoi adattarlo prima di usarlo.";
+      }catch(_){
+        promptOutput.focus();promptOutput.select();
+        state.textContent="Seleziona il testo e copialo manualmente.";
+      }
+    });
+    download.addEventListener("click",()=>{
+      if(files.images[i])fileDownload("MANZO-AI-scena-"+(i+1)+".png",dataUrlBlob(files.images[i]),"image/png");
+    });
+    tools.append(build,prompt,download);
+    box.append(tools,preview,promptOutput,copy,state);
     return box;
   }
   function renderScenes(data){
@@ -166,6 +209,93 @@
     });
   }
   renderScenes(defaultScenes);
+
+  /* Browser-produced educational graphics, never claimed to be model-generated. */
+  function linesForCanvas(ctx,value,maxWidth,maxLines){
+    const words=String(value||"").replace(/\s+/g," ").trim().split(" ");
+    const lines=[];let line="";
+    for(const word of words){
+      const next=line?line+" "+word:word;
+      if(ctx.measureText(next).width>maxWidth&&line){lines.push(line);line=word}
+      else line=next;
+      if(lines.length>=maxLines)break;
+    }
+    if(line&&lines.length<maxLines)lines.push(line);
+    if(lines.length===maxLines&&words.length>3){
+      let last=lines[maxLines-1];
+      while(last.length>4&&ctx.measureText(last+"…").width>maxWidth)last=last.slice(0,-1);
+      lines[maxLines-1]=last+"…";
+    }
+    return lines;
+  }
+  function paintScene(ctx,scene,index,image){
+    const w=1280,h=720;
+    const colors=[["#113b79","#1563dc","#8ee3e2"],["#143d68","#218a96","#c7eff1"],["#233879","#7053c5","#ffcc8a"]];
+    const [deep,bright,light]=colors[index%colors.length];
+    const bg=ctx.createLinearGradient(0,0,w,h);bg.addColorStop(0,deep);bg.addColorStop(1,bright);
+    ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+    ctx.globalAlpha=.12;ctx.fillStyle="#fff";
+    ctx.beginPath();ctx.arc(1110,140,240,0,2*Math.PI);ctx.fill();
+    ctx.beginPath();ctx.arc(1140,590,340,0,2*Math.PI);ctx.fill();ctx.globalAlpha=1;
+    ctx.fillStyle=light;ctx.fillRect(72,73,58,7);
+    ctx.font="700 22px system-ui, sans-serif";ctx.fillStyle="#d6e6ff";
+    ctx.fillText("MANZO AI  /  TEACHING LAB",72,119);
+    ctx.font="800 23px system-ui, sans-serif";ctx.fillStyle=light;
+    ctx.fillText("SCENA "+String(index+1).padStart(2,"0")+"  /  03",72,165);
+    const hasImage=Boolean(image);
+    const textWidth=hasImage?650:1090;
+    let titleSize=hasImage?58:68;
+    ctx.font="800 "+titleSize+"px system-ui, sans-serif";
+    while(titleSize>40&&linesForCanvas(ctx,scene.title,textWidth,3).length>=3){
+      titleSize-=3;ctx.font="800 "+titleSize+"px system-ui, sans-serif";
+      break;
+    }
+    const titleLines=linesForCanvas(ctx,scene.title,textWidth,3);
+    ctx.fillStyle="#fff";
+    titleLines.forEach((line,i)=>ctx.fillText(line,72,240+i*(titleSize+14)));
+    const bodyTop=Math.min(560,270+titleLines.length*(titleSize+14));
+    ctx.font=(hasImage?"27":"30")+"px system-ui, sans-serif";
+    ctx.fillStyle="#e2efff";
+    linesForCanvas(ctx,scene.body,textWidth,hasImage?6:5).forEach((line,i)=>ctx.fillText(line,72,bodyTop+i*42));
+    if(hasImage){
+      const x=820,y=218,bw=392,bh=350;
+      ctx.fillStyle="#ffffff";ctx.globalAlpha=.16;ctx.fillRect(x-12,y-12,bw+24,bh+24);ctx.globalAlpha=1;
+      const scale=Math.min(bw/image.width,bh/image.height),dw=image.width*scale,dh=image.height*scale;
+      ctx.drawImage(image,x+(bw-dw)/2,y+(bh-dh)/2,dw,dh);
+    }
+    ctx.fillStyle="rgba(255,255,255,.75)";ctx.font="500 18px system-ui, sans-serif";
+    ctx.fillText("Risorsa didattica progettata dal docente · verificare sempre le fonti",72,674);
+  }
+  function makeSceneGraphic(i){
+    const canvas=document.createElement("canvas");canvas.width=1280;canvas.height=720;
+    const ctx=canvas.getContext("2d");if(!ctx)throw Error("Canvas unavailable");
+    paintScene(ctx,{title:sceneValue(i,"title"),body:sceneValue(i,"body")},i,null);
+    return canvas.toDataURL("image/png");
+  }
+  function buildScenePrompt(i){
+    return [
+      "Realizza un'illustrazione educativa originale, destinata a una microlezione.",
+      "Formato: orizzontale 16:9, leggibile anche su smartphone.",
+      "Destinatari: "+value("audience")+".",
+      "Obiettivo osservabile: "+value("goal")+".",
+      "Scena "+(i+1)+" di 3: "+sceneValue(i,"title")+".",
+      "Spiegazione verificata dal docente: "+sceneValue(i,"body")+".",
+      "Descrizione visiva richiesta: "+sceneValue(i,"visual")+".",
+      "Vincoli: niente nomi o volti di studenti, niente dati o grafici inventati,",
+      "nessuna scritta che simuli una fonte, nessuna immagine documentale fittizia.",
+      "Crea una composizione chiara, essenziale e accessibile, con contrasto elevato.",
+      "Controllo umano: verifica ogni elemento prima dell'utilizzo in classe."
+    ].join("\n");
+  }
+  function dataUrlBlob(data){
+    const split=String(data).split(",");
+    const mime=(split[0].match(/^data:([^;]+);base64$/)||[])[1]||"application/octet-stream";
+    const binary=atob(split[1]||"");
+    const bytes=new Uint8Array(binary.length);
+    for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+    return new Blob([bytes],{type:mime});
+  }
+
   function asDataURL(file){
     return new Promise((resolve,reject)=>{
       const fr=new FileReader();
@@ -176,8 +306,8 @@
   }
   $("studio-audio").addEventListener("change",async e=>{
     const file=e.target.files?.[0];if(!file)return;
-    const types=["audio/mpeg","audio/mp4","audio/ogg","audio/wav","audio/x-wav"];
-    if(!types.includes(file.type)||file.size>maxAudio){msg("Audio non valido: usa MP3, M4A, OGG o WAV sotto 8 MB.");e.target.value="";return}
+    const types=["audio/mpeg","audio/mp4","audio/ogg","audio/wav","audio/x-wav","audio/webm"];
+    if(!types.includes(file.type)||file.size>maxAudio){msg("Audio non valido: usa MP3, M4A, OGG, WAV o WebM sotto 8 MB.");e.target.value="";return}
     try{files.audio=await asDataURL(file);$("studio-audio-state").textContent="Traccia audio pronta: "+file.name;msg("Audio acquisito in memoria nel tuo browser.",true)}
     catch(_){msg("Impossibile leggere la traccia audio.")}
   });
@@ -217,7 +347,7 @@
   function escapeHtml(s){return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}
   function validData(mimeValue,kind){
     if(typeof mimeValue!=="string")return null;
-    const regex=kind==="audio"?/^data:audio\/(?:mpeg|mp4|ogg|wav|x-wav);base64,[a-z0-9+/=]+$/i:
+    const regex=kind==="audio"?/^data:audio\/(?:mpeg|mp4|ogg|wav|x-wav|webm);base64,[a-z0-9+/=]+$/i:
       /^data:image\/(?:jpeg|png|webp);base64,[a-z0-9+/=]+$/i;
     return mimeValue.length<=16*1024*1024&&regex.test(mimeValue)?mimeValue:null;
   }
@@ -247,7 +377,7 @@ document.getElementById("prev").addEventListener("click",()=>{current=Math.max(0
 document.getElementById("next").addEventListener("click",()=>{current=Math.min(slides.length-1,current+1);update()});
 update();
 document.getElementById("transcript").textContent=data.script;
-if(data.audio&&/^data:audio\/(?:mpeg|mp4|ogg|wav|x-wav);base64,/i.test(data.audio)){const audio=el("audio");audio.controls=true;audio.preload="none";audio.src=data.audio;document.getElementById("recording").append(audio)}
+if(data.audio&&/^data:audio\/(?:mpeg|mp4|ogg|wav|x-wav|webm);base64,/i.test(data.audio)){const audio=el("audio");audio.controls=true;audio.preload="none";audio.src=data.audio;document.getElementById("recording").append(audio)}
 document.getElementById("quiz-title").textContent=data.quiz.question;
 const answers=document.getElementById("quiz-answers");
 data.quiz.options.forEach((option,i)=>{const label=el("label");const input=el("input");input.type="radio";input.name="answer";input.value=String(i);label.append(input,el("span",option));answers.append(label)});
