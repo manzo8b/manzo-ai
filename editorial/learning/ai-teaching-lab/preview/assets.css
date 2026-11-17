@@ -459,6 +459,7 @@ body:not([data-module-base]) [data-atl-resource-glossary]{display:none!important
 .atl-journey-intro p{color:#466482;font-size:.89rem;line-height:1.57;margin:0}
 .atl-module-switcher{display:flex;flex-direction:column;gap:6px;flex:0 1 290px;min-width:0}
 .atl-module-switcher label{font-size:.74rem;color:#345879;font-weight:750}
+@media(min-width:801px){.atl-module-switcher{display:none}}
 .atl-module-select{width:100%;min-height:46px;font-size:.88rem;padding:10px 12px;border:1px solid #b0cbe8;border-radius:11px;color:#183e68;background:#fff;font-weight:720}
 .atl-journey-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-inline:1px solid #cfdfef;border-bottom:1px solid #cfdfef;background:#fff}
 .atl-stage-tab{min-width:0;display:flex;align-items:center;justify-content:center;gap:9px;border:0;border-right:1px solid #dde9f5;border-bottom:3px solid transparent;background:#fff;color:#4b6886;padding:14px 10px;font-size:.88rem;font-weight:780;transition:background .18s,border-color .18s}
