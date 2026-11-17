@@ -17,6 +17,8 @@ on:
       - editorial/research/acr/**
       - editorial/learning/hallucinations/**
       - editorial/learning/ai-teaching-lab/**
+      - tools/ai-teaching-image-studio/**
+      - tools/ai-teaching-voice-studio/**
       - product/learning-experience/**
       - theme/publish-learning-experience.py
       - theme/publish-ai-teaching-lab.py
@@ -316,6 +318,9 @@ jobs:
           done
           test -s _site/it/formazione/ia-per-la-didattica/data/scenarios.json
           test -s _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
+          test -s _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
+          grep -q 'data-atl-voice-studio="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
+          grep -q 'id="transcript"' _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
           grep -q 'data-atl-image-studio="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
           grep -q 'id="approve"' _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
           # Product preview is deliberately nontransactional and noindex.
