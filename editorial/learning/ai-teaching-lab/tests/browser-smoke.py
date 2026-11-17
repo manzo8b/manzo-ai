@@ -59,6 +59,9 @@ with sync_playwright() as playwright:
         assert page.locator(".atl-resource-link:visible").count() == 11
         page.locator(".atl-resource-more:not(.atl-resource-specialized) summary").click()
         assert page.locator(".atl-resource-link:visible").count() == 4
+        page.locator(".atl-resource-specialized summary").click()
+        assert page.locator(".atl-resource-link:visible").count() == 12
+        page.locator(".atl-resource-specialized summary").click()
         assert page.locator("#module-content").is_visible()
         assert page.locator(".preview-tag").is_visible()
         assert page.get_by_text("Non pubblicata", exact=False).count() >= 1
@@ -70,6 +73,37 @@ with sync_playwright() as playwright:
             assert page.locator(".method-step").count() == 7
             assert page.locator(".case-card").count() == 2
             assert page.locator(".lab-prompt-code").count() == 3
+            assert page.locator(".competency-studio").count() == 1
+            assert page.locator(".studio-check").count() >= 4
+            if i == 0:
+                page.locator(".competency-reason").fill("Scelgo la scheda senza IA perché rende osservabile l'argomentazione, mantiene i testi sintetici e posso controllare la fonte.")
+                page.get_by_role("button", name="Verifica i miei criteri").click()
+                assert "obiettivo" in page.locator(".option-board .result").inner_text().lower()
+            if i == 1:
+                page.get_by_role("button", name="Prova le quattro schede nuove").click()
+                assert "2/4" in page.locator(".demo-model .result").inner_text()
+                page.locator('input[name="demo-feature"][value="shape"]').check()
+                page.get_by_role("button", name="Prova le quattro schede nuove").click()
+                assert "4/4" in page.locator(".demo-model .result").inner_text()
+            if i == 2:
+                assert page.locator("#atl-model-media option").count() == 6
+                assert "ChatGPT Images" in page.locator(".model-choice-detail").inner_text()
+                assert "Nano Banana" in page.locator(".model-choice-detail").inner_text()
+                page.locator("#atl-model-media").select_option("3")
+                assert "Notebook" in page.locator(".model-choice-detail").inner_text()
+                page.locator("#atl-model-media").select_option("0")
+                page.locator("#atl-model-rationale").fill("Confronto due modelli di immagini sullo stesso brief, verificando accuratezza e accessibilità prima della scelta.")
+                page.get_by_role("button", name="Confronta la mia scelta").click()
+                assert page.locator(".model-choice-controls .result").is_visible()
+                page.get_by_role("button", name="Costruisci la scaletta didattica").click()
+                assert "STORYBOARD" in page.locator(".media-generated").inner_text()
+                assert page.locator(".media-principle-card").count() == 6
+            if i == 3:
+                page.locator(".option-board .button").first.click()
+                assert page.locator(".option-board .result").is_visible()
+            if i == 4:
+                page.locator(".practice-branch .button").first.click()
+                assert "Conseguenza" in page.locator(".branch-feedback").inner_text()
             assert page.locator(".applied-step").count() == 5
             assert page.locator(".narrative-chapter").count() >= 5
             assert page.locator(".branch-choices button").count() == 3
