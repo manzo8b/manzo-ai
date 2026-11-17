@@ -1,5 +1,5 @@
 {
-  "schema_version": "draft-0.1",
+  "schema_version": "draft-0.2",
   "course_key": "ai-teaching-lab",
   "locale": "it",
   "status": "editorial_draft",
@@ -107,7 +107,74 @@
           "correct_index": 1,
           "feedback": "Il criterio parte da ciò che gli studenti dovranno saper dimostrare."
         }
-      ]
+      ],
+      "section_requirements": [
+        "sfida-docente",
+        "teoria-con-fonti",
+        "insegnamento-pedagogico",
+        "metodo-manzo-ai",
+        "laboratorio-autentico",
+        "verifica-multipla-e-cruciverba",
+        "evidenza-feedback"
+      ],
+      "theory": {
+        "title": "Dalla fretta al progetto didattico",
+        "paragraphs": [
+          "Un obiettivo didattico descrive una prestazione osservabile: spiegare, confrontare, argomentare, correggere. La scelta delle attività segue la definizione delle evidenze di apprendimento; un sistema IA non è un obiettivo in sé. Una presentazione attraente non dimostra che gli alunni abbiano compreso.",
+          "Le categorie della tassonomia di Bloom riveduta aiutano a scegliere verbi e prove coerenti con il compito; non obbligano ogni lezione a raggiungere il livello 'creare'. La comparazione con una soluzione senza IA è necessaria per distinguere vantaggio reale, costo, rischio e novelty effect.",
+          "TALIS 2024 descrive carichi amministrativi e gestione del comportamento come pressioni rilevanti. La tecnologia può facilitare la progettazione, ma non sostituisce routine, relazione educativa e interventi professionali. Ogni efficienza dichiarata richiede una prova misurabile, non numeri promozionali."
+        ],
+        "source_reviewed_at": "2026-11-17",
+        "sources": [
+          {
+            "title": "OECD TALIS 2024 — demands of teaching",
+            "url": "https://www.oecd.org/en/publications/2025/10/results-from-talis-2024_28fbde1d/full-report/the-demands-of-teaching_0e941e2f.html"
+          },
+          {
+            "title": "CMU — Learning Principles",
+            "url": "https://www.cmu.edu/teaching/principles/learning.html"
+          },
+          {
+            "title": "Vanderbilt — Bloom revised taxonomy",
+            "url": "https://cft.vanderbilt.edu/wp-content/uploads/sites/59/Blooms-Taxonomy.pdf"
+          }
+        ],
+        "pedagogical_reference": {
+          "name": "John Dewey",
+          "type": "parafrasi applicativa",
+          "insight": "La riflessione prende forma nell'indagine su un problema vissuto, attraverso ipotesi, prova e revisione; il docente deve motivare una scelta, non ricevere una soluzione già pronta.",
+          "source": "https://plato.stanford.edu/entries/dewey/"
+        }
+      },
+      "urgent_teacher_challenge": "Ridurre tempi di preparazione senza usare l'IA come scorciatoia e senza perdere la gestione della classe",
+      "professional_cases": [
+        {
+          "title": "Una settimana impossibile",
+          "school": "secondaria",
+          "situation": "Tre classi, due verifiche da preparare, riunioni e materiali da correggere",
+          "task": "Confronta pianificazione assistita da IA e riuso di materiale senza IA su casi sintetici; misura tempi e accuratezza",
+          "artifact": "Piano settimanale confrontato con cronometro e matrice di rischio",
+          "redline": "Non inserire nomi, voti o situazioni familiari reali"
+        },
+        {
+          "title": "Quindici minuti per riaccendere l'attenzione",
+          "school": "secondaria",
+          "situation": "Lezione sulla storia delle migrazioni, discussione superficiale e distrazione",
+          "task": "Progetta una micro-indagine con due fonti, confronto di interpretazioni e verifica dell'apprendimento",
+          "artifact": "Sequenza di domande ed exit ticket",
+          "redline": "Non usare stime automatiche dello stato emotivo dei ragazzi"
+        }
+      ],
+      "methodology_steps": [
+        "ascolto",
+        "classificazione",
+        "rischio",
+        "chiarimenti",
+        "progettazione",
+        "verifica",
+        "consegna"
+      ],
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
     },
     {
       "id": "atl-02",
@@ -169,7 +236,74 @@
           "correct_index": 1,
           "feedback": "Assenza di prova non equivale automaticamente a prova di falsità."
         }
-      ]
+      ],
+      "section_requirements": [
+        "sfida-docente",
+        "teoria-con-fonti",
+        "insegnamento-pedagogico",
+        "metodo-manzo-ai",
+        "laboratorio-autentico",
+        "verifica-multipla-e-cruciverba",
+        "evidenza-feedback"
+      ],
+      "theory": {
+        "title": "Verità, verifica e alfabetizzazione informativa",
+        "paragraphs": [
+          "Un modello linguistico genera sequenze plausibili a partire da contesto e modelli appresi. Non verifica automaticamente ciascun claim contro un documento autorevole. Allucinazione, errore di calcolo, bias, fonte non verificata e disposizione obsoleta richiedono diagnosi differenti.",
+          "Per verificare una tesi bisogna identificare il claim, recuperare la fonte, leggere il passaggio pertinente, valutarne data e contesto, e registrare l'esito come verificato, non verificato o smentito. Citazioni formattate, RAG e prompt accurati non garantiscono la verità.",
+          "L'integrità scolastica va progettata con processi osservabili: bozze, fonti, revisioni, confronto in classe e difesa orale. Il rilevamento automatico di testo IA, da solo, non è prova conclusiva di frode né base sufficiente per sanzioni."
+        ],
+        "source_reviewed_at": "2026-11-17",
+        "sources": [
+          {
+            "title": "UNESCO AI Competency Framework for Teachers 2024",
+            "url": "https://www.unesco.org/en/articles/ai-competency-framework-teachers"
+          },
+          {
+            "title": "Commissione europea — Ethical AI Guidelines 2026",
+            "url": "https://education.ec.europa.eu/focus-topics/digital-education/actions/plan/ethical-guidelines-for-educators-on-using-artificial-intelligence"
+          },
+          {
+            "title": "Stanford Encyclopedia — Critical thinking",
+            "url": "https://plato.stanford.edu/entries/critical-thinking/history.html"
+          }
+        ],
+        "pedagogical_reference": {
+          "name": "Paulo Freire",
+          "type": "parafrasi applicativa",
+          "insight": "Un'educazione dialogica problematizza la realtà vissuta anziché limitarsi al trasferimento passivo di risposte: il testo IA diventa materiale da interrogare e discutere.",
+          "source": "https://unesdoc.unesco.org/in/rest/annotationSVC/DownloadWatermarkedAttachment/attach_import_fc6d477a-47cd-4363-8429-5a6e3b260c1b?_=380981eng.pdf"
+        }
+      },
+      "urgent_teacher_challenge": "Gestire compiti scritti con IA, citazioni inventate e disinformazione senza ricorrere a sorveglianza o accuse automatiche",
+      "professional_cases": [
+        {
+          "title": "Il tema impeccabile che lo studente non sa spiegare",
+          "school": "secondaria",
+          "situation": "Elaborato fittizio sulla rivoluzione industriale con bibliografia plausibile ma due citazioni inventate",
+          "task": "Progetta rubriche, diario delle revisioni e discussione delle prove senza attribuire automaticamente l'autore al chatbot",
+          "artifact": "Registro claim/fonte e verifica resiliente all'IA",
+          "redline": "Nessuna accusa basata solo su un AI detector"
+        },
+        {
+          "title": "La bufala virale nella chat",
+          "school": "secondaria",
+          "situation": "Screenshot fittizio su un presunto studio medico diffuso nella comunità scolastica",
+          "task": "Traccia affermazione, DOI, fonte primaria e data; costruisci 15 minuti di fact checking in classe",
+          "artifact": "Matrice verificato/non verificato/smentito con fonti",
+          "redline": "Non creare consulenza clinica o diffondere chat personali"
+        }
+      ],
+      "methodology_steps": [
+        "ascolto",
+        "classificazione",
+        "rischio",
+        "chiarimenti",
+        "progettazione",
+        "verifica",
+        "consegna"
+      ],
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
     },
     {
       "id": "atl-03",
@@ -230,7 +364,74 @@
           "correct_index": 1,
           "feedback": "La plausibilità grafica non garantisce correttezza disciplinare."
         }
-      ]
+      ],
+      "section_requirements": [
+        "sfida-docente",
+        "teoria-con-fonti",
+        "insegnamento-pedagogico",
+        "metodo-manzo-ai",
+        "laboratorio-autentico",
+        "verifica-multipla-e-cruciverba",
+        "evidenza-feedback"
+      ],
+      "theory": {
+        "title": "Materiali per capire, non per impressionare",
+        "paragraphs": [
+          "La qualità di un materiale dipende da obiettivo, conoscenze pregresse, chiarezza e possibilità di verificare la comprensione. Una grafica appariscente può aumentare il carico cognitivo o consolidare un'immagine scientifica sbagliata.",
+          "La produzione assistita da IA richiede controllo disciplinare dei fatti, coerenza dei segnali visivi, alt text, trascrizioni e licenze. Un quiz è formativo soltanto se permette di capire perché un'opzione è falsa e quale passo fare dopo.",
+          "Costruire un prodotto significativo offre occasioni di elaborare, rappresentare e correggere le idee. La tecnologia va giudicata in base al lavoro cognitivo che rende possibile agli studenti, non alla rapidità con cui il docente genera file."
+        ],
+        "source_reviewed_at": "2026-11-17",
+        "sources": [
+          {
+            "title": "MIT Press — Designing Constructionist Futures",
+            "url": "https://mitpress.mit.edu/9780262539845/designing-constructionist-futures/"
+          },
+          {
+            "title": "CAST UDL Guidelines 3.0",
+            "url": "https://udlguidelines.cast.org/"
+          },
+          {
+            "title": "CMU Learning Principles",
+            "url": "https://www.cmu.edu/teaching/principles/learning.html"
+          }
+        ],
+        "pedagogical_reference": {
+          "name": "Seymour Papert",
+          "type": "parafrasi applicativa",
+          "insight": "Nel constructionism la comprensione si sviluppa anche creando e condividendo artefatti: un diagramma corretto insieme alla classe vale più di molte schermate da consumare passivamente.",
+          "source": "https://mitpress.mit.edu/9780262539845/designing-constructionist-futures/"
+        }
+      },
+      "urgent_teacher_challenge": "Produrre contenuti inclusivi rapidamente senza moltiplicare slide, errori visivi, video inutili e sovraccarico cognitivo",
+      "professional_cases": [
+        {
+          "title": "Dalle 40 slide a tre attività sul clima",
+          "school": "secondaria primo grado",
+          "situation": "Presentazione sul cambiamento climatico con troppe informazioni e grafici senza fonti",
+          "task": "Riduci a domanda guida, visualizzazione verificata, confronto sui dati e quiz con distrattori significativi",
+          "artifact": "Micro-kit accessibile con controllo fonti e testo alternativo",
+          "redline": "Non assumere corrette immagini o numeri solo perché plausibili"
+        },
+        {
+          "title": "Un podcast accessibile sulla Costituzione",
+          "school": "secondaria",
+          "situation": "Classe con livelli differenti di italiano e competenze di ascolto",
+          "task": "Prepara script audio, trascrizione, glossario e alternative testuali; revisiona eventuali traduzioni",
+          "artifact": "Audio-script e trascrizione accessibile",
+          "redline": "Non imitare voci di persone reali senza autorizzazione"
+        }
+      ],
+      "methodology_steps": [
+        "ascolto",
+        "classificazione",
+        "rischio",
+        "chiarimenti",
+        "progettazione",
+        "verifica",
+        "consegna"
+      ],
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
     },
     {
       "id": "atl-04",
@@ -291,7 +492,74 @@
           "correct_index": 1,
           "feedback": "Un indicatore probabilistico non è prova conclusiva né giustifica decisioni automatiche."
         }
-      ]
+      ],
+      "section_requirements": [
+        "sfida-docente",
+        "teoria-con-fonti",
+        "insegnamento-pedagogico",
+        "metodo-manzo-ai",
+        "laboratorio-autentico",
+        "verifica-multipla-e-cruciverba",
+        "evidenza-feedback"
+      ],
+      "theory": {
+        "title": "Stessi obiettivi, diverse opportunità di riuscita",
+        "paragraphs": [
+          "Le UDL Guidelines 3.0 propongono scelte diverse per coinvolgimento, rappresentazione, azione ed espressione. Offrire più strade di accesso non significa automaticamente abbassare gli obiettivi; i criteri di successo restano trasparenti e pertinenti.",
+          "La valutazione formativa usa evidenze per correggere il percorso di insegnamento e apprendimento. Il feedback deve essere specifico, legato a un obiettivo e seguito da opportunità di applicazione. Il testo generato può fungere da bozza su casi fittizi, non giudizio definitivo su studenti.",
+          "La metacognizione si insegna in discipline concrete: pianificare, monitorare e verificare il proprio ragionamento. L'IA non deve dedurre diagnosi, profili cognitivi o attitudini individuali da lavori reali."
+        ],
+        "source_reviewed_at": "2026-11-17",
+        "sources": [
+          {
+            "title": "CAST UDL Guidelines 3.0",
+            "url": "https://udlguidelines.cast.org/"
+          },
+          {
+            "title": "EEF Teacher Feedback 2021",
+            "url": "https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/feedback"
+          },
+          {
+            "title": "EEF Metacognition and Self-Regulated Learning 2025",
+            "url": "https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/metacognition"
+          }
+        ],
+        "pedagogical_reference": {
+          "name": "Dylan Wiliam",
+          "type": "principio documentato, parafrasi",
+          "insight": "La valutazione formativa raccoglie segnali di comprensione e modifica le azioni successive del docente e dello studente; un buon feedback deve far progredire.",
+          "source": "https://educationendowmentfoundation.org.uk/projects-and-evaluation/promising-programmes/embedding-formative-assessment"
+        }
+      },
+      "urgent_teacher_challenge": "Valutare con equità classi eterogenee, creare feedback davvero utili, rispettare BES/DSA e l'integrità dei compiti",
+      "professional_cases": [
+        {
+          "title": "Una verifica comune con tre strade di accesso",
+          "school": "secondaria primo grado",
+          "situation": "Classe fittizia plurilingue, abilità di lettura eterogenee, obiettivo argomentare cause di inquinamento",
+          "task": "Predisponi prova scritta, mappa con esposizione orale e alternativa IA dichiarata, tutte con rubrica comune",
+          "artifact": "Tre prove comparabili con criteri e feedback",
+          "redline": "Non usare diagnosi o profili di alunni per scegliere automaticamente i percorsi"
+        },
+        {
+          "title": "Trenta feedback, non trenta voti automatici",
+          "school": "secondaria",
+          "situation": "Errori matematici fittizi su proporzioni e problemi di misura",
+          "task": "Raggruppa errori tipici, scrivi feedback orientati alla correzione e mini-verifica successiva",
+          "artifact": "Repertorio di feedback e micro-attività di recupero",
+          "redline": "Non delegare valutazioni individuali a IA non autorizzate"
+        }
+      ],
+      "methodology_steps": [
+        "ascolto",
+        "classificazione",
+        "rischio",
+        "chiarimenti",
+        "progettazione",
+        "verifica",
+        "consegna"
+      ],
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
     },
     {
       "id": "atl-05",
@@ -359,7 +627,78 @@
           "correct_index": 1,
           "feedback": "Il collaudo formativo non equivale ad autorizzazione scolastica né garantisce sicurezza."
         }
-      ]
+      ],
+      "section_requirements": [
+        "sfida-docente",
+        "teoria-con-fonti",
+        "insegnamento-pedagogico",
+        "metodo-manzo-ai",
+        "laboratorio-autentico",
+        "verifica-multipla-e-cruciverba",
+        "evidenza-feedback"
+      ],
+      "theory": {
+        "title": "Tutoring intelligente, confini espliciti, responsabilità umana",
+        "paragraphs": [
+          "Un tutor formativo deve avere ambito, destinatari, conoscenze ammesse, progressione degli indizi, modalità di ammissione dell'incertezza, limiti di risposta ed escalation umana. Dire al modello di 'non sbagliare' non è un controllo sufficiente.",
+          "Il collaudo impiega casi normali e avversi, specifica risposte attese e osservate, testa richieste di soluzioni, errori fattuali, esfiltrazione di dati, giudizi su persone reali e contenuti dannosi. Sei test di laboratorio non certificano sicurezza generale.",
+          "AI Act e GDPR richiedono analisi differenziata per finalità e tipo di sistema; non ogni chatbot per docenti è un sistema ad alto rischio. Vanno verificate policy dell'istituto, base e ruoli nel trattamento, eventuali tutele dei minori e possibilità di una scelta senza IA."
+        ],
+        "source_reviewed_at": "2026-11-17",
+        "sources": [
+          {
+            "title": "UNESCO AI Competency Framework for Teachers 2024",
+            "url": "https://www.unesco.org/en/articles/ai-competency-framework-teachers"
+          },
+          {
+            "title": "European Commission Ethical Guidelines 2026",
+            "url": "https://education.ec.europa.eu/focus-topics/digital-education/actions/plan/ethical-guidelines-for-educators-on-using-artificial-intelligence"
+          },
+          {
+            "title": "Garante Privacy parere del 20 ottobre 2026 su schema MIM",
+            "url": "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/10315228"
+          },
+          {
+            "title": "AI Act Article 4",
+            "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4"
+          }
+        ],
+        "pedagogical_reference": {
+          "name": "Seymour Papert",
+          "type": "parafrasi applicativa",
+          "insight": "Gli strumenti digitali dovrebbero sostenere l'esplorazione e la costruzione personale della conoscenza, non sostituirsi al pensiero dello studente.",
+          "source": "https://www.media.mit.edu/publications/constructionism-ethics-and-creativity/"
+        }
+      },
+      "urgent_teacher_challenge": "Gestire richiesta di tutor IA per minori e casi di cyberbullismo senza automatizzare giudizi, perdere la relazione o compromettere privacy",
+      "professional_cases": [
+        {
+          "title": "Il tutor di matematica che fa domande anziché risolvere",
+          "school": "secondaria primo grado",
+          "situation": "Prototipo fittizio per le equazioni, richieste di soluzioni immediate e input fuori tema",
+          "task": "Scrivi specifica e testa sei casi critici, documentando risposte e condizioni di arresto",
+          "artifact": "Protocollo di test tutor con decisione go/no-go",
+          "redline": "Nessun prototipo pronto per alunni reali senza autorizzazioni e test aggiuntivi"
+        },
+        {
+          "title": "Cyberbullismo nella chat di classe",
+          "school": "secondaria",
+          "situation": "Messaggi interamente sintetici con prese in giro persistenti e richiesta di aiuto",
+          "task": "Disegna un percorso di alfabetizzazione e un'escalation a figure scolastiche competenti",
+          "artifact": "Scheda decisionale con alternativa senza IA e privacy by design",
+          "redline": "Non inserire chat reali, non diagnosticare emozioni di minori"
+        }
+      ],
+      "methodology_steps": [
+        "ascolto",
+        "classificazione",
+        "rischio",
+        "chiarimenti",
+        "progettazione",
+        "verifica",
+        "consegna"
+      ],
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
     }
   ],
   "assessment": {
@@ -465,6 +804,74 @@
     "Soluzioni di autovalutazione presenti nel JSON pubblico: non riutilizzarle per esami B2B",
     "Il carico 20 ore è una proposta di design da validare in un pilota",
     "Nessun attestato, iscrizione o valutazione di studenti attivi",
-    "Non modificare i contratti M2/M3 del catalogo esistente senza migrazione esplicita"
-  ]
+    "Non modificare i contratti M2/M3 del catalogo esistente senza migrazione esplicita",
+    "2.0: ogni modulo integra sette passaggi MANZO AI, 3 paragrafi teorici documentati, pedagogo citato come parafrasi e 2 casi reali sintetici"
+  ],
+  "methodology": {
+    "name": "MANZO AI / Prometeus Marcelus",
+    "status": "proprietary instructional design methodology, not externally validated",
+    "seven_steps": [
+      {
+        "id": "ascolto",
+        "label": "Ascolto",
+        "deliverable": "Problema professionale formulato"
+      },
+      {
+        "id": "classificazione",
+        "label": "Classificazione e ambito",
+        "deliverable": "Destinatari, competenza e obiettivo osservabile"
+      },
+      {
+        "id": "rischio",
+        "label": "Valutazione del rischio",
+        "deliverable": "Dati, bias, accessibilità e criteri di esclusione"
+      },
+      {
+        "id": "chiarimenti",
+        "label": "Domande mirate",
+        "deliverable": "Informazioni mancanti e autorizzazioni necessarie"
+      },
+      {
+        "id": "progettazione",
+        "label": "Costruzione e progettazione",
+        "deliverable": "Attività, alternativa senza IA e prompt strutturato"
+      },
+      {
+        "id": "verifica",
+        "label": "Verifica",
+        "deliverable": "Fonti, test, evidenze e correzioni"
+      },
+      {
+        "id": "consegna",
+        "label": "Output finale e consegna",
+        "deliverable": "Artefatto, registro decisionale e supervisione"
+      }
+    ],
+    "learning_progression": [
+      "Comprendere",
+      "Applicare",
+      "Valutare",
+      "Creare"
+    ],
+    "prompting_contract": [
+      "Obiettivo",
+      "Contesto",
+      "Dati consentiti",
+      "Vincoli",
+      "Output",
+      "Verifica"
+    ],
+    "provenance": "MANZO AI, Biblioteca Prometeus Marcelus, documentazione del repo; metodi operativi non validati sperimentalmente",
+    "used_in_every_module": true
+  },
+  "challenges_evidence": {
+    "title": "OECD TALIS 2024, published 2025; Education at a Glance 2026",
+    "italy_teacher_ai_use_percent": 25,
+    "oecd_average_teacher_ai_use_percent": 36,
+    "interpretation": "Dati descrittivi, non dimostrazione di efficacia didattica",
+    "sources": [
+      "https://gpseducation.oecd.org/CountryProfile?primaryCountry=ITA&topic=TA",
+      "https://www.oecd.org/en/publications/2026/09/education-at-a-glance-2026_3bce4131/full-report/teacher-shortages-and-the-attractiveness-of-the-teaching-profession_074961e4.html"
+    ]
+  }
 }
