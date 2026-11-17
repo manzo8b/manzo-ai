@@ -250,6 +250,16 @@ VERIFICA UMANA: controllare dettagli, coerenza, didascalia «immagine generata c
 - [Percorsi interattivi con feedback · guida al modello o servizio](https://h5p.org/branching-scenario)
 - [Percorsi interattivi con feedback · altra documentazione](https://h5p.org/interactive-video)
 
+## Laboratorio di produzione · costruisci e scarica il tuo kit
+
+La progettazione comincia con un obiettivo osservabile, non con un'app. Dopo aver letto i principi e i casi di questa unità, usa il [Laboratorio di produzione multimediale MANZO AI](https://manzo8b.github.io/manzo-ai/it/formazione/ia-per-la-didattica/laboratorio-multimediale/) per costruire **una microlezione riutilizzabile**.
+
+Il percorso comprende **cinque passaggi collegati**: brief (classe, obiettivo e fonti), scelta motivata dei modelli, storyboard con tre scene, produzione del copione e di una domanda interattiva, verifica e consegna. Puoi importare immagini JPG/PNG/WebP che hai il diritto di usare e, facoltativamente, una registrazione audio originale, che rimane nella memoria della pagina fino all'esportazione.
+
+**Prodotto finale verificabile:** un file HTML autonomo con tre scene, trascrizione, eventuale audio e una scelta con feedback; un progetto JSON da riaprire e modificare; una presentazione stampabile in PDF tramite il browser. **Il laboratorio non genera automaticamente immagini o audio con IA:** guida alla progettazione e all'assemblaggio di risorse che il docente crea o importa. Nessun caricamento di dati personali in servizi esterni.
+
+**Consegna consigliata:** prova la microlezione sia con mouse sia con tastiera; controlla la fonte di ogni affermazione; descrivi le immagini, verifica la trascrizione, le licenze e il funzionamento del feedback; annota in una frase quale decisione didattica cambieresti dopo il primo test. Questa attività si integra nei laboratori già previsti dal modulo e non aggiunge ore obbligatorie alla stima del corso.
+
 ## Esercitazione integrata · Dall'idea alla risorsa multimediale accessibile
 
 Questa esercitazione **fa parte dei due laboratori del modulo**; usa soltanto situazioni fittizie e puoi completarla anche senza un chatbot esterno.
