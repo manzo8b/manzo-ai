@@ -606,6 +606,60 @@
     return sectionBox;
   }
 
+
+  /* Disclosure-first reading: short mobile/desktop pages with intact learning objects. */
+  function revealCourseSection(targetId,scroll=true){
+    const target=$(targetId);
+    if(!target)return;
+    const fold=target.closest(".course-fold");
+    if(fold){
+      const article=$("module-content");
+      article?.querySelectorAll(".course-fold[open]").forEach(other=>{
+        if(other!==fold)other.open=false;
+      });
+      fold.open=true;
+    }
+    if(scroll)(fold||target).scrollIntoView({block:"start",behavior:"smooth"});
+  }
+  function organiseCourseSections(root){
+    const panels=[...root.querySelectorAll(":scope > section.panel")];
+    if(!panels.length)return;
+    const picker=el("div","course-section-picker");
+    const label=el("label","", "Vai alla sezione");
+    const select=el("select","course-section-select");
+    select.id="atl-section-select";
+    label.htmlFor=select.id;
+    add(picker,label,select);
+    panels.forEach((panel,i)=>{
+      const targetId=panel.id||"atl-extra-section-"+String(i+1).padStart(2,"0");
+      panel.id=targetId;
+      const h=panel.querySelector(":scope > h3");
+      const eyebrow=panel.querySelector(":scope > .section-kicker");
+      const title=h?.textContent?.trim()||"Attività";
+      const fold=el("details","course-fold");
+      fold.dataset.section=targetId;
+      const heading=el("summary","course-fold-heading");
+      add(heading,
+        el("span","course-fold-number",String(i+1).padStart(2,"0")),
+        add(el("span","course-fold-label"),el("strong","",title),el("small","",eyebrow?.textContent||"")),
+        el("span","course-fold-arrow","⌄"));
+      panel.replaceWith(fold);
+      add(fold,heading,panel);
+      if(i===0)fold.open=true;
+      const option=el("option","",String(i+1).padStart(2,"0")+" · "+title);
+      option.value=targetId;
+      add(select,option);
+      fold.addEventListener("toggle",()=>{
+        if(!fold.open)return;
+        root.querySelectorAll(".course-fold[open]").forEach(other=>{
+          if(other!==fold)other.open=false;
+        });
+        select.value=targetId;
+      });
+    });
+    select.addEventListener("change",()=>revealCourseSection(select.value,true));
+    root.insertBefore(picker,root.querySelector(".course-fold"));
+  }
   function render() {
     const m=state.course.modules[state.index],
           a=state.bank.modules.find(q=>q.module_id===m.id),
@@ -635,7 +689,14 @@
       add(a,el("span","course-session-number",num),el("span","",label));
       add(roadmap,a);
     });
-    add(root,roadmap);
+    roadmap.querySelectorAll("a[href^='#']").forEach(link=>{
+      link.addEventListener("click",event=>{
+        event.preventDefault();revealCourseSection(link.getAttribute("href").slice(1));
+      });
+    });
+    const quick=el("details","course-roadmap-disclosure");
+    add(quick,el("summary","","Percorso rapido · 4 attività"),roadmap);
+    add(root,quick);
 
     const welcome=section("COME INIZIARE","Qui impari anche da solo");
     welcome.id="atl-start";
@@ -787,6 +848,10 @@
       }
       add(root,closing);
     }
+    organiseCourseSections(root);
+    // Deep links should also reveal content initially hidden in a section.
+    const hash=decodeURIComponent(location.hash||"").replace(/^#/,"");
+    if(hash&&$(hash)?.closest(".course-fold"))revealCourseSection(hash,false);
     root.focus({preventScroll:true});
   }
   function init(course,bank,scenarios,narrative,glossary) {
@@ -822,13 +887,26 @@
         add(a,el("span","",activity.name),el("small","",activity.time));
         a.addEventListener("click",ev=>{
           ev.preventDefault();state.index=i;render();
-          document.getElementById(activity.target)?.scrollIntoView({block:"start",behavior:"smooth"});
+          revealCourseSection(activity.target);
         });
         add(items,add(el("li"),a));
       });
       add(details,items);
       add(entry,details);add(nav,entry);
     });
+    const sidebar=document.querySelector("#experience .course-side");
+    if(sidebar&&!sidebar.querySelector(".course-side-disclosure")){
+      const disclosure=el("details","course-side-disclosure");
+      const summary=el("summary","course-side-disclosure-title","Scegli il modulo e consulta le risorse");
+      const contents=[...sidebar.children];
+      sidebar.append(disclosure);
+      add(disclosure,summary,...contents);
+      const responsive=window.matchMedia("(max-width:800px)");
+      const setSidebar=()=>{disclosure.open=!responsive.matches};
+      setSidebar();
+      if(responsive.addEventListener)responsive.addEventListener("change",setSidebar);
+      else if(responsive.addListener)responsive.addListener(setSidebar);
+    }
     $("experience").hidden=false;$("notice").hidden=true;render();renderGlossary(glossary);
   }
   const dataBase=document.body.dataset.courseDataBase||"../it/";
