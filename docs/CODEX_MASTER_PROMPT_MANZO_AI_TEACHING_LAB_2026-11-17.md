@@ -101,6 +101,7 @@ Prepara un esercizio pilota A di 35–45 minuti utilizzabile da un docente princ
 - Nessuna affermazione «WCAG conforme», «AI Act conforme», «accreditato» o «efficacia dimostrata» senza documentazione sufficiente.
 
 ## FASE 6 — SOLO DOPO IL GATE: PIATTAFORMA MANZO AI
+**Decisione di architettura della HOME già definita:** leggi `docs/MANZO_AI_HOME_CONVERSATIONAL_LEARNING_ADR_2026-11-17.md`. Preserva la pagina iniziale di selezione IT/EN/ES. Le homepage localizzate devono unire un ingresso conversazionale per la scoperta degli obiettivi con un catalogo formativo e accessi a Learning/Verify/Studio. Non costruire una falsa chat generativa: se non esiste inferenza IA reale, il campo di ingresso è una ricerca guidata esplicitamente etichettata, con risultati e link autentici. Non trasformare la home in un clone di Coursera o ChatGPT. Documenta una variante di layout e benchmark prima di modificarla e applicala solo dopo il Gate 1. La scelta strategica non va riaperta per ragioni puramente estetiche.
 Quando il percorso AI Teaching Lab è stabile:
 - Audita homepage, Academy, percorsi formativi, navigazione IT/EN/ES, Sitelinks, sitemap, breadcrumbs, mobile, performance, coerenza tipografica e conversione verso percorsi gratuiti/premium.
 - Confronta ciò che appare nella UI con il README e lo stato reale delle funzioni; My Learning, Supabase Auth e backend SaaS non devono essere descritti come pienamente operativi se sono demo, mock o non distribuiti.
