@@ -607,58 +607,118 @@
   }
 
 
-  /* Disclosure-first reading: short mobile/desktop pages with intact learning objects. */
+  /* Four visible learning stages instead of nested section pickers and fold lists.
+     The original activities are moved, not recreated: input/quiz state survives navigation. */
   function revealCourseSection(targetId,scroll=true){
     const target=$(targetId);
     if(!target)return;
-    const fold=target.closest(".course-fold");
-    if(fold){
-      const article=$("module-content");
-      article?.querySelectorAll(".course-fold[open]").forEach(other=>{
-        if(other!==fold)other.open=false;
-      });
-      fold.open=true;
-    }
-    if(scroll)(fold||target).scrollIntoView({block:"start",behavior:"smooth"});
+    const stage=target.closest(".atl-journey-panel");
+    const journey=stage?.closest(".atl-journey");
+    if(stage && journey?.showStage)journey.showStage(Number(stage.dataset.stage),false);
+    if(scroll)target.scrollIntoView({block:"start",behavior:"smooth"});
   }
   function organiseCourseSections(root){
     const panels=[...root.querySelectorAll(":scope > section.panel")];
-    if(!panels.length)return;
-    const picker=el("div","course-section-picker");
-    const label=el("label","", "Vai alla sezione");
-    const select=el("select","course-section-select");
-    select.id="atl-section-select";
-    label.htmlFor=select.id;
-    add(picker,label,select);
-    panels.forEach((panel,i)=>{
-      const targetId=panel.id||"atl-extra-section-"+String(i+1).padStart(2,"0");
-      panel.id=targetId;
-      const h=panel.querySelector(":scope > h3");
-      const eyebrow=panel.querySelector(":scope > .section-kicker");
-      const title=h?.textContent?.trim()||"Attività";
-      const fold=el("details","course-fold");
-      fold.dataset.section=targetId;
-      const heading=el("summary","course-fold-heading");
-      add(heading,
-        el("span","course-fold-number",String(i+1).padStart(2,"0")),
-        add(el("span","course-fold-label"),el("strong","",title),el("small","",eyebrow?.textContent||"")),
-        el("span","course-fold-arrow","⌄"));
-      panel.replaceWith(fold);
-      add(fold,heading,panel);
-      if(i===0)fold.open=true;
-      const option=el("option","",String(i+1).padStart(2,"0")+" · "+title);
-      option.value=targetId;
-      add(select,option);
-      fold.addEventListener("toggle",()=>{
-        if(!fold.open)return;
-        root.querySelectorAll(".course-fold[open]").forEach(other=>{
-          if(other!==fold)other.open=false;
-        });
-        select.value=targetId;
+    if(panels.length<10)throw Error("Le sezioni del modulo non sono complete");
+    const stages=[
+      {title:"Orientati",desc:"Obiettivi, punto di partenza e prima decisione",action:"Definisci il tuo punto di partenza"},
+      {title:"Comprendi",desc:"Storia, parole chiave e metodo didattico",action:"Dai significato a ciò che hai letto"},
+      {title:"Sperimenta",desc:"Laboratori, prompt e simulazione delle scelte",action:"Metti in pratica una competenza"},
+      {title:"Verifica",desc:"Attività formative, riflessione e fonti",action:"Controlla ciò che hai imparato"}
+    ];
+    const journey=el("section","atl-journey");
+    journey.setAttribute("aria-label","Percorso guidato del modulo");
+    const top=el("div","atl-journey-top");
+    const headingBlock=el("div","atl-journey-intro");
+    add(headingBlock,el("span","atl-journey-eyebrow","IL TUO PERCORSO"),
+      heading("h3","Quattro passaggi, un obiettivo"),
+      paragraph("Apri un passaggio alla volta. I laboratori, gli strumenti e le verifiche restano tutti disponibili; non è necessario completare i precedenti per esplorarli."));
+    const picker=el("div","atl-module-switcher");
+    const pickerLabel=el("label","","Scegli il modulo");
+    const select=el("select","atl-module-select");
+    select.id="atl-module-select";
+    pickerLabel.htmlFor=select.id;
+    state.course.modules.forEach((module,i)=>{
+      const option=el("option","",String(i+1).padStart(2,"0")+" · "+module.title);
+      option.value=String(i);add(select,option);
+    });
+    select.value=String(state.index);
+    select.addEventListener("change",()=>{
+      const next=Number(select.value);
+      if(!Number.isInteger(next)||next<0||next>=state.course.modules.length)return;
+      state.index=next;render();
+      $("module-content").scrollIntoView({block:"start",behavior:"auto"});
+    });
+    add(picker,pickerLabel,select);
+    add(top,headingBlock,picker);
+    const nav=el("div","atl-journey-nav");
+    nav.setAttribute("role","tablist");
+    nav.setAttribute("aria-label","Quattro passaggi del modulo");
+    const tabButtons=[];
+    const stagePanels=[];
+    stages.forEach((stage,i)=>{
+      const tab=el("button","atl-stage-tab");tab.type="button";
+      tab.id="atl-stage-tab-"+i;tab.setAttribute("role","tab");
+      tab.setAttribute("aria-controls","atl-journey-panel-"+i);
+      add(tab,el("span","atl-stage-count",String(i+1).padStart(2,"0")),
+        el("span","atl-stage-name",stage.title));
+      tabButtons.push(tab);add(nav,tab);
+      const panel=el("section","atl-journey-panel");
+      panel.id="atl-journey-panel-"+i;panel.dataset.stage=String(i);
+      panel.setAttribute("role","tabpanel");
+      panel.setAttribute("aria-labelledby",tab.id);
+      panel.tabIndex=-1;
+      const intro=el("div","atl-journey-stage-intro");
+      add(intro,el("span","atl-stage-eyebrow","PASSAGGIO "+(i+1)+" DI 4"),
+        heading("h4",stage.action),paragraph(stage.desc));
+      add(panel,intro);
+      stagePanels.push(panel);
+    });
+    const progress=el("p","atl-journey-position");
+    progress.setAttribute("role","status");progress.setAttribute("aria-live","polite");
+    const goStage=(index,scroll=true,focus=false)=>{
+      if(!Number.isInteger(index)||index<0||index>=4)return;
+      stagePanels.forEach((p,i)=>{p.hidden=i!==index});
+      tabButtons.forEach((button,i)=>{
+        button.setAttribute("aria-selected",String(i===index));
+        button.tabIndex=i===index?0:-1;
+      });
+      progress.textContent="Passaggio "+(index+1)+" di 4 · "+stages[index].title;
+      journey.dataset.activeStage=String(index);
+      if(scroll)journey.scrollIntoView({block:"start",behavior:"auto"});
+      if(focus)tabButtons[index].focus({preventScroll:true});
+    };
+    journey.showStage=goStage;
+    tabButtons.forEach((tab,i)=>{
+      tab.addEventListener("click",()=>goStage(i,true));
+      tab.addEventListener("keydown",event=>{
+        const next=event.key==="ArrowRight"||event.key==="ArrowDown"?(i+1)%4:
+          event.key==="ArrowLeft"||event.key==="ArrowUp"?(i+3)%4:
+          event.key==="Home"?0:event.key==="End"?3:null;
+        if(next===null)return;
+        event.preventDefault();goStage(next,false,true);
       });
     });
-    select.addEventListener("change",()=>revealCourseSection(select.value,true));
-    root.insertBefore(picker,root.querySelector(".course-fold"));
+    panels.forEach((panel,i)=>{
+      const stageIndex=i<=2?0:i<=5?1:i<=7?2:3;
+      panel.classList.add("atl-stage-content");
+      stagePanels[stageIndex].append(panel);
+    });
+    stagePanels.forEach((panel,i)=>{
+      const controls=el("div","atl-journey-actions");
+      if(i>0)add(controls,control("← Precedente",()=>goStage(i-1,true),"secondary"));
+      if(i<3){
+        const next=control("Continua · "+stages[i+1].title+" →",()=>goStage(i+1,true));
+        next.classList.add("atl-journey-next");add(controls,next);
+      }else{
+        const finish=el("span","atl-journey-end","Hai raggiunto l'ultima fase: usa la riflessione finale per decidere che cosa sperimentare in classe");
+        add(controls,finish);
+      }
+      add(panel,controls);
+    });
+    root.append(journey);
+    add(journey,top,nav,progress,...stagePanels);
+    goStage(0,false);
   }
   function render() {
     const m=state.course.modules[state.index],
@@ -675,29 +735,6 @@
       paragraph(story.subtitle,"module-subtitle"),
       add(el("div","module-meta"),el("span","","Studio autonomo"),el("span","","2 laboratori guidati"),el("span","","4 ore indicative")));
     add(root,hero);
-    const roadmap=el("nav","course-session-map");
-    roadmap.setAttribute("aria-label","Attività del modulo");
-    const parts=[
-      ["Video e orientamento","#atl-start","00"],
-      ["Lettura di approfondimento","#atl-theory","01"],
-      ["Laboratori","#atl-labs","02"],
-      ["Verifica e riflessione","#atl-quiz","03"]
-    ];
-    parts.forEach(([label,url,num])=>{
-      const a=el("a","course-session-step");
-      a.href=url;
-      add(a,el("span","course-session-number",num),el("span","",label));
-      add(roadmap,a);
-    });
-    roadmap.querySelectorAll("a[href^='#']").forEach(link=>{
-      link.addEventListener("click",event=>{
-        event.preventDefault();revealCourseSection(link.getAttribute("href").slice(1));
-      });
-    });
-    const quick=el("details","course-roadmap-disclosure");
-    add(quick,el("summary","","Percorso rapido · 4 attività"),roadmap);
-    add(root,quick);
-
     const welcome=section("COME INIZIARE","Qui impari anche da solo");
     welcome.id="atl-start";
     add(welcome,paragraph("Puoi studiare senza un formatore e senza conoscenze di programmazione. Segui il racconto, svolgi i laboratori usando soltanto esempi inventati, controlla i risultati e verifica la comprensione. Non serve un account per leggere il corso."));
@@ -851,7 +888,7 @@
     organiseCourseSections(root);
     // Deep links should also reveal content initially hidden in a section.
     const hash=decodeURIComponent(location.hash||"").replace(/^#/,"");
-    if(hash&&$(hash)?.closest(".course-fold"))revealCourseSection(hash,false);
+    if(hash&&$(hash)?.closest(".atl-journey-panel"))revealCourseSection(hash,false);
     root.focus({preventScroll:true});
   }
 
@@ -879,7 +916,6 @@
     state.course=course;state.bank=bank;state.scenarios=scenarios;state.narrative=narrative;state.glossary=glossary;
     const nav=$("module-nav");
     course.modules.forEach((m,i)=>{
-      const story=narrative.modules.find(t=>t.id===m.id);
       const entry=el("div","module-nav-entry");
       const b=el("button","nav-button");b.type="button";
       add(b,el("span","nav-number",String(i+1).padStart(2,"0")),
@@ -887,32 +923,12 @@
       b.addEventListener("click",()=>{state.index=i;render();
         $("module-content").scrollIntoView({block:"start",behavior:"auto"})});
       add(entry,b);
-      const details=el("details","module-outline");
-      const summary=el("summary","","Che cosa farai · 4 attività");
-      add(details,summary);
-      const items=el("ol","module-outline-items");
-      [
-        {name:"Lettura di approfondimento",time:"48 min",target:"atl-theory"},
-        {name:"Laboratorio · Prima sperimentazione",time:"72 min",target:"atl-labs"},
-        {name:"Laboratorio · Revisione",time:"72 min",target:"atl-labs"},
-        {name:"Verifica e riflessione",time:"48 min",target:"atl-quiz"}
-      ].forEach((activity,j)=>{
-        const a=el("a","module-outline-link");
-        a.href="#"+activity.target;
-        add(a,el("span","",activity.name),el("small","",activity.time));
-        a.addEventListener("click",ev=>{
-          ev.preventDefault();state.index=i;render();
-          revealCourseSection(activity.target);
-        });
-        add(items,add(el("li"),a));
-      });
-      add(details,items);
-      add(entry,details);add(nav,entry);
+      add(nav,entry);
     });
     const sidebar=document.querySelector("#experience .course-side");
     if(sidebar&&!sidebar.querySelector(".course-side-disclosure")){
       const disclosure=el("details","course-side-disclosure");
-      const summary=el("summary","course-side-disclosure-title","Scegli il modulo e consulta le risorse");
+      const summary=el("summary","course-side-disclosure-title","Moduli e documenti di supporto");
       const contents=[...sidebar.children];
       sidebar.append(disclosure);
       add(disclosure,summary,...contents);
