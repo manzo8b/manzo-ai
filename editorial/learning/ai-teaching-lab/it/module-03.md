@@ -250,6 +250,8 @@ VERIFICA UMANA: controllare dettagli, coerenza, didascalia «immagine generata c
 - [Percorsi interattivi con feedback · guida al modello o servizio](https://h5p.org/branching-scenario)
 - [Percorsi interattivi con feedback · altra documentazione](https://h5p.org/interactive-video)
 
+**Prima di aprire un laboratorio, crea una missione guidata:** la micro-web-app [Mission Studio](https://manzo8b.github.io/manzo-ai/it/formazione/ia-per-la-didattica/inizia/) ti aiuta a scegliere obiettivo, classe, tempo e tipo di risorsa, mostra una prova di apprendimento e permette di salvare un brief JSON. È una guida locale basata su regole pedagogiche, **non** una chat IA generativa: il brief serve per organizzare il lavoro e non viene trasferito automaticamente agli altri Studi. L'indirizzo è operativo soltanto quando il relativo deploy GitHub Pages è stato completato.
+
 ## Laboratorio di produzione · costruisci e scarica il tuo kit
 
 La progettazione comincia con un obiettivo osservabile, non con un'app. Dopo aver letto i principi e i casi di questa unità, usa il [Laboratorio di produzione multimediale MANZO AI](https://manzo8b.github.io/manzo-ai/it/formazione/ia-per-la-didattica/laboratorio-multimediale/) per costruire **una microlezione riutilizzabile**.
