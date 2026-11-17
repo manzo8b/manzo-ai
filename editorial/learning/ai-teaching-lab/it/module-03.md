@@ -42,7 +42,7 @@ Quel grafico comunica rapidamente, ma non insegna ancora a interpretare i dati. 
 
 Le informazioni devono essere selezionate e organizzate affinché il discente possa riconoscerne le relazioni essenziali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata.
 
-La ricerca sull'apprendimento multimediale di Richard Mayer ci invita a progettare per l'attenzione e la comprensione, non per la quantità di effetti. Il principio di coerenza suggerisce di eliminare parole, immagini e suoni non pertinenti; la segnalazione evidenzia gli elementi essenziali; la segmentazione rende controllabile il ritmo di presentazione. Questi principi non trasformano qualsiasi video in una buona lezione: l'obiettivo osservabile resta il punto di riferimento. Per un corso scolastico un audio con voce chiara e trascrizione, una immagine con descrizione e una decisione con feedback possono completarsi senza ripetere tutto tre volte.
+La ricerca sull'apprendimento multimediale di Richard Mayer ci invita a progettare per l'attenzione e la comprensione, non per la quantità di effetti. Il principio di coerenza suggerisce di eliminare parole, immagini e suoni non pertinenti; la segnalazione evidenzia gli elementi essenziali; la segmentazione rende controllabile il ritmo di presentazione. Questi principi non trasformano qualsiasi video in una buona lezione: l'obiettivo osservabile resta il punto di riferimento. Per un corso scolastico un audio con voce chiara e trascrizione, un'immagine con descrizione e una decisione con feedback possono completarsi senza ripetere tutto tre volte.
 
 Ridurre il rumore visivo è il primo passo, non l'ultimo. Un materiale efficace deve poter essere usato da persone diverse, con strumenti e modalità differenti, senza perdere il nucleo della conoscenza.
 
@@ -98,13 +98,13 @@ Il progetto può prevedere tre scene: il dubbio iniziale, la differenza tra l'os
 
 4. **Attivare l'apprendimento** — La comprensione emerge anche da decisioni, spiegazioni e feedback. **Applica:** Crea una domanda che obblighi a usare un'evidenza.
 
-5. **Garantire accessibilità e diritti** — Trascrizioni, sottotitoli, descrizioni e licenze rendono il prodotto riutilizzabile. **Applica:** Controlla contrasto, navigazione, alternative e provenienza.
+5. **Progettare per accessibilità e diritti** — Trascrizioni, sottotitoli, descrizioni e licenze aiutano a rendere il prodotto più accessibile e riutilizzabile, ma richiedono verifiche specifiche. **Applica:** Controlla contrasto, navigazione, alternative e provenienza.
 
-6. **Verificare e migliorare** — Una bozza gradevole non prova un apprendimento; serve una osservazione. **Applica:** Prova con una microverifica e correggi prima del riuso.
+6. **Verificare e migliorare** — Una bozza gradevole non prova un apprendimento; serve un'osservazione. **Applica:** Prova con una microverifica e correggi prima del riuso.
 
 ### Quale linguaggio usare, e per quale motivo
 
-- **Tre slide essenziali** — Visualizzare una distinzione. 1. Una giornata fredda · 2. Meteo e clima: prove diverse · 3. Quale dato ci manca?. *Per renderlo accessibile:* Descrizioni testuali delle immagini e caratteri leggibili.
+- **Tre slide essenziali** — Visualizzare una distinzione. 1. Una giornata fredda · 2. Meteo e clima: prove diverse · 3. Quale dato ci manca? *Per renderlo accessibile:* Descrizioni testuali delle immagini e caratteri leggibili.
 - **Audio dialogato** — Rendere esplicito un ragionamento. Due voci confrontano un episodio meteorologico e una tendenza, senza inventare dati. *Per renderlo accessibile:* Trascrizione, pause e linguaggio comprensibile.
 - **Microvideo a scene** — Mostrare il ragionamento per segmenti. Scena-problema, confronto di fonti e domanda finale in 60–90 secondi. *Per renderlo accessibile:* Sottotitoli, niente lampeggiamenti, velocità controllabile.
 - **Scelta con feedback** — Far usare e correggere l'idea. «Una giornata fredda prova una tendenza?» · feedback motivato e secondo tentativo. *Per renderlo accessibile:* Pulsanti raggiungibili da tastiera e alternativa in testo.
@@ -256,7 +256,7 @@ La progettazione comincia con un obiettivo osservabile, non con un'app. Dopo ave
 
 Il percorso comprende **cinque passaggi collegati**: brief (classe, obiettivo e fonti), scelta motivata dei modelli, storyboard con tre scene, produzione del copione e di una domanda interattiva, verifica e consegna. Puoi importare immagini JPG/PNG/WebP che hai il diritto di usare e, facoltativamente, una registrazione audio originale, che rimane nella memoria della pagina fino all'esportazione.
 
-**Prodotto finale verificabile:** un file HTML autonomo con tre scene, trascrizione, eventuale audio e una scelta con feedback; un progetto JSON da riaprire e modificare; una presentazione stampabile in PDF tramite il browser. **Il laboratorio non genera automaticamente immagini o audio con IA:** guida alla progettazione e all'assemblaggio di risorse che il docente crea o importa. Nessun caricamento di dati personali in servizi esterni.
+**Prodotto finale verificabile:** un file HTML autonomo con tre scene, trascrizione, eventuale audio e una scelta con feedback; un progetto JSON da riaprire e modificare; una presentazione stampabile in PDF tramite il browser. **Il laboratorio non genera automaticamente immagini o audio con IA:** guida alla progettazione e all'assemblaggio di risorse che il docente crea o importa. Il laboratorio non invia automaticamente le risorse a servizi esterni; il docente deve evitare di caricare dati personali in servizi non autorizzati.
 
 **Consegna consigliata:** prova la microlezione sia con mouse sia con tastiera; controlla la fonte di ogni affermazione; descrivi le immagini, verifica la trascrizione, le licenze e il funzionamento del feedback; annota in una frase quale decisione didattica cambieresti dopo il primo test. Questa attività si integra nei laboratori già previsti dal modulo e non aggiunge ore obbligatorie alla stima del corso.
 
