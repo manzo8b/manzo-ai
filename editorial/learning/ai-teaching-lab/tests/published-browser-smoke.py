@@ -18,6 +18,25 @@ with sync_playwright() as playwright:
         assert "Formazione docenti" in page.title()
         assert page.locator("header.module-hero").count()==1
         assert page.locator("#module-nav button").count()==5
+        assert page.locator("#presentazione-corso").is_visible()
+        assert page.locator(".atl-intro-media-card").count()==2
+        assert "20 h" in page.locator(".atl-intro-facts").inner_text()
+        assert page.locator("a.atl-intro-primary-action").count()==1
+        assert page.locator("[data-atl-video-media] video").count() in (0,1)
+        # No broken media links are generated before files are staged.
+        if not page.locator("[data-atl-video-media] video").count():
+            assert page.locator("[data-atl-video-media] .atl-intro-missing").is_visible()
+        page.locator("a.atl-intro-primary-action").click()
+        page.wait_for_url(COURSE+"presentazione/")
+        assert page.locator("#atl-present-counter").inner_text()=="01 / 15"
+        page.locator("#atl-present-next").click()
+        assert page.locator("#atl-present-counter").inner_text()=="02 / 15"
+        page.locator("#atl-present-select").select_option("11")
+        assert "La prospettiva pedagogica" in page.locator(".atl-slide-page h2").inner_text()
+        assert "parafrasi" in page.locator(".atl-present-side-note").inner_text()
+        assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth+2")
+        page.goto(COURSE,wait_until="networkidle")
+        page.locator("#experience").wait_for(state="visible",timeout=10000)
         assert page.locator(".atl-resource-hub").is_visible()
         assert page.locator(".atl-resource-link").count()==11
         assert page.locator(".atl-resource-link:visible").count()==4
