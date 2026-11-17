@@ -30,7 +30,7 @@ Gli studenti non arrivano tutti con lo stesso lessico, le stesse esperienze o lo
 - Costruire una prova con IA e una senza IA con criteri equivalenti
 - Formulare feedback descrittivo azionabile
 
-## Per capire: un racconto e cinque idee fondamentali
+## Lettura di approfondimento · una storia che continua
 
 ### 1. Tre studenti, una competenza
 
@@ -176,7 +176,7 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Rubrica** — Criteri e descrittori condivisi di una prestazione
 - **Barriera** — Ostacolo non necessario che rende difficile partecipare o dimostrare una competenza
 
-## Dalla lettura alla lezione successiva
+## Per continuare il percorso
 
 Quando il feedback diventa un invito a migliorare, emerge una nuova possibilità: un tutor che accompagna senza sostituirsi all'insegnante. Ma chi decide i limiti di quell'accompagnamento?
 
