@@ -20,8 +20,8 @@
  <div class="studio-intro">
   <span class="studio-eyebrow">MODULO 03 / LABORATORIO DI PRODUZIONE</span>
   <h1>Dall'idea alla <em>risorsa multimediale</em></h1>
-  <p>Progetta, costruisci, verifica ed esporta un micro-kit didattico reale: <strong>tre slide, un copione audio a due voci e un'interazione con feedback</strong>. Puoi inserire immagini e audio che hai il diritto di utilizzare. Nessun account e nessun invio di dati a server.</p>
-  <div class="studio-intro-stats"><span><b>5</b> fasi guidate</span><span><b>3</b> scene modificabili</span><span><b>3</b> risultati esportabili</span><span><b>100%</b> nel browser</span></div>
+  <p>Progetta, costruisci, verifica ed esporta un micro-kit didattico reale: <strong>tre slide, un copione audio a due voci e un'interazione con feedback</strong>. Puoi anche creare schede visive PNG, registrare un audio originale e, nei browser compatibili, produrre un breve video delle tre scene. Nessun account e nessun invio di dati a server.</p>
+  <div class="studio-intro-stats"><span><b>5</b> fasi guidate</span><span><b>3</b> scene modificabili</span><span><b>PNG</b> grafica didattica</span><span><b>Audio</b> originale</span><span><b>Video</b> se supportato</span></div>
  </div>
  <div class="studio-workspace">
   <aside class="studio-sidebar" aria-label="Fasi della produzione">
@@ -69,6 +69,7 @@
    <section class="studio-phase" data-phase="2" hidden>
     <div class="phase-heading"><span class="phase-kicker">03 / STORYBOARD</span><h2>Tre scene, un filo narrativo</h2><p>Puoi cambiare titoli, spiegazioni e descrizioni visive. La scena iniziale solleva un problema; quella centrale lo chiarisce; la conclusione chiede una verifica.</p></div>
     <div id="studio-scenes" class="studio-scenes"></div>
+    <div class="studio-assist-note"><strong>Produzione locale</strong> — In ogni scena trovi un pulsante per creare una grafica PNG riutilizzabile e un prompt per richiedere un’illustrazione a un modello IA esterno. Le grafiche locali sono impaginazioni didattiche, non fotografie generate con IA.</div>
     <div class="studio-hint">Un'immagine decorativa non insegna da sola. Scegli un visual solo quando chiarisce una relazione o permette di ragionare sul problema.</div>
    </section>
    <section class="studio-phase" data-phase="3" hidden>
@@ -81,7 +82,18 @@
 Davide: Un singolo giorno ci parla del tempo meteorologico, non ci permette di stabilire una tendenza climatica.
 Marta: Quale prova ci servirebbe allora?
 Davide: Osservazioni affidabili raccolte nel tempo, confrontate con metodo. Non numeri inventati da un assistente.</textarea></label>
-      <label>Registrazione audio facoltativa (MP3, M4A, OGG o WAV, massimo 8 MB) <input type="file" id="studio-audio" accept="audio/mpeg,audio/mp4,audio/ogg,audio/wav,audio/x-wav,.m4a" aria-describedby="studio-audio-state"></label>
+      <div class="studio-audio-workbench">
+       <p>Puoi preparare una prima bozza del dialogo e modificarla, oppure registrare direttamente la tua voce con il microfono. Nessun file viene caricato sul server.</p>
+       <div class="studio-tool-actions">
+        <button type="button" class="studio-action studio-action-neutral" id="studio-script-draft">Prepara bozza dialogo</button>
+        <button type="button" class="studio-action studio-action-primary" id="studio-record-start">● Inizia registrazione</button>
+        <button type="button" class="studio-action studio-action-neutral" id="studio-record-stop" disabled>■ Interrompi</button>
+       </div>
+       <div id="studio-record-state" class="studio-file-state" role="status" aria-live="polite">La registrazione richiede il consenso al microfono e un browser compatibile.</div>
+       <audio id="studio-record-preview" controls hidden aria-label="Ascolta la registrazione"></audio>
+       <button type="button" id="studio-record-download" class="studio-action studio-action-neutral" disabled>Scarica registrazione</button>
+      </div>
+      <label>Oppure importa un audio esistente (MP3, M4A, OGG, WAV, WebM; massimo 8 MB) <input type="file" id="studio-audio" accept="audio/mpeg,audio/mp4,audio/ogg,audio/wav,audio/x-wav,audio/webm,.m4a,.webm" aria-describedby="studio-audio-state"></label>
       <div id="studio-audio-state" class="studio-file-state" aria-live="polite">Nessun audio allegato; il copione testuale è comunque esportabile.</div>
      </div>
      <div class="studio-subsection"><div class="studio-section-overline">INTERATTIVITÀ</div><h3>Una scelta che produce apprendimento</h3>
@@ -94,6 +106,17 @@ Davide: Osservazioni affidabili raccolte nel tempo, confrontate con metodo. Non 
       <label>Feedback se non corretto <textarea name="feedback_wrong" rows="2" maxlength="500">Riprova: distingui l'osservazione di oggi dalle misurazioni ripetute nel tempo. Quale fonte consulteresti?</textarea></label>
      </div>
     </div>
+    <section class="studio-video-builder" aria-labelledby="studio-video-title">
+      <div><span class="studio-section-overline">VIDEO / CLIP DI APPRENDIMENTO</span><h3 id="studio-video-title">Dallo storyboard a un video breve</h3>
+      <p>Trasforma le tre scene in una clip <strong>senza audio</strong>, da narrare o montare successivamente. È un'esportazione locale delle slide, non un video generato da un modello IA.</p></div>
+      <label>Durata per scena <select id="studio-video-seconds"><option value="2">2 secondi</option><option value="3" selected>3 secondi</option><option value="4">4 secondi</option></select></label>
+      <div class="studio-tool-actions">
+       <button type="button" class="studio-action studio-action-primary" id="studio-video-create">Crea clip dalle 3 scene</button>
+       <button type="button" class="studio-action studio-action-neutral" id="studio-video-download" disabled>Scarica video</button>
+      </div>
+      <p class="studio-file-state" id="studio-video-state" role="status" aria-live="polite">Se la registrazione video non è disponibile nel tuo browser, puoi comunque esportare la microlezione HTML con tutte le scene.</p>
+      <video id="studio-video-preview" controls playsinline preload="metadata" hidden aria-label="Anteprima video delle tre scene"></video>
+    </section>
    </section>
    <section class="studio-phase" data-phase="4" hidden>
     <div class="phase-heading"><span class="phase-kicker">05 / VERIFICA E CONSEGNA</span><h2>Controlla il kit e portalo in classe</h2><p>La tua produzione viene assemblata localmente in una microlezione HTML autonoma con tre slide, audio facoltativo, trascrizione e domanda interattiva. Puoi salvarla e stamparla in PDF.</p></div>
@@ -110,7 +133,7 @@ Davide: Osservazioni affidabili raccolte nel tempo, confrontate con metodo. Non 
      <button type="button" class="studio-action studio-action-neutral" id="studio-download-json">Salva progetto modificabile</button>
      <button type="button" class="studio-action studio-action-neutral" id="studio-print">Anteprima di stampa / PDF</button>
     </div>
-    <div class="studio-hint">L'HTML contiene il materiale che hai scritto e gli eventuali file allegati. Non è una generazione automatica di audio o video: per integrarli devi crearli o importarli. La stampa PDF dipende dalle funzioni del browser.</div>
+    <div class="studio-hint">L'HTML incorpora materiali e file allegati. Le grafiche PNG sono create da impaginazioni locali e la registrazione audio usa il tuo microfono. Le clip video vengono prodotte soltanto nei browser che le supportano: nessuna di queste funzioni interroga automaticamente un modello generativo. La stampa PDF dipende dalle funzioni del browser.</div>
    </section>
    </form>
    <div class="studio-controls"><button type="button" id="studio-prev" class="studio-action studio-action-neutral">← Indietro</button><span id="studio-status" role="status" aria-live="polite"></span><button type="button" id="studio-next" class="studio-action studio-action-primary">Continua →</button></div>
