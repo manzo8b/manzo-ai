@@ -1,251 +1,194 @@
-# AI Teaching Lab — Modulo 04 · Una classe, molte possibilità di apprendere
+# AI Teaching Lab · Modulo 04
 
-## Una scuola chiede di valutare trenta elaborati in poco tempo e contemporaneamente rendere accessibili le attività a una classe con livelli linguistici diversi
+## Una scuola che include e fa progredire
 
-**MANZO AI / Education** · 4 ore didattiche progettate · IT · Versione completa per prova editoriale 17/11/2026 · **Non pubblicato**
+*Differenziare le attività e trasformare la valutazione in un aiuto per imparare*
 
-> **Sfida del docente** — Valutare con equità classi eterogenee, creare feedback davvero utili, rispettare BES/DSA e l'integrità dei compiti
+**A chi si rivolge:** docenti e personale scolastico che desiderano comprendere e applicare l'IA responsabilmente, anche senza conoscenze tecniche pregresse
 
-### Caso iniziale
+**Tempo indicativo di formazione:** circa 4 ore fra lettura, attività, revisione e verifiche. È una stima progettuale, non un obbligo cronometrato e non indica il tempo che un formatore deve parlare
 
-Una scuola chiede di valutare trenta elaborati in poco tempo e contemporaneamente rendere accessibili le attività a una classe con livelli linguistici diversi. La scorciatoia sarebbe far assegnare all'IA un voto per studente, ma il problema vero è la qualità del feedback e l'equità delle opportunità di apprendere.
+## Come seguire questo modulo in autonomia
 
-### Risultati di apprendimento
+Non serve conoscere il linguaggio degli sviluppatori o saper programmare. Leggi i capitoli nell'ordine proposto. Quando trovi un laboratorio, prepara carta e penna oppure apri un documento tuo; copia il prompt già pronto in uno strumento **autorizzato dalla tua organizzazione**, oppure usa l'esempio simulato se non hai un assistente disponibile. Il materiale del corso usa situazioni inventate: **non inserire nomi, diagnosi, voti, foto o conversazioni reali degli studenti** in servizi non autorizzati. Per controllare le soluzioni dei quiz e completare il cruciverba torna all'area interattiva del percorso.
+
+Il tempo stimato comprende lettura, due laboratori, correzione delle bozze e autovalutazione. Puoi interrompere il percorso e riprenderlo dal modulo: questo sito non registra automaticamente lo stato di avanzamento.
+
+## La domanda che ci accompagnerà
+
+Gli studenti non arrivano tutti con lo stesso lessico, le stesse esperienze o lo stesso modo di esprimersi. Una verifica equa non deve essere identica in ogni dettaglio: deve essere trasparente su ciò che vuole osservare e offrire occasioni accessibili per dimostrarlo.
+
+### Che cosa saprai fare dopo lo studio
 
 - Definire barriere e supporti secondo principi UDL
 - Costruire una prova con IA e una senza IA con criteri equivalenti
 - Formulare feedback descrittivo azionabile
 
-### Sequenza guidata da 240 minuti
+## Per capire: un racconto e cinque idee fondamentali
 
-| Fase | Minuti | Prodotto |
-|---|---:|---|
-| Attivazione e teoria con fonti | 48 | Problema, ipotesi, criteri |
-| Laboratorio A | 72 | Primo artefatto comparativo |
-| Laboratorio B | 72 | Secondo artefatto professionale |
-| Debrief e revisione fra pari | 18 | Correzioni documentate |
-| Verifiche (quiz, associazioni, cruciverba) | 15 | Feedback formativo |
-| Trasferimento e exit ticket | 15 | Decisione e piano da riutilizzare |
+### 1. Tre studenti, una competenza
 
-La sequenza equivale a 48 minuti di input, 144 di pratica e 48 di restituzione. La versione digitale potrà essere segmentata, ma il carico deve essere verificato tramite pilota.
+La classe deve spiegare due cause dell'inquinamento locale sostenendole con prove. Una studentessa scrive con facilità; un compagno preferisce costruire una mappa; un terzo espone meglio oralmente. Sarebbe semplice proporre tre compiti scollegati, ma così non potremmo confrontare ciò che hanno imparato. Un'altra strada è chiarire la competenza comune e mantenere gli stessi criteri: precisione delle cause, qualità delle prove, chiarezza delle relazioni. Il formato può cambiare senza che la domanda cognitiva diventi automaticamente più facile.
 
-## Teoria documentata
+### 2. Progettare per ridurre le barriere
 
-### Fondamento 1
+Le linee guida CAST UDL 3.0 invitano a considerare più forme di coinvolgimento, rappresentazione, azione ed espressione. In pratica, non aspettiamo che una difficoltà si trasformi in esclusione: possiamo offrire indicazioni scritte e orali, testi leggibili e schemi descritti, esempi guidati e un tempo di riflessione appropriato. Non occorre inventare diagnosi per progettare materiali più accessibili. Qualunque adattamento individuale collegato a esigenze riconosciute segue le procedure e le responsabilità scolastiche, non il giudizio di un chatbot.
 
-Le UDL Guidelines 3.0 propongono scelte diverse per coinvolgimento, rappresentazione, azione ed espressione. Offrire più strade di accesso non significa automaticamente abbassare gli obiettivi; i criteri di successo restano trasparenti e pertinenti.
+### 3. Il feedback che cambia il prossimo passo
 
-### Fondamento 2
+Una frase come 'bravo, ma devi migliorare' raramente indica che cosa fare. Nel caso di una proporzione errata, il docente può invece mostrare il passaggio da rivedere e proporre un piccolo esercizio di controllo. Il feedback è formativo quando lo studente lo comprende, può usarlo e ha la possibilità di provare di nuovo. Un assistente IA può proporre bozze di messaggi su esempi inventati, ma la verifica del ragionamento matematico, l'interpretazione della situazione e qualunque valutazione individuale restano sotto responsabilità umana. Il fine è far avanzare l'apprendimento, non moltiplicare commenti standard.
 
-La valutazione formativa usa evidenze per correggere il percorso di insegnamento e apprendimento. Il feedback deve essere specifico, legato a un obiettivo e seguito da opportunità di applicazione. Il testo generato può fungere da bozza su casi fittizi, non giudizio definitivo su studenti.
+### 4. La metacognizione ha bisogno di occasioni concrete
 
-### Fondamento 3
+Chiedere 'hai capito?' non basta. Possiamo insegnare a pianificare una soluzione, osservare un errore, spiegare perché una strategia non funziona e sceglierne un'altra. Un piccolo diario di revisione o una risposta a due domande — 'che cosa ho provato?' e 'quale prova mi ha fatto cambiare idea?' — aiuta gli studenti a riconoscere il proprio processo. La valutazione diventa dialogo tra evidenze e decisioni, non una lista di voti. Anche l'insegnante usa questi segnali per decidere come impostare la lezione successiva.
 
-La metacognizione si insegna in discipline concrete: pianificare, monitorare e verificare il proprio ragionamento. L'IA non deve dedurre diagnosi, profili cognitivi o attitudini individuali da lavori reali.
+### 5. La lezione di Wiliam sulla valutazione formativa
 
-### Approfondimenti: tre distinzioni da padroneggiare
+Dylan Wiliam è un riferimento fondamentale per l'uso delle evidenze di apprendimento nel modificare le azioni didattiche. Qui ne presentiamo un principio in forma di parafrasi: raccogliere segnali di comprensione ha valore se produce un passo successivo, per il docente o per lo studente. Un sistema IA che restituisce un voto automatico senza spiegazione non realizza da solo questa funzione. Una rubrica comprensibile e un feedback che offre una nuova occasione di lavoro possono essere molto più utili.
 
-1. L'UDL promuove opzioni di coinvolgimento, rappresentazione e azione/espressione senza presupporre diagnosi.
-2. Il feedback è formativo quando l'alunno capisce quale passaggio correggere e può applicare immediatamente il suggerimento.
-3. La metacognizione esplicita pianificazione, monitoraggio e valutazione del proprio processo; adattare supporti non significa abbassare il traguardo atteso.
+## Il metodo MANZO AI: una proposta per organizzare il lavoro
 
-### Insegnamento pedagogico
+Il metodo MANZO AI è una **proposta operativa sviluppata nel progetto MANZO AI**, non una norma per le scuole, una teoria pedagogica universalmente riconosciuta o una procedura scientificamente validata. È utile come lista ragionata di domande perché rende visibili le decisioni: da quale problema parto, quale materiale posso usare, che cosa devo verificare, chi ha la responsabilità del risultato. Non devi imparare i sette passaggi a memoria per proseguire; puoi adattarli al tuo contesto, anche quando scegli di non utilizzare l'IA.
 
-**Dylan Wiliam — parafrasi applicativa MANZO AI, NON citazione testuale:** La valutazione formativa raccoglie segnali di comprensione e modifica le azioni successive del docente e dello studente; un buon feedback deve far progredire.
+Nel nostro percorso le fasi si collegano così:
 
-Riferimento dell'autore: https://educationendowmentfoundation.org.uk/projects-and-evaluation/promising-programmes/embedding-formative-assessment
+1. **Ascolto** — Descrivi una difficoltà reale del lavoro scolastico senza chiedere subito a un chatbot una soluzione
+2. **Classificazione e ambito** — Indica classe, materia, competenza e prova che gli studenti dovrebbero produrre
+3. **Valutazione del rischio** — Chiediti quali errori, stereotipi, barriere di accesso o dati personali potrebbero comparire
+4. **Domande mirate** — Annota che cosa non sai e quali informazioni o autorizzazioni servono
+5. **Costruzione e progettazione** — Scegli una proposta, un'alternativa senza IA e, se utile, un prompt controllabile
+6. **Verifica** — Controlla fonti, pertinenza, correttezza, tempo e accessibilità prima di usare l'output
+7. **Output finale e consegna** — Consegna il materiale finale dichiarando limiti e responsabilità, senza automatizzare il giudizio sugli studenti
 
-### Bibliografia specifica del modulo (consultazione/controllo editoriale al 17 novembre 2026)
+Il metodo aiuta a **comprendere → applicare → valutare → creare**, ma ciascun passaggio ha senso solo se conduce a una scelta concreta. Non sostituisce le indicazioni della scuola, le fonti disciplinari o la competenza pedagogica del docente.
+
+## Laboratori da svolgere personalmente
+
+Qui il partecipante sei **tu**. Le consegne spiegano cosa preparare, cosa scrivere nel prompt, come ottenere o simulare una risposta e come correggerla. I tempi sono indicativi e puoi dedicare più o meno tempo in base alla tua esperienza.
+
+### Laboratorio 1 · Tre prove, una sola rubrica
+
+**Situazione da affrontare:** Seconda media; competenza: argomentare due cause dell'inquinamento e documentarle
+
+**Obiettivo:** Predisporre una consegna scritta, una orale con schema e una guidata, mantenendo gli stessi criteri
+
+**Prima di iniziare:** apri un documento e crea quattro sezioni: problema, prompt, risposta e revisione. Tutto ciò che userai deve essere inventato per l'esercizio, non riferito a persone reali.
+
+**Passo dopo passo**
+
+1. Scrivi i tre criteri comuni prima di produrre qualsiasi materiale
+2. Progetta tre modalità con un diverso supporto, senza assegnarle a diagnosi fittizie
+3. Chiedi al sistema di proporre bozze delle consegne con il prompt indicato
+4. Controlla che tutte richiedano due cause, prove pertinenti e spiegazioni
+5. Stendi una rubrica unica e spiega agli studenti quale competenza viene osservata
+
+**Prompt pronto da copiare e personalizzare**
+
+```text
+OBIETTIVO: predisporre tre modalità di verifica di una competenza comune.
+CONTESTO: seconda media, argomentare due cause dell'inquinamento locale con almeno una prova per causa.
+DATI: nessun nome o profilo di studenti; solo esempi di consegne inventati.
+VINCOLI: mantenere identici criteri di argomentazione e pertinenza delle prove; non diagnosticare, non assegnare voti.
+OUTPUT: consegna scritta, orale con schema, supportata da indizi; rubrica comune a quattro livelli.
+VERIFICA: evidenzia se una modalità riduce involontariamente la competenza richiesta.
+```
+
+Se non hai a disposizione un assistente IA autorizzato, **non sei bloccato**: esamina la bozza didattica qui sotto come se fosse il risultato da controllare.
+
+**Esempio di possibile risultato, scritto per questa esercitazione (non prodotto da un servizio interrogato in diretta)**
+
+> Esempio simulato: «In forma scritta descrivi due cause e le prove. In forma orale mostra uno schema e spiega le stesse due cause. In entrambi i casi la rubrica richiede accuratezza, due prove pertinenti e una conclusione».
+
+**Controllo del risultato**
+
+È cambiato soltanto il mezzo o è cambiato anche l'obiettivo? La rubrica è comprensibile a tutti?
+
+**Che cosa conservare nel tuo portfolio personale**
+
+Tre consegne equivalenti e rubrica comune
+
+**Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
+
+### Laboratorio 2 · Dal voto al feedback che fa migliorare
+
+**Situazione da affrontare:** Tre esercizi inventati sulle proporzioni, alcuni corretti e uno con errore
+
+**Obiettivo:** Produrre feedback specifici e micro-verifiche di recupero
+
+**Prima di iniziare:** apri un documento e crea quattro sezioni: problema, prompt, risposta e revisione. Tutto ciò che userai deve essere inventato per l'esercizio, non riferito a persone reali.
+
+**Passo dopo passo**
+
+1. Leggi le tre soluzioni: A 2:3 = 4:6; B 2:3 = 4:5; C 2:3 = 6:9 senza spiegazione
+2. Individua quale errore matematico correggere e quale procedura chiedere di esplicitare
+3. Copia il prompt e analizza i suggerimenti ottenuti o il modello simulato
+4. Scarta complimenti generici e valutazioni sulle persone: conserva solo suggerimenti sul lavoro
+5. Crea un esercizio nuovo per controllare se lo studente ha corretto il passaggio
+
+**Prompt pronto da copiare e personalizzare**
+
+```text
+OBIETTIVO: creare feedback formativo per esercizi di proporzioni inventati.
+CONTESTO: prima media. SOLUZIONI FITTIZIE: A 2:3=4:6; B 2:3=4:5; C 2:3=6:9 senza giustificazione.
+VINCOLI: nessun nome, nessuna diagnosi o voto; verifica matematica indipendente.
+OUTPUT: per ogni soluzione descrivi ciò che funziona, il passaggio da correggere e un esercizio di prova.
+VERIFICA: controlla che i rapporti siano equivalenti e che il suggerimento possa essere applicato.
+```
+
+Se non hai a disposizione un assistente IA autorizzato, **non sei bloccato**: esamina la bozza didattica qui sotto come se fosse il risultato da controllare.
+
+**Esempio di possibile risultato, scritto per questa esercitazione (non prodotto da un servizio interrogato in diretta)**
+
+> Esempio simulato per B: «Hai raddoppiato il primo termine del rapporto ma non il secondo. Se 2 diventa 4, a quale valore deve arrivare 3? Spiega perché».
+
+**Controllo del risultato**
+
+Il feedback mostra che cosa cambiare e come riprovare? Evita giudizi sulla persona?
+
+**Che cosa conservare nel tuo portfolio personale**
+
+Tre feedback e una mini-verifica coerente
+
+**Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
+
+## Parole utili, spiegate senza gergo
+
+Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri una parola nuova.
+
+- **UDL** — Universal Design for Learning: progettazione che prevede più modi di accedere, partecipare ed esprimersi
+- **Valutazione formativa** — Uso delle prove di apprendimento per decidere i passi successivi
+- **Feedback** — Informazione specifica che orienta una correzione o un miglioramento
+- **Metacognizione** — Capacità di osservare e regolare il proprio modo di imparare
+- **Rubrica** — Criteri e descrittori condivisi di una prestazione
+- **Barriera** — Ostacolo non necessario che rende difficile partecipare o dimostrare una competenza
+
+## Verifica ciò che hai imparato
+
+Rientra nell'area interattiva per svolgere le domande a risposta singola, la selezione multipla, il caso a decisioni ramificate, le associazioni e il cruciverba. Le risposte vengono controllate **solo nel tuo browser**: il sistema non assegna voti né salva progressi.
+
+**Domande per prepararti alla verifica**
+
+1. Qual è l'adattamento preferibile in ottica UDL?
+2. Un rilevatore segnala testo probabilmente generato. È sufficiente per sanzionare?
+
+**Compito conclusivo:** Verifica con rubriche comuni e feedback. Produci l'artefatto sul tuo documento e verifica che sarebbe utile anche se domani l'IA non fosse disponibile.
+
+**Domanda di riflessione:** Quale aiuto riduce una barriera senza cambiare la competenza attesa?
+
+## Fonti da esplorare con criterio
+
+Per non interrompere il racconto, abbiamo raccolto le fonti in questa sezione. Sono letture esterne da consultare direttamente per approfondire i principi; le situazioni e le risposte dei laboratori sono esempi creati per MANZO AI, non risultati sperimentali.
 
 1. [CAST UDL Guidelines 3.0](https://udlguidelines.cast.org/)
 2. [EEF Teacher Feedback 2021](https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/feedback)
 3. [EEF Metacognition and Self-Regulated Learning 2025](https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/metacognition)
 
-Queste fonti sostengono i principi generali; i casi e i materiali sintetici successivi sono **esercizi originali**, non risultati di studi.
+**Riferimento pedagogico:** Dylan Wiliam — [testo di riferimento](https://educationendowmentfoundation.org.uk/projects-and-evaluation/promising-programmes/embedding-formative-assessment). Le idee riportate nel modulo sono parafrasi applicative e non citazioni letterali attribuite all'autore.
 
-## Metodo MANZO AI — applicazione obbligatoria
+## Per chi facilita un gruppo (sezione facoltativa)
 
-La progressione di studio è **Comprendere → Applicare → Valutare → Creare**. In ogni esercizio si registra il metodo operativo nelle sette fasi:
+Se stai seguendo la lezione da solo, puoi saltare questa sezione. Se invece conduci un incontro con altri docenti, proponi una discussione iniziale, lascia il tempo per i due laboratori e confronta le revisioni. Non è necessario imporre lo stesso ritmo a tutti: le quattro ore sono un carico di studio orientativo, non un copione minuto per minuto.
 
-1. **Ascolto** — Problema professionale formulato. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-2. **Classificazione e ambito** — Destinatari, competenza e obiettivo osservabile. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-3. **Valutazione del rischio** — Dati, bias, accessibilità e criteri di esclusione. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-4. **Domande mirate** — Informazioni mancanti e autorizzazioni necessarie. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-5. **Costruzione e progettazione** — Attività, alternativa senza IA e prompt strutturato. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-6. **Verifica** — Fonti, test, evidenze e correzioni. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-7. **Output finale e consegna** — Artefatto, registro decisionale e supervisione. Il corsista scrive quale prova produce e dove serve ancora una decisione.
+Una restituzione utile può partire da tre domande: quale risultato dell'IA è stato corretto? Quale strumento non useresti nel tuo contesto? Quale attività migliora anche senza il supporto dell'IA?
 
-## Laboratorio A · 72 minuti
-
-### Una competenza, tre strade
-
-**Contesto:** Prima media; obiettivo argomentare due cause dell'inquinamento locale con almeno una prova per causa.
-
-**Dati di esercizio, esclusivamente sintetici:** Classe del tutto fittizia. Percorsi: testo facilitato, diagramma con esposizione orale, preparazione con IA dichiarata e consentita.
-
-**Consegna:** Definire una rubrica comune per prove differenti e verificare che l'obiettivo cognitivo resti invariato.
-
-**Sequenza operativa**
-
-1. Scrivi competenza e tre indicatori valutabili comuni
-2. Individua due barriere di accesso e due alternative di rappresentazione
-3. Costruisci tre consegne, senza attribuire diagnosi ai destinatari
-4. Definisci una stessa rubrica a quattro livelli
-5. Prova le consegne con esempi fittizi e controlla equità
-
-**Esempio ragionato:** Criterio comune: due cause spiegate con prove pertinenti. Cambia il canale di espressione, non il numero e la qualità delle prove richieste.
-
-**Output da consegnare:** Tre prove inclusive, rubrica condivisa, scelta degli adattamenti
-
-**Punti di revisione MANZO:** chi è il destinatario? quale evidenza osservabile giustifica l'attività? quale parte rimane umana? il risultato è usabile anche senza IA?
-
-## Laboratorio B · 72 minuti
-
-### Trenta feedback senza trenta giudizi automatici
-
-**Contesto:** Matematica: proporzioni. Tre soluzioni FINTIZIE con errori diversi.
-
-**Dati di esercizio, esclusivamente sintetici:** Esempi fittizi: A) 2:3=4:6 corretta; B) 2:3=4:5 errata; C) 2:3=6:9 corretta ma senza spiegazione.
-
-**Consegna:** Creare una banca di feedback su misconcezioni, senza profili, voti o dati individuali reali.
-
-**Sequenza operativa**
-
-1. Classifica errori di equivalenza e omissioni di spiegazione
-2. Formula feedback osservabili: cosa riesce, cosa correggere, quale prova fare
-3. Aggiungi un esempio modello risolto senza attribuire capacità innate
-4. Progetta micro-verifica differente dalla prima
-5. Revisiona tono, accuratezza e accessibilità dei messaggi
-
-**Esempio ragionato:** Feedback a B: «Hai riconosciuto il rapporto iniziale, ma moltiplicare il primo termine per due richiede la stessa trasformazione del secondo. Controlla con il prodotto incrociato e riprova su 3:5=6:?».
-
-**Output da consegnare:** Banca di feedback specifici e micro-verifica di recupero
-
-**Riflessione critica:** in quale circostanza è preferibile non usare IA? che cosa deve essere verificato dal docente prima di portare la proposta in aula?
-
-## Scheda di prompt professionale (opzionale, non richiede account esterno)
-
-> Obiettivo: costruire feedback formativo su tre soluzioni matematiche completamente inventate. Contesto: proporzioni, prima secondaria. Dati: solo esempi A, B e C; non raccogliere dati personali. Vincoli: nessun voto o etichetta sulle persone, niente diagnosi. Output: competenza osservata, errore specifico, prossimo passo, esercizio di recupero. Verifica: controlla tutti i rapporti con calcolo indipendente.
-
-Una soluzione **offline o senza IA** deve rimanere sempre possibile. Se un output generato aggiunge riferimenti non presenti nelle fonti, non considerarli automaticamente verificati.
-
-## Esempio di decisione documentata
-
-Una verifica inclusiva non è più facile in automatico: lo studente può esporre oralmente oppure per iscritto, ma deve sostenere la stessa tesi con le stesse prove. Un feedback utile cita l'errore e la prossima azione, non il presunto livello di intelligenza.
-
-## Verifica differenziata — da completare dopo i laboratori
-
-### Scelta singola · due domande
-
-**1. Qual è l'adattamento preferibile in ottica UDL?**
-
-- A. Abbassare automaticamente l'obiettivo per tutti
-- B. Offrire più modalità di accesso ed espressione preservando l'obiettivo
-- C. Assegnare uno strumento in base a una diagnosi dedotta dall'IA
-
-**2. Un rilevatore segnala testo probabilmente generato. È sufficiente per sanzionare?**
-
-- A. Sì, da solo
-- B. No, occorre valutazione fondata, contesto e garanzie
-- C. Sì, se la percentuale è molto alta
-
-### Selezione multipla
-
-**Quali caratteristiche ha una valutazione formativa inclusiva? Seleziona due risposte**
-
-- A. Obiettivi e criteri trasparenti condivisi
-- B. Diagnosi individuali dedotte da un chatbot
-- C. Alternative di accesso ed espressione con competenza invariata
-- D. Voto automatico sulla base dello stile del testo
-
-### Dilemma professionale
-
-**Ricevi 30 risposte fittizie con lo stesso errore in proporzioni. Che cosa progetti?**
-
-- A. Trenta voti generati automaticamente
-- B. Feedback per misconcezione, attività correttiva e controllo successivo
-- C. Un giudizio sulle capacità intellettive di ciascun allievo
-
-Scrivi prima una motivazione di almeno due frasi. Il feedback va letto **dopo** la scelta.
-
-### Matching
-
-Abbina autonomamente i seguenti termini alle definizioni presenti nel file di esercizi e spiega perché una coppia è corretta:
-
-- **UDL** — Alternative di rappresentazione ed espressione
-- **FEEDBACK** — Indicazione concreta del prossimo passo
-- **RUBRICA** — Descrittori condivisi di prestazione
-- **METACOGNIZIONE** — Pianificare, monitorare e valutare una strategia
-
-### Cruciverba professionale
-
-Griglia reale con **7 termini incrociati**, 16 × 13 caselle; '#' indica uno spazio nero e '.' una casella da compilare. La versione digitale dovrà offrire anche l'inserimento parola per parola accessibile.
-
-```text
-##########.#####
-##########.#####
-##########.#####
-#.#####.##.#####
-..............##
-#.#.###.##.#####
-#.#.#...........
-#.#.###.########
-#.#.###.########
-#.#.###.########
-#.#.###.########
-###.###.########
-##........######
-```
-
-- 1 verticale: Criteri comuni con descrittori di prestazione (7 lettere)
-- 2 verticale: Informazione che indica come progredire nell'apprendimento (8 lettere)
-- 3 verticale: Progettazione per rimuovere le barriere alla partecipazione (10 lettere)
-- 4 orizzontale: Monitoraggio e regolazione del proprio apprendimento (14 lettere)
-- 5 verticale: Capacità di procedere con supporto progressivamente minore (9 lettere)
-- 6 orizzontale: Raccolta e interpretazione delle evidenze di competenza (11 lettere)
-- 7 orizzontale: Ostacoli alla partecipazione o all'espressione (8 lettere)
-
-### Compito autentico e trasferimento
-
-**Consegna di portfolio:** Verifica con rubriche comuni e feedback
-
-**Exit ticket:** Quale aiuto riduce una barriera senza cambiare la competenza attesa?
-
-**Errori da riconoscere:**
-
-- Confondere personalizzazione con classificazione automatica degli studenti
-- Usare il canale orale come pretesto per criteri meno rigorosi
-- Produrre complimenti generici al posto di istruzioni operative
-- Trattare dati personali o diagnosi con tool non autorizzati
-
-## Scheda di feedback del formatore
-
-| Criterio | Livello iniziale | Livello solido |
-|---|---|---|
-| Obiettivo | Argomento vago o solo strumento | Prestazione osservabile e prova coerente |
-| Evidenze | Impressioni e fonti non controllate | Controllo su passaggi, contesto e limiti |
-| Metodo MANZO AI | Passi citati senza attività | Sette passaggi documentati e motivati |
-| Inclusione e privacy | Nessuna alternativa o dati impropri | Materiali accessibili e sintetici |
-| Trasferibilità | Artefatto difficile da usare | Piano adattabile con decisione umana esplicita |
-
-La rubrica definitiva del percorso attribuisce 100 punti al progetto finale, non al solo quiz. Nessun certificato o avanzamento reale è implementato in questa bozza.
-
-## Guida del formatore — soluzioni formative da rivelare dopo il tentativo
-
-- Scelta singola 1: **B**. L'UDL amplia le possibilità senza presumere diagnosi individuali.
-- Scelta singola 2: **B**. Un indicatore probabilistico non è prova conclusiva né giustifica decisioni automatiche.
-- Scelta multipla: **A e C**. Equità significa criteri comuni e accessi plurimi; non diagnosi o voti automatici.
-- Dilemma: **B**. Feedback azionabile e verifica successiva sostengono la progressione
-- Matching: verificare corrispondenza dei quattro concetti alle definizioni documentate.
-- Cruciverba: soluzioni e coordinate verificate nel file assessment-bank.json; non usare questo JSON pubblico per un esame privato.
-
-## Registro professionale personale — da completare
-
-| ID caso | Decisione | Fonte o prova | Rischio | Correzione | Supervisore |
-|---|---|---|---|---|---|
-| A | … | … | … | … | Docente |
-| B | … | … | … | … | Docente |
-
-**Nota di governance:** non conferire dati, diagnosi, voti, chat o documenti identificativi di minori a sistemi non autorizzati. Non trasformare lo schema didattico in una decisione automatizzata su studenti. Controllare sempre policy dell'istituto, GDPR e perimetro normativo dell'AI Act. Il modello MANZO AI è metodo progettuale interno, non un protocollo scientificamente validato.
-
-_MANZO AI · versione editoriale per QA, senza attestato, progressi persistenti né pubblicazione web_
+**Nota editoriale e di sicurezza:** percorso di formazione aperto e non accreditato. Le attività usano esclusivamente esempi sintetici; nessuna prova di efficacia con docenti è stata ancora pubblicata e nessun attestato viene generato dal sito.
