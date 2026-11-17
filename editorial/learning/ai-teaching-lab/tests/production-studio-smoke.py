@@ -171,7 +171,7 @@ with tempfile.TemporaryDirectory() as directory:
             # Imported file really restores the changed slide and embedded image.
             page.goto(BASE,wait_until="networkidle")
             page.locator("#studio-import").set_input_files(str(project_path))
-            assert "Progetto importato" in page.locator("#studio-status").inner_text()
+            expect(page.locator("#studio-status")).to_contain_text("Progetto importato",timeout=10000)
             if width<=760: page.locator(".studio-phase-switcher > summary").click()
             page.locator('#studio-steps button[data-go="2"]').click()
             assert page.locator('[data-scene="0"] [data-field="title"]').input_value()=="Da una domanda a un metodo"
