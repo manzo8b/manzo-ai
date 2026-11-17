@@ -36,6 +36,8 @@ jobs:
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/course.json > /dev/null
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/assessment-bank.json > /dev/null
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/scenarios.json > /dev/null
+          python3 -m json.tool editorial/learning/ai-teaching-lab/it/narrative.json > /dev/null
+          python3 -m json.tool editorial/learning/ai-teaching-lab/it/glossary.json > /dev/null
       - name: Prepare static build and publish five full teacher lessons
         run: |
           python3 -m pip install --disable-pip-version-check markdown==3.10
@@ -58,6 +60,8 @@ jobs:
           assert public['hours_validated_by_pilot'] is False
           assert public['private_assessment_ready'] is False
           assert len(list(p.glob('modulo-*/index.html')))==5
+          assert (p/'glossario/index.html').is_file()
+          assert len(json.loads((p/'data/glossary.json').read_text(encoding='utf-8'))['entries'])>=40
           urls=(Path('_teacher_staging/sitemap.xml').read_text(encoding='utf-8'))
           assert 'ia-per-la-didattica' in urls
           for lang,hub in [('it','academy'),('en','academy'),('es','academia')]:

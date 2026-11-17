@@ -68,16 +68,61 @@ def lesson_page(i,m,course,text):
 <span>4 ore progettate</span><span>2 laboratori</span><span>Metodo MANZO AI</span></div></div>
 <div class="atl-learn-shell"><aside class="atl-side-index" aria-label="Indice del corso">
 <strong>Programma</strong><nav aria-label="Altri moduli">{siblings}</nav>
+<a class="atl-side-glossary-link" href="{BASE}{ROUTE}/glossario/">Vocabolario IA e didattica</a>
 <p>Accesso aperto in italiano. Nessuna iscrizione o certificazione richiesta.</p></aside>
 <article class="atl-reading" aria-label="Testo integrale">
 <p class="atl-alert">Materiale formativo aperto e non accreditato. Le attività simulano casi e dati: non usare informazioni personali di studenti. Le 20 ore sono una stima da validare.</p>
 {html}
 <nav class="atl-bottom-nav" aria-label="Continua il percorso">
 <a href="{BASE}{ROUTE}/">Laboratori interattivi</a>
+<a href="{BASE}{ROUTE}/glossario/">Consulta il vocabolario</a>
 <a class="atl-next" href="{next_url}">{next_label} <span aria-hidden="true">→</span></a>
 </nav></article></div></main><footer class="footer"><div class="wrap">
 <strong>MANZO AI · AI Teaching Lab</strong><p>Progettazione e verifica professionale con supervisione umana</p>
 </div></footer></body></html>'''
+
+
+def glossary_page(g):
+    """Static, indexable and keyboard-readable vocabulary for independent teachers."""
+    title="Vocabolario IA e didattica applicata per docenti"
+    url=BASE+ROUTE+"/glossario/"
+    meta=seo(title+" | MANZO AI",
+             "Le parole fondamentali della didattica e dell'intelligenza artificiale spiegate con esempi scolastici, da pedagogia e metodo a prompt e privacy.",
+             "DefinedTermSet",url)
+    chunks=[]
+    for category in g["categories"]:
+        items=[x for x in g["entries"] if x["category"]==category]
+        blocks=[]
+        for item in items:
+            refs=('<a href="'+e(item["source"])+'" rel="noopener noreferrer" target="_blank">Fonte di approfondimento</a>'
+                  if item.get("source") else "")
+            blocks.append('<article class="term-card" id="'+e(item["id"])+'">'
+              '<div class="term-group">'+e(category)+'</div>'
+              '<h3>'+e(item["term"])+'</h3>'
+              '<p>'+e(item["definition"])+'</p>'
+              '<div class="term-example"><b>Nella pratica scolastica</b><p>'+e(item["classroom_example"])+'</p></div>'
+              +refs+'</article>')
+        chunks.append('<section class="glossary-category" aria-label="'+e(category)+'">'
+          '<h2>'+e(category)+'</h2><div class="glossary-results">'+''.join(blocks)+'</div></section>')
+    return f'''<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{e(title)} | MANZO AI</title>{meta}
+<link rel="stylesheet" href="../assets.css"><link rel="stylesheet" href="../lesson.css">
+</head><body><a class="skip-link" href="#contenuto">Vai al vocabolario</a>
+<header class="site-head"><div class="wrap head-inner"><a class="brand" href="{BASE}it/">
+<img class="brand-icon" src="{BASE}assets/manzo-mark.svg" alt="" width="38" height="38"><span>MANZO <b>AI</b></span></a>
+<a href="{BASE}{ROUTE}/">Torna al corso</a></div></header>
+<main id="contenuto" class="wrap final-glossary">
+<div class="glossary-banner"><span class="eyebrow">AI TEACHING LAB / RIFERIMENTO FINALE</span>
+<h1>{e(title)}</h1>
+<p>{e(g["subtitle"])}. Differenze, significati ed esempi per orientarsi nella professione.</p>
+<a class="glossary-page-link" href="{BASE}{ROUTE}/">Riprendi la formazione</a></div>
+<p class="glossary-standalone-intro">Questo vocabolario è una risorsa didattica, non un dizionario normativo. Le definizioni semplificano termini professionali e illustrano un uso concreto. Il metodo MANZO AI è una proposta progettuale interna, non un metodo pedagogico validato sperimentalmente.</p>
+{''.join(chunks)}
+<section class="glossary-refs"><h2>Fonti per approfondire</h2><ul>
+{''.join('<li><a href="'+e(x["url"])+'" target="_blank" rel="noopener noreferrer">'+e(x["title"])+'</a></li>' for x in g["sources"])}
+</ul></section></main><footer class="footer"><div class="wrap"><b>MANZO AI · AI Teaching Lab</b>
+<p>Approccio centrato sul docente e sull'apprendimento, con verifica umana dei materiali generati</p></div></footer>
+</body></html>'''
 
 def feature(site,verify=False):
     titles={
@@ -112,8 +157,12 @@ def publish(site,verify=False):
     course=json.loads((DATA/"course.json").read_text(encoding="utf-8"))
     scenes=json.loads((DATA/"scenarios.json").read_text(encoding="utf-8"))
     assessments=json.loads((DATA/"assessment-bank.json").read_text(encoding="utf-8"))
-    if len(course["modules"])!=5 or len(scenes["modules"])!=5 or len(assessments["modules"])!=5:raise RuntimeError("Course incomplete")
-    for name in ["course.json","assessment-bank.json","scenarios.json"]:
+    narrative=json.loads((DATA/"narrative.json").read_text(encoding="utf-8"))
+    glossary=json.loads((DATA/"glossary.json").read_text(encoding="utf-8"))
+    if len(course["modules"])!=5 or len(scenes["modules"])!=5 or len(assessments["modules"])!=5 or len(narrative["modules"])!=5:raise RuntimeError("Course incomplete")
+    if [m["id"] for m in course["modules"]] != [m["id"] for m in narrative["modules"]]:raise RuntimeError("Narrative module order mismatch")
+    if len(glossary["entries"])<40:raise RuntimeError("Teacher glossary incomplete")
+    for name in ["course.json","assessment-bank.json","scenarios.json","narrative.json","glossary.json"]:
         dst=target/"data"/name
         if name=="course.json":
             public_course=dict(course)
@@ -152,16 +201,22 @@ def publish(site,verify=False):
             dest=target/f"modulo-{i:02d}"/"index.html"
             dest.parent.mkdir(parents=True,exist_ok=True)
             dest.write_text(lesson_page(i,m,course,text),encoding="utf-8")
+        vocab=target/"glossario"/"index.html"
+        vocab.parent.mkdir(parents=True,exist_ok=True)
+        vocab.write_text(glossary_page(glossary),encoding="utf-8")
     for i in range(1,6):
         page=target/f"modulo-{i:02d}"/"index.html"
         if not page.is_file():raise RuntimeError("Missing module "+str(page))
         html=page.read_text(encoding="utf-8")
         if html.count("<h1")!=1 or "Metodo MANZO AI" not in html or "Laboratorio" not in html:raise RuntimeError("Semantic module missing")
         if 'content="noindex' in html or 'Non pubblicato' in html:raise RuntimeError("Incorrect public lesson status")
+    vocab=target/"glossario"/"index.html"
+    if not vocab.is_file() or "Pedagogia" not in vocab.read_text(encoding="utf-8"):raise RuntimeError("Public glossary missing")
     for asset in ["index.html","app.js","assets.css","lesson.css","feature.css"]:
         if not (target/asset).is_file():raise RuntimeError("Missing asset "+asset)
     home=(target/"index.html").read_text(encoding="utf-8")
     if 'data-course-data-base="./data/"' not in home or 'content="noindex' in home:raise RuntimeError("Home not public")
+    if not (target/"data"/"narrative.json").is_file():raise RuntimeError("Missing full narrative")
     feature(site,verify)
     print("PASS AI Teaching Lab publisher: 5 complete lessons, public course, 3 Academy features, verified="+str(verify))
 

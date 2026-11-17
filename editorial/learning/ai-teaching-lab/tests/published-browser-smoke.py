@@ -19,6 +19,7 @@ with sync_playwright() as playwright:
         assert page.locator("header.module-hero").count()==1
         assert page.locator("#module-nav button").count()==5
         assert page.locator(".branch-choices button").count()==3
+        assert page.locator(".lab-prompt-code").count()==2
         probe=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button",name="Confronta la mia ipotesi"))
         assert probe.count()==1
         probe.locator("input").nth(1).check()
@@ -31,21 +32,32 @@ with sync_playwright() as playwright:
             assert page.locator(".branch-choices button").count()==2
             page.locator(".branch-choices button").first.click()
             assert page.locator(".branch-outcome").is_visible()
-            assert page.locator(".theory-accordion").count()==3
+            assert page.locator(".narrative-chapter").count()>=5
             assert page.locator(".source-list a").count()>=3
-            page.screenshot(path=str(SHOT/f"published-module-{index+1:02d}-{width}.png"),full_page=True)
+            page.screenshot(path=str(SHOT/f"published-module-{index+1:02d}-{width}.png"),full_page=False)
         # A complete lesson must be a semantic HTML page on the same site.
         link=page.locator("a.full-lesson-link")
         assert link.get_attribute("href")=="./modulo-05/"
+        assert page.locator("#atl-final-glossary").is_visible()
+        assert "47 voci" in page.locator("#atl-term-count").inner_text()
+        assert page.locator('a[data-atl-glossary-page]').is_visible()
         link.click()
         page.wait_for_url(COURSE+"modulo-05/")
         assert page.locator("h1").count()==1
         assert page.locator(".atl-reading").is_visible()
         assert page.locator(".atl-reading h2").count()>=5
-        assert page.locator(".atl-reading table").count()>=1
+        assert page.locator(".atl-reading pre code").count()>=2
         assert page.locator('link[rel="canonical"]').count()==1
-        assert page.get_by_text("Guida del formatore",exact=False).count()>=1
+        assert page.get_by_text("Per chi facilita un gruppo",exact=False).count()>=1
         assert page.locator("a.atl-next").count()==1
+        glossary_link=page.locator("a.atl-side-glossary-link")
+        assert glossary_link.count()==1
+        glossary_link.click()
+        page.wait_for_url(COURSE+"glossario/")
+        assert page.locator("h1").count()==1
+        assert page.locator(".term-card").count()==47
+        assert "Pedagogia" in page.locator("main").inner_text()
+        assert "Metodo MANZO AI" in page.locator("main").inner_text()
         assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth+2")
         assert not errors,errors
         page.close()

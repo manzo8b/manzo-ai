@@ -24,3 +24,147 @@
 .branch-stage label{display:block;font-weight:700;margin:8px 0}
 .branch-stage .text-reason{background:#fff}
 @media(prefers-reduced-motion:reduce){.branch-choices .button,.theory-accordion summary{transition:none!important}}
+
+
+/* AI Teaching Lab / Editorial learning experience 2.2
+   White backgrounds, vivid accessible cards and readable independent study. */
+.module-hero{background:linear-gradient(125deg,#0645c9 0%,#1264f2 57%,#173b96 100%);box-shadow:0 22px 48px #124ccc26}
+.module-hero h2,.module-hero .module-subtitle,.module-hero .kicker,
+.module-hero .module-meta,.module-hero .module-meta span{color:#fff!important}
+.module-hero .module-subtitle{font-size:clamp(1.03rem,1.7vw,1.18rem);font-weight:460;line-height:1.65;max-width:650px;opacity:1}
+.module-hero h2{text-shadow:0 2px 14px #092f8a22;font-weight:780}
+.module-hero:after{width:285px;height:285px;right:-135px;top:-145px;border-color:#ffffff20}
+.panel{background:#fff;border:1px solid #dce6f4;box-shadow:0 6px 28px #1c3e6a09}
+.self-study-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+.self-study-step{min-width:0;border:1px solid #d4e2f5;background:linear-gradient(155deg,#fff 20%,#f2f7ff);border-radius:18px;padding:17px 15px}
+.self-study-step b{font-size:1.04rem;display:block;margin:7px 0}
+.self-study-step p{font-size:.88rem;color:#435b73;margin:0}
+.self-step-no{color:#0c5ad5;font-size:1.5rem;font-weight:860;letter-spacing:-.04em}
+.study-goals{border-radius:17px;background:#ebf6ff;border-left:5px solid #1b67e7;padding:17px 20px;margin-top:20px}
+.study-goals h4{margin:0 0 7px;color:#19406b}
+.study-goals ul{margin:0}.study-goals li{font-size:.92rem}
+.narrative-intro{font-size:clamp(1.12rem,1.7vw,1.23rem);line-height:1.73;color:#1b426c;font-weight:520;border-left:4px solid #ef693c;padding-left:20px;margin:22px 0 34px!important}
+.narrative-chapter{border-top:1px solid #dfebf4;padding:23px 0 12px}
+.narrative-chapter:first-of-type{border-top:0}
+.narrative-chapter h4{font-size:clamp(1.2rem,2.2vw,1.55rem);letter-spacing:-.025em;line-height:1.3;color:#163d66;font-weight:770;margin:8px 0 12px}
+.narrative-chapter p{font-size:1.03rem;line-height:1.78;color:#314c66;margin:0 0 13px}
+.chapter-label{font-size:.69rem;letter-spacing:.12em;font-weight:820;color:#1261db}
+.pedagogy-note{background:linear-gradient(120deg,#fff4eb,#fffefa);border-left:4px solid #e87730;border-radius:0 18px 18px 0;padding:21px 23px;margin-top:22px}
+.pedagogy-note h4{color:#75411c;margin:0 0 10px}
+.glossary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0 0}
+.glossary-item{background:#f6faff;border:1px solid #dce6f3;border-radius:15px;padding:16px}
+.glossary-item dt{font-weight:780;color:#1a4a7f;margin-bottom:5px}
+.glossary-item dd{margin:0;color:#425d76;font-size:.9rem;line-height:1.55}
+.method-steps{grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:12px;margin-top:20px}
+.method-step{background:linear-gradient(130deg,#f7faff,#ecf4ff);border-color:#d2e1f5;padding:18px 16px;min-height:136px}
+.method-step span{font-size:1.55rem;font-weight:850;letter-spacing:-.04em;color:#145fea}
+.method-step b{color:#163858;line-height:1.3;margin:5px 0}
+.method-step small{font-size:.86rem;line-height:1.5;color:#45627b}
+.case-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:20px}
+.lab-card{position:relative;overflow:hidden;background:#fff;border:1px solid #d3e1f2;border-radius:22px;padding:0 0 23px;box-shadow:0 12px 30px #234f9311;transition:transform .23s ease,box-shadow .23s ease,border-color .23s ease}
+.lab-card:hover{transform:translateY(-6px);box-shadow:0 22px 50px #234f9324;border-color:#94b9ee}
+.lab-card>h4,.lab-card>p,.lab-card>.lab-goal,.lab-card>.lab-steps,.lab-card>.lab-prompt,.lab-card>.lab-example,.lab-card>.lab-review{margin-inline:clamp(16px,2.1vw,24px)}
+.lab-card>h4{font-size:1.34rem;color:#183e6a;margin-block:18px 10px;line-height:1.24}
+.lab-card>p{font-size:.95rem;line-height:1.6;color:#455e78}
+.lab-art{position:relative;min-height:122px;padding:24px;background:linear-gradient(120deg,#1b6aeb,#0b3fba);color:#fff;display:flex;align-items:end;font-size:.8rem;font-weight:800;letter-spacing:.14em;overflow:hidden}
+.lab-art:after{content:"";position:absolute;right:-25px;top:-82px;width:220px;height:220px;border:32px solid #ffffff31;border-radius:50%;transform:rotate(12deg)}
+.lab-card:nth-child(2) .lab-art{background:linear-gradient(120deg,#e5573e,#b8316c)}
+.lab-card:nth-child(2) .lab-art:after{border-color:#ffffff33}
+.lab-goal{border-left:4px solid #1c9a7a;background:#ecf9f5;padding:12px 16px;border-radius:0 12px 12px 0;margin-block:18px}
+.lab-goal b{display:block;color:#0a654e;margin-bottom:4px}
+.lab-goal p{font-size:.91rem;margin:0}
+.lab-steps{background:#f7faff;border:1px solid #dbe5f2;padding:18px 19px;border-radius:14px}
+.lab-steps h5,.lab-review h5{font-size:.95rem;margin:0 0 10px;color:#20446a}
+.lab-steps ol{padding-left:21px;margin:0}
+.lab-steps li{font-size:.87rem;color:#34516b;line-height:1.62;padding-left:3px;margin:8px 0}
+.lab-prompt{background:#f0f7ff;border:1px solid #c8dff8;border-radius:16px;padding:16px 18px;margin-top:15px}
+.lab-prompt-head{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.lab-prompt-head strong{color:#123f76}
+.lab-prompt-head button{margin:0;min-height:35px;font-size:.82rem}
+.lab-prompt-code{display:block;margin:12px 0;background:#fff;color:#173958;padding:15px;border:1px solid #cbdcf0;border-radius:11px;font-size:.8rem;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;max-height:360px}
+.lab-prompt-code code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.lab-prompt>p{font-size:.82rem;color:#4a6380}
+.lab-example{border:1px solid #e8d7cb;background:#fffaf6;border-radius:14px;margin-top:15px;padding:14px 17px}
+.lab-example summary{font-weight:790;color:#895224;cursor:pointer}
+.lab-example blockquote{margin:12px 0 0;line-height:1.6;color:#5b4839}
+.lab-example>p{font-size:.84rem;color:#775e4d;margin-bottom:7px}
+.lab-review{margin-top:17px;border-top:1px solid #e4eaf2;padding-top:15px}
+.lab-review p{font-size:.9rem;line-height:1.6}
+.lab-deliverable{color:#0b654c!important;font-weight:700}
+.full-lesson-link{display:inline-flex;background:#125fe3;color:white;border:2px solid #125fe3;box-shadow:0 8px 24px #145ec627;transition:transform .22s,box-shadow .22s}
+.full-lesson-link:hover{background:#0c47a9;color:white;transform:translateY(-2px);box-shadow:0 16px 34px #145ec63d}
+.crossword-card{background:linear-gradient(165deg,#f5f9ff,#fff 28%);border-color:#bdd3ed;padding:clamp(15px,3vw,26px)}
+.crossword-card h4{font-size:1.4rem;margin:7px 0}
+.crossword-status{font-size:.86rem;color:#1a5b95;font-weight:750}
+.crossword-grid-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.crossword-wrap{min-width:0;max-width:100%;overflow-x:auto;padding:16px;min-height:100px;background:#edf5ff;border:1px solid #d4e5f7;border-radius:17px}
+.crossword{display:grid;gap:2px;grid-template-columns:repeat(var(--grid-cols),var(--cell-size,30px));width:max-content;margin-inline:auto}
+.cross-cell{height:var(--cell-size,30px);width:var(--cell-size,30px);position:relative}
+.cross-block{background:#cbdcf0;border-radius:3px;opacity:.7}
+.cross-cell.active{background:#d8ebff;border-radius:4px}
+.cross-cell .cross-input{width:100%;height:100%;font-size:clamp(.74rem,1.7vw,1rem);padding:8px 0 1px;border:1px solid #789cc8;border-radius:3px;text-transform:uppercase;line-height:1;background:white;color:#123c69;font-weight:800;text-align:center;box-sizing:border-box}
+.cross-cell.active .cross-input{background:#e7f2ff;border-color:#185ddb}
+.cross-cell .cross-input:focus-visible{outline:2px solid #ef7045;outline-offset:0;position:relative;z-index:2}
+.cross-cell .cell-num{font-size:.55rem;top:0;left:2px;color:#234c70;font-weight:840;z-index:1;pointer-events:none}
+.crossword-scroll-hint{font-size:.76rem;color:#47627f;margin:9px 0 0!important;text-align:center}
+.crossword-clue-panel{border:1px solid #d5e3f2;border-radius:17px;background:#fff;padding:16px}
+.crossword-clue-panel h5{font-size:1rem;margin:0;color:#15395d}
+.crossword-clues{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));gap:8px;margin-top:12px}
+.crossword-clue{width:100%;padding:11px 13px!important;text-align:left!important;border:1px solid #d4e2f3!important;border-radius:12px;background:#f7faff!important;color:#204367!important;font-weight:600!important;line-height:1.48!important;white-space:normal;min-height:48px;margin:0!important;font-size:.86rem}
+.crossword-clue:hover,.crossword-clue[aria-pressed="true"]{background:#e7f1ff!important;border-color:#1b65e4!important;color:#123d89!important;box-shadow:0 4px 10px #1c5aa612}
+.crossword-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:15px}
+.crossword-actions .button{margin:0}
+.accessible-words{display:grid;gap:12px;padding:16px;border-radius:15px;background:#edf5ff;border:1px solid #d6e6f7}
+.crossword-word-input{font-size:.95rem!important;background:#fff!important}
+@media(max-width:750px){.self-study-steps{grid-template-columns:1fr}.glossary-grid{grid-template-columns:1fr}.case-grid{grid-template-columns:1fr}.lab-card{max-width:100%}}
+@media(max-width:500px){.narrative-chapter p{font-size:.96rem}.lab-card>h4,.lab-card>p,.lab-card>.lab-goal,.lab-card>.lab-steps,.lab-card>.lab-prompt,.lab-card>.lab-example,.lab-card>.lab-review{margin-inline:16px}.crossword-wrap{padding:10px}.crossword-grid-layout{gap:12px}.crossword-clue-panel{padding:13px}.crossword-clues{grid-template-columns:1fr}.module-hero h2{color:#fff!important}}
+@media(prefers-reduced-motion:reduce){.lab-card,.full-lesson-link{transition:none!important}.lab-card:hover,.full-lesson-link:hover{transform:none!important}}
+
+
+/* Applied pedagogy: the course models its own teaching method */
+.applied-pedagogy{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,165px),1fr));gap:10px;margin:19px 0 22px}
+.applied-step{background:#f6faff;border:1px solid #d6e5f6;border-radius:16px;padding:15px;min-width:0;transition:transform .22s ease,box-shadow .22s ease}
+.applied-step:hover{transform:translateY(-3px);box-shadow:0 14px 28px #245eae1a}
+.applied-step span{color:#1463e6;font-size:1.22rem;letter-spacing:-.02em;font-weight:870}
+.applied-step b{display:block;font-size:.92rem;color:#193c67;margin:7px 0}
+.applied-step p{font-size:.82rem;color:#45627e;line-height:1.55;margin:0}
+.final-glossary{padding-block:35px 100px}
+.glossary-banner{background:linear-gradient(125deg,#0c56dc,#1266ef 65%,#143a92);color:white;border-radius:27px;padding:clamp(25px,5vw,53px);box-shadow:0 24px 55px #124ece24;position:relative;overflow:hidden}
+.glossary-banner:after{content:"";position:absolute;border-radius:50%;width:230px;height:230px;right:-100px;top:-130px;border:35px solid #ffffff25;pointer-events:none}
+.glossary-banner .eyebrow{color:#edf7ff;font-size:.75rem}
+.glossary-banner h2{color:white!important;font-size:clamp(1.95rem,4.1vw,3.6rem);letter-spacing:-.05em;line-height:1.12;margin:12px 0 15px;max-width:720px}
+.glossary-banner p{color:#f6faff;font-size:1.02rem;line-height:1.65;max-width:760px}
+.glossary-page-link{display:inline-flex;margin-top:14px;color:#144eab!important;background:#fff;text-decoration:none!important;font-weight:790;border-radius:13px;padding:12px 17px}
+.glossary-page-link:hover{background:#ebf4ff}
+.glossary-controls{display:grid;grid-template-columns:minmax(0,2fr) minmax(170px,1fr);column-gap:20px;row-gap:8px;align-items:end;margin:30px 0 16px}
+.glossary-controls label{display:block;font-weight:790;font-size:.9rem;color:#294d75}
+.glossary-controls label:nth-of-type(1){grid-row:1;grid-column:1}
+.glossary-controls label:nth-of-type(2){grid-row:1;grid-column:2}
+.glossary-controls input,.glossary-controls select{width:100%;border:1px solid #a7c1df;border-radius:14px;background:#fff;padding:13px 15px;color:#163b67;min-height:49px}
+.glossary-controls input{grid-row:2;grid-column:1}
+.glossary-controls select{grid-row:2;grid-column:2}
+.glossary-count{color:#476482;font-size:.91rem;font-weight:700;margin:0 0 15px}
+.glossary-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,295px),1fr));gap:15px;align-items:stretch}
+.term-card{border-radius:19px;border:1px solid #d7e4f2;padding:21px;min-width:0;background:linear-gradient(140deg,#fff 50%,#f8fbff);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.term-card:hover{transform:translateY(-4px);border-color:#a4c8f5;box-shadow:0 15px 32px #2e548a15}
+.term-card h3{font-size:1.18rem;line-height:1.25;letter-spacing:-.02em;margin:9px 0 12px;color:#1d426d}
+.term-card>p{font-size:.9rem;line-height:1.62;color:#415c76;margin:0 0 16px}
+.term-group{font-size:.66rem;letter-spacing:.1em;font-weight:850;color:#1458b4;text-transform:uppercase}
+.term-example{border-left:3px solid #f07840;background:#fff8f3;border-radius:0 11px 11px 0;padding:11px 14px;margin-bottom:12px}
+.term-example b{color:#954519;font-size:.82rem}
+.term-example p{font-size:.84rem;color:#6f523a;margin:4px 0 0;line-height:1.57}
+.term-card>a{font-size:.79rem;font-weight:720;overflow-wrap:anywhere}
+.glossary-empty{background:#edf5ff;padding:18px;border-radius:14px;color:#315d8a}
+@media(max-width:650px){.glossary-controls{grid-template-columns:1fr}.glossary-controls label:nth-of-type(1){grid-row:1;grid-column:1}.glossary-controls input{grid-row:2;grid-column:1}.glossary-controls label:nth-of-type(2){grid-row:3;grid-column:1}.glossary-controls select{grid-row:4;grid-column:1}.glossary-results{grid-template-columns:1fr}.final-glossary{padding-block:15px 65px}}
+@media(prefers-reduced-motion:reduce){.term-card,.applied-step{transition:none!important}.term-card:hover,.applied-step:hover{transform:none!important}}
+
+
+/* Final glossary standalone page */
+.glossary-banner h1{color:#fff!important;font-size:clamp(2rem,4.2vw,3.5rem);letter-spacing:-.05em;line-height:1.13;margin:15px 0}
+.glossary-standalone-intro{font-size:1rem;line-height:1.75;max-width:890px;color:#385572;padding:20px 2px}
+.glossary-category{margin-top:42px}
+.glossary-category>h2,.glossary-refs>h2{font-size:clamp(1.5rem,2.6vw,2.15rem);letter-spacing:-.04em;margin-bottom:19px;color:#183f6a}
+.glossary-refs{border-top:1px solid #dbe6f4;margin-top:45px;padding-top:21px}
+.glossary-refs li{margin:12px 0}
+.atl-side-glossary-link{display:block;background:#eaf3ff;border-radius:12px;padding:10px 14px;font-weight:750;font-size:.87rem;color:#1451a3;margin-top:17px;text-decoration:none}
+.atl-side-glossary-link:hover{background:#dbeaff}

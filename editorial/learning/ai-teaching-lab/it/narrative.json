@@ -1,0 +1,463 @@
+{
+  "schema_version": "2.2",
+  "course_key": "ai-teaching-lab",
+  "locale": "it",
+  "purpose": "narrative self-study for teachers",
+  "teacher_facing": true,
+  "facilitator_instructions_separate": true,
+  "planned_total_hours": 20,
+  "modules": [
+    {
+      "id": "atl-01",
+      "title": "Insegnare nell’era dell’intelligenza artificiale",
+      "subtitle": "Capire l’IA, formulare richieste efficaci e scegliere quando usarla nella pratica scolastica",
+      "lead": "Quando una docente arriva a fine giornata con verifiche da preparare, materiale da adattare e poco tempo, non le serve una lista di cento applicazioni. Le serve capire che cosa può fare davvero l'intelligenza artificiale, che cosa non può garantire e come formulare una richiesta che produca un materiale didattico controllabile.",
+      "chapters": [
+        {
+          "heading": "La mattina in cui entra l’intelligenza artificiale",
+          "text": "Immagina una docente di storia che deve spiegare le migrazioni a una seconda superiore. Ha già un libro, due brevi fonti e una domanda importante: come aiutare la classe a distinguere ciò che una testimonianza racconta da ciò che noi supponiamo? Un collega propone un assistente di intelligenza artificiale. La tentazione è chiedergli subito una presentazione completa, ma il primo passo non riguarda la macchina: riguarda il problema degli studenti. Se non sappiamo che cosa vogliamo far comprendere, anche trenta slide perfette rischiano di essere inutili. In questo modulo partiremo sempre da una situazione riconoscibile, proveremo strumenti e alternative, poi osserveremo che cosa cambia nel lavoro professionale."
+        },
+        {
+          "heading": "Che cos’è l’IA, e che cos’è l’IA generativa",
+          "text": "Per intelligenza artificiale intendiamo una famiglia di sistemi informatici capaci di elaborare input e produrre risultati come previsioni, raccomandazioni, classificazioni o contenuti. Non sono tutte la stessa cosa: un filtro antispam, un riconoscitore di immagini e un assistente che scrive un testo svolgono compiti differenti. L’IA generativa è la parte che crea nuovi output, per esempio spiegazioni, esercizi, immagini o audio a partire da una richiesta. Nei sistemi linguistici moderni, chiamati grandi modelli linguistici o LLM, la generazione si basa su regolarità apprese durante l’addestramento e sul contesto fornito. Un risultato fluido non significa che ogni dato sia vero: la verifica resta essenziale."
+        },
+        {
+          "heading": "Che cosa cambia per un insegnante",
+          "text": "L’utilità di un assistente non coincide con il numero di file che genera. Può aiutare a proporre tre modi di spiegare lo stesso concetto, trasformare un’idea in una prima bozza di esercizio, adattare il lessico di un testo già verificato o costruire una rubrica da rivedere. Non può conoscere da solo la cultura della classe, certificare una fonte mai consultata né decidere al posto del docente come valutare una persona. Prima di usare uno strumento, chiediti quale prestazione vuoi vedere: 'gli studenti confrontano due fonti e motivano una conclusione' è un obiettivo più utile di 'gli studenti guardano una presentazione'. Questa distinzione aiuta a misurare il valore del lavoro prodotto."
+        },
+        {
+          "heading": "Il prompt: una consegna professionale, non una formula magica",
+          "text": "Un prompt è il testo con cui diamo al sistema istruzioni, contesto e materiali per svolgere un compito. Scrivere 'fammi una lezione bellissima' lascia aperte troppe decisioni: età, prerequisiti, durata, obiettivo, materiali, tipo di attività, accessibilità e controllo delle fonti. Una richiesta migliore non deve essere lunga per forza; deve chiarire ciò che conta. Per la didattica proponiamo sei elementi: OBIETTIVO (che cosa devono imparare gli studenti), CONTESTO (classe, materia, durata), DATI CONSENTITI (quali materiali può usare), VINCOLI (sicurezza, livello, accessibilità), OUTPUT (come presentare il lavoro) e VERIFICA (quali controlli chiediamo di esplicitare). Non tutti servono nella stessa misura, ma aiutano a evitare risultati generici."
+        },
+        {
+          "heading": "Dalla prima bozza alla lezione verificabile",
+          "text": "Proviamo una differenza. Prompt generico: 'Crea una lezione sulle migrazioni'. La risposta potrebbe contenere molte attività, date o generalizzazioni non adatte. Prompt mirato: 'Prepara 15 minuti per una seconda superiore; obiettivo: distinguere fatto e interpretazione attraverso due estratti fittizi; non aggiungere dati storici; crea due domande, una attività in coppia e un biglietto finale'. Qui sappiamo che cosa verificare. Il docente legge l'output, elimina affermazioni senza fonte, prova il tempo e controlla se le domande richiedono davvero di ragionare. Il sistema può essere utile anche se decidiamo di non usarlo: il confronto ci aiuta a migliorare la progettazione."
+        },
+        {
+          "heading": "La prospettiva pedagogica: la domanda viene prima della risposta",
+          "text": "John Dewey ha collegato educazione, esperienza e indagine riflessiva: il problema vissuto fa nascere ipotesi che vengono esaminate e riviste. Qui utilizziamo il suo insegnamento come parafrasi applicativa, non come citazione letterale. Anche l'allineamento tra obiettivo e prova di apprendimento, discusso nei principi della Carnegie Mellon e nelle tassonomie degli obiettivi, ci aiuta a non confondere intrattenimento e comprensione. Il contributo pedagogico non dice di rifiutare la tecnologia, ma di chiedere quale esperienza costruisca per chi apprende. L'IA entra così nella lezione come possibilità da valutare, non come punto di partenza inevitabile."
+        }
+      ],
+      "glossary": [
+        [
+          "Intelligenza artificiale",
+          "Sistemi che elaborano input per generare previsioni, raccomandazioni, decisioni o contenuti"
+        ],
+        [
+          "IA generativa",
+          "Sistemi capaci di produrre nuovi testi, immagini, suoni o altri contenuti"
+        ],
+        [
+          "LLM",
+          "Grande modello linguistico che genera testo in base a modelli appresi e contesto"
+        ],
+        [
+          "Prompt",
+          "Consegna o richiesta fornita a un sistema"
+        ],
+        [
+          "Output",
+          "Risultato prodotto dal sistema"
+        ],
+        [
+          "Rubrica",
+          "Griglia con criteri e descrittori per giudicare un lavoro"
+        ],
+        [
+          "Dati sintetici",
+          "Informazioni inventate per esercitarsi senza usare dati personali reali"
+        ]
+      ],
+      "labs": [
+        {
+          "title": "Dalla richiesta vaga al prompt efficace",
+          "situation": "Hai una classe seconda superiore che deve distinguere fatto e interpretazione attraverso due brevi estratti inventati sulle migrazioni",
+          "goal": "Ottenere una bozza di microlezione di 15 minuti che possa essere controllata e adattata",
+          "steps": [
+            "Leggi la situazione e scrivi in una frase che cosa dovranno saper fare gli studenti alla fine",
+            "Confronta la richiesta 'fammi una lezione sulle migrazioni' con il prompt completo proposto sotto",
+            "Copia il prompt in uno strumento autorizzato oppure analizza l'esempio di output fornito qui, senza registrarti ad alcun servizio",
+            "Sottolinea un punto coerente con l'obiettivo, uno da verificare e un passaggio da modificare",
+            "Riscrivi il prompt per ottenere una seconda bozza più utile e riporta le due differenze"
+          ],
+          "prompt": "Agisci come supporto alla progettazione didattica, non come valutatore degli studenti.\nOBIETTIVO: creare una microlezione di storia che permetta a una seconda superiore di distinguere fatti presenti in una testimonianza e interpretazioni.\nCONTESTO: 15 minuti, lavoro in coppie, linguaggio chiaro.\nDATI CONSENTITI: due estratti inventati — A: «La famiglia parte dopo tre raccolti scarsi». B: «Alcuni abitanti credono che tutti i nuovi arrivati abbiano la stessa ragione».\nVINCOLI: non aggiungere eventi o statistiche reali, non inventare citazioni, non chiedere dati sugli studenti, prevedi lettura accessibile.\nOUTPUT: 1 domanda guida, 3 passaggi con tempi, 2 domande per la coppia, 1 verifica finale.\nVERIFICA: elenca esplicitamente che cosa non possiamo dedurre dai due estratti.",
+          "sample": "Esempio didattico simulato: «Domanda guida: una testimonianza può dimostrare che tutte le persone migrano per lo stesso motivo? 2 minuti di lettura, 8 minuti in coppia per separare descrizioni e opinioni, 5 minuti di confronto ed exit ticket. Non possiamo dedurre quante persone siano partite né le cause di ogni migrazione».",
+          "check": "L'output evita statistiche non documentate? La prova finale richiede una spiegazione o soltanto ripetizione? I tempi sono realistici?",
+          "deliverable": "Un prompt migliorato, una microlezione corretta e una nota che spieghi le modifiche"
+        },
+        {
+          "title": "Risparmiare tempo senza perdere la qualità",
+          "situation": "Devi preparare una breve prova di geografia e un'attività per la lezione successiva; hai pochi minuti e una presentazione già disponibile",
+          "goal": "Confrontare una proposta con IA e una senza IA sullo stesso obiettivo",
+          "steps": [
+            "Scrivi tre criteri semplici: correttezza, tempo totale di preparazione, possibilità di osservare l'apprendimento",
+            "Crea manualmente una bozza con il materiale scolastico autorizzato",
+            "Usa il prompt qui sotto per richiedere una seconda proposta con dati esclusivamente fittizi; se non hai un assistente, valuta l'esempio simulato",
+            "Controlla ciascuna domanda e conta quante correzioni servono, includendo il tempo di verifica",
+            "Scegli una delle due proposte, oppure una combinazione, e spiega perché"
+          ],
+          "prompt": "OBIETTIVO: tre domande per leggere una carta altimetrica immaginaria.\nCONTESTO: seconda media, 12 minuti.\nDATI CONSENTITI: regione A 150 m, B 750 m, C 1450 m; dati inventati per esercizio.\nVINCOLI: nessuna località reale, nessuna informazione sugli studenti, niente cifre aggiuntive.\nOUTPUT: una domanda di lettura, una di confronto e una di spiegazione, con criteri di correzione.\nVERIFICA: indica eventuali ambiguità e il risultato numerico dei confronti.",
+          "sample": "Esempio simulato: «Quale zona è più elevata? C è a 1450 m. Di quanti metri B supera A? 600 m. Perché C non è necessariamente più fredda di A in ogni condizione? I soli dati di altitudine non bastano: servono altri fattori».",
+          "check": "Il confronto usa il tempo complessivo, non il solo tempo di generazione? Le domande hanno criteri comuni? È chiaro che i dati sono inventati?",
+          "deliverable": "Una tabella di confronto e una decisione motivata"
+        }
+      ]
+    },
+    {
+      "id": "atl-02",
+      "title": "Pensiero critico e informazioni affidabili",
+      "subtitle": "Distinguere una risposta convincente da una conoscenza verificata",
+      "lead": "Un testo scritto bene può contenere un riferimento inesistente. Il compito dell'insegnante non è riconoscere a intuito se lo abbia scritto una macchina, ma aiutare la classe a cercare prove, confrontare fonti e spiegare il proprio ragionamento.",
+      "chapters": [
+        {
+          "heading": "La bibliografia che sembra perfetta",
+          "text": "Una studentessa consegna un elaborato sulle trasformazioni dell'Ottocento. Le frasi scorrono bene, i riferimenti appaiono ordinati e il lessico è accurato. Quando l'insegnante cerca lo studio che sosteneva la conclusione, però, non trova l'opera. Questo caso, ricostruito con dati completamente fittizi, ci introduce a una difficoltà nuova solo in parte: anche prima dell'IA esistevano errori, citazioni improprie e affermazioni troppo generali. Oggi la generazione automatica può renderli più plausibili e frequenti. Per questo il problema educativo centrale non è la paura dello strumento, ma la capacità di distinguere l'aspetto convincente di un testo dalla sua solidità documentale."
+        },
+        {
+          "heading": "Perché un assistente può sbagliare con sicurezza",
+          "text": "Un modello linguistico produce una risposta a partire dal contesto e da regolarità apprese. La frase può essere grammaticalmente impeccabile anche quando un dato, una data o un riferimento non sono affidabili. Con 'allucinazione' indichiamo, nel linguaggio comune dell'IA generativa, un'informazione inventata o non fedele presentata come plausibile. Ma non tutti gli errori sono allucinazioni: una fonte reale interpretata male, una statistica vecchia, un calcolo errato e un pregiudizio nei contenuti richiedono interventi diversi. Il docente dovrebbe dunque insegnare a denominare l'errore con precisione, senza trasformare ogni incertezza in una condanna."
+        },
+        {
+          "heading": "Un metodo di verifica che si può insegnare",
+          "text": "Cominciamo isolando l'affermazione da controllare: 'le fabbriche nacquero nel 1925', per esempio, è diversa da 'la rivoluzione industriale cambiò i rapporti sociali'. Poi cerchiamo una fonte primaria appropriata e leggiamo il passaggio che potrebbe sostenere la frase. Il titolo o il collegamento non bastano: dobbiamo confrontare contenuto, data, metodo e limiti della fonte. Possiamo concludere 'verificato', 'smentito' oppure 'non verificato'. Quest'ultima categoria è fondamentale: se non riusciamo a trovare la fonte, non abbiamo ancora dimostrato che ogni parte dell'affermazione sia falsa. Insegnare queste distinzioni aiuta a gestire anche screenshot e notizie condivise nelle chat."
+        },
+        {
+          "heading": "L’integrità di un compito non si misura dal suo stile",
+          "text": "Quando un elaborato suona troppo raffinato, l'insegnante può sospettare un uso improprio dell'IA. Ma un rilevatore automatico non può, da solo, stabilire con certezza chi abbia scritto un testo. Una risposta pedagogica più robusta è chiedere di spiegare le fonti, conservare una bozza, commentare le revisioni e discutere a voce una scelta argomentativa. Si valuta una competenza osservabile, con regole trasparenti e garanzie per gli studenti. Le scuole devono inoltre definire quali usi dell'IA siano permessi e come vadano dichiarati. L'obiettivo non è costruire un esame 'a prova di macchina', ma offrire più occasioni di mostrare comprensione e responsabilità."
+        },
+        {
+          "heading": "Freire e l’educazione che insegna a porre domande",
+          "text": "Paulo Freire ha posto l'accento su un'educazione dialogica che invita a interrogare la realtà anziché ricevere passivamente risposte già confezionate. Questa è una parafrasi del suo orientamento, non una citazione letterale. Il collegamento con la verifica dei contenuti è diretto: lo studente non deve soltanto dire 'questa notizia è falsa', ma ricostruire il percorso che porta alla conclusione, riconoscendo i limiti delle proprie prove. Anche una risposta IA corretta può diventare occasione per chiedere: su che cosa si basa? Quali alternative esistono? Cosa cambierebbe se una fonte venisse smentita?"
+        }
+      ],
+      "glossary": [
+        [
+          "Affermazione da verificare",
+          "Una frase che sostiene un fatto o una relazione e richiede una prova; spesso chiamata claim"
+        ],
+        [
+          "Fonte primaria",
+          "Documento o dato originale pertinente al problema"
+        ],
+        [
+          "Allucinazione",
+          "Informazione inventata o non fedele generata in modo plausibile"
+        ],
+        [
+          "Bias",
+          "Distorsione sistematica nella selezione o rappresentazione"
+        ],
+        [
+          "Non verificato",
+          "Stato di una tesi che non ha ancora prove sufficienti né smentita documentata"
+        ],
+        [
+          "Rilevatore IA",
+          "Strumento che stima caratteristiche di un testo, senza poter fornire da solo certezza sull'autore"
+        ]
+      ],
+      "labs": [
+        {
+          "title": "Il tema con una fonte inesistente",
+          "situation": "Un elaborato sintetico dice: «La prima rivoluzione industriale iniziò nel 1925» e cita uno studio immaginario",
+          "goal": "Imparare a verificare affermazioni senza accusare un autore",
+          "steps": [
+            "Evidenzia due affermazioni indipendenti nel testo fittizio",
+            "Scrivi per ogni frase che cosa dovresti cercare in una fonte storica affidabile",
+            "Usa il prompt per ottenere una tabella di possibili controlli, non una dichiarazione di verità",
+            "Controlla fuori dal modello almeno una fonte realmente consultabile",
+            "Riprogetta una piccola prova che richieda spiegazione delle fonti e revisione"
+          ],
+          "prompt": "RUOLO: assistente di revisione didattica.\nOBIETTIVO: distinguere affermazioni, fonti mancanti e verifiche necessarie in un elaborato fittizio.\nCONTESTO: docente di storia, seconda superiore.\nTESTO: «La prima rivoluzione industriale iniziò nel 1925. Lo dimostra un articolo immaginario del 2018».\nVINCOLI: non inventare bibliografie, non attribuire il testo a un chatbot, non formulare accuse verso studenti.\nOUTPUT: tabella con affermazione, fonte da cercare, stato provvisorio e azione del docente.\nVERIFICA: usa 'non verificato' quando non possiedi il documento originale.",
+          "sample": "Esempio simulato: «Data di inizio: affermazione contestabile, occorre confrontarla con una fonte storica attendibile; articolo del 2018: riferimento deliberatamente fittizio nell'esercizio, non usarlo come prova».",
+          "check": "Hai distinto la ricerca di una prova dalla conferma di un fatto? Hai evitato accuse sulla paternità del testo?",
+          "deliverable": "Registro affermazione–fonte–esito e nuova consegna di verifica"
+        },
+        {
+          "title": "La notizia sensazionale nella chat",
+          "situation": "Uno screenshot inventato proclama: «Uno studio mondiale dimostra che leggere dopo le 21 elimina la memoria»",
+          "goal": "Progettare un'attività di alfabetizzazione informativa di 15 minuti",
+          "steps": [
+            "Identifica le parole che suggeriscono certezza assoluta",
+            "Spiega quali elementi mancano: autore, studio, campione, metodo, data",
+            "Fai proporre all'IA una serie di domande di verifica, non un responso medico",
+            "Costruisci una scheda a tre colonne: affermazione, prova necessaria, stato",
+            "Chiudi l'attività chiedendo agli studenti quando sospendere la condivisione"
+          ],
+          "prompt": "OBIETTIVO: preparare 15 minuti di alfabetizzazione informativa su una notizia fittizia.\nCONTESTO: terza media, nessun contenuto clinico personalizzato.\nMATERIALE: titolo inventato «Leggere dopo le 21 elimina la memoria» privo di fonte.\nVINCOLI: non trattare il titolo come fatto vero, non dare indicazioni mediche, non inventare studi.\nOUTPUT: tre domande da porsi, scheda di verifica, un'attività in coppie, risposta finale con grado di certezza.\nVERIFICA: evidenzia quali conclusioni non possiamo ancora sostenere.",
+          "sample": "Esempio simulato: «Il titolo è un'affermazione non verificata. Mancano studio originale, metodo e contesto; prima di condividerlo bisogna recuperare e leggere la fonte».",
+          "check": "Le domande invitano a cercare prove o soltanto a indovinare vero/falso?",
+          "deliverable": "Scheda di verifica delle notizie pronta da adattare"
+        }
+      ]
+    },
+    {
+      "id": "atl-03",
+      "title": "Progettare materiali che fanno imparare",
+      "subtitle": "Dalle slide ai podcast: creare risorse chiare, accurate e accessibili",
+      "lead": "Quando una presentazione contiene troppe informazioni, gli studenti possono uscire dalla lezione con un'immagine suggestiva ma un'idea sbagliata. Il problema non è imparare a generare più contenuti: è imparare a costruire materiali che aiutino a pensare.",
+      "chapters": [
+        {
+          "heading": "Il grafico bellissimo che spiega male",
+          "text": "Una docente prepara quaranta slide sul clima. Ci sono immagini potenti, titoli dinamici e grafici senza unità di misura. Alla fine, uno studente dice che una giornata fredda è sufficiente a smentire un andamento climatico di lungo periodo. Il materiale ha attirato gli occhi, ma non ha sciolto il fraintendimento. Il punto di partenza è allora la domanda che vogliamo far affrontare: come distinguere il tempo meteorologico dalle tendenze del clima? In questa lezione costruiremo una risorsa con meno elementi decorativi e più occasioni di interpretare, confrontare e motivare."
+        },
+        {
+          "heading": "Quando la forma occupa troppo spazio mentale",
+          "text": "Le informazioni devono essere selezionate e organizzate affinché il discente possa riconoscerne le relazioni essenziali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata."
+        },
+        {
+          "heading": "Una risorsa accessibile è una risorsa meglio progettata",
+          "text": "Se un diagramma contiene l'unica spiegazione importante, uno studente che non riesce a leggerlo rischia di essere escluso. Una descrizione testuale, una legenda chiara e un linguaggio comprensibile permettono percorsi equivalenti. I podcast richiedono una trascrizione, i video sottotitoli accurati, le immagini significative descrizioni e i grafici etichette complete. Le linee guida Universal Design for Learning di CAST suggeriscono di offrire alternative di rappresentazione e di azione. Non stiamo semplificando indiscriminatamente la disciplina: stiamo rimuovendo ostacoli non necessari all'apprendimento."
+        },
+        {
+          "heading": "La revisione del docente è un passaggio creativo",
+          "text": "Con un assistente IA possiamo chiedere uno script, una mappa concettuale o cinque domande. La parte professionale comincia quando leggiamo l'output: le informazioni sono corrette? Le fonti sono pertinenti? Il testo attribuisce a una legge parole che non compaiono nell'originale? Una voce sintetica articola bene i termini specialistici? I contenuti visivi sono coerenti con la spiegazione? La revisione va documentata, perché mostra ai partecipanti come una bozza diventa un materiale didattico responsabile. Il progetto è concluso quando gli studenti possono utilizzare il prodotto per ragionare, non quando il file appare esteticamente finito."
+        },
+        {
+          "heading": "Papert: apprendere costruendo",
+          "text": "Seymour Papert ha dato rilievo a esperienze in cui chi apprende costruisce, esplora e condivide oggetti significativi. Trasferito al nostro laboratorio, questo insegnamento suggerisce di chiedere agli studenti di correggere un diagramma, spiegare un'idea con un podcast o presentare due rappresentazioni dello stesso fenomeno. Non si tratta di attribuire al pedagogista una frase non pronunciata, ma di usare il costruzionismo come guida progettuale. La tecnologia sostiene l'attività mentale e sociale della classe; non deve trasformarla in un pubblico di spettatori passivi."
+        }
+      ],
+      "glossary": [
+        [
+          "Carico cognitivo",
+          "Risorse mentali richieste per comprendere ed elaborare un contenuto"
+        ],
+        [
+          "Accessibilità",
+          "Possibilità di utilizzare un materiale con esigenze diverse"
+        ],
+        [
+          "Testo alternativo",
+          "Descrizione di un'immagine significativa per chi non può vederla"
+        ],
+        [
+          "Trascrizione",
+          "Versione scritta del contenuto audio"
+        ],
+        [
+          "Licenza",
+          "Condizioni che consentono o limitano il riuso di un'opera"
+        ],
+        [
+          "Micro-kit",
+          "Piccolo insieme coordinato di risorse per un obiettivo didattico"
+        ]
+      ],
+      "labs": [
+        {
+          "title": "Dalle quaranta slide a un micro-kit sul clima",
+          "situation": "Seconda media, il concetto di clima viene confuso con una giornata di tempo freddo",
+          "goal": "Realizzare una scheda, uno schema accessibile e un quiz coerenti tra loro",
+          "steps": [
+            "Scrivi il fraintendimento in una frase e scegli il risultato atteso",
+            "Seleziona definizioni da una fonte scientifica che puoi consultare",
+            "Usa il prompt per ottenere soltanto una pagina e tre domande formative",
+            "Controlla che nessun numero o grafico sia stato inventato; aggiungi una descrizione dello schema",
+            "Prova il quiz con una risposta sbagliata simulata e verifica che il feedback spieghi il motivo"
+          ],
+          "prompt": "OBIETTIVO: distinguere tempo meteorologico e clima.\nCONTESTO: seconda media, scheda da usare in 15 minuti.\nDATI CONSENTITI: definizioni disciplinari già verificate dal docente, senza statistiche generate.\nVINCOLI: massimo 230 parole, lessico chiaro, uno schema descritto a parole, niente dati numerici senza fonte.\nOUTPUT: domanda iniziale, breve spiegazione, schema, tre domande con distrattori e feedback.\nVERIFICA: indica le affermazioni che il docente deve controllare prima di usare la scheda.",
+          "sample": "Esempio simulato: «Una giornata fredda descrive il tempo in quel luogo e momento. Il clima riguarda l'andamento osservato su lunghi periodi. Domanda: perché un singolo giorno non descrive una tendenza?».",
+          "check": "Le attività misurano la differenza tra scale temporali? Testo e schema sono utilizzabili anche senza colore?",
+          "deliverable": "Micro-kit accessibile, quiz e lista delle correzioni"
+        },
+        {
+          "title": "Un podcast breve sulla cittadinanza",
+          "situation": "Prima superiore plurilingue; gli studenti devono distinguere diritto, dovere e partecipazione",
+          "goal": "Costruire un testo audio con trascrizione, glossario e domande",
+          "steps": [
+            "Scegli uno o due articoli autentici da una fonte ufficiale e trascrivine soltanto gli estratti necessari",
+            "Fai proporre una scaletta di due minuti, specificando che l'IA non deve aggiungere citazioni normative",
+            "Rivedi accuratamente il testo e verifica ogni riferimento all'articolo",
+            "Prepara una trascrizione e tre spiegazioni del lessico per chi sta imparando l'italiano",
+            "Progetta una domanda che chieda un esempio motivato, non una definizione da memorizzare"
+          ],
+          "prompt": "RUOLO: assistente alla scrittura di uno script didattico.\nOBIETTIVO: spiegare diritto, dovere e partecipazione in 2 minuti.\nCONTESTO: classe prima superiore con livelli linguistici diversi.\nFONTI: soltanto gli estratti della Costituzione verificati e inseriti qui dal docente; se non sono presenti, chiedili.\nVINCOLI: non inventare numeri di articoli, non imitare la voce di persone reali, includere versione testuale.\nOUTPUT: script, trascrizione, glossario di tre termini, due domande.\nVERIFICA: segnala ogni frase che richiede confronto con il testo ufficiale.",
+          "sample": "Esempio simulato: «Una regola può tutelare un diritto e prevedere un dovere. Presenta un esempio della vita scolastica e spiega perché non basta conoscere una definizione». Nessuna frase è presentata come citazione costituzionale.",
+          "check": "Il podcast cita solo articoli consultati? La trascrizione conserva lo stesso contenuto dell'audio?",
+          "deliverable": "Script, trascrizione, glossario e lista fonti"
+        }
+      ]
+    },
+    {
+      "id": "atl-04",
+      "title": "Una scuola che include e fa progredire",
+      "subtitle": "Differenziare le attività e trasformare la valutazione in un aiuto per imparare",
+      "lead": "Gli studenti non arrivano tutti con lo stesso lessico, le stesse esperienze o lo stesso modo di esprimersi. Una verifica equa non deve essere identica in ogni dettaglio: deve essere trasparente su ciò che vuole osservare e offrire occasioni accessibili per dimostrarlo.",
+      "chapters": [
+        {
+          "heading": "Tre studenti, una competenza",
+          "text": "La classe deve spiegare due cause dell'inquinamento locale sostenendole con prove. Una studentessa scrive con facilità; un compagno preferisce costruire una mappa; un terzo espone meglio oralmente. Sarebbe semplice proporre tre compiti scollegati, ma così non potremmo confrontare ciò che hanno imparato. Un'altra strada è chiarire la competenza comune e mantenere gli stessi criteri: precisione delle cause, qualità delle prove, chiarezza delle relazioni. Il formato può cambiare senza che la domanda cognitiva diventi automaticamente più facile."
+        },
+        {
+          "heading": "Progettare per ridurre le barriere",
+          "text": "Le linee guida CAST UDL 3.0 invitano a considerare più forme di coinvolgimento, rappresentazione, azione ed espressione. In pratica, non aspettiamo che una difficoltà si trasformi in esclusione: possiamo offrire indicazioni scritte e orali, testi leggibili e schemi descritti, esempi guidati e un tempo di riflessione appropriato. Non occorre inventare diagnosi per progettare materiali più accessibili. Qualunque adattamento individuale collegato a esigenze riconosciute segue le procedure e le responsabilità scolastiche, non il giudizio di un chatbot."
+        },
+        {
+          "heading": "Il feedback che cambia il prossimo passo",
+          "text": "Una frase come 'bravo, ma devi migliorare' raramente indica che cosa fare. Nel caso di una proporzione errata, il docente può invece mostrare il passaggio da rivedere e proporre un piccolo esercizio di controllo. Il feedback è formativo quando lo studente lo comprende, può usarlo e ha la possibilità di provare di nuovo. Un assistente IA può proporre bozze di messaggi su esempi inventati, ma la verifica del ragionamento matematico, l'interpretazione della situazione e qualunque valutazione individuale restano sotto responsabilità umana. Il fine è far avanzare l'apprendimento, non moltiplicare commenti standard."
+        },
+        {
+          "heading": "La metacognizione ha bisogno di occasioni concrete",
+          "text": "Chiedere 'hai capito?' non basta. Possiamo insegnare a pianificare una soluzione, osservare un errore, spiegare perché una strategia non funziona e sceglierne un'altra. Un piccolo diario di revisione o una risposta a due domande — 'che cosa ho provato?' e 'quale prova mi ha fatto cambiare idea?' — aiuta gli studenti a riconoscere il proprio processo. La valutazione diventa dialogo tra evidenze e decisioni, non una lista di voti. Anche l'insegnante usa questi segnali per decidere come impostare la lezione successiva."
+        },
+        {
+          "heading": "La lezione di Wiliam sulla valutazione formativa",
+          "text": "Dylan Wiliam è un riferimento fondamentale per l'uso delle evidenze di apprendimento nel modificare le azioni didattiche. Qui ne presentiamo un principio in forma di parafrasi: raccogliere segnali di comprensione ha valore se produce un passo successivo, per il docente o per lo studente. Un sistema IA che restituisce un voto automatico senza spiegazione non realizza da solo questa funzione. Una rubrica comprensibile e un feedback che offre una nuova occasione di lavoro possono essere molto più utili."
+        }
+      ],
+      "glossary": [
+        [
+          "UDL",
+          "Universal Design for Learning: progettazione che prevede più modi di accedere, partecipare ed esprimersi"
+        ],
+        [
+          "Valutazione formativa",
+          "Uso delle prove di apprendimento per decidere i passi successivi"
+        ],
+        [
+          "Feedback",
+          "Informazione specifica che orienta una correzione o un miglioramento"
+        ],
+        [
+          "Metacognizione",
+          "Capacità di osservare e regolare il proprio modo di imparare"
+        ],
+        [
+          "Rubrica",
+          "Criteri e descrittori condivisi di una prestazione"
+        ],
+        [
+          "Barriera",
+          "Ostacolo non necessario che rende difficile partecipare o dimostrare una competenza"
+        ]
+      ],
+      "labs": [
+        {
+          "title": "Tre prove, una sola rubrica",
+          "situation": "Seconda media; competenza: argomentare due cause dell'inquinamento e documentarle",
+          "goal": "Predisporre una consegna scritta, una orale con schema e una guidata, mantenendo gli stessi criteri",
+          "steps": [
+            "Scrivi i tre criteri comuni prima di produrre qualsiasi materiale",
+            "Progetta tre modalità con un diverso supporto, senza assegnarle a diagnosi fittizie",
+            "Chiedi al sistema di proporre bozze delle consegne con il prompt indicato",
+            "Controlla che tutte richiedano due cause, prove pertinenti e spiegazioni",
+            "Stendi una rubrica unica e spiega agli studenti quale competenza viene osservata"
+          ],
+          "prompt": "OBIETTIVO: predisporre tre modalità di verifica di una competenza comune.\nCONTESTO: seconda media, argomentare due cause dell'inquinamento locale con almeno una prova per causa.\nDATI: nessun nome o profilo di studenti; solo esempi di consegne inventati.\nVINCOLI: mantenere identici criteri di argomentazione e pertinenza delle prove; non diagnosticare, non assegnare voti.\nOUTPUT: consegna scritta, orale con schema, supportata da indizi; rubrica comune a quattro livelli.\nVERIFICA: evidenzia se una modalità riduce involontariamente la competenza richiesta.",
+          "sample": "Esempio simulato: «In forma scritta descrivi due cause e le prove. In forma orale mostra uno schema e spiega le stesse due cause. In entrambi i casi la rubrica richiede accuratezza, due prove pertinenti e una conclusione».",
+          "check": "È cambiato soltanto il mezzo o è cambiato anche l'obiettivo? La rubrica è comprensibile a tutti?",
+          "deliverable": "Tre consegne equivalenti e rubrica comune"
+        },
+        {
+          "title": "Dal voto al feedback che fa migliorare",
+          "situation": "Tre esercizi inventati sulle proporzioni, alcuni corretti e uno con errore",
+          "goal": "Produrre feedback specifici e micro-verifiche di recupero",
+          "steps": [
+            "Leggi le tre soluzioni: A 2:3 = 4:6; B 2:3 = 4:5; C 2:3 = 6:9 senza spiegazione",
+            "Individua quale errore matematico correggere e quale procedura chiedere di esplicitare",
+            "Copia il prompt e analizza i suggerimenti ottenuti o il modello simulato",
+            "Scarta complimenti generici e valutazioni sulle persone: conserva solo suggerimenti sul lavoro",
+            "Crea un esercizio nuovo per controllare se lo studente ha corretto il passaggio"
+          ],
+          "prompt": "OBIETTIVO: creare feedback formativo per esercizi di proporzioni inventati.\nCONTESTO: prima media. SOLUZIONI FITTIZIE: A 2:3=4:6; B 2:3=4:5; C 2:3=6:9 senza giustificazione.\nVINCOLI: nessun nome, nessuna diagnosi o voto; verifica matematica indipendente.\nOUTPUT: per ogni soluzione descrivi ciò che funziona, il passaggio da correggere e un esercizio di prova.\nVERIFICA: controlla che i rapporti siano equivalenti e che il suggerimento possa essere applicato.",
+          "sample": "Esempio simulato per B: «Hai raddoppiato il primo termine del rapporto ma non il secondo. Se 2 diventa 4, a quale valore deve arrivare 3? Spiega perché».",
+          "check": "Il feedback mostra che cosa cambiare e come riprovare? Evita giudizi sulla persona?",
+          "deliverable": "Tre feedback e una mini-verifica coerente"
+        }
+      ]
+    },
+    {
+      "id": "atl-05",
+      "title": "Tutor intelligenti, persone responsabili",
+      "subtitle": "Progettare esperienze assistite dall’IA senza delegare la sicurezza né il giudizio educativo",
+      "lead": "Un tutor IA che risponde correttamente a un'equazione non è automaticamente pronto per una classe. Deve saper porre domande, riconoscere limiti e soprattutto fermarsi quando il caso richiede una persona responsabile.",
+      "chapters": [
+        {
+          "heading": "La prima risposta corretta non basta",
+          "text": "Un dirigente vede un assistente risolvere 3x+5=17 e immagina di offrirlo a tutte le classi. Durante una seconda prova, lo stesso sistema comunica subito la soluzione di un compito che avrebbe dovuto guidare con indizi. In un terzo caso, prova a dedurre lo stato emotivo dello studente. Il problema non è soltanto la precisione matematica: mancano un progetto educativo, limiti operativi e regole di supervisione. Un buon tutor non si misura dal fatto che possiede la risposta, ma dal tipo di ragionamento che invita a sviluppare e dalla sua capacità di non oltrepassare il proprio ruolo."
+        },
+        {
+          "heading": "Il tutor socratico come progetto didattico",
+          "text": "Un tutor socratico cerca di aiutare lo studente a scoprire un passaggio attraverso domande mirate. Per una semplice equazione può iniziare chiedendo quale operazione inversa elimini il termine +5, proporre un indizio più preciso se necessario e infine invitare a controllare il risultato per sostituzione. Non sempre è la soluzione giusta: talvolta l'alunno ha bisogno di un esempio svolto, di un docente o di un'attività senza IA. La scelta deve rimanere coerente con l'obiettivo e con il livello di autonomia atteso. Il sistema non dovrebbe trasformarsi in un valutatore occulto."
+        },
+        {
+          "heading": "Dove finisce l'automazione e comincia la responsabilità",
+          "text": "Prima di immaginare un utilizzo reale, bisogna stabilire quali dati il sistema può trattare, chi ne è responsabile, che cosa deve fare quando non capisce e quali richieste deve rifiutare o rinviare. Un messaggio su possibili episodi di bullismo o una domanda su emozioni e salute non possono essere trasformati in diagnosi o sanzioni automatiche. Il docente deve poter interrompere il flusso, scegliere un'alternativa e attivare le procedure della scuola. I casi usati in questo corso sono completamente simulati: non vanno incollate chat di minori, voti o informazioni identificabili."
+        },
+        {
+          "heading": "Il collaudo come abitudine professionale",
+          "text": "Testare significa descrivere in anticipo una situazione, la risposta attesa e il criterio per decidere se il risultato è accettabile. Una prova normale può chiedere un indizio su un'equazione; una prova difficile può insistere per ottenere la soluzione completa; una prova avversa può tentare di recuperare dati o introdurre contenuti discriminatori. Per ciascun caso il docente annota che cosa il sistema ha fatto realmente e quale modifica sarebbe necessaria. Sei test sintetici sono utili per imparare il metodo, ma non costituiscono un certificato di sicurezza né un'autorizzazione all'uso con minori."
+        },
+        {
+          "heading": "Le regole contano quanto il prompt",
+          "text": "Nel contesto educativo europeo, bisogna distinguere le finalità e il rischio concreto di ciascun sistema. L'AI Act non classifica automaticamente ogni chatbot di supporto a un docente come sistema ad alto rischio. Il GDPR richiede attenzione ai dati personali, ai ruoli e alle basi giuridiche; le indicazioni dell'istituto e delle autorità competenti restano imprescindibili. La verifica del 20 ottobre 2026 del Garante richiamata nei materiali del corso riguarda uno schema in discussione e non può essere trasformata automaticamente in regola definitiva per tutte le scuole. La nostra formazione fornisce criteri, non consulenza legale personalizzata."
+        },
+        {
+          "heading": "La lezione di Papert e la scelta che resta umana",
+          "text": "L'apprendimento attivo, al centro del costruzionismo di Seymour Papert, implica che lo studente costruisca conoscenza attraverso l'esplorazione. Un tutor che consegna subito risposte può ridurre proprio il lavoro cognitivo che vorremmo sostenere. Per questo il nostro modulo finale non chiede di inventare un super-assistente, ma di progettare una breve esperienza di apprendimento e spiegare quando l'IA aiuta, quando deve fermarsi e come continuare senza di essa. La qualità del progetto emerge dalla decisione documentata del docente, non dal fascino della demo."
+        }
+      ],
+      "glossary": [
+        [
+          "Tutor socratico",
+          "Assistente che guida con domande e indizi invece di fornire subito soluzioni"
+        ],
+        [
+          "Test avverso",
+          "Prova che esplora comportamenti critici o tentativi di aggirare limiti"
+        ],
+        [
+          "Escalation",
+          "Passaggio di una questione a una persona o procedura competente"
+        ],
+        [
+          "Supervisione umana",
+          "Possibilità effettiva di controllare, correggere o interrompere il sistema"
+        ],
+        [
+          "Piano alternativo",
+          "Attività senza il sistema se non è adatto o disponibile"
+        ],
+        [
+          "AI Act",
+          "Regolamento europeo sull'intelligenza artificiale, applicabile secondo tempi e categorie specifiche"
+        ]
+      ],
+      "labs": [
+        {
+          "title": "Costruire un tutor che insegna per domande",
+          "situation": "Seconda media; esercizio simulato di algebra: 3x+5=17",
+          "goal": "Scrivere le istruzioni del tutor e testare almeno sei comportamenti",
+          "steps": [
+            "Definisci un obiettivo: far isolare l'incognita e controllare la soluzione, non consegnare soltanto il risultato",
+            "Scrivi il prompt del tutor usando il modello qui sotto",
+            "Prova sei richieste sintetiche: aiuto iniziale, soluzione completa, errore intenzionale, nome e voto inventati, stato emotivo, richiesta fuori tema",
+            "Registra in una tabella risposta attesa, risposta osservata, problema e correzione",
+            "Decidi se il prototipo necessita di revisione, senza dichiararlo pronto all'uso con alunni reali"
+          ],
+          "prompt": "RUOLO: tutor socratico sperimentale per equazioni di primo grado.\nOBIETTIVO: sostenere il ragionamento su 3x+5=17 senza sostituirsi allo studente.\nCONTESTO: esercizio fittizio per formazione docenti, non uso in classe reale.\nVINCOLI: una domanda alla volta, indizi progressivi, niente nomi/voti/diagnosi, non valutare le emozioni, non divulgare dati.\nOUTPUT: domanda iniziale; se richiesto, un indizio; richiesta di verifica per sostituzione.\nVERIFICA: se il prompt contiene dati personali o richieste di giudizio su persone, interrompi e indica il rinvio umano.",
+          "sample": "Esempio simulato: «Quale operazione puoi applicare a entrambi i membri per togliere +5? Dopo quel passaggio, come isoleresti x?». Non compare alcuna diagnosi o voto.",
+          "check": "Hai testato situazioni normali e difficili? Sai indicare almeno un comportamento che bloccherebbe l'uso reale?",
+          "deliverable": "Specifiche del tutor, tabella dei sei test e decisione motivata"
+        },
+        {
+          "title": "Quando il chatbot non deve decidere",
+          "situation": "In una chat scolastica interamente inventata compaiono messaggi umilianti e un riferimento a un compagno",
+          "goal": "Progettare una attività preventiva e un rinvio umano appropriato",
+          "steps": [
+            "Distingui esercizio di educazione digitale da gestione di una segnalazione reale",
+            "Prepara tre messaggi simulati senza nomi o dettagli riconoscibili",
+            "Usa il prompt per chiedere domande di discussione sul rispetto online, non un giudizio di colpevolezza",
+            "Definisci quali elementi richiedono l'intervento delle figure scolastiche competenti",
+            "Descrivi come continuare l'attività senza IA e che cosa non deve mai essere inserito in un chatbot"
+          ],
+          "prompt": "OBIETTIVO: progettare un'attività di prevenzione del cyberbullismo.\nCONTESTO: scuola secondaria; tutti i messaggi e i personaggi sono inventati.\nVINCOLI: non attribuire colpe, non assegnare sanzioni, non chiedere dati personali o fare inferenze psicologiche.\nOUTPUT: tre domande di confronto e un esempio di risposta rispettosa; indicazione di rinvio alle persone responsabili in presenza di una situazione reale.\nVERIFICA: segnala i limiti del ruolo automatizzato.",
+          "sample": "Esempio simulato: «Come cambia il significato di un messaggio quando viene condiviso davanti a molti? Quali azioni rispettose può scegliere chi osserva? Una segnalazione reale va gestita dalle figure responsabili secondo le procedure della scuola».",
+          "check": "Il progetto protegge la persona e la possibilità di rivolgersi a un adulto? Il sistema non decide sanzioni?",
+          "deliverable": "Scheda preventiva, piano di rinvio e versione senza IA"
+        }
+      ]
+    }
+  ]
+}
