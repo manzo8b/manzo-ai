@@ -30,23 +30,31 @@ Quando una presentazione contiene troppe informazioni, gli studenti possono usci
 - Rivedere contenuti con verifica disciplinare, cognitiva e di accessibilità
 - Documentare uso dell'IA, licenze e revisioni
 
-## Per capire: un racconto e cinque idee fondamentali
+## Lettura di approfondimento · una storia che continua
 
 ### 1. Il grafico bellissimo che spiega male
 
 Una docente prepara quaranta slide sul clima. Ci sono immagini potenti, titoli dinamici e grafici senza unità di misura. Alla fine, uno studente dice che una giornata fredda è sufficiente a smentire un andamento climatico di lungo periodo. Il materiale ha attirato gli occhi, ma non ha sciolto il fraintendimento. Il punto di partenza è allora la domanda che vogliamo far affrontare: come distinguere il tempo meteorologico dalle tendenze del clima? In questa lezione costruiremo una risorsa con meno elementi decorativi e più occasioni di interpretare, confrontare e motivare.
 
+Quel grafico comunica rapidamente, ma non insegna ancora a interpretare i dati. Dobbiamo capire come l'eccesso di informazioni e decorazioni possa sottrarre attenzione proprio alle relazioni che contano.
+
 ### 2. Quando la forma occupa troppo spazio mentale
 
 Le informazioni devono essere selezionate e organizzate affinché il discente possa riconoscerne le relazioni essenziali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata.
+
+Ridurre il rumore visivo è il primo passo, non l'ultimo. Un materiale efficace deve poter essere usato da persone diverse, con strumenti e modalità differenti, senza perdere il nucleo della conoscenza.
 
 ### 3. Una risorsa accessibile è una risorsa meglio progettata
 
 Se un diagramma contiene l'unica spiegazione importante, uno studente che non riesce a leggerlo rischia di essere escluso. Una descrizione testuale, una legenda chiara e un linguaggio comprensibile permettono percorsi equivalenti. I podcast richiedono una trascrizione, i video sottotitoli accurati, le immagini significative descrizioni e i grafici etichette complete. Le linee guida Universal Design for Learning di CAST suggeriscono di offrire alternative di rappresentazione e di azione. Non stiamo semplificando indiscriminatamente la disciplina: stiamo rimuovendo ostacoli non necessari all'apprendimento.
 
+L'accessibilità ci costringe a scegliere che cosa è essenziale. A questo punto la revisione della bozza IA non è una correzione meccanica: diventa un vero atto di progettazione creativa.
+
 ### 4. La revisione del docente è un passaggio creativo
 
 Con un assistente IA possiamo chiedere uno script, una mappa concettuale o cinque domande. La parte professionale comincia quando leggiamo l'output: le informazioni sono corrette? Le fonti sono pertinenti? Il testo attribuisce a una legge parole che non compaiono nell'originale? Una voce sintetica articola bene i termini specialistici? I contenuti visivi sono coerenti con la spiegazione? La revisione va documentata, perché mostra ai partecipanti come una bozza diventa un materiale didattico responsabile. Il progetto è concluso quando gli studenti possono utilizzare il prodotto per ragionare, non quando il file appare esteticamente finito.
+
+Quando il docente ha ripensato la risorsa per favorire un'attività, si apre una questione più ampia: gli studenti saranno spettatori di un contenuto oppure costruttori di significati? Il pensiero di Papert aiuta a fare questa scelta.
 
 ### 5. Papert: apprendere costruendo
 
@@ -169,6 +177,14 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Trascrizione** — Versione scritta del contenuto audio
 - **Licenza** — Condizioni che consentono o limitano il riuso di un'opera
 - **Micro-kit** — Piccolo insieme coordinato di risorse per un obiettivo didattico
+
+## Per continuare il percorso
+
+Un materiale verificato e accessibile è un punto di partenza. Il passo successivo consiste nel riconoscere chi incontrerà quel materiale e come ogni persona potrà mostrare di avere imparato.
+
+**Domanda per continuare:** Come conservare lo stesso obiettivo offrendo percorsi di espressione differenti?
+
+**Nel prossimo modulo:** Una scuola che include e fa progredire
 
 ## Verifica ciò che hai imparato
 

@@ -30,27 +30,37 @@ Quando una docente arriva a fine giornata con verifiche da preparare, materiale 
 - Comparare alternative IA e senza IA con una matrice replicabile
 - Motivare una decisione go/no-go
 
-## Per capire: un racconto e cinque idee fondamentali
+## Lettura di approfondimento · una storia che continua
 
 ### 1. La mattina in cui entra l’intelligenza artificiale
 
 Immagina una docente di storia che deve spiegare le migrazioni a una seconda superiore. Ha già un libro, due brevi fonti e una domanda importante: come aiutare la classe a distinguere ciò che una testimonianza racconta da ciò che noi supponiamo? Un collega propone un assistente di intelligenza artificiale. La tentazione è chiedergli subito una presentazione completa, ma il primo passo non riguarda la macchina: riguarda il problema degli studenti. Se non sappiamo che cosa vogliamo far comprendere, anche trenta slide perfette rischiano di essere inutili. In questo modulo partiremo sempre da una situazione riconoscibile, proveremo strumenti e alternative, poi osserveremo che cosa cambia nel lavoro professionale.
 
+Ed è proprio in quella mattina, tra una campanella e una preparazione incompleta, che emerge la prima domanda: che cosa stiamo chiedendo davvero a un sistema che chiamiamo «intelligenza artificiale»?
+
 ### 2. Che cos’è l’IA, e che cos’è l’IA generativa
 
 Per intelligenza artificiale intendiamo una famiglia di sistemi informatici capaci di elaborare input e produrre risultati come previsioni, raccomandazioni, classificazioni o contenuti. Non sono tutte la stessa cosa: un filtro antispam, un riconoscitore di immagini e un assistente che scrive un testo svolgono compiti differenti. L’IA generativa è la parte che crea nuovi output, per esempio spiegazioni, esercizi, immagini o audio a partire da una richiesta. Nei sistemi linguistici moderni, chiamati grandi modelli linguistici o LLM, la generazione si basa su regolarità apprese durante l’addestramento e sul contesto fornito. Un risultato fluido non significa che ogni dato sia vero: la verifica resta essenziale.
+
+Chiarita la differenza fra un sistema che produce testo e un docente che costruisce apprendimento, possiamo tornare alla nostra aula: quali attività cambiano davvero, e quali decisioni restano nelle mani dell'insegnante?
 
 ### 3. Che cosa cambia per un insegnante
 
 L’utilità di un assistente non coincide con il numero di file che genera. Può aiutare a proporre tre modi di spiegare lo stesso concetto, trasformare un’idea in una prima bozza di esercizio, adattare il lessico di un testo già verificato o costruire una rubrica da rivedere. Non può conoscere da solo la cultura della classe, certificare una fonte mai consultata né decidere al posto del docente come valutare una persona. Prima di usare uno strumento, chiediti quale prestazione vuoi vedere: 'gli studenti confrontano due fonti e motivano una conclusione' è un obiettivo più utile di 'gli studenti guardano una presentazione'. Questa distinzione aiuta a misurare il valore del lavoro prodotto.
 
+La scena quotidiana ci ha mostrato una possibilità e un limite. Ora dobbiamo tradurre quella possibilità in una consegna: come formulare una richiesta che rispetti un obiettivo educativo, anziché ottenere soltanto pagine di testo?
+
 ### 4. Il prompt: una consegna professionale, non una formula magica
 
 Un prompt è il testo con cui diamo al sistema istruzioni, contesto e materiali per svolgere un compito. Scrivere 'fammi una lezione bellissima' lascia aperte troppe decisioni: età, prerequisiti, durata, obiettivo, materiali, tipo di attività, accessibilità e controllo delle fonti. Una richiesta migliore non deve essere lunga per forza; deve chiarire ciò che conta. Per la didattica proponiamo sei elementi: OBIETTIVO (che cosa devono imparare gli studenti), CONTESTO (classe, materia, durata), DATI CONSENTITI (quali materiali può usare), VINCOLI (sicurezza, livello, accessibilità), OUTPUT (come presentare il lavoro) e VERIFICA (quali controlli chiediamo di esplicitare). Non tutti servono nella stessa misura, ma aiutano a evitare risultati generici.
 
+Ma scrivere una consegna migliore non conclude il lavoro. Il passaggio decisivo comincia quando il sistema restituisce una bozza: che cosa dobbiamo controllare prima che entri in classe?
+
 ### 5. Dalla prima bozza alla lezione verificabile
 
 Proviamo una differenza. Prompt generico: 'Crea una lezione sulle migrazioni'. La risposta potrebbe contenere molte attività, date o generalizzazioni non adatte. Prompt mirato: 'Prepara 15 minuti per una seconda superiore; obiettivo: distinguere fatto e interpretazione attraverso due estratti fittizi; non aggiungere dati storici; crea due domande, una attività in coppia e un biglietto finale'. Qui sappiamo che cosa verificare. Il docente legge l'output, elimina affermazioni senza fonte, prova il tempo e controlla se le domande richiedono davvero di ragionare. Il sistema può essere utile anche se decidiamo di non usarlo: il confronto ci aiuta a migliorare la progettazione.
+
+Dalla bozza verificata siamo arrivati a un punto che precede la tecnologia: che cosa rende una scelta autenticamente educativa? Il riferimento a Dewey ci aiuta a ritrovare questa domanda, non a sostituirla con una formula.
 
 ### 6. La prospettiva pedagogica: la domanda viene prima della risposta
 
@@ -174,6 +184,14 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Output** — Risultato prodotto dal sistema
 - **Rubrica** — Griglia con criteri e descrittori per giudicare un lavoro
 - **Dati sintetici** — Informazioni inventate per esercitarsi senza usare dati personali reali
+
+## Per continuare il percorso
+
+Una docente che sa progettare e controllare una bozza è pronta a fare il passo successivo: non solo chiedersi se un contenuto è utile, ma insegnare agli studenti a riconoscere quando è attendibile.
+
+**Domanda per continuare:** Quale affermazione di un testo apparentemente impeccabile richiede ancora una prova?
+
+**Nel prossimo modulo:** Pensiero critico e informazioni affidabili
 
 ## Verifica ciò che hai imparato
 

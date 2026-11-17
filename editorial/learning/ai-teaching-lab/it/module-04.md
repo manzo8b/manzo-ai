@@ -30,23 +30,31 @@ Gli studenti non arrivano tutti con lo stesso lessico, le stesse esperienze o lo
 - Costruire una prova con IA e una senza IA con criteri equivalenti
 - Formulare feedback descrittivo azionabile
 
-## Per capire: un racconto e cinque idee fondamentali
+## Lettura di approfondimento · una storia che continua
 
 ### 1. Tre studenti, una competenza
 
 La classe deve spiegare due cause dell'inquinamento locale sostenendole con prove. Una studentessa scrive con facilità; un compagno preferisce costruire una mappa; un terzo espone meglio oralmente. Sarebbe semplice proporre tre compiti scollegati, ma così non potremmo confrontare ciò che hanno imparato. Un'altra strada è chiarire la competenza comune e mantenere gli stessi criteri: precisione delle cause, qualità delle prove, chiarezza delle relazioni. Il formato può cambiare senza che la domanda cognitiva diventi automaticamente più facile.
 
+Tre modi di esprimersi non significano tre obiettivi diversi. Per trasformare questa intuizione in una lezione equa, dobbiamo chiederci quali barriere siano prevedibili già mentre progettiamo.
+
 ### 2. Progettare per ridurre le barriere
 
 Le linee guida CAST UDL 3.0 invitano a considerare più forme di coinvolgimento, rappresentazione, azione ed espressione. In pratica, non aspettiamo che una difficoltà si trasformi in esclusione: possiamo offrire indicazioni scritte e orali, testi leggibili e schemi descritti, esempi guidati e un tempo di riflessione appropriato. Non occorre inventare diagnosi per progettare materiali più accessibili. Qualunque adattamento individuale collegato a esigenze riconosciute segue le procedure e le responsabilità scolastiche, non il giudizio di un chatbot.
+
+Dopo aver ridotto le barriere, dobbiamo osservare come gli studenti procedono. Un feedback può diventare il ponte fra ciò che una persona sa fare oggi e il prossimo tentativo che riuscirà a compiere.
 
 ### 3. Il feedback che cambia il prossimo passo
 
 Una frase come 'bravo, ma devi migliorare' raramente indica che cosa fare. Nel caso di una proporzione errata, il docente può invece mostrare il passaggio da rivedere e proporre un piccolo esercizio di controllo. Il feedback è formativo quando lo studente lo comprende, può usarlo e ha la possibilità di provare di nuovo. Un assistente IA può proporre bozze di messaggi su esempi inventati, ma la verifica del ragionamento matematico, l'interpretazione della situazione e qualunque valutazione individuale restano sotto responsabilità umana. Il fine è far avanzare l'apprendimento, non moltiplicare commenti standard.
 
+Un buon commento non conclude la correzione: invita a un nuovo passo. Questo ci porta a chiedere come lo studente riconosca le proprie strategie e impari a modificarle autonomamente.
+
 ### 4. La metacognizione ha bisogno di occasioni concrete
 
 Chiedere 'hai capito?' non basta. Possiamo insegnare a pianificare una soluzione, osservare un errore, spiegare perché una strategia non funziona e sceglierne un'altra. Un piccolo diario di revisione o una risposta a due domande — 'che cosa ho provato?' e 'quale prova mi ha fatto cambiare idea?' — aiuta gli studenti a riconoscere il proprio processo. La valutazione diventa dialogo tra evidenze e decisioni, non una lista di voti. Anche l'insegnante usa questi segnali per decidere come impostare la lezione successiva.
+
+Se uno studente riflette sul proprio processo, anche l'insegnante deve saper usare quelle evidenze. La valutazione formativa di Wiliam ci offre una cornice per collegare le risposte degli studenti alle decisioni didattiche successive.
 
 ### 5. La lezione di Wiliam sulla valutazione formativa
 
@@ -167,6 +175,14 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Metacognizione** — Capacità di osservare e regolare il proprio modo di imparare
 - **Rubrica** — Criteri e descrittori condivisi di una prestazione
 - **Barriera** — Ostacolo non necessario che rende difficile partecipare o dimostrare una competenza
+
+## Per continuare il percorso
+
+Quando il feedback diventa un invito a migliorare, emerge una nuova possibilità: un tutor che accompagna senza sostituirsi all'insegnante. Ma chi decide i limiti di quell'accompagnamento?
+
+**Domanda per continuare:** Quali domande dovrebbe fare un tutor prima di mostrare la risposta?
+
+**Nel prossimo modulo:** Tutor intelligenti, persone responsabili
 
 ## Verifica ciò che hai imparato
 

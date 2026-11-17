@@ -270,3 +270,54 @@ body:not([data-module-base]) [data-atl-resource-glossary]{display:none!important
 @media(max-width:800px){.atl-intro-media-grid,.atl-intro-bottom{grid-template-columns:1fr}.atl-intro-media-card{max-width:100%}.atl-intro-path-steps span:not(:last-child):after{display:none}}
 @media(max-width:520px){.atl-intro-top{padding:23px 20px}.atl-intro-facts>span{flex:1 1 42%;justify-content:center}.atl-intro-media-grid{gap:15px}.atl-intro-media-card{border-radius:18px}.atl-intro-path{padding:20px}.atl-intro-privacy{padding:19px}.atl-intro-footer p{font-size:.9rem}.atl-intro-start{width:100%;justify-content:center}}
 @media(prefers-reduced-motion:reduce){.atl-intro-media-card,.atl-intro-slide-front,.atl-intro-primary-action{transition:none!important}.atl-intro-media-card:hover,.atl-intro-media-card:hover .atl-intro-slide-front,.atl-intro-primary-action:hover{transform:none!important}}
+
+
+/* Lesson experience 3.0 — progressive learning rhythm, not schoolbook chapters */
+.course-session-map{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:16px 0 22px}
+.course-session-step{display:flex;flex-direction:column;gap:5px;min-width:0;background:#fff;border:1px solid #cbdcf0;border-radius:13px;padding:13px 14px;text-decoration:none!important;color:#174672!important;line-height:1.35;font-size:.8rem;font-weight:750;box-shadow:0 4px 12px #123e7910;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.course-session-step:hover{border-color:#7eafea;transform:translateY(-2px);box-shadow:0 12px 25px #16478621}
+.course-session-number{font-size:.66rem;font-weight:870;color:#1163dc;letter-spacing:.11em}
+.course-session-step:nth-child(3){background:#f0f8ff}
+.course-session-step:nth-child(4){background:#f0faf6;border-color:#c7e7d9}
+.module-nav-entry{border:1px solid #dce7f4;border-radius:14px;background:#fff;overflow:hidden}
+.module-nav-entry>.nav-button{width:100%;margin:0;border:0;border-radius:0;box-shadow:none!important}
+.module-nav-entry:has(.nav-button[aria-current="true"]){border-color:#90b6ec;box-shadow:0 7px 24px #11499912}
+.module-outline{background:#f7faff;border-top:1px solid #e2eafa}
+.module-outline summary{font-size:.76rem;color:#235b9a;padding:9px 13px;cursor:pointer;font-weight:720;line-height:1.5}
+.module-outline summary:hover{background:#edf4ff}
+.module-outline-items{margin:0;padding:6px 8px 10px 14px;list-style:none;display:grid;gap:2px}
+.module-outline-items li{margin:0!important}
+.module-outline-link{display:flex;justify-content:space-between;align-items:baseline;gap:9px;text-decoration:none!important;color:#355878!important;font-size:.73rem;line-height:1.44;padding:7px 8px;border-radius:7px}
+.module-outline-link:hover{background:#e9f2ff;color:#154ca8!important}
+.module-outline-link small{font-size:.65rem;color:#68809a;white-space:nowrap}
+.narrative-chapter{border:0!important;margin:0;padding:18px 0 0;max-width:790px}
+.narrative-chapter:not(:first-child){padding-top:31px}
+.narrative-chapter h4{font-size:clamp(1.24rem,2.1vw,1.6rem);letter-spacing:-.028em;color:#183e67;line-height:1.28;margin:0 0 13px}
+.narrative-chapter p{font-size:1.035rem;line-height:1.84;color:#2d4c6c;margin:0 0 16px}
+.narrative-bridge{color:#1c558d!important;font-size:1rem!important;line-height:1.82!important;font-weight:550!important;margin:19px 0 2px!important;padding:0 0 0 17px;border-left:3px solid #6b9dde}
+.course-next-section{background:linear-gradient(130deg,#eef7ff,#fff);border-color:#b8d4f4}
+.course-next-story{font-size:1.03rem;line-height:1.82;color:#244d78}
+.course-next-question{background:#fff;border-left:4px solid #ec8146;border-radius:0 13px 13px 0;padding:15px 19px;margin:19px 0 21px}
+.course-next-question b{font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;color:#a94e26}
+.course-next-question p{font-size:1.07rem;color:#284f78;line-height:1.6;margin:6px 0 0}
+.course-next-action{display:inline-flex;max-width:100%;white-space:normal!important;text-align:left;padding:12px 17px!important;background:#1258da!important;color:white!important;border-color:#1258da!important;box-shadow:0 9px 21px #1156ad29}
+@media(max-width:900px){.course-session-map{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.course-session-map{gap:7px}.course-session-step{padding:10px 11px;font-size:.73rem}.narrative-chapter p{font-size:.98rem}.module-outline-link{font-size:.76rem}}
+@media(prefers-reduced-motion:reduce){.course-session-step{transition:none!important}.course-session-step:hover{transform:none!important}}
+
+
+/* Course-level navigation and measurable learning goals, inspired by leading LMS UX */
+.atl-course-tabs{display:flex;gap:3px;flex-wrap:wrap;position:sticky;top:0;z-index:12;background:#fff;border-bottom:1px solid #dce8f5;padding-top:8px;padding-bottom:8px;box-shadow:0 7px 18px #1e4b7c09}
+.atl-course-tabs a{flex:none;text-decoration:none!important;color:#335a81;font-weight:770;font-size:.87rem;padding:11px 16px;border-radius:10px;white-space:nowrap}
+.atl-course-tabs a:hover,.atl-course-tabs a:focus-visible{background:#eaf3ff;color:#1257bd}
+.atl-intro-competencies{margin-top:18px;border-radius:22px;border:1px solid #d5e3f2;background:#fff;padding:clamp(20px,3vw,32px)}
+.atl-intro-competencies h3{margin:8px 0 20px;color:#193c67;letter-spacing:-.035em;font-size:clamp(1.38rem,2.7vw,2rem)}
+.atl-competencies-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+.atl-competencies-grid>div{padding:17px 15px;background:linear-gradient(135deg,#f2f8ff,#fff);border:1px solid #d5e3f2;border-radius:14px;transition:transform .2s ease,box-shadow .2s ease}
+.atl-competencies-grid>div:hover{transform:translateY(-3px);box-shadow:0 12px 25px #1d539015}
+.atl-competencies-grid strong{font-size:.98rem;color:#175bb6}
+.atl-competencies-grid p{font-size:.84rem;line-height:1.58;color:#445f7b;margin:8px 0 0}
+#presentazione-corso,#competenze,#experience,#atl-final-glossary{scroll-margin-top:80px}
+@media(max-width:820px){.atl-competencies-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.atl-course-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}}
+@media(max-width:470px){.atl-competencies-grid{grid-template-columns:1fr}.atl-course-tabs a{padding:9px 10px;font-size:.76rem}}
+@media(prefers-reduced-motion:reduce){.atl-competencies-grid>div{transition:none!important}.atl-competencies-grid>div:hover{transform:none!important}}

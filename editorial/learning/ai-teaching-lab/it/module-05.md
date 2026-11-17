@@ -30,27 +30,37 @@ Un tutor IA che risponde correttamente a un'equazione non è automaticamente pro
 - Testare almeno sei comportamenti critici con input sintetici
 - Finalizzare e difendere un'unità di apprendimento con decisione go/no-go
 
-## Per capire: un racconto e cinque idee fondamentali
+## Lettura di approfondimento · una storia che continua
 
 ### 1. La prima risposta corretta non basta
 
 Un dirigente vede un assistente risolvere 3x+5=17 e immagina di offrirlo a tutte le classi. Durante una seconda prova, lo stesso sistema comunica subito la soluzione di un compito che avrebbe dovuto guidare con indizi. In un terzo caso, prova a dedurre lo stato emotivo dello studente. Il problema non è soltanto la precisione matematica: mancano un progetto educativo, limiti operativi e regole di supervisione. Un buon tutor non si misura dal fatto che possiede la risposta, ma dal tipo di ragionamento che invita a sviluppare e dalla sua capacità di non oltrepassare il proprio ruolo.
 
+Il tutor che dà la soluzione corretta sembra efficiente. Ma per accompagnare un apprendimento non basta concludere l'esercizio al posto dello studente: proviamo a immaginare un assistente che faccia domande anziché dare subito risposte.
+
 ### 2. Il tutor socratico come progetto didattico
 
 Un tutor socratico cerca di aiutare lo studente a scoprire un passaggio attraverso domande mirate. Per una semplice equazione può iniziare chiedendo quale operazione inversa elimini il termine +5, proporre un indizio più preciso se necessario e infine invitare a controllare il risultato per sostituzione. Non sempre è la soluzione giusta: talvolta l'alunno ha bisogno di un esempio svolto, di un docente o di un'attività senza IA. La scelta deve rimanere coerente con l'obiettivo e con il livello di autonomia atteso. Il sistema non dovrebbe trasformarsi in un valutatore occulto.
+
+Progettare un tutor capace di aiutare non ci autorizza a delegargli tutto. A questo punto diventano centrali i limiti, i dati che può utilizzare e il momento in cui deve lasciare spazio a una persona responsabile.
 
 ### 3. Dove finisce l'automazione e comincia la responsabilità
 
 Prima di immaginare un utilizzo reale, bisogna stabilire quali dati il sistema può trattare, chi ne è responsabile, che cosa deve fare quando non capisce e quali richieste deve rifiutare o rinviare. Un messaggio su possibili episodi di bullismo o una domanda su emozioni e salute non possono essere trasformati in diagnosi o sanzioni automatiche. Il docente deve poter interrompere il flusso, scegliere un'alternativa e attivare le procedure della scuola. I casi usati in questo corso sono completamente simulati: non vanno incollate chat di minori, voti o informazioni identificabili.
 
+Stabilire regole sulla carta non è sufficiente: dobbiamo provare che cosa accade quando il sistema incontra una richiesta difficile o scorretta. Il collaudo diventa così una forma concreta di prudenza professionale.
+
 ### 4. Il collaudo come abitudine professionale
 
 Testare significa descrivere in anticipo una situazione, la risposta attesa e il criterio per decidere se il risultato è accettabile. Una prova normale può chiedere un indizio su un'equazione; una prova difficile può insistere per ottenere la soluzione completa; una prova avversa può tentare di recuperare dati o introdurre contenuti discriminatori. Per ciascun caso il docente annota che cosa il sistema ha fatto realmente e quale modifica sarebbe necessaria. Sei test sintetici sono utili per imparare il metodo, ma non costituiscono un certificato di sicurezza né un'autorizzazione all'uso con minori.
 
+Anche un test riuscito non rende automaticamente legittimo l'uso in ogni situazione. Servono regole istituzionali, autorizzazioni e una lettura proporzionata dei rischi previsti dalla normativa.
+
 ### 5. Le regole contano quanto il prompt
 
 Nel contesto educativo europeo, bisogna distinguere le finalità e il rischio concreto di ciascun sistema. L'AI Act non classifica automaticamente ogni chatbot di supporto a un docente come sistema ad alto rischio. Il GDPR richiede attenzione ai dati personali, ai ruoli e alle basi giuridiche; le indicazioni dell'istituto e delle autorità competenti restano imprescindibili. La verifica del 20 ottobre 2026 del Garante richiamata nei materiali del corso riguarda uno schema in discussione e non può essere trasformata automaticamente in regola definitiva per tutte le scuole. La nostra formazione fornisce criteri, non consulenza legale personalizzata.
+
+Regole e procedure hanno senso se proteggono un fine educativo. Con Papert torniamo allora alla domanda di partenza del corso: quale apprendimento stiamo rendendo possibile, e quale parte deve restare una scelta umana?
 
 ### 6. La lezione di Papert e la scelta che resta umana
 
@@ -171,6 +181,12 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Supervisione umana** — Possibilità effettiva di controllare, correggere o interrompere il sistema
 - **Piano alternativo** — Attività senza il sistema se non è adatto o disponibile
 - **AI Act** — Regolamento europeo sull'intelligenza artificiale, applicabile secondo tempi e categorie specifiche
+
+## Per continuare il percorso
+
+Il percorso si chiude dove era cominciato: davanti alla classe e a un problema reale. Ora puoi scegliere se usare l'IA, come guidarla e quando fermarla, senza confondere la velocità della risposta con la qualità dell'apprendimento.
+
+**Domanda per continuare:** Quale problema scolastico sapresti affrontare meglio anche senza un assistente IA?
 
 ## Verifica ciò che hai imparato
 
