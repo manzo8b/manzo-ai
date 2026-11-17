@@ -299,7 +299,10 @@
     root.focus({preventScroll:true});
   }
   function init(course,bank,scenarios) {
-    if(!course||!bank||course.modules.length!==5||bank.modules.length!==5||course.published!==false)throw Error("Contratto editoriale non valido");
+    if(!course||!bank||course.modules.length!==5||bank.modules.length!==5)throw Error("Contenuti formativi incompleti");
+    const isEditorial=course.published===false&&course.status==="editorial_draft";
+    const isPublic=course.published===true&&course.status==="public_beta"&&document.body.dataset.courseDataBase;
+    if(!isEditorial&&!isPublic)throw Error("Stato di pubblicazione non riconosciuto");
     if(!scenarios||scenarios.modules.length!==5)throw Error("Simulazioni didattiche incomplete");
     state.course=course;state.bank=bank;state.scenarios=scenarios;
     const nav=$("module-nav");
