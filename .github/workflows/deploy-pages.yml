@@ -315,6 +315,9 @@ jobs:
             test -s "_site/it/formazione/ia-per-la-didattica/modulo-$n/index.html"
           done
           test -s _site/it/formazione/ia-per-la-didattica/data/scenarios.json
+          test -s _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
+          grep -q 'data-atl-image-studio="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
+          grep -q 'id="approve"' _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
           # Product preview is deliberately nontransactional and noindex.
           python3 -m py_compile theme/publish-product-preview.py
           node --check product/preview/preview.js
