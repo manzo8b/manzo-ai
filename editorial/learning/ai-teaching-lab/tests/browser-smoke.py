@@ -127,7 +127,7 @@ with sync_playwright() as playwright:
         assert page.locator(".term-card").count() >= 7
         page.locator("#atl-term-group").select_option("")
         page.locator("#module-nav button").first.click()
-        first=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button", name="Verifica la risposta")).first
+        first=page.locator("#atl-quiz fieldset.assessment-block").filter(has=page.get_by_role("button", name="Verifica la risposta")).first
         q=course["modules"][0]["checkpoint"][0]
         first.locator('input[type="radio"]').nth(q["correct_index"]).check()
         first.get_by_role("button", name="Verifica la risposta").click()
