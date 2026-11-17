@@ -9,3 +9,32 @@
 .atl-reading pre{max-width:100%;overflow-x:auto}
 .atl-reading a,.atl-bottom-nav a{overflow-wrap:anywhere}
 .atl-lesson-hero,.atl-side-index,.atl-reading{min-width:0}
+
+
+/* Teacher lessons: reliable contrast and editorial rhythm, even with shared site CSS */
+body.atl-lesson .atl-lesson-hero{background:linear-gradient(126deg,#0749c9,#125cea 65%,#143f99)}
+body.atl-lesson .atl-lesson-hero h1,
+body.atl-lesson .atl-lesson-hero .eyebrow,
+body.atl-lesson .atl-lesson-hero p,
+body.atl-lesson .atl-lesson-hero .atl-lesson-facts,
+body.atl-lesson .atl-lesson-hero .atl-lesson-facts span{color:#fff!important}
+body.atl-lesson .atl-lesson-hero h1{font-weight:790;max-width:810px;text-shadow:0 3px 15px #072f7422}
+body.atl-lesson .atl-lesson-hero p{font-weight:470;opacity:1;line-height:1.65}
+body.atl-lesson .atl-reading{font-size:1.02rem;line-height:1.84}
+body.atl-lesson .atl-reading h2{color:#173c62;line-height:1.24;padding-top:19px;margin-top:48px}
+body.atl-lesson .atl-reading h3{color:#164e81;font-size:clamp(1.15rem,2.3vw,1.47rem);margin-top:33px;margin-bottom:13px}
+body.atl-lesson .atl-reading h2+ p,
+body.atl-lesson .atl-reading h3+ p{line-height:1.82}
+body.atl-lesson .atl-reading ol{border-left:3px solid #dbe9f8;margin:22px 0;padding-left:30px}
+body.atl-lesson .atl-reading ol li{padding-left:8px;margin:12px 0;line-height:1.72}
+body.atl-lesson .atl-reading ul li{line-height:1.7}
+body.atl-lesson .atl-reading blockquote{background:linear-gradient(140deg,#ecf6ff,#fff);color:#1c4773;border-color:#1a62db}
+body.atl-lesson .atl-reading pre{background:#f0f6ff;color:#173858;border:1px solid #b9d2ef;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.62;max-width:100%;padding:20px}
+body.atl-lesson .atl-reading pre code{white-space:inherit;color:inherit}
+body.atl-lesson .atl-reading strong{color:#153c65}
+body.atl-lesson .atl-reading a:focus-visible{outline:3px solid #ed7347;outline-offset:3px}
+body.atl-lesson .atl-side-index{box-shadow:0 10px 25px #1d498310;background:linear-gradient(150deg,#fff,#f4f8ff)}
+body.atl-lesson .atl-side-index nav a{transition:transform .2s,border-color .2s,box-shadow .2s}
+body.atl-lesson .atl-side-index nav a:hover{transform:translateX(3px);border-color:#85aff4;box-shadow:0 5px 16px #204c8a1b}
+@media(max-width:590px){body.atl-lesson .atl-reading h2{margin-top:32px}body.atl-lesson .atl-reading pre{padding:14px}}
+@media(prefers-reduced-motion:reduce){body.atl-lesson .atl-side-index nav a{transition:none!important}body.atl-lesson .atl-side-index nav a:hover{transform:none!important}}
