@@ -227,8 +227,9 @@ def publish(site,verify=False):
                 authentic_slides=True
                 media_available["AI_per_Docenti.web.mp4"]=True
         if media_available.get("AI_per_Docenti.web.mp4"):
+            home=home.replace(\'<span class="atl-intro-duration">Video non caricato</span>\',\'<span class="atl-intro-duration">Video disponibile</span>\',1)
             home=re.sub(r'<div data-atl-video-media>.*?</div>',
-                '<div data-atl-video-media><video class="atl-intro-video-player" controls preload="metadata" playsinline aria-label="Video podcast AI per Docenti, durata 7 minuti e 4 secondi">'
+                '<div data-atl-video-media><video class="atl-intro-video-player" controls preload="metadata" playsinline aria-label="Video podcast AI per docenti">'
                 '<source src="./media/AI_per_Docenti.web.mp4" type="video/mp4">Il browser non supporta il video HTML5</video>'
                 '<p class="atl-intro-video-a11y">Video con elementi grafici: consulta la presentazione web per una sintesi testuale. Non sono ancora disponibili sottotitoli verificati.</p></div>',
                 home, count=1,flags=re.S)
