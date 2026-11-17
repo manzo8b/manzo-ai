@@ -308,9 +308,186 @@
     const file=e.target.files?.[0];if(!file)return;
     const types=["audio/mpeg","audio/mp4","audio/ogg","audio/wav","audio/x-wav","audio/webm"];
     if(!types.includes(file.type)||file.size>maxAudio){msg("Audio non valido: usa MP3, M4A, OGG, WAV o WebM sotto 8 MB.");e.target.value="";return}
-    try{files.audio=await asDataURL(file);$("studio-audio-state").textContent="Traccia audio pronta: "+file.name;msg("Audio acquisito in memoria nel tuo browser.",true)}
+    try{files.audio=await asDataURL(file);setAudioPreview(files.audio);$("studio-audio-state").textContent="Traccia audio pronta: "+file.name;msg("Audio acquisito in memoria nel tuo browser.",true)}
     catch(_){msg("Impossibile leggere la traccia audio.")}
   });
+
+  /* Audio production via user-granted microphone access, no upload. */
+  const recordingPlayer=$("studio-record-preview");
+  const recordingDownload=$("studio-record-download");
+  const recordingStatus=$("studio-record-state");
+  let microphone=null,audioRecorder=null,recordedAudioMime="audio/webm";
+  function supportedMime(options){
+    if(typeof MediaRecorder==="undefined")return "";
+    return options.find(type=>{
+      try{return MediaRecorder.isTypeSupported(type)}catch(_){return false}
+    })||"";
+  }
+  function setAudioPreview(uri){
+    recordingPlayer.hidden=!uri;
+    recordingPlayer.removeAttribute("src");
+    if(uri)recordingPlayer.src=uri;
+    recordingDownload.disabled=!uri;
+  }
+  function audioRecordingAvailable(){
+    return Boolean(navigator.mediaDevices?.getUserMedia&&window.MediaRecorder);
+  }
+  if(!audioRecordingAvailable()){
+    $("studio-record-start").disabled=true;
+    recordingStatus.textContent="Questo browser non consente la registrazione diretta. Puoi importare una registrazione già pronta.";
+  }
+  function draftConversation(){
+    const p=collect(),scene=p.scenes;
+    const a=p.speakers[0]||"Docente",b=p.speakers[1]||"Collega";
+    return [
+      a+": Partiamo da una domanda: "+(scene[0].title||"che cosa vogliamo capire")+"?",
+      b+": "+(scene[0].body||"Descriviamo la situazione senza anticipare la risposta."),
+      a+": Quali informazioni servono per approfondire?",
+      b+": "+(scene[1].body||"Consultiamo la fonte scelta e distinguiamo osservazioni e conclusioni."),
+      a+": Come controlliamo ciò che abbiamo capito?",
+      b+": "+(scene[2].body||"Mettiamo alla prova il ragionamento."),
+      a+": Quali affermazioni dobbiamo verificare prima dell'uso in classe?"
+    ].join("\n");
+  }
+  $("studio-script-draft").addEventListener("click",()=>{
+    const target=form.elements["script"];
+    if(target.value.trim()&&!window.confirm("Sostituire il copione esistente con una nuova bozza modificabile?"))return;
+    target.value=draftConversation();
+    recordingStatus.textContent="Bozza costruita dalle tue tre scene. Controlla e riscrivi le affermazioni prima di registrare.";
+    target.focus();
+  });
+  $("studio-record-start").addEventListener("click",async()=>{
+    if(!audioRecordingAvailable()||audioRecorder?.state==="recording")return;
+    $("studio-record-start").disabled=true;
+    recordingStatus.textContent="Richiesta di accesso al microfono…";
+    try{
+      microphone=await navigator.mediaDevices.getUserMedia({audio:true,video:false});
+      const mime=supportedMime(["audio/mp4","audio/webm;codecs=opus","audio/webm","audio/ogg"]);
+      const opts=mime?{mimeType:mime}:undefined;
+      audioRecorder=new MediaRecorder(microphone,opts);
+      recordedAudioMime=(audioRecorder.mimeType||mime||"audio/webm").split(";")[0];
+      const chunks=[];
+      audioRecorder.addEventListener("dataavailable",event=>{if(event.data.size)chunks.push(event.data)});
+      audioRecorder.addEventListener("stop",async()=>{
+        microphone?.getTracks().forEach(track=>track.stop());microphone=null;
+        $("studio-record-start").disabled=false;$("studio-record-stop").disabled=true;
+        const blob=new Blob(chunks,{type:recordedAudioMime});
+        if(!blob.size){recordingStatus.textContent="La registrazione è vuota. Riprova.";return}
+        if(blob.size>maxAudio){recordingStatus.textContent="La registrazione supera 8 MB. Riprova con una traccia più breve.";return}
+        try{
+          files.audio=await asDataURL(blob);
+          setAudioPreview(files.audio);
+          $("studio-audio-state").textContent="Registrazione originale inclusa nel progetto: "+Math.ceil(blob.size/1024)+" KB";
+          recordingStatus.textContent="Registrazione pronta: ascolta e scarica oppure includila nella microlezione HTML.";
+          msg("Audio registrato in locale e aggiunto al progetto.",true);
+        }catch(_){recordingStatus.textContent="Impossibile salvare la registrazione."}
+      });
+      audioRecorder.addEventListener("error",()=>{recordingStatus.textContent="Registrazione interrotta da un errore del dispositivo."});
+      audioRecorder.start(1000);
+      $("studio-record-stop").disabled=false;
+      recordingStatus.textContent="Registrazione in corso: parla nel microfono. Usa Interrompi quando hai concluso.";
+    }catch(_){
+      microphone?.getTracks().forEach(track=>track.stop());microphone=null;
+      $("studio-record-start").disabled=false;$("studio-record-stop").disabled=true;
+      recordingStatus.textContent="Microfono non disponibile o autorizzazione negata. Puoi importare un file audio.";
+    }
+  });
+  $("studio-record-stop").addEventListener("click",()=>{
+    if(audioRecorder?.state==="recording"){
+      $("studio-record-stop").disabled=true;
+      recordingStatus.textContent="Finalizzazione della registrazione…";
+      audioRecorder.stop();
+    }
+  });
+  recordingDownload.addEventListener("click",()=>{
+    if(!files.audio)return;
+    const type=(files.audio.match(/^data:([^;]+);base64,/)||[])[1]||"audio/webm";
+    fileDownload("MANZO-AI-narrazione."+ (type==="audio/mp4"?"m4a":type==="audio/ogg"?"ogg":type==="audio/mpeg"?"mp3":type==="audio/wav"?"wav":"webm"),dataUrlBlob(files.audio),type);
+  });
+  /* Canvas animation exported as a silent video when the browser supports captureStream. */
+  const videoBtn=$("studio-video-create"),videoDownload=$("studio-video-download");
+  const videoStatus=$("studio-video-state"),videoPlayer=$("studio-video-preview");
+  let videoBlob=null,videoURL=null,videoName="MANZO-AI-video.webm",videoBusy=false;
+  const videoMime=()=>supportedMime(["video/mp4;codecs=avc1.42E01E","video/mp4","video/webm;codecs=vp8","video/webm"]);
+  const videoSupported=()=>Boolean(window.MediaRecorder&&HTMLCanvasElement.prototype.captureStream&&videoMime());
+  if(!videoSupported()){
+    videoBtn.disabled=true;
+    videoStatus.textContent="Il tuo browser non supporta l'esportazione video locale. Restano disponibili grafica PNG e microlezione HTML.";
+  }
+  function loadImage(data){
+    return new Promise(resolve=>{
+      if(!data){resolve(null);return}
+      const img=new Image();
+      img.onload=()=>resolve(img);
+      img.onerror=()=>resolve(null);
+      img.src=data;
+    });
+  }
+  videoBtn.addEventListener("click",async()=>{
+    if(videoBusy)return;
+    if(!videoSupported()){
+      videoStatus.textContent="Esportazione video non disponibile in questo browser. Usa HTML o prova un browser desktop compatibile.";return;
+    }
+    if(!validateBasics()||!validateScenes())return;
+    videoBusy=true;videoBtn.disabled=true;videoDownload.disabled=true;
+    videoStatus.textContent="Preparazione delle tre scene per il video…";
+    let stream=null,ticker=null,timeout=null,recorder=null;
+    try{
+      const scenes=collect().scenes;
+      const images=await Promise.all(scenes.map(scene=>loadImage(scene.image)));
+      const canvas=document.createElement("canvas");
+      canvas.width=1280;canvas.height=720;
+      const ctx=canvas.getContext("2d");if(!ctx)throw Error("Canvas unavailable");
+      const seconds=Number($("studio-video-seconds").value)||3;
+      const totalMs=seconds*3000,mime=videoMime();
+      const draw=(time)=>{
+        const index=Math.min(2,Math.floor(time/(seconds*1000)));
+        paintScene(ctx,scenes[index],index,images[index]);
+      };
+      draw(0);
+      stream=canvas.captureStream(20);
+      recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:2500000});
+      const chunks=[];
+      const finalStream=stream;
+      recorder.addEventListener("dataavailable",e=>{if(e.data.size)chunks.push(e.data)});
+      recorder.addEventListener("stop",()=>{
+        if(ticker)clearInterval(ticker);if(timeout)clearTimeout(timeout);
+        finalStream.getTracks().forEach(track=>track.stop());
+        const type=(recorder.mimeType||mime).split(";")[0];
+        videoBlob=new Blob(chunks,{type});
+        videoName="MANZO-AI-video-"+safeFilename(value("title"))+(type==="video/mp4"?".mp4":".webm");
+        if(videoURL)URL.revokeObjectURL(videoURL);
+        videoURL=videoBlob.size?URL.createObjectURL(videoBlob):null;
+        videoPlayer.hidden=!videoURL;
+        if(videoURL)videoPlayer.src=videoURL;
+        videoDownload.disabled=!videoURL;
+        videoBtn.disabled=false;videoBusy=false;
+        videoStatus.textContent=videoURL?"Video muto pronto: "+Math.round(totalMs/1000)+" secondi, tre scene. Puoi riprodurlo e scaricarlo.":"Registrazione video vuota. Usa l'esportazione HTML.";
+      });
+      recorder.addEventListener("error",()=>{
+        videoStatus.textContent="Errore del registratore video. Puoi esportare comunque la microlezione HTML.";
+      });
+      recorder.start(500);
+      const start=performance.now();
+      ticker=setInterval(()=>{
+        draw(Math.min(totalMs,performance.now()-start));
+        videoStatus.textContent="Composizione video: "+Math.min(100,Math.round((performance.now()-start)/totalMs*100))+"%";
+      },80);
+      timeout=setTimeout(()=>{
+        if(recorder?.state==="recording")recorder.stop();
+      },totalMs+250);
+    }catch(_){
+      if(ticker)clearInterval(ticker);if(timeout)clearTimeout(timeout);
+      stream?.getTracks().forEach(track=>track.stop());
+      videoBtn.disabled=false;videoBusy=false;
+      videoStatus.textContent="Video non esportabile in questo browser. La versione HTML resta disponibile.";
+    }
+  });
+  videoDownload.addEventListener("click",()=>{
+    if(!videoBlob)return;
+    fileDownload(videoName,videoBlob,videoBlob.type||"application/octet-stream");
+  });
+
   function renderPreview(){
     const p=collect(),root=$("studio-preview");root.replaceChildren();
     const heading=document.createElement("h3");heading.textContent=p.title||"Titolo ancora da definire";
@@ -441,6 +618,7 @@ document.getElementById("evaluate").addEventListener("click",()=>{const picked=a
         visual:String(s.visual||"").slice(0,340),alt:String(s.alt||"").slice(0,340)})));
       for(const box of form.querySelectorAll('input[name="quality"]'))box.checked=Array.isArray(p.quality)&&p.quality.includes(box.value);
       $("studio-audio-state").textContent=files.audio?"Registrazione recuperata dal progetto":"Nessuna registrazione nel progetto";
+      setAudioPreview(files.audio);
       renderModels();switchPhase(0);msg("Progetto importato correttamente. Controlla i dati prima dell'esportazione.",true);
     }catch(_){msg("Progetto non valido: importa un JSON creato da questo laboratorio.")}
     e.target.value="";
