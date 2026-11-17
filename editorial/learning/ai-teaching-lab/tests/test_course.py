@@ -14,6 +14,24 @@ SCENES = json.loads((ROOT / "scenarios.json").read_text(encoding="utf-8"))
 
 
 class CourseQuality(unittest.TestCase):
+    def test_editorial_claims_and_preview_integrity(self):
+        """Keep beginner-facing Italian and media-status claims accurate."""
+        base = ROOT.parent
+        lessons = [(base / f"it/module-{i:02d}.md").read_text(encoding="utf-8") for i in range(1, 6)]
+        course_source = (ROOT / "course.json").read_text(encoding="utf-8")
+        for text in [*lessons, course_source]:
+            for malformed in ("una immagine", "una osservazione", "una esperienza"):
+                self.assertNotIn(malformed, text)
+        self.assertNotIn("?.", lessons[2])
+        readme = (base / "README.md").read_text(encoding="utf-8")
+        self.assertNotIn("di circa 2.000 parole", readme)
+        self.assertIn("20 ore è **una stima progettuale", readme)
+        preview = (base / "preview/index.html").read_text(encoding="utf-8")
+        self.assertIn("Video non caricato", preview)
+        self.assertIn("Il video non è incluso in questa anteprima", preview)
+        self.assertNotIn('class="atl-intro-duration">07:04', preview)
+        self.assertNotIn('class="atl-intro-video-number">7:43', preview)
+
     def test_unpublished_synthetic(self):
         self.assertEqual(COURSE["status"], "editorial_draft")
         self.assertFalse(COURSE["published"])
