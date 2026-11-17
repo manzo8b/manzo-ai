@@ -1,0 +1,48 @@
+name: AI Teaching Lab — editorial and preview QA
+
+on:
+  push:
+    branches:
+      - feat/ai-teaching-lab-curriculum-20261117
+    paths:
+      - 'editorial/learning/ai-teaching-lab/**'
+      - '.github/workflows/ai-teaching-lab-qa.yml'
+  pull_request:
+    paths:
+      - 'editorial/learning/ai-teaching-lab/**'
+      - '.github/workflows/ai-teaching-lab-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-only-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Verify all five modules, pedagogy, quiz and crosswords
+        run: python3 -m unittest discover -s editorial/learning/ai-teaching-lab/tests -p 'test_*.py' -v
+      - name: Validate JavaScript source syntax
+        run: node --check editorial/learning/ai-teaching-lab/preview/app.js
+      - name: Validate editorial JSON syntax
+        run: |
+          python3 -m json.tool editorial/learning/ai-teaching-lab/it/course.json > /dev/null
+          python3 -m json.tool editorial/learning/ai-teaching-lab/it/assessment-bank.json > /dev/null
+      - name: Confirm non-public preview status
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('editorial/learning/ai-teaching-lab/it')
+          c=json.loads((p/'course.json').read_text())
+          b=json.loads((p/'assessment-bank.json').read_text())
+          assert c['published'] is False
+          assert b['implementation_status']['server_side_grading'] is False
+          assert b['implementation_status']['persistent_progress'] is False
+          assert b['implementation_status']['certificate'] is False
+          print('Draft-only content, no fake grades or certificates')
+          PY
