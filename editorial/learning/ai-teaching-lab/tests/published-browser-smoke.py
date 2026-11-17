@@ -45,17 +45,17 @@ with sync_playwright() as playwright:
         page.goto(COURSE,wait_until="networkidle")
         page.locator("#experience").wait_for(state="visible",timeout=10000)
         assert page.locator(".atl-resource-hub").is_visible()
-        assert page.locator(".atl-resource-link").count()==11
+        assert page.locator(".atl-resource-link").count()==19
         assert page.locator(".atl-resource-link:visible").count()==4
         assert page.locator("[data-atl-resource-glossary]").is_visible()
         assert page.locator('.atl-resource-link[href*="mim.gov.it"]').count()==1
         assert page.locator('.atl-resource-link[href*="unesco.org"]').count()==2
         assert page.locator(".atl-resource-link").first.get_attribute("target")=="_blank"
-        page.locator(".atl-resource-more summary").click()
+        page.locator(".atl-resource-more:not(.atl-resource-specialized) summary").click()
         assert page.locator(".atl-resource-link:visible").count()==11
-        page.locator(".atl-resource-more summary").click()
+        page.locator(".atl-resource-more:not(.atl-resource-specialized) summary").click()
         assert page.locator(".branch-choices button").count()==3
-        assert page.locator(".lab-prompt-code").count()==2
+        assert page.locator(".lab-prompt-code").count()==3
         probe=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button",name="Confronta la mia ipotesi"))
         assert probe.count()==1
         probe.locator("input").nth(1).check()
@@ -75,7 +75,7 @@ with sync_playwright() as playwright:
         link=page.locator("a.full-lesson-link")
         assert link.get_attribute("href")=="./modulo-05/"
         assert page.locator("#atl-final-glossary").is_visible()
-        assert "47 voci" in page.locator("#atl-term-count").inner_text()
+        assert "79 voci" in page.locator("#atl-term-count").inner_text()
         assert page.locator('a[data-atl-glossary-page]').is_visible()
         link.click()
         page.wait_for_url(COURSE+"modulo-05/")
@@ -91,7 +91,7 @@ with sync_playwright() as playwright:
         glossary_link.click()
         page.wait_for_url(COURSE+"glossario/")
         assert page.locator("h1").count()==1
-        assert page.locator(".term-card").count()==47
+        assert page.locator(".term-card").count()==79
         assert "Pedagogia" in page.locator("main").inner_text()
         assert "Metodo MANZO AI" in page.locator("main").inner_text()
         assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth+2")
