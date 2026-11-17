@@ -122,7 +122,7 @@ def publish(site,verify=False):
             public_course["publication_status"]="open_educational_beta"
             public_course["public_access_free"]=True
             public_course["locale_coverage"]=dict(course["locale_coverage"],it="public_beta")
-            expected=(json.dumps(public_course,ensure_ascii=False,indent=2)+"\\n").encode("utf-8")
+            expected=(json.dumps(public_course,ensure_ascii=False,indent=2)+chr(10)).encode("utf-8")
         else:
             expected=(DATA/name).read_bytes()
         if not verify:
