@@ -304,3 +304,20 @@ body:not([data-module-base]) [data-atl-resource-glossary]{display:none!important
 @media(max-width:900px){.course-session-map{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.course-session-map{gap:7px}.course-session-step{padding:10px 11px;font-size:.73rem}.narrative-chapter p{font-size:.98rem}.module-outline-link{font-size:.76rem}}
 @media(prefers-reduced-motion:reduce){.course-session-step{transition:none!important}.course-session-step:hover{transform:none!important}}
+
+
+/* Course-level navigation and measurable learning goals, inspired by leading LMS UX */
+.atl-course-tabs{display:flex;gap:3px;flex-wrap:wrap;position:sticky;top:0;z-index:12;background:#fff;border-bottom:1px solid #dce8f5;padding-top:8px;padding-bottom:8px;box-shadow:0 7px 18px #1e4b7c09}
+.atl-course-tabs a{flex:none;text-decoration:none!important;color:#335a81;font-weight:770;font-size:.87rem;padding:11px 16px;border-radius:10px;white-space:nowrap}
+.atl-course-tabs a:hover,.atl-course-tabs a:focus-visible{background:#eaf3ff;color:#1257bd}
+.atl-intro-competencies{margin-top:18px;border-radius:22px;border:1px solid #d5e3f2;background:#fff;padding:clamp(20px,3vw,32px)}
+.atl-intro-competencies h3{margin:8px 0 20px;color:#193c67;letter-spacing:-.035em;font-size:clamp(1.38rem,2.7vw,2rem)}
+.atl-competencies-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+.atl-competencies-grid>div{padding:17px 15px;background:linear-gradient(135deg,#f2f8ff,#fff);border:1px solid #d5e3f2;border-radius:14px;transition:transform .2s ease,box-shadow .2s ease}
+.atl-competencies-grid>div:hover{transform:translateY(-3px);box-shadow:0 12px 25px #1d539015}
+.atl-competencies-grid strong{font-size:.98rem;color:#175bb6}
+.atl-competencies-grid p{font-size:.84rem;line-height:1.58;color:#445f7b;margin:8px 0 0}
+#presentazione-corso,#competenze,#experience,#atl-final-glossary{scroll-margin-top:80px}
+@media(max-width:820px){.atl-competencies-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.atl-course-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}}
+@media(max-width:470px){.atl-competencies-grid{grid-template-columns:1fr}.atl-course-tabs a{padding:9px 10px;font-size:.76rem}}
+@media(prefers-reduced-motion:reduce){.atl-competencies-grid>div{transition:none!important}.atl-competencies-grid>div:hover{transform:none!important}}
