@@ -120,6 +120,12 @@ h1 .marker{position:relative;color:var(--blue);white-space:nowrap}h1 .marker:aft
 @media(max-width:780px){.shell{width:min(100% - 30px,640px)}.top{min-height:64px}.top-links{gap:10px}.top-links a:nth-child(2){display:none}.top-note{display:none}.hero{grid-template-columns:1fr;padding:38px 0 32px}.hero-art{min-height:250px;margin-top:7px}.hero-display{width:66%;padding:12px;border-radius:16px;transform:rotate(-3deg)}.visual-title{font-size:1.02rem}.visual-seq .visual-step{min-height:66px;padding:8px;font-size:.64rem}.sticker{bottom:8%;right:6%;font-size:.7rem}.orbit{width:245px;height:245px}.orbit.two{width:175px;height:175px}h1{font-size:clamp(2.7rem,8vw,4.8rem)}.hero-copy{font-size:.96rem}.app-layout{grid-template-columns:1fr}.preview{position:static}.section{padding:32px 0 45px}.pathways{grid-template-columns:repeat(2,minmax(0,1fr))}.end{flex-direction:column;align-items:flex-start;padding:26px}.end .btn{width:100%}}
 @media(max-width:440px){.shell{width:calc(100% - 26px)}.top-links a:nth-child(1){display:none}.hero-art{min-height:228px}.hero-display{width:77%}.visual-step{font-size:.62rem!important}.sticker{right:3%}.missions{gap:8px}.mission{min-height:118px;padding:13px}.mission strong{font-size:.82rem}.mission small{font-size:.69rem}.two{grid-template-columns:1fr}.pad{padding:17px}.workspace-title{padding:16px 17px}.preview{padding:18px}.diagram article{padding:9px 8px}.path{padding:15px;min-height:180px}.path .num{font-size:1.7rem}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.resume{margin:20px 0 3px;border:1.5px solid #bdd0ed;border-radius:13px;overflow:hidden}
+.resume summary{padding:12px 14px;font-size:.79rem;font-weight:850;color:#164dab;cursor:pointer}
+.resume label{display:block;font-size:.75rem;font-weight:800;color:#263c5d;padding:7px 14px}
+.resume input{display:block;width:calc(100% - 28px);margin:6px 14px;padding:10px;background:#fff;border:1px solid #a9c4e6;border-radius:9px;font-size:.8rem}
+.resume p{margin:8px 14px 14px;font-size:.75rem;line-height:1.5;color:#536277}
 </style>
 </head>
 <body>
@@ -173,7 +179,7 @@ h1 .marker{position:relative;color:var(--blue);white-space:nowrap}h1 .marker:aft
 <label class="field" for="objective"><span>Che cosa sapranno fare gli studenti?</span><span class="help">Usa un verbo osservabile: spiegare, confrontare, distinguere, ordinare. Puoi modificare il suggerimento nella scheda accanto.</span><textarea id="objective" maxlength="600" placeholder="Es. Sapranno ordinare le fasi di un fenomeno e motivare le relazioni"></textarea></label>
 <div class="disclose"><strong>Prima regola: nessun dato reale di alunni.</strong> Il percorso è una simulazione formativa locale. Non accede a registri, non chiama un modello IA e non salva progressi in un account.</div>
 <div class="workspace-actions"><button class="btn blue" type="button" id="generate">Aggiorna il piano <span aria-hidden="true">↗</span></button><button class="btn ghost" type="button" id="reset">Ricomincia</button></div>
-<p class="feedback" id="form-status" role="status" aria-live="polite"></p>
+<details class="resume"><summary>Hai già un brief? Riapri il file salvato</summary><label for="restore">Seleziona il file JSON esportato da Mission Studio</label><input id="restore" type="file" accept=".json,application/json"><p>Il ripristino riguarda soltanto questa micro-app: non importa immagini, audio o video e non approva il lavoro.</p></details><p class="feedback" id="form-status" role="status" aria-live="polite"></p>
 </div>
 </div>
 <aside class="preview" aria-labelledby="preview-title">
@@ -210,10 +216,10 @@ const root=document;
 const $=id=>root.getElementById(id);
 const select=(s)=>Array.from(root.querySelectorAll(s));
 const missions={
- image:{name:"Studio immagini",path:"../studio-immagini/",label:"Immagine esplicativa",steps:["Osserva","Collega","Descrivi"],defaultGoal:"Riconoscere gli elementi chiave di {topic} e spiegare almeno una relazione tra loro.",evidence:"Lo studente annota due elementi dell'immagine e spiega con parole proprie come sono collegati.",tips:"Verifica etichette, accuratezza scientifica, descrizione alternativa e diritti della risorsa."},
- voice:{name:"Studio voce",path:"../studio-voce/",label:"Narrazione accessibile",steps:["Ascolta","Riformula","Racconta"],defaultGoal:"Ascoltare una breve spiegazione di {topic}, riformularne l'idea principale e fornire un esempio.",evidence:"Lo studente riassume la spiegazione e formula una domanda di approfondimento; la trascrizione resta disponibile.",tips:"Riascolta integralmente la registrazione, controlla la trascrizione e la provenienza della voce."},
- video:{name:"Studio video",path:"../studio-video/",label:"Sequenza audiovisiva",steps:["Anticipa","Segui","Ricostruisci"],defaultGoal:"Ordinare tre passaggi di {topic}, descrivere cosa cambia e motivare la sequenza.",evidence:"Lo studente riordina tre scene e spiega perché una fase precede la successiva.",tips:"Controlla le scene, i sottotitoli, la provenienza delle immagini e il ritmo; il WebM locale è silenzioso."},
- verify:{name:"Modulo 02",path:"../modulo-02/",label:"Verifica delle fonti",steps:["Formula","Controlla","Motiva"],defaultGoal:"Distinguere una spiegazione documentata da un'affermazione non verificata su {topic}.",evidence:"Lo studente individua una fonte primaria pertinente, segnala un limite e formula una conclusione proporzionata alle prove.",tips:"Non usare detector di IA come prova di paternità e non inventare bibliografie: confronta le fonti originali."}
+ image:{name:"Studio immagini",path:"../studio-immagini/",label:"Immagine esplicativa",steps:["Osserva","Collega","Descrivi"],defaultGoal:"Riconoscere gli elementi chiave del tema «{topic}» e spiegare almeno una relazione fra loro.",evidence:"Lo studente annota due elementi dell'immagine e spiega con parole proprie come sono collegati.",tips:"Verifica etichette, accuratezza scientifica, descrizione alternativa e diritti della risorsa."},
+ voice:{name:"Studio voce",path:"../studio-voce/",label:"Narrazione accessibile",steps:["Ascolta","Riformula","Racconta"],defaultGoal:"Ascoltare una spiegazione sul tema «{topic}», riformularne l'idea principale e fornire un esempio.",evidence:"Lo studente riassume la spiegazione e formula una domanda di approfondimento; la trascrizione resta disponibile.",tips:"Riascolta integralmente la registrazione, controlla la trascrizione e la provenienza della voce."},
+ video:{name:"Studio video",path:"../studio-video/",label:"Sequenza audiovisiva",steps:["Anticipa","Segui","Ricostruisci"],defaultGoal:"Ordinare tre passaggi relativi al tema «{topic}», descrivere cosa cambia e motivare la sequenza.",evidence:"Lo studente riordina tre scene e spiega perché una fase precede la successiva.",tips:"Controlla le scene, i sottotitoli, la provenienza delle immagini e il ritmo; il WebM locale è silenzioso."},
+ verify:{name:"Modulo 02",path:"../modulo-02/",label:"Verifica delle fonti",steps:["Formula","Controlla","Motiva"],defaultGoal:"Distinguere una spiegazione documentata da un'affermazione non verificata sul tema «{topic}».",evidence:"Lo studente individua una fonte primaria pertinente, segnala un limite e formula una conclusione proporzionata alle prove.",tips:"Non usare detector di IA come prova di paternità e non inventare bibliografie: confronta le fonti originali."}
 };
 let mission="image",minutes=30;
 const initialTopic="Il ciclo dell'acqua";
@@ -222,7 +228,7 @@ function state(){
  const topic=tidy($("topic").value,110)||"un tema scelto dal docente";
  const audience=$("audience").value;
  const spec=missions[mission];
- const goal=tidy($("objective").value,600)||spec.defaultGoal.replace("{topic}",topic.toLowerCase());
+ const goal=tidy($("objective").value,600)||spec.defaultGoal.replace("{topic}",topic);
  return {schema:"ai-teaching-lab-mission-v0.1",createdAt:new Date().toISOString(),topic,audience,minutes,mission,resource:spec.label,objective:goal,evidence:spec.evidence,steps:spec.steps.map((title,i)=>({number:i+1,title})),teacherReview:spec.tips,source:"Mission Studio / regole editoriali locali",approval:false,disclaimer:"Bozza di progettazione: nessun contenuto generato o approvato da IA. La verifica e l'approvazione competono al docente."};
 }
 function planText(s){
@@ -253,6 +259,26 @@ select("[data-minutes]").forEach(el=>el.addEventListener("click",()=>{minutes=Nu
 ["topic","audience","objective"].forEach(id=>$(id).addEventListener("input",()=>{render();$("form-status").textContent=""}));
 $("generate").addEventListener("click",()=>{render();$("form-status").textContent="Piano aggiornato. È una bozza da rivedere: puoi copiarla, scaricarla o aprire il laboratorio."; $("preview-title").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"nearest"});});
 $("reset").addEventListener("click",()=>{mission="image";minutes=30;$("topic").value=initialTopic;$("objective").value="";$("audience").selectedIndex=1;update("Tornato al percorso iniziale.")});
+
+$("restore").addEventListener("change",async(e)=>{
+ const file=e.currentTarget.files[0];e.currentTarget.value="";
+ if(!file)return;
+ if(!file.size||file.size>1024*1024){$("form-status").textContent="Il brief deve essere un file JSON non vuoto e inferiore a 1 MB.";return}
+ try{
+  const data=JSON.parse(await file.text());
+  if(!data||Array.isArray(data)||data.schema!=="ai-teaching-lab-mission-v0.1"||!Object.hasOwn(missions,data.mission)||typeof data.topic!=="string"||typeof data.objective!=="string"){
+   throw Error("Formato non riconosciuto: seleziona un brief esportato da Mission Studio.");
+  }
+  if(!confirm("Ripristinare questa bozza? Il brief attualmente compilato verrà sostituito, senza approvarlo."))return;
+  mission=data.mission;
+  minutes=[15,30,45].includes(Number(data.minutes))?Number(data.minutes):30;
+  $("topic").value=tidy(data.topic,110);
+  const audienceValues=Array.from($("audience").options).map(o=>o.value);
+  $("audience").value=audienceValues.includes(data.audience)?data.audience:audienceValues[1];
+  $("objective").value=String(data.objective).slice(0,600);
+  update("Bozza ripristinata. Rivedi obiettivi, fonti e verifiche prima di procedere.");
+ }catch(error){$("form-status").textContent=error.message||"Impossibile importare la bozza."}
+});
 $("export").addEventListener("click",()=>{
  const s=state(),blob=new Blob([JSON.stringify(s,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
  a.href=url;a.download="ai-teaching-mission-brief.json";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),8000);
