@@ -21,6 +21,7 @@ IMAGE_STUDIO=ROOT/"tools"/"ai-teaching-image-studio"/"index.html"
 VOICE_STUDIO=ROOT/"tools"/"ai-teaching-voice-studio"/"index.html"
 VIDEO_STUDIO=ROOT/"tools"/"ai-teaching-video-studio"/"index.html"
 MULTIMEDIA_WORKSPACE=ROOT/"tools"/"ai-teaching-workspace"/"index.html"
+LAUNCHPAD=ROOT/"tools"/"ai-teaching-launchpad"/"index.html"
 ROUTE="it/formazione/ia-per-la-didattica"
 BASE="/manzo-ai/"
 MARKER='data-atl-feature="2026-11"'
@@ -253,6 +254,16 @@ def publish(site,verify=False):
         home=home.replace(voice_entry,voice_entry+video_entry,1)
         workspace_entry='<a href="./workspace-multimediale/" data-atl-workspace="v0.1" style="display:inline-flex;margin:12px 0 0 10px;padding:12px 18px;border-radius:14px;background:#1b6559;color:white;font-weight:750;text-decoration:none">Apri il Workspace · unisci i tre studi ↗</a>'
         home=home.replace(video_entry,video_entry+workspace_entry,1)
+        # An actionable micro-app above the course catalogue, not a fake AI chatbot.
+        launch_entry=('<a href="./inizia/" data-atl-launchpad="v0.1" '
+            'style="display:inline-flex;align-items:center;gap:10px;margin:10px 0 16px;'
+            'padding:13px 19px;background:#111827;color:#fff;border:2px solid #111827;'
+            'border-radius:15px;text-decoration:none;font-weight:850;'
+            'box-shadow:0 9px 24px #12224324">'
+            '✦ Avvia Mission Studio · progetta una microlezione ↗</a>')
+        if home.count('<div class="hero-stat"')!=1:
+            raise RuntimeError("Missing landing hero insertion point for Mission Studio")
+        home=home.replace('<div class="hero-stat"',launch_entry+'<div class="hero-stat"',1)
         (target/"index.html").write_text(home,encoding="utf-8")
         presentation=(PREVIEW/"presentazione"/"index.html").read_text(encoding="utf-8")
         presentation=presentation.replace('<meta name="robots" content="noindex,nofollow">',"")
@@ -340,6 +351,18 @@ def publish(site,verify=False):
         workspace_dest=target/"workspace-multimediale"/"index.html"
         workspace_dest.parent.mkdir(parents=True,exist_ok=True)
         workspace_dest.write_text(workspace_html,encoding="utf-8")
+        # Publish Mission Studio as a standalone, browser-only teaching micro-app.
+        if not LAUNCHPAD.is_file():raise RuntimeError("Missing Mission Studio source")
+        launch_html=LAUNCHPAD.read_text(encoding="utf-8")
+        marker='<meta name="robots" content="noindex,follow">'
+        if launch_html.count(marker)!=1:raise RuntimeError("Mission Studio source must declare prototype status")
+        launch_html=launch_html.replace(marker,seo(
+            "Mission Studio | AI Teaching Lab | MANZO AI",
+            "Micro-app formativa per docenti: progetta un brief didattico, seleziona risorse e verifica obiettivi prima di usare l'IA.",
+            "LearningResource",BASE+ROUTE+"/inizia/"),1)
+        launch_dest=target/"inizia"/"index.html"
+        launch_dest.parent.mkdir(parents=True,exist_ok=True)
+        launch_dest.write_text(launch_html,encoding="utf-8")
         for i,m in enumerate(course["modules"],1):
             text=(DATA/f"module-{i:02d}.md").read_text(encoding="utf-8")
             dest=target/f"modulo-{i:02d}"/"index.html"
@@ -386,6 +409,12 @@ def publish(site,verify=False):
         raise RuntimeError("Incomplete multimedia workspace import/review/export")
     if '../workspace-multimediale/' not in studio_html:
         raise RuntimeError("Missing multimedia workspace navigation")
+    launchpad_page=target/"inizia"/"index.html"
+    if not launchpad_page.is_file():raise RuntimeError("Missing Mission Studio micro-app")
+    launchpad_html=launchpad_page.read_text(encoding="utf-8")
+    if any(key not in launchpad_html for key in ('id="generate"','id="export"','id="copy"','data-kind="image"','ai-teaching-lab-mission-v0.1')):
+        raise RuntimeError("Incomplete Mission Studio actions or schema")
+    if 'content="noindex,follow"' in launchpad_html:raise RuntimeError("Mission Studio published noindex")
     slides=(target/"presentazione"/"index.html")
     if not slides.is_file() or "15 slide" not in slides.read_text(encoding="utf-8"):raise RuntimeError("Slide reader missing")
     if (MEDIA/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip").is_file():
@@ -400,6 +429,7 @@ def publish(site,verify=False):
     if 'data-atl-voice-studio="v0.1"' not in home:raise RuntimeError("Home voice studio link missing")
     if 'data-atl-video-studio="v0.1"' not in home:raise RuntimeError("Home video studio link missing")
     if 'data-atl-workspace="v0.1"' not in home:raise RuntimeError("Home workspace link missing")
+    if 'data-atl-launchpad="v0.1"' not in home:raise RuntimeError("Home Mission Studio entry missing")
     if not (target/"data"/"narrative.json").is_file():raise RuntimeError("Missing full narrative")
     presentation=json.loads((target/"data"/"presentation.json").read_text(encoding="utf-8"))
     if len(presentation["slides"])!=15:raise RuntimeError("Expected 15 presentation slides")
