@@ -216,8 +216,8 @@ class CourseQuality(unittest.TestCase):
         self.assertIn('id="atl-resource-heading"', preview)
         self.assertIn('<nav id="module-nav"', preview)
         self.assertLess(preview.index('id="module-nav"'), preview.index('class="atl-resource-hub"'))
-        self.assertEqual(preview.count('class="atl-resource-link"'), 11)
-        self.assertEqual(preview.count('rel="noopener noreferrer" title="Apri'), 11)
+        self.assertEqual(preview.count('class="atl-resource-link"'), 19)
+        self.assertEqual(preview.count('rel="noopener noreferrer" title="Apri'), 19)
         for authority in ["mim.gov.it", "unesco.org", "education.ec.europa.eu",
                           "garanteprivacy.it", "oecd.org", "udlguidelines.cast.org",
                           "ai-act-service-desk.ec.europa.eu"]:
@@ -306,6 +306,70 @@ class CourseQuality(unittest.TestCase):
         self.assertIn("document.body.dataset.originalSlideBase",script)
         self.assertIn("color:#fff!important",css)
         self.assertIn("atl-slide-reading h2",css)
+
+
+    def test_five_integrated_professional_experiences(self):
+        narrative=json.loads((ROOT/"narrative.json").read_text(encoding="utf-8"))
+        expected=["decision_matrix","model_test","multimedia_design","inclusive_feedback","branching_path"]
+        self.assertEqual(sum(m["hours"] for m in COURSE["modules"]),20)
+        self.assertFalse(COURSE["hours_validated_by_pilot"])
+        self.assertEqual(len(COURSE["cross_module_competences"]),5)
+        for i,m in enumerate(narrative["modules"]):
+            with self.subTest(module=m["id"]):
+                f=m["focus_experience"]
+                self.assertEqual(f["type"],expected[i])
+                self.assertGreaterEqual(len(f["steps"]),5)
+                self.assertIn("OBIETTIVO",f["prompt"])
+                self.assertGreater(len(f["example"]),160)
+                self.assertGreaterEqual(len(f["criteria"]),4)
+                self.assertGreaterEqual(len(f["references"]),1)
+                self.assertTrue(all(x["url"].startswith("https://") for x in f["references"]))
+                self.assertTrue(0<=f["quiz"]["correct_index"]<len(f["quiz"]["options"]))
+                self.assertEqual(BANK["modules"][i]["competency_check"]["question"],f["quiz"]["question"])
+                self.assertEqual(BANK["modules"][i]["competency_check"]["format"],expected[i])
+                self.assertEqual(COURSE["modules"][i]["competence_focus"]["kind"],expected[i])
+                lesson=(ROOT/f"module-{i+1:02d}.md").read_text(encoding="utf-8")
+                self.assertIn("## Esercitazione integrata",lesson)
+                self.assertIn(f["prompt"],lesson)
+                self.assertIn(f["deliverable"],lesson)
+        demo=narrative["modules"][1]["focus_experience"]["demo"]
+        self.assertEqual(len(demo["training"]),8)
+        self.assertEqual(len(demo["test"]),4)
+        self.assertEqual(sum(x["label"]==("triangolo" if x["color"]=="blu" else "cerchio") for x in demo["test"]),2)
+        self.assertEqual(sum(x["label"]==x["shape"] for x in demo["test"]),4)
+
+    def test_multimedia_model_guide_studio_and_glossary(self):
+        story=json.loads((ROOT/"narrative.json").read_text(encoding="utf-8"))["modules"][2]
+        guide=story["generative_model_guide"]
+        self.assertEqual(len(guide["rows"]),6)
+        for needle in ("ChatGPT Images","Nano Banana"):
+            self.assertIn(needle,str(guide["rows"][0]))
+        self.assertIn("Veo",str(guide["rows"][4]))
+        self.assertIn("NotebookLM",str(guide["rows"][3]))
+        self.assertIn("H5P",str(guide["rows"][5]))
+        self.assertEqual(guide["as_of"],"2026-11-17")
+        self.assertGreaterEqual(len(guide["decision_criteria"]),6)
+        self.assertTrue(all(row["source"].startswith("https://") for row in guide["rows"]))
+        self.assertEqual(len(story["multimedia_design_principles"]),6)
+        self.assertEqual(len(story["media_blueprints"]),4)
+        lesson=(ROOT/"module-03.md").read_text(encoding="utf-8")
+        self.assertIn("ChatGPT Images",lesson)
+        self.assertIn("Nano Banana",lesson)
+        self.assertEqual(len(COURSE["modules"][2]["generative_model_selection"]["examples"]),6)
+        gloss=json.loads((ROOT/"glossary.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(gloss["entries"]),79)
+        words={x["term"] for x in gloss["entries"]}
+        for term in ("Apprendimento automatico (machine learning)","Multimodalità",
+                     "Storyboard didattico","ChatGPT Images / GPT Image",
+                     "Nano Banana / Gemini Image","Scenario ramificato (branching)"):
+            self.assertIn(term,words)
+        html=(ROOT.parent/"preview"/"index.html").read_text(encoding="utf-8")
+        self.assertEqual(html.count('class="atl-resource-link"'),19)
+        self.assertIn("Strumenti per i laboratori · 8 risorse",html)
+        script=(ROOT.parent/"preview"/"app.js").read_text(encoding="utf-8")
+        for word in ("professionalStudio","model-selection-guide","media-creator",
+                     "model-test-grid","practice-branch"):
+            self.assertIn(word,script)
 
 if __name__ == "__main__":
     unittest.main()

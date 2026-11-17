@@ -42,6 +42,8 @@ Il tutor che dà la soluzione corretta sembra efficiente. Ma per accompagnare un
 
 Un tutor socratico cerca di aiutare lo studente a scoprire un passaggio attraverso domande mirate. Per una semplice equazione può iniziare chiedendo quale operazione inversa elimini il termine +5, proporre un indizio più preciso se necessario e infine invitare a controllare il risultato per sostituzione. Non sempre è la soluzione giusta: talvolta l'alunno ha bisogno di un esempio svolto, di un docente o di un'attività senza IA. La scelta deve rimanere coerente con l'obiettivo e con il livello di autonomia atteso. Il sistema non dovrebbe trasformarsi in un valutatore occulto.
 
+Un ambiente digitale «intelligente» non è automaticamente adattivo perché contiene quiz o pulsanti. Un percorso ramificato può seguire regole scritte dall'insegnante: tre scelte, tre feedback, una nuova prova e un'alternativa accessibile. Un tutor generativo opera diversamente, produce risposte a input nuovi e richiede una valutazione dei limiti, dei dati e della supervisione. Prima di parlare di algoritmi adattivi, insegniamo a progettare un ambiente in cui la scelta dello studente produca un'informazione utile per il passo successivo.
+
 Progettare un tutor capace di aiutare non ci autorizza a delegargli tutto. A questo punto diventano centrali i limiti, i dati che può utilizzare e il momento in cui deve lasciare spazio a una persona responsabile.
 
 ### 3. Dove finisce l'automazione e comincia la responsabilità
@@ -171,6 +173,55 @@ Scheda preventiva, piano di rinvio e versione senza IA
 
 **Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
 
+## Esercitazione integrata · Progettare un percorso interattivo a decisioni
+
+Questa esercitazione **fa parte dei due laboratori del modulo**; usa soltanto situazioni fittizie e puoi completarla anche senza un chatbot esterno.
+
+**Situazione:** Una notizia sintetica afferma: «tutti imparano meglio soltanto guardando video» ma non cita alcuna ricerca
+
+**Obiettivo:** Costruire un percorso interattivo di dieci minuti con tre scelte, feedback, recupero e alternativa accessibile
+
+### La tua sequenza di lavoro
+
+1. Scrivi l'obiettivo: individuare un'affermazione che necessita di fonte
+2. Disegna il nodo iniziale e tre scelte: condividere, cercare la ricerca, chiedere a un chatbot di confermare
+3. Scrivi un feedback formativo per ogni scelta e una possibilità di tornare al punto di partenza
+4. Inserisci un secondo tentativo con una notizia diversa e una modalità cartacea equivalente
+5. Dichiara che lo scenario funziona con regole prestabilite, non è un tutor generativo né una piattaforma adattiva
+
+### Prompt da copiare e controllare
+
+```text
+OBIETTIVO: creare una esperienza ramificata per riconoscere notizie non documentate.
+CONTESTO: 10 minuti, scuola secondaria, tre scelte e feedback.
+DATI CONSENTITI: notizia inventata «tutti imparano meglio guardando video» priva di fonti.
+VINCOLI: nessun dato degli studenti, niente statistiche inventate, accessibile con tastiera e carta.
+OUTPUT: nodo iniziale, tre vie, feedback per ogni scelta, opportunità di riprova, verifica finale.
+VERIFICA: separa chiaramente uno scenario a regole da un sistema che genera risposte IA.
+```
+
+### Un possibile risultato, simulato per il corso
+
+> Se condividi subito, il feedback ricorda che non c'è fonte; se cerchi la ricerca, la decisione è prudente e il feedback chiede di verificare autore e metodologia; se chiedi a un chatbot di confermare, il feedback ricorda che non sostituisce una fonte primaria. Una riprova chiede: «Quale documento cercheresti prima di usare questa frase in classe?»
+
+### Verifica del tuo prodotto
+
+- Tre alternative esplicite
+- Feedback distinto e non punitivo
+- Possibilità di revisione
+- Versione accessibile non digitale
+- Nessun finto apprendimento adattivo
+
+**Da conservare nel portfolio:** Storyboard di 10 minuti con tre diramazioni e un test di sicurezza del percorso
+
+**Domanda di autoverifica:** Uno scenario con tre pulsanti e feedback definiti dall'insegnante è automaticamente un tutor IA adattivo?
+
+1. Sì, perché i contenuti cambiano quando clicchi
+2. No, è interattività a regole; adattività IA richiede un sistema e dati ulteriori
+3. Sì, se sono presenti colori diversi
+
+*Dopo aver risposto, controlla:* opzione **2**. La ramificazione deterministica non equivale all'adattività basata su modelli.
+
 ## Parole utili, spiegate senza gergo
 
 Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri una parola nuova.
@@ -211,6 +262,11 @@ Per non interrompere il racconto, abbiamo raccolto le fonti in questa sezione. S
 4. [AI Act Article 4](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4)
 
 **Riferimento pedagogico:** Seymour Papert — [testo di riferimento](https://www.media.mit.edu/publications/constructionism-ethics-and-creativity/). Le idee riportate nel modulo sono parafrasi applicative e non citazioni letterali attribuite all'autore.
+
+### Fonti per approfondire la nuova attività
+
+- [H5P · Branching Scenario](https://h5p.org/branching-scenario)
+- [CAST · UDL](https://udlguidelines.cast.org/)
 
 ## Per chi facilita un gruppo (sezione facoltativa)
 

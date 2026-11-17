@@ -364,6 +364,245 @@
     add(p,steps,paragraph("Il percorso non attiva in segreto un'intelligenza artificiale: gli esempi sono materiali formativi preparati e verificabili. Quando vorrai sperimentare con un sistema esterno, usane uno autorizzato, evitando dati personali degli studenti.","subtle"));
     return p;
   }
+
+  /* A practical exercise in every module. All processing is local: these
+     are deterministic teacher-led demonstrations, NOT live AI models. */
+  function professionalStudio(story){
+    const f=story.focus_experience;
+    if(!f)return el("div");
+    const sectionBox=section("METTI IN PRATICA",f.label);
+    sectionBox.className+=" competency-studio";
+    sectionBox.id="atl-competence";
+    add(sectionBox,paragraph("Un'esperienza da integrare nei due laboratori già previsti: non richiede ore aggiuntive né un account.","subtle"));
+    add(sectionBox,add(el("div","competency-context"),
+      el("b","","Il problema professionale"),paragraph(f.context),
+      el("b","","Il risultato da raggiungere"),paragraph(f.objective)));
+    const steps=el("details","competency-steps");
+    add(steps,el("summary","","Come si svolge · "+f.steps.length+" passaggi"),list(f.steps,true));
+    add(sectionBox,steps);
+
+    if(f.type==="model_test"){
+      const demo=el("div","competency-interaction demo-model");
+      add(demo,heading("h4","Quale regola generalizza sui nuovi esempi?"),
+        paragraph("Il gioco usa otto schede inventate per ricavare una regola di maggioranza e quattro casi non visti per metterla alla prova. Non addestra un vero modello linguistico.","subtle"));
+      const field=el("fieldset","competency-field");
+      add(field,el("legend","","Quale caratteristica deve usare la regola?"));
+      ["color","shape"].forEach((kind,i)=>{
+        const lab=el("label","choice");
+        const inp=el("input");inp.type="radio";inp.name="demo-feature";inp.value=kind;
+        if(i===0)inp.checked=true;
+        add(lab,inp,el("span","",kind==="color"?"Colore: blu o rosso":"Forma: triangolo o cerchio"));
+        add(field,lab);
+      });
+      const results=el("div","model-results");
+      add(demo,field,control("Prova le quattro schede nuove",()=>{
+        const key=field.querySelector("input:checked").value;
+        const mapped={};
+        f.demo.training.forEach(ex=>{
+          const value=ex[key];mapped[value]??={};mapped[value][ex.label]=(mapped[value][ex.label]||0)+1;
+        });
+        const predict=ex=>{
+          const votes=mapped[ex[key]]||{};
+          return Object.keys(votes).sort((a,b)=>votes[b]-votes[a]||a.localeCompare(b))[0]||"nessuna";
+        };
+        const grid=el("div","model-test-grid");
+        let correct=0;
+        f.demo.test.forEach((ex,i)=>{
+          const pred=predict(ex),ok=pred===ex.label;
+          if(ok)correct++;
+          const row=el("div","model-test-card"+(ok?" model-correct":" model-wrong"));
+          add(row,el("span","model-icon",""+(ex.shape==="triangolo"?"△":"◯")),
+            el("b","","Caso nuovo "+(i+1)),
+            paragraph(ex.shape+" "+ex.color+" · previsione: "+pred+" · "+(ok?"corretta":"da correggere")));
+          add(grid,row);
+        });
+        results.replaceChildren(grid);
+        feedback(demo,"Risultato su dati nuovi: "+correct+"/4. Sul training entrambe le regole sembravano corrette; solo il test rivela se la caratteristica scelta generalizza. È un gioco con regole fisse, non un LLM.",correct===4);
+      }),results);
+      add(sectionBox,demo);
+    }
+    if(f.type==="multimedia_design"){
+      const studio=el("div","competency-interaction media-creator");
+
+      const guide=story.generative_model_guide;
+      if(guide){
+        const panel=el("section","model-selection-guide");
+        add(panel,el("div","model-selection-eyebrow","PRIMA DI GENERARE"),
+          heading("h4",guide.heading),paragraph(guide.introduction),
+          paragraph(guide.no_absolute_winner,"subtle"));
+        const chooser=el("div","model-choice-controls");
+        const label=el("label","media-label","Che cosa vuoi progettare?");
+        label.htmlFor="atl-model-media";
+        const kind=el("select","media-select");kind.id="atl-model-media";
+        guide.rows.forEach((item,i)=>{const op=el("option","",item.name);op.value=String(i);add(kind,op)});
+        const details=el("div","model-choice-detail");
+        const rationale=el("textarea","competency-reason");
+        rationale.rows=3;
+        rationale.maxLength=500;
+        rationale.placeholder="Perché useresti questa soluzione? Indica la prova da verificare e un limite da conoscere";
+        rationale.setAttribute("aria-label","Motivazione della scelta del modello o dello strumento");
+        function showModel(){
+          const item=guide.rows[Number(kind.value)]||guide.rows[0];
+          details.replaceChildren();
+          add(details,heading("h5",item.name));
+          const cols=el("div","model-choice-columns");
+          const mk=(title,items)=>{
+            const box=el("div","model-choice-column");
+            add(box,el("b","",title),list(items));
+            return box;
+          };
+          add(cols,mk("Modelli o famiglie",item.model_examples),
+            mk("Applicazioni o strumenti",item.product_examples));
+          add(details,cols,
+            add(el("div","model-choice-why"),el("b","","Quando possono aiutare"),paragraph(item.why)),
+            add(el("div","model-choice-verify"),el("b","","Cosa controllare"),paragraph(item.review)),
+            add(el("div","model-source-links"),
+              external(item.source,"Documentazione ufficiale"),
+              external(item.other_source,"Altra fonte pertinente")));
+          rationale.value="";
+        }
+        kind.value="0";kind.addEventListener("change",showModel);showModel();
+        const rationaleLabel=el("label","media-label","Scrivi la tua decisione e un criterio di verifica");
+        rationale.id="atl-model-rationale";rationaleLabel.htmlFor=rationale.id;
+        add(chooser,label,kind,details,rationaleLabel,rationale,
+          control("Confronta la mia scelta",()=>{
+            const text=rationale.value.trim();
+            if(text.length<35){feedback(chooser,"Motiva la scelta con almeno una frase su obiettivo, controllo e limiti.");return}
+            feedback(chooser,"Buona prima ipotesi. Ora confronta due alternative con lo stesso brief. Verifica fedeltà al contenuto, correggibilità, licenze, accessibilità, privacy, costo e piano senza IA. Il nome del prodotto non è una garanzia di efficacia.",true);
+          }));
+        add(panel,chooser);
+        const criteria=el("details","model-criteria");
+        add(criteria,el("summary","","Sei criteri per confrontare le alternative"),list(guide.decision_criteria,true));
+        add(panel,criteria);
+        add(studio,panel);
+      }
+      add(studio,heading("h4","Studio multimediale · costruisci lo storyboard"),
+        paragraph("Prima definisci l'apprendimento e la fonte, poi scegli come raccontarlo. La traccia è costruita nel tuo browser: nessuna IA viene interrogata e nessun dato viene inviato.","subtle"));
+      const form=el("div","media-brief");
+      const inputs=[
+        ["Destinatari","Seconda media"],
+        ["Obiettivo osservabile","Distinguere un evento meteorologico da una tendenza climatica"],
+        ["Concetto da spiegare","Un giorno di freddo non basta per descrivere il clima"],
+        ["Fonte da verificare","Inserirò una fonte scientifica verificata prima della pubblicazione"]
+      ];
+      const fields={};
+      inputs.forEach(([title,value],i)=>{
+        const lab=el("label","media-label",title);
+        const input=el("input","media-input");input.type="text";input.value=value;input.maxLength=250;
+        input.id="media-input-"+i;lab.htmlFor=input.id;
+        fields[i]=input;
+        add(form,lab,input);
+      });
+      const formatLabel=el("label","media-label","Formato principale");
+      const select=el("select","media-select");
+      [["slide","Slide"],["audio","Podcast / audio"],["video","Microvideo"],["interactive","Scelta interattiva"]].forEach(([val,title])=>{
+        const op=el("option","",title);op.value=val;add(select,op);
+      });
+      select.id="media-kind";formatLabel.htmlFor=select.id;
+      add(form,formatLabel,select);add(studio,form);
+      const output=el("div","media-storyboard-output");
+      let generated="";
+      add(studio,control("Costruisci la scaletta didattica",()=>{
+        const audience=fields[0].value.trim(),goal=fields[1].value.trim(),
+        concept=fields[2].value.trim(),source=fields[3].value.trim();
+        if(!audience||!goal||!concept||!source){
+          feedback(studio,"Compila tutti e quattro i campi prima di creare la scaletta.");return;
+        }
+        const kind=select.value;
+        const blueprint=story.media_blueprints.find(x=>x.kind===kind);
+        const act=kind==="interactive"?"Decisione 1 → feedback motivato → secondo tentativo":
+          kind==="audio"?"Voce 1: dubbio · Voce 2: prova · Trascrizione integrale":
+          kind==="video"?"Scena 1: dubbio · Scena 2: evidenza · Scena 3: verifica, con sottotitoli":
+          "Slide 1: dubbio · Slide 2: evidenza · Slide 3: verifica";
+        generated="DESTINATARI: "+audience+"\nOBIETTIVO: "+goal+
+          "\nCONCETTO: "+concept+"\nFONTE DA CONTROLLARE: "+source+
+          "\nFORMATO: "+select.selectedOptions[0].textContent+
+          (guide?"\nOPZIONI DI MODELLO/SERVIZIO DA CONFRONTARE: "+(guide.rows[Number(studio.querySelector("#atl-model-media")?.value||0)]||guide.rows[0]).model_examples.join("; "):"")+
+          "\nSTORYBOARD: "+act+"\nDOMANDA AGLI STUDENTI: Che cosa puoi concludere dalle prove disponibili?"+
+          "\nFEEDBACK: Chiedi quale fonte manca, spiega il criterio e invita alla revisione."+
+          "\nACCESSIBILITÀ: "+blueprint.accessibility+
+          "\nCONTROLLO: accuratezza, carico cognitivo, licenze, rappresentazioni equivalenti e alternativa senza IA.";
+        output.replaceChildren(
+          heading("h5","Scaletta da verificare e adattare"),
+          el("pre","media-generated",generated),
+          paragraph("È un modello di progettazione compilato con i tuoi dati, non un prodotto audio o video né un testo generato da IA.","subtle"));
+        feedback(studio,"Scaletta costruita localmente. Controlla fonti, consegne e accessibilità prima di utilizzarla.",true);
+      }),control("Copia la scaletta",async()=>{
+        if(!generated){feedback(studio,"Crea prima la scaletta.");return}
+        try{await navigator.clipboard.writeText(generated);feedback(studio,"Scaletta copiata.",true)}
+        catch(_){feedback(studio,"Seleziona manualmente la scaletta per copiarla: resta visibile qui sotto.")}
+      },"secondary"),output);
+      const principles=el("div","media-principles");
+      add(principles,heading("h4","Sei decisioni per una risorsa che fa imparare"));
+      story.multimedia_design_principles.forEach((p,i)=>{
+        const cell=el("article","media-principle-card");
+        add(cell,el("span","",String(i+1).padStart(2,"0")),
+          heading("h5",p.name),paragraph(p.why),el("small","",p.do));
+        add(principles,cell);
+      });
+      add(sectionBox,studio,principles);
+    }
+    if(f.type==="branching_path"){
+      const branch=el("div","competency-interaction practice-branch");
+      add(branch,heading("h4","Tre scelte, tre conseguenze"),
+        paragraph("Prova uno scenario ramificato con feedback deterministico: il codice segue regole decise dal docente, non usa un tutor IA.","subtle"));
+      const result=el("div","branch-feedback");
+      f.branches.forEach((item,i)=>{
+        const b=control(item.choice,()=>{
+          result.replaceChildren(
+            el("b","","Conseguenza della scelta "+(i+1)),
+            paragraph(item.feedback),
+            paragraph("Per correggere o approfondire, torna all'affermazione iniziale e confronta il documento originale.","subtle"));
+        },"secondary");
+        add(branch,b);
+      });
+      add(branch,result);add(sectionBox,branch);
+    }
+    if(f.type==="decision_matrix"||f.type==="inclusive_feedback"){
+      const demo=el("div","competency-interaction option-board");
+      if(f.type==="decision_matrix"){
+        add(demo,heading("h4","Quale soluzione sceglieresti?"));
+        const sel=el("select","competency-select");
+        ["Attività senza IA","Assistente generalista","Assistente su documenti","Editor multimediale"].forEach(s=>{const op=el("option","",s);add(sel,op)});
+        const reason=el("textarea","competency-reason");reason.rows=3;reason.placeholder="Motiva la scelta con obiettivo, dati, limiti e una prova di apprendimento";
+        reason.setAttribute("aria-label","Motivazione della scelta didattica");
+        add(demo,sel,reason,control("Verifica i miei criteri",()=>{
+          if(reason.value.trim().length<35){feedback(demo,"Spiega il motivo in almeno una frase completa e indica come verificheresti la scelta.");return}
+          feedback(demo,"Confronta la tua scelta con la matrice: competenza osservabile, affidabilità, privacy e autorizzazioni, accessibilità, costi, tempo di revisione e piano senza IA. Se un vincolo sui dati non è rispettato, la scelta va esclusa.");
+        }));
+      }else{
+        add(demo,heading("h4","Stessa competenza, più modalità"),
+          paragraph("Scegli quale prova vuoi progettare, poi confrontala con criteri uguali per tutti.","subtle"));
+        ["Testo con scaletta","Mappa descritta e commentata","Esposizione orale con appunti"].forEach((name,i)=>{
+          add(demo,control(name,()=>feedback(demo,
+            "Modalità "+(i+1)+": mantieni sempre correttezza delle cause, pertinenza delle prove e possibilità di revisione. Non dedurre diagnosi o capacità fisse dalla scelta del formato.",true),"secondary"));
+        });
+      }
+      add(sectionBox,demo);
+    }
+    const prompt=el("details","studio-prompt");
+    const bar=el("div","lab-prompt-head");
+    add(bar,el("strong","","Prompt da adattare"));
+    add(prompt,el("summary","","Leggi il prompt completo"),bar,add(el("pre","lab-prompt-code"),el("code","",f.prompt)));
+    add(sectionBox,prompt);
+    const checklist=el("div","studio-checklist");
+    add(checklist,heading("h4","Prima di consegnare"));
+    f.criteria.forEach((t,i)=>{
+      const label=el("label","studio-check");
+      const check=el("input");check.type="checkbox";
+      add(label,check,el("span","",t));add(checklist,label);
+    });
+    const artifact=el("p","competency-deliverable");add(artifact,el("b","","Portfolio: "),el("span","",f.deliverable));
+    add(sectionBox,checklist,artifact);
+    const item={...f.quiz,id:"focus-"+story.id};
+    add(sectionBox,singleChoice(item,1));
+    const refs=el("div","studio-references");
+    add(refs,heading("h4","Per approfondire"));
+    f.references.forEach(x=>add(refs,external(x.url,x.title)));
+    add(sectionBox,refs);
+    return sectionBox;
+  }
+
   function render() {
     const m=state.course.modules[state.index],
           a=state.bank.modules.find(q=>q.module_id===m.id),
@@ -419,7 +658,8 @@
     add(theory,paragraph(story.lead,"narrative-intro"));
     story.chapters.forEach((chapter,i)=>{
       const segment=el("section","narrative-chapter");
-      add(segment,heading("h4",chapter.heading),paragraph(chapter.text));
+      add(segment,heading("h4",chapter.heading));
+      chapter.text.split(/\n\n+/).forEach(text=>add(segment,paragraph(text)));
       if(chapter.transition)add(segment,paragraph(chapter.transition,"narrative-bridge"));
       add(theory,segment);
     });
@@ -496,6 +736,7 @@
       add(card,review);add(cards,card);
     });
     add(labs,cards);
+    add(labs,professionalStudio(story));
     const link=el("a","full-lesson-link","Apri la lezione completa in formato lettura");
     const moduleNumber=String(state.index+1).padStart(2,"0");
     link.href=document.body.dataset.moduleBase ? document.body.dataset.moduleBase+moduleNumber+"/" : "../it/module-"+moduleNumber+".md";

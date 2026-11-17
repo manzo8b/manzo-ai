@@ -42,17 +42,23 @@ Quel grafico comunica rapidamente, ma non insegna ancora a interpretare i dati. 
 
 Le informazioni devono essere selezionate e organizzate affinché il discente possa riconoscerne le relazioni essenziali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata.
 
+La ricerca sull'apprendimento multimediale di Richard Mayer ci invita a progettare per l'attenzione e la comprensione, non per la quantità di effetti. Il principio di coerenza suggerisce di eliminare parole, immagini e suoni non pertinenti; la segnalazione evidenzia gli elementi essenziali; la segmentazione rende controllabile il ritmo di presentazione. Questi principi non trasformano qualsiasi video in una buona lezione: l'obiettivo osservabile resta il punto di riferimento. Per un corso scolastico un audio con voce chiara e trascrizione, una immagine con descrizione e una decisione con feedback possono completarsi senza ripetere tutto tre volte.
+
 Ridurre il rumore visivo è il primo passo, non l'ultimo. Un materiale efficace deve poter essere usato da persone diverse, con strumenti e modalità differenti, senza perdere il nucleo della conoscenza.
 
 ### 3. Una risorsa accessibile è una risorsa meglio progettata
 
 Se un diagramma contiene l'unica spiegazione importante, uno studente che non riesce a leggerlo rischia di essere escluso. Una descrizione testuale, una legenda chiara e un linguaggio comprensibile permettono percorsi equivalenti. I podcast richiedono una trascrizione, i video sottotitoli accurati, le immagini significative descrizioni e i grafici etichette complete. Le linee guida Universal Design for Learning di CAST suggeriscono di offrire alternative di rappresentazione e di azione. Non stiamo semplificando indiscriminatamente la disciplina: stiamo rimuovendo ostacoli non necessari all'apprendimento.
 
+Quando pensiamo a destinatari diversi non dobbiamo etichettare gli studenti come «visivi», «uditivi» o «cinestetici» fissi e associare una sola modalità a ogni persona: la cosiddetta ipotesi del matching degli stili di apprendimento non dispone di un supporto empirico solido. L'UDL invita piuttosto a offrire più possibilità di rappresentazione e di espressione, riducendo ostacoli concretamente osservabili. Un video ha bisogno di sottotitoli e di una trascrizione, una infografica di descrizioni comprensibili, un'attività interattiva di controlli raggiungibili da tastiera e di una via alternativa equivalente.
+
 L'accessibilità ci costringe a scegliere che cosa è essenziale. A questo punto la revisione della bozza IA non è una correzione meccanica: diventa un vero atto di progettazione creativa.
 
 ### 4. La revisione del docente è un passaggio creativo
 
 Con un assistente IA possiamo chiedere uno script, una mappa concettuale o cinque domande. La parte professionale comincia quando leggiamo l'output: le informazioni sono corrette? Le fonti sono pertinenti? Il testo attribuisce a una legge parole che non compaiono nell'originale? Una voce sintetica articola bene i termini specialistici? I contenuti visivi sono coerenti con la spiegazione? La revisione va documentata, perché mostra ai partecipanti come una bozza diventa un materiale didattico responsabile. Il progetto è concluso quando gli studenti possono utilizzare il prodotto per ragionare, non quando il file appare esteticamente finito.
+
+La produzione multimediale comincia da uno storyboard: una scena introduttiva pone un problema, quella centrale mette a disposizione un'evidenza verificabile, l'ultima chiede una decisione e offre feedback. La scelta fra slide, audio, video e percorsi ramificati deve derivare da ciò che lo studente deve fare. Una didattica capovolta (flipped classroom) può collocare un breve media prima della lezione e usare il tempo insieme per discutere; un episodio di apprendimento situato può partire da un problema e chiedere un artefatto; un'attività cooperativa può mettere due studenti a confronto. Nessuna etichetta metodologica garantisce automaticamente efficacia: occorre verificare l'apprendimento e rivedere il prodotto.
 
 Quando il docente ha ripensato la risorsa per favorire un'attività, si apre una questione più ampia: gli studenti saranno spettatori di un contenuto oppure costruttori di significati? Il pensiero di Papert aiuta a fare questa scelta.
 
@@ -75,6 +81,37 @@ Nel nostro percorso le fasi si collegano così:
 7. **Output finale e consegna** — Consegna il materiale finale dichiarando limiti e responsabilità, senza automatizzare il giudizio sugli studenti
 
 Il metodo aiuta a **comprendere → applicare → valutare → creare**, ma ciascun passaggio ha senso solo se conduce a una scelta concreta. Non sostituisce le indicazioni della scuola, le fonti disciplinari o la competenza pedagogica del docente.
+
+## Progettare contenuti multimediali: prima la domanda, poi i media
+
+La docente immagina un video che spieghi il clima. Prima ancora di scegliere il programma, annota ciò che la classe dovrebbe comprendere: una giornata fredda non basta per descrivere una tendenza climatica. Solo allora sceglie una sequenza di scene, immagini e parole che renda visibile questa distinzione. La teoria dell'apprendimento multimediale di Richard Mayer ricorda che abbiamo risorse cognitive limitate e che l'apprendimento richiede di selezionare informazioni pertinenti, organizzarle e integrarle con ciò che sappiamo. Un video pieno di effetti decorativi può distrarre invece di aiutare. Sono principi utili alla progettazione, non garanzie automatiche di un risultato.
+
+Il progetto può prevedere tre scene: il dubbio iniziale, la differenza tra l'osservazione di oggi e le misurazioni ripetute, una domanda su quale prova manchi. Le slide mostrano la struttura, un audio dialogato racconta il ragionamento e una scelta interattiva offre feedback. I formati sono complementari, non semplici duplicati. Per questo occorre uno **storyboard**: una scaletta con ciò che appare, ciò che si ascolta, la funzione della scena, la fonte e la prova richiesta allo studente.
+
+### Le sei decisioni di un progetto multimediale
+
+1. **Partire dall'apprendimento** — Obiettivo osservabile, prerequisiti, destinatari e vincoli reali. **Applica:** Scrivi che cosa lo studente saprà spiegare o dimostrare.
+
+2. **Integrare i linguaggi** — Slide, grafico, voce e interazione hanno funzioni diverse. **Applica:** Scegli un mezzo soltanto quando aiuta a capire meglio.
+
+3. **Gestire il carico cognitivo** — Coerenza, segnalazione e segmentazione riducono distrazioni e sovraccarico. **Applica:** Elimina decorazioni inutili, evidenzia la prova e suddividi i passaggi.
+
+4. **Attivare l'apprendimento** — La comprensione emerge anche da decisioni, spiegazioni e feedback. **Applica:** Crea una domanda che obblighi a usare un'evidenza.
+
+5. **Garantire accessibilità e diritti** — Trascrizioni, sottotitoli, descrizioni e licenze rendono il prodotto riutilizzabile. **Applica:** Controlla contrasto, navigazione, alternative e provenienza.
+
+6. **Verificare e migliorare** — Una bozza gradevole non prova un apprendimento; serve una osservazione. **Applica:** Prova con una microverifica e correggi prima del riuso.
+
+### Quale linguaggio usare, e per quale motivo
+
+- **Tre slide essenziali** — Visualizzare una distinzione. 1. Una giornata fredda · 2. Meteo e clima: prove diverse · 3. Quale dato ci manca?. *Per renderlo accessibile:* Descrizioni testuali delle immagini e caratteri leggibili.
+- **Audio dialogato** — Rendere esplicito un ragionamento. Due voci confrontano un episodio meteorologico e una tendenza, senza inventare dati. *Per renderlo accessibile:* Trascrizione, pause e linguaggio comprensibile.
+- **Microvideo a scene** — Mostrare il ragionamento per segmenti. Scena-problema, confronto di fonti e domanda finale in 60–90 secondi. *Per renderlo accessibile:* Sottotitoli, niente lampeggiamenti, velocità controllabile.
+- **Scelta con feedback** — Far usare e correggere l'idea. «Una giornata fredda prova una tendenza?» · feedback motivato e secondo tentativo. *Per renderlo accessibile:* Pulsanti raggiungibili da tastiera e alternativa in testo.
+
+**Un avvertimento importante:** dare più modalità di accesso non significa attribuire a ogni studente uno stile fisso «visivo», «uditivo» o «cinestetico». La ricerca non supporta in modo robusto l'idea che l'abbinamento rigido tra presunto stile e mezzo migliori l'apprendimento. Meglio ridurre barriere concrete, offrire opzioni e osservare le evidenze prodotte. Ogni audio va accompagnato da trascrizione; i video richiedono sottotitoli controllati, i grafici informativi descrizioni, i riferimenti dati e licenze da verificare.
+
+Questa progettazione unisce i due laboratori esistenti: nel primo sviluppi la comprensione, nel secondo la narrazione sonora e la verifica. **Non è una terza attività obbligatoria da sommare alle quattro ore stimate**.
 
 ## Laboratori da svolgere personalmente
 
@@ -167,6 +204,106 @@ Script, trascrizione, glossario e lista fonti
 
 **Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
 
+## Scegliere il modello generativo in funzione del risultato
+
+Un docente che vuole costruire una fotografia illustrativa e un docente che vuole progettare un podcast hanno esigenze differenti. Prima di aprire un programma, occorre distinguere **modello**, **applicazione** ed **editor**. ChatGPT è un'applicazione che offre strumenti per generare immagini tramite modelli della famiglia GPT Image; Google Gemini consente di accedere ai modelli d'immagine conosciuti come **Nano Banana**. Per il montaggio, la grafica e la struttura di una presentazione può invece servire un editor come Canva. L'app non coincide sempre con il modello: una stessa piattaforma può offrire più motori. Nessuna denominazione garantisce in assoluto la scelta migliore e disponibilità, limiti e costi possono cambiare.
+
+La scena didattica è concreta: la docente deve far capire perché **una giornata di freddo non dimostri da sola una tendenza climatica**. Se desidera un'immagine illustrativa realistica di un paesaggio invernale, può provare ChatGPT Images e Gemini Nano Banana con lo stesso brief. Confronta dettagli, coerenza, facilità di correzione, accessibilità e condizioni d'uso. Non può però usare un'immagine generata come se fosse una fotografia documentaria con una data e un luogo realmente osservati. E se deve costruire un grafico con dati meteorologici, prima controlla i dati scientifici e poi disegna il grafico in uno strumento appropriato: non deve chiedere a un generatore visivo di inventare numeri.
+
+### Panorama operativo delle scelte
+
+| Risultato didattico | Modelli o servizi da considerare | Che cosa verificare |
+| --- | --- | --- |
+| Fotografie e immagini realistiche | ChatGPT Images (famiglia GPT Image), Gemini Nano Banana (modelli Gemini Image), ChatGPT, Gemini | Evitare di presentare immagini sintetiche come fotografie documentali; verificare errori storici, scientifici e dettagli che potrebbero creare stereotipi. |
+| Grafici, infografiche e schemi | ChatGPT Images, Gemini Nano Banana, Editor visuale e Canva per la revisione umana | Ricostruire manualmente dati, etichette, unità, proporzioni e fonti: una grafica generata può inventare cifre, oggetti o relazioni. |
+| Presentazioni e storyboard | LLM per testo e struttura; modelli di immagini per illustrazioni, Canva / Dream Lab, NotebookLM / Gemini Notebook per lavoro sulle fonti | Controllare fonte di ogni affermazione, leggibilità, compatibilità mobile, testi originali e contrasti. |
+| Dialoghi e podcast didattici | Servizi con generazione audio e dialoghi, non necessariamente modelli selezionabili dall'utente, NotebookLM / Gemini Notebook, Audio Overview | Riascoltare l'intero audio, correggere eventuali citazioni inesatte e fornire una trascrizione accessibile. |
+| Video o animazioni generative | Google Veo (famiglia di modelli video), Google Flow / Gemini secondo disponibilità, Editor video per il montaggio | Verificare coerenza delle scene, anomalie di movimento, accuratezza, diritti, eventuali didascalie e sottotitoli. |
+| Percorsi interattivi con feedback | LLM facoltativo per redigere domande, alternative e spiegazioni, H5P Branching Scenario, Attività locali MANZO AI | Dichiarare quando il percorso usa regole predefinite: H5P non diventa un tutor IA solo perché contiene un quiz. |
+
+**Attenzione:** NotebookLM/Gemini Notebook è uno strumento che lavora su fonti fornite; H5P è uno strumento per attività interattive basate su regole. Non sono intercambiabili con un modello che produce fotografie. Per qualsiasi piattaforma o modello vanno verificati licenze, accessibilità, costi, termini, protezione dei dati e policy dell'istituto. In particolare, **non caricare fotografie, lavori o voci di studenti identificabili in servizi non autorizzati**. Non mostrare fotografie sintetiche come prove documentali.
+
+### Una richiesta visiva che un docente può adattare
+
+```text
+OBIETTIVO DIDATTICO: usare un'illustrazione fotografica per avviare una discussione sulla differenza fra meteo e clima.
+DESTINATARI: seconda media, linguaggio accessibile.
+SOGGETTO: paesaggio invernale immaginario, senza persone identificabili, senza luoghi o date reali.
+COMPOSIZIONE: una singola scena leggibile, spazio laterale per un titolo aggiunto successivamente nell'editor.
+VINCOLI: non inventare grafici, numeri, marchi, citazioni o etichette; non presentare il risultato come documento storico o scientifico.
+OUTPUT: immagine orizzontale 16:9 e breve descrizione testuale per il docente.
+VERIFICA UMANA: controllare dettagli, coerenza, didascalia «immagine generata con IA», diritti e accessibilità.
+```
+
+**Laboratorio di confronto:** prova lo stesso prompt su **ChatGPT Images** e **Nano Banana** soltanto quando puoi farlo con strumenti consentiti. Se non hai accesso, confronta due output fittizi preparati dal docente e indica quali caratteristiche modificheresti. Compila una scheda con: adeguatezza all'obiettivo, possibilità di correggere, accuratezza del soggetto, diritti e autorizzazioni, accessibilità, costo complessivo e alternativa non IA. Concludi con una frase motivata: «Per questo obiettivo sceglierei …, purché …».
+
+**Fonti ufficiali per il panorama degli strumenti:**
+- [Fotografie e immagini realistiche · guida al modello o servizio](https://openai.com/it-IT/index/introducing-chatgpt-images-2-5/)
+- [Fotografie e immagini realistiche · altra documentazione](https://gemini.google/overview/image-generation/)
+- [Grafici, infografiche e schemi · guida al modello o servizio](https://developers.openai.com/api/docs/guides/image-prompting)
+- [Grafici, infografiche e schemi · altra documentazione](https://deepmind.google/models/gemini-image/)
+- [Presentazioni e storyboard · guida al modello o servizio](https://www.canva.com/help/generate-with-dreamlab/)
+- [Presentazioni e storyboard · altra documentazione](https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/)
+- [Dialoghi e podcast didattici · guida al modello o servizio](https://blog.google/innovation-and-ai/products/notebooklm-audio-overviews/)
+- [Video o animazioni generative · guida al modello o servizio](https://deepmind.google/models/veo/)
+- [Video o animazioni generative · altra documentazione](https://deepmind.google/models/veo/prompt-guide/)
+- [Percorsi interattivi con feedback · guida al modello o servizio](https://h5p.org/branching-scenario)
+- [Percorsi interattivi con feedback · altra documentazione](https://h5p.org/interactive-video)
+
+## Esercitazione integrata · Dall'idea alla risorsa multimediale accessibile
+
+Questa esercitazione **fa parte dei due laboratori del modulo**; usa soltanto situazioni fittizie e puoi completarla anche senza un chatbot esterno.
+
+**Situazione:** Seconda media: una giornata fredda non basta per descrivere una tendenza climatica. Progetta materiali che aiutino a distinguere meteo e clima
+
+**Obiettivo:** Produrre uno storyboard di tre slide, un copione audio/video con trascrizione e un'interazione di verifica coerenti con una stessa competenza
+
+### La tua sequenza di lavoro
+
+1. Analizza destinatari, prerequisiti, lingua, ostacoli prevedibili e obiettivo osservabile. Evita categorie fisse di «studenti visivi» o «uditivi»
+2. Scegli una domanda che apra la storia: «Oggi fa freddo: significa che il clima si sta raffreddando?»
+3. Scegli e motiva il modello o la piattaforma adatta a immagini, audio, video o interattività: confronta ChatGPT Images, Nano Banana e altre opzioni in base al risultato, non a una classifica
+4. Prepara tre scene coerenti: episodio iniziale, differenza fra osservazione e serie di lungo periodo, prova su ciò che si può dedurre
+5. Scrivi un copione di 50–70 secondi con trascrizione identica e una versione testuale consultabile senza audio
+6. Progetta una decisione interattiva con feedback, verifica accuratezza delle fonti, contrasto, sottotitoli, licenze e accessibilità
+
+### Prompt da copiare e controllare
+
+```text
+RUOLO: assistente alla progettazione di contenuti multimediali, non valutatore degli alunni.
+OBIETTIVO: far distinguere a una seconda media un evento meteorologico da una tendenza climatica.
+CONTESTO: 12 minuti, lavoro individuale e discussione in coppia; prerequisito: saper leggere una breve osservazione.
+DATI CONSENTITI: osservazione inventata «oggi fa freddo»; non ho fornito dati scientifici, quindi non crearli.
+VINCOLI: niente statistiche inventate, niente immagini di alunni, nessun requisito di ascolto obbligatorio; evita musica e animazioni decorative, prevedi sottotitoli e trascrizione.
+OUTPUT: (1) storyboard di tre slide con titolo, messaggio e descrizione visiva; (2) copione audio o video di circa un minuto con trascrizione; (3) domanda interattiva e feedback per scelta corretta ed errata.
+VERIFICA: indica le frasi per cui servirebbe una fonte e una checklist su coerenza, segmentazione, segnali visivi, accessibilità e possibilità di lavorare senza tecnologia.
+SCELTA DEL MODELLO: per fotografie illustrative confronta ChatGPT Images e Gemini Nano Banana; per audio valuta NotebookLM/Gemini Notebook; per video un modello video come Veo; per la ramificazione H5P usa regole, non un modello generativo. Non indicare un vincitore assoluto: confronta limiti, controllo, privacy, costo e accessibilità.
+```
+
+### Un possibile risultato, simulato per il corso
+
+> Scena 1: foto illustrativa non reale di una giornata fredda, domanda «Basta un giorno?»; scena 2: contrasto fra «osservazione di oggi» e «dati raccolti su molti anni», senza numeri inventati; scena 3: domanda «Quale prova manca?». Audio: dialogo fra due studenti sul perché servono osservazioni nel tempo, con trascrizione. Interazione: «Un giorno freddo dimostra una tendenza climatica?»; feedback motivato e possibilità di riprovare.
+
+### Verifica del tuo prodotto
+
+- Una stessa competenza per i tre media
+- Coerenza e segnali visivi senza decorazioni superflue
+- Audio con trascrizione o alternativa equivalente
+- Fonte controllata per ogni affermazione fattuale
+- Interazione con feedback e riprova
+- Licenze e riuso verificati
+- La scelta di modello o piattaforma è motivata e non confonde un editor con il modello generativo
+
+**Da conservare nel portfolio:** Portfolio multimediale: storyboard di tre slide, copione, trascrizione, scelta interattiva, checklist qualità
+
+**Domanda di autoverifica:** Qual è la progettazione multimediale più coerente con l'apprendimento?
+
+1. Aggiungere animazioni e musica a ogni frase per mantenere alta l'attenzione
+2. Partire da un obiettivo, scegliere media complementari, segmentare e verificare accessibilità e comprensione
+3. Suddividere gli studenti in stili visivi e uditivi fissi, poi assegnare un solo canale
+
+*Dopo aver risposto, controlla:* opzione **2**. I media devono chiarire il contenuto e offrire possibilità accessibili, senza sovraccaricare né classificare gli alunni in stili fissi.
+
 ## Parole utili, spiegate senza gergo
 
 Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri una parola nuova.
@@ -208,6 +345,12 @@ Per non interrompere il racconto, abbiamo raccolto le fonti in questa sezione. S
 3. [CMU Learning Principles](https://www.cmu.edu/teaching/principles/learning.html)
 
 **Riferimento pedagogico:** Seymour Papert — [testo di riferimento](https://mitpress.mit.edu/9780262539845/designing-constructionist-futures/). Le idee riportate nel modulo sono parafrasi applicative e non citazioni letterali attribuite all'autore.
+
+### Fonti per approfondire la nuova attività
+
+- [Richard Mayer · Coerenza e segnali visivi](https://www.cambridge.org/core/books/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning/F29A19FCD34C542806F736E0661C05F5)
+- [Mayer · Segmentazione e ritmo](https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/principles-for-managing-essential-processing-in-multimedia-learning/A9E77D0172F905AC957689D1771E2888)
+- [Commissione europea · Qualità dei contenuti digitali](https://education.ec.europa.eu/document/making-informed-choices-on-digital-education-content-eu-guidelines-for-teachers-and-educators)
 
 ## Per chi facilita un gruppo (sezione facoltativa)
 

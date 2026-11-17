@@ -170,12 +170,31 @@
       },
       "authentic_task": {
         "id": "atl-01-performance",
-        "portfolio_artifact": "Matrice A+ e decisione motivata",
+        "portfolio_artifact": "Matrice A+ e decisione motivata · Competenza integrata: Matrice ragionata con scelta, un motivo di esclusione e una prova di apprendimento",
         "human_review_required": true
       },
       "exit_ticket": {
         "id": "atl-01-exit",
         "question": "Quale lavoro non delegheresti all'IA, e quale prova ti farebbe cambiare scelta?"
+      },
+      "competency_check": {
+        "id": "comp-decision_matrix",
+        "question": "Un'app creativa richiede di caricare un compito con informazioni identificabili. Quale decisione è professionale?",
+        "options": [
+          "La uso se offre belle slide",
+          "Non la uso con quei dati finché la scuola non ne ha autorizzato il trattamento",
+          "Elimino solo il nome e non verifico altro"
+        ],
+        "correct_index": 1,
+        "feedback": "I vincoli sulla gestione dei dati non sono compensabili dalla qualità grafica.",
+        "criteria": [
+          "L'obiettivo precede la scelta",
+          "Almeno una alternativa non IA",
+          "Nessun dato personale non autorizzato",
+          "La decisione include un piano di verifica"
+        ],
+        "deliverable": "Matrice ragionata con scelta, un motivo di esclusione e una prova di apprendimento",
+        "format": "decision_matrix"
       }
     },
     {
@@ -327,12 +346,31 @@
       },
       "authentic_task": {
         "id": "atl-02-performance",
-        "portfolio_artifact": "Registro fonti e verifica resiliente",
+        "portfolio_artifact": "Registro fonti e verifica resiliente · Competenza integrata: Tabella 8 casi di training e 4 di test, spiegazione di almeno due errori e un limite della simulazione",
         "human_review_required": true
       },
       "exit_ticket": {
         "id": "atl-02-exit",
         "question": "Come distingueresti una fonte non verificata da una fonte smentita?"
+      },
+      "competency_check": {
+        "id": "comp-model_test",
+        "question": "Perché un classificatore che risponde bene ai dati già visti può sbagliare con nuove schede?",
+        "options": [
+          "Perché la grafica non è abbastanza moderna",
+          "Perché può avere appreso una regolarità accidentale che non generalizza",
+          "Perché ogni modello IA si limita a cercare informazioni su Internet"
+        ],
+        "correct_index": 1,
+        "feedback": "La prova con esempi mai visti mette alla prova la generalizzazione.",
+        "criteria": [
+          "Distinzione training/test",
+          "Nessuna interpretazione di successo sul training come prova di generalizzazione",
+          "Classificazione non confusa con generazione testuale",
+          "Esempi interamente fittizi"
+        ],
+        "deliverable": "Tabella 8 casi di training e 4 di test, spiegazione di almeno due errori e un limite della simulazione",
+        "format": "model_test"
       }
     },
     {
@@ -484,12 +522,34 @@
       },
       "authentic_task": {
         "id": "atl-03-performance",
-        "portfolio_artifact": "Micro-kit accessibile e registro revisione",
+        "portfolio_artifact": "Micro-kit accessibile e registro revisione · Competenza integrata: Portfolio multimediale: storyboard di tre slide, copione, trascrizione, scelta interattiva, checklist qualità · Scelta motivata di modelli generativi per immagini, audio o video",
         "human_review_required": true
       },
       "exit_ticket": {
         "id": "atl-03-exit",
         "question": "Quale miglioramento al kit è verificabile nell'apprendimento e non solo nel design?"
+      },
+      "competency_check": {
+        "id": "comp-multimedia_design",
+        "question": "Qual è la progettazione multimediale più coerente con l'apprendimento?",
+        "options": [
+          "Aggiungere animazioni e musica a ogni frase per mantenere alta l'attenzione",
+          "Partire da un obiettivo, scegliere media complementari, segmentare e verificare accessibilità e comprensione",
+          "Suddividere gli studenti in stili visivi e uditivi fissi, poi assegnare un solo canale"
+        ],
+        "correct_index": 1,
+        "feedback": "I media devono chiarire il contenuto e offrire possibilità accessibili, senza sovraccaricare né classificare gli alunni in stili fissi.",
+        "criteria": [
+          "Una stessa competenza per i tre media",
+          "Coerenza e segnali visivi senza decorazioni superflue",
+          "Audio con trascrizione o alternativa equivalente",
+          "Fonte controllata per ogni affermazione fattuale",
+          "Interazione con feedback e riprova",
+          "Licenze e riuso verificati",
+          "La scelta di modello o piattaforma è motivata e non confonde un editor con il modello generativo"
+        ],
+        "deliverable": "Portfolio multimediale: storyboard di tre slide, copione, trascrizione, scelta interattiva, checklist qualità",
+        "format": "multimedia_design"
       }
     },
     {
@@ -642,12 +702,31 @@
       },
       "authentic_task": {
         "id": "atl-04-performance",
-        "portfolio_artifact": "Verifica con rubriche comuni e feedback",
+        "portfolio_artifact": "Verifica con rubriche comuni e feedback · Competenza integrata: Tre percorsi accessibili, una rubrica e due versioni di un compito sintetico con miglioramento osservabile",
         "human_review_required": true
       },
       "exit_ticket": {
         "id": "atl-04-exit",
         "question": "Quale aiuto riduce una barriera senza cambiare la competenza attesa?"
+      },
+      "competency_check": {
+        "id": "comp-inclusive_feedback",
+        "question": "Quale pratica realizza una personalizzazione didattica responsabile?",
+        "options": [
+          "Etichettare gli alunni come visivi e uditivi",
+          "Offrire modalità diverse con obiettivi e criteri comuni",
+          "Demandare il voto ad un modello generativo"
+        ],
+        "correct_index": 1,
+        "feedback": "Personalizzazione non significa attribuire uno stile fisso o automatizzare un giudizio sulla persona.",
+        "criteria": [
+          "Obiettivo comune",
+          "Equivalenza delle prove",
+          "Nessuna diagnosi o etichetta automatica",
+          "Feedback applicabile a un secondo tentativo"
+        ],
+        "deliverable": "Tre percorsi accessibili, una rubrica e due versioni di un compito sintetico con miglioramento osservabile",
+        "format": "inclusive_feedback"
       }
     },
     {
@@ -797,12 +876,32 @@
       },
       "authentic_task": {
         "id": "atl-05-performance",
-        "portfolio_artifact": "UDA + sei test tutor e decisione go/no-go",
+        "portfolio_artifact": "UDA + sei test tutor e decisione go/no-go · Competenza integrata: Storyboard di 10 minuti con tre diramazioni e un test di sicurezza del percorso",
         "human_review_required": true
       },
       "exit_ticket": {
         "id": "atl-05-exit",
         "question": "Quali tre verifiche non puoi saltare prima di usare un tutor con alunni reali?"
+      },
+      "competency_check": {
+        "id": "comp-branching_path",
+        "question": "Uno scenario con tre pulsanti e feedback definiti dall'insegnante è automaticamente un tutor IA adattivo?",
+        "options": [
+          "Sì, perché i contenuti cambiano quando clicchi",
+          "No, è interattività a regole; adattività IA richiede un sistema e dati ulteriori",
+          "Sì, se sono presenti colori diversi"
+        ],
+        "correct_index": 1,
+        "feedback": "La ramificazione deterministica non equivale all'adattività basata su modelli.",
+        "criteria": [
+          "Tre alternative esplicite",
+          "Feedback distinto e non punitivo",
+          "Possibilità di revisione",
+          "Versione accessibile non digitale",
+          "Nessun finto apprendimento adattivo"
+        ],
+        "deliverable": "Storyboard di 10 minuti con tre diramazioni e un test di sicurezza del percorso",
+        "format": "branching_path"
       }
     }
   ]

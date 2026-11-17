@@ -30,6 +30,9 @@ with sync_playwright() as playwright:
         assert "20 h" in page.locator(".atl-intro-facts").inner_text()
         assert page.locator("a.atl-intro-primary-action").count()==1
         assert page.locator("[data-atl-video-media] video").count() in (0,1)
+        bundle=Path(__file__).resolve().parents[1]/"media"/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip"
+        if bundle.exists():
+            assert page.locator("[data-atl-video-media] video").count()==1
         # No broken media links are generated before files are staged.
         if not page.locator("[data-atl-video-media] video").count():
             assert page.locator("[data-atl-video-media] .atl-intro-missing").is_visible()
@@ -39,23 +42,33 @@ with sync_playwright() as playwright:
         page.locator("#atl-present-next").click()
         assert page.locator("#atl-present-counter").inner_text()=="02 / 15"
         page.locator("#atl-present-select").select_option("11")
-        assert "La prospettiva pedagogica" in page.locator(".atl-slide-page h2").inner_text()
+        if page.locator(".atl-original-slide").count():
+            image=page.locator(".atl-original-slide")
+            assert "slide-12.webp" in image.get_attribute("src")
+            assert image.evaluate("(img)=>img.complete && img.naturalWidth > 0")
+            page.locator(".atl-slide-transcription summary").click()
+            assert "La prospettiva pedagogica" in page.locator(".atl-slide-reading h2").inner_text()
+        else:
+            assert "La prospettiva pedagogica" in page.locator(".atl-slide-page h2").inner_text()
         assert "parafrasi" in page.locator(".atl-present-side-note").inner_text()
         assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth+2")
         page.goto(COURSE,wait_until="networkidle")
         page.locator("#experience").wait_for(state="visible",timeout=10000)
         assert page.locator(".atl-resource-hub").is_visible()
-        assert page.locator(".atl-resource-link").count()==11
+        assert page.locator(".atl-resource-link").count()==19
         assert page.locator(".atl-resource-link:visible").count()==4
         assert page.locator("[data-atl-resource-glossary]").is_visible()
         assert page.locator('.atl-resource-link[href*="mim.gov.it"]').count()==1
         assert page.locator('.atl-resource-link[href*="unesco.org"]').count()==2
         assert page.locator(".atl-resource-link").first.get_attribute("target")=="_blank"
-        page.locator(".atl-resource-more summary").click()
+        page.locator(".atl-resource-more:not(.atl-resource-specialized) summary").click()
         assert page.locator(".atl-resource-link:visible").count()==11
-        page.locator(".atl-resource-more summary").click()
+        page.locator(".atl-resource-more:not(.atl-resource-specialized) summary").click()
+        page.locator(".atl-resource-specialized summary").click()
+        assert page.locator(".atl-resource-link:visible").count()==12
+        page.locator(".atl-resource-specialized summary").click()
         assert page.locator(".branch-choices button").count()==3
-        assert page.locator(".lab-prompt-code").count()==2
+        assert page.locator(".lab-prompt-code").count()==3
         probe=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button",name="Confronta la mia ipotesi"))
         assert probe.count()==1
         probe.locator("input").nth(1).check()
@@ -69,13 +82,29 @@ with sync_playwright() as playwright:
             page.locator(".branch-choices button").first.click()
             assert page.locator(".branch-outcome").is_visible()
             assert page.locator(".narrative-chapter").count()>=5
+            assert page.locator(".competency-studio").count()==1
+            assert page.locator(".studio-check").count()>=4
+            if index==1:
+                page.get_by_role("button",name="Prova le quattro schede nuove").click()
+                assert "2/4" in page.locator(".demo-model .result").inner_text()
+            if index==2:
+                assert page.locator(".media-principle-card").count()==6
+                assert page.locator("#atl-model-media option").count()==6
+                assert "Nano Banana" in page.locator(".model-choice-detail").inner_text()
+                page.locator("#atl-model-media").select_option("4")
+                assert "Veo" in page.locator(".model-choice-detail").inner_text()
+                page.get_by_role("button",name="Costruisci la scaletta didattica").click()
+                assert "STORYBOARD" in page.locator(".media-generated").inner_text()
+            if index==4:
+                page.locator(".practice-branch .button").first.click()
+                assert "Conseguenza" in page.locator(".practice-branch .branch-feedback").inner_text()
             assert page.locator(".source-list a").count()>=3
             page.screenshot(path=str(SHOT/f"published-module-{index+1:02d}-{width}.png"),full_page=False)
         # A complete lesson must be a semantic HTML page on the same site.
         link=page.locator("a.full-lesson-link")
         assert link.get_attribute("href")=="./modulo-05/"
         assert page.locator("#atl-final-glossary").is_visible()
-        assert "47 voci" in page.locator("#atl-term-count").inner_text()
+        assert "79 voci" in page.locator("#atl-term-count").inner_text()
         assert page.locator('a[data-atl-glossary-page]').is_visible()
         link.click()
         page.wait_for_url(COURSE+"modulo-05/")
@@ -91,7 +120,7 @@ with sync_playwright() as playwright:
         glossary_link.click()
         page.wait_for_url(COURSE+"glossario/")
         assert page.locator("h1").count()==1
-        assert page.locator(".term-card").count()==47
+        assert page.locator(".term-card").count()==79
         assert "Pedagogia" in page.locator("main").inner_text()
         assert "Metodo MANZO AI" in page.locator("main").inner_text()
         assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth+2")

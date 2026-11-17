@@ -48,6 +48,8 @@ Chiarita la differenza fra un sistema che produce testo e un docente che costrui
 
 L’utilità di un assistente non coincide con il numero di file che genera. Può aiutare a proporre tre modi di spiegare lo stesso concetto, trasformare un’idea in una prima bozza di esercizio, adattare il lessico di un testo già verificato o costruire una rubrica da rivedere. Non può conoscere da solo la cultura della classe, certificare una fonte mai consultata né decidere al posto del docente come valutare una persona. Prima di usare uno strumento, chiediti quale prestazione vuoi vedere: 'gli studenti confrontano due fonti e motivano una conclusione' è un obiettivo più utile di 'gli studenti guardano una presentazione'. Questa distinzione aiuta a misurare il valore del lavoro prodotto.
 
+La scelta dello strumento è a sua volta un problema didattico: distinguere un assistente generativo da uno strumento che organizza documenti, un editor multimediale e una buona scheda cartacea significa confrontare possibilità diverse. La piattaforma più famosa non è necessariamente la più utile; prima vengono obiettivo e prova di apprendimento, poi dati consentiti, accessibilità, licenze, costi, tempo di revisione e autorizzazioni. Se un servizio necessita di materiali identificabili degli studenti senza autorizzazione scolastica, va escluso da quella attività. Se un lavoro a coppie raggiunge lo stesso scopo senza tecnologia, la scelta senza IA è una decisione professionale completa.
+
 La scena quotidiana ci ha mostrato una possibilità e un limite. Ora dobbiamo tradurre quella possibilità in una consegna: come formulare una richiesta che rispetti un obiettivo educativo, anziché ottenere soltanto pagine di testo?
 
 ### 4. Il prompt: una consegna professionale, non una formula magica
@@ -173,6 +175,56 @@ Una tabella di confronto e una decisione motivata
 
 **Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
 
+## Esercitazione integrata · Scegliere gli strumenti IA per insegnare
+
+*Questa esercitazione sviluppa una parte dei due laboratori già previsti, **non aumenta automaticamente le quattro ore stimate del modulo**. Puoi usare solo materiale sintetico e svolgere il lavoro senza un sistema IA esterno.*
+
+**Situazione professionale:** Seconda superiore, 15 minuti: distinguere un fatto da un'interpretazione usando due testimonianze inventate
+
+**Risultato che devi ottenere:** Argomentare quando un assistente IA, un editor di media o un'attività senza IA rispondono davvero all'obiettivo
+
+### Come procedere
+
+1. Scrivi un obiettivo verificabile e la prova attesa, prima di nominare un'app
+2. Confronta assistente generalista, assistente basato sui documenti, editor multimediale e foglio stampato
+3. Per ogni opzione valuta affidabilità, verifica, dati richiesti, accessibilità, tempo e costi (senza una finta media numerica)
+4. Escludi qualsiasi servizio che richieda dati identificativi o autorizzazioni non disponibili
+5. Motiva la tua scelta e descrivi quale risultato controllare in classe
+
+### Prompt professionale pronto da adattare
+
+```text
+OBIETTIVO: proporre una soluzione per una microlezione che distingua fatti e interpretazioni.
+CONTESTO: seconda superiore, 15 minuti, lavoro a coppie.
+DATI CONSENTITI: due esempi fittizi; testo A «la famiglia parte dopo tre raccolti scarsi» e testo B «alcuni abitanti credono che ogni nuovo arrivato abbia la stessa ragione».
+VINCOLI: non proporre caricamenti di lavori o dati degli studenti; non inventare fonti; includi un'opzione senza IA.
+OUTPUT: tabella comparativa fra assistente generalista, assistente basato su documenti, editor multimediale e schede cartacee, con vantaggi, limiti e criteri di esclusione.
+VERIFICA: indica quale opzione consiglieresti e che prova concreta useresti per dimostrare che la scelta funziona.
+```
+
+### Esempio di possibile elaborato (simulato)
+
+> La scheda cartacea ha il minor carico tecnico e permette il confronto dei due testi; l'assistente generalista è utile solo per una bozza di domande, da rivedere. L'editor di presentazioni migliora la forma, ma qui non rende la comprensione automaticamente migliore. Se uno strumento richiede dati non autorizzati, non lo utilizzo.
+
+### Cosa controllare prima di consegnare
+
+- L'obiettivo precede la scelta
+- Almeno una alternativa non IA
+- Nessun dato personale non autorizzato
+- La decisione include un piano di verifica
+
+**Portfolio:** Matrice ragionata con scelta, un motivo di esclusione e una prova di apprendimento
+
+### Una domanda per verificarti
+
+**Un'app creativa richiede di caricare un compito con informazioni identificabili. Quale decisione è professionale?**
+
+1. La uso se offre belle slide
+2. Non la uso con quei dati finché la scuola non ne ha autorizzato il trattamento
+3. Elimino solo il nome e non verifico altro
+
+*Rifletti prima di leggere la risposta.* La soluzione prevista è **2**: I vincoli sulla gestione dei dati non sono compensabili dalla qualità grafica.
+
 ## Parole utili, spiegate senza gergo
 
 Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri una parola nuova.
@@ -215,6 +267,10 @@ Per non interrompere il racconto, abbiamo raccolto le fonti in questa sezione. S
 3. [Vanderbilt — Bloom revised taxonomy](https://cft.vanderbilt.edu/wp-content/uploads/sites/59/Blooms-Taxonomy.pdf)
 
 **Riferimento pedagogico:** John Dewey — [testo di riferimento](https://plato.stanford.edu/entries/dewey/). Le idee riportate nel modulo sono parafrasi applicative e non citazioni letterali attribuite all'autore.
+
+### Altre letture per approfondire questa competenza
+
+- [Orientamenti UE per scegliere contenuti digitali](https://education.ec.europa.eu/document/making-informed-choices-on-digital-education-content-eu-guidelines-for-teachers-and-educators)
 
 ## Per chi facilita un gruppo (sezione facoltativa)
 

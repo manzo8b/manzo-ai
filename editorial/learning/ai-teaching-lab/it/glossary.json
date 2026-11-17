@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "course_key": "ai-teaching-lab",
   "locale": "it",
   "title": "Vocabolario IA e didattica applicata per docenti",
@@ -11,7 +11,10 @@
     "Prompt e produzione",
     "Verifica e attendibilità",
     "Didattica e valutazione",
-    "Sicurezza e responsabilità"
+    "Sicurezza e responsabilità",
+    "Fondamenti del machine learning",
+    "Progettazione multimediale",
+    "Ambienti di apprendimento"
   ],
   "entries": [
     {
@@ -389,6 +392,262 @@
       "definition": "Passaggio di una questione a una persona o procedura responsabile quando il problema supera il ruolo dello strumento.",
       "classroom_example": "Una segnalazione reale di cyberbullismo segue le procedure della scuola, non la sanzione suggerita dall’IA.",
       "source": "https://www.unesco.org/en/articles/ai-competency-framework-teachers"
+    },
+    {
+      "id": "g48",
+      "term": "Apprendimento automatico (machine learning)",
+      "category": "Fondamenti del machine learning",
+      "definition": "Approccio all'intelligenza artificiale in cui un modello ricava regolarità da esempi, invece di ricevere ogni regola già scritta a mano.",
+      "classroom_example": "L'insegnante sperimenta classificazioni di forme fittizie per comprendere perché servono esempi e controlli.",
+      "source": "https://developers.google.com/machine-learning/crash-course?hl=it"
+    },
+    {
+      "id": "g49",
+      "term": "Set di dati (dataset)",
+      "category": "Fondamenti del machine learning",
+      "definition": "Insieme organizzato di esempi utilizzati per addestrare, validare o valutare un modello. Qualità e rappresentatività contano più della quantità assoluta.",
+      "classroom_example": "Si preparano dodici schede di figure geometriche inventate, separando le schede per l'esercizio dalle schede per il test.",
+      "source": "https://developers.google.com/machine-learning/crash-course/overfitting?hl=it"
+    },
+    {
+      "id": "g50",
+      "term": "Etichetta di classificazione",
+      "category": "Fondamenti del machine learning",
+      "definition": "Categoria nota associata a un esempio nel corso dell'apprendimento supervisionato: serve al sistema per confrontare la propria previsione con quella attesa.",
+      "classroom_example": "Alle schede con un triangolo si assegna l'etichetta «triangolo» e a quelle con un cerchio «cerchio».",
+      "source": "https://developers.google.com/machine-learning/crash-course?hl=it"
+    },
+    {
+      "id": "g51",
+      "term": "Apprendimento supervisionato",
+      "category": "Fondamenti del machine learning",
+      "definition": "Forma di apprendimento automatico che utilizza esempi con risultati o etichette noti durante l'addestramento del modello.",
+      "classroom_example": "Un classificatore usa esempi di figure già etichettate e poi tenta di riconoscere nuove figure.",
+      "source": "https://developers.google.com/machine-learning/crash-course?hl=it"
+    },
+    {
+      "id": "g52",
+      "term": "Addestramento (training)",
+      "category": "Fondamenti del machine learning",
+      "definition": "Fase in cui un modello modifica i propri parametri o regole apprendendo regolarità dagli esempi a disposizione; non coincide con il test finale.",
+      "classroom_example": "La classe mostra otto esempi iniziali a un piccolo classificatore e riserva altri esempi per la verifica.",
+      "source": "https://developers.google.com/machine-learning/crash-course?hl=it"
+    },
+    {
+      "id": "g53",
+      "term": "Inferenza del modello",
+      "category": "Fondamenti del machine learning",
+      "definition": "Impiego di un modello già addestrato per produrre una previsione o un risultato a partire da un nuovo input; è distinto dall'addestramento.",
+      "classroom_example": "Dopo il training l'insegnante presenta un triangolo di colore nuovo e annota la previsione del modello.",
+      "source": "https://developers.google.com/machine-learning/crash-course?hl=it"
+    },
+    {
+      "id": "g54",
+      "term": "Set di test",
+      "category": "Fondamenti del machine learning",
+      "definition": "Esempi conservati separati dai dati di addestramento e impiegati per valutare la capacità di generalizzare su casi mai visti.",
+      "classroom_example": "Quattro schede non mostrate durante il training rivelano se il sistema riconosce davvero le forme o soltanto i colori.",
+      "source": "https://developers.google.com/machine-learning/crash-course/overfitting?hl=it"
+    },
+    {
+      "id": "g55",
+      "term": "Generalizzazione",
+      "category": "Fondamenti del machine learning",
+      "definition": "Capacità del modello di eseguire adeguatamente un compito anche su esempi non utilizzati durante l'addestramento.",
+      "classroom_example": "Una regola basata sulla forma riconosce un triangolo rosso che non era presente fra gli esempi iniziali.",
+      "source": "https://developers.google.com/machine-learning/crash-course/overfitting?hl=it"
+    },
+    {
+      "id": "g56",
+      "term": "Overfitting (sovradattamento)",
+      "category": "Fondamenti del machine learning",
+      "definition": "Situazione in cui un modello aderisce troppo alle particolarità dei dati su cui è addestrato e funziona peggio su dati nuovi.",
+      "classroom_example": "Il docente verifica che un classificatore perfetto sugli esempi iniziali sbaglia molte figure della prova finale.",
+      "source": "https://developers.google.com/machine-learning/crash-course/overfitting?hl=it"
+    },
+    {
+      "id": "g57",
+      "term": "Classificazione e generazione",
+      "category": "Fondamenti del machine learning",
+      "definition": "La classificazione assegna categorie a esempi; la generazione produce contenuti nuovi. I due compiti non sono sinonimi e possono usare modelli molto differenti.",
+      "classroom_example": "Separare una figura in «triangolo» o «cerchio» non equivale a produrre una spiegazione storica con un chatbot.",
+      "source": "https://developers.google.com/machine-learning/crash-course?hl=it"
+    },
+    {
+      "id": "g58",
+      "term": "Progettazione multimediale",
+      "category": "Progettazione multimediale",
+      "definition": "Processo didattico di scelta, integrazione e verifica di testo, immagini, audio, video e interazioni a partire da un obiettivo osservabile.",
+      "classroom_example": "Per spiegare clima e meteo il docente coordina tre slide, un breve dialogo trascritto e una scelta con feedback.",
+      "source": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/cognitive-theory-of-multimedia-learning/3A0E495CDB9D9D84665FAEFCBAB51D05"
+    },
+    {
+      "id": "g59",
+      "term": "Multimodalità",
+      "category": "Progettazione multimediale",
+      "definition": "Uso coordinato di più modalità comunicative e rappresentative; non significa duplicare tutte le informazioni ovunque o definire stili fissi degli studenti.",
+      "classroom_example": "Una sequenza di immagini essenziali è accompagnata da una spiegazione e da una versione consultabile in testo.",
+      "source": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/cognitive-theory-of-multimedia-learning/3A0E495CDB9D9D84665FAEFCBAB51D05"
+    },
+    {
+      "id": "g60",
+      "term": "Storyboard didattico",
+      "category": "Progettazione multimediale",
+      "definition": "Scaletta progettuale che descrive scene, messaggi, fonti, durata e azioni richieste agli studenti prima della produzione tecnica.",
+      "classroom_example": "Prima di aprire un editor video il docente prepara tre scene: problema, prova documentata e domanda finale.",
+      "source": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/cognitive-theory-of-multimedia-learning/3A0E495CDB9D9D84665FAEFCBAB51D05"
+    },
+    {
+      "id": "g61",
+      "term": "Carico cognitivo",
+      "category": "Progettazione multimediale",
+      "definition": "Impegno delle risorse mentali mentre si elabora un contenuto. Grafica irrilevante e sequenze troppo dense possono ostacolare la comprensione.",
+      "classroom_example": "Il docente toglie una animazione decorativa e divide una spiegazione complessa in segmenti più brevi.",
+      "source": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/cognitive-theory-of-multimedia-learning/3A0E495CDB9D9D84665FAEFCBAB51D05"
+    },
+    {
+      "id": "g62",
+      "term": "Principio di coerenza",
+      "category": "Progettazione multimediale",
+      "definition": "Nella teoria dell'apprendimento multimediale indica l'utilità di evitare elementi non pertinenti che sottraggono risorse alla comprensione.",
+      "classroom_example": "Una lezione sul clima elimina clip decorative e musica continua che non aiutano a distinguere i concetti.",
+      "source": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning-coherence-signaling-redundancy-spatial-contiguity-and-temporal-contiguity-principles/C98AB3A6CE760DD63C048936EA0B3B44"
+    },
+    {
+      "id": "g63",
+      "term": "Segnalazione (signaling)",
+      "category": "Progettazione multimediale",
+      "definition": "Uso di indizi visivi o verbali per attirare l'attenzione sulla struttura e sulle relazioni essenziali di un contenuto.",
+      "classroom_example": "Nel grafico si evidenzia la linea necessaria per rispondere alla domanda, senza aggiungere effetti superflui.",
+      "source": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning-coherence-signaling-redundancy-spatial-contiguity-and-temporal-contiguity-principles/C98AB3A6CE760DD63C048936EA0B3B44"
+    },
+    {
+      "id": "g64",
+      "term": "Segmentazione (segmenting)",
+      "category": "Progettazione multimediale",
+      "definition": "Organizzazione di un messaggio complesso in parti comprensibili, con possibilità per chi apprende di controllare il ritmo.",
+      "classroom_example": "Un video introduttivo è suddiviso in tre sequenze che si possono rivedere prima della domanda successiva.",
+      "source": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/principles-for-managing-essential-processing-in-multimedia-learning-segmenting-pretraining-and-modality-principles/DD24C2F48B9B1277CE59F78276110258"
+    },
+    {
+      "id": "g65",
+      "term": "Trascrizione accessibile",
+      "category": "Progettazione multimediale",
+      "definition": "Versione testuale fedele al contenuto parlato di un audio o video; permette una modalità alternativa di accesso e revisione.",
+      "classroom_example": "Il podcast didattico offre il dialogo scritto e indica chiaramente chi parla nei singoli passaggi.",
+      "source": "https://udlguidelines.cast.org/"
+    },
+    {
+      "id": "g66",
+      "term": "Sottotitoli",
+      "category": "Progettazione multimediale",
+      "definition": "Testo sincronizzato con un contenuto video che riproduce parole e informazioni audio significative per la comprensione.",
+      "classroom_example": "Un breve video di spiegazione dispone di sottotitoli controllati per permettere la lettura senza suono.",
+      "source": "https://udlguidelines.cast.org/"
+    },
+    {
+      "id": "g67",
+      "term": "Strategia didattica",
+      "category": "Progettazione multimediale",
+      "definition": "Modalità organizzata per collegare attività, ruolo degli studenti, tempi e prove di apprendimento a uno scopo educativo.",
+      "classroom_example": "Il docente usa un video breve prima della lezione e riserva il tempo insieme all'analisi delle fonti.",
+      "source": "https://udlguidelines.cast.org/"
+    },
+    {
+      "id": "g68",
+      "term": "Scenario ramificato (branching)",
+      "category": "Ambienti di apprendimento",
+      "definition": "Esperienza interattiva con percorsi definiti dalle scelte del partecipante e feedback appropriati, non necessariamente basata sull'intelligenza artificiale.",
+      "classroom_example": "Tre opzioni sulla verifica di una notizia conducono a conseguenze e spiegazioni diverse, con possibilità di riprovare.",
+      "source": "https://h5p.org/branching-scenario"
+    },
+    {
+      "id": "g69",
+      "term": "Sistema di gestione dell'apprendimento (LMS)",
+      "category": "Ambienti di apprendimento",
+      "definition": "Piattaforma che organizza e distribuisce percorsi, materiali e attività formative; la presenza di un LMS non implica automaticamente funzioni IA.",
+      "classroom_example": "Moodle può strutturare letture, quiz e laboratori di un corso, anche quando tutte le attività seguono regole prestabilite.",
+      "source": "https://h5p.org/branching-scenario"
+    },
+    {
+      "id": "g70",
+      "term": "Apprendimento adattivo",
+      "category": "Ambienti di apprendimento",
+      "definition": "Approccio che modifica contenuti o attività in funzione di evidenze relative all'apprendimento; può usare regole prestabilite oppure modelli avanzati.",
+      "classroom_example": "Un percorso propone un ripasso dopo una risposta errata. Va precisato se il comportamento dipende da una regola o da un modello.",
+      "source": "https://h5p.org/branching-scenario"
+    },
+    {
+      "id": "g71",
+      "term": "Feedback ramificato",
+      "category": "Ambienti di apprendimento",
+      "definition": "Risposta formativa associata alla scelta fatta in uno scenario che ne spiega implicazioni ed errori e suggerisce un nuovo tentativo.",
+      "classroom_example": "Dopo aver condiviso una notizia non verificata, una card spiega il rischio e propone di cercare la fonte primaria.",
+      "source": "https://h5p.org/branching-scenario"
+    },
+    {
+      "id": "g72",
+      "term": "Ipotesi degli stili di apprendimento fissi",
+      "category": "Progettazione multimediale",
+      "definition": "Idea secondo cui ogni studente apprende meglio se riceve contenuti in una modalità stabile preferita. Le prove a sostegno del matching sono insufficienti.",
+      "classroom_example": "Invece di etichettare bambini «visivi» o «uditivi», il docente offre alternative accessibili e confronta evidenze di apprendimento.",
+      "source": "https://pubmed.ncbi.nlm.nih.gov/26162104/"
+    },
+    {
+      "id": "g73",
+      "term": "Modello generativo",
+      "category": "Progettazione multimediale",
+      "definition": "Sistema di intelligenza artificiale che produce nuovi contenuti, per esempio immagini, testi, audio o video, a partire da istruzioni e altri input.",
+      "classroom_example": "Per creare una fotografia didattica illustrativa, il docente sceglie un modello di immagini e verifica che il risultato non presenti fatti inventati.",
+      "source": "https://help.openai.com/en/articles/11084440-images-in-chatgpt"
+    },
+    {
+      "id": "g74",
+      "term": "Applicazione e modello IA",
+      "category": "Progettazione multimediale",
+      "definition": "Un'applicazione è l'interfaccia usata dal docente; il modello è il sistema che elabora o genera il contenuto. Un servizio può offrire modelli differenti.",
+      "classroom_example": "ChatGPT è un'applicazione; GPT Image indica una famiglia di modelli di immagini. Canva è un ambiente di progettazione che può integrare più strumenti.",
+      "source": "https://developers.openai.com/api/docs/guides/image-generation"
+    },
+    {
+      "id": "g75",
+      "term": "ChatGPT Images / GPT Image",
+      "category": "Progettazione multimediale",
+      "definition": "Strumenti di generazione e modifica delle immagini accessibili da ChatGPT; i modelli effettivamente disponibili possono cambiare con il tempo.",
+      "classroom_example": "Il docente prova una scena illustrativa immaginaria, corregge gli elementi non pertinenti e aggiunge una didascalia che dichiara la natura sintetica.",
+      "source": "https://help.openai.com/en/articles/11084440-images-in-chatgpt"
+    },
+    {
+      "id": "g76",
+      "term": "Nano Banana / Gemini Image",
+      "category": "Progettazione multimediale",
+      "definition": "Nome con cui Google presenta la propria famiglia di modelli generativi per creare o modificare immagini, disponibili tramite servizi come Gemini secondo versione e accesso.",
+      "classroom_example": "Per una immagine scientifica illustrativa il docente confronta Nano Banana con un altro modello, controllando oggetti, riferimenti e leggibilità.",
+      "source": "https://gemini.google/overview/image-generation/"
+    },
+    {
+      "id": "g77",
+      "term": "Prompt visivo",
+      "category": "Progettazione multimediale",
+      "definition": "Richiesta che descrive soggetto, obiettivo didattico, composizione, formato, vincoli e criteri di verifica per generare o modificare un'immagine.",
+      "classroom_example": "Per una immagine sintetica del ciclo dell'acqua, il docente specifica destinatari, elementi necessari e divieto di introdurre etichette non controllate.",
+      "source": "https://developers.openai.com/api/docs/guides/image-prompting"
+    },
+    {
+      "id": "g78",
+      "term": "Video generativo",
+      "category": "Progettazione multimediale",
+      "definition": "Clip o sequenza audiovisiva prodotta a partire da un testo o da immagini mediante modelli specifici, da verificare per accuratezza, coerenza e accessibilità.",
+      "classroom_example": "Il docente usa una clip simulata come introduzione e fornisce sottotitoli, fonte dei contenuti e un'attività che ne verifica il significato.",
+      "source": "https://deepmind.google/models/veo/"
+    },
+    {
+      "id": "g79",
+      "term": "Audio Overview basato sulle fonti",
+      "category": "Progettazione multimediale",
+      "definition": "Formato audio dialogato che un servizio come NotebookLM o Gemini Notebook può costruire a partire dai materiali inseriti; non equivale a una registrazione umana.",
+      "classroom_example": "Una docente carica soltanto materiali autorizzati e controllati, genera un dialogo e verifica citazioni e trascrizione prima di proporlo alla classe.",
+      "source": "https://blog.google/innovation-and-ai/products/notebooklm-audio-overviews/"
     }
   ],
   "sources": [
@@ -415,7 +674,43 @@
     {
       "title": "AI Act — Commissione europea",
       "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4"
+    },
+    {
+      "title": "Richard Mayer · Cognitive Theory of Multimedia Learning",
+      "url": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/cognitive-theory-of-multimedia-learning/3A0E495CDB9D9D84665FAEFCBAB51D05"
+    },
+    {
+      "title": "Richard Mayer · Principi di coerenza e segnalazione",
+      "url": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning-coherence-signaling-redundancy-spatial-contiguity-and-temporal-contiguity-principles/C98AB3A6CE760DD63C048936EA0B3B44"
+    },
+    {
+      "title": "Google · Machine Learning Crash Course",
+      "url": "https://developers.google.com/machine-learning/crash-course?hl=it"
+    },
+    {
+      "title": "H5P · Branching Scenario",
+      "url": "https://h5p.org/branching-scenario"
+    },
+    {
+      "title": "Pashler et al. · Learning Styles: Concepts and Evidence",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26162104/"
+    },
+    {
+      "title": "ChatGPT Images · documentazione",
+      "url": "https://help.openai.com/en/articles/11084440-images-in-chatgpt"
+    },
+    {
+      "title": "Gemini Nano Banana · documentazione",
+      "url": "https://gemini.google/overview/image-generation/"
+    },
+    {
+      "title": "Google Veo · modelli video",
+      "url": "https://deepmind.google/models/veo/"
+    },
+    {
+      "title": "Google Audio Overview",
+      "url": "https://blog.google/innovation-and-ai/products/notebooklm-audio-overviews/"
     }
   ],
-  "editorial_note": "Definizioni divulgative redatte per il corso; esempi originali, non citazioni letterali. Metodo MANZO AI: proposta progettuale, non metodo scientificamente validato."
+  "editorial_note": "Definizioni divulgative redatte per il corso; esempi originali, non citazioni letterali. Metodo MANZO AI: proposta progettuale, non metodo scientificamente validato. Sono distinte interattività a regole e adattività IA; gli 'stili di apprendimento' non sono categorie diagnostiche né una base scientifica per abbinare un solo media a ciascun alunno."
 }
