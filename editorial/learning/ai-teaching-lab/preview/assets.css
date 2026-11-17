@@ -119,3 +119,41 @@
 @media(max-width:750px){.self-study-steps{grid-template-columns:1fr}.glossary-grid{grid-template-columns:1fr}.case-grid{grid-template-columns:1fr}.lab-card{max-width:100%}}
 @media(max-width:500px){.narrative-chapter p{font-size:.96rem}.lab-card>h4,.lab-card>p,.lab-card>.lab-goal,.lab-card>.lab-steps,.lab-card>.lab-prompt,.lab-card>.lab-example,.lab-card>.lab-review{margin-inline:16px}.crossword-wrap{padding:10px}.crossword-grid-layout{gap:12px}.crossword-clue-panel{padding:13px}.crossword-clues{grid-template-columns:1fr}.module-hero h2{color:#fff!important}}
 @media(prefers-reduced-motion:reduce){.lab-card,.full-lesson-link{transition:none!important}.lab-card:hover,.full-lesson-link:hover{transform:none!important}}
+
+
+/* Applied pedagogy: the course models its own teaching method */
+.applied-pedagogy{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,165px),1fr));gap:10px;margin:19px 0 22px}
+.applied-step{background:#f6faff;border:1px solid #d6e5f6;border-radius:16px;padding:15px;min-width:0;transition:transform .22s ease,box-shadow .22s ease}
+.applied-step:hover{transform:translateY(-3px);box-shadow:0 14px 28px #245eae1a}
+.applied-step span{color:#1463e6;font-size:1.22rem;letter-spacing:-.02em;font-weight:870}
+.applied-step b{display:block;font-size:.92rem;color:#193c67;margin:7px 0}
+.applied-step p{font-size:.82rem;color:#45627e;line-height:1.55;margin:0}
+.final-glossary{padding-block:35px 100px}
+.glossary-banner{background:linear-gradient(125deg,#0c56dc,#1266ef 65%,#143a92);color:white;border-radius:27px;padding:clamp(25px,5vw,53px);box-shadow:0 24px 55px #124ece24;position:relative;overflow:hidden}
+.glossary-banner:after{content:"";position:absolute;border-radius:50%;width:230px;height:230px;right:-100px;top:-130px;border:35px solid #ffffff25;pointer-events:none}
+.glossary-banner .eyebrow{color:#edf7ff;font-size:.75rem}
+.glossary-banner h2{color:white!important;font-size:clamp(1.95rem,4.1vw,3.6rem);letter-spacing:-.05em;line-height:1.12;margin:12px 0 15px;max-width:720px}
+.glossary-banner p{color:#f6faff;font-size:1.02rem;line-height:1.65;max-width:760px}
+.glossary-page-link{display:inline-flex;margin-top:14px;color:#144eab!important;background:#fff;text-decoration:none!important;font-weight:790;border-radius:13px;padding:12px 17px}
+.glossary-page-link:hover{background:#ebf4ff}
+.glossary-controls{display:grid;grid-template-columns:minmax(0,2fr) minmax(170px,1fr);column-gap:20px;row-gap:8px;align-items:end;margin:30px 0 16px}
+.glossary-controls label{display:block;font-weight:790;font-size:.9rem;color:#294d75}
+.glossary-controls label:nth-of-type(1){grid-row:1;grid-column:1}
+.glossary-controls label:nth-of-type(2){grid-row:1;grid-column:2}
+.glossary-controls input,.glossary-controls select{width:100%;border:1px solid #a7c1df;border-radius:14px;background:#fff;padding:13px 15px;color:#163b67;min-height:49px}
+.glossary-controls input{grid-row:2;grid-column:1}
+.glossary-controls select{grid-row:2;grid-column:2}
+.glossary-count{color:#476482;font-size:.91rem;font-weight:700;margin:0 0 15px}
+.glossary-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,295px),1fr));gap:15px;align-items:stretch}
+.term-card{border-radius:19px;border:1px solid #d7e4f2;padding:21px;min-width:0;background:linear-gradient(140deg,#fff 50%,#f8fbff);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.term-card:hover{transform:translateY(-4px);border-color:#a4c8f5;box-shadow:0 15px 32px #2e548a15}
+.term-card h3{font-size:1.18rem;line-height:1.25;letter-spacing:-.02em;margin:9px 0 12px;color:#1d426d}
+.term-card>p{font-size:.9rem;line-height:1.62;color:#415c76;margin:0 0 16px}
+.term-group{font-size:.66rem;letter-spacing:.1em;font-weight:850;color:#1458b4;text-transform:uppercase}
+.term-example{border-left:3px solid #f07840;background:#fff8f3;border-radius:0 11px 11px 0;padding:11px 14px;margin-bottom:12px}
+.term-example b{color:#954519;font-size:.82rem}
+.term-example p{font-size:.84rem;color:#6f523a;margin:4px 0 0;line-height:1.57}
+.term-card>a{font-size:.79rem;font-weight:720;overflow-wrap:anywhere}
+.glossary-empty{background:#edf5ff;padding:18px;border-radius:14px;color:#315d8a}
+@media(max-width:650px){.glossary-controls{grid-template-columns:1fr}.glossary-controls label:nth-of-type(1){grid-row:1;grid-column:1}.glossary-controls input{grid-row:2;grid-column:1}.glossary-controls label:nth-of-type(2){grid-row:3;grid-column:1}.glossary-controls select{grid-row:4;grid-column:1}.glossary-results{grid-template-columns:1fr}.final-glossary{padding-block:15px 65px}}
+@media(prefers-reduced-motion:reduce){.term-card,.applied-step{transition:none!important}.term-card:hover,.applied-step:hover{transform:none!important}}
