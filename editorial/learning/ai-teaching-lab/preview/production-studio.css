@@ -132,3 +132,16 @@
  .studio-form-grid :is(input,select,textarea){padding:11px!important}
  .studio-controls .studio-action{min-height:44px}
 }
+
+/* Storyboard: focus on a single scene, without cutting any editable fields. */
+.studio-scene-disclosure{border:1px solid #bdd8f0;border-radius:16px;background:#f8fbff;min-width:0;overflow:hidden}
+.studio-scene-disclosure>summary{list-style:none;cursor:pointer;padding:15px 19px;font-weight:800;color:#19548b;font-size:.95rem;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.studio-scene-disclosure>summary::-webkit-details-marker{display:none}
+.studio-scene-disclosure>summary::after{content:"⌄";font-size:1.25rem;color:#165dc7}
+.studio-scene-disclosure[open]>summary::after{content:"⌃"}
+.studio-scene-disclosure[open]>summary{border-bottom:1px solid #d1e2f2;background:#eef6ff}
+.studio-scene-disclosure .studio-scene-editor{border:0;border-radius:0;background:white;padding:16px 20px}
+@media(max-width:700px){
+ .studio-scene-disclosure>summary{padding:13px 14px}
+ .studio-scene-disclosure .studio-scene-editor{padding:14px}
+}
