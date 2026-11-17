@@ -87,7 +87,7 @@ with sync_playwright() as playwright:
                 assert "STORYBOARD" in page.locator(".media-generated").inner_text()
             if index==4:
                 page.locator(".practice-branch .button").first.click()
-                assert "Conseguenza" in page.locator(".branch-feedback").inner_text()
+                assert "Conseguenza" in page.locator(".practice-branch .branch-feedback").inner_text()
             assert page.locator(".source-list a").count()>=3
             page.screenshot(path=str(SHOT/f"published-module-{index+1:02d}-{width}.png"),full_page=False)
         # A complete lesson must be a semantic HTML page on the same site.
