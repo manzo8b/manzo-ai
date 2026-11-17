@@ -7,7 +7,7 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const accent = {cobalt:"#1159ea",violet:"#7547cb",coral:"#d84d30",emerald:"#077c61",teal:"#007a8b"};
-  const state = {course:null,bank:null,scenarios:null,narrative:null,index:0};
+  const state = {course:null,bank:null,scenarios:null,narrative:null,glossary:null,index:0};
   function el(tag, cls, text) {
     const x=document.createElement(tag);
     if (cls) x.className=cls;
@@ -315,6 +315,55 @@
     start();
     return block;
   }
+  function renderGlossary(g) {
+    const area=$("atl-final-glossary"),list=$("atl-term-list"),count=$("atl-term-count");
+    const search=$("atl-term-search"),group=$("atl-term-group");
+    if(!area||!list||!count||!search||!group)return;
+    if(!g||g.entries.length<40)throw Error("Vocabolario incompleto");
+    const link=area.querySelector("[data-atl-glossary-page]");
+    if(link)link.hidden=!document.body.dataset.moduleBase;
+    g.categories.forEach(name=>{const option=el("option","",name);option.value=name;add(group,option)});
+    const normalize=(value)=>String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("it").trim();
+    function apply(){
+      const term=normalize(search.value),category=group.value;
+      const matches=g.entries.filter(t=>(!category||t.category===category)&&
+        (!term||normalize(t.term+" "+t.definition+" "+t.classroom_example).includes(term)));
+      list.replaceChildren();
+      count.textContent=matches.length+" voci trovate su "+g.entries.length;
+      if(!matches.length){
+        add(list,paragraph("Nessun termine corrisponde alla ricerca. Prova una parola più generale.","glossary-empty"));return;
+      }
+      matches.forEach(item=>{
+        const card=el("article","term-card");
+        add(card,el("div","term-group",item.category),heading("h3",item.term),
+          paragraph(item.definition),add(el("div","term-example"),
+            el("b","","Nella pratica scolastica"),paragraph(item.classroom_example)));
+        if(item.source)add(card,external(item.source,"Approfondisci dalla fonte"));
+        add(list,card);
+      });
+    }
+    search.addEventListener("input",apply);
+    group.addEventListener("change",apply);
+    apply();
+    area.hidden=false;
+  }
+  function courseInAction(){
+    const p=section("DIDATTICA APPLICATA","Questo corso mette in pratica ciò che insegna");
+    add(p,paragraph("Non si limita a descrivere l'IA: il modo stesso in cui studi è un modello didattico. L'IA è oggetto di analisi e uno strumento facoltativo per produrre bozze, mentre spiegazione, confronto e giudizio rimangono tuoi."));
+    const steps=el("div","applied-pedagogy");
+    [
+      ["Problema concreto","Parti da una situazione che un docente riconosce"],
+      ["Spiegazione narrativa","Comprendi la teoria attraverso una storia coerente e fonti"],
+      ["Esempio svolto","Osservi un output simulato e che cosa correggere"],
+      ["Laboratorio","Scrivi un prompt, oppure lavori sul materiale senza IA"],
+      ["Verifica e revisione","Ricevi feedback, correggi e trasferisci la scelta in classe"]
+    ].forEach(([title,desc],i)=>{
+      const cell=el("div","applied-step");
+      add(cell,el("span","",String(i+1).padStart(2,"0")),el("b","",title),paragraph(desc));add(steps,cell);
+    });
+    add(p,steps,paragraph("Il percorso non attiva in segreto un'intelligenza artificiale: gli esempi sono materiali formativi preparati e verificabili. Quando vorrai sperimentare con un sistema esterno, usane uno autorizzato, evitando dati personali degli studenti.","subtle"));
+    return p;
+  }
   function render() {
     const m=state.course.modules[state.index],
           a=state.bank.modules.find(q=>q.module_id===m.id),
@@ -348,7 +397,7 @@
     add(goals,heading("h4","Dopo questa lezione saprai"),
       list(m.outcomes));
     add(welcome,goals);
-    add(root,welcome,conceptProbe(decision));
+    add(root,welcome,courseInAction(),conceptProbe(decision));
 
     const theory=section("COMPRENDERE","La storia che dà senso alla teoria");
     theory.id="atl-theory";
@@ -463,14 +512,14 @@
     add(root,sources);
     root.focus({preventScroll:true});
   }
-  function init(course,bank,scenarios,narrative) {
+  function init(course,bank,scenarios,narrative,glossary) {
     if(!course||!bank||course.modules.length!==5||bank.modules.length!==5)throw Error("Contenuti formativi incompleti");
     const isEditorial=course.published===false&&course.status==="editorial_draft";
     const isPublic=course.published===true&&course.status==="public_beta"&&document.body.dataset.courseDataBase;
     if(!isEditorial&&!isPublic)throw Error("Stato di pubblicazione non riconosciuto");
     if(!scenarios||scenarios.modules.length!==5)throw Error("Simulazioni didattiche incomplete");
     if(!narrative||narrative.modules.length!==5)throw Error("Materiali narrativi mancanti");
-    state.course=course;state.bank=bank;state.scenarios=scenarios;state.narrative=narrative;
+    state.course=course;state.bank=bank;state.scenarios=scenarios;state.narrative=narrative;state.glossary=glossary;
     const nav=$("module-nav");
     course.modules.forEach((m,i)=>{
       const b=el("button","nav-button");b.type="button";
@@ -478,15 +527,16 @@
       b.addEventListener("click",()=>{state.index=i;render();$("module-content").scrollIntoView({block:"start",behavior:"auto"})});
       add(nav,b);
     });
-    $("experience").hidden=false;$("notice").hidden=true;render();
+    $("experience").hidden=false;$("notice").hidden=true;render();renderGlossary(glossary);
   }
   const dataBase=document.body.dataset.courseDataBase||"../it/";
   Promise.all([
     fetch(dataBase+"course.json").then(r=>{if(!r.ok)throw Error("corso HTTP "+r.status);return r.json()}),
     fetch(dataBase+"assessment-bank.json").then(r=>{if(!r.ok)throw Error("verifiche HTTP "+r.status);return r.json()}),
     fetch(dataBase+"scenarios.json").then(r=>{if(!r.ok)throw Error("simulazioni HTTP "+r.status);return r.json()}),
-    fetch(dataBase+"narrative.json").then(r=>{if(!r.ok)throw Error("narrazione HTTP "+r.status);return r.json()})
-  ]).then(d=>init(d[0],d[1],d[2],d[3])).catch(err=>{
+    fetch(dataBase+"narrative.json").then(r=>{if(!r.ok)throw Error("narrazione HTTP "+r.status);return r.json()}),
+    fetch(dataBase+"glossary.json").then(r=>{if(!r.ok)throw Error("vocabolario HTTP "+r.status);return r.json()})
+  ]).then(d=>init(d[0],d[1],d[2],d[3],d[4])).catch(err=>{
     $("notice").textContent="Anteprima non disponibile: "+err.message+". Apri con un server HTTP locale dalla radice del repository; non usare file://.";
     $("notice").className="wrap notice";
   });
