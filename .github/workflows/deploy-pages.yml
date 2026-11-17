@@ -325,6 +325,15 @@ jobs:
           test -s _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
           grep -q 'data-atl-workspace="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
           grep -q 'id="exportJSON"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          # Beginner-first pedagogy and guided navigation are release gates.
+          grep -q 'id="guided-demo"' _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
+          grep -q 'id="guided-demo"' _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
+          grep -q 'id="guided-demo"' _site/it/formazione/ia-per-la-didattica/studio-video/index.html
+          grep -q 'id="sample-brief"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          grep -q 'id="wk-all"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
+          grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
+          grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-video/index.html
           grep -q 'data-atl-video-studio="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
           grep -q 'id="captions"' _site/it/formazione/ia-per-la-didattica/studio-video/index.html
           grep -q 'data-atl-voice-studio="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
