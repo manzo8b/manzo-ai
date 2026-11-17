@@ -24,6 +24,7 @@ on:
       - product/learning-experience/**
       - theme/publish-learning-experience.py
       - theme/publish-ai-teaching-lab.py
+      - theme/check-ai-teaching-lab-contracts.cjs
       - product/preview/**
       - product/learning-console/**
       - theme/publish-learning-console.py
@@ -336,6 +337,8 @@ jobs:
           grep -q 'class="mobile-guide"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
           grep -q 'class="example-detail"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
           grep -q 'class="card workspace-section"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          node --check theme/check-ai-teaching-lab-contracts.cjs
+          node theme/check-ai-teaching-lab-contracts.cjs --site _site
           grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
           grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
           grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-video/index.html
