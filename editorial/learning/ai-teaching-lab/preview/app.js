@@ -281,7 +281,7 @@
     const link=el("a","full-lesson-link","Leggi il modulo completo con esercizi e soluzioni");
     const moduleNumber=String(state.index+1).padStart(2,"0");
     link.href=document.body.dataset.moduleBase ? document.body.dataset.moduleBase+moduleNumber+"/" : "../it/module-"+moduleNumber+".md";
-    link.target="_blank";link.rel="noopener noreferrer";
+    link.target=document.body.dataset.moduleBase?"_self":"_blank";link.rel="noopener noreferrer";
     add(labs,paragraph("Il documento contiene consegne passo passo, esempi guidati, prompt e una guida di correzione.", "subtle"),link);add(root,labs,branchingSimulation(branchScenario));
     const assess=section("VERIFICA FORMATIVA","Metti alla prova il tuo giudizio");
     add(assess,paragraph("Le risposte rimangono solo in questa pagina durante la visita. Non c'è voto, salvataggio o attestato.","subtle"));
