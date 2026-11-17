@@ -7,6 +7,13 @@ BASE="http://127.0.0.1:8767/manzo-ai/"
 COURSE=BASE+"it/formazione/ia-per-la-didattica/"
 SHOT=Path("ai-teaching-lab-screenshots")
 SHOT.mkdir(exist_ok=True)
+
+def reveal_fold(page, selector):
+    element=page.locator(selector).first
+    fold=element.locator('xpath=ancestor::details[contains(concat(" ",normalize-space(@class)," ")," course-fold ")][1]')
+    if fold.count() and not fold.evaluate("(node)=>node.open"):
+        fold.locator("summary").first.click()
+
 with sync_playwright() as playwright:
     browser=playwright.chromium.launch(headless=True)
     for width in [390,1440]:
@@ -15,6 +22,8 @@ with sync_playwright() as playwright:
         page.on("pageerror",lambda ex:errors.append(str(ex)))
         page.goto(COURSE,wait_until="networkidle")
         page.locator("#experience").wait_for(state="visible",timeout=10000)
+        assert page.locator(".course-fold").count()>=9
+        if width<=800: page.locator(".course-side-disclosure > summary").click()
         assert "Formazione docenti" in page.title()
         assert page.locator("header.module-hero").count()==1
         assert page.locator("#module-nav button").count()==5
@@ -36,6 +45,8 @@ with sync_playwright() as playwright:
         assert page.locator("#studio-progress-text").inner_text()=="Fase 2 di 5"
         page.goto(COURSE,wait_until="networkidle")
         page.locator("#experience").wait_for(state="visible",timeout=10000)
+        assert page.locator(".course-fold").count()>=9
+        if width<=800: page.locator(".course-side-disclosure > summary").click()
         assert page.locator(".atl-intro-media-card").count()==2
         assert "20 h" in page.locator(".atl-intro-facts").inner_text()
         assert page.locator("a.atl-intro-primary-action").count()==1
@@ -64,6 +75,8 @@ with sync_playwright() as playwright:
         assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth+2")
         page.goto(COURSE,wait_until="networkidle")
         page.locator("#experience").wait_for(state="visible",timeout=10000)
+        assert page.locator(".course-fold").count()>=9
+        if width<=800: page.locator(".course-side-disclosure > summary").click()
         assert page.locator(".atl-resource-hub").is_visible()
         assert page.locator(".atl-resource-link").count()==19
         assert page.locator(".atl-resource-link:visible").count()==4
@@ -81,12 +94,14 @@ with sync_playwright() as playwright:
         assert page.locator(".lab-prompt-code").count()==3
         probe=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button",name="Confronta la mia ipotesi"))
         assert probe.count()==1
+        reveal_fold(page, 'fieldset.assessment-block')
         probe.locator("input").nth(1).check()
         probe.get_by_role("button",name="Confronta la mia ipotesi").click()
         assert "Hai individuato" in probe.locator(".result").inner_text()
         for index in range(5):
             page.locator("#module-nav button").nth(index).click()
             assert page.locator(".branch-choices button").count()==3
+            reveal_fold(page, ".branch-choices")
             page.locator(".branch-choices button").first.click()
             assert page.locator(".branch-choices button").count()==2
             page.locator(".branch-choices button").first.click()
@@ -94,6 +109,7 @@ with sync_playwright() as playwright:
             assert page.locator(".narrative-chapter").count()>=5
             assert page.locator(".competency-studio").count()==1
             assert page.locator(".studio-check").count()>=4
+            reveal_fold(page, ".competency-studio")
             if index==1:
                 page.get_by_role("button",name="Prova le quattro schede nuove").click()
                 assert "2/4" in page.locator(".demo-model .result").inner_text()
@@ -112,6 +128,7 @@ with sync_playwright() as playwright:
             page.screenshot(path=str(SHOT/f"published-module-{index+1:02d}-{width}.png"),full_page=False)
         # A complete lesson must be a semantic HTML page on the same site.
         link=page.locator("a.full-lesson-link")
+        reveal_fold(page, "a.full-lesson-link")
         assert link.get_attribute("href")=="./modulo-05/"
         assert page.locator("#atl-final-glossary").is_visible()
         assert "79 voci" in page.locator("#atl-term-count").inner_text()
