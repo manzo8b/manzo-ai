@@ -112,8 +112,10 @@ def publish(site,verify=False):
     course=json.loads((DATA/"course.json").read_text(encoding="utf-8"))
     scenes=json.loads((DATA/"scenarios.json").read_text(encoding="utf-8"))
     assessments=json.loads((DATA/"assessment-bank.json").read_text(encoding="utf-8"))
-    if len(course["modules"])!=5 or len(scenes["modules"])!=5 or len(assessments["modules"])!=5:raise RuntimeError("Course incomplete")
-    for name in ["course.json","assessment-bank.json","scenarios.json"]:
+    narrative=json.loads((DATA/"narrative.json").read_text(encoding="utf-8"))
+    if len(course["modules"])!=5 or len(scenes["modules"])!=5 or len(assessments["modules"])!=5 or len(narrative["modules"])!=5:raise RuntimeError("Course incomplete")
+    if [m["id"] for m in course["modules"]] != [m["id"] for m in narrative["modules"]]:raise RuntimeError("Narrative module order mismatch")
+    for name in ["course.json","assessment-bank.json","scenarios.json","narrative.json"]:
         dst=target/"data"/name
         if name=="course.json":
             public_course=dict(course)
@@ -162,6 +164,7 @@ def publish(site,verify=False):
         if not (target/asset).is_file():raise RuntimeError("Missing asset "+asset)
     home=(target/"index.html").read_text(encoding="utf-8")
     if 'data-course-data-base="./data/"' not in home or 'content="noindex' in home:raise RuntimeError("Home not public")
+    if not (target/"data"/"narrative.json").is_file():raise RuntimeError("Missing full narrative")
     feature(site,verify)
     print("PASS AI Teaching Lab publisher: 5 complete lessons, public course, 3 Academy features, verified="+str(verify))
 
