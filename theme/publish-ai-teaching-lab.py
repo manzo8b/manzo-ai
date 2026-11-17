@@ -283,7 +283,9 @@ def publish(site,verify=False):
             seo(studio_title,
                 "Studio didattico autonomo per progettare, verificare ed esportare slide, script audio e attività interattive.",
                 "LearningResource",BASE+ROUTE+"/laboratorio-multimediale/"))
-        if '<meta name="description"' not in studio_html:\n            raise RuntimeError("Production studio is missing a description")\n        studio_path=target/"laboratorio-multimediale"/"index.html"
+        if '<meta name="description"' not in studio_html:
+            raise RuntimeError("Production studio is missing a description")
+        studio_path=target/"laboratorio-multimediale"/"index.html"
         studio_path.parent.mkdir(parents=True,exist_ok=True)
         studio_path.write_text(studio_html,encoding="utf-8")
         for i,m in enumerate(course["modules"],1):
