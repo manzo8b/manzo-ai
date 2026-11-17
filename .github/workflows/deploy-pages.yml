@@ -21,6 +21,7 @@ on:
       - tools/ai-teaching-voice-studio/**
       - tools/ai-teaching-video-studio/**
       - tools/ai-teaching-workspace/**
+      - tools/ai-teaching-launchpad/**
       - product/learning-experience/**
       - theme/publish-learning-experience.py
       - theme/publish-ai-teaching-lab.py
@@ -324,6 +325,9 @@ jobs:
           test -s _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
           test -s _site/it/formazione/ia-per-la-didattica/studio-video/index.html
           test -s _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          test -s _site/it/formazione/ia-per-la-didattica/inizia/index.html
+          grep -q 'data-atl-launchpad="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
+          grep -q 'ai-teaching-lab-mission-v0.1' _site/it/formazione/ia-per-la-didattica/inizia/index.html
           grep -q 'data-atl-workspace="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
           grep -q 'id="exportJSON"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
           # Beginner-first pedagogy and guided navigation are release gates.
