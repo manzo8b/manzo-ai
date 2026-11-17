@@ -423,7 +423,7 @@
           "La qualità di un materiale dipende da obiettivo, conoscenze pregresse, chiarezza e possibilità di verificare la comprensione. Una grafica appariscente può aumentare il carico cognitivo o consolidare un'immagine scientifica sbagliata.",
           "La produzione assistita da IA richiede controllo disciplinare dei fatti, coerenza dei segnali visivi, alt text, trascrizioni e licenze. Un quiz è formativo soltanto se permette di capire perché un'opzione è falsa e quale passo fare dopo.",
           "Costruire un prodotto significativo offre occasioni di elaborare, rappresentare e correggere le idee. La tecnologia va giudicata in base al lavoro cognitivo che rende possibile agli studenti, non alla rapidità con cui il docente genera file.",
-          "iali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata.\n\nLa ricerca sull'apprendimento multimediale di Richard Mayer ci invita a progettare per l'attenzione e la comprensione, non per la quantità di effetti. Il principio di coerenza suggerisce di eliminare parole, immagini e suoni non pertinenti; la segnalazione evidenzia gli elementi essenziali; la segmentazione rende controllabile il ritmo di presentazione. Questi principi non trasformano qualsiasi video in una buona lezione: l'obiettivo osservabile resta il punto di riferimento. Per un corso scolastico un audio con voce chiara e trascrizione, una immagine con descrizione e una decisione con feedback possono completarsi senza ripetere tutto tre volte."
+          "iali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata.\n\nLa ricerca sull'apprendimento multimediale di Richard Mayer ci invita a progettare per l'attenzione e la comprensione, non per la quantità di effetti. Il principio di coerenza suggerisce di eliminare parole, immagini e suoni non pertinenti; la segnalazione evidenzia gli elementi essenziali; la segmentazione rende controllabile il ritmo di presentazione. Questi principi non trasformano qualsiasi video in una buona lezione: l'obiettivo osservabile resta il punto di riferimento. Per un corso scolastico un audio con voce chiara e trascrizione, un'immagine con descrizione e una decisione con feedback possono completarsi senza ripetere tutto tre volte."
         ],
         "source_reviewed_at": "2026-11-17",
         "sources": [
@@ -570,7 +570,7 @@
         },
         {
           "name": "Verificare e migliorare",
-          "why": "Una bozza gradevole non prova un apprendimento; serve una osservazione",
+          "why": "Una bozza gradevole non prova un apprendimento; serve un'osservazione",
           "do": "Prova con una microverifica e correggi prima del riuso"
         }
       ],
