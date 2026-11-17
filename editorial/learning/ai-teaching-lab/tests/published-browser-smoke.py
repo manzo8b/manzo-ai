@@ -54,6 +54,9 @@ with sync_playwright() as playwright:
         page.locator(".atl-resource-more:not(.atl-resource-specialized) summary").click()
         assert page.locator(".atl-resource-link:visible").count()==11
         page.locator(".atl-resource-more:not(.atl-resource-specialized) summary").click()
+        page.locator(".atl-resource-specialized summary").click()
+        assert page.locator(".atl-resource-link:visible").count()==12
+        page.locator(".atl-resource-specialized summary").click()
         assert page.locator(".branch-choices button").count()==3
         assert page.locator(".lab-prompt-code").count()==3
         probe=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button",name="Confronta la mia ipotesi"))
@@ -69,6 +72,22 @@ with sync_playwright() as playwright:
             page.locator(".branch-choices button").first.click()
             assert page.locator(".branch-outcome").is_visible()
             assert page.locator(".narrative-chapter").count()>=5
+            assert page.locator(".competency-studio").count()==1
+            assert page.locator(".studio-check").count()>=4
+            if index==1:
+                page.get_by_role("button",name="Prova le quattro schede nuove").click()
+                assert "2/4" in page.locator(".demo-model .result").inner_text()
+            if index==2:
+                assert page.locator(".media-principle-card").count()==6
+                assert page.locator("#atl-model-media option").count()==6
+                assert "Nano Banana" in page.locator(".model-choice-detail").inner_text()
+                page.locator("#atl-model-media").select_option("4")
+                assert "Veo" in page.locator(".model-choice-detail").inner_text()
+                page.get_by_role("button",name="Costruisci la scaletta didattica").click()
+                assert "STORYBOARD" in page.locator(".media-generated").inner_text()
+            if index==4:
+                page.locator(".practice-branch .button").first.click()
+                assert "Conseguenza" in page.locator(".branch-feedback").inner_text()
             assert page.locator(".source-list a").count()>=3
             page.screenshot(path=str(SHOT/f"published-module-{index+1:02d}-{width}.png"),full_page=False)
         # A complete lesson must be a semantic HTML page on the same site.
