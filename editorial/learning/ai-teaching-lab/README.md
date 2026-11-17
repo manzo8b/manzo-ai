@@ -1,0 +1,64 @@
+# AI Teaching Lab · Corso docenti MANZO AI
+
+**Stato:** cinque moduli editoriali completi in italiano, **NON pubblicati su GitHub Pages** e **NON accreditati**.  
+**Ramo dedicato:** feat/ai-teaching-lab-curriculum-20261117  
+**Revisione:** 17 novembre 2026  
+**Licenze e diritti:** documenti didattici originali per revisione del titolare; fonti esterne solo con link, senza riproduzioni integrali.
+
+## Contenuti
+
+- it/course.json — cinque moduli, teoria e fonti, pedagogisti citati come parafrasi, metodo MANZO AI sempre presente, due scenari autentici sintetici per modulo.
+- it/module-01.md ... module-05.md — **cinque lezioni integrali** di circa 2.000 parole ciascuna, con sequenza da 240 minuti, laboratori da 72+72 minuti, prompt, esempi ragionati, quiz, matching, cruciverba, rubrica, guida del formatore e schede di consegna.
+- it/lesson-01.md — prima lezione pilota, conservata come risorsa storica complementare.
+- it/assessment-bank.json — 5 set con scelta multipla, scenari, associazioni, 5 cruciverba realmente incrociati (35 termini), compiti autentici ed exit ticket.
+- preview/index.html, preview/assets.css, preview/app.js — **anteprima interattiva source-only**, senza backend, che visualizza teoria, pedagogisti, casi, quiz, matching e cruciverba in griglia + modalità accessibile.
+- tests/test_course.py — test di integrità, coerenza didattica e sicurezza editoriale.
+- ../../../../docs/AI_TEACHING_LAB_CURRICULUM_2026-11-17.md — curriculum di progettazione generale.
+
+## Avvio anteprima su Mac o PC
+
+Clonare o scaricare il ramo; dalla **radice del repository**:
+
+    python3 -m http.server 8766
+
+Aprire:
+
+    http://localhost:8766/editorial/learning/ai-teaching-lab/preview/
+
+**Importante:** non aprire index.html con file:// perché l'anteprima carica due JSON relativi usando fetch e alcuni browser bloccano queste richieste. Non è un servizio Supabase: è una UI locale di prova.
+
+### QA automatica
+
+    python3 -m unittest discover -s editorial/learning/ai-teaching-lab/tests -p 'test_*.py' -v
+    node --check editorial/learning/ai-teaching-lab/preview/app.js
+
+Workflow di sola verifica: .github/workflows/ai-teaching-lab-qa.yml.
+
+I test di integrità **non** equivalgono a collaudo pedagogico, audit WCAG completo, consultazione di tutte le fonti o browser test visivo. Servono successivi test su Chrome/Safari/mobile, lettore schermo, tastiera e tempi reali.
+
+## Metodo MANZO AI
+
+**Ascolto → Classificazione → Valutazione del rischio → Domande mirate → Progettazione → Verifica → Consegna**, integrato con la progressione **Comprendere → Applicare → Valutare → Creare**. È un metodo operativo MANZO AI, non uno standard accreditato.
+
+## Temi
+
+1. Carico di lavoro, attenzione e valore di una scelta IA/non IA
+2. Compiti generati, fake news, affidabilità documentale e integrità
+3. Materiali multimediali corretti, accessibili e non sovraccarichi
+4. Differenziazione, UDL, valutazione formativa e feedback
+5. Tutor socratico, prova di sicurezza, governance e cyberbullismo
+
+## Regole di sicurezza
+
+- Tutti gli studenti, documenti, chat, dati e casi devono essere **fittizi**; vietato usare dati identificabili di minori in sistemi non autorizzati.
+- Soluzioni nel JSON pubblico sono formative; non sono idonee a esami privati o certificazioni.
+- Tutti i controlli, punteggi e cruciverba girano **esclusivamente nel browser**. Nessun progresso reale viene registrato o inviato. L'anteprima non dispone di login, database o analytics.
+- Non dichiarare badge, attestati, accreditamento MIUR/MIM o soddisfacimento dell'articolo 4 dell'AI Act come automatismi del percorso.
+- Prima di un impiego in scuole reali verificare contratto, ruolo titolare/responsabile, policy, finalità, anonimizzazione, sicurezza, AI Act e GDPR con personale responsabile. Il parere Garante del 20/10/2026 riguarda **uno schema di decreto**: verificare prima di citare come definitivo.
+- Nessuna modifica al sito pubblico, alle tabelle Supabase esistenti, Auth, catalogo M2, deploy o pagamenti.
+
+## Definizione di completamento editoriale vs product release
+
+**Sviluppo contenuti:** cinque moduli e banca di verifiche scritti, prototipo funzionante in sorgente.  
+**Resta prima di una release:** validazione teorica con esperto disciplinare, controllo delle fonti, prove di comprensione con docenti campione, revisione UX, test su dispositivi reali, traduzioni EN/ES se richieste, eventuale integrazione nel catalogo e progressi sicuri server-side. La durata 20h è **stimata**. Nessuna pubblicazione automatica per il solo merge.
+
