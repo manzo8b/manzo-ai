@@ -1,0 +1,441 @@
+{
+  "schema_version": "0.3-draft",
+  "course_key": "ai-teaching-lab",
+  "locale": "it",
+  "published": false,
+  "evaluations": "formative-only, non-persistent, not individual student profiles",
+  "branching_model": "two distinct learner decisions: 3 initial approaches × 2 follow-up actions = six different outcomes per module",
+  "design_rationale": "Prova di previsione prima di teoria; feedback differenziato per decisione e conseguenza; trasferimento alla classe",
+  "modules": [
+    {
+      "module_id": "atl-01",
+      "title": "La verifica di domani e il tempo che manca",
+      "setting": "È mercoledì, ore 18:40. Hai 45 minuti, due verifiche da preparare e una classe che fatica a distinguere fatti e interpretazioni. Un assistente IA promette 30 slide in 20 secondi.",
+      "key_question": "Dove cominci?",
+      "first": [
+        {
+          "label": "Definisco cosa gli studenti devono dimostrare, prima del tool",
+          "note": "Buona impostazione: l'obiettivo è osservabile, ma ora serve decidere come ottenere una prova e misurare il carico complessivo.",
+          "challenge": "Hai identificato l'obiettivo: distinguere un fatto storico da un'interpretazione. Il collega chiede come organizzare i prossimi 15 minuti.",
+          "routes": [
+            {
+              "label": "Propongo confronto tra due estratti fittizi e un exit ticket",
+              "good": true,
+              "why": "L'output dello studente mostra la competenza e non richiede un account IA.",
+              "result": "Produci una micro-indagine con due fonti dichiarate fittizie, una domanda non risolta e un exit ticket. Solo dopo confronti la bozza IA, se utile.",
+              "transfer": "Quale evidenza userai per dire che il percorso ha funzionato?"
+            },
+            {
+              "label": "Genero comunque le 30 slide per presentarle senza controllo",
+              "good": false,
+              "why": "La quantità di contenuti aumenta, ma resta assente una prova di apprendimento; possono esserci errori e sovraccarico.",
+              "result": "Recupera l'obiettivo e riduci le slide a una fonte e una domanda. Verifica ogni affermazione prima della lezione.",
+              "transfer": "Quali 20 minuti risparmieresti e quanti ne perderesti in revisione?"
+            }
+          ]
+        },
+        {
+          "label": "Chiedo all'IA di preparare tutto, compresa la valutazione",
+          "note": "Hai delegato un compito non definito. Ora compare una richiesta di caricare le verifiche degli studenti.",
+          "challenge": "La piattaforma chiede foto dei compiti reali e voti per personalizzare le domande.",
+          "routes": [
+            {
+              "label": "Non carico dati reali; creo un esempio sintetico e verifico con la scuola",
+              "good": true,
+              "why": "La minimizzazione e l'autorizzazione precedono la scelta tecnologica.",
+              "result": "Riparti da obiettivo, criteri e input sintetici. Se il tool non è ammesso, usa l'alternativa senza IA.",
+              "transfer": "Quale trattamento di dati è indispensabile per una semplice bozza?"
+            },
+            {
+              "label": "Rimuovo solo i nomi e carico comunque le fotografie",
+              "good": false,
+              "why": "Foto e contenuti possono restare identificabili; togliere il nome non rende necessariamente anonimo il lavoro.",
+              "result": "Interrompi il caricamento. Ricostruisci il materiale con dati sintetici, elimina ogni riferimento identificabile e chiedi la verifica istituzionale.",
+              "transfer": "Quali elementi possono reidentificare uno studente?"
+            }
+          ]
+        },
+        {
+          "label": "Rinuncio a definire obiettivi e riuso subito la vecchia presentazione",
+          "note": "L'alternativa senza IA è legittima, ma il semplice riuso non garantisce coerenza con la sfida della classe.",
+          "challenge": "Il materiale recuperato contiene 50 slide e grafici non citati.",
+          "routes": [
+            {
+              "label": "Elimino contenuti non pertinenti e preparo una prova di comprensione",
+              "good": true,
+              "why": "L'alternativa senza IA è stata migliorata grazie a una decisione didattica motivata.",
+              "result": "Conserva due estratti controllabili e valuta un'attività di confronto. Non serve un chatbot se il materiale funziona.",
+              "transfer": "Quale criterio userai per riutilizzarlo la prossima volta?"
+            },
+            {
+              "label": "Uso tutto perché è già pronto",
+              "good": false,
+              "why": "La disponibilità di un file non dimostra validità, accessibilità o apprendimento.",
+              "result": "Riduci il materiale, identifica fonti affidabili e progetta un'evidenza prima di consegnarlo.",
+              "transfer": "Come dimostri che gli studenti non hanno soltanto guardato le slide?"
+            }
+          ]
+        }
+      ],
+      "mini_theory": {
+        "module_id": "atl-01",
+        "probe": "L'IA produce 30 slide in 20 secondi. Quale elemento dimostra che la lezione funziona?",
+        "options": [
+          "Il numero di slide prodotte",
+          "La competenza osservata nell'exit ticket",
+          "La velocità dichiarata dal fornitore"
+        ],
+        "correct": 1,
+        "feedback": "La tecnologia è uno strumento. Serve definire un obiettivo osservabile e un'evidenza coerente, considerando anche il tempo di verifica.",
+        "source": "https://www.cmu.edu/teaching/principles/learning.html"
+      },
+      "path_count": 6,
+      "reflection": "Se domani l'IA non fosse disponibile, questa decisione ti renderebbe comunque un insegnante migliore? Scrivi un esempio concreto.",
+      "phase": "Comprendere → Applicare → Valutare → Creare"
+    },
+    {
+      "module_id": "atl-02",
+      "title": "Il tema impeccabile e tre fonti impossibili",
+      "setting": "Uno studente presenta un elaborato fittizio sulla rivoluzione industriale, con un DOI impossibile e un anacronismo. Un collega propone di usare subito un detector di IA.",
+      "key_question": "Qual è il tuo primo atto professionale?",
+      "first": [
+        {
+          "label": "Separo claim, fonti e prove, senza dedurre l'autore",
+          "note": "Hai distinto verifica dei contenuti e ipotesi sull'uso dell'IA. Ora devi decidere come condurre l'accertamento.",
+          "challenge": "Il DOI non esiste nella simulazione; un titolo plausibile non porta al documento citato.",
+          "routes": [
+            {
+              "label": "Registro i limiti e chiedo una difesa delle fonti",
+              "good": true,
+              "why": "Il percorso osserva argomentazione, passaggi verificabili e capacità di revisione.",
+              "result": "Progetta una prova con diario delle modifiche, confronto di due fonti autentiche e colloquio breve.",
+              "transfer": "Come distingui non verificato da dimostrato falso?"
+            },
+            {
+              "label": "Dichiaro che ogni frase senza fonte è falsa",
+              "good": false,
+              "why": "Assenza di prova non è equivalente a smentita documentata.",
+              "result": "Classifica le affermazioni come non verificate, finché non recuperi elementi pertinenti per verificarle o smentirle.",
+              "transfer": "Quale nuova prova cambierebbe lo stato dell'affermazione?"
+            }
+          ]
+        },
+        {
+          "label": "Affido la decisione disciplinare al rilevatore IA",
+          "note": "Il detector produce una percentuale elevata ma non garantisce attribuzione individuale.",
+          "challenge": "La famiglia chiede quali prove verificabili sostengono l'accusa.",
+          "routes": [
+            {
+              "label": "Ritiro l'interpretazione automatica e raccolgo evidenze del processo",
+              "good": true,
+              "why": "Un punteggio probabilistico non è una dimostrazione sufficiente di scorrettezza.",
+              "result": "Usa una rubrica di ragionamento e fonti, applica le procedure e le garanzie della scuola e consenti spiegazione e correzione.",
+              "transfer": "Come prevenire accuse non fondate in futuro?"
+            },
+            {
+              "label": "Difendo l'accusa perché il detector ha scritto 97%",
+              "good": false,
+              "why": "Una percentuale del servizio, da sola, non è prova conclusiva di origine del testo.",
+              "result": "Non sanzionare sulla base del numero; rivedi la consegna e verifica le competenze con una prova appropriata.",
+              "transfer": "Quale evidenza autonoma potresti raccogliere?"
+            }
+          ]
+        },
+        {
+          "label": "Correggo immediatamente il testo con un secondo chatbot",
+          "note": "Un secondo output può essere utile come ipotesi, ma potrebbe ripetere errori e citazioni inventate.",
+          "challenge": "Il nuovo chatbot ha aggiunto una bibliografia ordinata senza mostrare i passaggi originali.",
+          "routes": [
+            {
+              "label": "Consulto direttamente gli originali e segnalo ciò che non ho verificato",
+              "good": true,
+              "why": "Tracciabilità e pertinenza prevalgono sulla formattazione.",
+              "result": "Ricostruisci la catena claim→fonte→passaggio; ogni riferimento privo di originale resta non verificato.",
+              "transfer": "La fonte esiste, ma dice davvero ciò che la risposta sostiene?"
+            },
+            {
+              "label": "Accetto la bibliografia perché completa e leggibile",
+              "good": false,
+              "why": "La forma tipografica non dimostra l'esistenza delle fonti.",
+              "result": "Rimuovi i riferimenti non controllati e non attribuire verifica esterna a una generazione.",
+              "transfer": "Come spiegheresti questo errore agli studenti?"
+            }
+          ]
+        }
+      ],
+      "mini_theory": {
+        "module_id": "atl-02",
+        "probe": "Non trovi una fonte citata da un chatbot. Quale conclusione puoi sostenere?",
+        "options": [
+          "La tesi è sicuramente falsa",
+          "L'autore è sicuramente uno studente che ha copiato",
+          "La fonte è non verificata finché non emerge un originale pertinente"
+        ],
+        "correct": 2,
+        "feedback": "Non verificato e dimostrato falso non sono sinonimi. La verifica richiede fonte, passaggio e contesto.",
+        "source": "https://www.unesco.org/en/articles/ai-competency-framework-teachers"
+      },
+      "path_count": 6,
+      "reflection": "Se domani l'IA non fosse disponibile, questa decisione ti renderebbe comunque un insegnante migliore? Scrivi un esempio concreto.",
+      "phase": "Comprendere → Applicare → Valutare → Creare"
+    },
+    {
+      "module_id": "atl-03",
+      "title": "Quaranta slide, zero chiarezza",
+      "setting": "Una classe di 13 anni deve capire la differenza tra clima e tempo meteorologico. La presentazione contiene 40 slide, grafici senza unità e illustrazioni non verificate.",
+      "key_question": "Come ridisegni l'esperienza?",
+      "first": [
+        {
+          "label": "Parto dal fraintendimento e preparo una mini-indagine",
+          "note": "Hai scelto un problema cognitivo preciso. Ora il docente chiede se una figura generata dall'IA possa sostituire la spiegazione.",
+          "challenge": "La figura illustrativa contiene frecce che suggeriscono un rapporto causale sbagliato.",
+          "routes": [
+            {
+              "label": "Correggo lo schema, documento la fonte e scrivo un alt text",
+              "good": true,
+              "why": "Accuratezza, rappresentazione equivalente e verifica dell'apprendimento sono vincoli essenziali.",
+              "result": "Consegna scheda di una pagina, figura verificata, alternativa testuale e quiz sui fraintendimenti.",
+              "transfer": "Come capirai se la classe distingue le scale temporali?"
+            },
+            {
+              "label": "La tengo perché l'immagine è spettacolare",
+              "good": false,
+              "why": "Un'immagine memorabile può consolidare una relazione errata.",
+              "result": "Sostituisci la figura o elimina le frecce false; la correzione è più importante dell'effetto visivo.",
+              "transfer": "Quando un visual rende un errore più convincente?"
+            }
+          ]
+        },
+        {
+          "label": "Produco altri video e podcast per tutti gli studenti",
+          "note": "La moltiplicazione di canali non basta: serve accesso equivalente e un compito significativo.",
+          "challenge": "Il video ha una bella voce, ma nessuna trascrizione ed è difficile da seguire senza audio.",
+          "routes": [
+            {
+              "label": "Riduco il contenuto, aggiungo trascrizione e domanda di trasferimento",
+              "good": true,
+              "why": "L'accessibilità deve essere integrata, non un'aggiunta tardiva.",
+              "result": "Pubblica script, trascrizione, glossario e un esercizio di applicazione. Controlla accuratamente fatti e licenze.",
+              "transfer": "Quale studente potrebbe restare escluso senza trascrizione?"
+            },
+            {
+              "label": "Aumento la musica e accelerò il montaggio",
+              "good": false,
+              "why": "Effetti aggiuntivi non correggono il problema cognitivo né quello di accessibilità.",
+              "result": "Rimuovi elementi irrilevanti, aggiungi supporti alternativi e verifica la comprensione.",
+              "transfer": "Che cosa dello schermo aiuta davvero a ragionare?"
+            }
+          ]
+        },
+        {
+          "label": "Consegno le slide originali: il materiale è già stato prodotto",
+          "note": "Risparmi un passaggio operativo, ma non hai verificato il carico e la coerenza.",
+          "challenge": "Gli studenti rispondono che un giorno freddo smentisce il riscaldamento globale.",
+          "routes": [
+            {
+              "label": "Interrompo la sequenza e confronto due scale temporali",
+              "good": true,
+              "why": "Il feedback mostra un fraintendimento reale e consente di adattare la didattica.",
+              "result": "Riprogetta due domande sui dati e una visualizzazione con scala e fonte dichiarata.",
+              "transfer": "Come distingueresti una previsione del tempo da una tendenza climatica?"
+            },
+            {
+              "label": "Spiego che hanno torto senza mostrare le prove",
+              "good": false,
+              "why": "Una correzione soltanto assertiva non costruisce comprensione causale.",
+              "result": "Prepara un controesempio documentato e una domanda che richieda confronto di dati su periodi diversi.",
+              "transfer": "Che tipo di evidenza li aiuterebbe a correggersi?"
+            }
+          ]
+        }
+      ],
+      "mini_theory": {
+        "module_id": "atl-03",
+        "probe": "Una figura generata è molto bella ma mostra una relazione scientifica sbagliata. Che fai?",
+        "options": [
+          "La uso perché la classe la ricorderà",
+          "La correggo o la sostituisco, con testo alternativo",
+          "Aumento colori e animazioni"
+        ],
+        "correct": 1,
+        "feedback": "Accuratezza, carico cognitivo e accessibilità vengono prima dell'effetto visivo.",
+        "source": "https://udlguidelines.cast.org/"
+      },
+      "path_count": 6,
+      "reflection": "Se domani l'IA non fosse disponibile, questa decisione ti renderebbe comunque un insegnante migliore? Scrivi un esempio concreto.",
+      "phase": "Comprendere → Applicare → Valutare → Creare"
+    },
+    {
+      "module_id": "atl-04",
+      "title": "La stessa competenza, tre modi di dimostrarla",
+      "setting": "La classe deve argomentare due cause dell'inquinamento locale. Livelli di lettura differenti rendono poco accessibile una prova unica e lunga. Il dirigente chiede qualità, non facili promozioni.",
+      "key_question": "Che cosa deve restare uguale nelle diverse prove?",
+      "first": [
+        {
+          "label": "La competenza e la rubrica, non necessariamente il formato",
+          "note": "Hai applicato un principio UDL. Ora devi valutare un elaborato orale e uno scritto.",
+          "challenge": "La presentazione orale contiene due cause ma soltanto una prova, il testo scritto ne presenta due e due.",
+          "routes": [
+            {
+              "label": "Applico i medesimi descrittori di evidenza e ragionamento",
+              "good": true,
+              "why": "Differenziare l'espressione non significa ridurre automaticamente i criteri.",
+              "result": "Rendi esplicita la rubrica a quattro livelli e offri a entrambi un'occasione di revisione.",
+              "transfer": "Quale prova concreta giustifica il livello assegnato?"
+            },
+            {
+              "label": "Attribuisco lo stesso massimo voto a entrambi per equità",
+              "good": false,
+              "why": "Equità di accesso non coincide con valutazione indipendente dalle evidenze.",
+              "result": "Conserva gli obiettivi comuni, riconosci il lavoro svolto e fornisci il prossimo passo per integrare la prova mancante.",
+              "transfer": "Come formulare un feedback specifico, non punitivo?"
+            }
+          ]
+        },
+        {
+          "label": "Chiedo al chatbot di stimare bisogni speciali e livello cognitivo",
+          "note": "Il sistema offre una classificazione individuale, ma non dispone della competenza né delle autorizzazioni per tale inferenza.",
+          "challenge": "L'IA produce una descrizione psicologica di un alunno fittizio.",
+          "routes": [
+            {
+              "label": "Escludo la profilazione e progetto supporti universali",
+              "good": true,
+              "why": "La progettazione UDL non richiede diagnosi generate.",
+              "result": "Prevedi testo leggibile, schema, supporto orale e criteri comuni per tutti; le decisioni individuali seguono le procedure scolastiche.",
+              "transfer": "Quali informazioni personali puoi evitare del tutto?"
+            },
+            {
+              "label": "Uso la classificazione per assegnare un percorso diverso",
+              "good": false,
+              "why": "L'inferenza può essere inaccurata, stigmatizzante e non autorizzata.",
+              "result": "Rimuovi l'etichetta e coinvolgi i professionisti responsabili per qualunque decisione su adattamenti individuali.",
+              "transfer": "Come separare adattamenti didattici da diagnosi?"
+            }
+          ]
+        },
+        {
+          "label": "Preparo un quiz identico e solo più corto per chi fatica",
+          "note": "La quantità inferiore di domande non basta a eliminare barriere o a misurare la stessa competenza.",
+          "challenge": "La prova breve non richiede di argomentare, ma soltanto riconoscere due definizioni.",
+          "routes": [
+            {
+              "label": "Riprogetto modalità diverse mantenendo il ragionamento",
+              "good": true,
+              "why": "La medesima competenza richiede confronto tra prove, anche attraverso altri canali espressivi.",
+              "result": "Costruisci tre consegne equivalenti con un criterio osservabile comune.",
+              "transfer": "Che cosa dovrebbe dimostrare lo studente in ciascuna modalità?"
+            },
+            {
+              "label": "Accetto il quiz perché è più facile da correggere",
+              "good": false,
+              "why": "La prestazione richiesta è cambiata: riconoscimento non equivale ad argomentazione.",
+              "result": "Ripristina il compito argomentativo con barriere ridotte e feedback praticabile.",
+              "transfer": "Quale ostacolo hai eliminato e quale competenza hai perso?"
+            }
+          ]
+        }
+      ],
+      "mini_theory": {
+        "module_id": "atl-04",
+        "probe": "Tre studenti dimostrano la stessa competenza con testo, mappa e spiegazione orale. Che cosa rimane uguale?",
+        "options": [
+          "Il formato della risposta",
+          "L'obiettivo e i criteri delle evidenze",
+          "La quantità di parole pronunciate"
+        ],
+        "correct": 1,
+        "feedback": "UDL propone molteplici vie di accesso ed espressione senza cambiare automaticamente la competenza attesa.",
+        "source": "https://udlguidelines.cast.org/"
+      },
+      "path_count": 6,
+      "reflection": "Se domani l'IA non fosse disponibile, questa decisione ti renderebbe comunque un insegnante migliore? Scrivi un esempio concreto.",
+      "phase": "Comprendere → Applicare → Valutare → Creare"
+    },
+    {
+      "module_id": "atl-05",
+      "title": "Un tutor per minori: dalla demo convincente alla responsabilità",
+      "setting": "Una scuola vuole provare un tutor IA per equazioni. La demo risponde bene a 3x+5=17, ma nessuno ha ancora definito limiti, gestione dei dati, fallback o escalation umana.",
+      "key_question": "Quale decisione prendi prima di coinvolgere studenti?",
+      "first": [
+        {
+          "label": "Definisco l'ambito e testo casi sintetici avversi",
+          "note": "Hai costruito un perimetro verificabile, ma ora il sistema riceve una richiesta inattesa.",
+          "challenge": "Il tutor fittizio chiede il nome dell'alunno e tenta di valutare il suo stato emotivo.",
+          "routes": [
+            {
+              "label": "Blocco la raccolta, segnalo il problema e mantengo fallback umano",
+              "good": true,
+              "why": "Un prototipo non deve trasformarsi in sistema di profilazione.",
+              "result": "Registra il fallimento nel test, correggi la specifica e non autorizzare uso reale senza audit ulteriori.",
+              "transfer": "Quali richieste devono sempre provocare uno stop?"
+            },
+            {
+              "label": "Consento i dati perché la personalizzazione è utile",
+              "good": false,
+              "why": "Il beneficio ipotizzato non giustifica la raccolta di dati non necessari.",
+              "result": "Torna alla minimizzazione dei dati e alla definizione di responsabilità e perimetro d'uso.",
+              "transfer": "La stessa spiegazione può funzionare senza dati identificabili?"
+            }
+          ]
+        },
+        {
+          "label": "Porto subito il tutor in classe dopo un test corretto",
+          "note": "La risposta su un'equazione era giusta, ma un singolo test non valuta robustezza, privacy o compatibilità con l'ambiente scolastico.",
+          "challenge": "Uno studente del caso simulato chiede la soluzione pronta per una verifica.",
+          "routes": [
+            {
+              "label": "Sospendo l'uso reale; progetto indizi graduati e sei test avversi",
+              "good": true,
+              "why": "Una buona politica di tutoring richiede progettazione, controllo e autorizzazione.",
+              "result": "Prepara un protocollo atteso/osservato e una decisione go/no-go, senza dichiarare il sistema sicuro.",
+              "transfer": "Quale fallimento determinerebbe uno stop immediato?"
+            },
+            {
+              "label": "Lascio che il modello risolva la prova per mantenere l'engagement",
+              "good": false,
+              "why": "Consegna la risposta, ma sostituisce il processo di apprendimento.",
+              "result": "Ripristina domande socratiche, spiegazione per passi e verifica autonoma.",
+              "transfer": "Che cosa sta davvero apprendendo lo studente?"
+            }
+          ]
+        },
+        {
+          "label": "Delego al chatbot la gestione di una segnalazione di bullismo",
+          "note": "Un messaggio della simulazione mostra offese persistenti. Serve tutela umana secondo procedura scolastica.",
+          "challenge": "Il tutor propone di identificare il colpevole e assegnare una sanzione.",
+          "routes": [
+            {
+              "label": "Rinvio la segnalazione a figure scolastiche competenti",
+              "good": true,
+              "why": "La tutela e la valutazione del caso richiedono persone responsabili e garanzie.",
+              "result": "Usa simulazioni anonime soltanto per prevenzione e alfabetizzazione; non processare chat reali in strumenti non autorizzati.",
+              "transfer": "Qual è il punto di escalation previsto dall'istituto?"
+            },
+            {
+              "label": "Accetto la sanzione automatica suggerita",
+              "good": false,
+              "why": "È una delega impropria di un giudizio che coinvolge minori e garanzie procedurali.",
+              "result": "Interrompi la decisione automatica, attiva il percorso umano e documenta le responsabilità.",
+              "transfer": "Quali danni può produrre una decisione senza contesto?"
+            }
+          ]
+        }
+      ],
+      "mini_theory": {
+        "module_id": "atl-05",
+        "probe": "Un tutor IA risolve correttamente un'equazione durante la demo. Questo dimostra che è sicuro con minori?",
+        "options": [
+          "Sì: una risposta corretta basta",
+          "Solo se è famoso",
+          "No: servono scopo definito, stress test e governance"
+        ],
+        "correct": 2,
+        "feedback": "Una prova didattica e sei test sintetici non dimostrano sicurezza generale né autorizzazione dell'istituto.",
+        "source": "https://www.unesco.org/en/articles/ai-competency-framework-teachers"
+      },
+      "path_count": 6,
+      "reflection": "Se domani l'IA non fosse disponibile, questa decisione ti renderebbe comunque un insegnante migliore? Scrivi un esempio concreto.",
+      "phase": "Comprendere → Applicare → Valutare → Creare"
+    }
+  ]
+}

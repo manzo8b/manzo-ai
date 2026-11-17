@@ -1,0 +1,62 @@
+#!/usr/bin/env python3
+"""Published-pages Chromium smoke on isolated staging (not real production)."""
+from pathlib import Path
+from playwright.sync_api import sync_playwright
+
+BASE="http://127.0.0.1:8767/manzo-ai/"
+COURSE=BASE+"it/formazione/ia-per-la-didattica/"
+SHOT=Path("ai-teaching-lab-screenshots")
+SHOT.mkdir(exist_ok=True)
+with sync_playwright() as playwright:
+    browser=playwright.chromium.launch(headless=True)
+    for width in [390,1440]:
+        page=browser.new_page(viewport={"width":width,"height":880},reduced_motion="reduce")
+        errors=[]
+        page.on("pageerror",lambda ex:errors.append(str(ex)))
+        page.goto(COURSE,wait_until="networkidle")
+        page.locator("#experience").wait_for(state="visible",timeout=10000)
+        assert "Formazione docenti" in page.title()
+        assert page.locator("header.module-hero").count()==1
+        assert page.locator("#module-nav button").count()==5
+        assert page.locator(".branch-choices button").count()==3
+        probe=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button",name="Confronta la mia ipotesi"))
+        assert probe.count()==1
+        probe.locator("input").nth(1).check()
+        probe.get_by_role("button",name="Confronta la mia ipotesi").click()
+        assert "Hai individuato" in probe.locator(".result").inner_text()
+        for index in range(5):
+            page.locator("#module-nav button").nth(index).click()
+            assert page.locator(".branch-choices button").count()==3
+            page.locator(".branch-choices button").first.click()
+            assert page.locator(".branch-choices button").count()==2
+            page.locator(".branch-choices button").first.click()
+            assert page.locator(".branch-outcome").is_visible()
+            assert page.locator(".theory-accordion").count()==3
+            assert page.locator(".source-list a").count()>=3
+            page.screenshot(path=str(SHOT/f"published-module-{index+1:02d}-{width}.png"),full_page=True)
+        # A complete lesson must be a semantic HTML page on the same site.
+        link=page.locator("a.full-lesson-link")
+        assert link.get_attribute("href")=="./modulo-05/"
+        link.click()
+        page.wait_for_url(COURSE+"modulo-05/")
+        assert page.locator("h1").count()==1
+        assert page.locator(".atl-reading").is_visible()
+        assert page.locator(".atl-reading h2").count()>=5
+        assert page.locator(".atl-reading table").count()>=1
+        assert page.locator('link[rel="canonical"]').count()==1
+        assert page.get_by_text("Guida del formatore",exact=False).count()>=1
+        assert page.locator("a.atl-next").count()==1
+        assert not page.evaluate("document.documentElement.scrollWidth>window.innerWidth+2")
+        assert not errors,errors
+        page.close()
+    page=browser.new_page()
+    for locale,academy in [("it","academy"),("en","academy"),("es","academia")]:
+        page.goto(BASE+locale+"/"+academy+"/",wait_until="domcontentloaded")
+        feature=page.locator('section[data-atl-feature="2026-11"]')
+        assert feature.count()==1
+        href=feature.locator("a.atl-feature-cta").get_attribute("href")
+        assert href=="/manzo-ai/it/formazione/ia-per-la-didattica/"
+        assert page.locator('article[data-ma-course-card="1"]').count()==0 or page.locator('article[data-ma-course-card="1"]').count()==6
+    page.close()
+    browser.close()
+print("PASS public teaching course: 5 decision trees, theory probes, 5 lesson routes, Academy IT/EN/ES, 390/1440px")

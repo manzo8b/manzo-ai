@@ -1,0 +1,809 @@
+{
+  "schema_version": "draft-0.2",
+  "course_key": "ai-teaching-lab",
+  "locale": "it",
+  "status": "public_formative_content_draft_not_published",
+  "generated_at": "2026-11-17",
+  "implementation_status": {
+    "ui_renderer": false,
+    "server_side_grading": false,
+    "persistent_progress": false,
+    "certificate": false
+  },
+  "policy": {
+    "synthetic_data_only": true,
+    "formative_only": true,
+    "answers_in_public_json": true,
+    "not_suitable_for_private_exams": true
+  },
+  "accessibility": {
+    "crossword_text_alternative": true,
+    "keyboard_interaction_required_on_future_renderer": true,
+    "feedback_beyond_color": true
+  },
+  "modules": [
+    {
+      "module_id": "atl-01",
+      "types": [
+        "single_choice",
+        "multi_select",
+        "decision_scenario",
+        "matching",
+        "crossword",
+        "authentic_task",
+        "exit_ticket"
+      ],
+      "single_choice_source": "course.json:modules[0].checkpoint (2 domande con feedback)",
+      "multi_select": {
+        "id": "atl-01-ms1",
+        "stem": "Quali interventi possono aiutare un docente con poco tempo senza perdere il controllo pedagogico? Seleziona due risposte",
+        "choices": [
+          "Definire obiettivi e criteri prima del tool",
+          "Caricare voti reali su un servizio personale non autorizzato",
+          "Cronometrare e verificare una prova A/B su input sintetici",
+          "Accettare le stime di produttività del vendor"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "rationale": "Obiettivi e test comparativi permettono una scelta motivata; dati non autorizzati e promesse commerciali non sono scorciatoie valide.",
+        "feedback_on_submit": true
+      },
+      "decision_scenario": {
+        "id": "atl-01-dq1",
+        "stem": "Hai dieci minuti per scegliere una soluzione per un'interrogazione inclusiva. Cosa fai?",
+        "options": [
+          "Scelgo l'app col catalogo più grande",
+          "Definisco l'evidenza da osservare e confronto modalità accessibili",
+          "Chiedo all'IA di assegnare i voti in automatico"
+        ],
+        "correct_index": 1,
+        "feedback": [
+          "Popolarità non prova utilità didattica",
+          "Allineamento obiettivo-evidenza guida poi la tecnologia",
+          "Il giudizio su persone non può essere delegato a un tool non autorizzato"
+        ],
+        "require_written_reason_before_feedback": true
+      },
+      "matching": {
+        "id": "atl-01-match1",
+        "prompt": "Associa ciascun termine professionale all'esempio che lo rappresenta; motiva una coppia",
+        "pairs": [
+          {
+            "term": "OBIETTIVO",
+            "description": "Studente argomenta una tesi con prove"
+          },
+          {
+            "term": "EVIDENZA",
+            "description": "Breve esposizione in cui usa due documenti"
+          },
+          {
+            "term": "RISCHIO",
+            "description": "Servizio che richiede voti identificativi"
+          },
+          {
+            "term": "VERIFICA",
+            "description": "Confronto tra risultato previsto e osservato"
+          }
+        ]
+      },
+      "crossword": {
+        "id": "atl-01-cross1",
+        "title": "Lessico professionale — atl-01",
+        "professional_context": true,
+        "width": 14,
+        "height": 11,
+        "pattern": [
+          "####......####",
+          "#.###.########",
+          "#.###.########",
+          ".........#####",
+          "#.#.#.#.######",
+          "#.#.#.#.......",
+          "#.#.#.#.######",
+          "#.#.#.#.######",
+          "###.###.######",
+          "###.###.######",
+          "###.###.######"
+        ],
+        "entries": [
+          {
+            "answer": "SCELTA",
+            "clue": "Decisione didattica motivata tra alternative",
+            "row": 0,
+            "col": 4,
+            "direction": "across",
+            "number": 1
+          },
+          {
+            "answer": "CONTESTO",
+            "clue": "Ambito e condizioni che orientano la progettazione",
+            "row": 0,
+            "col": 5,
+            "direction": "down",
+            "number": 2
+          },
+          {
+            "answer": "RUBRICA",
+            "clue": "Criteri e livelli espliciti per giudicare un lavoro",
+            "row": 1,
+            "col": 1,
+            "direction": "down",
+            "number": 3
+          },
+          {
+            "answer": "OBIETTIVO",
+            "clue": "Prestazione osservabile che guida la lezione",
+            "row": 3,
+            "col": 0,
+            "direction": "across",
+            "number": 4
+          },
+          {
+            "answer": "EVIDENZA",
+            "clue": "Prova concreta di apprendimento",
+            "row": 3,
+            "col": 3,
+            "direction": "down",
+            "number": 5
+          },
+          {
+            "answer": "VERIFICA",
+            "clue": "Controllo fondato su criteri e prove",
+            "row": 3,
+            "col": 7,
+            "direction": "down",
+            "number": 6
+          },
+          {
+            "answer": "RISCHIO",
+            "clue": "Possibile conseguenza negativa da prevenire",
+            "row": 5,
+            "col": 7,
+            "direction": "across",
+            "number": 7
+          }
+        ],
+        "solution_format": "uppercase ASCII, no spaces/accents",
+        "accessible_alternative": "present clues and individual word fields, not only the grid"
+      },
+      "authentic_task": {
+        "id": "atl-01-performance",
+        "portfolio_artifact": "Matrice A+ e decisione motivata",
+        "human_review_required": true
+      },
+      "exit_ticket": {
+        "id": "atl-01-exit",
+        "question": "Quale lavoro non delegheresti all'IA, e quale prova ti farebbe cambiare scelta?"
+      }
+    },
+    {
+      "module_id": "atl-02",
+      "types": [
+        "single_choice",
+        "multi_select",
+        "decision_scenario",
+        "matching",
+        "crossword",
+        "authentic_task",
+        "exit_ticket"
+      ],
+      "single_choice_source": "course.json:modules[1].checkpoint (2 domande con feedback)",
+      "multi_select": {
+        "id": "atl-02-ms1",
+        "stem": "Quali azioni sono necessarie quando una risposta IA cita uno studio? Seleziona due risposte",
+        "choices": [
+          "Verificare esistenza e data della fonte",
+          "Ritenere vero il contenuto perché contiene un DOI",
+          "Leggere il passaggio effettivamente citato e confrontarlo col claim",
+          "Chiedere soltanto al medesimo modello se è vero"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "rationale": "La presenza di una citazione non prova né esistenza né pertinenza; la verifica richiede confronto indipendente.",
+        "feedback_on_submit": true
+      },
+      "decision_scenario": {
+        "id": "atl-02-dq1",
+        "stem": "Uno studente presenta un tema con tre citazioni non rintracciabili. Qual è la reazione più corretta?",
+        "options": [
+          "Lo accuso di frode basandomi sul detector",
+          "Lo considero automaticamente valido perché ben scritto",
+          "Chiedo di ricostruire fonti e percorso di lavoro, valutando con criteri noti"
+        ],
+        "correct_index": 2,
+        "feedback": [
+          "Un detector non è prova conclusiva",
+          "La qualità stilistica non equivale a validità delle fonti",
+          "La valutazione riguarda evidenze, processo e capacità di motivare"
+        ],
+        "require_written_reason_before_feedback": true
+      },
+      "matching": {
+        "id": "atl-02-match1",
+        "prompt": "Associa ciascun termine professionale all'esempio che lo rappresenta; motiva una coppia",
+        "pairs": [
+          {
+            "term": "ALLUCINAZIONE",
+            "description": "Sentenza inesistente inventata con sicurezza"
+          },
+          {
+            "term": "NONVERIFICATO",
+            "description": "Fonte non ancora rintracciata, senza controprova"
+          },
+          {
+            "term": "BIAS",
+            "description": "Esempi sistematicamente sbilanciati"
+          },
+          {
+            "term": "FONTEPRIMARIA",
+            "description": "Testo originale dello studio citato"
+          }
+        ]
+      },
+      "crossword": {
+        "id": "atl-02-cross1",
+        "title": "Lessico professionale — atl-02",
+        "professional_context": true,
+        "width": 14,
+        "height": 12,
+        "pattern": [
+          ".............#",
+          "#####.########",
+          "#####.........",
+          "#.....########",
+          "#####.####.###",
+          "#####.#.##.###",
+          "#####........#",
+          "#####.#.##.###",
+          "#####.#.##.###",
+          "#####.####.###",
+          "##########.###",
+          "##########.###"
+        ],
+        "entries": [
+          {
+            "answer": "ALLUCINAZIONE",
+            "clue": "Contenuto falso generato in modo apparentemente plausibile",
+            "row": 0,
+            "col": 0,
+            "direction": "across",
+            "number": 1
+          },
+          {
+            "answer": "INCERTEZZA",
+            "clue": "Stato da riconoscere quando le prove non bastano",
+            "row": 0,
+            "col": 5,
+            "direction": "down",
+            "number": 2
+          },
+          {
+            "answer": "CITAZIONE",
+            "clue": "Rimando a un documento da controllare",
+            "row": 2,
+            "col": 5,
+            "direction": "across",
+            "number": 3
+          },
+          {
+            "answer": "FONTE",
+            "clue": "Documento originale da consultare per verificare una tesi",
+            "row": 3,
+            "col": 1,
+            "direction": "across",
+            "number": 4
+          },
+          {
+            "answer": "CONTESTO",
+            "clue": "Periodo e ambito senza cui un'affermazione cambia senso",
+            "row": 4,
+            "col": 10,
+            "direction": "down",
+            "number": 5
+          },
+          {
+            "answer": "BIAS",
+            "clue": "Distorsione sistematica nei dati o nel risultato",
+            "row": 5,
+            "col": 7,
+            "direction": "down",
+            "number": 6
+          },
+          {
+            "answer": "EVIDENZA",
+            "clue": "Dato o passaggio documentale a supporto di un claim",
+            "row": 6,
+            "col": 5,
+            "direction": "across",
+            "number": 7
+          }
+        ],
+        "solution_format": "uppercase ASCII, no spaces/accents",
+        "accessible_alternative": "present clues and individual word fields, not only the grid"
+      },
+      "authentic_task": {
+        "id": "atl-02-performance",
+        "portfolio_artifact": "Registro fonti e verifica resiliente",
+        "human_review_required": true
+      },
+      "exit_ticket": {
+        "id": "atl-02-exit",
+        "question": "Come distingueresti una fonte non verificata da una fonte smentita?"
+      }
+    },
+    {
+      "module_id": "atl-03",
+      "types": [
+        "single_choice",
+        "multi_select",
+        "decision_scenario",
+        "matching",
+        "crossword",
+        "authentic_task",
+        "exit_ticket"
+      ],
+      "single_choice_source": "course.json:modules[2].checkpoint (2 domande con feedback)",
+      "multi_select": {
+        "id": "atl-03-ms1",
+        "stem": "Quali accorgimenti rendono un kit multimediale più utile e accessibile? Seleziona due risposte",
+        "choices": [
+          "Mantenere solo le immagini, senza testi alternativi",
+          "Aggiungere trascrizioni/descrizioni equivalenti",
+          "Verificare accuratezza e coerenza con l'obiettivo",
+          "Moltiplicare animazioni e decorazioni"
+        ],
+        "correct": [
+          1,
+          2
+        ],
+        "rationale": "Accessibilità e verifica disciplinare sono parte della progettazione, non un'aggiunta estetica.",
+        "feedback_on_submit": true
+      },
+      "decision_scenario": {
+        "id": "atl-03-dq1",
+        "stem": "Un podcast sintetico è fluido ma non possiede trascrizione. Quale correzione prioritaria?",
+        "options": [
+          "Fornire trascrizione accurata e controllare contenuti",
+          "Aumentare il volume e le animazioni",
+          "Eliminare tutti gli esempi"
+        ],
+        "correct_index": 0,
+        "feedback": [
+          "Accesso equivalente e verifica dei fatti sono fondamentali",
+          "Non sostituisce accessibilità o correttezza",
+          "Si perdono opportunità pedagogiche senza motivo"
+        ],
+        "require_written_reason_before_feedback": true
+      },
+      "matching": {
+        "id": "atl-03-match1",
+        "prompt": "Associa ciascun termine professionale all'esempio che lo rappresenta; motiva una coppia",
+        "pairs": [
+          {
+            "term": "ACCESSIBILITA",
+            "description": "Descrizione testuale di schema visivo"
+          },
+          {
+            "term": "CARICOCOGNITIVO",
+            "description": "Informazioni irrilevanti che affollano una slide"
+          },
+          {
+            "term": "REVISIONE",
+            "description": "Correzione dati e testi dopo il confronto"
+          },
+          {
+            "term": "LICENZA",
+            "description": "Condizioni documentate di riutilizzo dell'immagine"
+          }
+        ]
+      },
+      "crossword": {
+        "id": "atl-03-cross1",
+        "title": "Lessico professionale — atl-03",
+        "professional_context": true,
+        "width": 16,
+        "height": 12,
+        "pattern": [
+          "########.###.##.",
+          ".............##.",
+          "##.##.##.###.##.",
+          "##.##.#.........",
+          "##.##.##.###.##.",
+          "##.##.##.###.##.",
+          "##.##.##.#######",
+          "##.##.##########",
+          "##.##.##########",
+          "#####.##########",
+          "#####.##########",
+          "#####.##########"
+        ],
+        "entries": [
+          {
+            "answer": "LICENZA",
+            "clue": "Regole per riutilizzare legalmente i contenuti",
+            "row": 0,
+            "col": 8,
+            "direction": "down",
+            "number": 1
+          },
+          {
+            "answer": "CARICO",
+            "clue": "Risorse mentali richieste per elaborare il compito",
+            "row": 0,
+            "col": 12,
+            "direction": "down",
+            "number": 2
+          },
+          {
+            "answer": "SCHEMA",
+            "clue": "Rappresentazione sintetica delle relazioni",
+            "row": 0,
+            "col": 15,
+            "direction": "down",
+            "number": 3
+          },
+          {
+            "answer": "ACCESSIBILITA",
+            "clue": "Possibilità di fruire del contenuto con esigenze diverse",
+            "row": 1,
+            "col": 0,
+            "direction": "across",
+            "number": 4
+          },
+          {
+            "answer": "COERENZA",
+            "clue": "Corrispondenza tra obiettivo, attività e materiale",
+            "row": 1,
+            "col": 2,
+            "direction": "down",
+            "number": 5
+          },
+          {
+            "answer": "SOTTOTITOLI",
+            "clue": "Testo sincronizzato al parlato video",
+            "row": 1,
+            "col": 5,
+            "direction": "down",
+            "number": 6
+          },
+          {
+            "answer": "REVISIONE",
+            "clue": "Intervento umano che corregge e migliora una bozza",
+            "row": 3,
+            "col": 7,
+            "direction": "across",
+            "number": 7
+          }
+        ],
+        "solution_format": "uppercase ASCII, no spaces/accents",
+        "accessible_alternative": "present clues and individual word fields, not only the grid"
+      },
+      "authentic_task": {
+        "id": "atl-03-performance",
+        "portfolio_artifact": "Micro-kit accessibile e registro revisione",
+        "human_review_required": true
+      },
+      "exit_ticket": {
+        "id": "atl-03-exit",
+        "question": "Quale miglioramento al kit è verificabile nell'apprendimento e non solo nel design?"
+      }
+    },
+    {
+      "module_id": "atl-04",
+      "types": [
+        "single_choice",
+        "multi_select",
+        "decision_scenario",
+        "matching",
+        "crossword",
+        "authentic_task",
+        "exit_ticket"
+      ],
+      "single_choice_source": "course.json:modules[3].checkpoint (2 domande con feedback)",
+      "multi_select": {
+        "id": "atl-04-ms1",
+        "stem": "Quali caratteristiche ha una valutazione formativa inclusiva? Seleziona due risposte",
+        "choices": [
+          "Obiettivi e criteri trasparenti condivisi",
+          "Diagnosi individuali dedotte da un chatbot",
+          "Alternative di accesso ed espressione con competenza invariata",
+          "Voto automatico sulla base dello stile del testo"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "rationale": "Equità significa criteri comuni e accessi plurimi; non diagnosi o voti automatici.",
+        "feedback_on_submit": true
+      },
+      "decision_scenario": {
+        "id": "atl-04-dq1",
+        "stem": "Ricevi 30 risposte fittizie con lo stesso errore in proporzioni. Che cosa progetti?",
+        "options": [
+          "Trenta voti generati automaticamente",
+          "Feedback per misconcezione, attività correttiva e controllo successivo",
+          "Un giudizio sulle capacità intellettive di ciascun allievo"
+        ],
+        "correct_index": 1,
+        "feedback": [
+          "Il voto non fornisce di per sé il prossimo passo",
+          "Feedback azionabile e verifica successiva sostengono la progressione",
+          "Profilazione non necessaria e potenzialmente dannosa"
+        ],
+        "require_written_reason_before_feedback": true
+      },
+      "matching": {
+        "id": "atl-04-match1",
+        "prompt": "Associa ciascun termine professionale all'esempio che lo rappresenta; motiva una coppia",
+        "pairs": [
+          {
+            "term": "UDL",
+            "description": "Alternative di rappresentazione ed espressione"
+          },
+          {
+            "term": "FEEDBACK",
+            "description": "Indicazione concreta del prossimo passo"
+          },
+          {
+            "term": "RUBRICA",
+            "description": "Descrittori condivisi di prestazione"
+          },
+          {
+            "term": "METACOGNIZIONE",
+            "description": "Pianificare, monitorare e valutare una strategia"
+          }
+        ]
+      },
+      "crossword": {
+        "id": "atl-04-cross1",
+        "title": "Lessico professionale — atl-04",
+        "professional_context": true,
+        "width": 16,
+        "height": 13,
+        "pattern": [
+          "##########.#####",
+          "##########.#####",
+          "##########.#####",
+          "#.#####.##.#####",
+          "..............##",
+          "#.#.###.##.#####",
+          "#.#.#...........",
+          "#.#.###.########",
+          "#.#.###.########",
+          "#.#.###.########",
+          "#.#.###.########",
+          "###.###.########",
+          "##........######"
+        ],
+        "entries": [
+          {
+            "answer": "RUBRICA",
+            "clue": "Criteri comuni con descrittori di prestazione",
+            "row": 0,
+            "col": 10,
+            "direction": "down",
+            "number": 1
+          },
+          {
+            "answer": "FEEDBACK",
+            "clue": "Informazione che indica come progredire nell'apprendimento",
+            "row": 3,
+            "col": 1,
+            "direction": "down",
+            "number": 2
+          },
+          {
+            "answer": "INCLUSIONE",
+            "clue": "Progettazione per rimuovere le barriere alla partecipazione",
+            "row": 3,
+            "col": 7,
+            "direction": "down",
+            "number": 3
+          },
+          {
+            "answer": "METACOGNIZIONE",
+            "clue": "Monitoraggio e regolazione del proprio apprendimento",
+            "row": 4,
+            "col": 0,
+            "direction": "across",
+            "number": 4
+          },
+          {
+            "answer": "AUTONOMIA",
+            "clue": "Capacità di procedere con supporto progressivamente minore",
+            "row": 4,
+            "col": 3,
+            "direction": "down",
+            "number": 5
+          },
+          {
+            "answer": "VALUTAZIONE",
+            "clue": "Raccolta e interpretazione delle evidenze di competenza",
+            "row": 6,
+            "col": 5,
+            "direction": "across",
+            "number": 6
+          },
+          {
+            "answer": "BARRIERE",
+            "clue": "Ostacoli alla partecipazione o all'espressione",
+            "row": 12,
+            "col": 2,
+            "direction": "across",
+            "number": 7
+          }
+        ],
+        "solution_format": "uppercase ASCII, no spaces/accents",
+        "accessible_alternative": "present clues and individual word fields, not only the grid"
+      },
+      "authentic_task": {
+        "id": "atl-04-performance",
+        "portfolio_artifact": "Verifica con rubriche comuni e feedback",
+        "human_review_required": true
+      },
+      "exit_ticket": {
+        "id": "atl-04-exit",
+        "question": "Quale aiuto riduce una barriera senza cambiare la competenza attesa?"
+      }
+    },
+    {
+      "module_id": "atl-05",
+      "types": [
+        "single_choice",
+        "multi_select",
+        "decision_scenario",
+        "matching",
+        "crossword",
+        "authentic_task",
+        "exit_ticket"
+      ],
+      "single_choice_source": "course.json:modules[4].checkpoint (2 domande con feedback)",
+      "multi_select": {
+        "id": "atl-05-ms1",
+        "stem": "Quali pratiche sono necessarie prima di valutare un tutor per la classe? Seleziona due risposte",
+        "choices": [
+          "Definire confini, informazioni ammesse e fallback",
+          "Provarlo con dati di studenti reali senza informativa",
+          "Testarlo con input sintetici normali e avversi",
+          "Dichiararlo sicuro dopo una sola risposta corretta"
+        ],
+        "correct": [
+          0,
+          2
+        ],
+        "rationale": "Limiti e test documentati sono necessari ma da soli non autorizzano l'uso reale con minori.",
+        "feedback_on_submit": true
+      },
+      "decision_scenario": {
+        "id": "atl-05-dq1",
+        "stem": "Un prototipo tutor riceve una richiesta di giudicare l'ansia di un minore. Che cosa dovrebbe fare?",
+        "options": [
+          "Inferire uno stato emotivo dal testo",
+          "Chiedere cognome, età e diagnosi",
+          "Non diagnosticare, dichiarare il limite e rimandare alle figure umane appropriate"
+        ],
+        "correct_index": 2,
+        "feedback": [
+          "Le inferenze emotive individuali possono essere inaffidabili e non appropriate",
+          "Chiedere dati sensibili aggraverebbe il rischio",
+          "La supervisione e l'escalation sono parte della specifica"
+        ],
+        "require_written_reason_before_feedback": true
+      },
+      "matching": {
+        "id": "atl-05-match1",
+        "prompt": "Associa ciascun termine professionale all'esempio che lo rappresenta; motiva una coppia",
+        "pairs": [
+          {
+            "term": "GUARDRAIL",
+            "description": "Il tutor non tratta richieste di valutazione persone reali"
+          },
+          {
+            "term": "FALLBACK",
+            "description": "Attività cartacea se il servizio è indisponibile"
+          },
+          {
+            "term": "ESCALATION",
+            "description": "Rimando al dirigente o personale competente"
+          },
+          {
+            "term": "TESTAVVERSO",
+            "description": "Input sintetico che tenta di estrarre dati"
+          }
+        ]
+      },
+      "crossword": {
+        "id": "atl-05-cross1",
+        "title": "Lessico professionale — atl-05",
+        "professional_context": true,
+        "width": 14,
+        "height": 10,
+        "pattern": [
+          "#.##.##.######",
+          "............##",
+          "#.##.##.######",
+          "#.##.#........",
+          "#.##.##.######",
+          "#.##.##.######",
+          "#.##.##.....##",
+          "#.#####.#.####",
+          "#.#####.#.####",
+          "#######.#.####"
+        ],
+        "entries": [
+          {
+            "answer": "GUARDRAIL",
+            "clue": "Vincolo che delimita il comportamento di un tutor",
+            "row": 0,
+            "col": 1,
+            "direction": "down",
+            "number": 1
+          },
+          {
+            "answer": "PRIVACY",
+            "clue": "Protezione dei dati personali e dei diritti",
+            "row": 0,
+            "col": 4,
+            "direction": "down",
+            "number": 2
+          },
+          {
+            "answer": "ESCALATION",
+            "clue": "Rinvio di un caso alla figura competente",
+            "row": 0,
+            "col": 7,
+            "direction": "down",
+            "number": 3
+          },
+          {
+            "answer": "SUPERVISIONE",
+            "clue": "Controllo umano con potere di correggere o fermare",
+            "row": 1,
+            "col": 0,
+            "direction": "across",
+            "number": 4
+          },
+          {
+            "answer": "FALLBACK",
+            "clue": "Alternativa sicura se il sistema non funziona",
+            "row": 3,
+            "col": 6,
+            "direction": "across",
+            "number": 5
+          },
+          {
+            "answer": "TUTOR",
+            "clue": "Assistente che fornisce indizi per guidare l'apprendimento",
+            "row": 6,
+            "col": 7,
+            "direction": "across",
+            "number": 6
+          },
+          {
+            "answer": "TEST",
+            "clue": "Prova ripetibile tra comportamento atteso e osservato",
+            "row": 6,
+            "col": 9,
+            "direction": "down",
+            "number": 7
+          }
+        ],
+        "solution_format": "uppercase ASCII, no spaces/accents",
+        "accessible_alternative": "present clues and individual word fields, not only the grid"
+      },
+      "authentic_task": {
+        "id": "atl-05-performance",
+        "portfolio_artifact": "UDA + sei test tutor e decisione go/no-go",
+        "human_review_required": true
+      },
+      "exit_ticket": {
+        "id": "atl-05-exit",
+        "question": "Quali tre verifiche non puoi saltare prima di usare un tutor con alunni reali?"
+      }
+    }
+  ]
+}
