@@ -135,6 +135,9 @@ with sync_playwright() as playwright:
             assert page.locator("a.full-lesson-link").get_attribute("href") == "../it/module-%02d.md" % (i+1)
             page.screenshot(path=str(evidence / ("module-%02d-%d.png" % (i+1, width))), full_page=False)
         # Course-ending vocabulary is independently searchable and grouped.
+        assert page.locator(".atl-final-disclosure").count()==1
+        assert not page.locator(".atl-final-disclosure").evaluate("(node)=>node.open")
+        page.locator(".atl-final-disclosure > summary").click()
         assert page.locator("#atl-final-glossary").is_visible()
         assert "79 voci" in page.locator("#atl-term-count").inner_text()
         page.locator("#atl-term-search").fill("pedagogia")
