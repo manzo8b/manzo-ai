@@ -286,9 +286,18 @@ class CourseQuality(unittest.TestCase):
                 self.assertIn(m["chapters"][0]["transition"],full)
         script=(ROOT.parent/"preview"/"app.js").read_text(encoding="utf-8")
         self.assertNotIn('"CAPITOLO "+String(',script)
-        self.assertIn("Lettura di approfondimento",script)
-        self.assertIn("course-session-map",script)
-        self.assertIn("module-outline",script)
+        # One clear study journey; long readings and labs are retained in the data.
+        self.assertIn('title:"Orientati"',script)
+        self.assertIn('title:"Comprendi"',script)
+        self.assertIn('title:"Sperimenta"',script)
+        self.assertIn('title:"Verifica"',script)
+        self.assertIn("atl-journey-panel",script)
+        self.assertIn("atl-journey-nav",script)
+        self.assertIn("atl-module-select",script)
+        self.assertIn('theory.id="atl-theory"',script)
+        self.assertIn('assess.id="atl-quiz"',script)
+        self.assertNotIn("course-session-map",script)
+        self.assertNotIn("module-outline",script)
         self.assertIn("course-next-section",script)
 
     def test_authentic_slide_mode_and_media_bundle_contract(self):
