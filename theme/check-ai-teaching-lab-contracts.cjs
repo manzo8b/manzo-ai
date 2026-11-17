@@ -67,10 +67,44 @@ for(const studio of ["image","voice","video"]){
  assert.ok(htmls[studio].includes('id="guided-demo"'),studio+": missing demo");
  assert.ok(htmls[studio].includes('class="learn-next"'),studio+": missing workspace CTA");
  assert.ok(htmls[studio].includes("field-guide"),studio+": missing field guidance");
+ assert.ok(htmls[studio].includes("learn-flow-mobile"),studio+": missing compact mobile learning guide");
+ assert.ok(htmls[studio].includes("field-example"),studio+": missing expandable examples");
 }
 assert.ok(htmls.video.includes("silenzioso"),"Video silent-only disclosure missing");
 assert.ok(htmls.voice.includes("non genera voci IA"),"Voice non-AI disclosure missing");
 assert.ok(htmls.image.includes("Non genera immagini con IA"),"Image non-AI disclosure missing");
+
+/* Import/export boundary: exercise real normalization and validation logic,
+   without loading any UI, account data or user files. */
+const begin=workspace.indexOf("function safeValue");
+const end=workspace.indexOf("function render(){",begin);
+assert.ok(begin!==-1 && end>begin,"Import normalization source missing");
+const normalizedFunctions=workspace.slice(begin,end);
+const validators=vm.runInNewContext(
+  "(function(){const types="+JSON.stringify({[schemas.image]:"image",[schemas.voice]:"voice",[schemas.video]:"video"})+";"+
+  normalizedFunctions+"return {clean,validateStudyFile};})()",
+  {},{timeout:1000}
+);
+const sampleVideo={
+ schema:schemas.video,exportedAt:"2026-11-17T18:00:00Z",
+ fields:{title:"Evaporazione",objective:"Spiegare il ciclo"},
+ approval:{approved:true,approvedAt:"2026-11-17",reviewer:"Docente"},
+ review:{c1:true,c2:true,c3:true,c4:true},
+ scenes:[{title:"Acqua",goal:"Individuare cambiamento",caption:"L'acqua evapora",seconds:5,origin:"ai_external",source:"Fonte e licenza controllate",imageName:"acqua.png"}],
+ audioReference:"voce.wav"
+};
+assert.equal(validators.validateStudyFile(sampleVideo),"video");
+const normalizedVideo=validators.clean(sampleVideo);
+assert.equal(normalizedVideo.media.scenes[0].source,"Fonte e licenza controllate");
+assert.equal(normalizedVideo.media.scenes[0].imageName,"acqua.png");
+assert.equal(normalizedVideo.review,4);
+assert.equal(validators.clean(normalizedVideo).review,4,"Review count must survive kit reopen");
+const corruptVideo={...sampleVideo,scenes:[]};
+assert.throws(()=>validators.validateStudyFile(corruptVideo),/scene/,"Approved video without scenes must fail");
+const falseApproval={...sampleVideo,review:{c1:true,c2:true,c3:false,c4:true}};
+assert.throws(()=>validators.validateStudyFile(falseApproval),/controlli/,"Incomplete reviews must not pass");
+assert.throws(()=>validators.validateStudyFile({schema:"invalid"}),/Formato/,"Unknown import schema must fail");
+
 const siteArg=process.argv.indexOf("--site");
 if(siteArg!==-1){
  const site=process.argv[siteArg+1];
