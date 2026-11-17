@@ -36,17 +36,25 @@ Un testo scritto bene può contenere un riferimento inesistente. Il compito dell
 
 Una studentessa consegna un elaborato sulle trasformazioni dell'Ottocento. Le frasi scorrono bene, i riferimenti appaiono ordinati e il lessico è accurato. Quando l'insegnante cerca lo studio che sosteneva la conclusione, però, non trova l'opera. Questo caso, ricostruito con dati completamente fittizi, ci introduce a una difficoltà nuova solo in parte: anche prima dell'IA esistevano errori, citazioni improprie e affermazioni troppo generali. Oggi la generazione automatica può renderli più plausibili e frequenti. Per questo il problema educativo centrale non è la paura dello strumento, ma la capacità di distinguere l'aspetto convincente di un testo dalla sua solidità documentale.
 
+Il dubbio su quella bibliografia non si risolve guardando lo stile. Occorre capire perché un assistente possa costruire un testo così convincente anche quando le sue fonti non esistono.
+
 ### 2. Perché un assistente può sbagliare con sicurezza
 
 Un modello linguistico produce una risposta a partire dal contesto e da regolarità apprese. La frase può essere grammaticalmente impeccabile anche quando un dato, una data o un riferimento non sono affidabili. Con 'allucinazione' indichiamo, nel linguaggio comune dell'IA generativa, un'informazione inventata o non fedele presentata come plausibile. Ma non tutti gli errori sono allucinazioni: una fonte reale interpretata male, una statistica vecchia, un calcolo errato e un pregiudizio nei contenuti richiedono interventi diversi. Il docente dovrebbe dunque insegnare a denominare l'errore con precisione, senza trasformare ogni incertezza in una condanna.
+
+Conoscere il meccanismo dell'errore è utile solo se impariamo a reagire. Passiamo allora da un sospetto generico a una sequenza di verifiche che anche gli studenti possano eseguire e spiegare.
 
 ### 3. Un metodo di verifica che si può insegnare
 
 Cominciamo isolando l'affermazione da controllare: 'le fabbriche nacquero nel 1925', per esempio, è diversa da 'la rivoluzione industriale cambiò i rapporti sociali'. Poi cerchiamo una fonte primaria appropriata e leggiamo il passaggio che potrebbe sostenere la frase. Il titolo o il collegamento non bastano: dobbiamo confrontare contenuto, data, metodo e limiti della fonte. Possiamo concludere 'verificato', 'smentito' oppure 'non verificato'. Quest'ultima categoria è fondamentale: se non riusciamo a trovare la fonte, non abbiamo ancora dimostrato che ogni parte dell'affermazione sia falsa. Insegnare queste distinzioni aiuta a gestire anche screenshot e notizie condivise nelle chat.
 
+Una volta compreso come controllare un'affermazione, incontriamo una questione delicata: chi ha scritto il compito? È qui che la verifica dei fatti deve diventare una riflessione sulla valutazione del processo.
+
 ### 4. L’integrità di un compito non si misura dal suo stile
 
 Quando un elaborato suona troppo raffinato, l'insegnante può sospettare un uso improprio dell'IA. Ma un rilevatore automatico non può, da solo, stabilire con certezza chi abbia scritto un testo. Una risposta pedagogica più robusta è chiedere di spiegare le fonti, conservare una bozza, commentare le revisioni e discutere a voce una scelta argomentativa. Si valuta una competenza osservabile, con regole trasparenti e garanzie per gli studenti. Le scuole devono inoltre definire quali usi dell'IA siano permessi e come vadano dichiarati. L'obiettivo non è costruire un esame 'a prova di macchina', ma offrire più occasioni di mostrare comprensione e responsabilità.
+
+Questa attenzione al ragionamento conduce oltre il singolo elaborato. Il dialogo educativo proposto da Freire aiuta a comprendere perché formulare domande, confrontare prove e rivedere idee sia più formativo che cercare un colpevole.
 
 ### 5. Freire e l’educazione che insegna a porre domande
 
@@ -169,6 +177,14 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Bias** — Distorsione sistematica nella selezione o rappresentazione
 - **Non verificato** — Stato di una tesi che non ha ancora prove sufficienti né smentita documentata
 - **Rilevatore IA** — Strumento che stima caratteristiche di un testo, senza poter fornire da solo certezza sull'autore
+
+## Dalla lettura alla lezione successiva
+
+Abbiamo imparato a riconoscere informazioni incerte e a valutare i processi. Ora serve trasformare questa capacità critica in materiali che rendano più facile comprendere e ragionare, non soltanto impressionare.
+
+**Domanda per continuare:** Se una presentazione è bella ma confonde, quali elementi cambieresti per primi?
+
+**Nel prossimo modulo:** Progettare materiali che fanno imparare
 
 ## Verifica ciò che hai imparato
 
