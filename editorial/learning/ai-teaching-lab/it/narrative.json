@@ -2,7 +2,7 @@
   "schema_version": "2.2",
   "course_key": "ai-teaching-lab",
   "locale": "it",
-  "purpose": "narrative self-study for teachers",
+  "purpose": "Cinque moduli di autoformazione con laboratorio multimediale centrale: problema autentico → lettura narrativa → storyboard/attività → revisione → trasferimento. Il percorso riserva spazi esistenti ai nuovi esperimenti, senza aggiungere ore di frequenza inventate.",
   "teacher_facing": true,
   "facilitator_instructions_separate": true,
   "planned_total_hours": 20,
@@ -25,7 +25,7 @@
         },
         {
           "heading": "Che cosa cambia per un insegnante",
-          "text": "L’utilità di un assistente non coincide con il numero di file che genera. Può aiutare a proporre tre modi di spiegare lo stesso concetto, trasformare un’idea in una prima bozza di esercizio, adattare il lessico di un testo già verificato o costruire una rubrica da rivedere. Non può conoscere da solo la cultura della classe, certificare una fonte mai consultata né decidere al posto del docente come valutare una persona. Prima di usare uno strumento, chiediti quale prestazione vuoi vedere: 'gli studenti confrontano due fonti e motivano una conclusione' è un obiettivo più utile di 'gli studenti guardano una presentazione'. Questa distinzione aiuta a misurare il valore del lavoro prodotto.",
+          "text": "L’utilità di un assistente non coincide con il numero di file che genera. Può aiutare a proporre tre modi di spiegare lo stesso concetto, trasformare un’idea in una prima bozza di esercizio, adattare il lessico di un testo già verificato o costruire una rubrica da rivedere. Non può conoscere da solo la cultura della classe, certificare una fonte mai consultata né decidere al posto del docente come valutare una persona. Prima di usare uno strumento, chiediti quale prestazione vuoi vedere: 'gli studenti confrontano due fonti e motivano una conclusione' è un obiettivo più utile di 'gli studenti guardano una presentazione'. Questa distinzione aiuta a misurare il valore del lavoro prodotto.\n\nLa scelta dello strumento è a sua volta un problema didattico: distinguere un assistente generativo da uno strumento che organizza documenti, un editor multimediale e una buona scheda cartacea significa confrontare possibilità diverse. La piattaforma più famosa non è necessariamente la più utile; prima vengono obiettivo e prova di apprendimento, poi dati consentiti, accessibilità, licenze, costi, tempo di revisione e autorizzazioni. Se un servizio necessita di materiali identificabili degli studenti senza autorizzazione scolastica, va escluso da quella attività. Se un lavoro a coppie raggiunge lo stesso scopo senza tecnologia, la scelta senza IA è una decisione professionale completa.",
           "transition": "La scena quotidiana ci ha mostrato una possibilità e un limite. Ora dobbiamo tradurre quella possibilità in una consegna: come formulare una richiesta che rispetti un obiettivo educativo, anziché ottenere soltanto pagine di testo?"
         },
         {
@@ -139,7 +139,46 @@
           "estimated_min": 48,
           "description": "Quiz, caso applicativo, associazioni e cruciverba"
         }
-      ]
+      ],
+      "focus_experience": {
+        "label": "Scegliere gli strumenti IA per insegnare",
+        "type": "decision_matrix",
+        "timebox": "All'interno del secondo laboratorio",
+        "context": "Seconda superiore, 15 minuti: distinguere un fatto da un'interpretazione usando due testimonianze inventate",
+        "objective": "Argomentare quando un assistente IA, un editor di media o un'attività senza IA rispondono davvero all'obiettivo",
+        "steps": [
+          "Scrivi un obiettivo verificabile e la prova attesa, prima di nominare un'app",
+          "Confronta assistente generalista, assistente basato sui documenti, editor multimediale e foglio stampato",
+          "Per ogni opzione valuta affidabilità, verifica, dati richiesti, accessibilità, tempo e costi (senza una finta media numerica)",
+          "Escludi qualsiasi servizio che richieda dati identificativi o autorizzazioni non disponibili",
+          "Motiva la tua scelta e descrivi quale risultato controllare in classe"
+        ],
+        "prompt": "OBIETTIVO: proporre una soluzione per una microlezione che distingua fatti e interpretazioni.\nCONTESTO: seconda superiore, 15 minuti, lavoro a coppie.\nDATI CONSENTITI: due esempi fittizi; testo A «la famiglia parte dopo tre raccolti scarsi» e testo B «alcuni abitanti credono che ogni nuovo arrivato abbia la stessa ragione».\nVINCOLI: non proporre caricamenti di lavori o dati degli studenti; non inventare fonti; includi un'opzione senza IA.\nOUTPUT: tabella comparativa fra assistente generalista, assistente basato su documenti, editor multimediale e schede cartacee, con vantaggi, limiti e criteri di esclusione.\nVERIFICA: indica quale opzione consiglieresti e che prova concreta useresti per dimostrare che la scelta funziona.",
+        "example": "La scheda cartacea ha il minor carico tecnico e permette il confronto dei due testi; l'assistente generalista è utile solo per una bozza di domande, da rivedere. L'editor di presentazioni migliora la forma, ma qui non rende la comprensione automaticamente migliore. Se uno strumento richiede dati non autorizzati, non lo utilizzo.",
+        "criteria": [
+          "L'obiettivo precede la scelta",
+          "Almeno una alternativa non IA",
+          "Nessun dato personale non autorizzato",
+          "La decisione include un piano di verifica"
+        ],
+        "deliverable": "Matrice ragionata con scelta, un motivo di esclusione e una prova di apprendimento",
+        "quiz": {
+          "question": "Un'app creativa richiede di caricare un compito con informazioni identificabili. Quale decisione è professionale?",
+          "options": [
+            "La uso se offre belle slide",
+            "Non la uso con quei dati finché la scuola non ne ha autorizzato il trattamento",
+            "Elimino solo il nome e non verifico altro"
+          ],
+          "correct_index": 1,
+          "feedback": "I vincoli sulla gestione dei dati non sono compensabili dalla qualità grafica."
+        },
+        "references": [
+          {
+            "title": "Orientamenti UE per scegliere contenuti digitali",
+            "url": "https://education.ec.europa.eu/document/making-informed-choices-on-digital-education-content-eu-guidelines-for-teachers-and-educators"
+          }
+        ]
+      }
     },
     {
       "id": "atl-02",
@@ -154,7 +193,7 @@
         },
         {
           "heading": "Perché un assistente può sbagliare con sicurezza",
-          "text": "Un modello linguistico produce una risposta a partire dal contesto e da regolarità apprese. La frase può essere grammaticalmente impeccabile anche quando un dato, una data o un riferimento non sono affidabili. Con 'allucinazione' indichiamo, nel linguaggio comune dell'IA generativa, un'informazione inventata o non fedele presentata come plausibile. Ma non tutti gli errori sono allucinazioni: una fonte reale interpretata male, una statistica vecchia, un calcolo errato e un pregiudizio nei contenuti richiedono interventi diversi. Il docente dovrebbe dunque insegnare a denominare l'errore con precisione, senza trasformare ogni incertezza in una condanna.",
+          "text": "Un modello linguistico produce una risposta a partire dal contesto e da regolarità apprese. La frase può essere grammaticalmente impeccabile anche quando un dato, una data o un riferimento non sono affidabili. Con 'allucinazione' indichiamo, nel linguaggio comune dell'IA generativa, un'informazione inventata o non fedele presentata come plausibile. Ma non tutti gli errori sono allucinazioni: una fonte reale interpretata male, una statistica vecchia, un calcolo errato e un pregiudizio nei contenuti richiedono interventi diversi. Il docente dovrebbe dunque insegnare a denominare l'errore con precisione, senza trasformare ogni incertezza in una condanna.\n\nUn'altra distinzione è fondamentale: apprendimento automatico non significa semplicemente chiedere qualcosa a un chatbot. Nell'apprendimento supervisionato un modello viene addestrato su esempi etichettati; poi lo si prova su dati mai visti. Se tutti i triangoli del training sono blu e tutti i cerchi sono rossi, una regola che impara solo i colori sembra perfetta sul training ma fallisce quando cambia il colore. Il test rivela il problema di generalizzazione e possibili scorciatoie nei dati. Un grande modello linguistico generativo produce invece sequenze di token attraverso meccanismi ben più complessi: il nostro piccolo classificatore dimostrativo non riproduce ChatGPT. La simulazione serve a capire perché una prestazione apparentemente buona richiede prove indipendenti.",
           "transition": "Conoscere il meccanismo dell'errore è utile solo se impariamo a reagire. Passiamo allora da un sospetto generico a una sequenza di verifiche che anche gli studenti possano eseguire e spiegare."
         },
         {
@@ -264,13 +303,122 @@
           "estimated_min": 48,
           "description": "Quiz, caso applicativo, associazioni e cruciverba"
         }
-      ]
+      ],
+      "focus_experience": {
+        "label": "Dentro il machine learning: allenare e verificare una regola",
+        "type": "model_test",
+        "timebox": "All'interno del primo laboratorio",
+        "context": "Schede inventate: quattro triangoli blu e quattro cerchi rossi; quattro nuovi esempi incrociano colore e forma",
+        "objective": "Distinguere dati di addestramento, test, etichette, generalizzazione e possibili scorciatoie nei dati",
+        "steps": [
+          "Osserva otto esempi etichettati, senza dati personali",
+          "Confronta due regole che sul training sembrano entrambe corrette: «blu → triangolo» e «triangolo → triangolo»",
+          "Prova le due regole su quattro schede mai viste: triangolo rosso, cerchio blu, triangolo blu e cerchio rosso",
+          "Conta gli errori e spiega perché osservare solo il training sarebbe ingannevole",
+          "Distingui il piccolo classificatore a regole da un grande modello generativo di testo: non sono lo stesso meccanismo"
+        ],
+        "prompt": "OBIETTIVO: spiegare con un esperimento semplice la differenza fra training e test.\nCONTESTO: docenti non programmatori, schede inventate di figure e colori.\nDATI CONSENTITI: otto esempi di training (triangoli blu; cerchi rossi) e quattro esempi nuovi (triangolo rosso, cerchio blu, triangolo blu, cerchio rosso).\nVINCOLI: non usare foto, voci o dati degli alunni; non descrivere questa simulazione come una rete neurale o un LLM.\nOUTPUT: tabella di predizioni delle due regole con spiegazione degli errori.\nVERIFICA: segnala quali esempi mostrano il limite del colore come scorciatoia.",
+        "example": "Entrambe le regole ottengono 8/8 sugli esempi iniziali. Su quattro casi nuovi, la regola basata sul colore riconosce 2/4, mentre quella basata sulla forma riconosce 4/4. Il risultato vale per questo piccolo gioco: non garantisce prestazioni reali su altri dati.",
+        "criteria": [
+          "Distinzione training/test",
+          "Nessuna interpretazione di successo sul training come prova di generalizzazione",
+          "Classificazione non confusa con generazione testuale",
+          "Esempi interamente fittizi"
+        ],
+        "deliverable": "Tabella 8 casi di training e 4 di test, spiegazione di almeno due errori e un limite della simulazione",
+        "quiz": {
+          "question": "Perché un classificatore che risponde bene ai dati già visti può sbagliare con nuove schede?",
+          "options": [
+            "Perché la grafica non è abbastanza moderna",
+            "Perché può avere appreso una regolarità accidentale che non generalizza",
+            "Perché ogni modello IA si limita a cercare informazioni su Internet"
+          ],
+          "correct_index": 1,
+          "feedback": "La prova con esempi mai visti mette alla prova la generalizzazione."
+        },
+        "references": [
+          {
+            "title": "Google · Machine Learning Crash Course",
+            "url": "https://developers.google.com/machine-learning/crash-course?hl=it"
+          },
+          {
+            "title": "Generalizzazione e overfitting",
+            "url": "https://developers.google.com/machine-learning/crash-course/overfitting?hl=it"
+          }
+        ],
+        "demo": {
+          "training": [
+            {
+              "shape": "triangolo",
+              "color": "blu",
+              "label": "triangolo"
+            },
+            {
+              "shape": "triangolo",
+              "color": "blu",
+              "label": "triangolo"
+            },
+            {
+              "shape": "triangolo",
+              "color": "blu",
+              "label": "triangolo"
+            },
+            {
+              "shape": "triangolo",
+              "color": "blu",
+              "label": "triangolo"
+            },
+            {
+              "shape": "cerchio",
+              "color": "rosso",
+              "label": "cerchio"
+            },
+            {
+              "shape": "cerchio",
+              "color": "rosso",
+              "label": "cerchio"
+            },
+            {
+              "shape": "cerchio",
+              "color": "rosso",
+              "label": "cerchio"
+            },
+            {
+              "shape": "cerchio",
+              "color": "rosso",
+              "label": "cerchio"
+            }
+          ],
+          "test": [
+            {
+              "shape": "triangolo",
+              "color": "rosso",
+              "label": "triangolo"
+            },
+            {
+              "shape": "cerchio",
+              "color": "blu",
+              "label": "cerchio"
+            },
+            {
+              "shape": "triangolo",
+              "color": "blu",
+              "label": "triangolo"
+            },
+            {
+              "shape": "cerchio",
+              "color": "rosso",
+              "label": "cerchio"
+            }
+          ]
+        }
+      }
     },
     {
       "id": "atl-03",
       "title": "Progettare materiali che fanno imparare",
       "subtitle": "Dalle slide ai podcast: creare risorse chiare, accurate e accessibili",
-      "lead": "Quando una presentazione contiene troppe informazioni, gli studenti possono uscire dalla lezione con un'immagine suggestiva ma un'idea sbagliata. Il problema non è imparare a generare più contenuti: è imparare a costruire materiali che aiutino a pensare.",
+      "lead": "Immagina un insegnante che abbia già generato quaranta slide, un breve podcast e una grafica brillante. Prima della campanella si accorge che nessuno di quei materiali, da solo, garantisce che la classe comprenda la differenza fra meteo e clima. Questo modulo lo accompagna dall'analisi dell'obiettivo alla scelta dei linguaggi, allo storyboard, alla produzione accessibile e alla verifica. Realizzerai un piccolo portfolio di media complementari: non una collezione di effetti, ma una esperienza pensata per far imparare.",
       "chapters": [
         {
           "heading": "Il grafico bellissimo che spiega male",
@@ -279,17 +427,17 @@
         },
         {
           "heading": "Quando la forma occupa troppo spazio mentale",
-          "text": "Le informazioni devono essere selezionate e organizzate affinché il discente possa riconoscerne le relazioni essenziali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata.",
+          "text": "Le informazioni devono essere selezionate e organizzate affinché il discente possa riconoscerne le relazioni essenziali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata.\n\nLa ricerca sull'apprendimento multimediale di Richard Mayer ci invita a progettare per l'attenzione e la comprensione, non per la quantità di effetti. Il principio di coerenza suggerisce di eliminare parole, immagini e suoni non pertinenti; la segnalazione evidenzia gli elementi essenziali; la segmentazione rende controllabile il ritmo di presentazione. Questi principi non trasformano qualsiasi video in una buona lezione: l'obiettivo osservabile resta il punto di riferimento. Per un corso scolastico un audio con voce chiara e trascrizione, una immagine con descrizione e una decisione con feedback possono completarsi senza ripetere tutto tre volte.",
           "transition": "Ridurre il rumore visivo è il primo passo, non l'ultimo. Un materiale efficace deve poter essere usato da persone diverse, con strumenti e modalità differenti, senza perdere il nucleo della conoscenza."
         },
         {
           "heading": "Una risorsa accessibile è una risorsa meglio progettata",
-          "text": "Se un diagramma contiene l'unica spiegazione importante, uno studente che non riesce a leggerlo rischia di essere escluso. Una descrizione testuale, una legenda chiara e un linguaggio comprensibile permettono percorsi equivalenti. I podcast richiedono una trascrizione, i video sottotitoli accurati, le immagini significative descrizioni e i grafici etichette complete. Le linee guida Universal Design for Learning di CAST suggeriscono di offrire alternative di rappresentazione e di azione. Non stiamo semplificando indiscriminatamente la disciplina: stiamo rimuovendo ostacoli non necessari all'apprendimento.",
+          "text": "Se un diagramma contiene l'unica spiegazione importante, uno studente che non riesce a leggerlo rischia di essere escluso. Una descrizione testuale, una legenda chiara e un linguaggio comprensibile permettono percorsi equivalenti. I podcast richiedono una trascrizione, i video sottotitoli accurati, le immagini significative descrizioni e i grafici etichette complete. Le linee guida Universal Design for Learning di CAST suggeriscono di offrire alternative di rappresentazione e di azione. Non stiamo semplificando indiscriminatamente la disciplina: stiamo rimuovendo ostacoli non necessari all'apprendimento.\n\nQuando pensiamo a destinatari diversi non dobbiamo etichettare gli studenti come «visivi», «uditivi» o «cinestetici» fissi e associare una sola modalità a ogni persona: la cosiddetta ipotesi del matching degli stili di apprendimento non dispone di un supporto empirico solido. L'UDL invita piuttosto a offrire più possibilità di rappresentazione e di espressione, riducendo ostacoli concretamente osservabili. Un video ha bisogno di sottotitoli e di una trascrizione, una infografica di descrizioni comprensibili, un'attività interattiva di controlli raggiungibili da tastiera e di una via alternativa equivalente.",
           "transition": "L'accessibilità ci costringe a scegliere che cosa è essenziale. A questo punto la revisione della bozza IA non è una correzione meccanica: diventa un vero atto di progettazione creativa."
         },
         {
           "heading": "La revisione del docente è un passaggio creativo",
-          "text": "Con un assistente IA possiamo chiedere uno script, una mappa concettuale o cinque domande. La parte professionale comincia quando leggiamo l'output: le informazioni sono corrette? Le fonti sono pertinenti? Il testo attribuisce a una legge parole che non compaiono nell'originale? Una voce sintetica articola bene i termini specialistici? I contenuti visivi sono coerenti con la spiegazione? La revisione va documentata, perché mostra ai partecipanti come una bozza diventa un materiale didattico responsabile. Il progetto è concluso quando gli studenti possono utilizzare il prodotto per ragionare, non quando il file appare esteticamente finito.",
+          "text": "Con un assistente IA possiamo chiedere uno script, una mappa concettuale o cinque domande. La parte professionale comincia quando leggiamo l'output: le informazioni sono corrette? Le fonti sono pertinenti? Il testo attribuisce a una legge parole che non compaiono nell'originale? Una voce sintetica articola bene i termini specialistici? I contenuti visivi sono coerenti con la spiegazione? La revisione va documentata, perché mostra ai partecipanti come una bozza diventa un materiale didattico responsabile. Il progetto è concluso quando gli studenti possono utilizzare il prodotto per ragionare, non quando il file appare esteticamente finito.\n\nLa produzione multimediale comincia da uno storyboard: una scena introduttiva pone un problema, quella centrale mette a disposizione un'evidenza verificabile, l'ultima chiede una decisione e offre feedback. La scelta fra slide, audio, video e percorsi ramificati deve derivare da ciò che lo studente deve fare. Una didattica capovolta (flipped classroom) può collocare un breve media prima della lezione e usare il tempo insieme per discutere; un episodio di apprendimento situato può partire da un problema e chiedere un artefatto; un'attività cooperativa può mettere due studenti a confronto. Nessuna etichetta metodologica garantisce automaticamente efficacia: occorre verificare l'apprendimento e rivedere il prodotto.",
           "transition": "Quando il docente ha ripensato la risorsa per favorire un'attività, si apre una questione più ampia: gli studenti saranno spettatori di un contenuto oppure costruttori di significati? Il pensiero di Papert aiuta a fare questa scelta."
         },
         {
@@ -389,7 +537,145 @@
           "estimated_min": 48,
           "description": "Quiz, caso applicativo, associazioni e cruciverba"
         }
-      ]
+      ],
+      "focus_experience": {
+        "label": "Dall'idea alla risorsa multimediale accessibile",
+        "type": "multimedia_design",
+        "timebox": "Integra i due laboratori esistenti, senza aggiungere ore",
+        "context": "Seconda media: una giornata fredda non basta per descrivere una tendenza climatica. Progetta materiali che aiutino a distinguere meteo e clima",
+        "objective": "Produrre uno storyboard di tre slide, un copione audio/video con trascrizione e un'interazione di verifica coerenti con una stessa competenza",
+        "steps": [
+          "Analizza destinatari, prerequisiti, lingua, ostacoli prevedibili e obiettivo osservabile. Evita categorie fisse di «studenti visivi» o «uditivi»",
+          "Scegli una domanda che apra la storia: «Oggi fa freddo: significa che il clima si sta raffreddando?»",
+          "Prepara tre scene coerenti: episodio iniziale, differenza fra osservazione e serie di lungo periodo, prova su ciò che si può dedurre",
+          "Scrivi un copione di 50–70 secondi con trascrizione identica e una versione testuale consultabile senza audio",
+          "Progetta una decisione interattiva con feedback, verifica accuratezza delle fonti, contrasto, sottotitoli, licenze e accessibilità"
+        ],
+        "prompt": "RUOLO: assistente alla progettazione di contenuti multimediali, non valutatore degli alunni.\nOBIETTIVO: far distinguere a una seconda media un evento meteorologico da una tendenza climatica.\nCONTESTO: 12 minuti, lavoro individuale e discussione in coppia; prerequisito: saper leggere una breve osservazione.\nDATI CONSENTITI: osservazione inventata «oggi fa freddo»; non ho fornito dati scientifici, quindi non crearli.\nVINCOLI: niente statistiche inventate, niente immagini di alunni, nessun requisito di ascolto obbligatorio; evita musica e animazioni decorative, prevedi sottotitoli e trascrizione.\nOUTPUT: (1) storyboard di tre slide con titolo, messaggio e descrizione visiva; (2) copione audio o video di circa un minuto con trascrizione; (3) domanda interattiva e feedback per scelta corretta ed errata.\nVERIFICA: indica le frasi per cui servirebbe una fonte e una checklist su coerenza, segmentazione, segnali visivi, accessibilità e possibilità di lavorare senza tecnologia.",
+        "example": "Scena 1: foto illustrativa non reale di una giornata fredda, domanda «Basta un giorno?»; scena 2: contrasto fra «osservazione di oggi» e «dati raccolti su molti anni», senza numeri inventati; scena 3: domanda «Quale prova manca?». Audio: dialogo fra due studenti sul perché servono osservazioni nel tempo, con trascrizione. Interazione: «Un giorno freddo dimostra una tendenza climatica?»; feedback motivato e possibilità di riprovare.",
+        "criteria": [
+          "Una stessa competenza per i tre media",
+          "Coerenza e segnali visivi senza decorazioni superflue",
+          "Audio con trascrizione o alternativa equivalente",
+          "Fonte controllata per ogni affermazione fattuale",
+          "Interazione con feedback e riprova",
+          "Licenze e riuso verificati"
+        ],
+        "deliverable": "Portfolio multimediale: storyboard di tre slide, copione, trascrizione, scelta interattiva, checklist qualità",
+        "quiz": {
+          "question": "Qual è la progettazione multimediale più coerente con l'apprendimento?",
+          "options": [
+            "Aggiungere animazioni e musica a ogni frase per mantenere alta l'attenzione",
+            "Partire da un obiettivo, scegliere media complementari, segmentare e verificare accessibilità e comprensione",
+            "Suddividere gli studenti in stili visivi e uditivi fissi, poi assegnare un solo canale"
+          ],
+          "correct_index": 1,
+          "feedback": "I media devono chiarire il contenuto e offrire possibilità accessibili, senza sovraccaricare né classificare gli alunni in stili fissi."
+        },
+        "references": [
+          {
+            "title": "Richard Mayer · Coerenza e segnali visivi",
+            "url": "https://www.cambridge.org/core/books/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning/F29A19FCD34C542806F736E0661C05F5"
+          },
+          {
+            "title": "Mayer · Segmentazione e ritmo",
+            "url": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/principles-for-managing-essential-processing-in-multimedia-learning/A9E77D0172F905AC957689D1771E2888"
+          },
+          {
+            "title": "CAST · UDL 3.0",
+            "url": "https://udlguidelines.cast.org/"
+          },
+          {
+            "title": "Commissione europea · Qualità dei contenuti digitali",
+            "url": "https://education.ec.europa.eu/document/making-informed-choices-on-digital-education-content-eu-guidelines-for-teachers-and-educators"
+          }
+        ]
+      },
+      "multimedia_design_principles": [
+        {
+          "name": "Partire dall'apprendimento",
+          "why": "Obiettivo osservabile, prerequisiti, destinatari e vincoli reali",
+          "do": "Scrivi che cosa lo studente saprà spiegare o dimostrare"
+        },
+        {
+          "name": "Integrare i linguaggi",
+          "why": "Slide, grafico, voce e interazione hanno funzioni diverse",
+          "do": "Scegli un mezzo soltanto quando aiuta a capire meglio"
+        },
+        {
+          "name": "Gestire il carico cognitivo",
+          "why": "Coerenza, segnalazione e segmentazione riducono distrazioni e sovraccarico",
+          "do": "Elimina decorazioni inutili, evidenzia la prova e suddividi i passaggi"
+        },
+        {
+          "name": "Attivare l'apprendimento",
+          "why": "La comprensione emerge anche da decisioni, spiegazioni e feedback",
+          "do": "Crea una domanda che obblighi a usare un'evidenza"
+        },
+        {
+          "name": "Garantire accessibilità e diritti",
+          "why": "Trascrizioni, sottotitoli, descrizioni e licenze rendono il prodotto riutilizzabile",
+          "do": "Controlla contrasto, navigazione, alternative e provenienza"
+        },
+        {
+          "name": "Verificare e migliorare",
+          "why": "Una bozza gradevole non prova un apprendimento; serve una osservazione",
+          "do": "Prova con una microverifica e correggi prima del riuso"
+        }
+      ],
+      "media_blueprints": [
+        {
+          "kind": "slide",
+          "title": "Tre slide essenziali",
+          "role": "Visualizzare una distinzione",
+          "example": "1. Una giornata fredda · 2. Meteo e clima: prove diverse · 3. Quale dato ci manca?",
+          "accessibility": "Descrizioni testuali delle immagini e caratteri leggibili"
+        },
+        {
+          "kind": "audio",
+          "title": "Audio dialogato",
+          "role": "Rendere esplicito un ragionamento",
+          "example": "Due voci confrontano un episodio meteorologico e una tendenza, senza inventare dati",
+          "accessibility": "Trascrizione, pause e linguaggio comprensibile"
+        },
+        {
+          "kind": "video",
+          "title": "Microvideo a scene",
+          "role": "Mostrare il ragionamento per segmenti",
+          "example": "Scena-problema, confronto di fonti e domanda finale in 60–90 secondi",
+          "accessibility": "Sottotitoli, niente lampeggiamenti, velocità controllabile"
+        },
+        {
+          "kind": "interactive",
+          "title": "Scelta con feedback",
+          "role": "Far usare e correggere l'idea",
+          "example": "«Una giornata fredda prova una tendenza?» · feedback motivato e secondo tentativo",
+          "accessibility": "Pulsanti raggiungibili da tastiera e alternativa in testo"
+        }
+      ],
+      "media_studio": {
+        "id": "atl-media-workshop",
+        "heading": "Studio di progettazione multimediale",
+        "subtitle": "Prepara una traccia pronta per il tuo portfolio senza account né dati degli studenti",
+        "default_topic": "Meteo e clima",
+        "default_objective": "Distinguere un evento meteorologico da una tendenza climatica",
+        "default_audience": "Seconda media",
+        "default_source": "Una giornata fredda è un esempio inventato; inserire soltanto fonti climatiche verificate",
+        "formats": [
+          "slide",
+          "audio",
+          "video",
+          "interactive"
+        ],
+        "steps": [
+          "Analisi di destinatari e prerequisiti",
+          "Definizione dell'obiettivo",
+          "Scelta del codice comunicativo e storyboard",
+          "Momento attivo per lo studente",
+          "Controllo di accuratezza, accessibilità, licenze e revisione"
+        ],
+        "source": "https://www.cambridge.org/core/books/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning/F29A19FCD34C542806F736E0661C05F5"
+      }
     },
     {
       "id": "atl-04",
@@ -404,7 +690,7 @@
         },
         {
           "heading": "Progettare per ridurre le barriere",
-          "text": "Le linee guida CAST UDL 3.0 invitano a considerare più forme di coinvolgimento, rappresentazione, azione ed espressione. In pratica, non aspettiamo che una difficoltà si trasformi in esclusione: possiamo offrire indicazioni scritte e orali, testi leggibili e schemi descritti, esempi guidati e un tempo di riflessione appropriato. Non occorre inventare diagnosi per progettare materiali più accessibili. Qualunque adattamento individuale collegato a esigenze riconosciute segue le procedure e le responsabilità scolastiche, non il giudizio di un chatbot.",
+          "text": "Le linee guida CAST UDL 3.0 invitano a considerare più forme di coinvolgimento, rappresentazione, azione ed espressione. In pratica, non aspettiamo che una difficoltà si trasformi in esclusione: possiamo offrire indicazioni scritte e orali, testi leggibili e schemi descritti, esempi guidati e un tempo di riflessione appropriato. Non occorre inventare diagnosi per progettare materiali più accessibili. Qualunque adattamento individuale collegato a esigenze riconosciute segue le procedure e le responsabilità scolastiche, non il giudizio di un chatbot.\n\nDifferenziare una proposta non significa imporre un mezzo sulla base di un presunto stile cognitivo immutabile. È più utile conservare obiettivo e criteri comuni, offrendo a chi apprende scelte realmente accessibili: argomentare in un testo, con una mappa descritta o attraverso un'esposizione con supporti. La revisione deve basarsi su evidenze osservabili e non su diagnosi inferite dall'IA. Una buona attività multimediale permette a tutti di raggiungere la domanda importante anche se una modalità tecnica non è disponibile.",
           "transition": "Dopo aver ridotto le barriere, dobbiamo osservare come gli studenti procedono. Un feedback può diventare il ponte fra ciò che una persona sa fare oggi e il prossimo tentativo che riuscirà a compiere."
         },
         {
@@ -514,7 +800,50 @@
           "estimated_min": 48,
           "description": "Quiz, caso applicativo, associazioni e cruciverba"
         }
-      ]
+      ],
+      "focus_experience": {
+        "label": "Personalizzare senza etichettare gli studenti",
+        "type": "inclusive_feedback",
+        "timebox": "All'interno dei laboratori su rubriche e feedback",
+        "context": "Una seconda media deve argomentare due cause di un problema ambientale; materiali ed espressione possono essere differenti",
+        "objective": "Fornire tre modalità equivalenti con una rubrica comune e feedback che porti a una nuova prova",
+        "steps": [
+          "Fissa una competenza osservabile e tre criteri comuni",
+          "Individua barriere dei materiali e dell'ambiente senza attribuire diagnosi",
+          "Prepara tre modalità: testo con scaletta, mappa descritta e commentata, esposizione orale con appunti",
+          "Applica la stessa rubrica a un elaborato inventato e formula un feedback sul prossimo passo",
+          "Verifica se un nuovo tentativo mostra il miglioramento, senza etichettare la persona"
+        ],
+        "prompt": "OBIETTIVO: progettare tre modalità equivalenti di dimostrare la capacità di motivare due cause di un problema ambientale.\nCONTESTO: seconda media, 20 minuti, competenza comune.\nDATI CONSENTITI: esempi fittizi di due cause e prove inventate chiaramente dichiarate.\nVINCOLI: nessuna diagnosi, nessuna valutazione automatica di persone, nessun dato personale.\nOUTPUT: tre consegne accessibili, una rubrica comune di tre criteri, feedback specifico e microprova di revisione.\nVERIFICA: i criteri e l'obiettivo restano gli stessi in tutti i formati?",
+        "example": "Testo, mappa commentata ed esposizione breve richiedono tutte due cause e prove pertinenti; la rubrica comune valuta coerenza, prove e revisione. Feedback su elaborato inventato: «Hai nominato il traffico, ma manca una osservazione a sostegno. Aggiungila e riscrivi la conclusione».",
+        "criteria": [
+          "Obiettivo comune",
+          "Equivalenza delle prove",
+          "Nessuna diagnosi o etichetta automatica",
+          "Feedback applicabile a un secondo tentativo"
+        ],
+        "deliverable": "Tre percorsi accessibili, una rubrica e due versioni di un compito sintetico con miglioramento osservabile",
+        "quiz": {
+          "question": "Quale pratica realizza una personalizzazione didattica responsabile?",
+          "options": [
+            "Etichettare gli alunni come visivi e uditivi",
+            "Offrire modalità diverse con obiettivi e criteri comuni",
+            "Demandare il voto ad un modello generativo"
+          ],
+          "correct_index": 1,
+          "feedback": "Personalizzazione non significa attribuire uno stile fisso o automatizzare un giudizio sulla persona."
+        },
+        "references": [
+          {
+            "title": "CAST · Opzioni di azione ed espressione",
+            "url": "https://udlguidelines.cast.org/action-expression/"
+          },
+          {
+            "title": "CAST · Rappresentazione",
+            "url": "https://udlguidelines.cast.org/representation/"
+          }
+        ]
+      }
     },
     {
       "id": "atl-05",
@@ -529,7 +858,7 @@
         },
         {
           "heading": "Il tutor socratico come progetto didattico",
-          "text": "Un tutor socratico cerca di aiutare lo studente a scoprire un passaggio attraverso domande mirate. Per una semplice equazione può iniziare chiedendo quale operazione inversa elimini il termine +5, proporre un indizio più preciso se necessario e infine invitare a controllare il risultato per sostituzione. Non sempre è la soluzione giusta: talvolta l'alunno ha bisogno di un esempio svolto, di un docente o di un'attività senza IA. La scelta deve rimanere coerente con l'obiettivo e con il livello di autonomia atteso. Il sistema non dovrebbe trasformarsi in un valutatore occulto.",
+          "text": "Un tutor socratico cerca di aiutare lo studente a scoprire un passaggio attraverso domande mirate. Per una semplice equazione può iniziare chiedendo quale operazione inversa elimini il termine +5, proporre un indizio più preciso se necessario e infine invitare a controllare il risultato per sostituzione. Non sempre è la soluzione giusta: talvolta l'alunno ha bisogno di un esempio svolto, di un docente o di un'attività senza IA. La scelta deve rimanere coerente con l'obiettivo e con il livello di autonomia atteso. Il sistema non dovrebbe trasformarsi in un valutatore occulto.\n\nUn ambiente digitale «intelligente» non è automaticamente adattivo perché contiene quiz o pulsanti. Un percorso ramificato può seguire regole scritte dall'insegnante: tre scelte, tre feedback, una nuova prova e un'alternativa accessibile. Un tutor generativo opera diversamente, produce risposte a input nuovi e richiede una valutazione dei limiti, dei dati e della supervisione. Prima di parlare di algoritmi adattivi, insegniamo a progettare un ambiente in cui la scelta dello studente produca un'informazione utile per il passo successivo.",
           "transition": "Progettare un tutor capace di aiutare non ci autorizza a delegargli tutto. A questo punto diventano centrali i limiti, i dati che può utilizzare e il momento in cui deve lasciare spazio a una persona responsabile."
         },
         {
@@ -644,7 +973,65 @@
           "estimated_min": 48,
           "description": "Quiz, caso applicativo, associazioni e cruciverba"
         }
-      ]
+      ],
+      "focus_experience": {
+        "label": "Progettare un percorso interattivo a decisioni",
+        "type": "branching_path",
+        "timebox": "All'interno dei laboratori sul tutor e la supervisione",
+        "context": "Una notizia sintetica afferma: «tutti imparano meglio soltanto guardando video» ma non cita alcuna ricerca",
+        "objective": "Costruire un percorso interattivo di dieci minuti con tre scelte, feedback, recupero e alternativa accessibile",
+        "steps": [
+          "Scrivi l'obiettivo: individuare un'affermazione che necessita di fonte",
+          "Disegna il nodo iniziale e tre scelte: condividere, cercare la ricerca, chiedere a un chatbot di confermare",
+          "Scrivi un feedback formativo per ogni scelta e una possibilità di tornare al punto di partenza",
+          "Inserisci un secondo tentativo con una notizia diversa e una modalità cartacea equivalente",
+          "Dichiara che lo scenario funziona con regole prestabilite, non è un tutor generativo né una piattaforma adattiva"
+        ],
+        "prompt": "OBIETTIVO: creare una esperienza ramificata per riconoscere notizie non documentate.\nCONTESTO: 10 minuti, scuola secondaria, tre scelte e feedback.\nDATI CONSENTITI: notizia inventata «tutti imparano meglio guardando video» priva di fonti.\nVINCOLI: nessun dato degli studenti, niente statistiche inventate, accessibile con tastiera e carta.\nOUTPUT: nodo iniziale, tre vie, feedback per ogni scelta, opportunità di riprova, verifica finale.\nVERIFICA: separa chiaramente uno scenario a regole da un sistema che genera risposte IA.",
+        "example": "Se condividi subito, il feedback ricorda che non c'è fonte; se cerchi la ricerca, la decisione è prudente e il feedback chiede di verificare autore e metodologia; se chiedi a un chatbot di confermare, il feedback ricorda che non sostituisce una fonte primaria. Una riprova chiede: «Quale documento cercheresti prima di usare questa frase in classe?»",
+        "criteria": [
+          "Tre alternative esplicite",
+          "Feedback distinto e non punitivo",
+          "Possibilità di revisione",
+          "Versione accessibile non digitale",
+          "Nessun finto apprendimento adattivo"
+        ],
+        "deliverable": "Storyboard di 10 minuti con tre diramazioni e un test di sicurezza del percorso",
+        "quiz": {
+          "question": "Uno scenario con tre pulsanti e feedback definiti dall'insegnante è automaticamente un tutor IA adattivo?",
+          "options": [
+            "Sì, perché i contenuti cambiano quando clicchi",
+            "No, è interattività a regole; adattività IA richiede un sistema e dati ulteriori",
+            "Sì, se sono presenti colori diversi"
+          ],
+          "correct_index": 1,
+          "feedback": "La ramificazione deterministica non equivale all'adattività basata su modelli."
+        },
+        "references": [
+          {
+            "title": "H5P · Branching Scenario",
+            "url": "https://h5p.org/branching-scenario"
+          },
+          {
+            "title": "CAST · UDL",
+            "url": "https://udlguidelines.cast.org/"
+          }
+        ],
+        "branches": [
+          {
+            "choice": "Condivido la notizia",
+            "feedback": "Non c'è una fonte verificabile. Prima di condividere, controlla autore, documento e affermazione."
+          },
+          {
+            "choice": "Cerco la ricerca originale",
+            "feedback": "Buona verifica preliminare. Controlla che i metodi e i risultati della fonte sostengano davvero la frase."
+          },
+          {
+            "choice": "Chiedo al chatbot di confermarla",
+            "feedback": "La risposta di un chatbot potrebbe ripetere l'affermazione. Devi risalire alla fonte primaria."
+          }
+        ]
+      }
     }
   ]
 }
