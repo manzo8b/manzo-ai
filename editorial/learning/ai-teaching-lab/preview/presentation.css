@@ -1,0 +1,52 @@
+/* Accessible 15-slide teacher presentation; independent from the course layout */
+:root{--ink:#173b61;--blue:#145ce0;--gold:#efae42;--line:#d6e2f2}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,Segoe UI,system-ui,sans-serif}
+a{color:#1559cb;text-underline-offset:3px}button,select{font:inherit}button{cursor:pointer}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #f37349;outline-offset:3px}
+.atl-presentation-skip{position:absolute;left:15px;top:-200px;background:#fff;padding:10px;z-index:20}.atl-presentation-skip:focus{top:12px}
+.atl-present-nav{border-bottom:1px solid #dfe8f4;min-height:75px;padding:15px max(20px,calc((100% - 1300px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px}
+.atl-present-brand{display:flex;align-items:center;gap:8px;text-decoration:none;color:#193a5b;font-weight:850;letter-spacing:.08em}
+.atl-present-brand strong{color:#175fe4}.atl-present-mark{border-radius:12px;background:#173d7e;color:white;padding:5px 11px;transform:rotate(-5deg)}.atl-present-back{font-size:.85rem;font-weight:750}
+.atl-present-main{max-width:1340px;margin:auto;padding:35px clamp(18px,3.5vw,44px) 55px}
+.atl-present-overline,.atl-present-side-kicker{font-size:.71rem;font-weight:820;letter-spacing:.13em;color:#135bd2}
+.atl-present-lead h1{font-size:clamp(2rem,5.1vw,4.3rem);letter-spacing:-.055em;line-height:1.07;margin:13px 0 14px;max-width:970px}.atl-present-lead h1 em{font-style:normal;color:#135ce0}
+.atl-present-lead p{font-size:clamp(.95rem,1.7vw,1.12rem);color:#456079;line-height:1.7;max-width:900px}
+.atl-present-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(255px,0.63fr);gap:19px;margin-top:28px;align-items:start}
+.atl-present-viewer{background:#f7faff;border-radius:24px;border:1px solid #d4e4f5;padding:16px;min-width:0;box-shadow:0 13px 37px #1a478711}
+.atl-present-topline{display:flex;align-items:center;justify-content:space-between;padding:7px 9px 18px;font-size:.69rem;letter-spacing:.1em;color:#315782;font-weight:850}
+.atl-present-topline span:last-child{color:#125ce1}
+.atl-slide-page{min-height:570px;border-radius:18px;padding:clamp(23px,4vw,51px);display:flex;flex-direction:column;position:relative;background:linear-gradient(145deg,#09294c 0%,#153f6c 100%);color:#fff;overflow:hidden}
+.atl-slide-page:before{content:"";position:absolute;border:1px solid #ffffff23;right:-140px;top:-220px;width:500px;height:500px;border-radius:50%;box-shadow:0 0 0 35px #ffffff07,0 0 0 85px #ffffff05;pointer-events:none}
+.atl-slide-page:nth-child(even){background:linear-gradient(138deg,#153967,#0b2a53)}
+.atl-slide-kicker{font-size:.71rem;font-weight:850;letter-spacing:.13em;color:#fac476;position:relative;z-index:1}
+.atl-slide-page h2{max-width:750px;color:#fff;font-size:clamp(1.75rem,3.3vw,3rem);line-height:1.12;letter-spacing:-.035em;margin:15px 0}
+.atl-slide-lead{font-size:clamp(.99rem,1.6vw,1.24rem);line-height:1.65;max-width:750px;color:#f1f7ff;font-weight:550;margin:0}
+.atl-slide-points{list-style:none;display:grid;grid-template-columns:1fr;gap:10px;padding:0;margin:25px 0;position:relative;z-index:1}
+.atl-slide-points li{max-width:790px;border-left:3px solid #ffbc54;background:#ffffff14;border-radius:0 10px 10px 0;padding:9px 13px;line-height:1.52;color:#fff;font-size:clamp(.86rem,1.25vw,.98rem)}
+.atl-slide-takeaway{margin-top:auto;background:#fff;border-radius:14px;padding:16px 18px;position:relative;z-index:1}
+.atl-slide-takeaway span{color:#b9572b;font-size:.65rem;font-weight:850;letter-spacing:.14em}
+.atl-slide-takeaway p{margin:5px 0 0;color:#1a4169;font-size:clamp(.87rem,1.3vw,1.02rem);font-weight:780;line-height:1.4}
+.atl-present-nav-buttons{display:flex;align-items:center;gap:13px;margin-top:16px}
+.atl-present-nav-buttons button{background:#125bd9;color:white;border:0;border-radius:11px;font-size:.84rem;font-weight:750;padding:11px 13px}
+.atl-present-nav-buttons button:disabled{background:#dbe7f6;color:#758ca5;cursor:not-allowed}
+.atl-present-track{height:7px;border-radius:20px;background:#d7e6f8;flex:1;overflow:hidden}
+.atl-present-track span{height:100%;width:6%;display:block;background:#ed9651;transition:width .18s ease}
+.atl-present-side{background:#fff;border:1px solid #d5e3f2;border-radius:22px;padding:22px;box-shadow:0 12px 32px #264c7612}
+.atl-present-side h2{font-size:1.3rem;line-height:1.3;margin:8px 0 19px;letter-spacing:-.03em}
+.atl-present-side label{display:block;font-weight:750;font-size:.82rem;margin-bottom:8px}
+.atl-present-side select{width:100%;border:1px solid #bed1e8;color:#1c456f;background:#fff;border-radius:11px;padding:11px;margin-bottom:15px}
+.atl-present-index{display:grid;gap:5px;max-height:340px;overflow-y:auto;padding-right:4px}
+.atl-present-index-button{border:1px solid transparent;text-align:left;border-radius:9px;background:#f4f8ff;color:#30577d;font-weight:650;padding:9px 12px;font-size:.8rem}
+.atl-present-index-button[aria-current="true"]{background:#dceaff;border-color:#91b7ee;color:#124fa6;font-weight:820}
+.atl-present-index-button:hover{border-color:#91b7ee}
+.atl-present-side-note{font-size:.76rem;line-height:1.68;color:#5b7189;margin-top:20px}
+.atl-present-files{background:#f1f7ff;border-radius:13px;margin-top:18px;padding:12px 15px}
+.atl-present-files p{font-size:.78rem;color:#526780;line-height:1.52;margin:0}
+.atl-present-files a{display:block;padding:8px 0;font-size:.82rem;font-weight:760}
+.atl-present-reflection{margin-top:22px;background:linear-gradient(120deg,#eef6ff,#fff);border:1px solid #c8ddf6;border-radius:21px;padding:25px}
+.atl-present-reflection span{font-size:.72rem;letter-spacing:.11em;font-weight:850;color:#1460d5}
+.atl-present-reflection p{font-size:clamp(1.15rem,2.2vw,1.55rem);max-width:970px;color:#1b466d;font-weight:760;line-height:1.48}
+.atl-present-reflection a{font-weight:800}.atl-present-footer{border-top:1px solid #e3ebf4;padding:25px;color:#54718b;font-size:.77rem;text-align:center}
+@media(max-width:930px){.atl-present-layout{grid-template-columns:1fr}.atl-present-index{max-height:145px}.atl-present-side{order:2}.atl-slide-page{min-height:460px}}
+@media(max-width:520px){.atl-present-main{padding-top:24px}.atl-present-nav-buttons{flex-wrap:wrap}.atl-present-track{order:3;flex-basis:100%}.atl-slide-page{padding:24px 20px;min-height:500px}.atl-slide-points{gap:7px}.atl-present-topline{font-size:.64rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.atl-present-track span{transition:none!important}}
