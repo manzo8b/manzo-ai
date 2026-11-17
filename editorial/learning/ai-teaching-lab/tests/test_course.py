@@ -266,5 +266,46 @@ class CourseQuality(unittest.TestCase):
         self.assertIn('id="atl-present-next"',slide_page)
         self.assertIn('data-slides-base="../../it/"',slide_page)
 
+
+    def test_continuous_narrative_and_learning_activities(self):
+        narrative = json.loads((ROOT / "narrative.json").read_text(encoding="utf-8"))
+        self.assertEqual(len(narrative["modules"]), 5)
+        for idx, m in enumerate(narrative["modules"],1):
+            with self.subTest(module=m["id"]):
+                self.assertEqual(m["reading_label"],"Lettura di approfondimento")
+                self.assertEqual(len(m["learning_rhythm"]), 4)
+                self.assertEqual(sum(x["estimated_min"] for x in m["learning_rhythm"]),240)
+                self.assertEqual(len([c for c in m["chapters"] if c.get("transition")]),len(m["chapters"])-1)
+                for c in m["chapters"][:-1]:
+                    self.assertGreater(len(c["transition"]), 120)
+                self.assertGreater(len(m["bridge_to_next"]["back"]), 140)
+                full=(ROOT / f"module-{idx:02d}.md").read_text(encoding="utf-8")
+                self.assertIn("## Lettura di approfondimento",full)
+                self.assertIn("## Per continuare il percorso",full)
+                self.assertIn(m["bridge_to_next"]["back"],full)
+                self.assertIn(m["chapters"][0]["transition"],full)
+        script=(ROOT.parent/"preview"/"app.js").read_text(encoding="utf-8")
+        self.assertNotIn('"CAPITOLO "+String(',script)
+        self.assertIn("Lettura di approfondimento",script)
+        self.assertIn("course-session-map",script)
+        self.assertIn("module-outline",script)
+        self.assertIn("course-next-section",script)
+
+    def test_authentic_slide_mode_and_media_bundle_contract(self):
+        preview=ROOT.parent/"preview"
+        script=(preview/"presentation.js").read_text(encoding="utf-8")
+        css=(preview/"presentation.css").read_text(encoding="utf-8")
+        publisher=(ROOT.parents[3] / "theme" / "publish-ai-teaching-lab.py").read_text(encoding="utf-8")
+        self.assertIn("data-original-slide-base",publisher)
+        self.assertIn("slide-{i:02d}.webp",publisher)
+        self.assertIn("AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip",publisher)
+        self.assertIn("AI_per_Docenti.web.mp4",publisher)
+        self.assertIn("authentic_slides",publisher)
+        self.assertIn("atl-original-slide",script)
+        self.assertIn("atl-slide-transcription",script)
+        self.assertIn("document.body.dataset.originalSlideBase",script)
+        self.assertIn("color:#fff!important",css)
+        self.assertIn("atl-slide-reading h2",css)
+
 if __name__ == "__main__":
     unittest.main()
