@@ -29,6 +29,14 @@ with sync_playwright() as playwright:
         page.goto(BASE, wait_until="networkidle", timeout=30000)
         page.locator("#experience").wait_for(state="visible", timeout=10000)
         assert page.locator("#module-nav button").count() == 5
+        assert page.locator(".atl-course-tabs a").count()==4
+        assert page.locator("#competenze .atl-competencies-grid>div").count()==4
+        assert page.locator(".module-outline").count()==5
+        assert page.locator(".course-session-step").count()==4
+        assert "CAPITOLO" not in page.locator("#atl-theory").inner_text()
+        assert page.locator(".narrative-bridge").count()>=4
+        page.locator(".module-outline").first.locator("summary").click()
+        assert page.locator(".module-outline").first.locator(".module-outline-link").count()==4
         assert page.locator("#presentazione-corso").is_visible()
         assert page.locator(".atl-intro-media-card").count() == 2
         assert page.locator(".atl-intro-privacy").is_visible()
