@@ -52,7 +52,7 @@ class CourseQuality(unittest.TestCase):
                         self.assertTrue(case[field])
 
     def test_assessments_and_answers(self):
-        by_id = {m["id"]: m for m in BANK["modules"]}
+        by_id = {m["module_id"]: m for m in BANK["modules"]}
         self.assertEqual(set(by_id), {m["id"] for m in COURSE["modules"]})
         for mod in COURSE["modules"]:
             m = by_id[mod["id"]]
