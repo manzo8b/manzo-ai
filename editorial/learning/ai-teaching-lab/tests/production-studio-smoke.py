@@ -27,7 +27,14 @@ with tempfile.TemporaryDirectory() as directory:
             assert page.locator("#studio-progress-text").inner_text()=="Fase 1 di 5"
             assert page.locator("#studio-form").count()==1
             assert page.locator('input[name="title"]').input_value()=="Una giornata fredda cambia il clima?"
-            assert not page.evaluate("document.documentElement.scrollWidth > window.innerWidth + 2")
+            assert not page.evaluate("document.documentElement.scrollWidth > window.innerWidth + 2"), page.evaluate("""() => ({
+                inner:innerWidth,
+                scroll:document.documentElement.scrollWidth,
+                overflow:[...document.querySelectorAll('body *')].filter(e=>{
+                    const r=e.getBoundingClientRect();
+                    return r.right>innerWidth+2 && getComputedStyle(e).position!=='absolute';
+                }).slice(0,12).map(e=>({tag:e.tagName,class:e.className,id:e.id,scroll:e.scrollWidth,right:e.getBoundingClientRect().right}))
+            })""")
 
             # Brief to model selection
             page.locator("#studio-next").click()
@@ -55,7 +62,14 @@ with tempfile.TemporaryDirectory() as directory:
             assert page.locator(".studio-preview-card").count()==3
             assert page.locator(".studio-preview-card img").count()==1
             assert "Da una domanda a un metodo" in page.locator(".studio-preview").inner_text()
-            assert not page.evaluate("document.documentElement.scrollWidth > window.innerWidth + 2")
+            assert not page.evaluate("document.documentElement.scrollWidth > window.innerWidth + 2"), page.evaluate("""() => ({
+                inner:innerWidth,
+                scroll:document.documentElement.scrollWidth,
+                overflow:[...document.querySelectorAll('body *')].filter(e=>{
+                    const r=e.getBoundingClientRect();
+                    return r.right>innerWidth+2 && getComputedStyle(e).position!=='absolute';
+                }).slice(0,12).map(e=>({tag:e.tagName,class:e.className,id:e.id,scroll:e.scrollWidth,right:e.getBoundingClientRect().right}))
+            })""")
 
             # Quality gate prevents falsely claiming readiness.
             page.locator("#studio-download-html").click()
