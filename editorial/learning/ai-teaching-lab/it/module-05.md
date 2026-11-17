@@ -30,7 +30,7 @@ Un tutor IA che risponde correttamente a un'equazione non è automaticamente pro
 - Testare almeno sei comportamenti critici con input sintetici
 - Finalizzare e difendere un'unità di apprendimento con decisione go/no-go
 
-## Per capire: un racconto e cinque idee fondamentali
+## Lettura di approfondimento · una storia che continua
 
 ### 1. La prima risposta corretta non basta
 
@@ -182,7 +182,7 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Piano alternativo** — Attività senza il sistema se non è adatto o disponibile
 - **AI Act** — Regolamento europeo sull'intelligenza artificiale, applicabile secondo tempi e categorie specifiche
 
-## Dalla lettura alla lezione successiva
+## Per continuare il percorso
 
 Il percorso si chiude dove era cominciato: davanti alla classe e a un problema reale. Ora puoi scegliere se usare l'IA, come guidarla e quando fermarla, senza confondere la velocità della risposta con la qualità dell'apprendimento.
 
