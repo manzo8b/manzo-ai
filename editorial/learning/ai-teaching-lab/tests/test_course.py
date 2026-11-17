@@ -101,5 +101,56 @@ class CourseQuality(unittest.TestCase):
                 self.assertTrue(puzzle["accessible_alternative"])
 
 
+
+    def test_five_full_module_readers(self):
+        ids = [m["id"] for m in COURSE["modules"]]
+        for i, module_id in enumerate(ids, start=1):
+            with self.subTest(module=module_id):
+                p = ROOT / ("module-%02d.md" % i)
+                self.assertTrue(p.is_file(), str(p))
+                body = p.read_text(encoding="utf-8")
+                self.assertGreater(len(body), 10000)
+                for marker in [
+                    "Teoria documentata", "Metodo MANZO AI", "Laboratorio A",
+                    "Laboratorio B", "Verifica differenziata", "Cruciverba professionale",
+                    "Insegnamento pedagogico", "Guida del formatore",
+                    "Bibliografia specifica", "Exit ticket",
+                ]:
+                    self.assertIn(marker, body)
+                self.assertIn(COURSE["modules"][i - 1]["title"], body)
+                self.assertIn("48 |", body)
+                self.assertIn("72 |", body)
+                self.assertIn("15 |", body)
+                for quote in COURSE["modules"][i - 1]["theory"]["sources"]:
+                    self.assertIn(quote["url"], body)
+                for item in COURSE["modules"][i - 1]["checkpoint"]:
+                    self.assertIn(item["question"], body)
+                self.assertNotIn("Voto finale automatico", body)
+
+    def test_preview_files_and_privacy(self):
+        preview = ROOT.parent / "preview"
+        html = (preview / "index.html").read_text(encoding="utf-8")
+        css = (preview / "assets.css").read_text(encoding="utf-8")
+        js = (preview / "app.js").read_text(encoding="utf-8")
+        self.assertIn('name="robots" content="noindex,nofollow"', html)
+        self.assertIn("[hidden]{display:none!important}", css)
+        for marker in ["assessment-bank.json", "crossword", "matching", "singleChoice",
+                       "multiChoice", "scenario", "fetch("]:
+            self.assertIn(marker, js)
+        for bad in ["localStorage.setItem", "sessionStorage.setItem", "service_role",
+                    "analytics.track(", "eval("]:
+            self.assertNotIn(bad, js)
+        self.assertIn("course.json", js)
+        self.assertIn("aria-label", js)
+
+    def test_crossword_numbers_and_recovery(self):
+        for module in BANK["modules"]:
+            with self.subTest(module=module["module_id"]):
+                puzzle = module["crossword"]
+                for entry in puzzle["entries"]:
+                    self.assertTrue(1 <= entry["number"] <= 7)
+                    self.assertTrue(entry["row"] >= 0 and entry["col"] >= 0)
+                    self.assertTrue(entry["clue"])
+
 if __name__ == "__main__":
     unittest.main()
