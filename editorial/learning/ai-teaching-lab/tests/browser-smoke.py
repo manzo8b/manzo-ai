@@ -45,7 +45,7 @@ with sync_playwright() as playwright:
         assert page.locator(".atl-stage-tab[aria-selected='true']").count()==1
         assert page.locator("#atl-module-select option").count()==5
         assert page.locator(".atl-journey-panel:not([hidden])").count()==1
-        assert page.locator("#atl-section-select").count()==1
+        assert page.locator("#atl-section-select").count()==0
         if width<=800: page.locator(".course-side-disclosure > summary").click()
         assert page.locator("#module-nav button").count() == 5
         feedback_badge=page.locator("#atl-feedback-contact")
@@ -67,7 +67,7 @@ with sync_playwright() as playwright:
         page.locator(".atl-stage-tab").nth(1).focus()
         page.keyboard.press("ArrowRight")
         assert page.locator(".atl-stage-tab[aria-selected='true']").get_attribute("aria-controls")=="atl-journey-panel-2"
-        page.locator(".atl-journey-actions .button").last.click()
+        page.locator(".atl-journey-panel:not([hidden]) .atl-journey-actions .button").last.click()
         assert page.locator(".atl-journey-panel:not([hidden])").get_attribute("data-stage")=="3"
         page.locator(".atl-journey-panel:not([hidden]) .atl-journey-actions .button").first.click()
         assert page.locator(".atl-journey-panel:not([hidden])").get_attribute("data-stage")=="2"
