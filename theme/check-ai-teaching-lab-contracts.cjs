@@ -48,6 +48,24 @@ function checkHtml(name,html){
 const htmls=Object.fromEntries(Object.entries(sources).map(([k,v])=>[k,load(v)]));
 const stats=Object.fromEntries(Object.entries(htmls).map(([k,v])=>[k,checkHtml(k,v)]));
 const workspace=htmls.workspace;
+/* Mission Studio is an educational guide, not a generative chatbot. */
+const launch=load("tools/ai-teaching-launchpad/index.html");
+const launchScripts=[...launch.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script\s*>/gi)];
+assert.equal(launchScripts.length,1,"Mission Studio should have one local application script");
+launchScripts.forEach((m,i)=>new vm.Script(m[1],{filename:"mission-studio-"+i+".js"}));
+const launchStatic=launch.replace(/<script(?:\s[^>]*)?>[\s\S]*?<\/script\s*>/gi,"");
+const launchIds=[...launchStatic.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+assert.equal(new Set(launchIds).size,launchIds.length,"Duplicate Mission Studio ID");
+for(const marker of ['id="generate"','id="export"','id="copy"','id="preview-steps"','data-kind="image"','data-kind="voice"','data-kind="video"','data-kind="verify"','ai-teaching-lab-mission-v0.1']){
+ assert.ok(launch.includes(marker),"Mission Studio missing "+marker);
+}
+for(const slug of ["studio-immagini","studio-voce","studio-video","workspace-multimediale","modulo-01","modulo-02","modulo-03","modulo-04","modulo-05"]){
+ assert.ok(launch.includes("../"+slug+"/"),"Mission Studio missing route "+slug);
+}
+assert.ok(launch.includes("Nessuna API generativa"),"Must disclose no inference API");
+assert.ok(launch.includes("approval:false"),"Mission plan cannot be pre-approved");
+assert.ok(launch.includes("prefers-reduced-motion"),"Missing reduced-motion accommodation");
+
 for(const schema of Object.values(schemas))assert.ok(workspace.includes(schema),"Workspace misses "+schema);
 for(const studio of ["image","voice","video"]){
  assert.ok(htmls[studio].includes("../workspace-multimediale/"),studio+": missing handoff");
@@ -120,7 +138,14 @@ if(siteArg!==-1){
   assert.ok(rendered.includes(schemas[name]),"Rendered "+name+" missing schema");
   assert.ok(rendered.length>=htmls[name].length*0.9,"Truncated rendered "+name);
  }
+ const appPath=path.join(root,site,route,"inizia","index.html");
+ assert.ok(fs.existsSync(appPath),"Missing published Mission Studio micro-app");
+ const appPage=fs.readFileSync(appPath,"utf8");
+ assert.ok(appPage.includes("ai-teaching-lab-mission-v0.1"),"Rendered mission schema missing");
+ assert.ok(!appPage.includes('content="noindex,follow"'),"Published Mission Studio may not be noindex");
+ assert.ok(appPage.includes('rel="canonical"'),"Published Mission Studio missing SEO canonical");
  const landing=fs.readFileSync(path.join(root,site,route,"index.html"),"utf8");
  for(const slug of Object.values(routes))assert.ok(landing.includes("./"+slug+"/"),"Landing lacks "+slug);
+ assert.ok(landing.includes('data-atl-launchpad="v0.1"'),"Landing lacks Mission Studio entry");
 }
 console.log("AI Teaching Lab contracts PASS",JSON.stringify(stats));
