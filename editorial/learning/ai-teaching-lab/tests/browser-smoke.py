@@ -39,22 +39,30 @@ with sync_playwright() as playwright:
             assert page.locator(".panel").count() >= 5
             assert page.locator(".method-step").count() == 7
             assert page.locator(".case-card").count() == 2
+            assert page.locator(".theory-accordion").count() == 3
+            assert page.locator(".branch-choices button").count() == 3
+            page.locator(".branch-choices button").first.click()
+            assert page.locator(".branch-choices button").count() == 2
+            page.locator(".branch-choices button").first.click()
+            assert page.locator(".branch-outcome").is_visible()
+            page.get_by_role("button", name="Esplora una scelta diversa").click()
+            assert page.locator(".branch-choices button").count() == 3
             assert page.locator(".cross-cell input").count() > 0
             assert page.locator(".source-list a").count() >= 3
             assert page.locator("a.full-lesson-link").get_attribute("href") == "../it/module-%02d.md" % (i+1)
             page.screenshot(path=str(evidence / ("module-%02d-%d.png" % (i+1, width))), full_page=True)
         page.locator("#module-nav button").first.click()
-        first=page.locator("fieldset.assessment-block").first
+        first=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button", name="Verifica la risposta")).first
         q=course["modules"][0]["checkpoint"][0]
         first.locator('input[type="radio"]').nth(q["correct_index"]).check()
         first.get_by_role("button", name="Verifica la risposta").click()
         assert "Corretto" in first.locator(".result").inner_text()
-        multi=page.locator("fieldset.assessment-block").nth(2)
+        multi=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button", name="Controlla la selezione"))
         for idx in bank["modules"][0]["multi_select"]["correct"]:
             multi.locator('input[type="checkbox"]').nth(idx).check()
         multi.get_by_role("button", name="Controlla la selezione").click()
         assert "Corretto" in multi.locator(".result").inner_text()
-        scenario=page.locator("fieldset.assessment-block").nth(3)
+        scenario=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button", name="Confronta la tua decisione"))
         scenario.locator('input[type="radio"]').nth(
             bank["modules"][0]["decision_scenario"]["correct_index"]
         ).check()
