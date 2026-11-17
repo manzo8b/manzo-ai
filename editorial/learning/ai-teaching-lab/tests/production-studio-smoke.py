@@ -16,7 +16,7 @@ with tempfile.TemporaryDirectory() as directory:
     image=tmp/"didattica.png"
     image.write_bytes(PNG)
     with sync_playwright() as playwright:
-        browser=playwright.chromium.launch(headless=True)
+        browser=playwright.chromium.launch(headless=True,args=["--use-fake-ui-for-media-stream","--use-fake-device-for-media-stream"])
         for width in (390,1440):
             page=browser.new_page(viewport={"width":width,"height":900},accept_downloads=True,reduced_motion="reduce")
             errors=[]
@@ -60,15 +60,62 @@ with tempfile.TemporaryDirectory() as directory:
             page.locator('[data-scene="0"] [data-field="title"]').fill("Da una domanda a un metodo")
             page.locator('[data-scene="0"] input[type="file"]').set_input_files(str(image))
             page.locator('[data-scene="0"] .studio-file-state').get_by_text("Immagine pronta",exact=False).wait_for(timeout=10000)
+            # Prompt that can be copied into an authorized external AI model.
+            page.locator('[data-scene="0"] .studio-scene-tools button').nth(1).click()
+            assert "16:9" in page.locator('[data-scene="0"] .studio-prompt-output').input_value()
+            assert "niente dati o grafici inventati" in page.locator('[data-scene="0"] .studio-prompt-output').input_value()
+            # Produce a real PNG with the text of scene 2; it is attached to the kit.
+            page.locator(".studio-scene-disclosure").nth(1).locator("summary").click()
+            page.locator('[data-scene="1"] .studio-scene-tools button').first.click()
+            assert page.locator('[data-scene="1"] .studio-generated-image').is_visible()
+            assert page.locator('[data-scene="1"] .studio-generated-image').get_attribute("src").startswith("data:image/png;base64,")
+            with page.expect_download() as generated:
+                page.locator('[data-scene="1"] .studio-scene-tools button').nth(2).click()
+            graphic=tmp/f"generated-{width}.png"
+            generated.value.save_as(str(graphic))
+            assert graphic.read_bytes()[:8]==b"\\x89PNG\\r\\n\\x1a\\n"
+            assert graphic.stat().st_size>2000
             page.locator("#studio-next").click()
 
             # Script, quiz, all six formats are recognized and separate.
             assert page.locator('textarea[name="script"]').count()==1
             assert page.locator('textarea[name="quiz_question"]').count()==1
+            page.locator('textarea[name="script"]').fill("")
+            page.locator("#studio-script-draft").click()
+            assert "Marta:" in page.locator('textarea[name="script"]').input_value()
+            assert "Davide:" in page.locator('textarea[name="script"]').input_value()
+            # The microphone is optional and explicitly controlled by the user.
+            assert page.locator("#studio-record-start").count()==1
+            assert page.locator("#studio-record-stop").count()==1
+            if page.locator("#studio-record-start").is_enabled():
+                page.locator("#studio-record-start").click()
+                page.locator("#studio-record-stop").wait_for(state="visible")
+                if page.locator("#studio-record-stop").is_enabled():
+                    page.wait_for_timeout(900)
+                    page.locator("#studio-record-stop").click()
+                    page.locator("#studio-record-download").wait_for(state="enabled",timeout=8000)
+                    assert page.locator("#studio-record-preview").is_visible()
+                    with page.expect_download() as audio_export:
+                        page.locator("#studio-record-download").click()
+                    audio_file=tmp/f"narration-{width}"
+                    audio_export.value.save_as(str(audio_file))
+                    assert audio_file.stat().st_size>1000
+            # Produce a silent video from the storyboard only where the browser supports it.
+            assert page.locator("#studio-video-create").count()==1
+            if page.locator("#studio-video-create").is_enabled():
+                page.locator("#studio-video-seconds").select_option("2")
+                page.locator("#studio-video-create").click()
+                page.locator("#studio-video-download").wait_for(state="enabled",timeout=24000)
+                assert page.locator("#studio-video-preview").is_visible()
+                with page.expect_download() as video_export:
+                    page.locator("#studio-video-download").click()
+                video_file=tmp/f"clip-{width}"
+                video_export.value.save_as(str(video_file))
+                assert video_file.stat().st_size>3000
             page.locator("#studio-next").click()
             assert page.locator("#studio-progress-text").inner_text()=="Fase 5 di 5"
             assert page.locator(".studio-preview-card").count()==3
-            assert page.locator(".studio-preview-card img").count()==1
+            assert page.locator(".studio-preview-card img").count()==2
             assert "Da una domanda a un metodo" in page.locator(".studio-preview").inner_text()
             assert not page.evaluate("document.documentElement.scrollWidth > window.innerWidth + 2"), page.evaluate("""() => ({
                 inner:innerWidth,
@@ -95,6 +142,7 @@ with tempfile.TemporaryDirectory() as directory:
             assert len(data["scenes"])==3
             assert data["scenes"][0]["title"]=="Da una domanda a un metodo"
             assert data["scenes"][0]["image"].startswith("data:image/png;base64,")
+            assert data["scenes"][1]["image"].startswith("data:image/png;base64,")
 
             # Export and *run* a standalone learning object offline.
             with page.expect_download() as event:
@@ -131,4 +179,4 @@ with tempfile.TemporaryDirectory() as directory:
             assert not errors,errors
             page.close()
         browser.close()
-print("PASS production studio: 5 phases, model options, imported image, real HTML/JSON export, offline quiz, reimport, mobile and desktop")
+print("PASS production studio: 5 phases, real PNG creation, prompts, local recording/video if available, HTML/JSON, offline quiz, mobile and desktop")
