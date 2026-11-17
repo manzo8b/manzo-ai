@@ -14,6 +14,12 @@ Non serve conoscere il linguaggio degli sviluppatori o saper programmare. Leggi 
 
 Il tempo stimato comprende lettura, due laboratori, correzione delle bozze e autovalutazione. Puoi interrompere il percorso e riprenderlo dal modulo: questo sito non registra automaticamente lo stato di avanzamento.
 
+## Questo corso è un esempio di didattica applicata all’IA
+
+La formazione che stai seguendo applica i principi che propone. **Non ascolti soltanto una spiegazione sull'intelligenza artificiale:** parti da un problema scolastico, formuli una previsione, comprendi un principio attraverso il racconto, analizzi un esempio, svolgi un laboratorio, ricevi feedback e trasferisci ciò che hai scoperto nella tua pratica professionale. I materiali con IA sono proposte da verificare: nessun assistente nascosto genera risposte o giudizi sul tuo lavoro.
+
+Questo filo guida ti accompagna in tutti i moduli: **problema → comprensione → progettazione → sperimentazione → controllo → revisione**. Se non hai uno strumento IA autorizzato puoi comunque completare le attività attraverso gli esempi simulati. In questo modo la tecnologia non è un prerequisito per imparare a ragionare didatticamente.
+
 ## La domanda che ci accompagnerà
 
 Quando una docente arriva a fine giornata con verifiche da preparare, materiale da adattare e poco tempo, non le serve una lista di cento applicazioni. Le serve capire che cosa può fare davvero l'intelligenza artificiale, che cosa non può garantire e come formulare una richiesta che produca un materiale didattico controllabile.
