@@ -854,6 +854,21 @@
     if(hash&&$(hash)?.closest(".course-fold"))revealCourseSection(hash,false);
     root.focus({preventScroll:true});
   }
+
+  function organiseFinalGlossary(){
+    const area=$("atl-final-glossary");
+    if(!area||area.closest(".atl-final-disclosure"))return;
+    const wrap=el("details","atl-final-disclosure");
+    const summary=el("summary","atl-final-disclosure-title","Vocabolario completo · 79 voci");
+    area.replaceWith(wrap);
+    add(wrap,summary,area);
+    const reveal=()=>{if(location.hash==="#atl-final-glossary")wrap.open=true;};
+    document.querySelectorAll('a[href="#atl-final-glossary"]').forEach(link=>{
+      link.addEventListener("click",()=>{wrap.open=true;});
+    });
+    window.addEventListener("hashchange",reveal);
+    reveal();
+  }
   function init(course,bank,scenarios,narrative,glossary) {
     if(!course||!bank||course.modules.length!==5||bank.modules.length!==5)throw Error("Contenuti formativi incompleti");
     const isEditorial=course.published===false&&course.status==="editorial_draft";
@@ -907,7 +922,7 @@
       if(responsive.addEventListener)responsive.addEventListener("change",setSidebar);
       else if(responsive.addListener)responsive.addListener(setSidebar);
     }
-    $("experience").hidden=false;$("notice").hidden=true;render();renderGlossary(glossary);
+    $("experience").hidden=false;$("notice").hidden=true;render();renderGlossary(glossary);organiseFinalGlossary();
   }
   const dataBase=document.body.dataset.courseDataBase||"../it/";
   Promise.all([
