@@ -1,110 +1,83 @@
-# AI Teaching Lab · Lezione campione 01
-## Una lezione da progettare, una scelta da motivare
+# AI Teaching Lab · Lezione campione 01 — Una settimana impossibile
+## Ridurre il carico di lavoro senza delegare l'insegnamento
 
-**ID:** atl-01-lesson-demo · **Stato:** anteprima editoriale, non ancora resa nel sito  
-**Modulo:** 01 — Prima il problema, poi lo strumento  
-**Tempo di studio/attività previsto:** 45–60 minuti nel laboratorio di 4 ore, da validare con un pilota  
-**Risultato osservabile:** scegliere fra IA e alternativa senza IA motivando la scelta sulla base di un obiettivo e di evidenze.
+**Stato:** anteprima editoriale 2.0 non pubblicata · **Modulo:** 01 · **Tempo previsto:** 50–60 minuti entro il laboratorio di 4 ore, da verificare con un pilota.
+**Risultato atteso:** individuare un problema professionale urgente, confrontare un'opzione IA e un'alternativa senza IA, documentare scelta, criteri e rischio residuo.
 
-### Il caso
+### La situazione reale, ma con dati sintetici
 
-Sono le 7:50. Devi preparare per una quinta primaria una spiegazione sul ciclo dell'acqua. Hai 45 minuti di lezione e vuoi che gli alunni, alla fine, **sappiano spiegare con parole proprie i passaggi fondamentali del ciclo dell'acqua e correggere un errore in uno schema**.
+Sono le 18:30. Una docente della secondaria deve preparare due verifiche, una spiegazione per tre classi diverse, un intervento per studenti con livelli di comprensione differenti e una riunione. Domani vuole svolgere una lezione di storia sulle migrazioni. Ha circa 40 minuti per preparare una micro-attività, non per realizzare una presentazione spettacolare.
 
-Un collega suggerisce: «Usa un generatore IA, così fai prima». Un'altra docente propone una spiegazione con un esperimento e uno schema alla lavagna. Nessuna delle due proposte è automaticamente migliore.
+Un collega propone: «Facciamoci scrivere 30 slide dall'IA». Un secondo propone: «Recuperiamo due fonti, una domanda guida e un esercizio di confronto». Quale percorso offre una prova verificabile che gli studenti comprendano la differenza tra un dato storico e un'interpretazione?
 
-**Scegli la tua prima mossa, poi leggi il feedback**
+**Prima risposta da scrivere:** l'obiettivo osservabile. Per esempio: «Al termine, lo studente confronta due fonti storiche, distingue un dato e un'opinione e sostiene una conclusione indicando dove l'ha ricavata».
 
-- **A — Apro subito un chatbot e gli chiedo una presentazione bella da vedere.** Feedback: la bellezza non dimostra l'efficacia. Hai scelto la tecnologia prima di definire la prova di apprendimento.
-- **B — Scrivo ciò che gli studenti dovranno dimostrare, poi confronto due strategie.** Feedback: è la mossa più solida; ora devi precisare criteri e vincoli, incluso l'uso consentito degli strumenti.
-- **C — Escludo sempre l'IA, perché non è affidabile.** Feedback: la prudenza è importante, ma un divieto a priori impedisce di valutare usi potenzialmente utili e proporzionati.
+### La teoria in tre passaggi, con fonti
 
-**Domanda da scrivere:** «Quale evidenza concreta mi farebbe dire che gli alunni hanno raggiunto l'obiettivo?». Una risposta adeguata è osservabile: l'alunno spiega tre passaggi e individua l'errore nello schema, non semplicemente «sembra aver capito».
+**1 — Allineamento didattico:** prima il risultato osservabile, poi l'evidenza, poi l'attività e infine lo strumento. Una presentazione ricca può essere inefficace se non produce prove dell'apprendimento. I principi di apprendimento del centro Eberly alla Carnegie Mellon University sottolineano il ruolo di conoscenze pregresse, organizzazione del sapere e motivazione. Fonte: https://www.cmu.edu/teaching/principles/learning.html
 
-### La cornice pedagogica in 90 secondi
+**2 — Quale sfida stiamo affrontando davvero?** Secondo l'OCSE, TALIS 2024, il carico amministrativo e la gestione della disciplina sono pressioni professionali importanti. La scuola ha bisogno di scelte sostenibili, non solo di produzione più veloce di materiali. Fonte: https://www.oecd.org/en/publications/2025/10/results-from-talis-2024_28fbde1d/full-report/the-demands-of-teaching_0e941e2f.html
 
-Nel *constructive alignment*, progettare significa mantenere coerenti:
-1. **Obiettivo**: che cosa sarà capace di fare lo studente?
-2. **Evidenza**: come osserverò quella capacità?
-3. **Attività**: quale esperienza può svilupparla?
-4. **Strumento**: cosa serve davvero per realizzare quell'attività?
+**3 — Valutare le prestazioni:** la tassonomia di Bloom riveduta offre categorie per progettare compiti: comprendere, applicare, analizzare, valutare, creare. Per questo caso interessa la capacità di confrontare prove, non il numero di slide prodotte. Fonte: https://cft.vanderbilt.edu/wp-content/uploads/sites/59/Blooms-Taxonomy.pdf
 
-L'IA compare al quarto passaggio, non al primo. Questo non rende l'IA meno importante: la rende **giustificabile e valutabile**.
+**Insegnamento di John Dewey — parafrasi didattica, NON citazione testuale:** l'apprendimento è indagine riflessiva a partire da problemi vissuti. Trasposizione MANZO AI: la docente formula ipotesi su due metodi, raccoglie evidenze e modifica la propria decisione. Fonte: https://plato.stanford.edu/entries/dewey/
 
-### La prova A/B senza dati di studenti
+### Il metodo MANZO AI, in tutti e sette i passaggi
 
-**Percorso A, con IA usata solo dal docente**  
-Preparare una scheda illustrativa a partire da questo input sintetico:
+1. **Ascolto:** «Ho poco tempo e devo ridurre la distrazione senza sacrificare la qualità».
+2. **Classificazione/ambito:** storia, secondaria, lezione sulle migrazioni; obiettivo: confrontare fonti e distinguere fatti/interpretazioni.
+3. **Valutazione del rischio:** dati degli studenti non necessari; possibili fatti storici inventati; linguaggio parziale; problemi di accessibilità.
+4. **Domande mirate:** quanti minuti di lezione? Quali prerequisiti? Quali fonti affidabili abbiamo? Serve un'alternativa senza account esterno?
+5. **Progettazione:** preparare A con IA solo come bozza e B con strumenti disponibili; definire attività e prove equivalenti.
+6. **Verifica:** controllare fonte, cronometrare preparazione, verificare domande, accessibilità, coerenza con la competenza.
+7. **Consegna:** piano di 15 minuti, fonti citate, matrice comparativa e decisione motivata, con supervisione della docente.
 
-> Crea una scheda breve per quinta primaria sul ciclo dell'acqua. Obiettivo: al termine, gli alunni devono spiegare evaporazione, condensazione e precipitazione e individuare un errore intenzionale nello schema. Massimo 180 parole, due esempi vicini alla vita quotidiana e tre domande. Se un fatto richiede controllo, segnalalo. Non creare dati di alunni, valutazioni individuali o immagini scientifiche non verificate.
+### Laboratorio 1 — IA o non IA per una lezione attiva
 
-**Percorso B, senza IA**  
-Usare una dimostrazione guidata, un disegno realizzato in classe e tre domande di recupero. L'insegnante prepara uno schema volutamente scorretto e chiede di correggerlo.
+**Opzione A — IA a supporto della preparazione, non degli studenti.** Prompt di prova costruito con il contratto MANZO AI:
 
-**Il confronto non misura quanto è bella la scheda**. Si misurano: corrispondenza con l'obiettivo, correttezza dei concetti, tempo effettivo del docente, accessibilità, possibilità di discussione, gestione dei dati.
+> Obiettivo: costruire una micro-attività di storia per la secondaria in cui lo studente confronti due fonti sulle migrazioni e separi dato e interpretazione. Contesto: 15 minuti, classe eterogenea, lavoro in coppie. Dati: usa soltanto i due estratti storici autorizzati e fittizi qui forniti dall'insegnante; non aggiungere statistiche esterne, nomi di alunni o diagnosi. Vincoli: linguaggio B1-B2, accessibilità, due domande aperte, una domanda di verifica. Output: scheda di una pagina con titolo, attività, criterio di valutazione. Verifica: segnala affermazioni non sostenute direttamente dagli estratti e le parti da controllare.
 
-### La matrice decisionale
+**Opzione B — Preparazione senza IA.** Selezionare due estratti dal materiale didattico autorizzato; formulare una domanda guida: «Che cosa afferma il documento? Che cosa possiamo interpretare e che cosa non possiamo sapere?». Impostare una restituzione orale di due minuti per coppia.
 
-Compila ogni cella da **0 = inadeguato** a **3 = molto adeguato**, poi spiega il voto con un dato o un'osservazione. La tabella qui è volutamente **vuota**: il corso non deve inventare risultati di un test che nessuno ha eseguito.
+**Consegna:** per entrambe le opzioni, scrivere il tempo reale utilizzato, una verifica della fonte, l'accessibilità, il lavoro cognitivo degli studenti e il modo in cui si misura il risultato. È lecito scegliere B.
 
-| Criterio | A con IA | B senza IA | Quale evidenza lo dimostra? |
-|---|---:|---:|---|
-| Obiettivo raggiungibile | — | — | |
-| Accuratezza verificabile | — | — | |
-| Accessibilità | — | — | |
-| Protezione dei dati | — | — | |
-| Tempo e costo realistici | — | — | |
-| Controllo del docente | — | — | |
+### Laboratorio 2 — La classe perde attenzione
 
-**Regola di esclusione:** se l'opzione richiede dati personali non autorizzati o un uso vietato, non viene scelta anche se il totale è alto. In questo caso di laboratorio i materiali sono integralmente sintetici e non si richiedono account di minori.
+Un caso fittizio: durante un video di 25 minuti sulla migrazione, pochi studenti partecipano. Invece di usare il riconoscimento delle emozioni o di classificare gli studenti per «attenzione», progetta 15 minuti con domanda provocatoria, due prove contraddittorie da interpretare, confronto e riscontro finale.
 
-### La verifica critica
+**Prodotto:** un micro-piano su una pagina e tre indicatori osservabili di comprensione. Non affermare che l'attività «aumenta l'attenzione del 50%» senza un disegno di ricerca e dati adeguati.
 
-Individua nell'eventuale scheda generata:
-- Un'affermazione da confrontare con una fonte disciplinare
-- Un elemento che potrebbe creare un equivoco negli studenti
-- Una barriera di accessibilità per chi non può leggere l'immagine
-- Un passaggio che richiede revisione umana
+### Verifica formativa
 
-Non sostituire questa analisi con «chiedi all'IA se è corretto»: sarebbe un'autovalidazione non indipendente.
+**Domanda a scelta singola** — Un tool genera le 30 slide in pochi secondi ma richiede i voti reali della classe. Qual è la decisione più appropriata?
 
-### La decisione professionale
+- A. Usarlo per la rapidità.
+- B. Rimuovere i soli nomi e procedere comunque.
+- C. Non conferire dati non autorizzati, ridefinire l'obiettivo e testare con input sintetici.
 
-Completa il seguente mini-verbale:
+**Soluzione commentata:** C. Un guadagno di tempo non compensa un trattamento non autorizzato; la semplice rimozione di nomi non garantisce anonimato.
 
-**Obiettivo:** …  
-**Evidenza di apprendimento:** …  
-**Alternative comparate:** …  
-**Risultato osservato, non presunto:** …  
-**Rischio che resta:** …  
-**Decisione:** uso IA / uso senza IA / rinvio la decisione  
-**Perché:** …  
-**Condizioni prima della classe:** …
+**Domanda a selezione multipla** — Quali due pratiche sono metodologicamente corrette? A. Definire obiettivi osservabili; B. Copiare una rubrica dal modello senza controllarla; C. Confrontare IA/non IA su criteri comuni; D. Credere a qualsiasi percentuale di risparmio dichiarata dal servizio.
 
-**Esempio di decisione corretta:** «Preferisco il percorso B perché, per questa classe e con 45 minuti disponibili, la dimostrazione e il confronto sullo schema rendono osservabile la comprensione. Posso comunque usare l'IA, se consentita, per preparare una bozza di tre domande da verificare prima dell'uso». È altrettanto difendibile una scelta A ben documentata.
+**Soluzione:** A + C. L'allineamento degli obiettivi e una comparazione misurabile motivano la scelta.
 
-### Feedback e riflessione
+**Quiz scenario:** la classe si distrae; preferisci nuove slide oppure una mini-indagine in coppie? Quale prova di apprendimento potrebbe dimostrare che la soluzione funziona? La risposta corretta richiede una giustificazione, non una preferenza per un prodotto.
 
-Il feedback non valuta la tua preferenza personale: valuta **la qualità delle prove** usate per giustificarla.
+**Cruciverba professionale interconnesso:** obiettivo, evidenza, rubrica, scelta, rischio, contesto, verifica. Griglia verificata, coordinate, indizi e alternativa testuale nel file editoriale assessment-bank.json, modulo atl-01; non dichiarare l'interazione implementata sul sito fino al rendering/test browser.
 
-- **Da rivedere:** «Uso l'IA perché è moderna» — motivazione non collegata all'apprendimento.
-- **Adeguato:** «Le due proposte raggiungono l'obiettivo, ma A richiede meno tempo di preparazione» — manca ancora un controllo della qualità e delle condizioni d'uso.
-- **Solido:** «Definisco l'evidenza, testo gli output, verifico i concetti, considero alternative e dichiaro limiti e responsabilità» — decisione replicabile.
+**Compito autentico:** compilare la matrice A+ con sei criteri (allineamento, accuratezza, accessibilità, dati, tempo/costo, controllo docente) 0–3 più eventuali condizioni di esclusione. Evitare numeri inventati: registrare solo misure effettive.
 
-**Exit ticket:** scrivi una frase che cominci con «Non userò l'IA quando…» e una che cominci con «Userò l'IA se…». Evita formule assolute: specifica contesto e ragione.
+**Exit ticket:** «Quale parte di questa preparazione non delegherai all'IA e perché?».
 
-### Materiale consegnabile
+### Feedback
 
-La Scheda A+ compilata è il primo elemento del portfolio. Conservala come file personale nel contesto autorizzato dal corso. **In questa anteprima non esiste un sistema di invio, correzione, salvataggio o monitoraggio dei progressi.**
+**Da rivedere:** «Uso IA perché è moderna». Motivo: la scelta non è collegata a evidenze.
+**In progressione:** «Uso IA perché mi fa risparmiare tempo». Serve misurare anche correttezza, accessibilità e rischio.
+**Professionale:** «Ho definito obiettivo e prova, confrontato alternative e documentato evidenze, fonti, limiti e decisione».
 
-### Note per il formatore
+### I limiti di questa anteprima
 
-- Evitare di dimostrare l'uso di tool con classi e dati identificabili
-- Permettere il laboratorio senza account esterni e senza accesso a IA
-- Non attribuire efficacia didattica a una soluzione senza verifica
-- Raccogliere il tempo realmente necessario e la qualità degli artefatti per il pilota
-- Fare emergere intenzionalmente l'opzione «non usare IA», non premiando solo l'entusiasmo tecnologico
+Questa lezione è una bozza formativa. Non esistono attualmente salvataggio progressi, valutazione server-side, certificato o tutor IA attivo per studenti; tutte le situazioni devono restare sintetiche. La durata è da testare con partecipanti reali. Le attività richiedono adattamento a disciplina e ordine di scuola.
 
-**Riferimenti:** UNESCO AI CFT 2024; DigCompEdu; Commissione europea, Ethical Guidelines 2026; CAST UDL Guidelines 3.0. URL e note normative nel curriculum principale.
-
----
-MANZO AI · Lezione originale dimostrativa · Non accreditata / non distribuita come corso attivo
+**MANZO AI · Comprendere → Applicare → Valutare → Creare · Revisione editoriale 17 novembre 2026**
