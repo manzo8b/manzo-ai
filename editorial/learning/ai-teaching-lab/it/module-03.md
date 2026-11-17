@@ -1,250 +1,196 @@
-# AI Teaching Lab — Modulo 03 · Il laboratorio dei contenuti
+# AI Teaching Lab · Modulo 03
 
-## Una docente ha realizzato quaranta slide sul clima: grafici senza unità di misura, immagini con frecce incoerenti e un testo troppo lungo
+## Progettare materiali che fanno imparare
 
-**MANZO AI / Education** · 4 ore didattiche progettate · IT · Versione completa per prova editoriale 17/11/2026 · **Non pubblicato**
+*Dalle slide ai podcast: creare risorse chiare, accurate e accessibili*
 
-> **Sfida del docente** — Produrre contenuti inclusivi rapidamente senza moltiplicare slide, errori visivi, video inutili e sovraccarico cognitivo
+**A chi si rivolge:** docenti e personale scolastico che desiderano comprendere e applicare l'IA responsabilmente, anche senza conoscenze tecniche pregresse
 
-### Caso iniziale
+**Tempo indicativo di formazione:** circa 4 ore fra lettura, attività, revisione e verifiche. È una stima progettuale, non un obbligo cronometrato e non indica il tempo che un formatore deve parlare
 
-Una docente ha realizzato quaranta slide sul clima: grafici senza unità di misura, immagini con frecce incoerenti e un testo troppo lungo. Le slide sembrano moderne, ma gli studenti non distinguono clima e tempo meteorologico.
+## Come seguire questo modulo in autonomia
 
-### Risultati di apprendimento
+Non serve conoscere il linguaggio degli sviluppatori o saper programmare. Leggi i capitoli nell'ordine proposto. Quando trovi un laboratorio, prepara carta e penna oppure apri un documento tuo; copia il prompt già pronto in uno strumento **autorizzato dalla tua organizzazione**, oppure usa l'esempio simulato se non hai un assistente disponibile. Il materiale del corso usa situazioni inventate: **non inserire nomi, diagnosi, voti, foto o conversazioni reali degli studenti** in servizi non autorizzati. Per controllare le soluzioni dei quiz e completare il cruciverba torna all'area interattiva del percorso.
+
+Il tempo stimato comprende lettura, due laboratori, correzione delle bozze e autovalutazione. Puoi interrompere il percorso e riprenderlo dal modulo: questo sito non registra automaticamente lo stato di avanzamento.
+
+## La domanda che ci accompagnerà
+
+Quando una presentazione contiene troppe informazioni, gli studenti possono uscire dalla lezione con un'immagine suggestiva ma un'idea sbagliata. Il problema non è imparare a generare più contenuti: è imparare a costruire materiali che aiutino a pensare.
+
+### Che cosa saprai fare dopo lo studio
 
 - Realizzare un micro-kit coerente con obiettivi e prerequisiti
 - Rivedere contenuti con verifica disciplinare, cognitiva e di accessibilità
 - Documentare uso dell'IA, licenze e revisioni
 
-### Sequenza guidata da 240 minuti
+## Per capire: un racconto e cinque idee fondamentali
 
-| Fase | Minuti | Prodotto |
-|---|---:|---|
-| Attivazione e teoria con fonti | 48 | Problema, ipotesi, criteri |
-| Laboratorio A | 72 | Primo artefatto comparativo |
-| Laboratorio B | 72 | Secondo artefatto professionale |
-| Debrief e revisione fra pari | 18 | Correzioni documentate |
-| Verifiche (quiz, associazioni, cruciverba) | 15 | Feedback formativo |
-| Trasferimento e exit ticket | 15 | Decisione e piano da riutilizzare |
+### 1. Il grafico bellissimo che spiega male
 
-La sequenza equivale a 48 minuti di input, 144 di pratica e 48 di restituzione. La versione digitale potrà essere segmentata, ma il carico deve essere verificato tramite pilota.
+Una docente prepara quaranta slide sul clima. Ci sono immagini potenti, titoli dinamici e grafici senza unità di misura. Alla fine, uno studente dice che una giornata fredda è sufficiente a smentire un andamento climatico di lungo periodo. Il materiale ha attirato gli occhi, ma non ha sciolto il fraintendimento. Il punto di partenza è allora la domanda che vogliamo far affrontare: come distinguere il tempo meteorologico dalle tendenze del clima? In questa lezione costruiremo una risorsa con meno elementi decorativi e più occasioni di interpretare, confrontare e motivare.
 
-## Teoria documentata
+### 2. Quando la forma occupa troppo spazio mentale
 
-### Fondamento 1
+Le informazioni devono essere selezionate e organizzate affinché il discente possa riconoscerne le relazioni essenziali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata.
 
-La qualità di un materiale dipende da obiettivo, conoscenze pregresse, chiarezza e possibilità di verificare la comprensione. Una grafica appariscente può aumentare il carico cognitivo o consolidare un'immagine scientifica sbagliata.
+### 3. Una risorsa accessibile è una risorsa meglio progettata
 
-### Fondamento 2
+Se un diagramma contiene l'unica spiegazione importante, uno studente che non riesce a leggerlo rischia di essere escluso. Una descrizione testuale, una legenda chiara e un linguaggio comprensibile permettono percorsi equivalenti. I podcast richiedono una trascrizione, i video sottotitoli accurati, le immagini significative descrizioni e i grafici etichette complete. Le linee guida Universal Design for Learning di CAST suggeriscono di offrire alternative di rappresentazione e di azione. Non stiamo semplificando indiscriminatamente la disciplina: stiamo rimuovendo ostacoli non necessari all'apprendimento.
 
-La produzione assistita da IA richiede controllo disciplinare dei fatti, coerenza dei segnali visivi, alt text, trascrizioni e licenze. Un quiz è formativo soltanto se permette di capire perché un'opzione è falsa e quale passo fare dopo.
+### 4. La revisione del docente è un passaggio creativo
 
-### Fondamento 3
+Con un assistente IA possiamo chiedere uno script, una mappa concettuale o cinque domande. La parte professionale comincia quando leggiamo l'output: le informazioni sono corrette? Le fonti sono pertinenti? Il testo attribuisce a una legge parole che non compaiono nell'originale? Una voce sintetica articola bene i termini specialistici? I contenuti visivi sono coerenti con la spiegazione? La revisione va documentata, perché mostra ai partecipanti come una bozza diventa un materiale didattico responsabile. Il progetto è concluso quando gli studenti possono utilizzare il prodotto per ragionare, non quando il file appare esteticamente finito.
 
-Costruire un prodotto significativo offre occasioni di elaborare, rappresentare e correggere le idee. La tecnologia va giudicata in base al lavoro cognitivo che rende possibile agli studenti, non alla rapidità con cui il docente genera file.
+### 5. Papert: apprendere costruendo
 
-### Approfondimenti: tre distinzioni da padroneggiare
+Seymour Papert ha dato rilievo a esperienze in cui chi apprende costruisce, esplora e condivide oggetti significativi. Trasferito al nostro laboratorio, questo insegnamento suggerisce di chiedere agli studenti di correggere un diagramma, spiegare un'idea con un podcast o presentare due rappresentazioni dello stesso fenomeno. Non si tratta di attribuire al pedagogista una frase non pronunciata, ma di usare il costruzionismo come guida progettuale. La tecnologia sostiene l'attività mentale e sociale della classe; non deve trasformarla in un pubblico di spettatori passivi.
 
-1. Il carico cognitivo impone di eliminare contenuti irrilevanti, segmentare la spiegazione e rendere visibili le relazioni importanti.
-2. Una rappresentazione è utile solo se corretta: testo nelle immagini, valori, grafici, scale e nessi causali vanno verificati.
-3. Accessibilità significa permettere apprendimento con più modalità: trascrizioni, descrizioni di figure, testo navigabile e prove non dipendenti solo dal colore.
+## Il metodo MANZO AI: una proposta per organizzare il lavoro
 
-### Insegnamento pedagogico
+Il metodo MANZO AI è una **proposta operativa sviluppata nel progetto MANZO AI**, non una norma per le scuole, una teoria pedagogica universalmente riconosciuta o una procedura scientificamente validata. È utile come lista ragionata di domande perché rende visibili le decisioni: da quale problema parto, quale materiale posso usare, che cosa devo verificare, chi ha la responsabilità del risultato. Non devi imparare i sette passaggi a memoria per proseguire; puoi adattarli al tuo contesto, anche quando scegli di non utilizzare l'IA.
 
-**Seymour Papert — parafrasi applicativa MANZO AI, NON citazione testuale:** Nel constructionism la comprensione si sviluppa anche creando e condividendo artefatti: un diagramma corretto insieme alla classe vale più di molte schermate da consumare passivamente.
+Nel nostro percorso le fasi si collegano così:
 
-Riferimento dell'autore: https://mitpress.mit.edu/9780262539845/designing-constructionist-futures/
+1. **Ascolto** — Descrivi una difficoltà reale del lavoro scolastico senza chiedere subito a un chatbot una soluzione
+2. **Classificazione e ambito** — Indica classe, materia, competenza e prova che gli studenti dovrebbero produrre
+3. **Valutazione del rischio** — Chiediti quali errori, stereotipi, barriere di accesso o dati personali potrebbero comparire
+4. **Domande mirate** — Annota che cosa non sai e quali informazioni o autorizzazioni servono
+5. **Costruzione e progettazione** — Scegli una proposta, un'alternativa senza IA e, se utile, un prompt controllabile
+6. **Verifica** — Controlla fonti, pertinenza, correttezza, tempo e accessibilità prima di usare l'output
+7. **Output finale e consegna** — Consegna il materiale finale dichiarando limiti e responsabilità, senza automatizzare il giudizio sugli studenti
 
-### Bibliografia specifica del modulo (consultazione/controllo editoriale al 17 novembre 2026)
+Il metodo aiuta a **comprendere → applicare → valutare → creare**, ma ciascun passaggio ha senso solo se conduce a una scelta concreta. Non sostituisce le indicazioni della scuola, le fonti disciplinari o la competenza pedagogica del docente.
+
+## Laboratori da svolgere personalmente
+
+Qui il partecipante sei **tu**. Le consegne spiegano cosa preparare, cosa scrivere nel prompt, come ottenere o simulare una risposta e come correggerla. I tempi sono indicativi e puoi dedicare più o meno tempo in base alla tua esperienza.
+
+### Laboratorio 1 · Dalle quaranta slide a un micro-kit sul clima
+
+**Situazione da affrontare:** Seconda media, il concetto di clima viene confuso con una giornata di tempo freddo
+
+**Obiettivo:** Realizzare una scheda, uno schema accessibile e un quiz coerenti tra loro
+
+**Prima di iniziare:** apri un documento e crea quattro sezioni: problema, prompt, risposta e revisione. Tutto ciò che userai deve essere inventato per l'esercizio, non riferito a persone reali.
+
+**Passo dopo passo**
+
+1. Scrivi il fraintendimento in una frase e scegli il risultato atteso
+2. Seleziona definizioni da una fonte scientifica che puoi consultare
+3. Usa il prompt per ottenere soltanto una pagina e tre domande formative
+4. Controlla che nessun numero o grafico sia stato inventato; aggiungi una descrizione dello schema
+5. Prova il quiz con una risposta sbagliata simulata e verifica che il feedback spieghi il motivo
+
+**Prompt pronto da copiare e personalizzare**
+
+```text
+OBIETTIVO: distinguere tempo meteorologico e clima.
+CONTESTO: seconda media, scheda da usare in 15 minuti.
+DATI CONSENTITI: definizioni disciplinari già verificate dal docente, senza statistiche generate.
+VINCOLI: massimo 230 parole, lessico chiaro, uno schema descritto a parole, niente dati numerici senza fonte.
+OUTPUT: domanda iniziale, breve spiegazione, schema, tre domande con distrattori e feedback.
+VERIFICA: indica le affermazioni che il docente deve controllare prima di usare la scheda.
+```
+
+Se non hai a disposizione un assistente IA autorizzato, **non sei bloccato**: esamina la bozza didattica qui sotto come se fosse il risultato da controllare.
+
+**Esempio di possibile risultato, scritto per questa esercitazione (non prodotto da un servizio interrogato in diretta)**
+
+> Esempio simulato: «Una giornata fredda descrive il tempo in quel luogo e momento. Il clima riguarda l'andamento osservato su lunghi periodi. Domanda: perché un singolo giorno non descrive una tendenza?».
+
+**Controllo del risultato**
+
+Le attività misurano la differenza tra scale temporali? Testo e schema sono utilizzabili anche senza colore?
+
+**Che cosa conservare nel tuo portfolio personale**
+
+Micro-kit accessibile, quiz e lista delle correzioni
+
+**Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
+
+### Laboratorio 2 · Un podcast breve sulla cittadinanza
+
+**Situazione da affrontare:** Prima superiore plurilingue; gli studenti devono distinguere diritto, dovere e partecipazione
+
+**Obiettivo:** Costruire un testo audio con trascrizione, glossario e domande
+
+**Prima di iniziare:** apri un documento e crea quattro sezioni: problema, prompt, risposta e revisione. Tutto ciò che userai deve essere inventato per l'esercizio, non riferito a persone reali.
+
+**Passo dopo passo**
+
+1. Scegli uno o due articoli autentici da una fonte ufficiale e trascrivine soltanto gli estratti necessari
+2. Fai proporre una scaletta di due minuti, specificando che l'IA non deve aggiungere citazioni normative
+3. Rivedi accuratamente il testo e verifica ogni riferimento all'articolo
+4. Prepara una trascrizione e tre spiegazioni del lessico per chi sta imparando l'italiano
+5. Progetta una domanda che chieda un esempio motivato, non una definizione da memorizzare
+
+**Prompt pronto da copiare e personalizzare**
+
+```text
+RUOLO: assistente alla scrittura di uno script didattico.
+OBIETTIVO: spiegare diritto, dovere e partecipazione in 2 minuti.
+CONTESTO: classe prima superiore con livelli linguistici diversi.
+FONTI: soltanto gli estratti della Costituzione verificati e inseriti qui dal docente; se non sono presenti, chiedili.
+VINCOLI: non inventare numeri di articoli, non imitare la voce di persone reali, includere versione testuale.
+OUTPUT: script, trascrizione, glossario di tre termini, due domande.
+VERIFICA: segnala ogni frase che richiede confronto con il testo ufficiale.
+```
+
+Se non hai a disposizione un assistente IA autorizzato, **non sei bloccato**: esamina la bozza didattica qui sotto come se fosse il risultato da controllare.
+
+**Esempio di possibile risultato, scritto per questa esercitazione (non prodotto da un servizio interrogato in diretta)**
+
+> Esempio simulato: «Una regola può tutelare un diritto e prevedere un dovere. Presenta un esempio della vita scolastica e spiega perché non basta conoscere una definizione». Nessuna frase è presentata come citazione costituzionale.
+
+**Controllo del risultato**
+
+Il podcast cita solo articoli consultati? La trascrizione conserva lo stesso contenuto dell'audio?
+
+**Che cosa conservare nel tuo portfolio personale**
+
+Script, trascrizione, glossario e lista fonti
+
+**Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
+
+## Parole utili, spiegate senza gergo
+
+Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri una parola nuova.
+
+- **Carico cognitivo** — Risorse mentali richieste per comprendere ed elaborare un contenuto
+- **Accessibilità** — Possibilità di utilizzare un materiale con esigenze diverse
+- **Testo alternativo** — Descrizione di un'immagine significativa per chi non può vederla
+- **Trascrizione** — Versione scritta del contenuto audio
+- **Licenza** — Condizioni che consentono o limitano il riuso di un'opera
+- **Micro-kit** — Piccolo insieme coordinato di risorse per un obiettivo didattico
+
+## Verifica ciò che hai imparato
+
+Rientra nell'area interattiva per svolgere le domande a risposta singola, la selezione multipla, il caso a decisioni ramificate, le associazioni e il cruciverba. Le risposte vengono controllate **solo nel tuo browser**: il sistema non assegna voti né salva progressi.
+
+**Domande per prepararti alla verifica**
+
+1. Quale modifica aumenta l'accessibilità di uno schema visivo?
+2. Il modello crea una figura scientifica convincente. Prima dell'uso:
+
+**Compito conclusivo:** Micro-kit accessibile e registro revisione. Produci l'artefatto sul tuo documento e verifica che sarebbe utile anche se domani l'IA non fosse disponibile.
+
+**Domanda di riflessione:** Quale miglioramento al kit è verificabile nell'apprendimento e non solo nel design?
+
+## Fonti da esplorare con criterio
+
+Per non interrompere il racconto, abbiamo raccolto le fonti in questa sezione. Sono letture esterne da consultare direttamente per approfondire i principi; le situazioni e le risposte dei laboratori sono esempi creati per MANZO AI, non risultati sperimentali.
 
 1. [MIT Press — Designing Constructionist Futures](https://mitpress.mit.edu/9780262539845/designing-constructionist-futures/)
 2. [CAST UDL Guidelines 3.0](https://udlguidelines.cast.org/)
 3. [CMU Learning Principles](https://www.cmu.edu/teaching/principles/learning.html)
 
-Queste fonti sostengono i principi generali; i casi e i materiali sintetici successivi sono **esercizi originali**, non risultati di studi.
+**Riferimento pedagogico:** Seymour Papert — [testo di riferimento](https://mitpress.mit.edu/9780262539845/designing-constructionist-futures/). Le idee riportate nel modulo sono parafrasi applicative e non citazioni letterali attribuite all'autore.
 
-## Metodo MANZO AI — applicazione obbligatoria
+## Per chi facilita un gruppo (sezione facoltativa)
 
-La progressione di studio è **Comprendere → Applicare → Valutare → Creare**. In ogni esercizio si registra il metodo operativo nelle sette fasi:
+Se stai seguendo la lezione da solo, puoi saltare questa sezione. Se invece conduci un incontro con altri docenti, proponi una discussione iniziale, lascia il tempo per i due laboratori e confronta le revisioni. Non è necessario imporre lo stesso ritmo a tutti: le quattro ore sono un carico di studio orientativo, non un copione minuto per minuto.
 
-1. **Ascolto** — Problema professionale formulato. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-2. **Classificazione e ambito** — Destinatari, competenza e obiettivo osservabile. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-3. **Valutazione del rischio** — Dati, bias, accessibilità e criteri di esclusione. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-4. **Domande mirate** — Informazioni mancanti e autorizzazioni necessarie. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-5. **Costruzione e progettazione** — Attività, alternativa senza IA e prompt strutturato. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-6. **Verifica** — Fonti, test, evidenze e correzioni. Il corsista scrive quale prova produce e dove serve ancora una decisione.
-7. **Output finale e consegna** — Artefatto, registro decisionale e supervisione. Il corsista scrive quale prova produce e dove serve ancora una decisione.
+Una restituzione utile può partire da tre domande: quale risultato dell'IA è stato corretto? Quale strumento non useresti nel tuo contesto? Quale attività migliora anche senza il supporto dell'IA?
 
-## Laboratorio A · 72 minuti
-
-### Da quaranta slide a tre esperienze
-
-**Contesto:** Classe seconda media, argomento clima vs tempo meteorologico; materiali originali sintetici troppo lunghi.
-
-**Dati di esercizio, esclusivamente sintetici:** Due microdefinizioni da verificare con fonte disciplinare: il tempo descrive condizioni atmosferiche a breve termine; il clima riguarda pattern su periodi lunghi.
-
-**Consegna:** Ridurre il materiale a una domanda guida, un diagramma controllato e una prova di trasferimento senza usare grafici inventati.
-
-**Sequenza operativa**
-
-1. Definisci il fraintendimento 'un giorno freddo smentisce il riscaldamento globale'
-2. Elimina tre contenuti non pertinenti e conserva due concetti chiave
-3. Produci uno schema corretto con alternativa descrittiva testuale
-4. Scrivi cinque item di quiz con feedback che spieghi i distrattori
-5. Documenta fonte, revisione umana e licenza d'uso
-
-**Esempio ragionato:** Domanda appropriata: «Perché un singolo giorno freddo non basta a descrivere una tendenza climatica di lungo periodo?». Il feedback chiede di confrontare scala temporale e dati, non una definizione memorizzata.
-
-**Output da consegnare:** Micro-kit: scheda, quiz, schema accessibile, registro delle correzioni
-
-**Punti di revisione MANZO:** chi è il destinatario? quale evidenza osservabile giustifica l'attività? quale parte rimane umana? il risultato è usabile anche senza IA?
-
-## Laboratorio B · 72 minuti
-
-### Podcast bilingue sulla Costituzione
-
-**Contesto:** Gruppo plurilingue in prima superiore; gli studenti devono distinguere diritto, dovere e partecipazione.
-
-**Dati di esercizio, esclusivamente sintetici:** Estratto sintetico per esercizio: «Una comunità democratica riconosce regole comuni e permette il confronto su come applicarle». NON è una citazione della Costituzione.
-
-**Consegna:** Scrivere un podcast di due minuti, trascrizione completa, glossario essenziale e due domande per discutere.
-
-**Sequenza operativa**
-
-1. Individua concetti giuridici che richiedono fonte ufficiale e non confondere il testo fittizio con un articolo costituzionale
-2. Scrivi una scaletta: domanda, esempio, spiegazione, verifica
-3. Prepara una trascrizione comprensibile e, se traduci, verifica con revisore competente
-4. Individua segnalazioni visive e alternative audio/testo
-5. Concludi con una domanda autentica sul significato della partecipazione
-
-**Esempio ragionato:** Il testo «la Costituzione dice...» è scorretto finché non si cita un articolo preciso e si confronta il testo autentico; il podcast dovrà dichiarare il proprio esempio come parafrasi.
-
-**Output da consegnare:** Script, trascrizione, glossario, checklist media e fonti
-
-**Riflessione critica:** in quale circostanza è preferibile non usare IA? che cosa deve essere verificato dal docente prima di portare la proposta in aula?
-
-## Scheda di prompt professionale (opzionale, non richiede account esterno)
-
-> Crea una scheda didattica di una pagina per seconda media. Obiettivo: distinguere tempo meteorologico e clima. Dati consentiti: definizioni verificate dal docente. Vincoli: nessuna statistica senza fonte, massimo 220 parole, almeno un controesempio, linguaggio chiaro. Output: titolo, mini-spiegazione, schema descritto testualmente, quiz con cinque domande e feedback. Verifica: evidenzia ogni dato che richiede controllo.
-
-Una soluzione **offline o senza IA** deve rimanere sempre possibile. Se un output generato aggiunge riferimenti non presenti nelle fonti, non considerarli automaticamente verificati.
-
-## Esempio di decisione documentata
-
-Scelgo di eliminare grafici decorativi e mantenere una sola figura con legenda e descrizione accessibile. Una bozza IA può aiutare a generare varianti, ma le scale e le affermazioni scientifiche vengono controllate su fonti disciplinari.
-
-## Verifica differenziata — da completare dopo i laboratori
-
-### Scelta singola · due domande
-
-**1. Quale modifica aumenta l'accessibilità di uno schema visivo?**
-
-- A. Aggiungere un testo alternativo descrittivo
-- B. Usare soltanto un colore più brillante
-- C. Convertirlo in un'immagine senza etichette
-
-**2. Il modello crea una figura scientifica convincente. Prima dell'uso:**
-
-- A. La pubblico senza controllo
-- B. Verifico tutti gli elementi e il testo rappresentato
-- C. Controllo solo la risoluzione
-
-### Selezione multipla
-
-**Quali accorgimenti rendono un kit multimediale più utile e accessibile? Seleziona due risposte**
-
-- A. Mantenere solo le immagini, senza testi alternativi
-- B. Aggiungere trascrizioni/descrizioni equivalenti
-- C. Verificare accuratezza e coerenza con l'obiettivo
-- D. Moltiplicare animazioni e decorazioni
-
-### Dilemma professionale
-
-**Un podcast sintetico è fluido ma non possiede trascrizione. Quale correzione prioritaria?**
-
-- A. Fornire trascrizione accurata e controllare contenuti
-- B. Aumentare il volume e le animazioni
-- C. Eliminare tutti gli esempi
-
-Scrivi prima una motivazione di almeno due frasi. Il feedback va letto **dopo** la scelta.
-
-### Matching
-
-Abbina autonomamente i seguenti termini alle definizioni presenti nel file di esercizi e spiega perché una coppia è corretta:
-
-- **ACCESSIBILITA** — Descrizione testuale di schema visivo
-- **CARICOCOGNITIVO** — Informazioni irrilevanti che affollano una slide
-- **REVISIONE** — Correzione dati e testi dopo il confronto
-- **LICENZA** — Condizioni documentate di riutilizzo dell'immagine
-
-### Cruciverba professionale
-
-Griglia reale con **7 termini incrociati**, 16 × 12 caselle; '#' indica uno spazio nero e '.' una casella da compilare. La versione digitale dovrà offrire anche l'inserimento parola per parola accessibile.
-
-```text
-########.###.##.
-.............##.
-##.##.##.###.##.
-##.##.#.........
-##.##.##.###.##.
-##.##.##.###.##.
-##.##.##.#######
-##.##.##########
-##.##.##########
-#####.##########
-#####.##########
-#####.##########
-```
-
-- 1 verticale: Regole per riutilizzare legalmente i contenuti (7 lettere)
-- 2 verticale: Risorse mentali richieste per elaborare il compito (6 lettere)
-- 3 verticale: Rappresentazione sintetica delle relazioni (6 lettere)
-- 4 orizzontale: Possibilità di fruire del contenuto con esigenze diverse (13 lettere)
-- 5 verticale: Corrispondenza tra obiettivo, attività e materiale (8 lettere)
-- 6 verticale: Testo sincronizzato al parlato video (11 lettere)
-- 7 orizzontale: Intervento umano che corregge e migliora una bozza (9 lettere)
-
-### Compito autentico e trasferimento
-
-**Consegna di portfolio:** Micro-kit accessibile e registro revisione
-
-**Exit ticket:** Quale miglioramento al kit è verificabile nell'apprendimento e non solo nel design?
-
-**Errori da riconoscere:**
-
-- Conservare contenuto esteticamente gradevole ma errato
-- Mettere testo dentro immagini senza alternativa accessibile
-- Confondere una citazione simulata con un estratto normativo reale
-- Usare un quiz senza spiegare perché un distrattore è falso
-
-## Scheda di feedback del formatore
-
-| Criterio | Livello iniziale | Livello solido |
-|---|---|---|
-| Obiettivo | Argomento vago o solo strumento | Prestazione osservabile e prova coerente |
-| Evidenze | Impressioni e fonti non controllate | Controllo su passaggi, contesto e limiti |
-| Metodo MANZO AI | Passi citati senza attività | Sette passaggi documentati e motivati |
-| Inclusione e privacy | Nessuna alternativa o dati impropri | Materiali accessibili e sintetici |
-| Trasferibilità | Artefatto difficile da usare | Piano adattabile con decisione umana esplicita |
-
-La rubrica definitiva del percorso attribuisce 100 punti al progetto finale, non al solo quiz. Nessun certificato o avanzamento reale è implementato in questa bozza.
-
-## Guida del formatore — soluzioni formative da rivelare dopo il tentativo
-
-- Scelta singola 1: **A**. L'accesso al significato non deve dipendere da percezione visiva o colore.
-- Scelta singola 2: **B**. La plausibilità grafica non garantisce correttezza disciplinare.
-- Scelta multipla: **B e C**. Accessibilità e verifica disciplinare sono parte della progettazione, non un'aggiunta estetica.
-- Dilemma: **A**. Accesso equivalente e verifica dei fatti sono fondamentali
-- Matching: verificare corrispondenza dei quattro concetti alle definizioni documentate.
-- Cruciverba: soluzioni e coordinate verificate nel file assessment-bank.json; non usare questo JSON pubblico per un esame privato.
-
-## Registro professionale personale — da completare
-
-| ID caso | Decisione | Fonte o prova | Rischio | Correzione | Supervisore |
-|---|---|---|---|---|---|
-| A | … | … | … | … | Docente |
-| B | … | … | … | … | Docente |
-
-**Nota di governance:** non conferire dati, diagnosi, voti, chat o documenti identificativi di minori a sistemi non autorizzati. Non trasformare lo schema didattico in una decisione automatizzata su studenti. Controllare sempre policy dell'istituto, GDPR e perimetro normativo dell'AI Act. Il modello MANZO AI è metodo progettuale interno, non un protocollo scientificamente validato.
-
-_MANZO AI · versione editoriale per QA, senza attestato, progressi persistenti né pubblicazione web_
+**Nota editoriale e di sicurezza:** percorso di formazione aperto e non accreditato. Le attività usano esclusivamente esempi sintetici; nessuna prova di efficacia con docenti è stata ancora pubblicata e nessun attestato viene generato dal sito.
