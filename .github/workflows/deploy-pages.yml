@@ -331,6 +331,11 @@ jobs:
           grep -q 'id="guided-demo"' _site/it/formazione/ia-per-la-didattica/studio-video/index.html
           grep -q 'id="sample-brief"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
           grep -q 'id="wk-all"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          # Mobile first: content before status, concise disclosure and assisted inputs.
+          grep -q 'data-atl-workspace="1"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          grep -q 'class="mobile-guide"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          grep -q 'class="example-detail"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          grep -q 'class="card workspace-section"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
           grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
           grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
           grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-video/index.html
