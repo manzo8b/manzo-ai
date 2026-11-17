@@ -32,6 +32,15 @@ jobs:
         run: |
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/course.json > /dev/null
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/assessment-bank.json > /dev/null
+      - name: Install Chromium for functional and mobile preview tests
+        run: |
+          python3 -m pip install playwright==1.55.0
+          python3 -m playwright install chromium
+      - name: Exercise every module with quiz and crossword in Chromium
+        run: |
+          python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/ai-teaching-lab-http.log 2>&1 &
+          sleep 1
+          python3 editorial/learning/ai-teaching-lab/tests/browser-smoke.py
       - name: Confirm non-public preview status
         run: |
           python3 - <<'PY'
@@ -46,3 +55,11 @@ jobs:
           assert b['implementation_status']['certificate'] is False
           print('Draft-only content, no fake grades or certificates')
           PY
+      - name: Upload visual QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-teaching-lab-design-review
+          path: ai-teaching-lab-screenshots/
+          if-no-files-found: ignore
+          retention-days: 7
