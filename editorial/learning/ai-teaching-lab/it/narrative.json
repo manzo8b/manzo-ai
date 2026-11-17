@@ -432,7 +432,7 @@
         },
         {
           "heading": "Una risorsa accessibile è una risorsa meglio progettata",
-          "text": "Se un diagramma contiene l'unica spiegazione importante, uno studente che non riesce a leggerlo rischia di essere escluso. Una descrizione testuale, una legenda chiara e un linguaggio comprensibile permettono percorsi equivalenti. I podcast richiedono una trascrizione, i video sottotitoli accurati, le immagini significative descrizioni e i grafici etichette complete. Le linee guida Universal Design for Learning di CAST suggeriscono di offrire alternative di rappresentazione e di azione. Non stiamo semplificando indiscriminatamente la disciplina: stiamo rimuovendo ostacoli non necessari all'apprendimento.\n\nQuando pensiamo a destinatari diversi non dobbiamo etichettare gli studenti come «visivi», «uditivi» o «cinestetici» fissi e associare una sola modalità a ogni persona: la cosiddetta ipotesi del matching degli stili di apprendimento non dispone di un supporto empirico solido. L'UDL invita piuttosto a offrire più possibilità di rappresentazione e di espressione, riducendo ostacoli concretamente osservabili. Un video ha bisogno di sottotitoli e di una trascrizione, una infografica di descrizioni comprensibili, un'attività interattiva di controlli raggiungibili da tastiera e di una via alternativa equivalente.",
+          "text": "Se un diagramma contiene l'unica spiegazione importante, uno studente che non riesce a leggerlo rischia di essere escluso. Una descrizione testuale, una legenda chiara e un linguaggio comprensibile permettono percorsi equivalenti. I podcast richiedono una trascrizione, i video sottotitoli accurati, le immagini significative descrizioni e i grafici etichette complete. Le linee guida Universal Design for Learning di CAST suggeriscono di offrire alternative di rappresentazione e di azione. Non stiamo semplificando indiscriminatamente la disciplina: stiamo rimuovendo ostacoli non necessari all'apprendimento.\n\nQuando pensiamo a destinatari diversi non dobbiamo etichettare gli studenti come «visivi», «uditivi» o «cinestetici» fissi e associare una sola modalità a ogni persona: la cosiddetta ipotesi del matching degli stili di apprendimento non dispone di un supporto empirico solido. L'UDL invita piuttosto a offrire più possibilità di rappresentazione e di espressione, riducendo ostacoli concretamente osservabili. Un video ha bisogno di sottotitoli e di una trascrizione, una infografica di descrizioni comprensibili, un'attività interattiva di controlli raggiungibili da tastiera e di una via alternativa equivalente.\n\nLa selezione del modello generativo è un altro passaggio progettuale. Se serve una fotografia illustrativa originale, possiamo confrontare ChatGPT Images (modelli GPT Image) e Gemini Nano Banana (modelli Gemini Image), sempre su un identico brief e senza utilizzare fotografie reali di studenti. Se vogliamo un podcast basato su fonti già controllate, è più pertinente un servizio come NotebookLM/Gemini Notebook. Per una sequenza animata può essere utile valutare un modello video come Veo. Canva è invece un ambiente di impaginazione e creazione che può integrare diversi modelli, non un singolo modello. Per scenari ramificati, H5P lavora con regole e scelte progettate dal docente: è utile ma non è di per sé un modello IA. La domanda professionale non è «qual è il migliore?», ma «quale posso usare in sicurezza, controllare e correggere per questa esperienza?».",
           "transition": "L'accessibilità ci costringe a scegliere che cosa è essenziale. A questo punto la revisione della bozza IA non è una correzione meccanica: diventa un vero atto di progettazione creativa."
         },
         {
@@ -547,11 +547,12 @@
         "steps": [
           "Analizza destinatari, prerequisiti, lingua, ostacoli prevedibili e obiettivo osservabile. Evita categorie fisse di «studenti visivi» o «uditivi»",
           "Scegli una domanda che apra la storia: «Oggi fa freddo: significa che il clima si sta raffreddando?»",
+          "Scegli e motiva il modello o la piattaforma adatta a immagini, audio, video o interattività: confronta ChatGPT Images, Nano Banana e altre opzioni in base al risultato, non a una classifica",
           "Prepara tre scene coerenti: episodio iniziale, differenza fra osservazione e serie di lungo periodo, prova su ciò che si può dedurre",
           "Scrivi un copione di 50–70 secondi con trascrizione identica e una versione testuale consultabile senza audio",
           "Progetta una decisione interattiva con feedback, verifica accuratezza delle fonti, contrasto, sottotitoli, licenze e accessibilità"
         ],
-        "prompt": "RUOLO: assistente alla progettazione di contenuti multimediali, non valutatore degli alunni.\nOBIETTIVO: far distinguere a una seconda media un evento meteorologico da una tendenza climatica.\nCONTESTO: 12 minuti, lavoro individuale e discussione in coppia; prerequisito: saper leggere una breve osservazione.\nDATI CONSENTITI: osservazione inventata «oggi fa freddo»; non ho fornito dati scientifici, quindi non crearli.\nVINCOLI: niente statistiche inventate, niente immagini di alunni, nessun requisito di ascolto obbligatorio; evita musica e animazioni decorative, prevedi sottotitoli e trascrizione.\nOUTPUT: (1) storyboard di tre slide con titolo, messaggio e descrizione visiva; (2) copione audio o video di circa un minuto con trascrizione; (3) domanda interattiva e feedback per scelta corretta ed errata.\nVERIFICA: indica le frasi per cui servirebbe una fonte e una checklist su coerenza, segmentazione, segnali visivi, accessibilità e possibilità di lavorare senza tecnologia.",
+        "prompt": "RUOLO: assistente alla progettazione di contenuti multimediali, non valutatore degli alunni.\nOBIETTIVO: far distinguere a una seconda media un evento meteorologico da una tendenza climatica.\nCONTESTO: 12 minuti, lavoro individuale e discussione in coppia; prerequisito: saper leggere una breve osservazione.\nDATI CONSENTITI: osservazione inventata «oggi fa freddo»; non ho fornito dati scientifici, quindi non crearli.\nVINCOLI: niente statistiche inventate, niente immagini di alunni, nessun requisito di ascolto obbligatorio; evita musica e animazioni decorative, prevedi sottotitoli e trascrizione.\nOUTPUT: (1) storyboard di tre slide con titolo, messaggio e descrizione visiva; (2) copione audio o video di circa un minuto con trascrizione; (3) domanda interattiva e feedback per scelta corretta ed errata.\nVERIFICA: indica le frasi per cui servirebbe una fonte e una checklist su coerenza, segmentazione, segnali visivi, accessibilità e possibilità di lavorare senza tecnologia.\nSCELTA DEL MODELLO: per fotografie illustrative confronta ChatGPT Images e Gemini Nano Banana; per audio valuta NotebookLM/Gemini Notebook; per video un modello video come Veo; per la ramificazione H5P usa regole, non un modello generativo. Non indicare un vincitore assoluto: confronta limiti, controllo, privacy, costo e accessibilità.",
         "example": "Scena 1: foto illustrativa non reale di una giornata fredda, domanda «Basta un giorno?»; scena 2: contrasto fra «osservazione di oggi» e «dati raccolti su molti anni», senza numeri inventati; scena 3: domanda «Quale prova manca?». Audio: dialogo fra due studenti sul perché servono osservazioni nel tempo, con trascrizione. Interazione: «Un giorno freddo dimostra una tendenza climatica?»; feedback motivato e possibilità di riprovare.",
         "criteria": [
           "Una stessa competenza per i tre media",
@@ -559,7 +560,8 @@
           "Audio con trascrizione o alternativa equivalente",
           "Fonte controllata per ogni affermazione fattuale",
           "Interazione con feedback e riprova",
-          "Licenze e riuso verificati"
+          "Licenze e riuso verificati",
+          "La scelta di modello o piattaforma è motivata e non confonde un editor con il modello generativo"
         ],
         "deliverable": "Portfolio multimediale: storyboard di tre slide, copione, trascrizione, scelta interattiva, checklist qualità",
         "quiz": {
@@ -675,6 +677,114 @@
           "Controllo di accuratezza, accessibilità, licenze e revisione"
         ],
         "source": "https://www.cambridge.org/core/books/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning/F29A19FCD34C542806F736E0661C05F5"
+      },
+      "generative_model_guide": {
+        "as_of": "2026-11-17",
+        "heading": "Scegliere il modello generativo in base al contenuto",
+        "introduction": "La scelta inizia dal prodotto didattico, non dal marchio. ChatGPT e Gemini sono applicazioni che possono dare accesso a famiglie di modelli; Nano Banana identifica modelli di immagini di Google, GPT Image la famiglia di modelli visivi di OpenAI. Canva è soprattutto un ambiente di produzione e NotebookLM/Gemini Notebook un servizio di lavoro sulle fonti. Una stessa applicazione può cambiare i modelli disponibili nel tempo.",
+        "no_absolute_winner": "Le opzioni sono esempi da provare con lo stesso brief e non una classifica. I marchi e le versioni cambiano rapidamente; caratteristiche, limiti gratuiti, condizioni d'uso e modelli effettivamente disponibili vanno controllati prima di usarli.",
+        "decision_criteria": [
+          "Obiettivo didattico e tipo di output: foto, infografica, video, podcast, slide o attività",
+          "Fedeltà ai dati e alle fonti fornite; rischio di inesattezze o rappresentazioni fittizie",
+          "Possibilità di correggere dettagli, mantenere coerenza e riutilizzare l'output",
+          "Contrasto, testo alternativo, trascrizione, sottotitoli e leggibilità dei materiali",
+          "Licenze, proprietà delle fonti, termini di utilizzo, costo effettivo, modalità di accesso e sicurezza",
+          "Rispetto delle policy scolastiche e protezione dei dati: nessun caricamento di fotografie, volti o informazioni identificabili di alunni su sistemi non autorizzati"
+        ],
+        "rows": [
+          {
+            "type": "fotografia",
+            "name": "Fotografie e immagini realistiche",
+            "model_examples": [
+              "ChatGPT Images (famiglia GPT Image)",
+              "Gemini Nano Banana (modelli Gemini Image)"
+            ],
+            "product_examples": [
+              "ChatGPT",
+              "Gemini"
+            ],
+            "why": "Generare immagini illustrative o modificare una bozza con istruzioni successive, controllando composizione, dettagli e coerenza.",
+            "review": "Evitare di presentare immagini sintetiche come fotografie documentali; verificare errori storici, scientifici e dettagli che potrebbero creare stereotipi.",
+            "source": "https://openai.com/it-IT/index/introducing-chatgpt-images-2-5/",
+            "other_source": "https://gemini.google/overview/image-generation/"
+          },
+          {
+            "type": "grafica",
+            "name": "Grafici, infografiche e schemi",
+            "model_examples": [
+              "ChatGPT Images",
+              "Gemini Nano Banana"
+            ],
+            "product_examples": [
+              "Editor visuale e Canva per la revisione umana"
+            ],
+            "why": "Sviluppare una prima ipotesi visiva o una illustrazione concettuale, senza delegare a un'immagine la verifica dei numeri.",
+            "review": "Ricostruire manualmente dati, etichette, unità, proporzioni e fonti: una grafica generata può inventare cifre, oggetti o relazioni.",
+            "source": "https://developers.openai.com/api/docs/guides/image-prompting",
+            "other_source": "https://deepmind.google/models/gemini-image/"
+          },
+          {
+            "type": "slide",
+            "name": "Presentazioni e storyboard",
+            "model_examples": [
+              "LLM per testo e struttura; modelli di immagini per illustrazioni"
+            ],
+            "product_examples": [
+              "Canva / Dream Lab",
+              "NotebookLM / Gemini Notebook per lavoro sulle fonti"
+            ],
+            "why": "Separare progettazione delle slide, qualità disciplinare, immagini e impaginazione, evitando un'unica generazione non controllata.",
+            "review": "Controllare fonte di ogni affermazione, leggibilità, compatibilità mobile, testi originali e contrasti.",
+            "source": "https://www.canva.com/help/generate-with-dreamlab/",
+            "other_source": "https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/"
+          },
+          {
+            "type": "audio",
+            "name": "Dialoghi e podcast didattici",
+            "model_examples": [
+              "Servizi con generazione audio e dialoghi, non necessariamente modelli selezionabili dall'utente"
+            ],
+            "product_examples": [
+              "NotebookLM / Gemini Notebook, Audio Overview"
+            ],
+            "why": "Trasformare materiali verificati in una conversazione guidata con due voci, da riascoltare e confrontare con i documenti.",
+            "review": "Riascoltare l'intero audio, correggere eventuali citazioni inesatte e fornire una trascrizione accessibile.",
+            "source": "https://blog.google/innovation-and-ai/products/notebooklm-audio-overviews/",
+            "other_source": "https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/"
+          },
+          {
+            "type": "video",
+            "name": "Video o animazioni generative",
+            "model_examples": [
+              "Google Veo (famiglia di modelli video)"
+            ],
+            "product_examples": [
+              "Google Flow / Gemini secondo disponibilità",
+              "Editor video per il montaggio"
+            ],
+            "why": "Produrre brevi sequenze illustrative da uno storyboard preparato dal docente.",
+            "review": "Verificare coerenza delle scene, anomalie di movimento, accuratezza, diritti, eventuali didascalie e sottotitoli.",
+            "source": "https://deepmind.google/models/veo/",
+            "other_source": "https://deepmind.google/models/veo/prompt-guide/"
+          },
+          {
+            "type": "interattivo",
+            "name": "Percorsi interattivi con feedback",
+            "model_examples": [
+              "LLM facoltativo per redigere domande, alternative e spiegazioni"
+            ],
+            "product_examples": [
+              "H5P Branching Scenario",
+              "Attività locali MANZO AI"
+            ],
+            "why": "Una vera esperienza interattiva nasce da decisioni, conseguenze e feedback, non dal nome di un modello generativo.",
+            "review": "Dichiarare quando il percorso usa regole predefinite: H5P non diventa un tutor IA solo perché contiene un quiz.",
+            "source": "https://h5p.org/branching-scenario",
+            "other_source": "https://h5p.org/interactive-video"
+          }
+        ],
+        "teacher_assignment": "Scegli una delle sei tipologie di media, confronta almeno due alternative praticabili (inclusa una soluzione senza IA quando appropriata), spiega perché selezioni uno strumento e come verificherai la qualità del risultato. Non inserire dati reali di alunni.",
+        "sample_selection": "Per illustrare una scena immaginaria del clima puoi provare ChatGPT Images e Gemini Nano Banana con lo stesso brief: «una scena didattica non documentale che mostri una giornata invernale; nessuna persona riconoscibile, nessun dato meteorologico inventato». Confronta fedeltà, editabilità, accuratezza, leggibilità, diritti e costi prima di scegliere. Per un grafico climatico, invece, privilegia un diagramma creato a partire da dati scientifici verificati rispetto a immagini generate liberamente."
       }
     },
     {
