@@ -145,3 +145,29 @@
  .studio-scene-disclosure>summary{padding:13px 14px}
  .studio-scene-disclosure .studio-scene-editor{padding:14px}
 }
+
+/* Multimedia workbench / 2026-11: local visual cards, microphone and video outputs. */
+.studio-scene-tools,.studio-tool-actions{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:15px 0 11px}
+.studio-scene-tools .studio-action,.studio-tool-actions .studio-action{min-height:44px;margin:0}
+.studio-generated-image{display:block;width:min(100%,620px);aspect-ratio:16/9;object-fit:contain;border:1px solid #b8d3ef;border-radius:14px;margin:12px 0;box-shadow:0 8px 26px #20568c1a;background:#f4f9ff}
+.studio-generated-image[hidden],.studio-prompt-output[hidden],.studio-audio-workbench audio[hidden],.studio-video-builder video[hidden]{display:none!important}
+.studio-prompt-output{display:block;width:100%;min-height:140px;border:1px solid #a7c8eb;background:#f8fbff;color:#244e73;border-radius:12px;padding:12px 14px;white-space:pre-wrap;font-size:.83rem;line-height:1.55;resize:vertical}
+.studio-assist-note{background:#ecf6ff;border:1px solid #c5ddf5;border-left:4px solid #1765d2;border-radius:9px;margin:17px 0;padding:13px 16px;font-size:.84rem;line-height:1.6;color:#335879}
+.studio-assist-note strong{color:#1356b5}
+.studio-audio-workbench{padding:15px 16px;background:#fff;border:1px solid #c3d9ec;border-radius:15px;margin:8px 0 19px}
+.studio-audio-workbench>p{margin:0;font-size:.84rem;line-height:1.65;color:#476783}
+.studio-audio-workbench audio{width:100%;display:block;margin:13px 0 10px}
+.studio-audio-workbench #studio-record-download{margin-top:10px}
+.studio-video-builder{border:1px solid #c4dbf4;background:linear-gradient(128deg,#eff7ff 0%,#fff 75%);padding:clamp(18px,3vw,28px);border-radius:20px;margin:20px 0 0;display:flex;flex-direction:column;gap:12px;min-width:0}
+.studio-video-builder h3{font-size:clamp(1.24rem,2vw,1.65rem);letter-spacing:-.03em;color:#15487c;margin:7px 0}
+.studio-video-builder p{margin:0;font-size:.85rem;line-height:1.66;color:#496881}
+.studio-video-builder>label{display:flex;flex-direction:column;gap:7px;max-width:235px;font-size:.82rem;font-weight:760;color:#315f84}
+.studio-video-builder select{max-width:100%;border:1px solid #a6c6e9;border-radius:10px;min-height:45px;padding:9px;color:#18477b;background:#fff;font-size:16px}
+.studio-video-builder video{max-width:100%;width:min(100%,850px);aspect-ratio:16/9;background:#122b54;border-radius:14px;display:block}
+.studio-video-builder #studio-video-state{font-size:.79rem;color:#406184;line-height:1.6}
+@media(max-width:700px){
+ .studio-scene-tools,.studio-tool-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+ .studio-scene-tools .studio-action,.studio-tool-actions .studio-action{width:100%;text-align:center}
+ .studio-audio-workbench{padding:13px}
+ .studio-video-builder{padding:15px}
+}
