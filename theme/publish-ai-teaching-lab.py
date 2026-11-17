@@ -359,7 +359,7 @@ def publish(site,verify=False):
         launch_html=launch_html.replace(marker,seo(
             "Mission Studio | AI Teaching Lab | MANZO AI",
             "Micro-app formativa per docenti: progetta un brief didattico, seleziona risorse e verifica obiettivi prima di usare l'IA.",
-            "LearningResource",BASE+ROUTE+"/inizia/"),1)
+            "LearningResource",BASE+ROUTE+"/inizia/")+'<link rel="canonical" href="https://manzo8b.github.io'+BASE+ROUTE+'/inizia/">',1)
         launch_dest=target/"inizia"/"index.html"
         launch_dest.parent.mkdir(parents=True,exist_ok=True)
         launch_dest.write_text(launch_html,encoding="utf-8")
