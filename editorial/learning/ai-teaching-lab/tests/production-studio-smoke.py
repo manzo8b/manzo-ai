@@ -73,7 +73,7 @@ with tempfile.TemporaryDirectory() as directory:
                 page.locator('[data-scene="1"] .studio-scene-tools button').nth(2).click()
             graphic=tmp/f"generated-{width}.png"
             generated.value.save_as(str(graphic))
-            assert graphic.read_bytes()[:8]==b"\\x89PNG\\r\\n\\x1a\\n"
+            assert graphic.read_bytes()[:8]==bytes.fromhex("89504e470d0a1a0a")
             assert graphic.stat().st_size>2000
             page.locator("#studio-next").click()
 
