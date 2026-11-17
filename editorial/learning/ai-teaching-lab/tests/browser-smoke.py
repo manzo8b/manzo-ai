@@ -29,6 +29,15 @@ with sync_playwright() as playwright:
         page.goto(BASE, wait_until="networkidle", timeout=30000)
         page.locator("#experience").wait_for(state="visible", timeout=10000)
         assert page.locator("#module-nav button").count() == 5
+        assert page.locator(".atl-resource-link").count() == 11
+        assert page.locator(".atl-resource-link:visible").count() == 4
+        assert page.locator(".atl-resource-hub").is_visible()
+        assert not page.locator("[data-atl-resource-glossary]").is_visible()
+        assert page.evaluate("document.getElementById('module-nav').nextElementSibling.classList.contains('atl-resource-hub')")
+        page.locator(".atl-resource-more summary").click()
+        assert page.locator(".atl-resource-link:visible").count() == 11
+        page.locator(".atl-resource-more summary").click()
+        assert page.locator(".atl-resource-link:visible").count() == 4
         assert page.locator("#module-content").is_visible()
         assert page.locator(".preview-tag").is_visible()
         assert page.get_by_text("Non pubblicata", exact=False).count() >= 1

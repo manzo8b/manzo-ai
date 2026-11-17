@@ -168,3 +168,38 @@
 .glossary-refs li{margin:12px 0}
 .atl-side-glossary-link{display:block;background:#eaf3ff;border-radius:12px;padding:10px 14px;font-weight:750;font-size:.87rem;color:#1451a3;margin-top:17px;text-decoration:none}
 .atl-side-glossary-link:hover{background:#dbeaff}
+
+
+/* Document hub: curated official learning references beneath module index */
+.atl-resource-hub{margin-top:23px;padding-top:23px;border-top:1px solid #d5e2f2;min-width:0}
+.atl-resource-kicker{font-size:.63rem;font-weight:850;letter-spacing:.13em;color:#1165d8}
+.atl-resource-hub h3{font-size:1.13rem;letter-spacing:-.035em;line-height:1.2;margin:7px 0 9px;color:#153c69}
+.atl-resource-intro{font-size:.81rem;line-height:1.62;color:#49617a;margin:0 0 17px}
+.atl-resource-stack{display:grid;gap:9px}
+.atl-resource-link{display:flex;align-items:center;gap:10px;min-width:0;padding:12px 10px;border:1px solid #dae6f4;border-radius:15px;background:#fff;color:#194366!important;text-decoration:none!important;box-shadow:0 4px 14px #19467b0b;transition:transform .19s ease,box-shadow .19s ease,border-color .19s ease}
+.atl-resource-link:hover{transform:translateY(-2px);border-color:#89b6f2;box-shadow:0 10px 24px #1d4b881a}
+.atl-resource-link:focus-visible{outline:3px solid #f07146;outline-offset:2px}
+.atl-resource-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none;color:#fff;font-weight:850;font-size:.73rem;letter-spacing:-.02em;background:#155ee5}
+.atl-resource-azure{background:linear-gradient(145deg,#1876dd,#084c9c)}
+.atl-resource-cobalt{background:linear-gradient(145deg,#165ef1,#113ba4)}
+.atl-resource-indigo{background:linear-gradient(145deg,#8160ea,#5a35ad)}
+.atl-resource-emerald{background:linear-gradient(145deg,#0b9974,#056b5f)}
+.atl-resource-coral{background:linear-gradient(145deg,#ed7046,#c03d56)}
+.atl-resource-copy{min-width:0;display:grid;gap:3px;flex:1}
+.atl-resource-copy strong{font-weight:770;font-size:.81rem;line-height:1.25;color:#1b416b}
+.atl-resource-copy small{font-size:.69rem;line-height:1.34;color:#58718a}
+.atl-resource-arrow{color:#1759c3;font-size:1rem;font-weight:780;flex:none;align-self:flex-start}
+.atl-resource-more{border:1px solid #cbdcf0;background:linear-gradient(110deg,#f2f7ff,#fff);border-radius:15px;margin-top:12px;overflow:hidden}
+.atl-resource-more summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:6px;padding:13px 11px;color:#1556af;font-size:.79rem;line-height:1.5;font-weight:770}
+.atl-resource-more summary:hover{background:#ecf4ff}
+.atl-resource-more summary span{font-size:1.18rem}
+.atl-resource-more[open] summary span{transform:rotate(45deg)}
+.atl-resource-more>.atl-resource-stack{padding:0 9px 9px}
+.atl-resource-local{display:flex;justify-content:space-between;gap:8px;margin-top:12px;text-decoration:none!important;font-size:.77rem;line-height:1.4;font-weight:800;color:#0b654f!important;background:#e8f8f1;border:1px solid #a9ddca;border-radius:13px;padding:12px 13px}
+.atl-resource-local:hover{background:#daf2e7}
+.atl-resource-disclaimer{font-size:.69rem;line-height:1.55;color:#62778d;margin:14px 0 0}
+body:not([data-module-base]) [data-atl-resource-glossary]{display:none!important}
+@media(min-width:801px){.course-side{max-height:calc(100dvh - 24px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#b5d0ed transparent}}
+@media(max-width:800px){.course-side{max-height:none;overflow:visible}.atl-resource-stack{grid-template-columns:repeat(2,minmax(0,1fr))}.atl-resource-hub{margin-top:17px}.atl-resource-more>.atl-resource-stack{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.atl-resource-stack,.atl-resource-more>.atl-resource-stack{grid-template-columns:1fr}.atl-resource-copy strong{font-size:.84rem}.atl-resource-link{padding:11px}}
+@media(prefers-reduced-motion:reduce){.atl-resource-link{transition:none!important}.atl-resource-link:hover{transform:none!important}.atl-resource-more summary span{transition:none!important}}
