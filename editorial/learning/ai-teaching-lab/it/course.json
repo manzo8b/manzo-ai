@@ -1,5 +1,5 @@
 {
-  "schema_version": "draft-0.2",
+  "schema_version": "draft-2.2",
   "course_key": "ai-teaching-lab",
   "locale": "it",
   "status": "editorial_draft",
@@ -7,8 +7,8 @@
   "public_graded_assessment": false,
   "private_assessment_ready": false,
   "course_title": "Intelligenza Artificiale per la Didattica",
-  "subtitle": "Progettare, insegnare e valutare nell'era dell'IA",
-  "marketing_title": "AI Teaching Lab",
+  "subtitle": "Un percorso narrativo e pratico, comprensibile anche a chi studia in autonomia",
+  "marketing_title": "AI Teaching Lab — Intelligenza Artificiale per la Didattica",
   "audience": [
     "docenti primaria",
     "docenti secondaria",
@@ -51,10 +51,10 @@
   "modules": [
     {
       "id": "atl-01",
-      "title": "Prima il problema, poi lo strumento",
+      "title": "Insegnare nell’era dell’intelligenza artificiale",
       "hours": 4,
       "accent": "cobalt",
-      "question": "Quale evidenza giustifica l'uso dell'IA per questo obiettivo?",
+      "question": "Quando una docente arriva a fine giornata con verifiche da preparare, materiale da adattare e poco tempo, non le serve una lista di cento applicazioni. Le serve capire che cosa può fare davvero l'intelligenza artificiale, che cosa non può garantire e come formulare una richiesta che produca un materiale didattico controllabile.",
       "outcomes": [
         "Definire un obiettivo osservabile prima di scegliere un sistema",
         "Comparare alternative IA e senza IA con una matrice replicabile",
@@ -118,7 +118,7 @@
         "evidenza-feedback"
       ],
       "theory": {
-        "title": "Dalla fretta al progetto didattico",
+        "title": "Una storia per comprendere insegnare nell’era dell’intelligenza artificiale",
         "paragraphs": [
           "Un obiettivo didattico descrive una prestazione osservabile: spiegare, confrontare, argomentare, correggere. La scelta delle attività segue la definizione delle evidenze di apprendimento; un sistema IA non è un obiettivo in sé. Una presentazione attraente non dimostra che gli alunni abbiano compreso.",
           "Le categorie della tassonomia di Bloom riveduta aiutano a scegliere verbi e prove coerenti con il compito; non obbligano ogni lezione a raggiungere il livello 'creare'. La comparazione con una soluzione senza IA è necessaria per distinguere vantaggio reale, costo, rischio e novelty effect.",
@@ -174,14 +174,16 @@
         "verifica",
         "consegna"
       ],
-      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
+      "subtitle": "Capire l’IA, formulare richieste efficaci e scegliere quando usarla nella pratica scolastica",
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
     },
     {
       "id": "atl-02",
-      "title": "Dentro l'IA, oltre le risposte convincenti",
+      "title": "Pensiero critico e informazioni affidabili",
       "hours": 4,
       "accent": "violet",
-      "question": "Come distinguere una risposta plausibile da una risposta verificata?",
+      "question": "Un testo scritto bene può contenere un riferimento inesistente. Il compito dell'insegnante non è riconoscere a intuito se lo abbia scritto una macchina, ma aiutare la classe a cercare prove, confrontare fonti e spiegare il proprio ragionamento.",
       "outcomes": [
         "Descrivere in modo essenziale generazione dei token e ruolo del contesto",
         "Classificare errori, bias, informazioni non verificate e citazioni inventate",
@@ -247,7 +249,7 @@
         "evidenza-feedback"
       ],
       "theory": {
-        "title": "Verità, verifica e alfabetizzazione informativa",
+        "title": "Una storia per comprendere pensiero critico e informazioni affidabili",
         "paragraphs": [
           "Un modello linguistico genera sequenze plausibili a partire da contesto e modelli appresi. Non verifica automaticamente ciascun claim contro un documento autorevole. Allucinazione, errore di calcolo, bias, fonte non verificata e disposizione obsoleta richiedono diagnosi differenti.",
           "Per verificare una tesi bisogna identificare il claim, recuperare la fonte, leggere il passaggio pertinente, valutarne data e contesto, e registrare l'esito come verificato, non verificato o smentito. Citazioni formattate, RAG e prompt accurati non garantiscono la verità.",
@@ -303,14 +305,16 @@
         "verifica",
         "consegna"
       ],
-      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
+      "subtitle": "Distinguere una risposta convincente da una conoscenza verificata",
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
     },
     {
       "id": "atl-03",
-      "title": "Il laboratorio dei contenuti",
+      "title": "Progettare materiali che fanno imparare",
       "hours": 4,
       "accent": "coral",
-      "question": "Il contenuto prodotto permette davvero di apprendere?",
+      "question": "Quando una presentazione contiene troppe informazioni, gli studenti possono uscire dalla lezione con un'immagine suggestiva ma un'idea sbagliata. Il problema non è imparare a generare più contenuti: è imparare a costruire materiali che aiutino a pensare.",
       "outcomes": [
         "Realizzare un micro-kit coerente con obiettivi e prerequisiti",
         "Rivedere contenuti con verifica disciplinare, cognitiva e di accessibilità",
@@ -375,7 +379,7 @@
         "evidenza-feedback"
       ],
       "theory": {
-        "title": "Materiali per capire, non per impressionare",
+        "title": "Una storia per comprendere progettare materiali che fanno imparare",
         "paragraphs": [
           "La qualità di un materiale dipende da obiettivo, conoscenze pregresse, chiarezza e possibilità di verificare la comprensione. Una grafica appariscente può aumentare il carico cognitivo o consolidare un'immagine scientifica sbagliata.",
           "La produzione assistita da IA richiede controllo disciplinare dei fatti, coerenza dei segnali visivi, alt text, trascrizioni e licenze. Un quiz è formativo soltanto se permette di capire perché un'opzione è falsa e quale passo fare dopo.",
@@ -431,14 +435,16 @@
         "verifica",
         "consegna"
       ],
-      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
+      "subtitle": "Dalle slide ai podcast: creare risorse chiare, accurate e accessibili",
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
     },
     {
       "id": "atl-04",
-      "title": "Una classe, molte possibilità di apprendere",
+      "title": "Una scuola che include e fa progredire",
       "hours": 4,
       "accent": "emerald",
-      "question": "Come variare accesso e strumenti mantenendo gli obiettivi?",
+      "question": "Gli studenti non arrivano tutti con lo stesso lessico, le stesse esperienze o lo stesso modo di esprimersi. Una verifica equa non deve essere identica in ogni dettaglio: deve essere trasparente su ciò che vuole osservare e offrire occasioni accessibili per dimostrarlo.",
       "outcomes": [
         "Definire barriere e supporti secondo principi UDL",
         "Costruire una prova con IA e una senza IA con criteri equivalenti",
@@ -503,7 +509,7 @@
         "evidenza-feedback"
       ],
       "theory": {
-        "title": "Stessi obiettivi, diverse opportunità di riuscita",
+        "title": "Una storia per comprendere una scuola che include e fa progredire",
         "paragraphs": [
           "Le UDL Guidelines 3.0 propongono scelte diverse per coinvolgimento, rappresentazione, azione ed espressione. Offrire più strade di accesso non significa automaticamente abbassare gli obiettivi; i criteri di successo restano trasparenti e pertinenti.",
           "La valutazione formativa usa evidenze per correggere il percorso di insegnamento e apprendimento. Il feedback deve essere specifico, legato a un obiettivo e seguito da opportunità di applicazione. Il testo generato può fungere da bozza su casi fittizi, non giudizio definitivo su studenti.",
@@ -559,14 +565,16 @@
         "verifica",
         "consegna"
       ],
-      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
+      "subtitle": "Differenziare le attività e trasformare la valutazione in un aiuto per imparare",
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
     },
     {
       "id": "atl-05",
-      "title": "Progettare esperienze intelligenti e sicure",
+      "title": "Tutor intelligenti, persone responsabili",
       "hours": 4,
       "accent": "teal",
-      "question": "Come collaudare un tutor IA prima di proporlo alla scuola?",
+      "question": "Un tutor IA che risponde correttamente a un'equazione non è automaticamente pronto per una classe. Deve saper porre domande, riconoscere limiti e soprattutto fermarsi quando il caso richiede una persona responsabile.",
       "outcomes": [
         "Specificare un tutor socratico con confini e fallback",
         "Testare almeno sei comportamenti critici con input sintetici",
@@ -638,7 +646,7 @@
         "evidenza-feedback"
       ],
       "theory": {
-        "title": "Tutoring intelligente, confini espliciti, responsabilità umana",
+        "title": "Una storia per comprendere tutor intelligenti, persone responsabili",
         "paragraphs": [
           "Un tutor formativo deve avere ambito, destinatari, conoscenze ammesse, progressione degli indizi, modalità di ammissione dell'incertezza, limiti di risposta ed escalation umana. Dire al modello di 'non sbagliare' non è un controllo sufficiente.",
           "Il collaudo impiega casi normali e avversi, specifica risposte attese e osservate, testa richieste di soluzioni, errori fattuali, esfiltrazione di dati, giudizi su persone reali e contenuti dannosi. Sei test di laboratorio non certificano sicurezza generale.",
@@ -698,7 +706,9 @@
         "verifica",
         "consegna"
       ],
-      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json"
+      "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
+      "subtitle": "Progettare esperienze assistite dall’IA senza delegare la sicurezza né il giudizio educativo",
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
     }
   ],
   "assessment": {
@@ -798,7 +808,14 @@
     ],
     "mobile_required": true,
     "reduced_motion_required": true,
-    "seo_status": "not_published"
+    "seo_status": "not_published",
+    "self_study_first": true,
+    "show_teaching_time_as_estimate": true,
+    "no_facilitator_mixed_with_student_content": true,
+    "continuous_theory": true,
+    "explicit_prompts": true,
+    "narrative_data": "narrative.json",
+    "crossword_grid_adaptive": true
   },
   "editorial_notes": [
     "Soluzioni di autovalutazione presenti nel JSON pubblico: non riutilizzarle per esami B2B",
