@@ -50,3 +50,23 @@ a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #f37
 @media(max-width:930px){.atl-present-layout{grid-template-columns:1fr}.atl-present-index{max-height:145px}.atl-present-side{order:2}.atl-slide-page{min-height:460px}}
 @media(max-width:520px){.atl-present-main{padding-top:24px}.atl-present-nav-buttons{flex-wrap:wrap}.atl-present-track{order:3;flex-basis:100%}.atl-slide-page{padding:24px 20px;min-height:500px}.atl-slide-points{gap:7px}.atl-present-topline{font-size:.64rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.atl-present-track span{transition:none!important}}
+
+
+/* Correct failed color contrast in the textual fallback (shown in screenshot). */
+.atl-slide-page h2,.atl-slide-page h2 *, .atl-slide-page .atl-slide-lead,
+.atl-slide-page .atl-slide-points li{color:#fff!important}
+.atl-slide-page h2{font-weight:760;text-shadow:0 2px 9px #071d4466}
+.atl-slide-fallback-notice{font-size:.79rem;line-height:1.5;background:#fff8e9;color:#744c17!important;border:1px solid #edcb8a;border-radius:9px;padding:10px 13px;margin:0 0 15px;position:relative;z-index:1}
+/* Authentic slide image — content, typography and artwork belong to original author. */
+.atl-slide-page:has(.atl-original-slide-wrap){background:#eef4ff;min-height:0;color:#193e66;padding:0;display:block}
+.atl-slide-page:has(.atl-original-slide-wrap):before{display:none}
+.atl-original-slide-wrap{margin:0;padding:0;position:relative}
+.atl-original-slide{width:100%;height:auto;aspect-ratio:1376/768;object-fit:contain;display:block;border-radius:13px;background:white}
+.atl-original-slide-wrap figcaption{font-size:.73rem;color:#415c78;background:#eef4ff;padding:9px 12px}
+.atl-slide-transcription{border-top:1px solid #cbdcf0;background:#fff;color:#1c466a;padding:13px 18px;border-radius:0 0 13px 13px}
+.atl-slide-transcription summary{color:#1555af;font-size:.91rem;font-weight:750;cursor:pointer;padding:7px 4px}
+.atl-slide-reading{max-width:770px;margin:8px auto 10px;font-size:.93rem;line-height:1.76}
+.atl-slide-reading h2{font-size:1.45rem;color:#1c4269!important}
+.atl-slide-reading li{margin:8px 0}
+.atl-slide-remember{border-left:4px solid #e97842;padding:12px 15px;background:#fff5ec;color:#76401e;font-weight:750}
+@media(max-width:520px){.atl-slide-page:has(.atl-original-slide-wrap){min-height:0}.atl-slide-transcription{padding:11px 13px}}
