@@ -103,7 +103,7 @@ with sync_playwright() as playwright:
                 assert page.locator(".option-board .result").is_visible()
             if i == 4:
                 page.locator(".practice-branch .button").first.click()
-                assert "Conseguenza" in page.locator(".branch-feedback").inner_text()
+                assert "Conseguenza" in page.locator(".practice-branch .branch-feedback").inner_text()
             assert page.locator(".applied-step").count() == 5
             assert page.locator(".narrative-chapter").count() >= 5
             assert page.locator(".branch-choices button").count() == 3
