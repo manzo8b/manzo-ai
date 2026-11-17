@@ -462,8 +462,9 @@
           rationale.value="";
         }
         kind.value="0";kind.addEventListener("change",showModel);showModel();
-        add(chooser,label,kind,details,
-          el("label","media-label","Scrivi la tua decisione e un criterio di verifica"),rationale,
+        const rationaleLabel=el("label","media-label","Scrivi la tua decisione e un criterio di verifica");
+        rationale.id="atl-model-rationale";rationaleLabel.htmlFor=rationale.id;
+        add(chooser,label,kind,details,rationaleLabel,rationale,
           control("Confronta la mia scelta",()=>{
             const text=rationale.value.trim();
             if(text.length<35){feedback(chooser,"Motiva la scelta con almeno una frase su obiettivo, controllo e limiti.");return}
@@ -591,7 +592,8 @@
       const check=el("input");check.type="checkbox";
       add(label,check,el("span","",t));add(checklist,label);
     });
-    add(sectionBox,checklist,paragraph("**Portfolio:** "+f.deliverable));
+    const artifact=el("p","competency-deliverable");add(artifact,el("b","","Portfolio: "),el("span","",f.deliverable));
+    add(sectionBox,checklist,artifact);
     const item={...f.quiz,id:"focus-"+story.id};
     add(sectionBox,singleChoice(item,1));
     const refs=el("div","studio-references");
@@ -656,7 +658,8 @@
     add(theory,paragraph(story.lead,"narrative-intro"));
     story.chapters.forEach((chapter,i)=>{
       const segment=el("section","narrative-chapter");
-      add(segment,heading("h4",chapter.heading),paragraph(chapter.text));
+      add(segment,heading("h4",chapter.heading));
+      chapter.text.split(/\n\n+/).forEach(text=>add(segment,paragraph(text)));
       if(chapter.transition)add(segment,paragraph(chapter.transition,"narrative-bridge"));
       add(theory,segment);
     });
