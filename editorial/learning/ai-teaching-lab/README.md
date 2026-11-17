@@ -73,6 +73,14 @@ Il percorso è progettato per essere **ad accesso aperto**, senza account, progr
 **Resta per una versione pienamente validata:** revisione disciplinare, controllo periodico delle fonti, prove con docenti principianti, audit UX e accessibilità, test su dispositivi reali e, se necessari, traduzioni EN/ES, progressi persistenti e integrazioni commerciali. La durata complessiva di 20 ore è **una stima progettuale, non una misurazione con utenti**. L'effettiva pubblicazione dipende dall'esito di GitHub Pages.
 
 
+## Mission Studio — micro-web-app didattica
+
+**Codice:** `tools/ai-teaching-launchpad/index.html`  
+**Rotta prevista:** `/it/formazione/ia-per-la-didattica/inizia/`  
+**Stato:** micro-app interattiva v0.1 in sorgente, collegata al publisher e ai controlli GitHub Pages. La disponibilità del sito pubblico va confermata dopo il deploy.
+
+Permette al docente di selezionare una missione fra immagini, voce, video e verifica delle fonti; personalizzare argomento, destinatari, tempo e obiettivo; vedere un piano didattico sintetico; scaricare o ripristinare un brief JSON. È una guida **basata su regole locali**, senza inferenza IA, accesso a dati degli studenti, registrazione dei progressi o invio del brief a server. Non sostituisce i laboratori: vi si collega, ma il JSON del brief non viene importato automaticamente dagli Studi.
+
 ## Laboratori multimediali e Workspace
 
 Oltre al corso e al laboratorio multimediale iniziale, il publisher collega gli Studi **immagini**, **voce** e **video** e il **Workspace multimediale**, nei rispettivi percorsi `studio-immagini/`, `studio-voce/`, `studio-video/` e `workspace-multimediale/`.
