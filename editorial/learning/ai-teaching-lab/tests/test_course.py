@@ -210,5 +210,34 @@ class CourseQuality(unittest.TestCase):
                         self.assertGreater(len(route["transfer"]), 20)
                         self.assertGreater(len(route["result"]), 40)
 
+
+    def test_official_teacher_document_hub_and_podcast(self):
+        preview = (ROOT.parent / "preview" / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="atl-resource-heading"', preview)
+        self.assertIn('<nav id="module-nav"', preview)
+        self.assertLess(preview.index('id="module-nav"'), preview.index('class="atl-resource-hub"'))
+        self.assertEqual(preview.count('class="atl-resource-link"'), 11)
+        self.assertEqual(preview.count('rel="noopener noreferrer" title="Apri'), 11)
+        for authority in ["mim.gov.it", "unesco.org", "education.ec.europa.eu",
+                          "garanteprivacy.it", "oecd.org", "udlguidelines.cast.org",
+                          "ai-act-service-desk.ec.europa.eu"]:
+            self.assertIn(authority, preview)
+        self.assertIn("schema MIM, ottobre 2026", preview)
+        self.assertIn("altre 7 risorse", preview.lower())
+        media = (ROOT.parent / "media" / "PODCAST_NOTEBOOKLM_ITALIANO_8_MIN.md").read_text(encoding="utf-8")
+        self.assertIn("La classe delle 7:43", media)
+        self.assertIn("MARTA", media)
+        self.assertIn("DAVIDE", media)
+        self.assertIn("### Prompt da incollare", media)
+        self.assertIn("Formato APPROFONDIMENTO", media)
+        self.assertIn("sistema scientificamente validato", media)
+        dialogue = media.split("# Copione originale — due voci", 1)[1].split("## Fonti da caricare", 1)[0]
+        utterances = [line for line in dialogue.splitlines()
+                      if line.startswith("**MARTA:**") or line.startswith("**DAVIDE:**")]
+        self.assertGreaterEqual(len(utterances), 45)
+        self.assertGreater(sum(len(u.split()) for u in utterances), 1120)
+        self.assertLess(sum(len(u.split()) for u in utterances), 1450)
+        self.assertFalse(any("**TERZA VOCE:**" in x for x in utterances))
+
 if __name__ == "__main__":
     unittest.main()
