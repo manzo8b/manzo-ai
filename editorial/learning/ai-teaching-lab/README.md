@@ -1,14 +1,14 @@
 # AI Teaching Lab · Corso docenti MANZO AI
 
-**Stato:** cinque moduli completi in italiano, con **publisher predisposto per la versione pubblica beta**, non accreditata. I file sorgenti restano bozze editoriali non transazionali; il sito diventa pubblico soltanto dopo un deploy GitHub Pages concluso con successo.  
-**Ramo dedicato:** feat/ai-teaching-lab-curriculum-20261117  
+**Stato:** cinque moduli redatti in italiano e integrati nel publisher della **versione pubblica beta non accreditata**. I file JSON sorgenti conservano lo stato di bozza editoriale; il publisher produce copie pubbliche con metadati diversi. La presenza del codice sul branch principale non dimostra, da sola, l'esito dell'ultimo deploy GitHub Pages.  
+**Sviluppo:** contenuti inizialmente preparati su `feat/ai-teaching-lab-curriculum-20261117`; integrazioni successive e quattro studi audiovisivi presenti sul branch `main`.  
 **Revisione:** 17 novembre 2026  
 **Licenze e diritti:** documenti didattici originali per revisione del titolare; fonti esterne solo con link, senza riproduzioni integrali.
 
 ## Contenuti
 
 - it/course.json — cinque moduli, teoria e fonti, pedagogisti citati come parafrasi, metodo MANZO AI sempre presente, due scenari autentici sintetici per modulo.
-- it/module-01.md ... module-05.md — **cinque lezioni integrali** di circa 2.000 parole ciascuna, con sequenza da 240 minuti, laboratori da 72+72 minuti, prompt, esempi ragionati, quiz, matching, cruciverba, rubrica, guida del formatore e schede di consegna.
+- it/module-01.md ... module-05.md — **cinque lezioni integrali**, di lunghezza diversa (circa 2.900–5.000 parole nei sorgenti al 17 novembre 2026), con una durata didattica stimata di 240 minuti per modulo, due laboratori principali per modulo, prompt, casi sintetici, verifiche, rubriche e guida del formatore. Il progetto finale del modulo 05 è un'attività aggiuntiva distinta dai dieci laboratori principali.
 - it/lesson-01.md — prima lezione pilota, conservata come risorsa storica complementare.
 - it/assessment-bank.json — 5 set con scelta multipla, scenari, associazioni, 5 cruciverba realmente incrociati (35 termini), compiti autentici ed exit ticket.
 - it/scenarios.json — cinque decision lab, 3 scelte iniziali × 2 sviluppi per modulo: **30 percorsi possibili** con feedback specifico, revisione e trasferimento al lavoro docente.
@@ -19,7 +19,7 @@
 
 ## Avvio anteprima su Mac o PC
 
-Clonare o scaricare il ramo; dalla **radice del repository**:
+Clonare o scaricare il repository; dalla **radice del progetto**:
 
     python3 -m http.server 8766
 
@@ -40,11 +40,11 @@ I test comprendono controlli unitari, pubblicazione su staging statico con sitem
 
 ## Versione pubblica beta
 
-Quando il ramo verrà integrato e il deploy GitHub Pages terminerà con esito positivo, il percorso sarà disponibile su:
+Il publisher predispone il percorso a questo indirizzo, da considerare operativo soltanto dopo una verifica del deploy GitHub Pages:
 
     https://manzo8b.github.io/manzo-ai/it/formazione/ia-per-la-didattica/
 
-Il corso sarà **ad accesso aperto**, senza account, progressi persistenti, certificati, voti o raccolta di lavori degli studenti. Le cinque lezioni integrali avranno propri URL sotto `modulo-01/` … `modulo-05/` e il percorso sarà collegato all'Academy e alle sitemap. Le traduzioni non sono ancora disponibili: i collegamenti EN/ES identificano la lingua italiana del corso, senza fingere una localizzazione.
+Il percorso è progettato per essere **ad accesso aperto**, senza account, progressi persistenti, certificati, voti o raccolta dei lavori degli studenti. Le cinque lezioni hanno URL predisposti sotto `modulo-01/` … `modulo-05/`; il publisher integra anche i collegamenti all'Academy e alla sitemap. Le traduzioni non sono ancora disponibili: i collegamenti EN/ES identificano la lingua italiana del corso, senza fingere una localizzazione.
 
 ## Metodo MANZO AI
 
@@ -65,10 +65,18 @@ Il corso sarà **ad accesso aperto**, senza account, progressi persistenti, cert
 - Tutti i controlli, punteggi e cruciverba girano **esclusivamente nel browser**. Nessun progresso reale viene registrato o inviato. L'anteprima non dispone di login, database o analytics.
 - Non dichiarare badge, attestati, accreditamento MIUR/MIM o soddisfacimento dell'articolo 4 dell'AI Act come automatismi del percorso.
 - Prima di un impiego in scuole reali verificare contratto, ruolo titolare/responsabile, policy, finalità, anonimizzazione, sicurezza, AI Act e GDPR con personale responsabile. Il parere Garante del 20/10/2026 riguarda **uno schema di decreto**: verificare prima di citare come definitivo.
-- Nessuna modifica al sito pubblico, alle tabelle Supabase esistenti, Auth, catalogo M2, deploy o pagamenti.
+- Gli aggiornamenti sono effettuati nel codice del sito e nei suoi workflow di pubblicazione; non implicano modifiche alle tabelle Supabase, all'autenticazione, al catalogo commerciale o ai pagamenti.
 
 ## Definizione di completamento editoriale vs product release
 
-**Sviluppo contenuti:** cinque moduli, banca di verifiche e trenta percorsi decisionali scritti, prototipo funzionante in sorgente. Nuovo publisher pronto per l'integrazione e la verifica su staging.  
-**Resta prima di una release:** validazione teorica con esperto disciplinare, controllo delle fonti, prove di comprensione con docenti campione, revisione UX, test su dispositivi reali, traduzioni EN/ES se richieste, eventuale integrazione nel catalogo e progressi sicuri server-side. La durata 20h è **stimata**. Nessuna pubblicazione automatica per il solo merge.
+**Sviluppo contenuti:** cinque moduli, banca di verifiche e trenta percorsi decisionali redatti; publisher e laboratori integrati nel codice sorgente. La funzionalità nel browser e la pubblicazione devono essere verificate con test eseguiti e controlli sul sito reale.  
+**Resta per una versione pienamente validata:** revisione disciplinare, controllo periodico delle fonti, prove con docenti principianti, audit UX e accessibilità, test su dispositivi reali e, se necessari, traduzioni EN/ES, progressi persistenti e integrazioni commerciali. La durata complessiva di 20 ore è **una stima progettuale, non una misurazione con utenti**. L'effettiva pubblicazione dipende dall'esito di GitHub Pages.
 
+
+## Laboratori multimediali e Workspace
+
+Oltre al corso e al laboratorio multimediale iniziale, il publisher collega gli Studi **immagini**, **voce** e **video** e il **Workspace multimediale**, nei rispettivi percorsi `studio-immagini/`, `studio-voce/`, `studio-video/` e `workspace-multimediale/`.
+
+Gli Studi lavorano sui materiali importati localmente e producono schede JSON di lavoro; non attivano modelli generativi remoti. Lo Studio video, sui browser compatibili, esporta soltanto una sequenza WebM silenziosa: la traccia audio di riferimento e i sottotitoli restano separati. Il Workspace aggrega **metadati** e approvazioni autodichiarate, non ingloba file audiovisivi e non certifica in modo indipendente la revisione del docente.
+
+L'audit automatico del codice si avvia con `node theme/check-ai-teaching-lab-contracts.cjs`; dopo un build si può indicare `--site _site` per verificare anche la struttura pubblicata. L'esito dello script non sostituisce test reali con browser o docenti.
