@@ -423,6 +423,58 @@
     }
     if(f.type==="multimedia_design"){
       const studio=el("div","competency-interaction media-creator");
+
+      const guide=story.generative_model_guide;
+      if(guide){
+        const panel=el("section","model-selection-guide");
+        add(panel,el("div","model-selection-eyebrow","PRIMA DI GENERARE"),
+          heading("h4",guide.heading),paragraph(guide.introduction),
+          paragraph(guide.no_absolute_winner,"subtle"));
+        const chooser=el("div","model-choice-controls");
+        const label=el("label","media-label","Che cosa vuoi progettare?");
+        label.htmlFor="atl-model-media";
+        const kind=el("select","media-select");kind.id="atl-model-media";
+        guide.rows.forEach((item,i)=>{const op=el("option","",item.name);op.value=String(i);add(kind,op)});
+        const details=el("div","model-choice-detail");
+        const rationale=el("textarea","competency-reason");
+        rationale.rows=3;
+        rationale.maxLength=500;
+        rationale.placeholder="Perché useresti questa soluzione? Indica la prova da verificare e un limite da conoscere";
+        rationale.setAttribute("aria-label","Motivazione della scelta del modello o dello strumento");
+        function showModel(){
+          const item=guide.rows[Number(kind.value)]||guide.rows[0];
+          details.replaceChildren();
+          add(details,heading("h5",item.name));
+          const cols=el("div","model-choice-columns");
+          const mk=(title,items)=>{
+            const box=el("div","model-choice-column");
+            add(box,el("b","",title),list(items));
+            return box;
+          };
+          add(cols,mk("Modelli o famiglie",item.model_examples),
+            mk("Applicazioni o strumenti",item.product_examples));
+          add(details,cols,
+            add(el("div","model-choice-why"),el("b","","Quando possono aiutare"),paragraph(item.why)),
+            add(el("div","model-choice-verify"),el("b","","Cosa controllare"),paragraph(item.review)),
+            add(el("div","model-source-links"),
+              external(item.source,"Documentazione ufficiale"),
+              external(item.other_source,"Altra fonte pertinente")));
+          rationale.value="";
+        }
+        kind.value="0";kind.addEventListener("change",showModel);showModel();
+        add(chooser,label,kind,details,
+          el("label","media-label","Scrivi la tua decisione e un criterio di verifica"),rationale,
+          control("Confronta la mia scelta",()=>{
+            const text=rationale.value.trim();
+            if(text.length<35){feedback(chooser,"Motiva la scelta con almeno una frase su obiettivo, controllo e limiti.");return}
+            feedback(chooser,"Buona prima ipotesi. Ora confronta due alternative con lo stesso brief. Verifica fedeltà al contenuto, correggibilità, licenze, accessibilità, privacy, costo e piano senza IA. Il nome del prodotto non è una garanzia di efficacia.",true);
+          }));
+        add(panel,chooser);
+        const criteria=el("details","model-criteria");
+        add(criteria,el("summary","","Sei criteri per confrontare le alternative"),list(guide.decision_criteria,true));
+        add(panel,criteria);
+        add(studio,panel);
+      }
       add(studio,heading("h4","Studio multimediale · costruisci lo storyboard"),
         paragraph("Prima definisci l'apprendimento e la fonte, poi scegli come raccontarlo. La traccia è costruita nel tuo browser: nessuna IA viene interrogata e nessun dato viene inviato.","subtle"));
       const form=el("div","media-brief");
@@ -464,6 +516,7 @@
         generated="DESTINATARI: "+audience+"\nOBIETTIVO: "+goal+
           "\nCONCETTO: "+concept+"\nFONTE DA CONTROLLARE: "+source+
           "\nFORMATO: "+select.selectedOptions[0].textContent+
+          (guide?"\nOPZIONI DI MODELLO/SERVIZIO DA CONFRONTARE: "+(guide.rows[Number(studio.querySelector("#atl-model-media")?.value||0)]||guide.rows[0]).model_examples.join("; "):"")+
           "\nSTORYBOARD: "+act+"\nDOMANDA AGLI STUDENTI: Che cosa puoi concludere dalle prove disponibili?"+
           "\nFEEDBACK: Chiedi quale fonte manca, spiega il criterio e invita alla revisione."+
           "\nACCESSIBILITÀ: "+blueprint.accessibility+
