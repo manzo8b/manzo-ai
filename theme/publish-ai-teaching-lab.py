@@ -18,6 +18,7 @@ DATA=SRC/"it"
 PREVIEW=SRC/"preview"
 MEDIA=SRC/"media"
 IMAGE_STUDIO=ROOT/"tools"/"ai-teaching-image-studio"/"index.html"
+VOICE_STUDIO=ROOT/"tools"/"ai-teaching-voice-studio"/"index.html"
 ROUTE="it/formazione/ia-per-la-didattica"
 BASE="/manzo-ai/"
 MARKER='data-atl-feature="2026-11"'
@@ -242,6 +243,9 @@ def publish(site,verify=False):
         anchor='<a class="studio-entry-action" href="./laboratorio-multimediale/">'
         if home.count(anchor)!=1:raise RuntimeError("Image Studio landing anchor missing or repeated")
         home=home.replace(anchor,entry+"\\n"+anchor,1)
+        voice_entry='<a href="./studio-voce/" data-atl-voice-studio="v0.1" style="display:inline-flex;margin:12px 0 0 10px;padding:12px 18px;border-radius:14px;background:#174c7b;color:white;font-weight:750;text-decoration:none">Apri lo Studio voce · registrazione e verifica ↗</a>'
+        if home.count('data-atl-image-studio="v0.1"')!=1:raise RuntimeError("Missing image studio link before voice insertion")
+        home=home.replace(entry,entry+voice_entry,1)
         (target/"index.html").write_text(home,encoding="utf-8")
         presentation=(PREVIEW/"presentazione"/"index.html").read_text(encoding="utf-8")
         presentation=presentation.replace('<meta name="robots" content="noindex,nofollow">',"")
@@ -294,6 +298,7 @@ def publish(site,verify=False):
         studio_path.parent.mkdir(parents=True,exist_ok=True)
         if studio_html.count("</body>")!=1:raise RuntimeError("Unexpected production studio body")
         studio_html=studio_html.replace("</body>",'<div style="max-width:1100px;margin:1rem auto 2rem;padding:1.25rem;border:1px solid #cbd9f0;border-radius:20px;background:#f1f6ff;color:#193454"><strong>Studio immagini · nuovo laboratorio dedicato</strong><p>Progetta l’immagine, prepara il prompt, importa il risultato e verifica il materiale prima dell’approvazione docente. La generazione IA rimane esterna.</p><a href="../studio-immagini/" style="display:inline-block;padding:.8rem 1rem;border-radius:11px;background:#205beb;color:#fff;font-weight:700">Apri Studio immagini ↗</a></div></body>',1)
+        studio_html=studio_html.replace("</body>",'<div style="max-width:1100px;margin:1rem auto 2rem;padding:1.25rem;border:1px solid #cbd9f0;border-radius:20px;background:#f1f6ff;color:#193454"><strong>Studio voce · narrazione didattica</strong><p>Scrivi il copione, registra dal microfono o importa una voce esterna, controlla la trascrizione e approva il materiale. Nessuna voce IA integrata.</p><a href="../studio-voce/" style="display:inline-block;padding:.8rem 1rem;border-radius:11px;background:#174c7b;color:#fff;font-weight:700">Apri Studio voce ↗</a></div></body>',1)
         studio_path.write_text(studio_html,encoding="utf-8")
         if not IMAGE_STUDIO.is_file():raise RuntimeError("Missing standalone image studio source")
         image_html=IMAGE_STUDIO.read_text(encoding="utf-8")
@@ -303,6 +308,14 @@ def publish(site,verify=False):
         image_dest=target/"studio-immagini"/"index.html"
         image_dest.parent.mkdir(parents=True,exist_ok=True)
         image_dest.write_text(image_html,encoding="utf-8")
+        if not VOICE_STUDIO.is_file():raise RuntimeError("Missing standalone voice studio source")
+        voice_html=VOICE_STUDIO.read_text(encoding="utf-8")
+        if '<meta name="robots" content="noindex,follow">' not in voice_html:
+            raise RuntimeError("Voice studio prototype status not declared")
+        voice_html=voice_html.replace('<meta name="robots" content="noindex,follow">',seo("Studio voce didattica | AI Teaching Lab | MANZO AI","Copione, registrazione locale, importazione, trascrizione e verifica della voce sotto controllo del docente.","LearningResource",BASE+ROUTE+"/studio-voce/"),1)
+        voice_dest=target/"studio-voce"/"index.html"
+        voice_dest.parent.mkdir(parents=True,exist_ok=True)
+        voice_dest.write_text(voice_html,encoding="utf-8")
         for i,m in enumerate(course["modules"],1):
             text=(DATA/f"module-{i:02d}.md").read_text(encoding="utf-8")
             dest=target/f"modulo-{i:02d}"/"index.html"
@@ -330,6 +343,12 @@ def publish(site,verify=False):
     if 'id="approve"' not in image_content or 'id="upload"' not in image_content or "Non genera immagini con IA" not in image_content:
         raise RuntimeError("Image Studio review/provenance flow incomplete")
     if '../studio-immagini/' not in studio_html:raise RuntimeError("No link from production studio to image studio")
+    voice_studio=(target/"studio-voce"/"index.html")
+    if not voice_studio.is_file():raise RuntimeError("Missing published voice studio")
+    voice_content=voice_studio.read_text(encoding="utf-8")
+    if any(x not in voice_content for x in ('id="record"','id="stop"','id="transcript"','id="approve"','getUserMedia','MediaRecorder')):
+        raise RuntimeError("Voice studio recording/transcript/approval incomplete")
+    if '../studio-voce/' not in studio_html:raise RuntimeError("No link from production studio to voice studio")
     slides=(target/"presentazione"/"index.html")
     if not slides.is_file() or "15 slide" not in slides.read_text(encoding="utf-8"):raise RuntimeError("Slide reader missing")
     if (MEDIA/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip").is_file():
@@ -341,6 +360,7 @@ def publish(site,verify=False):
     home=(target/"index.html").read_text(encoding="utf-8")
     if 'data-course-data-base="./data/"' not in home or 'content="noindex' in home:raise RuntimeError("Home not public")
     if 'data-atl-image-studio="v0.1"' not in home:raise RuntimeError("Home image studio link missing")
+    if 'data-atl-voice-studio="v0.1"' not in home:raise RuntimeError("Home voice studio link missing")
     if not (target/"data"/"narrative.json").is_file():raise RuntimeError("Missing full narrative")
     presentation=json.loads((target/"data"/"presentation.json").read_text(encoding="utf-8"))
     if len(presentation["slides"])!=15:raise RuntimeError("Expected 15 presentation slides")
