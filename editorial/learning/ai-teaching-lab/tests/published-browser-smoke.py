@@ -18,6 +18,16 @@ with sync_playwright() as playwright:
         assert "Formazione docenti" in page.title()
         assert page.locator("header.module-hero").count()==1
         assert page.locator("#module-nav button").count()==5
+        assert page.locator(".atl-resource-hub").is_visible()
+        assert page.locator(".atl-resource-link").count()==11
+        assert page.locator(".atl-resource-link:visible").count()==4
+        assert page.locator("[data-atl-resource-glossary]").is_visible()
+        assert page.locator('.atl-resource-link[href*="mim.gov.it"]').count()==1
+        assert page.locator('.atl-resource-link[href*="unesco.org"]').count()==2
+        assert page.locator(".atl-resource-link").first.get_attribute("target")=="_blank"
+        page.locator(".atl-resource-more summary").click()
+        assert page.locator(".atl-resource-link:visible").count()==11
+        page.locator(".atl-resource-more summary").click()
         assert page.locator(".branch-choices button").count()==3
         assert page.locator(".lab-prompt-code").count()==2
         probe=page.locator("fieldset.assessment-block").filter(has=page.get_by_role("button",name="Confronta la mia ipotesi"))
