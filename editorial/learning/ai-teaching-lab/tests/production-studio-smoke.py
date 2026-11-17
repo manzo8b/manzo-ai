@@ -59,7 +59,7 @@ with tempfile.TemporaryDirectory() as directory:
             assert page.locator(".studio-scene-editor").count()==3
             page.locator('[data-scene="0"] [data-field="title"]').fill("Da una domanda a un metodo")
             page.locator('[data-scene="0"] input[type="file"]').set_input_files(str(image))
-            page.locator('[data-scene="0"] .studio-file-state').get_by_text("Immagine pronta",exact=False).wait_for(timeout=10000)
+            page.locator('[data-scene="0"] div.studio-file-state').get_by_text("Immagine pronta",exact=False).wait_for(timeout=10000)
             # Prompt that can be copied into an authorized external AI model.
             page.locator('[data-scene="0"] .studio-scene-tools button').nth(1).click()
             assert "16:9" in page.locator('[data-scene="0"] .studio-prompt-output').input_value()
@@ -175,7 +175,7 @@ with tempfile.TemporaryDirectory() as directory:
             if width<=760: page.locator(".studio-phase-switcher > summary").click()
             page.locator('#studio-steps button[data-go="2"]').click()
             assert page.locator('[data-scene="0"] [data-field="title"]').input_value()=="Da una domanda a un metodo"
-            assert "Immagine caricata" in page.locator('[data-scene="0"] .studio-file-state').inner_text()
+            assert "Immagine caricata" in page.locator('[data-scene="0"] div.studio-file-state').inner_text()
             assert not errors,errors
             page.close()
         browser.close()
