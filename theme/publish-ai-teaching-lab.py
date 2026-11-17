@@ -193,7 +193,7 @@ def publish(site,verify=False):
         home=home.replace("<body>",'<body data-course-data-base="./data/" data-module-base="./modulo-">')
         home=home.replace('ANTEPRIMA DIDATTICA · NON PUBBLICATA','FORMAZIONE DOCENTI · ACCESSO APERTO')
         home=home.replace("Questo è un prototipo editoriale isolato: non salva risposte, non prevede login, non valuta studenti reali e non rilascia attestati. La durata non è stata ancora validata con un gruppo pilota.",
-            "Corso aperto in italiano, non accreditato. Le risposte restano solo nel browser: nessun account, dato personale o certificato. Le 20 ore sono stimate e saranno validate con docenti.")
+            "Corso aperto in italiano, non accreditato. Le verifiche sono locali al browser; non serve un account, non si salvano progressi né si rilasciano attestati. Le 20 ore sono stimate e saranno validate con docenti.")
         home=home.replace('<span class="brand-symbol" aria-hidden="true">M</span>',
             '<img class="brand-icon" src="/manzo-ai/assets/manzo-mark.svg" width="38" height="38" alt="">')
         # Media are optional: never publish dead links while the binary originals
