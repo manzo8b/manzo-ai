@@ -78,7 +78,7 @@ with sync_playwright() as playwright:
             if i == 0:
                 page.locator(".competency-reason").fill("Scelgo la scheda senza IA perché rende osservabile l'argomentazione, mantiene i testi sintetici e posso controllare la fonte.")
                 page.get_by_role("button", name="Verifica i miei criteri").click()
-                assert "obiettivo" in page.locator(".option-board .result").inner_text().lower()
+                assert "competenza osservabile" in page.locator(".option-board .result").inner_text().lower()
             if i == 1:
                 page.get_by_role("button", name="Prova le quattro schede nuove").click()
                 assert "2/4" in page.locator(".demo-model .result").inner_text()
