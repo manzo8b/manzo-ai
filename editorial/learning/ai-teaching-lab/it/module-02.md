@@ -42,6 +42,8 @@ Il dubbio su quella bibliografia non si risolve guardando lo stile. Occorre capi
 
 Un modello linguistico produce una risposta a partire dal contesto e da regolarità apprese. La frase può essere grammaticalmente impeccabile anche quando un dato, una data o un riferimento non sono affidabili. Con 'allucinazione' indichiamo, nel linguaggio comune dell'IA generativa, un'informazione inventata o non fedele presentata come plausibile. Ma non tutti gli errori sono allucinazioni: una fonte reale interpretata male, una statistica vecchia, un calcolo errato e un pregiudizio nei contenuti richiedono interventi diversi. Il docente dovrebbe dunque insegnare a denominare l'errore con precisione, senza trasformare ogni incertezza in una condanna.
 
+Un'altra distinzione è fondamentale: apprendimento automatico non significa semplicemente chiedere qualcosa a un chatbot. Nell'apprendimento supervisionato un modello viene addestrato su esempi etichettati; poi lo si prova su dati mai visti. Se tutti i triangoli del training sono blu e tutti i cerchi sono rossi, una regola che impara solo i colori sembra perfetta sul training ma fallisce quando cambia il colore. Il test rivela il problema di generalizzazione e possibili scorciatoie nei dati. Un grande modello linguistico generativo produce invece sequenze di token attraverso meccanismi ben più complessi: il nostro piccolo classificatore dimostrativo non riproduce ChatGPT. La simulazione serve a capire perché una prestazione apparentemente buona richiede prove indipendenti.
+
 Conoscere il meccanismo dell'errore è utile solo se impariamo a reagire. Passiamo allora da un sospetto generico a una sequenza di verifiche che anche gli studenti possano eseguire e spiegare.
 
 ### 3. Un metodo di verifica che si può insegnare
@@ -167,6 +169,56 @@ Scheda di verifica delle notizie pronta da adattare
 
 **Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
 
+## Esercitazione integrata · Dentro il machine learning: allenare e verificare una regola
+
+*Questa esercitazione sviluppa una parte dei due laboratori già previsti, **non aumenta automaticamente le quattro ore stimate del modulo**. Puoi usare solo materiale sintetico e svolgere il lavoro senza un sistema IA esterno.*
+
+**Situazione professionale:** Schede inventate: quattro triangoli blu e quattro cerchi rossi; quattro nuovi esempi incrociano colore e forma
+
+**Risultato che devi ottenere:** Distinguere dati di addestramento, test, etichette, generalizzazione e possibili scorciatoie nei dati
+
+### Come procedere
+
+1. Osserva otto esempi etichettati, senza dati personali
+2. Confronta due regole che sul training sembrano entrambe corrette: «blu → triangolo» e «triangolo → triangolo»
+3. Prova le due regole su quattro schede mai viste: triangolo rosso, cerchio blu, triangolo blu e cerchio rosso
+4. Conta gli errori e spiega perché osservare solo il training sarebbe ingannevole
+5. Distingui il piccolo classificatore a regole da un grande modello generativo di testo: non sono lo stesso meccanismo
+
+### Prompt professionale pronto da adattare
+
+```text
+OBIETTIVO: spiegare con un esperimento semplice la differenza fra training e test.
+CONTESTO: docenti non programmatori, schede inventate di figure e colori.
+DATI CONSENTITI: otto esempi di training (triangoli blu; cerchi rossi) e quattro esempi nuovi (triangolo rosso, cerchio blu, triangolo blu, cerchio rosso).
+VINCOLI: non usare foto, voci o dati degli alunni; non descrivere questa simulazione come una rete neurale o un LLM.
+OUTPUT: tabella di predizioni delle due regole con spiegazione degli errori.
+VERIFICA: segnala quali esempi mostrano il limite del colore come scorciatoia.
+```
+
+### Esempio di possibile elaborato (simulato)
+
+> Entrambe le regole ottengono 8/8 sugli esempi iniziali. Su quattro casi nuovi, la regola basata sul colore riconosce 2/4, mentre quella basata sulla forma riconosce 4/4. Il risultato vale per questo piccolo gioco: non garantisce prestazioni reali su altri dati.
+
+### Cosa controllare prima di consegnare
+
+- Distinzione training/test
+- Nessuna interpretazione di successo sul training come prova di generalizzazione
+- Classificazione non confusa con generazione testuale
+- Esempi interamente fittizi
+
+**Portfolio:** Tabella 8 casi di training e 4 di test, spiegazione di almeno due errori e un limite della simulazione
+
+### Una domanda per verificarti
+
+**Perché un classificatore che risponde bene ai dati già visti può sbagliare con nuove schede?**
+
+1. Perché la grafica non è abbastanza moderna
+2. Perché può avere appreso una regolarità accidentale che non generalizza
+3. Perché ogni modello IA si limita a cercare informazioni su Internet
+
+*Rifletti prima di leggere la risposta.* La soluzione prevista è **2**: La prova con esempi mai visti mette alla prova la generalizzazione.
+
 ## Parole utili, spiegate senza gergo
 
 Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri una parola nuova.
@@ -208,6 +260,11 @@ Per non interrompere il racconto, abbiamo raccolto le fonti in questa sezione. S
 3. [Stanford Encyclopedia — Critical thinking](https://plato.stanford.edu/entries/critical-thinking/history.html)
 
 **Riferimento pedagogico:** Paulo Freire — [testo di riferimento](https://unesdoc.unesco.org/in/rest/annotationSVC/DownloadWatermarkedAttachment/attach_import_fc6d477a-47cd-4363-8429-5a6e3b260c1b?_=380981eng.pdf). Le idee riportate nel modulo sono parafrasi applicative e non citazioni letterali attribuite all'autore.
+
+### Altre letture per approfondire questa competenza
+
+- [Google · Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course?hl=it)
+- [Generalizzazione e overfitting](https://developers.google.com/machine-learning/crash-course/overfitting?hl=it)
 
 ## Per chi facilita un gruppo (sezione facoltativa)
 
