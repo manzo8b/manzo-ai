@@ -244,7 +244,7 @@
     return block;
   }
   function render() {
-    const m=state.course.modules[state.index],a=state.bank.modules.find(q=>q.module_id===m.id),scenario=state.scenarios.modules.find(q=>q.module_id===m.id);
+    const m=state.course.modules[state.index],a=state.bank.modules.find(q=>q.module_id===m.id),branchScenario=state.scenarios.modules.find(q=>q.module_id===m.id);
     document.documentElement.style.setProperty("--accent",accent[m.accent]||"#1159ea");
     Array.from($("module-nav").children).forEach((b,i)=>b.setAttribute("aria-current",String(i===state.index)));
     const root=$("module-content");root.replaceChildren();
@@ -253,7 +253,7 @@
       heading("h2",m.title),paragraph(m.question),add(el("div","module-meta"),el("span","","4 ore previste"),el("span","","2 laboratori"),el("span","","Verifica interattiva")));
     add(root,hero);
     const outcomes=section("LEARNING OUTCOMES","Quello che saprai fare");
-    add(outcomes,list(m.outcomes));add(root,outcomes,conceptProbe(scenario));
+    add(outcomes,list(m.outcomes));add(root,outcomes,conceptProbe(branchScenario));
     const theory=section("TEORIA DOCUMENTATA","Capire prima di applicare");
     add(theory,paragraph(m.urgent_teacher_challenge,"subtle"));
     m.theory.paragraphs.forEach((p,i)=>{
@@ -282,7 +282,7 @@
     const moduleNumber=String(state.index+1).padStart(2,"0");
     link.href=document.body.dataset.moduleBase ? document.body.dataset.moduleBase+moduleNumber+"/" : "../it/module-"+moduleNumber+".md";
     link.target="_blank";link.rel="noopener noreferrer";
-    add(labs,paragraph("Il documento contiene consegne passo passo, esempi guidati, prompt e una guida di correzione.", "subtle"),link);add(root,labs,branchingSimulation(scenario));
+    add(labs,paragraph("Il documento contiene consegne passo passo, esempi guidati, prompt e una guida di correzione.", "subtle"),link);add(root,labs,branchingSimulation(branchScenario));
     const assess=section("VERIFICA FORMATIVA","Metti alla prova il tuo giudizio");
     add(assess,paragraph("Le risposte rimangono solo in questa pagina durante la visita. Non c'è voto, salvataggio o attestato.","subtle"));
     m.checkpoint.forEach((q,i)=>add(assess,singleChoice(q,i+1)));
