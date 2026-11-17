@@ -208,7 +208,7 @@ def publish(site,verify=False):
                 shutil.copyfile(src,target/"media"/name)
                 media_available[name]=True
         # A single small ZIP stores unaltered slide artwork and the original podcast video.
-        bundle=MEDIA/"AI_Teaching_Lab_Originali_1_UPLOAD.zip"
+        bundle=MEDIA/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip"
         expected_slides=[f"slide-{i:02d}.webp" for i in range(1,16)]
         authentic_slides=False
         if bundle.is_file():
@@ -285,7 +285,7 @@ def publish(site,verify=False):
     if not vocab.is_file() or "Pedagogia" not in vocab.read_text(encoding="utf-8"):raise RuntimeError("Public glossary missing")
     slides=(target/"presentazione"/"index.html")
     if not slides.is_file() or "15 slide" not in slides.read_text(encoding="utf-8"):raise RuntimeError("Slide reader missing")
-    if (MEDIA/"AI_Teaching_Lab_Originali_1_UPLOAD.zip").is_file():
+    if (MEDIA/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip").is_file():
         slide_files=list((target/"media"/"slides").glob("slide-*.webp"))
         if len(slide_files)!=15:raise RuntimeError("Missing all original NotebookLM slide images")
         if not (target/"media"/"AI_per_Docenti.web.mp4").is_file():raise RuntimeError("Original video missing")
