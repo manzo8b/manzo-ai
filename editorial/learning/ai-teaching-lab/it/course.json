@@ -6,9 +6,9 @@
   "published": false,
   "public_graded_assessment": false,
   "private_assessment_ready": false,
-  "course_title": "Intelligenza Artificiale per la Didattica",
-  "subtitle": "Un percorso narrativo e pratico, comprensibile anche a chi studia in autonomia",
-  "marketing_title": "AI Teaching Lab — Intelligenza Artificiale per la Didattica",
+  "course_title": "IA e didattica applicata",
+  "subtitle": "Cinque esperienze che insegnano attraverso la pratica: problema, narrazione, prompt, revisione e feedback",
+  "marketing_title": "AI Teaching Lab — IA e didattica applicata",
   "audience": [
     "docenti primaria",
     "docenti secondaria",
@@ -889,6 +889,24 @@
     "sources": [
       "https://gpseducation.oecd.org/CountryProfile?primaryCountry=ITA&topic=TA",
       "https://www.oecd.org/en/publications/2026/09/education-at-a-glance-2026_3bce4131/full-report/teacher-shortages-and-the-attractiveness-of-the-teaching-profession_074961e4.html"
+    ]
+  },
+  "learning_promise": "Il corso è progettato per essere un esempio di didattica applicata all'IA: la sequenza che il docente sperimenta è la stessa che potrà adattare ai propri studenti, con supporto IA opzionale e controllo umano.",
+  "course_as_demonstration": {
+    "not_a_live_ai_tutor": true,
+    "sequence": [
+      "Problema professionale autentico e sintetico",
+      "Domanda iniziale con previsione",
+      "Narrazione teorica e fonti",
+      "Esempio svolto da analizzare",
+      "Laboratorio con prompt oppure alternativa senza IA",
+      "Verifica con feedback e riflessione",
+      "Trasferimento alla classe"
+    ],
+    "learning_concept": "Il corso fa sperimentare prima di descrivere: la progettazione stessa è il modello didattico, non una dimostrazione di software",
+    "sources": [
+      "https://www.unesco.org/en/articles/ai-competency-framework-teachers",
+      "https://joint-research-centre.ec.europa.eu/scientific-activities/key-competences-lifelong-learning/digcompedu/digcompedu-framework_en"
     ]
   }
 }
