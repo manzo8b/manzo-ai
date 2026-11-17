@@ -3,6 +3,7 @@ name: AI Teaching Lab — editorial and preview QA
 on:
   push:
     branches:
+      - main
       - feat/ai-teaching-lab-curriculum-20261117
     paths:
       - 'editorial/learning/ai-teaching-lab/**'
