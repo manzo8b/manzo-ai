@@ -6,6 +6,9 @@ on:
       - feat/ai-teaching-lab-curriculum-20261117
     paths:
       - 'editorial/learning/ai-teaching-lab/**'
+      - 'theme/publish-ai-teaching-lab.py'
+      - 'theme/build-seo.py'
+      - '.github/workflows/deploy-pages.yml'
       - '.github/workflows/ai-teaching-lab-qa.yml'
   pull_request:
     paths:
@@ -32,6 +35,36 @@ jobs:
         run: |
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/course.json > /dev/null
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/assessment-bank.json > /dev/null
+          python3 -m json.tool editorial/learning/ai-teaching-lab/it/scenarios.json > /dev/null
+      - name: Prepare static build and publish five full teacher lessons
+        run: |
+          python3 -m pip install --disable-pip-version-check markdown==3.10
+          python3 -m py_compile theme/publish-ai-teaching-lab.py
+          mkdir -p _teacher_staging
+          unzip -q site-v0.7.zip -d _teacher_staging
+          mkdir -p _teacher_staging/assets
+          cp theme/manzo-mark.svg _teacher_staging/assets/manzo-mark.svg
+          python3 theme/publish-ai-teaching-lab.py --site _teacher_staging
+          python3 theme/publish-ai-teaching-lab.py --site _teacher_staging --verify-only
+          python3 theme/build-seo.py --site _teacher_staging --base-url https://manzo8b.github.io/manzo-ai/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          p=Path('_teacher_staging/it/formazione/ia-per-la-didattica')
+          public=json.loads((p/'data/course.json').read_text(encoding='utf-8'))
+          assert public['published'] is True
+          assert public['status']=='public_beta'
+          assert public['hours_validated_by_pilot'] is False
+          assert public['private_assessment_ready'] is False
+          assert len(list(p.glob('modulo-*/index.html')))==5
+          urls=(Path('_teacher_staging/sitemap.xml').read_text(encoding='utf-8'))
+          assert 'ia-per-la-didattica' in urls
+          for lang,hub in [('it','academy'),('en','academy'),('es','academia')]:
+              text=(Path('_teacher_staging')/lang/hub/'index.html').read_text(encoding='utf-8')
+              assert text.count('data-atl-feature="2026-11"')==1
+          print('Five published beta modules and SEO sitemap: PASS')
+          PY
       - name: Install Chromium for functional and mobile preview tests
         run: |
           python3 -m pip install playwright==1.55.0
@@ -41,6 +74,13 @@ jobs:
           python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/ai-teaching-lab-http.log 2>&1 &
           sleep 1
           python3 editorial/learning/ai-teaching-lab/tests/browser-smoke.py
+      - name: Exercise published course, full lessons and Academy links in Chromium
+        run: |
+          mkdir -p _teacher_webroot
+          ln -s ../_teacher_staging _teacher_webroot/manzo-ai
+          python3 -m http.server 8767 --bind 127.0.0.1 --directory _teacher_webroot >/tmp/ai-teaching-public-http.log 2>&1 &
+          sleep 1
+          python3 editorial/learning/ai-teaching-lab/tests/published-browser-smoke.py
       - name: Confirm non-public preview status
         run: |
           python3 - <<'PY'
