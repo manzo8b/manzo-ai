@@ -204,6 +204,52 @@ Script, trascrizione, glossario e lista fonti
 
 **Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
 
+## Scegliere il modello generativo in funzione del risultato
+
+Un docente che vuole costruire una fotografia illustrativa e un docente che vuole progettare un podcast hanno esigenze differenti. Prima di aprire un programma, occorre distinguere **modello**, **applicazione** ed **editor**. ChatGPT è un'applicazione che offre strumenti per generare immagini tramite modelli della famiglia GPT Image; Google Gemini consente di accedere ai modelli d'immagine conosciuti come **Nano Banana**. Per il montaggio, la grafica e la struttura di una presentazione può invece servire un editor come Canva. L'app non coincide sempre con il modello: una stessa piattaforma può offrire più motori. Nessuna denominazione garantisce in assoluto la scelta migliore e disponibilità, limiti e costi possono cambiare.
+
+La scena didattica è concreta: la docente deve far capire perché **una giornata di freddo non dimostri da sola una tendenza climatica**. Se desidera un'immagine illustrativa realistica di un paesaggio invernale, può provare ChatGPT Images e Gemini Nano Banana con lo stesso brief. Confronta dettagli, coerenza, facilità di correzione, accessibilità e condizioni d'uso. Non può però usare un'immagine generata come se fosse una fotografia documentaria con una data e un luogo realmente osservati. E se deve costruire un grafico con dati meteorologici, prima controlla i dati scientifici e poi disegna il grafico in uno strumento appropriato: non deve chiedere a un generatore visivo di inventare numeri.
+
+### Panorama operativo delle scelte
+
+| Risultato didattico | Modelli o servizi da considerare | Che cosa verificare |
+| --- | --- | --- |
+| Fotografie e immagini realistiche | ChatGPT Images (famiglia GPT Image), Gemini Nano Banana (modelli Gemini Image), ChatGPT, Gemini | Evitare di presentare immagini sintetiche come fotografie documentali; verificare errori storici, scientifici e dettagli che potrebbero creare stereotipi. |
+| Grafici, infografiche e schemi | ChatGPT Images, Gemini Nano Banana, Editor visuale e Canva per la revisione umana | Ricostruire manualmente dati, etichette, unità, proporzioni e fonti: una grafica generata può inventare cifre, oggetti o relazioni. |
+| Presentazioni e storyboard | LLM per testo e struttura; modelli di immagini per illustrazioni, Canva / Dream Lab, NotebookLM / Gemini Notebook per lavoro sulle fonti | Controllare fonte di ogni affermazione, leggibilità, compatibilità mobile, testi originali e contrasti. |
+| Dialoghi e podcast didattici | Servizi con generazione audio e dialoghi, non necessariamente modelli selezionabili dall'utente, NotebookLM / Gemini Notebook, Audio Overview | Riascoltare l'intero audio, correggere eventuali citazioni inesatte e fornire una trascrizione accessibile. |
+| Video o animazioni generative | Google Veo (famiglia di modelli video), Google Flow / Gemini secondo disponibilità, Editor video per il montaggio | Verificare coerenza delle scene, anomalie di movimento, accuratezza, diritti, eventuali didascalie e sottotitoli. |
+| Percorsi interattivi con feedback | LLM facoltativo per redigere domande, alternative e spiegazioni, H5P Branching Scenario, Attività locali MANZO AI | Dichiarare quando il percorso usa regole predefinite: H5P non diventa un tutor IA solo perché contiene un quiz. |
+
+**Attenzione:** NotebookLM/Gemini Notebook è uno strumento che lavora su fonti fornite; H5P è uno strumento per attività interattive basate su regole. Non sono intercambiabili con un modello che produce fotografie. Per qualsiasi piattaforma o modello vanno verificati licenze, accessibilità, costi, termini, protezione dei dati e policy dell'istituto. In particolare, **non caricare fotografie, lavori o voci di studenti identificabili in servizi non autorizzati**. Non mostrare fotografie sintetiche come prove documentali.
+
+### Una richiesta visiva che un docente può adattare
+
+```text
+OBIETTIVO DIDATTICO: usare un'illustrazione fotografica per avviare una discussione sulla differenza fra meteo e clima.
+DESTINATARI: seconda media, linguaggio accessibile.
+SOGGETTO: paesaggio invernale immaginario, senza persone identificabili, senza luoghi o date reali.
+COMPOSIZIONE: una singola scena leggibile, spazio laterale per un titolo aggiunto successivamente nell'editor.
+VINCOLI: non inventare grafici, numeri, marchi, citazioni o etichette; non presentare il risultato come documento storico o scientifico.
+OUTPUT: immagine orizzontale 16:9 e breve descrizione testuale per il docente.
+VERIFICA UMANA: controllare dettagli, coerenza, didascalia «immagine generata con IA», diritti e accessibilità.
+```
+
+**Laboratorio di confronto:** prova lo stesso prompt su **ChatGPT Images** e **Nano Banana** soltanto quando puoi farlo con strumenti consentiti. Se non hai accesso, confronta due output fittizi preparati dal docente e indica quali caratteristiche modificheresti. Compila una scheda con: adeguatezza all'obiettivo, possibilità di correggere, accuratezza del soggetto, diritti e autorizzazioni, accessibilità, costo complessivo e alternativa non IA. Concludi con una frase motivata: «Per questo obiettivo sceglierei …, purché …».
+
+**Fonti ufficiali per il panorama degli strumenti:**
+- [Fotografie e immagini realistiche · guida al modello o servizio](https://openai.com/it-IT/index/introducing-chatgpt-images-2-5/)
+- [Fotografie e immagini realistiche · altra documentazione](https://gemini.google/overview/image-generation/)
+- [Grafici, infografiche e schemi · guida al modello o servizio](https://developers.openai.com/api/docs/guides/image-prompting)
+- [Grafici, infografiche e schemi · altra documentazione](https://deepmind.google/models/gemini-image/)
+- [Presentazioni e storyboard · guida al modello o servizio](https://www.canva.com/help/generate-with-dreamlab/)
+- [Presentazioni e storyboard · altra documentazione](https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/)
+- [Dialoghi e podcast didattici · guida al modello o servizio](https://blog.google/innovation-and-ai/products/notebooklm-audio-overviews/)
+- [Video o animazioni generative · guida al modello o servizio](https://deepmind.google/models/veo/)
+- [Video o animazioni generative · altra documentazione](https://deepmind.google/models/veo/prompt-guide/)
+- [Percorsi interattivi con feedback · guida al modello o servizio](https://h5p.org/branching-scenario)
+- [Percorsi interattivi con feedback · altra documentazione](https://h5p.org/interactive-video)
+
 ## Esercitazione integrata · Dall'idea alla risorsa multimediale accessibile
 
 Questa esercitazione **fa parte dei due laboratori del modulo**; usa soltanto situazioni fittizie e puoi completarla anche senza un chatbot esterno.
