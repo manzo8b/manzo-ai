@@ -379,6 +379,21 @@
       paragraph(story.subtitle,"module-subtitle"),
       add(el("div","module-meta"),el("span","","Studio autonomo"),el("span","","2 laboratori guidati"),el("span","","4 ore indicative")));
     add(root,hero);
+    const roadmap=el("nav","course-session-map");
+    roadmap.setAttribute("aria-label","Attività del modulo");
+    const parts=[
+      ["Video e orientamento","#atl-start","00"],
+      ["Lettura di approfondimento","#atl-theory","01"],
+      ["Laboratori","#atl-labs","02"],
+      ["Verifica e riflessione","#atl-quiz","03"]
+    ];
+    parts.forEach(([label,url,num])=>{
+      const a=el("a","course-session-step");
+      a.href=url;
+      add(a,el("span","course-session-number",num),el("span","",label));
+      add(roadmap,a);
+    });
+    add(root,roadmap);
 
     const welcome=section("COME INIZIARE","Qui impari anche da solo");
     welcome.id="atl-start";
@@ -399,13 +414,13 @@
     add(welcome,goals);
     add(root,welcome,courseInAction(),conceptProbe(decision));
 
-    const theory=section("COMPRENDERE","La storia che dà senso alla teoria");
+    const theory=section("LETTURA DI APPROFONDIMENTO","Una storia da seguire, non una successione di definizioni");
     theory.id="atl-theory";
     add(theory,paragraph(story.lead,"narrative-intro"));
     story.chapters.forEach((chapter,i)=>{
       const segment=el("section","narrative-chapter");
-      add(segment,el("span","chapter-label","CAPITOLO "+String(i+1).padStart(2,"0")),
-        heading("h4",chapter.heading),paragraph(chapter.text));
+      add(segment,heading("h4",chapter.heading),paragraph(chapter.text));
+      if(chapter.transition)add(segment,paragraph(chapter.transition,"narrative-bridge"));
       add(theory,segment);
     });
     const pedagogy=el("div","pedagogy-note");
@@ -510,6 +525,24 @@
     m.theory.sources.forEach((s,i)=>add(links,external(s.url,(i+1)+". "+s.title)));
     add(sources,paragraph("Le fonti aiutano a distinguere i principi di ricerca dalle proposte operative di MANZO AI. Le situazioni dei laboratori sono esercitazioni inventate, non dati di ricerca."),links);
     add(root,sources);
+    const bridge=story.bridge_to_next;
+    if(bridge){
+      const closing=section("PER CONTINUARE","Il prossimo passo nasce da ciò che hai imparato");
+      closing.className+=" course-next-section";
+      add(closing,paragraph(bridge.back,"course-next-story"),
+        add(el("div","course-next-question"),el("b","","Riflessione"),paragraph(bridge.prompt)));
+      if(state.index<state.course.modules.length-1){
+        const nextButton=control("Prosegui · "+state.course.modules[state.index+1].title,()=>{
+          state.index++;render();
+          $("module-content").scrollIntoView({block:"start",behavior:"auto"});
+        });
+        nextButton.className+=" course-next-action";
+        add(closing,nextButton);
+      }else{
+        add(closing,paragraph("Hai attraversato tutte le letture. Scegli un problema della tua didattica, prepara una proposta verificabile e consulta il vocabolario quando incontri un termine nuovo.","subtle"));
+      }
+      add(root,closing);
+    }
     root.focus({preventScroll:true});
   }
   function init(course,bank,scenarios,narrative,glossary) {
@@ -522,10 +555,35 @@
     state.course=course;state.bank=bank;state.scenarios=scenarios;state.narrative=narrative;state.glossary=glossary;
     const nav=$("module-nav");
     course.modules.forEach((m,i)=>{
+      const story=narrative.modules.find(t=>t.id===m.id);
+      const entry=el("div","module-nav-entry");
       const b=el("button","nav-button");b.type="button";
-      add(b,el("span","nav-number",String(i+1).padStart(2,"0")),el("span","nav-text",m.title));
-      b.addEventListener("click",()=>{state.index=i;render();$("module-content").scrollIntoView({block:"start",behavior:"auto"})});
-      add(nav,b);
+      add(b,el("span","nav-number",String(i+1).padStart(2,"0")),
+        el("span","nav-text",m.title));
+      b.addEventListener("click",()=>{state.index=i;render();
+        $("module-content").scrollIntoView({block:"start",behavior:"auto"})});
+      add(entry,b);
+      const details=el("details","module-outline");
+      const summary=el("summary","","Che cosa farai · 4 attività");
+      add(details,summary);
+      const items=el("ol","module-outline-items");
+      [
+        {name:"Lettura di approfondimento",time:"48 min",target:"atl-theory"},
+        {name:"Laboratorio · Prima sperimentazione",time:"72 min",target:"atl-labs"},
+        {name:"Laboratorio · Revisione",time:"72 min",target:"atl-labs"},
+        {name:"Verifica e riflessione",time:"48 min",target:"atl-quiz"}
+      ].forEach((activity,j)=>{
+        const a=el("a","module-outline-link");
+        a.href="#"+activity.target;
+        add(a,el("span","",activity.name),el("small","",activity.time));
+        a.addEventListener("click",ev=>{
+          ev.preventDefault();state.index=i;render();
+          document.getElementById(activity.target)?.scrollIntoView({block:"start",behavior:"smooth"});
+        });
+        add(items,add(el("li"),a));
+      });
+      add(details,items);
+      add(entry,details);add(nav,entry);
     });
     $("experience").hidden=false;$("notice").hidden=true;render();renderGlossary(glossary);
   }
