@@ -450,53 +450,55 @@ body:not([data-module-base]) [data-atl-resource-glossary]{display:none!important
 @media(max-width:490px){.studio-entry-content{padding:23px 19px}.studio-entry-action{display:flex}.studio-entry-visual{min-height:155px}.studio-entry-page{min-height:120px;width:28%;max-width:98px;padding:10px}.studio-entry-page b{font-size:.61rem}}
 @media(prefers-reduced-motion:reduce){.studio-entry-action,.studio-open-action{transition:none!important}.studio-entry-action:hover,.studio-open-action:hover{transform:none!important}}
 
-/* AI Teaching Lab / progressive disclosure: prevent exhaustive vertical scroll. */
-.course-side-disclosure{min-width:0}
-.course-side-disclosure>summary{display:none;list-style:none}
-.course-side-disclosure>summary::-webkit-details-marker,.course-roadmap-disclosure>summary::-webkit-details-marker,.course-fold>summary::-webkit-details-marker{display:none}
-.course-roadmap-disclosure{margin:12px 0 18px;border:1px solid #cbdff2;border-radius:16px;background:#f5f9ff;padding:0}
-.course-roadmap-disclosure>summary{list-style:none;padding:14px 18px;color:#194c81;font-weight:800;font-size:.88rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.course-roadmap-disclosure>summary::after{content:"⌄";color:#145cd4;font-size:1.15rem}
-.course-roadmap-disclosure[open]>summary::after{content:"⌃"}
-.course-roadmap-disclosure .course-session-map{margin:0 14px 14px}
-.course-section-picker{display:flex;align-items:center;gap:14px;padding:15px 18px;margin:19px 0 16px;background:#f0f6ff;border:1px solid #bfd7f1;border-radius:17px}
-.course-section-picker label{font-size:.84rem;font-weight:800;white-space:nowrap;color:#194d82}
-.course-section-select{min-width:0;width:100%;max-width:650px;background:#fff;color:#153e6b;border:1px solid #b6cfe9;border-radius:11px;min-height:46px;padding:10px 13px;font-weight:690;font-size:.88rem}
-.course-fold{min-width:0;margin:13px 0;border-radius:20px;border:1px solid #cbdff2;background:#fff;box-shadow:0 8px 24px rgba(26,69,116,.055);overflow:clip;scroll-margin-top:90px}
-.course-fold>summary{display:grid;align-items:center;grid-template-columns:44px minmax(0,1fr) 20px;gap:13px;list-style:none;cursor:pointer;padding:18px 20px;background:linear-gradient(115deg,#fff 15%,#f2f7ff);color:#1b416c}
-.course-fold>summary:hover{background:linear-gradient(115deg,#f7fbff 15%,#eaf4ff)}
-.course-fold[open]{border-color:#9bbfe7;box-shadow:0 14px 35px rgba(31,87,157,.09)}
-.course-fold[open]>summary{border-bottom:1px solid #d6e5f5}
-.course-fold-number{display:grid;place-items:center;min-width:40px;height:40px;border-radius:11px;background:#e1edff;color:#1755b5;font-size:.83rem;font-weight:850}
-.course-fold[open] .course-fold-number{background:#145ed7;color:#fff}
-.course-fold-label{min-width:0;display:block}
-.course-fold-label strong{display:block;font-size:clamp(.91rem,1.1vw,1.03rem);line-height:1.35;letter-spacing:-.015em}
-.course-fold-label small{display:block;color:#567692;font-size:.67rem;letter-spacing:.07em;font-weight:760;margin-top:5px}
-.course-fold-arrow{font-size:1.3rem;color:#2a66b5;transition:transform .18s ease}
-.course-fold[open] .course-fold-arrow{transform:rotate(180deg)}
-.course-fold>.panel{margin:0!important;border:0!important;box-shadow:none!important;border-radius:0!important;min-width:0}
-.course-fold>.panel>h3:first-of-type{display:none}
-.course-fold>.panel>.section-kicker:first-child{display:none}
-.course-fold:focus-within{border-color:#2f73df}
+/* Four-step course experience: single-level navigation and preserved learning content. */
+.atl-journey{min-width:0;margin-top:23px;scroll-margin-top:85px}
+.atl-journey-top{display:flex;justify-content:space-between;align-items:end;gap:18px;padding:24px clamp(19px,2.5vw,30px);background:linear-gradient(128deg,#f0f6ff 0%,#fff 85%);border:1px solid #cfdfef;border-radius:23px 23px 0 0}
+.atl-journey-intro{flex:1;min-width:0;max-width:570px}
+.atl-journey-eyebrow,.atl-stage-eyebrow{font-size:.7rem;letter-spacing:.11em;font-weight:840;color:#165dc4}
+.atl-journey-intro h3{font-size:clamp(1.4rem,2.2vw,1.95rem);letter-spacing:-.035em;line-height:1.17;margin:8px 0;color:#152f54}
+.atl-journey-intro p{color:#466482;font-size:.89rem;line-height:1.57;margin:0}
+.atl-module-switcher{display:flex;flex-direction:column;gap:6px;flex:0 1 290px;min-width:0}
+.atl-module-switcher label{font-size:.74rem;color:#345879;font-weight:750}
+.atl-module-select{width:100%;min-height:46px;font-size:.88rem;padding:10px 12px;border:1px solid #b0cbe8;border-radius:11px;color:#183e68;background:#fff;font-weight:720}
+.atl-journey-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-inline:1px solid #cfdfef;border-bottom:1px solid #cfdfef;background:#fff}
+.atl-stage-tab{min-width:0;display:flex;align-items:center;justify-content:center;gap:9px;border:0;border-right:1px solid #dde9f5;border-bottom:3px solid transparent;background:#fff;color:#4b6886;padding:14px 10px;font-size:.88rem;font-weight:780;transition:background .18s,border-color .18s}
+.atl-stage-tab:last-child{border-right:0}
+.atl-stage-tab:hover{background:#f0f6ff;color:#1b519b}
+.atl-stage-tab[aria-selected="true"]{background:#edf4ff;color:#134da7;border-bottom-color:#1a63de}
+.atl-stage-count{display:grid;place-items:center;width:31px;height:31px;flex:0 0 31px;border-radius:10px;background:#e7effa;color:#2f669f;font-weight:840;font-size:.73rem}
+.atl-stage-tab[aria-selected="true"] .atl-stage-count{background:#165edb;color:#fff}
+.atl-stage-name{min-width:0;overflow-wrap:anywhere}
+.atl-journey-position{margin:0;border-inline:1px solid #cfdfef;background:#f8fbff;padding:9px 22px;color:#346086;font-size:.77rem;font-weight:760}
+.atl-journey-panel{border:1px solid #cfdfef;border-top:0;border-radius:0 0 22px 22px;background:#fff;padding:25px clamp(16px,3vw,31px) 28px;min-width:0}
+.atl-journey-panel[hidden]{display:none!important}
+.atl-journey-stage-intro{padding:0 0 14px;border-bottom:1px solid #e2eaf4;margin-bottom:12px}
+.atl-journey-stage-intro h4{margin:7px 0 3px;font-size:clamp(1.32rem,2.4vw,1.85rem);color:#172f51;line-height:1.21;letter-spacing:-.033em}
+.atl-journey-stage-intro p{font-size:.86rem;color:#57728c;margin:6px 0 0}
+.atl-journey-panel>.panel.atl-stage-content{padding:18px 0 21px;margin:0;background:transparent;border:0;border-bottom:1px solid #e4ecf5;border-radius:0;box-shadow:none;min-width:0}
+.atl-journey-panel>.panel.atl-stage-content:last-of-type{border-bottom:0}
+.atl-journey-panel>.panel.atl-stage-content>.section-kicker{color:#155dbf}
+.atl-journey-panel>.panel.atl-stage-content>h3{font-size:clamp(1.15rem,2vw,1.53rem);color:#1a406e;letter-spacing:-.025em;margin:6px 0 12px}
+.atl-journey-panel .competency-studio{margin:16px 0 17px}
+.atl-journey-actions{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:11px;margin-top:23px;padding-top:17px;border-top:1px solid #dce8f5}
+.atl-journey-actions .button{margin:0;min-height:46px}
+.atl-journey-actions .atl-journey-next{margin-left:auto;background:#175bdb;color:white;box-shadow:0 9px 22px rgba(25,91,180,.14)}
+.atl-journey-end{font-size:.82rem;line-height:1.6;color:#386582;max-width:660px}
 @media(max-width:800px){
- .course-side-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;list-style:none;min-height:54px;padding:13px 16px;cursor:pointer;color:#174c83;font-size:.89rem;font-weight:800;background:#fff;border:1px solid #bad2ec;border-radius:13px}
- .course-side-disclosure>summary::after{content:"⌄";font-size:1.2rem;color:#1a5fc8}
- .course-side-disclosure[open]>summary::after{content:"⌃"}
- .course-side-disclosure[open]>summary{margin-bottom:13px}
- .course-side{padding:13px!important;border-radius:18px!important}
- .course-article{min-width:0}
- .course-section-picker{display:block;padding:13px;margin:13px 0}
- .course-section-picker label{display:block;margin-bottom:7px}
- .course-section-select{max-width:100%;font-size:16px}
- .course-fold>summary{grid-template-columns:37px minmax(0,1fr) 18px;gap:10px;padding:13px 12px}
- .course-fold-number{min-width:35px;height:35px;border-radius:9px;font-size:.76rem}
- .course-fold-label strong{font-size:.91rem}
- .course-fold-label small{font-size:.63rem;line-height:1.25;letter-spacing:.025em}
- .course-fold>.panel{padding:19px 15px!important}
- .course-fold{scroll-margin-top:82px;border-radius:15px;margin:10px 0}
- .course-roadmap-disclosure{margin:12px 0}
+ .atl-journey{scroll-margin-top:75px;margin-top:15px}
+ .atl-journey-top{display:flex;flex-direction:column;align-items:stretch;gap:14px;padding:19px 17px;border-radius:17px 17px 0 0}
+ .atl-module-switcher{flex:none}
+ .atl-module-select{font-size:16px}
+ .atl-journey-nav{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .atl-stage-tab{flex-direction:column;gap:5px;padding:12px 4px 10px;min-height:76px;font-size:.73rem;line-height:1.22}
+ .atl-stage-count{height:29px;width:29px;flex-basis:29px}
+ .atl-journey-position{padding:9px 15px}
+ .atl-journey-panel{padding:20px 16px 24px;border-radius:0 0 17px 17px}
+ .atl-journey-panel>.panel.atl-stage-content{padding:17px 0 18px}
+ .atl-journey-panel>.panel.atl-stage-content>h3{font-size:1.23rem}
+ .atl-journey-actions .button{flex:1 1 130px;font-size:.85rem;text-align:center}
 }
-@media(prefers-reduced-motion:reduce){.course-fold-arrow{transition:none}}
+@media(max-width:370px){.atl-stage-tab{font-size:.68rem}.atl-journey-panel{padding-inline:13px}}
+@media(prefers-reduced-motion:reduce){.atl-stage-tab{transition:none}}
 
 /* The 79-term glossary remains discoverable but never adds 79 unsolicited cards. */
 .atl-final-disclosure{max-width:1210px;margin:28px auto;border:1px solid #b9d2ec;background:#f4f9ff;border-radius:19px;box-shadow:0 8px 26px #1749800a;overflow:hidden}
