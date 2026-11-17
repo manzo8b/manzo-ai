@@ -50,14 +50,14 @@ with sync_playwright() as playwright:
         assert "Una domanda per continuare" in page.locator(".atl-slide-page h2").inner_text()
         page.goto(BASE,wait_until="networkidle")
         page.locator("#experience").wait_for(state="visible",timeout=10000)
-        assert page.locator(".atl-resource-link").count() == 11
+        assert page.locator(".atl-resource-link").count() == 19
         assert page.locator(".atl-resource-link:visible").count() == 4
         assert page.locator(".atl-resource-hub").is_visible()
         assert not page.locator("[data-atl-resource-glossary]").is_visible()
         assert page.evaluate("document.getElementById('module-nav').nextElementSibling.classList.contains('atl-resource-hub')")
-        page.locator(".atl-resource-more summary").click()
+        page.locator(".atl-resource-more:not(.atl-resource-specialized) summary").click()
         assert page.locator(".atl-resource-link:visible").count() == 11
-        page.locator(".atl-resource-more summary").click()
+        page.locator(".atl-resource-more:not(.atl-resource-specialized) summary").click()
         assert page.locator(".atl-resource-link:visible").count() == 4
         assert page.locator("#module-content").is_visible()
         assert page.locator(".preview-tag").is_visible()
@@ -69,7 +69,7 @@ with sync_playwright() as playwright:
             assert page.locator(".panel").count() >= 5
             assert page.locator(".method-step").count() == 7
             assert page.locator(".case-card").count() == 2
-            assert page.locator(".lab-prompt-code").count() == 2
+            assert page.locator(".lab-prompt-code").count() == 3
             assert page.locator(".applied-step").count() == 5
             assert page.locator(".narrative-chapter").count() >= 5
             assert page.locator(".branch-choices button").count() == 3
@@ -85,7 +85,7 @@ with sync_playwright() as playwright:
             page.screenshot(path=str(evidence / ("module-%02d-%d.png" % (i+1, width))), full_page=False)
         # Course-ending vocabulary is independently searchable and grouped.
         assert page.locator("#atl-final-glossary").is_visible()
-        assert "47 voci" in page.locator("#atl-term-count").inner_text()
+        assert "79 voci" in page.locator("#atl-term-count").inner_text()
         page.locator("#atl-term-search").fill("pedagogia")
         assert page.locator(".term-card").count() >= 1
         page.locator("#atl-term-search").fill("")
