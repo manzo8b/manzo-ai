@@ -31,6 +31,7 @@ jobs:
         run: python3 -m unittest discover -s editorial/learning/ai-teaching-lab/tests -p 'test_*.py' -v
       - name: Validate JavaScript source syntax
         run: node --check editorial/learning/ai-teaching-lab/preview/app.js
+          && node --check editorial/learning/ai-teaching-lab/preview/production-studio.js
       - name: Validate editorial JSON syntax
         run: |
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/course.json > /dev/null
@@ -61,6 +62,9 @@ jobs:
           assert public['private_assessment_ready'] is False
           assert len(list(p.glob('modulo-*/index.html')))==5
           assert (p/'glossario/index.html').is_file()
+          assert (p/'laboratorio-multimediale/index.html').is_file()
+          assert (p/'production-studio.js').is_file()
+          assert (p/'production-studio.css').is_file()
           assert len(json.loads((p/'data/glossary.json').read_text(encoding='utf-8'))['entries'])>=40
           urls=(Path('_teacher_staging/sitemap.xml').read_text(encoding='utf-8'))
           assert 'ia-per-la-didattica' in urls
@@ -78,6 +82,7 @@ jobs:
           python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/ai-teaching-lab-http.log 2>&1 &
           sleep 1
           python3 editorial/learning/ai-teaching-lab/tests/browser-smoke.py
+          python3 editorial/learning/ai-teaching-lab/tests/production-studio-smoke.py
       - name: Exercise published course, full lessons and Academy links in Chromium
         run: |
           mkdir -p _teacher_webroot

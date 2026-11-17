@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#ffffff">
+<title>Studio multimediale · AI Teaching Lab | MANZO AI</title>
+<link rel="stylesheet" href="../production-studio.css">
+<script src="../production-studio.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#studio-main">Vai al laboratorio</a>
+<header class="studio-header">
+ <div class="studio-container studio-header-inner">
+ <a class="studio-logo" href="../"><span class="studio-monogram">M</span> MANZO <strong>AI</strong><span class="studio-logo-desc"> / AI TEACHING LAB</span></a>
+ <a class="studio-back" href="../">Torna al percorso <span aria-hidden="true">↗</span></a>
+ </div>
+</header>
+<main class="studio-container" id="studio-main">
+ <div class="studio-intro">
+  <span class="studio-eyebrow">MODULO 03 / LABORATORIO DI PRODUZIONE</span>
+  <h1>Dall'idea alla <em>risorsa multimediale</em></h1>
+  <p>Progetta, costruisci, verifica ed esporta un micro-kit didattico reale: <strong>tre slide, un copione audio a due voci e un'interazione con feedback</strong>. Puoi inserire immagini e audio che hai il diritto di utilizzare. Nessun account e nessun invio di dati a server.</p>
+  <div class="studio-intro-stats"><span><b>5</b> fasi guidate</span><span><b>3</b> scene modificabili</span><span><b>3</b> risultati esportabili</span><span><b>100%</b> nel browser</span></div>
+ </div>
+ <div class="studio-workspace">
+  <aside class="studio-sidebar" aria-label="Fasi della produzione">
+   <div class="studio-side-label">IL TUO PROCESSO</div>
+   <nav class="studio-steps" id="studio-steps" aria-label="Fasi del laboratorio">
+    <button type="button" data-go="0" aria-current="step"><span class="studio-step-number">01</span><span><strong>Brief didattico</strong><small>Chi, perché e con quali fonti</small></span></button>
+    <button type="button" data-go="1"><span class="studio-step-number">02</span><span><strong>Scelta dei modelli</strong><small>Strumenti e criteri</small></span></button>
+    <button type="button" data-go="2"><span class="studio-step-number">03</span><span><strong>Storyboard</strong><small>Tre scene e una storia</small></span></button>
+    <button type="button" data-go="3"><span class="studio-step-number">04</span><span><strong>Produzione</strong><small>Immagini, podcast, interazione</small></span></button>
+    <button type="button" data-go="4"><span class="studio-step-number">05</span><span><strong>Verifica e consegna</strong><small>Anteprima ed esportazione</small></span></button>
+   </nav>
+   <div class="studio-side-note"><strong>Un laboratorio, non cinque esercizi in più</strong><p>Integra i laboratori esistenti del modulo 3. I tempi del corso rimangono stimati, non certificati.</p></div>
+  </aside>
+  <section class="studio-panel" aria-label="Area di produzione">
+   <div class="studio-panel-head"><span id="studio-progress-text" aria-live="polite">Fase 1 di 5</span><div class="studio-progress-track"><span id="studio-progress-fill"></span></div></div>
+   <form id="studio-form" novalidate>
+   <section class="studio-phase" data-phase="0">
+    <div class="phase-heading"><span class="phase-kicker">01 / ASCOLTO E PROGETTAZIONE</span><h2>Prima la lezione, poi il modello IA</h2><p>Definisci una competenza osservabile e indica da dove provengono le informazioni. L'esempio iniziale è inventato e puoi sostituirlo interamente.</p></div>
+    <div class="studio-form-grid">
+     <label>Argomento o titolo del kit <input name="title" maxlength="130" required value="Una giornata fredda cambia il clima?"></label>
+     <label>Destinatari <input name="audience" maxlength="100" required value="Scuola secondaria di primo grado"></label>
+     <label class="studio-span">Obiettivo osservabile <textarea name="goal" rows="2" maxlength="480" required>Distinguere un evento meteorologico da una tendenza climatica e motivare quali prove servono.</textarea></label>
+     <label>Durata della microlezione <select name="minutes"><option value="10">10 minuti</option><option value="15" selected>15 minuti</option><option value="20">20 minuti</option><option value="30">30 minuti</option></select></label>
+     <label>Prerequisiti <input name="prerequisites" maxlength="220" value="Saper distinguere una singola osservazione da una serie di dati"></label>
+     <label class="studio-span">Fonte da verificare e utilizzare <textarea name="source" rows="2" maxlength="550" required>Materiale didattico dell'insegnante e fonte scientifica da controllare prima della pubblicazione. Gli esempi di questa demo sono inventati.</textarea></label>
+     <label class="studio-span">Vincoli e accessibilità <textarea name="constraints" rows="2" maxlength="480">Nessun dato personale di studenti; esempi sintetici; slide leggibili; audio con trascrizione; alternativa senza dispositivi.</textarea></label>
+    </div>
+    <div class="studio-hint"><strong>Domanda guida</strong> — Che cosa saprà fare lo studente dopo questa attività, anche se il servizio IA non fosse disponibile?</div>
+   </section>
+   <section class="studio-phase" data-phase="1" hidden>
+    <div class="phase-heading"><span class="phase-kicker">02 / CLASSIFICAZIONE E RISCHIO</span><h2>Scegli lo strumento in base al risultato</h2><p>Non esiste un modello migliore per tutte le attività. Seleziona il tipo di risorsa, consulta i riferimenti e giustifica la tua scelta prima di generare contenuti.</p></div>
+    <label>Prodotto principale da sviluppare
+     <select name="medium" id="studio-medium">
+      <option value="slides">Slide e immagini</option><option value="audio">Podcast e audio</option>
+      <option value="video">Video e animazioni</option><option value="interactive">Attività interattiva</option>
+     </select>
+    </label>
+    <div class="studio-models" id="studio-models" aria-live="polite"></div>
+    <label>Motiva la scelta e descrivi il controllo necessario
+     <textarea name="model_reason" rows="4" maxlength="600">Per le immagini illustrative confronto ChatGPT Images e Gemini Nano Banana sullo stesso brief. Non considero un'immagine generata una prova scientifica e verifico fonti, licenze, accessibilità e dettagli.</textarea>
+    </label>
+    <div class="studio-hint">Non caricare fotografie, elaborati o voci di studenti identificabili su servizi non autorizzati. Canva è un ambiente di progettazione, non un singolo modello; H5P crea percorsi interattivi a regole.</div>
+   </section>
+   <section class="studio-phase" data-phase="2" hidden>
+    <div class="phase-heading"><span class="phase-kicker">03 / STORYBOARD</span><h2>Tre scene, un filo narrativo</h2><p>Puoi cambiare titoli, spiegazioni e descrizioni visive. La scena iniziale solleva un problema; quella centrale lo chiarisce; la conclusione chiede una verifica.</p></div>
+    <div id="studio-scenes" class="studio-scenes"></div>
+    <div class="studio-hint">Un'immagine decorativa non insegna da sola. Scegli un visual solo quando chiarisce una relazione o permette di ragionare sul problema.</div>
+   </section>
+   <section class="studio-phase" data-phase="3" hidden>
+    <div class="phase-heading"><span class="phase-kicker">04 / PRODUZIONE E INTERAZIONE</span><h2>Dai forma ai materiali</h2><p>Scrivi il copione, definisci una decisione formativa e, se disponibili, aggiungi immagini e audio tuoi. Le risorse vengono incorporate nell'HTML esportato, senza upload.</p></div>
+    <div class="studio-media-split">
+     <div class="studio-subsection"><div class="studio-section-overline">AUDIO / PODCAST</div><h3>Due voci e trascrizione</h3>
+      <label>Voce A <input name="speaker_a" maxlength="45" value="Marta"></label>
+      <label>Voce B <input name="speaker_b" maxlength="45" value="Davide"></label>
+      <label>Copione leggibile come trascrizione <textarea name="script" rows="9" maxlength="9000">Marta: Oggi fa freddo. Significa che il clima sta cambiando in una direzione precisa?
+Davide: Un singolo giorno ci parla del tempo meteorologico, non ci permette di stabilire una tendenza climatica.
+Marta: Quale prova ci servirebbe allora?
+Davide: Osservazioni affidabili raccolte nel tempo, confrontate con metodo. Non numeri inventati da un assistente.</textarea></label>
+      <label>Registrazione audio facoltativa (MP3, M4A, OGG o WAV, massimo 8 MB) <input type="file" id="studio-audio" accept="audio/mpeg,audio/mp4,audio/ogg,audio/wav,audio/x-wav,.m4a" aria-describedby="studio-audio-state"></label>
+      <div id="studio-audio-state" class="studio-file-state" aria-live="polite">Nessun audio allegato; il copione testuale è comunque esportabile.</div>
+     </div>
+     <div class="studio-subsection"><div class="studio-section-overline">INTERATTIVITÀ</div><h3>Una scelta che produce apprendimento</h3>
+      <label>Domanda per gli studenti <textarea name="quiz_question" rows="2" maxlength="400">Una sola giornata molto fredda dimostra che il clima si sta raffreddando?</textarea></label>
+      <label>Risposta A <input name="answer_a" maxlength="230" value="Sì, basta una giornata"></label>
+      <label>Risposta B <input name="answer_b" maxlength="230" value="No, occorrono osservazioni nel tempo"></label>
+      <label>Risposta C <input name="answer_c" maxlength="230" value="Non serve verificare alcuna fonte"></label>
+      <label>Risposta corretta <select name="correct"><option value="0">A</option><option value="1" selected>B</option><option value="2">C</option></select></label>
+      <label>Feedback se corretto <textarea name="feedback_correct" rows="2" maxlength="500">Esatto: un evento locale non basta per dimostrare una tendenza. Occorrono dati attendibili e una scala temporale adeguata.</textarea></label>
+      <label>Feedback se non corretto <textarea name="feedback_wrong" rows="2" maxlength="500">Riprova: distingui l'osservazione di oggi dalle misurazioni ripetute nel tempo. Quale fonte consulteresti?</textarea></label>
+     </div>
+    </div>
+   </section>
+   <section class="studio-phase" data-phase="4" hidden>
+    <div class="phase-heading"><span class="phase-kicker">05 / VERIFICA E CONSEGNA</span><h2>Controlla il kit e portalo in classe</h2><p>La tua produzione viene assemblata localmente in una microlezione HTML autonoma con tre slide, audio facoltativo, trascrizione e domanda interattiva. Puoi salvarla e stamparla in PDF.</p></div>
+    <div class="studio-quality">
+     <label><input type="checkbox" name="quality" value="sources"> Ho controllato tutte le affermazioni fattuali e le fonti</label>
+     <label><input type="checkbox" name="quality" value="privacy"> Non ho inserito dati personali non autorizzati</label>
+     <label><input type="checkbox" name="quality" value="access"> Immagini con descrizioni, testo leggibile e audio con trascrizione</label>
+     <label><input type="checkbox" name="quality" value="learning"> Ogni scena contribuisce all'obiettivo e include una verifica</label>
+     <label><input type="checkbox" name="quality" value="rights"> Ho verificato le licenze e il diritto di riutilizzo dei materiali</label>
+    </div>
+    <div class="studio-preview" id="studio-preview" aria-label="Anteprima del prodotto"></div>
+    <div class="studio-export-actions">
+     <button type="button" class="studio-action studio-action-primary" id="studio-download-html">Esporta microlezione HTML</button>
+     <button type="button" class="studio-action studio-action-neutral" id="studio-download-json">Salva progetto modificabile</button>
+     <button type="button" class="studio-action studio-action-neutral" id="studio-print">Anteprima di stampa / PDF</button>
+    </div>
+    <div class="studio-hint">L'HTML contiene il materiale che hai scritto e gli eventuali file allegati. Non è una generazione automatica di audio o video: per integrarli devi crearli o importarli. La stampa PDF dipende dalle funzioni del browser.</div>
+   </section>
+   </form>
+   <div class="studio-controls"><button type="button" id="studio-prev" class="studio-action studio-action-neutral">← Indietro</button><span id="studio-status" role="status" aria-live="polite"></span><button type="button" id="studio-next" class="studio-action studio-action-primary">Continua →</button></div>
+  </section>
+ </div>
+ <section class="studio-support" aria-label="Gestione progetto"><div><span class="studio-eyebrow">IL TUO SPAZIO DI LAVORO</span><h2>Riprendi un progetto salvato</h2><p>I campi restano nel browser soltanto durante questa sessione. Esporta il progetto JSON per conservarlo e importarlo qui per continuare. Non viene memorizzato un account o un progresso sul server.</p></div>
+ <label class="studio-import-label">Importa un progetto JSON <input id="studio-import" type="file" accept=".json,application/json"></label>
+ </section>
+</main>
+<footer class="studio-footer"><div class="studio-container">MANZO AI · AI Teaching Lab · Laboratorio professionale aperto · Progetto dimostrativo non accreditato</div></footer>
+</body></html>

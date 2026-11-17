@@ -476,6 +476,9 @@
         add(panel,criteria);
         add(studio,panel);
       }
+      const openStudio=el("a","studio-open-action","Apri il laboratorio completo · crea ed esporta il tuo kit ↗");
+      openStudio.href="./laboratorio-multimediale/";
+      add(studio,openStudio);
       add(studio,heading("h4","Studio multimediale · costruisci lo storyboard"),
         paragraph("Prima definisci l'apprendimento e la fonte, poi scegli come raccontarlo. La traccia è costruita nel tuo browser: nessuna IA viene interrogata e nessun dato viene inviato.","subtle"));
       const form=el("div","media-brief");

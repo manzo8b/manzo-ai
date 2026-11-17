@@ -26,6 +26,16 @@ with sync_playwright() as playwright:
         assert page.locator(".narrative-bridge").count()>=4
         assert page.locator(".course-next-section").count()==1
         assert page.locator("#presentazione-corso").is_visible()
+        assert page.locator(".studio-entry-action").count()==1
+        page.locator(".studio-entry-action").click()
+        page.wait_for_url(COURSE+"laboratorio-multimediale/")
+        assert page.locator(".studio-phase").count()==5
+        assert page.locator("#studio-form").count()==1
+        assert page.locator("#studio-download-html").count()==1
+        page.locator("#studio-next").click()
+        assert page.locator("#studio-progress-text").inner_text()=="Fase 2 di 5"
+        page.goto(COURSE,wait_until="networkidle")
+        page.locator("#experience").wait_for(state="visible",timeout=10000)
         assert page.locator(".atl-intro-media-card").count()==2
         assert "20 h" in page.locator(".atl-intro-facts").inner_text()
         assert page.locator("a.atl-intro-primary-action").count()==1

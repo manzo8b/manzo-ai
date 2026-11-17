@@ -371,5 +371,37 @@ class CourseQuality(unittest.TestCase):
                      "model-test-grid","practice-branch"):
             self.assertIn(word,script)
 
+
+    def test_real_multimedia_production_studio_contract(self):
+        preview=ROOT.parent/"preview"
+        source=(preview/"laboratorio-multimediale"/"index.html").read_text(encoding="utf-8")
+        script=(preview/"production-studio.js").read_text(encoding="utf-8")
+        css=(preview/"production-studio.css").read_text(encoding="utf-8")
+        course=(preview/"index.html").read_text(encoding="utf-8")
+        self.assertEqual(source.count('class="studio-phase"'),5)
+        for field in ('title','audience','goal','source','script','quiz_question',
+                      'feedback_correct','feedback_wrong'):
+            self.assertIn(f'name="{field}"',source)
+        for token in ("studio-download-html","studio-download-json","studio-import",
+                      "studio-scenes","studio-audio","studio-preview","studio-medium"):
+            self.assertIn(token,source)
+        self.assertIn("studio-entry-action",course)
+        self.assertIn('href="./laboratorio-multimediale/"',course)
+        self.assertIn("String.raw",script)
+        self.assertIn("fileDownload",script)
+        self.assertIn("exportedHTML",script)
+        self.assertIn("readAsDataURL",script)
+        self.assertIn("new FileReader",script)
+        self.assertIn("microlezione",script)
+        self.assertIn("quiz-answers",script)
+        self.assertIn("studio-workspace",css)
+        self.assertIn("max-width:700px",css)
+        publisher=(ROOT.parents[3]/"theme"/"publish-ai-teaching-lab.py").read_text(encoding="utf-8")
+        self.assertIn('"laboratorio-multimediale"/"index.html"',publisher)
+        self.assertIn('"production-studio.js"',publisher)
+        self.assertIn('"production-studio.css"',publisher)
+        module=(ROOT/"module-03.md").read_text(encoding="utf-8")
+        self.assertIn("Laboratorio di produzione · costruisci e scarica il tuo kit",module)
+
 if __name__ == "__main__":
     unittest.main()
