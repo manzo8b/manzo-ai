@@ -71,9 +71,15 @@ with sync_playwright() as playwright:
         assert page.locator(".atl-journey-panel:not([hidden])").get_attribute("data-stage")=="3"
         page.locator(".atl-journey-panel:not([hidden]) .atl-journey-actions .button").first.click()
         assert page.locator(".atl-journey-panel:not([hidden])").get_attribute("data-stage")=="2"
-        page.locator("#atl-module-select").select_option("2")
+        if width<=800:
+            page.locator("#atl-module-select").select_option("2")
+        else:
+            page.locator("#module-nav button").nth(2).click()
         assert course["modules"][2]["title"] in page.locator(".module-hero h2").inner_text()
-        page.locator("#atl-module-select").select_option("0")
+        if width<=800:
+            page.locator("#atl-module-select").select_option("0")
+        else:
+            page.locator("#module-nav button").first.click()
         assert page.locator(".atl-journey-panel:not([hidden])").get_attribute("data-stage")=="0"
         assert page.locator("#presentazione-corso").is_visible()
         assert page.locator(".atl-intro-media-card").count() == 2
