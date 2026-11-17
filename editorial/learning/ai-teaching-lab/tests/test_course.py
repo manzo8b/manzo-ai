@@ -105,28 +105,59 @@ class CourseQuality(unittest.TestCase):
 
     def test_five_full_module_readers(self):
         ids = [m["id"] for m in COURSE["modules"]]
+        self.assertEqual(len(ids), 5)
         for i, module_id in enumerate(ids, start=1):
             with self.subTest(module=module_id):
                 p = ROOT / ("module-%02d.md" % i)
                 self.assertTrue(p.is_file(), str(p))
                 body = p.read_text(encoding="utf-8")
-                self.assertGreater(len(body), 10000)
+                self.assertGreater(len(body), 14000)
                 for marker in [
-                    "Teoria documentata", "Metodo MANZO AI", "Laboratorio A",
-                    "Laboratorio B", "Verifica differenziata", "Cruciverba professionale",
-                    "Insegnamento pedagogico", "Guida del formatore",
-                    "Bibliografia specifica", "Exit ticket",
+                    "Come seguire questo modulo in autonomia",
+                    "Questo corso è un esempio di didattica applicata",
+                    "Il metodo MANZO AI: una proposta",
+                    "Laboratorio 1", "Laboratorio 2",
+                    "Parole utili", "Prompt pronto da copiare",
+                    "Verifica ciò che hai imparato",
+                    "Per chi facilita un gruppo",
+                    "Fonti da esplorare",
                 ]:
                     self.assertIn(marker, body)
                 self.assertIn(COURSE["modules"][i - 1]["title"], body)
-                self.assertIn("48 |", body)
-                self.assertIn("72 |", body)
-                self.assertIn("15 |", body)
+                self.assertNotIn("Sequenza guidata da 240 minuti", body)
+                self.assertNotIn("applicazione obbligatoria", body)
                 for quote in COURSE["modules"][i - 1]["theory"]["sources"]:
                     self.assertIn(quote["url"], body)
                 for item in COURSE["modules"][i - 1]["checkpoint"]:
                     self.assertIn(item["question"], body)
                 self.assertNotIn("Voto finale automatico", body)
+
+    def test_narrative_and_teacher_glossary(self):
+        narrative = json.loads((ROOT / "narrative.json").read_text(encoding="utf-8"))
+        glossary = json.loads((ROOT / "glossary.json").read_text(encoding="utf-8"))
+        self.assertEqual([m["id"] for m in narrative["modules"]], [m["id"] for m in COURSE["modules"]])
+        self.assertGreaterEqual(len(glossary["entries"]), 40)
+        self.assertEqual(len(glossary["entries"]), len(set(x["term"].casefold() for x in glossary["entries"])))
+        words = {x["term"] for x in glossary["entries"]}
+        for required in ("Metodo MANZO AI", "Didattica", "Pedagogia", "Pedagogico / pedagogica",
+                         "Educazione", "Metodo", "Tecnica", "Prompt", "IA generativa"):
+            self.assertIn(required, words)
+        for row in glossary["entries"]:
+            self.assertGreater(len(row["definition"]), 55)
+            self.assertGreater(len(row["classroom_example"]), 35)
+            self.assertIn(row["category"], glossary["categories"])
+        for m in narrative["modules"]:
+            self.assertGreaterEqual(len(m["chapters"]), 5)
+            self.assertEqual(len(m["labs"]), 2)
+            for lab in m["labs"]:
+                self.assertGreaterEqual(len(lab["steps"]), 5)
+                for label in ["prompt", "sample", "check", "deliverable", "goal"]:
+                    self.assertGreater(len(lab[label]), 28)
+                self.assertIn("OBIETTIVO", lab["prompt"])
+            self.assertGreaterEqual(len(m["glossary"]), 6)
+        self.assertIn("Che cos’è l’IA", " ".join(x["heading"] for x in narrative["modules"][0]["chapters"]))
+        self.assertIn("applicata", COURSE["course_title"].lower())
+        self.assertEqual(len(COURSE["course_as_demonstration"]["sequence"]), 7)
 
     def test_preview_files_and_privacy(self):
         preview = ROOT.parent / "preview"
