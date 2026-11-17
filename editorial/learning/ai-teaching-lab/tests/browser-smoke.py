@@ -17,12 +17,16 @@ evidence = Path("ai-teaching-lab-screenshots")
 evidence.mkdir(exist_ok=True)
 
 
-def reveal_fold(page, selector):
-    """Open a learning section through its visible summary (not by bypassing the UI)."""
-    element=page.locator(selector).first
-    fold=element.locator('xpath=ancestor::details[contains(concat(" ",normalize-space(@class)," ")," course-fold ")][1]')
-    if fold.count() and not fold.evaluate("(node)=>node.open"):
-        fold.locator("summary").first.click()
+def reveal_step(page, selector):
+    """Navigate to the learning stage using its actual tab control."""
+    node=page.locator(selector).first
+    panel=node.locator('xpath=ancestor::section[contains(concat(" ",normalize-space(@class)," ")," atl-journey-panel ")][1]')
+    assert panel.count()==1, f"No learning stage for {selector}"
+    stage_id=panel.get_attribute("id")
+    tab=page.locator('.atl-stage-tab[aria-controls="'+stage_id+'"]')
+    if tab.get_attribute("aria-selected")!="true":
+        tab.click()
+    assert not panel.evaluate("(element)=>element.hidden")
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True)
@@ -36,8 +40,11 @@ with sync_playwright() as playwright:
         page.on("pageerror", lambda err: js_errors.append(str(err)))
         page.goto(BASE, wait_until="networkidle", timeout=30000)
         page.locator("#experience").wait_for(state="visible", timeout=10000)
-        assert page.locator(".course-fold").count()>=9
-        assert page.locator(".course-fold[open]").count()==1
+        assert page.locator(".atl-journey-panel").count()==4
+        assert page.locator(".atl-stage-tab").count()==4
+        assert page.locator(".atl-stage-tab[aria-selected='true']").count()==1
+        assert page.locator("#atl-module-select option").count()==5
+        assert page.locator(".atl-journey-panel:not([hidden])").count()==1
         assert page.locator("#atl-section-select").count()==1
         if width<=800: page.locator(".course-side-disclosure > summary").click()
         assert page.locator("#module-nav button").count() == 5
@@ -49,12 +56,25 @@ with sync_playwright() as playwright:
         assert not page.evaluate("document.documentElement.scrollWidth > window.innerWidth + 2")
         assert page.locator(".atl-course-tabs a").count()==4
         assert page.locator("#competenze .atl-competencies-grid>div").count()==4
-        assert page.locator(".module-outline").count()==5
-        assert page.locator(".course-session-step").count()==4
+        assert page.locator(".module-outline").count()==0
+        assert page.locator(".atl-stage-tab").count()==4
         assert "CAPITOLO" not in page.locator("#atl-theory").inner_text()
         assert page.locator(".narrative-bridge").count()>=4
-        page.locator(".module-outline").first.locator("summary").click()
-        assert page.locator(".module-outline").first.locator(".module-outline-link").count()==4
+        # One-level study flow: four guided steps, accessible keyboard tabs, module switch.
+        page.locator(".atl-stage-tab").nth(1).click()
+        assert page.locator(".atl-journey-panel:not([hidden])").count()==1
+        assert page.locator(".atl-journey-panel:not([hidden])").get_attribute("data-stage")=="1"
+        page.locator(".atl-stage-tab").nth(1).focus()
+        page.keyboard.press("ArrowRight")
+        assert page.locator(".atl-stage-tab[aria-selected='true']").get_attribute("aria-controls")=="atl-journey-panel-2"
+        page.locator(".atl-journey-actions .button").last.click()
+        assert page.locator(".atl-journey-panel:not([hidden])").get_attribute("data-stage")=="3"
+        page.locator(".atl-journey-panel:not([hidden]) .atl-journey-actions .button").first.click()
+        assert page.locator(".atl-journey-panel:not([hidden])").get_attribute("data-stage")=="2"
+        page.locator("#atl-module-select").select_option("2")
+        assert course["modules"][2]["title"] in page.locator(".module-hero h2").inner_text()
+        page.locator("#atl-module-select").select_option("0")
+        assert page.locator(".atl-journey-panel:not([hidden])").get_attribute("data-stage")=="0"
         assert page.locator("#presentazione-corso").is_visible()
         assert page.locator(".atl-intro-media-card").count() == 2
         assert page.locator(".atl-intro-privacy").is_visible()
@@ -94,9 +114,9 @@ with sync_playwright() as playwright:
             assert page.locator(".lab-prompt-code").count() == 3
             assert page.locator(".competency-studio").count() == 1
             assert page.locator(".studio-check").count() >= 4
-            reveal_fold(page, ".competency-studio")
+            reveal_step(page, ".competency-studio")
             if i == 0:
-                reveal_fold(page, ".competency-reason")
+                reveal_step(page, ".competency-reason")
                 page.locator(".competency-reason").fill("Scelgo la scheda senza IA perché rende osservabile l'argomentazione, mantiene i testi sintetici e posso controllare la fonte.")
                 page.get_by_role("button", name="Verifica i miei criteri").click()
                 assert "competenza osservabile" in page.locator(".option-board .result").inner_text().lower()
@@ -120,7 +140,7 @@ with sync_playwright() as playwright:
                 assert "STORYBOARD" in page.locator(".media-generated").inner_text()
                 assert page.locator(".media-principle-card").count() == 6
             if i == 3:
-                reveal_fold(page, ".option-board")
+                reveal_step(page, ".option-board")
                 page.locator(".option-board .button").first.click()
                 assert page.locator(".option-board .result").is_visible()
             if i == 4:
@@ -129,7 +149,7 @@ with sync_playwright() as playwright:
             assert page.locator(".applied-step").count() == 5
             assert page.locator(".narrative-chapter").count() >= 5
             assert page.locator(".branch-choices button").count() == 3
-            reveal_fold(page, ".branch-choices")
+            reveal_step(page, ".branch-choices")
             page.locator(".branch-choices button").first.click()
             assert page.locator(".branch-choices button").count() == 2
             page.locator(".branch-choices button").first.click()
@@ -153,7 +173,7 @@ with sync_playwright() as playwright:
         assert page.locator(".term-card").count() >= 7
         page.locator("#atl-term-group").select_option("")
         page.locator("#module-nav button").first.click()
-        reveal_fold(page, "#atl-quiz")
+        reveal_step(page, "#atl-quiz")
         first=page.locator("#atl-quiz fieldset.assessment-block").filter(has=page.get_by_role("button", name="Verifica la risposta")).first
         q=course["modules"][0]["checkpoint"][0]
         first.locator('input[type="radio"]').nth(q["correct_index"]).check()
