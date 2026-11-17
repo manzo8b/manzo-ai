@@ -30,7 +30,7 @@ Quando una presentazione contiene troppe informazioni, gli studenti possono usci
 - Rivedere contenuti con verifica disciplinare, cognitiva e di accessibilità
 - Documentare uso dell'IA, licenze e revisioni
 
-## Per capire: un racconto e cinque idee fondamentali
+## Lettura di approfondimento · una storia che continua
 
 ### 1. Il grafico bellissimo che spiega male
 
@@ -178,7 +178,7 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Licenza** — Condizioni che consentono o limitano il riuso di un'opera
 - **Micro-kit** — Piccolo insieme coordinato di risorse per un obiettivo didattico
 
-## Dalla lettura alla lezione successiva
+## Per continuare il percorso
 
 Un materiale verificato e accessibile è un punto di partenza. Il passo successivo consiste nel riconoscere chi incontrerà quel materiale e come ogni persona potrà mostrare di avere imparato.
 
