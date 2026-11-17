@@ -22,7 +22,7 @@ GROUP_NAMES = {
  'en': {'academy':'Learn and Academy', 'prompt':'Prompt Mastery and labs', 'critical':'Critical thinking', 'research':'Research and dossiers', 'media':'Resources and media', 'other':'Other pathways'},
 }
 NAV = {
- 'it': [('AI Academy','academy/'), ('Prompt Mastery','prompt-mastery/'), ('Laboratorio tecnico','prompt-mastery/laboratorio-tecnico/'), ('Ricerca ACR','ricerca/acr/'), ('AI Brain Challenge','pensiero-critico/'), ('Risorse','risorse/'), ('Video e podcast','video-e-slide/')],
+ 'it': [('AI Academy','academy/'), ('AI Teaching Lab','formazione/ia-per-la-didattica/'), ('Prompt Mastery','prompt-mastery/'), ('Laboratorio tecnico','prompt-mastery/laboratorio-tecnico/'), ('Ricerca ACR','ricerca/acr/'), ('AI Brain Challenge','pensiero-critico/'), ('Risorse','risorse/'), ('Video e podcast','video-e-slide/')],
  'es': [('AI Academia','academia/'), ('Prompt Mastery','prompt-mastery/'), ('Laboratorio técnico','prompt-mastery/laboratorio-tecnico/'), ('Investigación ACR','investigacion/acr/'), ('AI Brain Challenge','pensamiento-critico/'), ('Recursos','recursos/'), ('Vídeos y podcast','videos-y-diapositivas/')],
  'en': [('AI Academy','academy/'), ('Prompt Mastery','prompt-mastery/'), ('Technical lab','prompt-mastery/technical-lab/'), ('ACR research','research/acr/'), ('AI Brain Challenge','critical-thinking/'), ('Resources','resources/'), ('Videos and podcast','videos-and-slides/')],
 }
@@ -39,7 +39,7 @@ def page_title(text: str, fallback: str) -> str:
     return label[:110] or fallback
 
 def group_for(rel: str) -> str:
-    if any(segment in rel for segment in ('/academy/', '/academia/', '/impara/', '/aprende/', '/learn/')): return 'academy'
+    if any(segment in rel for segment in ('/academy/', '/academia/', '/impara/', '/aprende/', '/learn/', '/formazione/')): return 'academy'
     if '/prompt-mastery/' in rel: return 'prompt'
     if any(segment in rel for segment in ('/ricerca/','/investigacion/','/research/')): return 'research'
     if any(segment in rel for segment in ('/pensiero-critico/', '/pensamiento-critico/', '/critical-thinking/')): return 'critical'
