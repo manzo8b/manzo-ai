@@ -507,3 +507,51 @@ body:not([data-module-base]) [data-atl-resource-glossary]{display:none!important
 .atl-final-disclosure[open]>summary{border-bottom:1px solid #c7dcf2}
 .atl-final-disclosure .final-glossary{padding:22px clamp(15px,3vw,29px)!important}
 @media(max-width:800px){.atl-final-disclosure{margin:20px 16px}.atl-final-disclosure>summary{padding:15px 17px}}
+
+/* AI Teaching Lab feedback badge — visible at the start, accessible on every viewport. */
+.atl-feedback-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:13px;
+  max-width:100%;
+  margin:11px 0 0;
+  padding:12px 15px;
+  border:1px solid #b7d3ef;
+  border-radius:16px;
+  background:linear-gradient(117deg,#edf5ff 0%,#fff 86%);
+  color:#163c68!important;
+  text-decoration:none!important;
+  box-shadow:0 8px 26px rgba(24,87,162,.08);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.atl-feedback-badge:hover{
+  transform:translateY(-2px);
+  border-color:#6fa4e9;
+  box-shadow:0 13px 30px rgba(24,87,162,.13);
+}
+.atl-feedback-symbol{
+  display:grid;
+  place-items:center;
+  flex:0 0 40px;
+  height:40px;
+  border-radius:12px;
+  background:#155cce;
+  color:#fff;
+  font-size:1.33rem;
+  line-height:1;
+}
+.atl-feedback-copy{display:flex;flex-direction:column;gap:2px;min-width:0}
+.atl-feedback-label{font-size:.78rem;font-weight:850;line-height:1.35;letter-spacing:.01em;color:#1a5fae}
+.atl-feedback-copy strong{font-size:.9rem;line-height:1.4;font-weight:700;overflow-wrap:anywhere}
+.atl-feedback-arrow{font-size:1.1rem;color:#1b64ce;font-weight:850;margin-left:8px;flex-shrink:0}
+@media(max-width:520px){
+  .atl-feedback-badge{display:flex;width:100%;padding:11px 12px;gap:10px}
+  .atl-feedback-symbol{flex-basis:38px;height:38px}
+  .atl-feedback-label{font-size:.75rem}
+  .atl-feedback-copy strong{font-size:.87rem}
+  .atl-feedback-arrow{margin-left:auto}
+}
+@media(prefers-reduced-motion:reduce){
+  .atl-feedback-badge{transition:none}
+  .atl-feedback-badge:hover{transform:none}
+}
