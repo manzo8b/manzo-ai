@@ -105,77 +105,149 @@
     return block;
   }
   function crossword(item) {
-    const block=el("section","assessment-block");
-    add(block,heading("h4","Cruciverba professionale"),paragraph("Compila la griglia oppure scegli la modalità testuale accessibile. Le caselle scure non vanno riempite.","subtle"));
-    const toggles=el("div","toggle-row");
+    const block=el("section","assessment-block crossword-card");
+    add(block,el("div","section-kicker","ALLENAMENTO DEL LESSICO"),heading("h4","Cruciverba delle competenze"),
+      paragraph("Un vero cruciverba, con sette parole che si incrociano. Seleziona un indizio per evidenziare le caselle, scrivi una lettera per volta e controlla la soluzione. Su telefono puoi usare la modalità per parole.","subtle"));
+    const status=el("p","crossword-status","Nessuna casella compilata");
+    status.setAttribute("role","status");status.setAttribute("aria-live","polite");
+    const toggles=el("div","toggle-row crossword-modes");
     const gridButton=control("Griglia",()=>switchMode("grid"),"secondary");
     const textButton=control("Elenco accessibile",()=>switchMode("text"),"secondary");
-    add(toggles,gridButton,textButton);add(block,toggles);
+    add(toggles,gridButton,textButton);
+    const gridLayout=el("div","crossword-grid-layout");
     const gridWrap=el("div","crossword-wrap");
-    const grid=el("div","crossword");grid.style.setProperty("--grid-cols",String(item.width));
-    const startNums={};
-    item.entries.forEach(e=>{startNums[e.row+","+e.col]=String(e.number)});
-    const cells={};
+    const hint=el("p","crossword-scroll-hint","La griglia scorre orizzontalmente se lo schermo è stretto");
+    const grid=el("div","crossword");
+    grid.style.setProperty("--grid-cols",String(item.width));
+    const clues=el("div","crossword-clue-panel");
+    add(clues,heading("h5","Indizi"),paragraph("Tocca un indizio per selezionare una parola","subtle"));
+    const clueList=el("div","crossword-clues");
+    add(clues,clueList);
+    const cells={}, startNums={}, expected={};
+    item.entries.forEach(e=>{
+      startNums[e.row+","+e.col]=e.number;
+      for(let i=0;i<e.answer.length;i++){
+        const y=e.row+(e.direction==="down"?i:0),x=e.col+(e.direction==="across"?i:0);
+        expected[y+","+x]=e.answer[i];
+      }
+    });
+    let active=null,mode="grid";
+    const normalize=s=>String(s||"").toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^A-Z]/g,"");
+    const keys=Object.keys(expected);
+    function positions(entry){
+      return [...entry.answer].map((_,i)=>entry.row+(entry.direction==="down"?i:0)+","+(entry.col+(entry.direction==="across"?i:0)));
+    }
+    function updateProgress(){
+      const count=keys.filter(k=>Boolean(normalize(cells[k]?.value))).length;
+      status.textContent=count+" caselle compilate su "+keys.length+" · "+item.entries.length+" indizi";
+    }
+    function selectEntry(entry,focus){
+      active=entry;
+      grid.querySelectorAll(".cross-cell.active").forEach(x=>x.classList.remove("active"));
+      const coords=positions(entry);
+      coords.forEach(k=>cells[k]?.parentElement?.classList.add("active"));
+      clueList.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.word===entry.answer)));
+      const first=coords.find(k=>!cells[k]?.value)||coords[0];
+      if(focus!==false)cells[first]?.focus();
+    }
+    function advance(cellKey,delta){
+      const entry=active||item.entries.find(e=>positions(e).includes(cellKey));
+      if(!entry)return;
+      const ps=positions(entry),at=ps.indexOf(cellKey),next=at+delta;
+      if(next>=0&&next<ps.length)cells[ps[next]]?.focus();
+    }
     item.pattern.forEach((row,y)=>[...row].forEach((ch,x)=>{
-      if(ch==="#"){add(grid,el("div","cross-cell cross-block"));return}
-      const box=el("div","cross-cell"),input=el("input");
-      input.type="text";input.maxLength=1;input.autocomplete="off";input.spellcheck=false;
-      input.setAttribute("aria-label","Riga "+(y+1)+", colonna "+(x+1));
-      input.dataset.row=String(y);input.dataset.col=String(x);
-      input.addEventListener("input",()=>{input.value=input.value.slice(-1).toUpperCase().replace(/[^A-Z]/g,"")});
-      input.addEventListener("keydown",ev=>{
-        const moves={ArrowLeft:[0,-1],ArrowRight:[0,1],ArrowUp:[-1,0],ArrowDown:[1,0]};
-        if(!moves[ev.key])return;
-        ev.preventDefault();const d=moves[ev.key];
-        let ry=y+d[0],cx=x+d[1];
-        while(ry>=0&&ry<item.height&&cx>=0&&cx<item.width){
-          if(cells[ry+","+cx]){cells[ry+","+cx].focus();return}
-          ry+=d[0];cx+=d[1];
+      if(ch==="#"){const wall=el("div","cross-cell cross-block");wall.setAttribute("aria-hidden","true");add(grid,wall);return}
+      const k=y+","+x,box=el("div","cross-cell"),input=el("input","cross-input");
+      input.type="text";input.inputMode="text";input.maxLength=1;input.autocomplete="off";input.spellcheck=false;
+      input.setAttribute("aria-label","Riga "+(y+1)+", colonna "+(x+1)+(startNums[k]?", inizio parola "+startNums[k]:""));
+      input.addEventListener("focus",()=>{
+        if(!active||!positions(active).includes(k)){
+          const first=item.entries.find(e=>positions(e).includes(k));if(first)selectEntry(first,false);
         }
       });
-      cells[y+","+x]=input;add(box,input);
-      if(startNums[y+","+x])add(box,el("span","cell-num",startNums[y+","+x]));
-      add(grid,box);
+      input.addEventListener("click",()=>{
+        const inCell=item.entries.filter(e=>positions(e).includes(k));
+        if(inCell.length>1){
+          const other=inCell.find(e=>e!==active)||inCell[0];selectEntry(other,false);
+        }
+      });
+      input.addEventListener("input",()=>{
+        input.value=normalize(input.value).slice(-1);
+        updateProgress();
+        if(input.value)advance(k,1);
+      });
+      input.addEventListener("keydown",ev=>{
+        const directions={ArrowLeft:[0,-1],ArrowRight:[0,1],ArrowUp:[-1,0],ArrowDown:[1,0]};
+        if(ev.key==="Backspace"&&!input.value){ev.preventDefault();advance(k,-1);return}
+        if(!directions[ev.key])return;
+        ev.preventDefault();const delta=directions[ev.key];
+        let ny=y+delta[0],nx=x+delta[1];
+        while(ny>=0&&ny<item.height&&nx>=0&&nx<item.width){
+          if(cells[ny+","+nx]){cells[ny+","+nx].focus();return}
+          ny+=delta[0];nx+=delta[1];
+        }
+      });
+      if(startNums[k]!==undefined)add(box,el("span","cell-num",String(startNums[k])));
+      cells[k]=input;add(box,input);add(grid,box);
     }));
-    add(gridWrap,grid);
-    const clues=el("div","clue-list");
-    const clueList=el("ol");
-    item.entries.forEach(e=>add(clueList,el("li","",e.number+" "+(e.direction==="across"?"Orizzontale":"Verticale")+" · "+e.clue+" ("+e.answer.length+" lettere)")));
-    add(clues,clueList);add(gridWrap,clues);
-    const accessible=el("div","accessible-words");accessible.hidden=true;
+    const textWrap=el("div","accessible-words");textWrap.hidden=true;
     const words=[];
-    item.entries.forEach(e=>{
-      const row=el("div","word-field"),label=el("label","",e.number+" "+e.clue+" ("+e.answer.length+" lettere)");
-      const input=el("input");input.type="text";input.maxLength=e.answer.length+3;input.autocomplete="off";input.spellcheck=false;
-      input.id="word-"+e.number+"-"+e.direction;label.htmlFor=input.id;
-      add(row,label,input);add(accessible,row);words.push({answer:e.answer,input});
+    item.entries.forEach(entry=>{
+      const btn=control(entry.number+" · "+(entry.direction==="across"?"Orizzontale":"Verticale")+" · "+entry.clue+" · "+entry.answer.length+" lettere",
+        ()=>selectEntry(entry),"secondary");
+      btn.className="crossword-clue";
+      btn.dataset.word=entry.answer;btn.setAttribute("aria-pressed","false");
+      add(clueList,btn);
+      const row=el("div","word-field"),label=el("label","",
+        entry.number+" "+(entry.direction==="across"?"orizzontale":"verticale")+" · "+entry.clue+" ("+entry.answer.length+" lettere)");
+      const input=el("input","crossword-word-input");
+      input.type="text";input.autocomplete="off";input.spellcheck=false;input.maxLength=entry.answer.length;
+      input.id="word-"+entry.number+"-"+entry.direction;label.htmlFor=input.id;
+      input.addEventListener("input",()=>{
+        const letters=normalize(input.value).slice(0,entry.answer.length);
+        input.value=letters;
+        positions(entry).forEach((k,i)=>{if(letters[i]!==undefined)cells[k].value=letters[i]});
+        updateProgress();
+      });
+      add(row,label,input);add(textWrap,row);words.push({answer:entry.answer,input});
     });
-    let mode="grid";
+    add(gridWrap,grid,hint);add(gridLayout,gridWrap,clues);
+    const actions=el("div","crossword-actions");
+    const check=control("Controlla le risposte",()=>{
+      if(mode==="grid"){
+        const done=keys.filter(k=>normalize(cells[k].value)===expected[k]).length;
+        feedback(block,done+" caselle corrette su "+keys.length+". Puoi correggere le altre senza ricominciare.",done===keys.length);
+      }else{
+        const count=words.filter(w=>normalize(w.input.value)===w.answer).length;
+        feedback(block,count+" parole corrette su "+words.length+". Rileggi gli indizi e riprova.",count===words.length);
+      }
+    });
+    // Maintain familiar named control for existing technical regressions.
+    check.textContent="Verifica il cruciverba";
+    const reset=control("Ricomincia",()=>{
+      Object.values(cells).forEach(x=>{x.value="";x.parentElement.classList.remove("active")});
+      words.forEach(w=>w.input.value="");
+      const prior=block.querySelector(".result");if(prior)prior.remove();
+      active=null;updateProgress();selectEntry(item.entries[0],false);
+    },"secondary");
+    add(actions,check,reset);
     function switchMode(next){
-      mode=next;gridWrap.hidden=next!=="grid";accessible.hidden=next!=="text";
+      mode=next;gridLayout.hidden=next!=="grid";textWrap.hidden=next!=="text";
       gridButton.setAttribute("aria-pressed",String(next==="grid"));
       textButton.setAttribute("aria-pressed",String(next==="text"));
-      const prev=block.querySelector(".result");if(prev)prev.remove();
+      const result=block.querySelector(".result");if(result)result.remove();
+      if(next==="grid")sizeGrid();
     }
-    switchMode("grid");
-    add(block,gridWrap,accessible);
-    const normalize=v=>String(v).toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^A-Z]/g,"");
-    const exp={};
-    item.entries.forEach(e=>{
-      [...e.answer].forEach((ch,i)=>{
-        const y=e.row+(e.direction==="down"?i:0),x=e.col+(e.direction==="across"?i:0);
-        exp[y+","+x]=ch;
-      });
-    });
-    add(block,control("Verifica il cruciverba",()=>{
-      if(mode==="grid"){
-        const keys=Object.keys(exp),correct=keys.filter(k=>normalize(cells[k].value)===exp[k]).length;
-        feedback(block,correct+" caselle corrette su "+keys.length+". Controlla gli incroci e riprova.",correct===keys.length);
-      }else{
-        const correct=words.filter(w=>normalize(w.input.value)===w.answer).length;
-        feedback(block,correct+" parole corrette su "+words.length+". Rivedi gli indizi non risolti.",correct===words.length);
-      }
-    }));
+    function sizeGrid(){
+      if(!gridWrap.isConnected)return;
+      const available=Math.max(280,gridWrap.getBoundingClientRect().width)-12;
+      const size=Math.max(22,Math.min(39,Math.floor((available-2*(item.width-1))/item.width)));
+      grid.style.setProperty("--cell-size",size+"px");
+    }
+    add(block,toggles,status,gridLayout,textWrap,actions);
+    updateProgress();selectEntry(item.entries[0],false);switchMode("grid");
+    if(typeof ResizeObserver!=="undefined")new ResizeObserver(sizeGrid).observe(gridWrap);
     return block;
   }
   function conceptProbe(module) {
