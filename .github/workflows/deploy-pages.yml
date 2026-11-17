@@ -16,8 +16,10 @@ on:
       - editorial/video/prompt-engineering/**
       - editorial/research/acr/**
       - editorial/learning/hallucinations/**
+      - editorial/learning/ai-teaching-lab/**
       - product/learning-experience/**
       - theme/publish-learning-experience.py
+      - theme/publish-ai-teaching-lab.py
       - product/preview/**
       - product/learning-console/**
       - theme/publish-learning-console.py
@@ -114,6 +116,8 @@ jobs:
             sudo apt-get update -qq
             sudo apt-get install -y ffmpeg
           fi
+      - name: Install Markdown renderer for the open teacher course
+        run: python3 -m pip install --disable-pip-version-check markdown==3.10
       - name: Extract and inspect static site
         shell: bash
         run: |
@@ -302,6 +306,15 @@ jobs:
             grep -q 'hx-quiz-data' "_site/$course_page/index.html"
             grep -q 'hx-cross-grid' "_site/$course_page/index.html"
           done
+          # Publish the full Italian teacher course beta before SEO, without DB or certificates.
+          python3 -m py_compile theme/publish-ai-teaching-lab.py
+          node --check editorial/learning/ai-teaching-lab/preview/app.js
+          python3 theme/publish-ai-teaching-lab.py --site _site
+          python3 theme/publish-ai-teaching-lab.py --site _site --verify-only
+          for n in 01 02 03 04 05; do
+            test -s "_site/it/formazione/ia-per-la-didattica/modulo-$n/index.html"
+          done
+          test -s _site/it/formazione/ia-per-la-didattica/data/scenarios.json
           # Product preview is deliberately nontransactional and noindex.
           python3 -m py_compile theme/publish-product-preview.py
           node --check product/preview/preview.js
