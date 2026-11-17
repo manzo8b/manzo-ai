@@ -115,9 +115,20 @@ def publish(site,verify=False):
     if len(course["modules"])!=5 or len(scenes["modules"])!=5 or len(assessments["modules"])!=5:raise RuntimeError("Course incomplete")
     for name in ["course.json","assessment-bank.json","scenarios.json"]:
         dst=target/"data"/name
+        if name=="course.json":
+            public_course=dict(course)
+            public_course["published"]=True
+            public_course["status"]="public_beta"
+            public_course["publication_status"]="open_educational_beta"
+            public_course["public_access_free"]=True
+            public_course["locale_coverage"]=dict(course["locale_coverage"],it="public_beta")
+            expected=(json.dumps(public_course,ensure_ascii=False,indent=2)+"\\n").encode("utf-8")
+        else:
+            expected=(DATA/name).read_bytes()
         if not verify:
-            dst.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(DATA/name,dst)
-        if not dst.is_file() or dst.read_bytes()!=(DATA/name).read_bytes():raise RuntimeError("Data mismatch "+name)
+            dst.parent.mkdir(parents=True,exist_ok=True)
+            dst.write_bytes(expected)
+        if not dst.is_file() or dst.read_bytes()!=expected:raise RuntimeError("Data mismatch "+name)
     if not verify:
         target.mkdir(parents=True,exist_ok=True)
         for name in ["assets.css","app.js","lesson.css","feature.css"]:
