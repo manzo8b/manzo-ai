@@ -196,7 +196,7 @@ VERIFICA: i criteri e l'obiettivo restano gli stessi in tutti i formati?
 
 ### Un possibile risultato, simulato per il corso
 
-> Testo, mappa commentata ed esposizione breve richiedono tutte due cause e prove pertinenti; la rubrica comune valuta coerenza, prove e revisione. Feedback su elaborato inventato: «Hai nominato il traffico, ma manca una osservazione a sostegno. Aggiungila e riscrivi la conclusione».
+> Testo, mappa commentata ed esposizione breve richiedono tutte due cause e prove pertinenti; la rubrica comune valuta coerenza, prove e revisione. Feedback su elaborato inventato: «Hai nominato il traffico, ma manca un'osservazione a sostegno. Aggiungila e riscrivi la conclusione».
 
 ### Verifica del tuo prodotto
 
