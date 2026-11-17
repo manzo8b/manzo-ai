@@ -42,6 +42,8 @@ Tre modi di esprimersi non significano tre obiettivi diversi. Per trasformare qu
 
 Le linee guida CAST UDL 3.0 invitano a considerare più forme di coinvolgimento, rappresentazione, azione ed espressione. In pratica, non aspettiamo che una difficoltà si trasformi in esclusione: possiamo offrire indicazioni scritte e orali, testi leggibili e schemi descritti, esempi guidati e un tempo di riflessione appropriato. Non occorre inventare diagnosi per progettare materiali più accessibili. Qualunque adattamento individuale collegato a esigenze riconosciute segue le procedure e le responsabilità scolastiche, non il giudizio di un chatbot.
 
+Differenziare una proposta non significa imporre un mezzo sulla base di un presunto stile cognitivo immutabile. È più utile conservare obiettivo e criteri comuni, offrendo a chi apprende scelte realmente accessibili: argomentare in un testo, con una mappa descritta o attraverso un'esposizione con supporti. La revisione deve basarsi su evidenze osservabili e non su diagnosi inferite dall'IA. Una buona attività multimediale permette a tutti di raggiungere la domanda importante anche se una modalità tecnica non è disponibile.
+
 Dopo aver ridotto le barriere, dobbiamo osservare come gli studenti procedono. Un feedback può diventare il ponte fra ciò che una persona sa fare oggi e il prossimo tentativo che riuscirà a compiere.
 
 ### 3. Il feedback che cambia il prossimo passo
@@ -165,6 +167,54 @@ Tre feedback e una mini-verifica coerente
 
 **Per capire se l'attività è riuscita:** devi essere in grado di mostrare cosa hai cambiato nella bozza, con quale criterio e per quale bisogno dei tuoi studenti.
 
+## Esercitazione integrata · Personalizzare senza etichettare gli studenti
+
+Questa esercitazione **fa parte dei due laboratori del modulo**; usa soltanto situazioni fittizie e puoi completarla anche senza un chatbot esterno.
+
+**Situazione:** Una seconda media deve argomentare due cause di un problema ambientale; materiali ed espressione possono essere differenti
+
+**Obiettivo:** Fornire tre modalità equivalenti con una rubrica comune e feedback che porti a una nuova prova
+
+### La tua sequenza di lavoro
+
+1. Fissa una competenza osservabile e tre criteri comuni
+2. Individua barriere dei materiali e dell'ambiente senza attribuire diagnosi
+3. Prepara tre modalità: testo con scaletta, mappa descritta e commentata, esposizione orale con appunti
+4. Applica la stessa rubrica a un elaborato inventato e formula un feedback sul prossimo passo
+5. Verifica se un nuovo tentativo mostra il miglioramento, senza etichettare la persona
+
+### Prompt da copiare e controllare
+
+```text
+OBIETTIVO: progettare tre modalità equivalenti di dimostrare la capacità di motivare due cause di un problema ambientale.
+CONTESTO: seconda media, 20 minuti, competenza comune.
+DATI CONSENTITI: esempi fittizi di due cause e prove inventate chiaramente dichiarate.
+VINCOLI: nessuna diagnosi, nessuna valutazione automatica di persone, nessun dato personale.
+OUTPUT: tre consegne accessibili, una rubrica comune di tre criteri, feedback specifico e microprova di revisione.
+VERIFICA: i criteri e l'obiettivo restano gli stessi in tutti i formati?
+```
+
+### Un possibile risultato, simulato per il corso
+
+> Testo, mappa commentata ed esposizione breve richiedono tutte due cause e prove pertinenti; la rubrica comune valuta coerenza, prove e revisione. Feedback su elaborato inventato: «Hai nominato il traffico, ma manca una osservazione a sostegno. Aggiungila e riscrivi la conclusione».
+
+### Verifica del tuo prodotto
+
+- Obiettivo comune
+- Equivalenza delle prove
+- Nessuna diagnosi o etichetta automatica
+- Feedback applicabile a un secondo tentativo
+
+**Da conservare nel portfolio:** Tre percorsi accessibili, una rubrica e due versioni di un compito sintetico con miglioramento osservabile
+
+**Domanda di autoverifica:** Quale pratica realizza una personalizzazione didattica responsabile?
+
+1. Etichettare gli alunni come visivi e uditivi
+2. Offrire modalità diverse con obiettivi e criteri comuni
+3. Demandare il voto ad un modello generativo
+
+*Dopo aver risposto, controlla:* opzione **2**. Personalizzazione non significa attribuire uno stile fisso o automatizzare un giudizio sulla persona.
+
 ## Parole utili, spiegate senza gergo
 
 Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri una parola nuova.
@@ -206,6 +256,11 @@ Per non interrompere il racconto, abbiamo raccolto le fonti in questa sezione. S
 3. [EEF Metacognition and Self-Regulated Learning 2025](https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/metacognition)
 
 **Riferimento pedagogico:** Dylan Wiliam — [testo di riferimento](https://educationendowmentfoundation.org.uk/projects-and-evaluation/promising-programmes/embedding-formative-assessment). Le idee riportate nel modulo sono parafrasi applicative e non citazioni letterali attribuite all'autore.
+
+### Fonti per approfondire la nuova attività
+
+- [CAST · Opzioni di azione ed espressione](https://udlguidelines.cast.org/action-expression/)
+- [CAST · Rappresentazione](https://udlguidelines.cast.org/representation/)
 
 ## Per chi facilita un gruppo (sezione facoltativa)
 
