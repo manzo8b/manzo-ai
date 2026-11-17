@@ -1,0 +1,470 @@
+{
+  "schema_version": "draft-0.1",
+  "course_key": "ai-teaching-lab",
+  "locale": "it",
+  "status": "editorial_draft",
+  "published": false,
+  "public_graded_assessment": false,
+  "private_assessment_ready": false,
+  "course_title": "Intelligenza Artificiale per la Didattica",
+  "subtitle": "Progettare, insegnare e valutare nell'era dell'IA",
+  "marketing_title": "AI Teaching Lab",
+  "audience": [
+    "docenti primaria",
+    "docenti secondaria",
+    "formatori",
+    "referenti digitali"
+  ],
+  "planned_hours": 20,
+  "hours_validated_by_pilot": false,
+  "delivery_modes": [
+    "lab_in_person_planned",
+    "asynchronous_guided_in_design"
+  ],
+  "prerequisites": "Competenze digitali di base; nessuna programmazione richiesta",
+  "locale_coverage": {
+    "it": "editorial_draft",
+    "en": "not_localized",
+    "es": "not_localized"
+  },
+  "ai_and_data_policy": {
+    "real_student_data_allowed": false,
+    "synthetic_scenarios_only": true,
+    "requires_institutional_authorization_for_real_use": true,
+    "rights_or_certification_claimed": false,
+    "external_ai_tool_required": false
+  },
+  "instructional_ratio": {
+    "concept_and_demo": 0.2,
+    "workshop": 0.6,
+    "reflection_transfer": 0.2
+  },
+  "learning_outcomes": [
+    "Formulare un obiettivo osservabile prima di scegliere l'IA",
+    "Verificare l'affidabilità di claim, fonti e output LLM",
+    "Creare e revisionare materiali didattici accessibili",
+    "Riprogettare prove formative con e senza IA",
+    "Riconoscere rischi, responsabilità e necessità di autorizzazione",
+    "Prototipare e testare un tutor socratico su casi sintetici",
+    "Completare una unità didattica documentata e valutabile"
+  ],
+  "modules": [
+    {
+      "id": "atl-01",
+      "title": "Prima il problema, poi lo strumento",
+      "hours": 4,
+      "accent": "cobalt",
+      "question": "Quale evidenza giustifica l'uso dell'IA per questo obiettivo?",
+      "outcomes": [
+        "Definire un obiettivo osservabile prima di scegliere un sistema",
+        "Comparare alternative IA e senza IA con una matrice replicabile",
+        "Motivare una decisione go/no-go"
+      ],
+      "concepts": [
+        "allineamento costruttivo",
+        "criteri di scelta",
+        "affidabilità",
+        "costi e vendor lock-in",
+        "privacy e accessibilità"
+      ],
+      "practice": [
+        {
+          "id": "atl-01-a",
+          "type": "decision_matrix",
+          "title": "Due strade per lo stesso obiettivo",
+          "task": "Per una lezione sul ciclo dell'acqua, confronta una proposta IA con un'alternativa non-IA usando sei criteri 0-3 e motivando il risultato",
+          "deliverable": "Matrice A+ e decisione motivata"
+        },
+        {
+          "id": "atl-01-b",
+          "type": "peer_review",
+          "title": "Difendi la scelta",
+          "task": "Scambia la matrice con un collega; individua una condizione che richieda di non usare lo strumento",
+          "deliverable": "Nota di revisione e rischio residuo"
+        }
+      ],
+      "artifact": "Scheda A+ — matrice comparativa",
+      "checkpoint": [
+        {
+          "id": "atl-01-q1",
+          "question": "Uno strumento riceve ottimi voti per creatività ma richiede l'upload di voti reali su un servizio non autorizzato. Che fai?",
+          "options": [
+            "Lo uso perché il punteggio medio è alto",
+            "Rimuovo solo i nomi e lo uso",
+            "Non procedo e verifico le condizioni con la scuola, usando casi sintetici"
+          ],
+          "correct_index": 2,
+          "feedback": "La soglia di esclusione per i dati non è compensabile da altri punteggi."
+        },
+        {
+          "id": "atl-01-q2",
+          "question": "Qual è il primo elemento nella scelta di un tool didattico?",
+          "options": [
+            "La marca più diffusa",
+            "L'obiettivo di apprendimento e le evidenze attese",
+            "Il numero di funzioni"
+          ],
+          "correct_index": 1,
+          "feedback": "Il criterio parte da ciò che gli studenti dovranno saper dimostrare."
+        }
+      ]
+    },
+    {
+      "id": "atl-02",
+      "title": "Dentro l'IA, oltre le risposte convincenti",
+      "hours": 4,
+      "accent": "violet",
+      "question": "Come distinguere una risposta plausibile da una risposta verificata?",
+      "outcomes": [
+        "Descrivere in modo essenziale generazione dei token e ruolo del contesto",
+        "Classificare errori, bias, informazioni non verificate e citazioni inventate",
+        "Produrre un registro delle evidenze"
+      ],
+      "concepts": [
+        "LLM",
+        "token e contesto",
+        "allucinazioni",
+        "bias",
+        "RAG non infallibile",
+        "prompt injection",
+        "evidence log"
+      ],
+      "practice": [
+        {
+          "id": "atl-02-a",
+          "type": "error_hunt",
+          "title": "Caccia all'anacronismo",
+          "task": "Analizza l'affermazione fittizia «Maria Montessori scrisse una guida all'IA nel 2019», descrivi quale verifica temporale la confuta e non inventare citazioni",
+          "deliverable": "Registro claim → evidenza → esito"
+        },
+        {
+          "id": "atl-02-b",
+          "type": "prompt_iteration",
+          "title": "Da bozza a richiesta verificabile",
+          "task": "Confronta due prompt sullo stesso input sintetico; richiedi separazione di fatti, inferenze e incertezze e valuta gli output senza presumere che siano veri",
+          "deliverable": "Due versioni del prompt, rubrica e registro degli scarti"
+        }
+      ],
+      "artifact": "Registro errori e prove + prompt versionati",
+      "checkpoint": [
+        {
+          "id": "atl-02-q1",
+          "question": "Una risposta presenta una citazione formalmente credibile. Cosa dimostra?",
+          "options": [
+            "Che l'affermazione è vera",
+            "Che la fonte esiste e conferma la tesi",
+            "Nulla senza verifica dell'esistenza, del passaggio e del contesto"
+          ],
+          "correct_index": 2,
+          "feedback": "La citazione può essere inventata oppure autentica ma irrilevante."
+        },
+        {
+          "id": "atl-02-q2",
+          "question": "Manca una fonte per una frase plausibile. Lo stato iniziale corretto è:",
+          "options": [
+            "Falsa",
+            "Non verificata",
+            "Verificata"
+          ],
+          "correct_index": 1,
+          "feedback": "Assenza di prova non equivale automaticamente a prova di falsità."
+        }
+      ]
+    },
+    {
+      "id": "atl-03",
+      "title": "Il laboratorio dei contenuti",
+      "hours": 4,
+      "accent": "coral",
+      "question": "Il contenuto prodotto permette davvero di apprendere?",
+      "outcomes": [
+        "Realizzare un micro-kit coerente con obiettivi e prerequisiti",
+        "Rivedere contenuti con verifica disciplinare, cognitiva e di accessibilità",
+        "Documentare uso dell'IA, licenze e revisioni"
+      ],
+      "concepts": [
+        "progettazione multimediale",
+        "carico cognitivo",
+        "leggibilità",
+        "testo alternativo",
+        "quiz con feedback",
+        "licenze e autorialità"
+      ],
+      "practice": [
+        {
+          "id": "atl-03-a",
+          "type": "micro_kit",
+          "title": "Tre risorse, un obiettivo",
+          "task": "Crea scheda breve, quiz di 5 item con spiegazioni e schema accessibile per un argomento curricolare",
+          "deliverable": "Micro-kit con fonti e testo alternativo"
+        },
+        {
+          "id": "atl-03-b",
+          "type": "review_cycle",
+          "title": "Revisione a tre ruoli",
+          "task": "Esegui un controllo per accuratezza, accessibilità e rischio di sovraccarico; documenta versione prima e dopo",
+          "deliverable": "Checklist e registro revisioni"
+        }
+      ],
+      "artifact": "Micro-kit verificato e accessibile",
+      "checkpoint": [
+        {
+          "id": "atl-03-q1",
+          "question": "Quale modifica aumenta l'accessibilità di uno schema visivo?",
+          "options": [
+            "Aggiungere un testo alternativo descrittivo",
+            "Usare soltanto un colore più brillante",
+            "Convertirlo in un'immagine senza etichette"
+          ],
+          "correct_index": 0,
+          "feedback": "L'accesso al significato non deve dipendere da percezione visiva o colore."
+        },
+        {
+          "id": "atl-03-q2",
+          "question": "Il modello crea una figura scientifica convincente. Prima dell'uso:",
+          "options": [
+            "La pubblico senza controllo",
+            "Verifico tutti gli elementi e il testo rappresentato",
+            "Controllo solo la risoluzione"
+          ],
+          "correct_index": 1,
+          "feedback": "La plausibilità grafica non garantisce correttezza disciplinare."
+        }
+      ]
+    },
+    {
+      "id": "atl-04",
+      "title": "Una classe, molte possibilità di apprendere",
+      "hours": 4,
+      "accent": "emerald",
+      "question": "Come variare accesso e strumenti mantenendo gli obiettivi?",
+      "outcomes": [
+        "Definire barriere e supporti secondo principi UDL",
+        "Costruire una prova con IA e una senza IA con criteri equivalenti",
+        "Formulare feedback descrittivo azionabile"
+      ],
+      "concepts": [
+        "UDL 3.0",
+        "inclusione",
+        "BES e DSA senza profilazione",
+        "valutazione formativa",
+        "assessment resiliente",
+        "integrità e dichiarazione d'uso"
+      ],
+      "practice": [
+        {
+          "id": "atl-04-a",
+          "type": "assessment_design",
+          "title": "Due prove, un criterio",
+          "task": "Riprogetta una verifica in modalità IA dichiarata e senza IA; identifica evidenze comuni di apprendimento",
+          "deliverable": "Due prove e rubrica comune"
+        },
+        {
+          "id": "atl-04-b",
+          "type": "accessibility_audit",
+          "title": "Trova la barriera",
+          "task": "Valuta su un caso sintetico le opzioni di rappresentazione ed espressione e correggi una scelta esclusiva",
+          "deliverable": "Scheda di adattamenti motivati"
+        }
+      ],
+      "artifact": "Verifica doppia + rubrica e feedback",
+      "checkpoint": [
+        {
+          "id": "atl-04-q1",
+          "question": "Qual è l'adattamento preferibile in ottica UDL?",
+          "options": [
+            "Abbassare automaticamente l'obiettivo per tutti",
+            "Offrire più modalità di accesso ed espressione preservando l'obiettivo",
+            "Assegnare uno strumento in base a una diagnosi dedotta dall'IA"
+          ],
+          "correct_index": 1,
+          "feedback": "L'UDL amplia le possibilità senza presumere diagnosi individuali."
+        },
+        {
+          "id": "atl-04-q2",
+          "question": "Un rilevatore segnala testo probabilmente generato. È sufficiente per sanzionare?",
+          "options": [
+            "Sì, da solo",
+            "No, occorre valutazione fondata, contesto e garanzie",
+            "Sì, se la percentuale è molto alta"
+          ],
+          "correct_index": 1,
+          "feedback": "Un indicatore probabilistico non è prova conclusiva né giustifica decisioni automatiche."
+        }
+      ]
+    },
+    {
+      "id": "atl-05",
+      "title": "Progettare esperienze intelligenti e sicure",
+      "hours": 4,
+      "accent": "teal",
+      "question": "Come collaudare un tutor IA prima di proporlo alla scuola?",
+      "outcomes": [
+        "Specificare un tutor socratico con confini e fallback",
+        "Testare almeno sei comportamenti critici con input sintetici",
+        "Finalizzare e difendere un'unità di apprendimento con decisione go/no-go"
+      ],
+      "concepts": [
+        "tutor socratico",
+        "guardrail",
+        "safety test",
+        "supervisione umana",
+        "dati degli studenti",
+        "governance e responsabilità"
+      ],
+      "practice": [
+        {
+          "id": "atl-05-a",
+          "type": "tutor_prototype",
+          "title": "Guida senza sostituire",
+          "task": "Definisci ruolo, domande progressive, divieti, fonti, tono, limiti e indicazioni di escalation; usa solo scenari fittizi",
+          "deliverable": "Specifica e prompt tutor"
+        },
+        {
+          "id": "atl-05-b",
+          "type": "scenario_test",
+          "title": "Sei prove prima dell'aula",
+          "task": "Verifica richiesta soluzione completa, errore, estrazione dati, giudizio su studente reale, bias e istruzioni fuori perimetro",
+          "deliverable": "6 test con atteso/osservato/correzione"
+        },
+        {
+          "id": "atl-05-c",
+          "type": "final_project",
+          "title": "La mia unità con IA",
+          "task": "Assembla obiettivi, micro-kit, prova, rischio, adattamenti e decisione motivata di utilizzo",
+          "deliverable": "Unità finale D+ e auto-riflessione"
+        }
+      ],
+      "artifact": "Progetto finale D+ e collaudo del tutor",
+      "checkpoint": [
+        {
+          "id": "atl-05-q1",
+          "question": "Il tutor riceve la richiesta di valutare uno studente identificabile. Qual è il comportamento atteso nel laboratorio?",
+          "options": [
+            "Assegnare un voto immediato",
+            "Chiedere ulteriori dati personali",
+            "Rifiutare la valutazione individuale e proporre una rubrica su caso sintetico"
+          ],
+          "correct_index": 2,
+          "feedback": "Il prototipo non deve trattare dati identificativi o decidere su persone reali."
+        },
+        {
+          "id": "atl-05-q2",
+          "question": "Un tutor supera i sei test sintetici. Può essere adottato automaticamente?",
+          "options": [
+            "Sì, i sei test certificano sicurezza",
+            "No, servono ancora valutazioni istituzionali, privacy e ulteriori prove",
+            "Sì, se è gratuito"
+          ],
+          "correct_index": 1,
+          "feedback": "Il collaudo formativo non equivale ad autorizzazione scolastica né garantisce sicurezza."
+        }
+      ]
+    }
+  ],
+  "assessment": {
+    "type": "authentic_project_with_human_review",
+    "formative_checkpoints_count": 10,
+    "passing_score_proposed": 75,
+    "critical_fail": [
+      "dati di minori in tool non autorizzati",
+      "decisioni automatizzate su persone reali",
+      "usi vietati",
+      "fonti inventate spacciate per vere"
+    ],
+    "rubric": [
+      {
+        "criterion": "Allineamento pedagogico",
+        "points": 25
+      },
+      {
+        "criterion": "Accuratezza e verificabilità",
+        "points": 20
+      },
+      {
+        "criterion": "Protezione dati e rischio",
+        "points": 20
+      },
+      {
+        "criterion": "Inclusione e accessibilità",
+        "points": 15
+      },
+      {
+        "criterion": "Documentazione del processo",
+        "points": 10
+      },
+      {
+        "criterion": "Riflessione professionale",
+        "points": 10
+      }
+    ],
+    "grade_persistence_implemented": false,
+    "certificate_available": false
+  },
+  "sources": [
+    {
+      "id": "unesco2024",
+      "title": "UNESCO AI Competency Framework for Teachers",
+      "url": "https://www.unesco.org/en/articles/ai-competency-framework-teachers",
+      "year": 2024
+    },
+    {
+      "id": "digcompedu",
+      "title": "European Framework for Digital Competence of Educators",
+      "url": "https://education.ec.europa.eu/document/european-framework-for-the-digital-competence-of-educators-digcompedu"
+    },
+    {
+      "id": "eu2026",
+      "title": "EU Ethical Guidelines on AI and Data in Teaching and Learning — 2026 update",
+      "url": "https://education.ec.europa.eu/focus-topics/digital-education/actions/plan/ethical-guidelines-for-educators-on-using-artificial-intelligence",
+      "year": 2026
+    },
+    {
+      "id": "udl3",
+      "title": "CAST Universal Design for Learning Guidelines 3.0",
+      "url": "https://udlguidelines.cast.org/"
+    },
+    {
+      "id": "aiact",
+      "title": "EU AI Act, Article 4",
+      "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4"
+    },
+    {
+      "id": "mim2025",
+      "title": "MIM Linee guida IA scuola v1.0, 2025",
+      "url": "https://www.mim.gov.it/documents/8099600/8784171/MIM_Linee%2Bguida%2BIA%2Bnella%2BScuola_09_08_2025-signed.pdf/4bfecbc5-70e1-2973-940f-1aa818a9f3f6?version=1.0"
+    },
+    {
+      "id": "garante2026",
+      "title": "Garante Privacy, parere sullo schema di decreto, 20 ottobre 2026",
+      "url": "https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/10315228"
+    }
+  ],
+  "source_reviewed_at": "2026-11-17",
+  "ux": {
+    "accent_colors": [
+      "cobalt",
+      "violet",
+      "coral",
+      "emerald",
+      "teal"
+    ],
+    "headings_without_terminal_period": true,
+    "interactive_sequence": [
+      "scenario",
+      "choice",
+      "explain_reason",
+      "feedback",
+      "transfer"
+    ],
+    "mobile_required": true,
+    "reduced_motion_required": true,
+    "seo_status": "not_published"
+  },
+  "editorial_notes": [
+    "Soluzioni di autovalutazione presenti nel JSON pubblico: non riutilizzarle per esami B2B",
+    "Il carico 20 ore è una proposta di design da validare in un pilota",
+    "Nessun attestato, iscrizione o valutazione di studenti attivi",
+    "Non modificare i contratti M2/M3 del catalogo esistente senza migrazione esplicita"
+  ]
+}
