@@ -592,6 +592,62 @@
       "definition": "Idea secondo cui ogni studente apprende meglio se riceve contenuti in una modalità stabile preferita. Le prove a sostegno del matching sono insufficienti.",
       "classroom_example": "Invece di etichettare bambini «visivi» o «uditivi», il docente offre alternative accessibili e confronta evidenze di apprendimento.",
       "source": "https://pubmed.ncbi.nlm.nih.gov/26162104/"
+    },
+    {
+      "id": "g73",
+      "term": "Modello generativo",
+      "category": "Progettazione multimediale",
+      "definition": "Sistema di intelligenza artificiale che produce nuovi contenuti, per esempio immagini, testi, audio o video, a partire da istruzioni e altri input.",
+      "classroom_example": "Per creare una fotografia didattica illustrativa, il docente sceglie un modello di immagini e verifica che il risultato non presenti fatti inventati.",
+      "source": "https://help.openai.com/en/articles/11084440-images-in-chatgpt"
+    },
+    {
+      "id": "g74",
+      "term": "Applicazione e modello IA",
+      "category": "Progettazione multimediale",
+      "definition": "Un'applicazione è l'interfaccia usata dal docente; il modello è il sistema che elabora o genera il contenuto. Un servizio può offrire modelli differenti.",
+      "classroom_example": "ChatGPT è un'applicazione; GPT Image indica una famiglia di modelli di immagini. Canva è un ambiente di progettazione che può integrare più strumenti.",
+      "source": "https://developers.openai.com/api/docs/guides/image-generation"
+    },
+    {
+      "id": "g75",
+      "term": "ChatGPT Images / GPT Image",
+      "category": "Progettazione multimediale",
+      "definition": "Strumenti di generazione e modifica delle immagini accessibili da ChatGPT; i modelli effettivamente disponibili possono cambiare con il tempo.",
+      "classroom_example": "Il docente prova una scena illustrativa immaginaria, corregge gli elementi non pertinenti e aggiunge una didascalia che dichiara la natura sintetica.",
+      "source": "https://help.openai.com/en/articles/11084440-images-in-chatgpt"
+    },
+    {
+      "id": "g76",
+      "term": "Nano Banana / Gemini Image",
+      "category": "Progettazione multimediale",
+      "definition": "Nome con cui Google presenta la propria famiglia di modelli generativi per creare o modificare immagini, disponibili tramite servizi come Gemini secondo versione e accesso.",
+      "classroom_example": "Per una immagine scientifica illustrativa il docente confronta Nano Banana con un altro modello, controllando oggetti, riferimenti e leggibilità.",
+      "source": "https://gemini.google/overview/image-generation/"
+    },
+    {
+      "id": "g77",
+      "term": "Prompt visivo",
+      "category": "Progettazione multimediale",
+      "definition": "Richiesta che descrive soggetto, obiettivo didattico, composizione, formato, vincoli e criteri di verifica per generare o modificare un'immagine.",
+      "classroom_example": "Per una immagine sintetica del ciclo dell'acqua, il docente specifica destinatari, elementi necessari e divieto di introdurre etichette non controllate.",
+      "source": "https://developers.openai.com/api/docs/guides/image-prompting"
+    },
+    {
+      "id": "g78",
+      "term": "Video generativo",
+      "category": "Progettazione multimediale",
+      "definition": "Clip o sequenza audiovisiva prodotta a partire da un testo o da immagini mediante modelli specifici, da verificare per accuratezza, coerenza e accessibilità.",
+      "classroom_example": "Il docente usa una clip simulata come introduzione e fornisce sottotitoli, fonte dei contenuti e un'attività che ne verifica il significato.",
+      "source": "https://deepmind.google/models/veo/"
+    },
+    {
+      "id": "g79",
+      "term": "Audio Overview basato sulle fonti",
+      "category": "Progettazione multimediale",
+      "definition": "Formato audio dialogato che un servizio come NotebookLM o Gemini Notebook può costruire a partire dai materiali inseriti; non equivale a una registrazione umana.",
+      "classroom_example": "Una docente carica soltanto materiali autorizzati e controllati, genera un dialogo e verifica citazioni e trascrizione prima di proporlo alla classe.",
+      "source": "https://blog.google/innovation-and-ai/products/notebooklm-audio-overviews/"
     }
   ],
   "sources": [
@@ -638,6 +694,22 @@
     {
       "title": "Pashler et al. · Learning Styles: Concepts and Evidence",
       "url": "https://pubmed.ncbi.nlm.nih.gov/26162104/"
+    },
+    {
+      "title": "ChatGPT Images · documentazione",
+      "url": "https://help.openai.com/en/articles/11084440-images-in-chatgpt"
+    },
+    {
+      "title": "Gemini Nano Banana · documentazione",
+      "url": "https://gemini.google/overview/image-generation/"
+    },
+    {
+      "title": "Google Veo · modelli video",
+      "url": "https://deepmind.google/models/veo/"
+    },
+    {
+      "title": "Google Audio Overview",
+      "url": "https://blog.google/innovation-and-ai/products/notebooklm-audio-overviews/"
     }
   ],
   "editorial_note": "Definizioni divulgative redatte per il corso; esempi originali, non citazioni letterali. Metodo MANZO AI: proposta progettuale, non metodo scientificamente validato. Sono distinte interattività a regole e adattività IA; gli 'stili di apprendimento' non sono categorie diagnostiche né una base scientifica per abbinare un solo media a ciascun alunno."
