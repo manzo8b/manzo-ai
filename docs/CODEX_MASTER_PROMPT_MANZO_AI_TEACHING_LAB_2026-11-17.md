@@ -23,6 +23,7 @@ LAVORA DAVVERO: inventaria, riproduci problemi, modifica i sorgenti, aggiungi te
 - Studio voce: tools/ai-teaching-voice-studio/index.html
 - Studio video: tools/ai-teaching-video-studio/index.html
 - Workspace: tools/ai-teaching-workspace/index.html
+- Mission Studio (micro-web-app formativa): tools/ai-teaching-launchpad/index.html, pubblicata dal publisher sotto /inizia/
 - Contract QA: theme/check-ai-teaching-lab-contracts.cjs
 - Leggi README.md, editorial/learning/ai-teaching-lab/README.md e le note di audit in docs/.
 - La build Pages attuale deriva da un archivio statico site-v0.7.zip integrato da publisher: trova la reale source of truth; NON correggere soltanto HTML già generato nella cartella di output.
@@ -44,13 +45,13 @@ STATO DA NON FALSIFICARE: cinque moduli in italiano; durata complessiva di 20 or
 1. Leggi tutta l'architettura del corso e della pipeline GitHub Pages. Elenca le pagine effettivamente generate e quelle solo pianificate.
 2. Controlla stato working tree, branch, cambi preesistenti e CI; non sovrascrivere lavoro non tuo.
 3. Esegui i test esistenti PRIMA di cambiare codice. Registra comando, esito, errore riproducibile e cause probabili. Non dichiarare PASS se non hai eseguito un test.
-4. Mappa i flussi docente: corso → Studio immagini/voce/video → JSON + file originario → Workspace → revisione → export manifest/HTML → ripresa bozza.
+4. Mappa i flussi docente: corso → Mission Studio (/inizia/) → brief locale → Studio immagini/voce/video → JSON + file originario → Workspace → revisione → export manifest/HTML → ripresa bozza. Valuta con precisione la differenza tra il brief Mission Studio e il manifest del Workspace: non fingere interoperabilità automatica tra formati distinti.
 5. Crea un backlog P0/P1/P2/P3 con file coinvolti, gravità, impatto pedagogico, rischio privacy, criterio di accettazione.
 6. Identifica fatti, simulazioni, esempi, funzionalità vere e meri placeholder.
 
 ## FASE 1 — HARDENING TECNICO AI TEACHING LAB
 - Correggi crash, errori JS/Python, dipendenze, link interrotti, mancati file e rotture nel publisher.
-- Testa i quattro schemi JSON, import/export, reimportazione, sovrascrittura consapevole, errori su file non validi, stato di approvazione e invalidazione dopo modifiche.
+- Testa i cinque schemi JSON (incluso ai-teaching-lab-mission-v0.1), import/export, reimportazione, sovrascrittura consapevole, errori su file non validi, stato di approvazione e invalidazione dopo modifiche.
 - Preserva la provenienza di ogni asset e singola scena video; visualizza fonte, modello, licenza dichiarata e limiti.
 - Verifica che l'importazione di una scheda non attribuisca automaticamente validità alle sue dichiarazioni; i materiali originali restano da controllare.
 - Esamina memoria, URL.createObjectURL/revokeObjectURL, MediaRecorder, permessi microfono, fallback Safari, gestione errori, metadati temporali, formati audio, sottotitoli e accessibilità.
@@ -117,7 +118,7 @@ Non fare refactor massivi simultanei. Non rompere funzionalità esistenti per ot
 
 ## GATE DI ACCETTAZIONE
 GATE 1 / Teaching Lab:
-- Tutte e cinque le lezioni e i quattro ambienti si aprono, con link andata/ritorno funzionanti.
+- Tutte e cinque le lezioni, Mission Studio e i quattro ambienti si aprono, con link andata/ritorno funzionanti.
 - Flusso sintetico end-to-end completabile o eventuale limite dichiarato; nessuna perdita silenziosa di lavoro.
 - Tutti i test riproducibili obbligatori passano. Zero errori bloccanti JS nei percorsi smoke effettivamente eseguiti.
 - Nessun overflow orizzontale / pannello che nasconde il modulo sui viewport testati.
