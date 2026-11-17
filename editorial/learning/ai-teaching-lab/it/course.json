@@ -1,5 +1,5 @@
 {
-  "schema_version": "draft-2.2",
+  "schema_version": "draft-2.3",
   "course_key": "ai-teaching-lab",
   "locale": "it",
   "status": "editorial_draft",
@@ -7,7 +7,7 @@
   "public_graded_assessment": false,
   "private_assessment_ready": false,
   "course_title": "IA e didattica applicata",
-  "subtitle": "Cinque esperienze che insegnano attraverso la pratica: problema, narrazione, prompt, revisione e feedback",
+  "subtitle": "Dalla scelta consapevole dell'IA alla creazione di materiali multimediali accessibili, con letture, laboratori e verifiche",
   "marketing_title": "AI Teaching Lab — IA e didattica applicata",
   "audience": [
     "docenti primaria",
@@ -46,7 +46,10 @@
     "Riprogettare prove formative con e senza IA",
     "Riconoscere rischi, responsabilità e necessità di autorizzazione",
     "Prototipare e testare un tutor socratico su casi sintetici",
-    "Completare una unità didattica documentata e valutabile"
+    "Completare una unità didattica documentata e valutabile",
+    "Progettare uno storyboard multimediale con slide, audio/video, trascrizione e un'interazione guidata dalla verifica dell'apprendimento.",
+    "Distinguere training e test di un classificatore dimostrativo senza confonderlo con un modello linguistico generativo.",
+    "Disegnare un percorso ramificato con feedback, una via accessibile e supervisione professionale."
   ],
   "modules": [
     {
@@ -58,7 +61,8 @@
       "outcomes": [
         "Definire un obiettivo osservabile prima di scegliere un sistema",
         "Comparare alternative IA e senza IA con una matrice replicabile",
-        "Motivare una decisione go/no-go"
+        "Motivare una decisione go/no-go",
+        "Argomentare quando un assistente IA, un editor di media o un'attività senza IA rispondono davvero all'obiettivo"
       ],
       "concepts": [
         "allineamento costruttivo",
@@ -122,7 +126,8 @@
         "paragraphs": [
           "Un obiettivo didattico descrive una prestazione osservabile: spiegare, confrontare, argomentare, correggere. La scelta delle attività segue la definizione delle evidenze di apprendimento; un sistema IA non è un obiettivo in sé. Una presentazione attraente non dimostra che gli alunni abbiano compreso.",
           "Le categorie della tassonomia di Bloom riveduta aiutano a scegliere verbi e prove coerenti con il compito; non obbligano ogni lezione a raggiungere il livello 'creare'. La comparazione con una soluzione senza IA è necessaria per distinguere vantaggio reale, costo, rischio e novelty effect.",
-          "TALIS 2024 descrive carichi amministrativi e gestione del comportamento come pressioni rilevanti. La tecnologia può facilitare la progettazione, ma non sostituisce routine, relazione educativa e interventi professionali. Ogni efficienza dichiarata richiede una prova misurabile, non numeri promozionali."
+          "TALIS 2024 descrive carichi amministrativi e gestione del comportamento come pressioni rilevanti. La tecnologia può facilitare la progettazione, ma non sostituisce routine, relazione educativa e interventi professionali. Ogni efficienza dichiarata richiede una prova misurabile, non numeri promozionali.",
+          "Per intelligenza artificiale intendiamo una famiglia di sistemi informatici capaci di elaborare input e produrre risultati come previsioni, raccomandazioni, classificazioni o contenuti. Non sono tutte la stessa cosa: un filtro antispam, un riconoscitore di immagini e un assistente che scrive un testo svolgono compiti differenti. L’IA generativa è la parte che crea nuovi output, per esempio spiegazioni, esercizi, immagini o audio a partire da una richiesta. Nei sistemi linguistici moderni, chiamati grandi modelli linguistici o LLM, la generazione si basa su regolarità apprese durante l’addestramento e sul contesto fornito. Un risultato fluido non significa che ogni dato sia vero: la verifica resta essenziale."
         ],
         "source_reviewed_at": "2026-11-17",
         "sources": [
@@ -137,6 +142,10 @@
           {
             "title": "Vanderbilt — Bloom revised taxonomy",
             "url": "https://cft.vanderbilt.edu/wp-content/uploads/sites/59/Blooms-Taxonomy.pdf"
+          },
+          {
+            "title": "Orientamenti UE per scegliere contenuti digitali",
+            "url": "https://education.ec.europa.eu/document/making-informed-choices-on-digital-education-content-eu-guidelines-for-teachers-and-educators"
           }
         ],
         "pedagogical_reference": {
@@ -176,7 +185,15 @@
       ],
       "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
       "subtitle": "Capire l’IA, formulare richieste efficaci e scegliere quando usarla nella pratica scolastica",
-      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica.",
+      "competence_focus": {
+        "title": "Scegliere gli strumenti IA per insegnare",
+        "kind": "decision_matrix",
+        "embedded_in_laboratory": true,
+        "estimated_extra_hours": 0,
+        "source_count": 1,
+        "portfolio_artifact": "Matrice ragionata con scelta, un motivo di esclusione e una prova di apprendimento"
+      }
     },
     {
       "id": "atl-02",
@@ -187,7 +204,9 @@
       "outcomes": [
         "Descrivere in modo essenziale generazione dei token e ruolo del contesto",
         "Classificare errori, bias, informazioni non verificate e citazioni inventate",
-        "Produrre un registro delle evidenze"
+        "Produrre un registro delle evidenze",
+        "Distinguere dati di addestramento, test, etichette, generalizzazione e possibili scorciatoie nei dati",
+        "Illustrare con dati sintetici perché la prestazione sul training non dimostra la generalizzazione."
       ],
       "concepts": [
         "LLM",
@@ -253,7 +272,8 @@
         "paragraphs": [
           "Un modello linguistico genera sequenze plausibili a partire da contesto e modelli appresi. Non verifica automaticamente ciascun claim contro un documento autorevole. Allucinazione, errore di calcolo, bias, fonte non verificata e disposizione obsoleta richiedono diagnosi differenti.",
           "Per verificare una tesi bisogna identificare il claim, recuperare la fonte, leggere il passaggio pertinente, valutarne data e contesto, e registrare l'esito come verificato, non verificato o smentito. Citazioni formattate, RAG e prompt accurati non garantiscono la verità.",
-          "L'integrità scolastica va progettata con processi osservabili: bozze, fonti, revisioni, confronto in classe e difesa orale. Il rilevamento automatico di testo IA, da solo, non è prova conclusiva di frode né base sufficiente per sanzioni."
+          "L'integrità scolastica va progettata con processi osservabili: bozze, fonti, revisioni, confronto in classe e difesa orale. Il rilevamento automatico di testo IA, da solo, non è prova conclusiva di frode né base sufficiente per sanzioni.",
+          "zione inventata o non fedele presentata come plausibile. Ma non tutti gli errori sono allucinazioni: una fonte reale interpretata male, una statistica vecchia, un calcolo errato e un pregiudizio nei contenuti richiedono interventi diversi. Il docente dovrebbe dunque insegnare a denominare l'errore con precisione, senza trasformare ogni incertezza in una condanna.\n\nUn'altra distinzione è fondamentale: apprendimento automatico non significa semplicemente chiedere qualcosa a un chatbot. Nell'apprendimento supervisionato un modello viene addestrato su esempi etichettati; poi lo si prova su dati mai visti. Se tutti i triangoli del training sono blu e tutti i cerchi sono rossi, una regola che impara solo i colori sembra perfetta sul training ma fallisce quando cambia il colore. Il test rivela il problema di generalizzazione e possibili scorciatoie nei dati. Un grande modello linguistico generativo produce invece sequenze di token attraverso meccanismi ben più complessi: il nostro piccolo classificatore dimostrativo non riproduce ChatGPT. La simulazione serve a capire perché una prestazione apparentemente buona richiede prove indipendenti."
         ],
         "source_reviewed_at": "2026-11-17",
         "sources": [
@@ -268,6 +288,14 @@
           {
             "title": "Stanford Encyclopedia — Critical thinking",
             "url": "https://plato.stanford.edu/entries/critical-thinking/history.html"
+          },
+          {
+            "title": "Google · Machine Learning Crash Course",
+            "url": "https://developers.google.com/machine-learning/crash-course?hl=it"
+          },
+          {
+            "title": "Generalizzazione e overfitting",
+            "url": "https://developers.google.com/machine-learning/crash-course/overfitting?hl=it"
           }
         ],
         "pedagogical_reference": {
@@ -307,7 +335,15 @@
       ],
       "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
       "subtitle": "Distinguere una risposta convincente da una conoscenza verificata",
-      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica.",
+      "competence_focus": {
+        "title": "Dentro il machine learning: allenare e verificare una regola",
+        "kind": "model_test",
+        "embedded_in_laboratory": true,
+        "estimated_extra_hours": 0,
+        "source_count": 2,
+        "portfolio_artifact": "Tabella 8 casi di training e 4 di test, spiegazione di almeno due errori e un limite della simulazione"
+      }
     },
     {
       "id": "atl-03",
@@ -318,7 +354,10 @@
       "outcomes": [
         "Realizzare un micro-kit coerente con obiettivi e prerequisiti",
         "Rivedere contenuti con verifica disciplinare, cognitiva e di accessibilità",
-        "Documentare uso dell'IA, licenze e revisioni"
+        "Documentare uso dell'IA, licenze e revisioni",
+        "Produrre uno storyboard di tre slide, un copione audio/video con trascrizione e un'interazione di verifica coerenti con una stessa competenza",
+        "Saper spiegare le scelte multimediali richiamando coerenza, segmentazione, segnali visivi, accessibilità e limiti cognitivi.",
+        "Consegnare un portfolio di tre formati allineati allo stesso obiettivo e alla medesima verifica formativa."
       ],
       "concepts": [
         "progettazione multimediale",
@@ -383,7 +422,8 @@
         "paragraphs": [
           "La qualità di un materiale dipende da obiettivo, conoscenze pregresse, chiarezza e possibilità di verificare la comprensione. Una grafica appariscente può aumentare il carico cognitivo o consolidare un'immagine scientifica sbagliata.",
           "La produzione assistita da IA richiede controllo disciplinare dei fatti, coerenza dei segnali visivi, alt text, trascrizioni e licenze. Un quiz è formativo soltanto se permette di capire perché un'opzione è falsa e quale passo fare dopo.",
-          "Costruire un prodotto significativo offre occasioni di elaborare, rappresentare e correggere le idee. La tecnologia va giudicata in base al lavoro cognitivo che rende possibile agli studenti, non alla rapidità con cui il docente genera file."
+          "Costruire un prodotto significativo offre occasioni di elaborare, rappresentare e correggere le idee. La tecnologia va giudicata in base al lavoro cognitivo che rende possibile agli studenti, non alla rapidità con cui il docente genera file.",
+          "iali. Non occorre una slide per ogni frase, né dieci animazioni per esprimere un concetto. Una sequenza efficace può usare una domanda iniziale, un esempio concreto, un semplice schema e una prova finale. Il problema del sovraccarico non si risolve riducendo ogni attività a slogan: serve trovare il giusto equilibrio tra precisione, leggibilità e profondità. Per questo chiediamo all'IA di produrre una prima bozza controllabile, non una presentazione definitiva pronta per essere proiettata.\n\nLa ricerca sull'apprendimento multimediale di Richard Mayer ci invita a progettare per l'attenzione e la comprensione, non per la quantità di effetti. Il principio di coerenza suggerisce di eliminare parole, immagini e suoni non pertinenti; la segnalazione evidenzia gli elementi essenziali; la segmentazione rende controllabile il ritmo di presentazione. Questi principi non trasformano qualsiasi video in una buona lezione: l'obiettivo osservabile resta il punto di riferimento. Per un corso scolastico un audio con voce chiara e trascrizione, una immagine con descrizione e una decisione con feedback possono completarsi senza ripetere tutto tre volte."
         ],
         "source_reviewed_at": "2026-11-17",
         "sources": [
@@ -398,6 +438,18 @@
           {
             "title": "CMU Learning Principles",
             "url": "https://www.cmu.edu/teaching/principles/learning.html"
+          },
+          {
+            "title": "Richard Mayer · Coerenza e segnali visivi",
+            "url": "https://www.cambridge.org/core/books/cambridge-handbook-of-multimedia-learning/principles-for-reducing-extraneous-processing-in-multimedia-learning/F29A19FCD34C542806F736E0661C05F5"
+          },
+          {
+            "title": "Mayer · Segmentazione e ritmo",
+            "url": "https://www.cambridge.org/core/books/abs/cambridge-handbook-of-multimedia-learning/principles-for-managing-essential-processing-in-multimedia-learning/A9E77D0172F905AC957689D1771E2888"
+          },
+          {
+            "title": "Commissione europea · Qualità dei contenuti digitali",
+            "url": "https://education.ec.europa.eu/document/making-informed-choices-on-digital-education-content-eu-guidelines-for-teachers-and-educators"
           }
         ],
         "pedagogical_reference": {
@@ -437,7 +489,77 @@
       ],
       "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
       "subtitle": "Dalle slide ai podcast: creare risorse chiare, accurate e accessibili",
-      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica.",
+      "competence_focus": {
+        "title": "Dall'idea alla risorsa multimediale accessibile",
+        "kind": "multimedia_design",
+        "embedded_in_laboratory": true,
+        "estimated_extra_hours": 0,
+        "source_count": 4,
+        "portfolio_artifact": "Portfolio multimediale: storyboard di tre slide, copione, trascrizione, scelta interattiva, checklist qualità"
+      },
+      "multimedia_design_principles": [
+        {
+          "name": "Partire dall'apprendimento",
+          "why": "Obiettivo osservabile, prerequisiti, destinatari e vincoli reali",
+          "do": "Scrivi che cosa lo studente saprà spiegare o dimostrare"
+        },
+        {
+          "name": "Integrare i linguaggi",
+          "why": "Slide, grafico, voce e interazione hanno funzioni diverse",
+          "do": "Scegli un mezzo soltanto quando aiuta a capire meglio"
+        },
+        {
+          "name": "Gestire il carico cognitivo",
+          "why": "Coerenza, segnalazione e segmentazione riducono distrazioni e sovraccarico",
+          "do": "Elimina decorazioni inutili, evidenzia la prova e suddividi i passaggi"
+        },
+        {
+          "name": "Attivare l'apprendimento",
+          "why": "La comprensione emerge anche da decisioni, spiegazioni e feedback",
+          "do": "Crea una domanda che obblighi a usare un'evidenza"
+        },
+        {
+          "name": "Garantire accessibilità e diritti",
+          "why": "Trascrizioni, sottotitoli, descrizioni e licenze rendono il prodotto riutilizzabile",
+          "do": "Controlla contrasto, navigazione, alternative e provenienza"
+        },
+        {
+          "name": "Verificare e migliorare",
+          "why": "Una bozza gradevole non prova un apprendimento; serve una osservazione",
+          "do": "Prova con una microverifica e correggi prima del riuso"
+        }
+      ],
+      "media_blueprints": [
+        {
+          "kind": "slide",
+          "title": "Tre slide essenziali",
+          "role": "Visualizzare una distinzione",
+          "example": "1. Una giornata fredda · 2. Meteo e clima: prove diverse · 3. Quale dato ci manca?",
+          "accessibility": "Descrizioni testuali delle immagini e caratteri leggibili"
+        },
+        {
+          "kind": "audio",
+          "title": "Audio dialogato",
+          "role": "Rendere esplicito un ragionamento",
+          "example": "Due voci confrontano un episodio meteorologico e una tendenza, senza inventare dati",
+          "accessibility": "Trascrizione, pause e linguaggio comprensibile"
+        },
+        {
+          "kind": "video",
+          "title": "Microvideo a scene",
+          "role": "Mostrare il ragionamento per segmenti",
+          "example": "Scena-problema, confronto di fonti e domanda finale in 60–90 secondi",
+          "accessibility": "Sottotitoli, niente lampeggiamenti, velocità controllabile"
+        },
+        {
+          "kind": "interactive",
+          "title": "Scelta con feedback",
+          "role": "Far usare e correggere l'idea",
+          "example": "«Una giornata fredda prova una tendenza?» · feedback motivato e secondo tentativo",
+          "accessibility": "Pulsanti raggiungibili da tastiera e alternativa in testo"
+        }
+      ]
     },
     {
       "id": "atl-04",
@@ -448,7 +570,8 @@
       "outcomes": [
         "Definire barriere e supporti secondo principi UDL",
         "Costruire una prova con IA e una senza IA con criteri equivalenti",
-        "Formulare feedback descrittivo azionabile"
+        "Formulare feedback descrittivo azionabile",
+        "Fornire tre modalità equivalenti con una rubrica comune e feedback che porti a una nuova prova"
       ],
       "concepts": [
         "UDL 3.0",
@@ -513,7 +636,8 @@
         "paragraphs": [
           "Le UDL Guidelines 3.0 propongono scelte diverse per coinvolgimento, rappresentazione, azione ed espressione. Offrire più strade di accesso non significa automaticamente abbassare gli obiettivi; i criteri di successo restano trasparenti e pertinenti.",
           "La valutazione formativa usa evidenze per correggere il percorso di insegnamento e apprendimento. Il feedback deve essere specifico, legato a un obiettivo e seguito da opportunità di applicazione. Il testo generato può fungere da bozza su casi fittizi, non giudizio definitivo su studenti.",
-          "La metacognizione si insegna in discipline concrete: pianificare, monitorare e verificare il proprio ragionamento. L'IA non deve dedurre diagnosi, profili cognitivi o attitudini individuali da lavori reali."
+          "La metacognizione si insegna in discipline concrete: pianificare, monitorare e verificare il proprio ragionamento. L'IA non deve dedurre diagnosi, profili cognitivi o attitudini individuali da lavori reali.",
+          "Le linee guida CAST UDL 3.0 invitano a considerare più forme di coinvolgimento, rappresentazione, azione ed espressione. In pratica, non aspettiamo che una difficoltà si trasformi in esclusione: possiamo offrire indicazioni scritte e orali, testi leggibili e schemi descritti, esempi guidati e un tempo di riflessione appropriato. Non occorre inventare diagnosi per progettare materiali più accessibili. Qualunque adattamento individuale collegato a esigenze riconosciute segue le procedure e le responsabilità scolastiche, non il giudizio di un chatbot.\n\nDifferenziare una proposta non significa imporre un mezzo sulla base di un presunto stile cognitivo immutabile. È più utile conservare obiettivo e criteri comuni, offrendo a chi apprende scelte realmente accessibili: argomentare in un testo, con una mappa descritta o attraverso un'esposizione con supporti. La revisione deve basarsi su evidenze osservabili e non su diagnosi inferite dall'IA. Una buona attività multimediale permette a tutti di raggiungere la domanda importante anche se una modalità tecnica non è disponibile."
         ],
         "source_reviewed_at": "2026-11-17",
         "sources": [
@@ -528,6 +652,14 @@
           {
             "title": "EEF Metacognition and Self-Regulated Learning 2025",
             "url": "https://educationendowmentfoundation.org.uk/education-evidence/guidance-reports/metacognition"
+          },
+          {
+            "title": "CAST · Opzioni di azione ed espressione",
+            "url": "https://udlguidelines.cast.org/action-expression/"
+          },
+          {
+            "title": "CAST · Rappresentazione",
+            "url": "https://udlguidelines.cast.org/representation/"
           }
         ],
         "pedagogical_reference": {
@@ -567,7 +699,15 @@
       ],
       "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
       "subtitle": "Differenziare le attività e trasformare la valutazione in un aiuto per imparare",
-      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica.",
+      "competence_focus": {
+        "title": "Personalizzare senza etichettare gli studenti",
+        "kind": "inclusive_feedback",
+        "embedded_in_laboratory": true,
+        "estimated_extra_hours": 0,
+        "source_count": 2,
+        "portfolio_artifact": "Tre percorsi accessibili, una rubrica e due versioni di un compito sintetico con miglioramento osservabile"
+      }
     },
     {
       "id": "atl-05",
@@ -578,7 +718,9 @@
       "outcomes": [
         "Specificare un tutor socratico con confini e fallback",
         "Testare almeno sei comportamenti critici con input sintetici",
-        "Finalizzare e difendere un'unità di apprendimento con decisione go/no-go"
+        "Finalizzare e difendere un'unità di apprendimento con decisione go/no-go",
+        "Costruire un percorso interattivo di dieci minuti con tre scelte, feedback, recupero e alternativa accessibile",
+        "Distinguere interattività programmata, LMS, tutor generativi e adattività basata su dati."
       ],
       "concepts": [
         "tutor socratico",
@@ -650,7 +792,8 @@
         "paragraphs": [
           "Un tutor formativo deve avere ambito, destinatari, conoscenze ammesse, progressione degli indizi, modalità di ammissione dell'incertezza, limiti di risposta ed escalation umana. Dire al modello di 'non sbagliare' non è un controllo sufficiente.",
           "Il collaudo impiega casi normali e avversi, specifica risposte attese e osservate, testa richieste di soluzioni, errori fattuali, esfiltrazione di dati, giudizi su persone reali e contenuti dannosi. Sei test di laboratorio non certificano sicurezza generale.",
-          "AI Act e GDPR richiedono analisi differenziata per finalità e tipo di sistema; non ogni chatbot per docenti è un sistema ad alto rischio. Vanno verificate policy dell'istituto, base e ruoli nel trattamento, eventuali tutele dei minori e possibilità di una scelta senza IA."
+          "AI Act e GDPR richiedono analisi differenziata per finalità e tipo di sistema; non ogni chatbot per docenti è un sistema ad alto rischio. Vanno verificate policy dell'istituto, base e ruoli nel trattamento, eventuali tutele dei minori e possibilità di una scelta senza IA.",
+          "Un tutor socratico cerca di aiutare lo studente a scoprire un passaggio attraverso domande mirate. Per una semplice equazione può iniziare chiedendo quale operazione inversa elimini il termine +5, proporre un indizio più preciso se necessario e infine invitare a controllare il risultato per sostituzione. Non sempre è la soluzione giusta: talvolta l'alunno ha bisogno di un esempio svolto, di un docente o di un'attività senza IA. La scelta deve rimanere coerente con l'obiettivo e con il livello di autonomia atteso. Il sistema non dovrebbe trasformarsi in un valutatore occulto.\n\nUn ambiente digitale «intelligente» non è automaticamente adattivo perché contiene quiz o pulsanti. Un percorso ramificato può seguire regole scritte dall'insegnante: tre scelte, tre feedback, una nuova prova e un'alternativa accessibile. Un tutor generativo opera diversamente, produce risposte a input nuovi e richiede una valutazione dei limiti, dei dati e della supervisione. Prima di parlare di algoritmi adattivi, insegniamo a progettare un ambiente in cui la scelta dello studente produca un'informazione utile per il passo successivo."
         ],
         "source_reviewed_at": "2026-11-17",
         "sources": [
@@ -669,6 +812,14 @@
           {
             "title": "AI Act Article 4",
             "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4"
+          },
+          {
+            "title": "H5P · Branching Scenario",
+            "url": "https://h5p.org/branching-scenario"
+          },
+          {
+            "title": "CAST · UDL",
+            "url": "https://udlguidelines.cast.org/"
           }
         ],
         "pedagogical_reference": {
@@ -708,7 +859,15 @@
       ],
       "assessment_bank_path": "editorial/learning/ai-teaching-lab/it/assessment-bank.json",
       "subtitle": "Progettare esperienze assistite dall’IA senza delegare la sicurezza né il giudizio educativo",
-      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica."
+      "self_study_intro": "Puoi seguire il modulo senza un formatore: leggi la spiegazione, prepara il materiale fittizio, prova il prompt con uno strumento autorizzato oppure analizza l'esempio simulato, controlla il risultato e svolgi la verifica.",
+      "competence_focus": {
+        "title": "Progettare un percorso interattivo a decisioni",
+        "kind": "branching_path",
+        "embedded_in_laboratory": true,
+        "estimated_extra_hours": 0,
+        "source_count": 2,
+        "portfolio_artifact": "Storyboard di 10 minuti con tre diramazioni e un test di sicurezza del percorso"
+      }
     }
   ],
   "assessment": {
@@ -891,7 +1050,7 @@
       "https://www.oecd.org/en/publications/2026/09/education-at-a-glance-2026_3bce4131/full-report/teacher-shortages-and-the-attractiveness-of-the-teaching-profession_074961e4.html"
     ]
   },
-  "learning_promise": "Il corso è progettato per essere un esempio di didattica applicata all'IA: la sequenza che il docente sperimenta è la stessa che potrà adattare ai propri studenti, con supporto IA opzionale e controllo umano.",
+  "learning_promise": "Progettazione multimediale al centro: ogni docente impara a trasformare un obiettivo in narrazione, media complementari e attività con feedback, senza trascurare selezione degli strumenti, fondamenti ML, inclusione e supervisione.",
   "course_as_demonstration": {
     "not_a_live_ai_tutor": true,
     "sequence": [
@@ -908,5 +1067,42 @@
       "https://www.unesco.org/en/articles/ai-competency-framework-teachers",
       "https://joint-research-centre.ec.europa.eu/scientific-activities/key-competences-lifelong-learning/digcompedu/digcompedu-framework_en"
     ]
-  }
+  },
+  "cross_module_competences": [
+    {
+      "module_id": "atl-01",
+      "label": "Scegliere gli strumenti IA per insegnare",
+      "kind": "decision_matrix",
+      "embedded_in_existing_time": true,
+      "portfolio_artifact": "Matrice ragionata con scelta, un motivo di esclusione e una prova di apprendimento"
+    },
+    {
+      "module_id": "atl-02",
+      "label": "Dentro il machine learning: allenare e verificare una regola",
+      "kind": "model_test",
+      "embedded_in_existing_time": true,
+      "portfolio_artifact": "Tabella 8 casi di training e 4 di test, spiegazione di almeno due errori e un limite della simulazione"
+    },
+    {
+      "module_id": "atl-03",
+      "label": "Dall'idea alla risorsa multimediale accessibile",
+      "kind": "multimedia_design",
+      "embedded_in_existing_time": true,
+      "portfolio_artifact": "Portfolio multimediale: storyboard di tre slide, copione, trascrizione, scelta interattiva, checklist qualità"
+    },
+    {
+      "module_id": "atl-04",
+      "label": "Personalizzare senza etichettare gli studenti",
+      "kind": "inclusive_feedback",
+      "embedded_in_existing_time": true,
+      "portfolio_artifact": "Tre percorsi accessibili, una rubrica e due versioni di un compito sintetico con miglioramento osservabile"
+    },
+    {
+      "module_id": "atl-05",
+      "label": "Progettare un percorso interattivo a decisioni",
+      "kind": "branching_path",
+      "embedded_in_existing_time": true,
+      "portfolio_artifact": "Storyboard di 10 minuti con tre diramazioni e un test di sicurezza del percorso"
+    }
+  ]
 }
