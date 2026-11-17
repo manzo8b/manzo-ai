@@ -126,7 +126,7 @@ function validateStudyFile(raw){
     if(!raw.approval.reviewer||!raw.approval.approvedAt||!raw.fields.title||!raw.fields.objective)
       throw Error("Scheda dichiarata approvata, ma con informazioni essenziali mancanti.");
     const checks=raw.review&&typeof raw.review==="object"?Object.values(raw.review):[];
-    if(checks.length<4||!checks.every(Boolean))
+    if(checks.length!==4||!checks.every(x=>x===true))
       throw Error("La scheda dichiara approvazione senza i quattro controlli compilati.");
     if(raw.schema==="ai-teaching-lab-image-v0.1"&&!raw.image?.name)
       throw Error("Manca l'identificazione dell'immagine approvata.");
