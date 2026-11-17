@@ -30,7 +30,7 @@ Un testo scritto bene può contenere un riferimento inesistente. Il compito dell
 - Classificare errori, bias, informazioni non verificate e citazioni inventate
 - Produrre un registro delle evidenze
 
-## Per capire: un racconto e cinque idee fondamentali
+## Lettura di approfondimento · una storia che continua
 
 ### 1. La bibliografia che sembra perfetta
 
@@ -178,7 +178,7 @@ Questi termini compaiono anche nei quiz. Puoi tornarci ogni volta che incontri u
 - **Non verificato** — Stato di una tesi che non ha ancora prove sufficienti né smentita documentata
 - **Rilevatore IA** — Strumento che stima caratteristiche di un testo, senza poter fornire da solo certezza sull'autore
 
-## Dalla lettura alla lezione successiva
+## Per continuare il percorso
 
 Abbiamo imparato a riconoscere informazioni incerte e a valutare i processi. Ora serve trasformare questa capacità critica in materiali che rendano più facile comprendere e ragionare, non soltanto impressionare.
 
