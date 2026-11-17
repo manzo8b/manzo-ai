@@ -1,0 +1,191 @@
+{
+  "version": "1.0",
+  "locale": "it",
+  "course": "Intelligenza artificiale e didattica applicata",
+  "slides_count": 15,
+  "source": "IA_e_Progettazione_Didattica.pdf / .pptx · materiali dell'autore consegnati in chat il 17 novembre 2026",
+  "editorial_policy": "Trasposizione testuale accessibile e fedele ai temi, non duplicato grafico esatto delle slide originali; le citazioni pedagogiche non verificate sono indicate come parafrasi",
+  "duration_podcast_seconds": 423.717732,
+  "slides": [
+    {
+      "title": "Intelligenza artificiale e didattica applicata",
+      "eyebrow": "LA PRESENTAZIONE",
+      "lead": "Trasformare l'IA da generatore automatico a strumento di progettazione pedagogica",
+      "points": [
+        "Il docente guida l'obiettivo formativo",
+        "Il sistema può generare bozze, non certificare l'apprendimento"
+      ],
+      "takeaway": "La tecnologia serve la didattica, non il contrario"
+    },
+    {
+      "title": "Il falso mito della velocità",
+      "eyebrow": "IL PROBLEMA INIZIA ALLE 7:43",
+      "lead": "La promessa: 30 slide perfette in 20 secondi",
+      "points": [
+        "La quantità non misura la qualità della lezione",
+        "Il tempo risparmiato va confrontato con quello necessario a verificare",
+        "Chiediti quali evidenze dimostrino che gli studenti hanno compreso"
+      ],
+      "takeaway": "Quale elemento dimostra che la lezione funziona?"
+    },
+    {
+      "title": "Il rischio dell'errore ben impaginato",
+      "eyebrow": "UN CASO DIDATTICO INVENTATO",
+      "lead": "Una slide colloca la prima rivoluzione industriale nel 1925",
+      "points": [
+        "L'esempio contiene volutamente un anacronismo",
+        "Una grafica curata può dare credibilità a un'affermazione errata",
+        "La macchina non conosce automaticamente il contesto della classe"
+      ],
+      "takeaway": "L'IA genera bozze. La verifica delle fonti rimane responsabilità del docente"
+    },
+    {
+      "title": "Dal software al metodo",
+      "eyebrow": "SETTE DOMANDE DA PORSI",
+      "lead": "Il Metodo MANZO AI come proposta organizzativa",
+      "points": [
+        "1 · Ascolto — che problema affrontiamo?",
+        "2 · Classificazione — classe e obiettivo?",
+        "3 · Rischi — errori, privacy, barriere?",
+        "4 · Domande mirate — che cosa manca?",
+        "5 · Progettazione — quale attività o prompt?",
+        "6 · Verifica — contenuto e apprendimento?",
+        "7 · Consegna — che cosa offriamo e con quali limiti?"
+      ],
+      "takeaway": "Il metodo è una proposta pratica, adattabile e non scientificamente validata come standard"
+    },
+    {
+      "title": "Il prompt non è una formula magica",
+      "eyebrow": "UNA CONSEGNA PROFESSIONALE",
+      "lead": "Da «fammi una lezione bellissima» a istruzioni didattiche verificabili",
+      "points": [
+        "L'IA non deve decidere da sola età, prerequisiti e fonti",
+        "Una richiesta migliore chiarisce ciò che conta, anche senza diventare lunghissima",
+        "È il docente che mantiene il controllo delle variabili educative"
+      ],
+      "takeaway": "La qualità della richiesta parte dalla progettazione didattica"
+    },
+    {
+      "title": "I sei elementi di un prompt didattico",
+      "eyebrow": "UNA STRUTTURA RIUTILIZZABILE",
+      "lead": "La bussola per ottenere bozze controllabili",
+      "points": [
+        "Obiettivo — che cosa dovrà saper fare la classe?",
+        "Contesto — materia, livello, tempi, prerequisiti",
+        "Dati consentiti — fonti e materiali utilizzabili",
+        "Vincoli — sicurezza, accessibilità, accuratezza",
+        "Output — forma richiesta per la risposta",
+        "Verifica — controlli, limiti e cose non deducibili"
+      ],
+      "takeaway": "Un prompt efficace è una consegna che si può controllare"
+    },
+    {
+      "title": "Obiettivo e contesto",
+      "eyebrow": "IL PRIMO PASSAGGIO",
+      "lead": "Chi apprende e che cosa vogliamo osservare",
+      "points": [
+        "Obiettivo: distinguere fatto e interpretazione in un breve documento",
+        "Contesto: seconda superiore, 15 minuti, lavoro in coppie, linguaggio chiaro",
+        "Prestazione osservabile: motivare una distinzione, non soltanto ricordare una definizione"
+      ],
+      "takeaway": "Prima si decide l'apprendimento atteso, poi si sceglie il materiale"
+    },
+    {
+      "title": "Dati consentiti e vincoli",
+      "eyebrow": "IL PERIMETRO DELLA RICHIESTA",
+      "lead": "Proteggere gli studenti e non inventare ciò che non sappiamo",
+      "points": [
+        "Usa fonti già controllate oppure esempi dichiarati fittizi",
+        "Non caricare nomi, voti, fotografie o dati personali reali in strumenti non autorizzati",
+        "Non aggiungere statistiche o citazioni storiche inesistenti",
+        "Prevedi materiali leggibili e alternative accessibili"
+      ],
+      "takeaway": "La minimizzazione dei dati è una scelta di progettazione; da sola non certifica conformità GDPR"
+    },
+    {
+      "title": "Output e verifica",
+      "eyebrow": "IL CONTROLLO DEL RISULTATO",
+      "lead": "Definisci la forma e la prova dell'apprendimento",
+      "points": [
+        "Una domanda guida",
+        "Tre passaggi con tempi indicativi",
+        "Due domande per il lavoro in coppie",
+        "Un exit ticket di comprensione",
+        "Un elenco di ciò che i documenti non consentono di dedurre"
+      ],
+      "takeaway": "Il controllo viene prima dell'uso in classe"
+    },
+    {
+      "title": "Dalla richiesta generica alla richiesta mirata",
+      "eyebrow": "DUE CONSEGNE A CONFRONTO",
+      "lead": "«Crea una lezione sulle migrazioni» non basta",
+      "points": [
+        "Richiesta generica: lascia aperte finalità, fonti, destinatari e criteri",
+        "Richiesta mirata: descrive i sei elementi del prompt",
+        "Il risultato mirato è più facile da leggere, correggere e adattare",
+        "Nessun prompt garantisce automaticamente esattezza e sicurezza"
+      ],
+      "takeaway": "Il docente valuta il lavoro, non si limita a riceverlo"
+    },
+    {
+      "title": "Valutazione autentica oltre i rilevatori",
+      "eyebrow": "OSSERVARE IL PROCESSO",
+      "lead": "Non rincorrere una percentuale: chiedi di mostrare il ragionamento",
+      "points": [
+        "Scelta e verifica delle fonti",
+        "Argomentazione e difesa delle tesi",
+        "Riflessione sulle correzioni e sui passi successivi",
+        "Un detector da solo non dimostra in modo conclusivo l'autore di un testo"
+      ],
+      "takeaway": "Valutare la competenza, non dedurre colpe dall'aspetto di un elaborato"
+    },
+    {
+      "title": "La prospettiva pedagogica",
+      "eyebrow": "ISPIRATO A DEWEY",
+      "lead": "Il problema vissuto può attivare ipotesi, prova e revisione",
+      "points": [
+        "Un problema reale sollecita domande",
+        "Le domande guidano ipotesi controllabili",
+        "Le prove possono confermare, modificare o smentire le prime idee",
+        "Nella slide originale il riferimento a Dewey è una parafrasi pedagogica, non una citazione testuale verificata"
+      ],
+      "takeaway": "L'educazione come indagine riflessiva, non intrattenimento"
+    },
+    {
+      "title": "La domanda viene sempre prima",
+      "eyebrow": "IL PRINCIPIO CARDINE",
+      "lead": "La domanda del docente precede la risposta della macchina",
+      "points": [
+        "Obiettivo e contesto guidano l'attività",
+        "Un sistema non sostituisce il giudizio educativo",
+        "Anche scegliere di non usare IA può essere una decisione pedagogicamente motivata"
+      ],
+      "takeaway": "Una buona domanda vale più di trenta slide"
+    },
+    {
+      "title": "Il kit professionale del docente",
+      "eyebrow": "LE FONTI DA CONOSCERE",
+      "lead": "Norme, orientamenti e progettazione educativa",
+      "points": [
+        "MIM 2025 — indicazioni per l'IA nelle scuole",
+        "Commissione europea 2026 — orientamenti etici",
+        "UNESCO 2024 — competenze IA per docenti",
+        "CAST UDL 3.0 — inclusione e accessibilità",
+        "L'aggiornamento e l'applicabilità delle fonti vanno sempre ricontrollati"
+      ],
+      "takeaway": "La pratica si fonda su responsabilità professionale, non sulla rincorsa agli strumenti"
+    },
+    {
+      "title": "Una domanda per continuare",
+      "eyebrow": "IL TUO PROSSIMO LABORATORIO",
+      "lead": "Se domani l'intelligenza artificiale smettesse improvvisamente di funzionare, quello che hai imparato oggi ti renderebbe comunque un insegnante migliore?",
+      "points": [
+        "Conserva le buone domande",
+        "Conserva la capacità di verificare",
+        "Conserva la progettazione didattica",
+        "Sperimenta con intenzione, e senza delegare il giudizio"
+      ],
+      "takeaway": "Inizia dal bisogno della classe"
+    }
+  ]
+}

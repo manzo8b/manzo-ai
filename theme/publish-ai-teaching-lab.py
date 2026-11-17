@@ -15,6 +15,7 @@ ROOT=Path(__file__).resolve().parent.parent
 SRC=ROOT/"editorial"/"learning"/"ai-teaching-lab"
 DATA=SRC/"it"
 PREVIEW=SRC/"preview"
+MEDIA=SRC/"media"
 ROUTE="it/formazione/ia-per-la-didattica"
 BASE="/manzo-ai/"
 MARKER='data-atl-feature="2026-11"'
@@ -162,7 +163,7 @@ def publish(site,verify=False):
     if len(course["modules"])!=5 or len(scenes["modules"])!=5 or len(assessments["modules"])!=5 or len(narrative["modules"])!=5:raise RuntimeError("Course incomplete")
     if [m["id"] for m in course["modules"]] != [m["id"] for m in narrative["modules"]]:raise RuntimeError("Narrative module order mismatch")
     if len(glossary["entries"])<40:raise RuntimeError("Teacher glossary incomplete")
-    for name in ["course.json","assessment-bank.json","scenarios.json","narrative.json","glossary.json"]:
+    for name in ["course.json","assessment-bank.json","scenarios.json","narrative.json","glossary.json","presentation.json"]:
         dst=target/"data"/name
         if name=="course.json":
             public_course=dict(course)
@@ -180,7 +181,7 @@ def publish(site,verify=False):
         if not dst.is_file() or dst.read_bytes()!=expected:raise RuntimeError("Data mismatch "+name)
     if not verify:
         target.mkdir(parents=True,exist_ok=True)
-        for name in ["assets.css","app.js","lesson.css","feature.css"]:
+        for name in ["assets.css","app.js","lesson.css","feature.css","presentation.css","presentation.js"]:
             shutil.copyfile(PREVIEW/name,target/name)
         home=(PREVIEW/"index.html").read_text(encoding="utf-8")
         home=home.replace('<meta name="robots" content="noindex,nofollow">',"")
@@ -195,7 +196,50 @@ def publish(site,verify=False):
             "Corso aperto in italiano, non accreditato. Le risposte restano solo nel browser: nessun account, dato personale o certificato. Le 20 ore sono stimate e saranno validate con docenti.")
         home=home.replace('<span class="brand-symbol" aria-hidden="true">M</span>',
             '<img class="brand-icon" src="/manzo-ai/assets/manzo-mark.svg" width="38" height="38" alt="">')
+        # Media are optional: never publish dead links while the binary originals
+        # have not yet been added to the repository.
+        media_paths=("AI_per_Docenti.web.mp4","IA_e_Progettazione_Didattica.pdf","IA_e_Progettazione_Didattica.pptx")
+        media_available={}
+        for name in media_paths:
+            src=MEDIA/name
+            if src.is_file():
+                (target/"media").mkdir(parents=True,exist_ok=True)
+                shutil.copyfile(src,target/"media"/name)
+                media_available[name]=True
+        if media_available.get("AI_per_Docenti.web.mp4"):
+            home=re.sub(r'<div data-atl-video-media>.*?</div>',
+                '<div data-atl-video-media><video class="atl-intro-video-player" controls preload="metadata" playsinline aria-label="Video podcast AI per Docenti, durata 7 minuti e 4 secondi">'
+                '<source src="./media/AI_per_Docenti.web.mp4" type="video/mp4">Il browser non supporta il video HTML5</video>'
+                '<p class="atl-intro-video-a11y">Video con elementi grafici: consulta la presentazione web per una sintesi testuale. Non sono ancora disponibili sottotitoli verificati.</p></div>',
+                home, count=1,flags=re.S)
+        available_docs=[(n,label) for n,label in [
+            ("IA_e_Progettazione_Didattica.pdf","Apri PDF originale"),
+            ("IA_e_Progettazione_Didattica.pptx","Scarica PowerPoint originale")
+        ] if media_available.get(n)]
+        if available_docs:
+            links='<div data-atl-deck-downloads class="atl-intro-media-downloads">'+''.join(
+                '<a href="./media/'+n+'" download>'+label+' ↗</a>' for n,label in available_docs
+            )+'</div>'
+            home=re.sub(r'<div data-atl-deck-downloads>.*?</div>',links,home,count=1,flags=re.S)
         (target/"index.html").write_text(home,encoding="utf-8")
+        presentation=(PREVIEW/"presentazione"/"index.html").read_text(encoding="utf-8")
+        presentation=presentation.replace('<meta name="robots" content="noindex,nofollow">',"")
+        presentation=presentation.replace(
+            '<title>Presentazione del corso · IA e didattica applicata | MANZO AI</title>',
+            '<title>Presentazione del corso · IA e didattica applicata | MANZO AI</title>'+
+            seo("Presentazione del corso · IA e didattica applicata | MANZO AI",
+                "Quindici slide didattiche sulla progettazione con l'intelligenza artificiale, in una versione web accessibile.",
+                "LearningResource",BASE+ROUTE+"/presentazione/"))
+        presentation=presentation.replace('data-slides-base="../../it/"','data-slides-base="../data/"')
+        if available_docs:
+            links='<div class="atl-present-files" data-atl-slide-files><strong>Materiali originali</strong>'+''.join(
+               '<a href="../media/'+n+'" download>'+label+' ↗</a>' for n,label in available_docs
+            )+'</div>'
+            presentation=re.sub(r'<div class="atl-present-files" data-atl-slide-files>.*?</div>',
+                                links,presentation,count=1,flags=re.S)
+        slidepath=target/"presentazione"/"index.html"
+        slidepath.parent.mkdir(parents=True,exist_ok=True)
+        slidepath.write_text(presentation,encoding="utf-8")
         for i,m in enumerate(course["modules"],1):
             text=(DATA/f"module-{i:02d}.md").read_text(encoding="utf-8")
             dest=target/f"modulo-{i:02d}"/"index.html"
@@ -212,11 +256,17 @@ def publish(site,verify=False):
         if 'content="noindex' in html or 'Non pubblicato' in html:raise RuntimeError("Incorrect public lesson status")
     vocab=target/"glossario"/"index.html"
     if not vocab.is_file() or "Pedagogia" not in vocab.read_text(encoding="utf-8"):raise RuntimeError("Public glossary missing")
-    for asset in ["index.html","app.js","assets.css","lesson.css","feature.css"]:
+    slides=(target/"presentazione"/"index.html")
+    if not slides.is_file() or "15 slide" not in slides.read_text(encoding="utf-8"):raise RuntimeError("Slide reader missing")
+    for asset in ["index.html","app.js","assets.css","lesson.css","feature.css","presentation.css","presentation.js"]:
         if not (target/asset).is_file():raise RuntimeError("Missing asset "+asset)
     home=(target/"index.html").read_text(encoding="utf-8")
     if 'data-course-data-base="./data/"' not in home or 'content="noindex' in home:raise RuntimeError("Home not public")
     if not (target/"data"/"narrative.json").is_file():raise RuntimeError("Missing full narrative")
+    presentation=json.loads((target/"data"/"presentation.json").read_text(encoding="utf-8"))
+    if len(presentation["slides"])!=15:raise RuntimeError("Expected 15 presentation slides")
+    for name in ("AI_per_Docenti.web.mp4","IA_e_Progettazione_Didattica.pdf","IA_e_Progettazione_Didattica.pptx"):
+        if (MEDIA/name).is_file() and not (target/"media"/name).is_file():raise RuntimeError("Missing staged media "+name)
     feature(site,verify)
     print("PASS AI Teaching Lab publisher: 5 complete lessons, public course, 3 Academy features, verified="+str(verify))
 
