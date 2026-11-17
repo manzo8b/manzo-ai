@@ -16,6 +16,14 @@ bank = json.loads((ROOT / "it/assessment-bank.json").read_text(encoding="utf-8")
 evidence = Path("ai-teaching-lab-screenshots")
 evidence.mkdir(exist_ok=True)
 
+
+def reveal_fold(page, selector):
+    """Open a learning section through its visible summary (not by bypassing the UI)."""
+    element=page.locator(selector).first
+    fold=element.locator('xpath=ancestor::details[contains(concat(" ",normalize-space(@class)," ")," course-fold ")][1]')
+    if fold.count() and not fold.evaluate("(node)=>node.open"):
+        fold.locator("summary").first.click()
+
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True)
     for width in (1440, 390):
@@ -28,6 +36,10 @@ with sync_playwright() as playwright:
         page.on("pageerror", lambda err: js_errors.append(str(err)))
         page.goto(BASE, wait_until="networkidle", timeout=30000)
         page.locator("#experience").wait_for(state="visible", timeout=10000)
+        assert page.locator(".course-fold").count()>=9
+        assert page.locator(".course-fold[open]").count()==1
+        assert page.locator("#atl-section-select").count()==1
+        if width<=800: page.locator(".course-side-disclosure > summary").click()
         assert page.locator("#module-nav button").count() == 5
         assert page.locator(".atl-course-tabs a").count()==4
         assert page.locator("#competenze .atl-competencies-grid>div").count()==4
@@ -50,6 +62,7 @@ with sync_playwright() as playwright:
         assert "Una domanda per continuare" in page.locator(".atl-slide-page h2").inner_text()
         page.goto(BASE,wait_until="networkidle")
         page.locator("#experience").wait_for(state="visible",timeout=10000)
+        if width<=800: page.locator(".course-side-disclosure > summary").click()
         assert page.locator(".atl-resource-link").count() == 19
         assert page.locator(".atl-resource-link:visible").count() == 4
         assert page.locator(".atl-resource-hub").is_visible()
@@ -75,7 +88,9 @@ with sync_playwright() as playwright:
             assert page.locator(".lab-prompt-code").count() == 3
             assert page.locator(".competency-studio").count() == 1
             assert page.locator(".studio-check").count() >= 4
+            reveal_fold(page, ".competency-studio")
             if i == 0:
+                reveal_fold(page, ".competency-reason")
                 page.locator(".competency-reason").fill("Scelgo la scheda senza IA perché rende osservabile l'argomentazione, mantiene i testi sintetici e posso controllare la fonte.")
                 page.get_by_role("button", name="Verifica i miei criteri").click()
                 assert "competenza osservabile" in page.locator(".option-board .result").inner_text().lower()
@@ -99,6 +114,7 @@ with sync_playwright() as playwright:
                 assert "STORYBOARD" in page.locator(".media-generated").inner_text()
                 assert page.locator(".media-principle-card").count() == 6
             if i == 3:
+                reveal_fold(page, ".option-board")
                 page.locator(".option-board .button").first.click()
                 assert page.locator(".option-board .result").is_visible()
             if i == 4:
@@ -107,6 +123,7 @@ with sync_playwright() as playwright:
             assert page.locator(".applied-step").count() == 5
             assert page.locator(".narrative-chapter").count() >= 5
             assert page.locator(".branch-choices button").count() == 3
+            reveal_fold(page, ".branch-choices")
             page.locator(".branch-choices button").first.click()
             assert page.locator(".branch-choices button").count() == 2
             page.locator(".branch-choices button").first.click()
@@ -127,6 +144,7 @@ with sync_playwright() as playwright:
         assert page.locator(".term-card").count() >= 7
         page.locator("#atl-term-group").select_option("")
         page.locator("#module-nav button").first.click()
+        reveal_fold(page, "#atl-quiz")
         first=page.locator("#atl-quiz fieldset.assessment-block").filter(has=page.get_by_role("button", name="Verifica la risposta")).first
         q=course["modules"][0]["checkpoint"][0]
         first.locator('input[type="radio"]').nth(q["correct_index"]).check()
