@@ -56,7 +56,7 @@ launchScripts.forEach((m,i)=>new vm.Script(m[1],{filename:"mission-studio-"+i+".
 const launchStatic=launch.replace(/<script(?:\s[^>]*)?>[\s\S]*?<\/script\s*>/gi,"");
 const launchIds=[...launchStatic.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
 assert.equal(new Set(launchIds).size,launchIds.length,"Duplicate Mission Studio ID");
-for(const marker of ['id="generate"','id="export"','id="copy"','id="preview-steps"','data-kind="image"','data-kind="voice"','data-kind="video"','data-kind="verify"','ai-teaching-lab-mission-v0.1']){
+for(const marker of ['id="generate"','id="export"','id="copy"','id="restore"','id="preview-steps"','data-kind="image"','data-kind="voice"','data-kind="video"','data-kind="verify"','ai-teaching-lab-mission-v0.1']){
  assert.ok(launch.includes(marker),"Mission Studio missing "+marker);
 }
 for(const slug of ["studio-immagini","studio-voce","studio-video","workspace-multimediale","modulo-01","modulo-02","modulo-03","modulo-04","modulo-05"]){
@@ -64,6 +64,9 @@ for(const slug of ["studio-immagini","studio-voce","studio-video","workspace-mul
 }
 assert.ok(launch.includes("Nessuna API generativa"),"Must disclose no inference API");
 assert.ok(launch.includes("approval:false"),"Mission plan cannot be pre-approved");
+assert.ok(launch.includes("data.schema!==\"ai-teaching-lab-mission-v0.1\""),"Restore must validate exported schema");
+assert.ok(launch.includes("confirm(\"Ripristinare questa bozza?"),"Restoration must confirm replacement");
+assert.ok(launch.includes(".hero-art{display:none}"),"Small-screen view must prioritize actions");
 assert.ok(launch.includes("prefers-reduced-motion"),"Missing reduced-motion accommodation");
 
 for(const schema of Object.values(schemas))assert.ok(workspace.includes(schema),"Workspace misses "+schema);
