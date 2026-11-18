@@ -24,6 +24,12 @@ MANZO AI combina progettazione di workflow digitali, verificabilità degli outpu
 ---
 
 
+## Home conversazionale + Academy · 18 novembre 2026
+
+Le tre homepage interne (IT/EN/ES) hanno una nuova **scoperta guidata per obiettivo** implementata nei sorgenti: quattro suggerimenti conversazionali, collegamenti derivati dalle card Academy effettive e accesso al Teaching Lab in italiano. La **pagina radice per scegliere la lingua è preservata**. Il campo di ricerca esistente rimane funzionante; **non esiste una chat IA generativa integrata** in questa esperienza.
+
+**Stato:** publisher, CSS/JS e test di regressione inseriti nel workflow GitHub Pages; l'esito dell'ultimo deploy e il rendering fisico su iPhone restano **da verificare**. [Release e gate](docs/MANZO_AI_HOME_CONVERSATIONAL_V1_RELEASE_2026-11-18.md) · [Decisione di prodotto](docs/MANZO_AI_HOME_CONVERSATIONAL_LEARNING_ADR_2026-11-17.md).
+
 ## Ricerca ACR · Dossier scientifico
 
 Il nuovo dossier di ricerca applicata sull'**Adaptive Cognitive Recursion** è disponibile in [italiano](https://manzo8b.github.io/manzo-ai/it/ricerca/acr/), [inglese](https://manzo8b.github.io/manzo-ai/en/research/acr/) e [spagnolo](https://manzo8b.github.io/manzo-ai/es/investigacion/acr/). Presenta ipotesi A/B/C, memoria verificata, pilota offline, metodi e fonti. **Nessuna superiorità ACR o Fibonacci è stata dimostrata tramite esperimenti LLM.** [Note di pubblicazione](docs/ACR_DOSSIER_RELEASE.md).
