@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """MANZO AI — language-preserving conversational discovery for the three homepages.
 
-Preserves the existing home hero search and Academy showcase. The four goals are
-grounded in REAL published Academy/Product/Mission routes, never in fake AI replies.
+Preserves the existing home hero search and six Academy cards. Four general-purpose goals
+lead to REAL published lessons and labs, never simulated AI replies.
 This publisher runs after the three Academies and the Italian Mission Studio exist.
 """
 from __future__ import annotations
@@ -27,43 +27,46 @@ CAT=re.compile(r'data-ma-category="([^"]+)"')
 TITLE=re.compile(r'<h3\b[^>]*>(.*?)</h3>',re.I|re.S)
 COPY={
  "it":{
-  "eyebrow":"MANZO AI / PERCORSI FORMATIVI",
-  "heading":"Da dove vuoi iniziare?",
-  "tag":"Percorsi disponibili",
-  "open":"Apri il percorso",
-  "group":"Scegli un obiettivo",
-  "note":"Puoi cercare una lezione oppure scegliere un obiettivo. I suggerimenti utilizzano contenuti disponibili, senza generare risposte IA.",
+  "eyebrow":"MANZO AI / ESPLORA L'INTELLIGENZA ARTIFICIALE",
+  "heading":"Cosa vorresti scoprire oggi?",
+  "tag":"Scegli il tuo percorso",
+  "open":"Esplora",
+  "group":"Obiettivi di apprendimento",
+  "note":"Scegli ciò che ti interessa oppure cerca una lezione. Tutti i percorsi rimandano a contenuti realmente disponibili.",
   "goals":[
-   ("Progettare una lezione","AI Teaching Lab · Mission Studio","Crea un brief didattico e prosegui nei laboratori multimediali per docenti e formatori."),
-   ("Scrivere prompt efficaci","Prompt Engineering","Esercitati a scrivere istruzioni chiare e a verificare i risultati ottenuti."),
-   ("Verificare una risposta IA","Verifica e pensiero critico","Impara a confrontare affermazioni, evidenze e fonti originali."),
-     ],
+   ("Capire l'IA","Parti dalle basi","Scopri come funzionano i modelli, cosa possono fare e dove serve il giudizio umano."),
+   ("Scrivere prompt migliori","Prompt Engineering","Impara a dare istruzioni chiare, confrontare risposte e ottenere risultati controllabili."),
+   ("Riconoscere le allucinazioni","Allucinazioni dell'IA","Capisci perché l'IA può inventare informazioni e come verificare risposte e fonti."),
+   ("Creare e sperimentare","IA per progetti digitali","Passa dalla teoria alla pratica con esempi di coding e produzione responsabile."),
+  ],
  },
  "en":{
-  "eyebrow":"MANZO AI / LEARNING PATHS",
-  "heading":"Where would you like to begin?",
-  "tag":"Available learning resources",
-  "open":"Open this path",
-  "group":"Choose a goal",
-  "note":"Search the catalog or select a goal. Suggestions are based on available resources, not generated AI replies.",
+  "eyebrow":"MANZO AI / EXPLORE ARTIFICIAL INTELLIGENCE",
+  "heading":"What would you like to explore today?",
+  "tag":"Find your learning path",
+  "open":"Explore",
+  "group":"Learning goals",
+  "note":"Choose a topic or search for a lesson. Every path links to an existing learning resource.",
   "goals":[
-   ("Plan a teaching activity","AI Teaching Lab · Mission Studio (Italian)","Prepare an educational brief with the Italian teacher-training micro-app; English translation is not available yet."),
-   ("Improve my prompts","Prompt Engineering lessons","Learn practical prompting from an existing Academy resource."),
-   ("Check an AI response","Evidence and critical thinking","Examine claims and sources using real published educational resources."),
-     ],
+   ("Understand AI","Start with the foundations","Learn what models do, how they work and when human judgment is essential."),
+   ("Write better prompts","Prompt Engineering","Practice clear instructions, compare responses and check results."),
+   ("Spot AI hallucinations","AI hallucinations","Understand why AI can invent details and learn how to check claims and sources."),
+   ("Build and experiment","AI for digital projects","Move from theory to practice with coding and responsible production."),
+  ],
  },
  "es":{
-  "eyebrow":"MANZO AI / ITINERARIOS DE APRENDIZAJE",
-  "heading":"¿Por dónde quieres empezar?",
-  "tag":"Recursos disponibles",
-  "open":"Abrir este recorrido",
-  "group":"Elige un objetivo",
-  "note":"Busca una lección o elige un objetivo. Las sugerencias proceden de contenidos disponibles, no de respuestas generadas por IA.",
+  "eyebrow":"MANZO AI / EXPLORA LA INTELIGENCIA ARTIFICIAL",
+  "heading":"¿Qué te gustaría descubrir hoy?",
+  "tag":"Encuentra tu recorrido",
+  "open":"Explorar",
+  "group":"Objetivos de aprendizaje",
+  "note":"Elige lo que te interesa o busca una lección. Todos los enlaces llevan a recursos realmente disponibles.",
   "goals":[
-   ("Preparar una actividad didáctica","AI Teaching Lab · Mission Studio (italiano)","Diseña una actividad con la micro-app italiana. La traducción al español aún no está disponible."),
-   ("Mejorar mis prompts","Lecciones de Prompt Engineering","Aprende a escribir instrucciones útiles mediante lecciones ya publicadas."),
-   ("Verificar respuestas de IA","Evidencias y pensamiento crítico","Contrasta afirmaciones con fuentes en los recursos disponibles de la Academia."),
-     ],
+   ("Comprender la IA","Empieza por lo esencial","Descubre qué hacen los modelos, cómo funcionan y cuándo importa el criterio humano."),
+   ("Escribir mejores prompts","Prompt Engineering","Practica instrucciones claras, compara respuestas y comprueba resultados."),
+   ("Detectar alucinaciones","Alucinaciones de la IA","Comprende por qué la IA puede inventar datos y aprende a verificar afirmaciones y fuentes."),
+   ("Crear y experimentar","IA para proyectos digitales","Pasa de la teoría a la práctica mediante ejemplos de código y producción responsable."),
+  ],
  },
 }
 
@@ -116,9 +119,8 @@ def destination(site,href):
 def render(site,locale):
  copy=COPY[locale]
  catalog=cards_from_academy(site,locale)
- teacher=BASE+"it/formazione/ia-per-la-didattica/inizia/"
- product=BASE+locale+"/"+PRODUCT[locale]+"/"
- hrefs=(teacher,catalog["prompt"][0],catalog["verify"][0])
+ hallucination=BASE+{"it":"it/impara/allucinazioni-ai-verificabilita/","en":"en/learn/ai-hallucinations-verification/","es":"es/aprende/alucinaciones-ia-verificacion/"}[locale]
+ hrefs=(catalog["fundamentals"][0],catalog["prompt"][0],hallucination,catalog["coding"][0])
  for href in hrefs:destination(site,href)
  choices=[]
  for n,(label,title,description) in enumerate(copy["goals"]):
