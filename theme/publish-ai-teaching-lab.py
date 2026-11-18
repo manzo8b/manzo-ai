@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 from html import escape
+from html.parser import HTMLParser
 import json
 import re
 import shutil
@@ -27,6 +28,40 @@ BASE="/manzo-ai/"
 MARKER='data-atl-feature="2026-11"'
 
 def e(s):return escape(str(s),quote=True)
+
+def accessible_studio(html,tool):
+    """Attach the shared, scoped tool styles and an activity skip link."""
+    class Landmarks(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=False)
+            self.positions={"head":[],"body":[],"main":[]}
+            self.lines=html.splitlines(keepends=True)
+        def absolute_offset(self):
+            line,column=self.getpos()
+            return sum(map(len,self.lines[:line-1]))+column
+        def handle_starttag(self,tag,attrs):
+            if tag in ("body","main"):
+                self.positions[tag].append((self.absolute_offset(),self.get_starttag_text(),dict(attrs)))
+        def handle_endtag(self,tag):
+            if tag=="head":self.positions[tag].append((self.absolute_offset(),"</head>",{}))
+    landmarks=Landmarks()
+    landmarks.feed(html)
+    if any(len(landmarks.positions[tag])!=1 for tag in ("head","body","main")):
+        raise RuntimeError("Unexpected standalone studio structure: "+tool)
+    head_at,_,_=landmarks.positions["head"][0]
+    body_at,body_tag,_=landmarks.positions["body"][0]
+    main_at,main_tag,main_attrs=landmarks.positions["main"][0]
+    target=main_attrs.get("id") or "atl-studio-main"
+    if not main_attrs.get("id"):main_tag=main_tag[:-1]+' id="'+target+'">'
+    if "tabindex" not in main_attrs:main_tag=main_tag[:-1]+' tabindex="-1">'
+    body_tag=body_tag[:-1]+' data-atl-tool="'+e(tool)+'">'
+    body_tag+='<a class="atl-studio-skip" href="#'+e(target)+'">Vai all’attività</a>'
+    replacements=[(head_at,0,'<link rel="stylesheet" href="../studio-accessibility.css">'),
+                  (body_at,len(landmarks.positions["body"][0][1]),body_tag),
+                  (main_at,len(landmarks.positions["main"][0][1]),main_tag)]
+    for start,length,replacement in sorted(replacements,reverse=True):
+        html=html[:start]+replacement+html[start+length:]
+    return html
 
 def seo(title,desc,kind,url):
     ld={"@context":"https://schema.org","@type":kind,"name":title,
@@ -187,7 +222,7 @@ def publish(site,verify=False):
         if not dst.is_file() or dst.read_bytes()!=expected:raise RuntimeError("Data mismatch "+name)
     if not verify:
         target.mkdir(parents=True,exist_ok=True)
-        for name in ["assets.css","app.js","lesson.css","feature.css","presentation.css","presentation.js","production-studio.css","production-studio.js"]:
+        for name in ["assets.css","app.js","lesson.css","feature.css","presentation.css","presentation.js","production-studio.css","production-studio.js","studio-accessibility.css"]:
             shutil.copyfile(PREVIEW/name,target/name)
         home=(PREVIEW/"index.html").read_text(encoding="utf-8")
         home=home.replace('<meta name="robots" content="noindex,nofollow">',"")
@@ -327,7 +362,7 @@ def publish(site,verify=False):
         image_html=image_html.replace('<meta name="theme-color" content="#ffffff">','<meta name="theme-color" content="#ffffff">'+seo("Studio immagini didattiche | AI Teaching Lab | MANZO AI","Progetta immagini formative, prepara prompt e verifica la qualità prima della decisione docente.","LearningResource",BASE+ROUTE+"/studio-immagini/"),1)
         image_dest=target/"studio-immagini"/"index.html"
         image_dest.parent.mkdir(parents=True,exist_ok=True)
-        image_dest.write_text(image_html,encoding="utf-8")
+        image_dest.write_text(accessible_studio(image_html,"image"),encoding="utf-8")
         if not VOICE_STUDIO.is_file():raise RuntimeError("Missing standalone voice studio source")
         voice_html=VOICE_STUDIO.read_text(encoding="utf-8")
         if '<meta name="robots" content="noindex,follow">' not in voice_html:
@@ -335,14 +370,14 @@ def publish(site,verify=False):
         voice_html=voice_html.replace('<meta name="robots" content="noindex,follow">',seo("Studio voce didattica | AI Teaching Lab | MANZO AI","Copione, registrazione locale, importazione, trascrizione e verifica della voce sotto controllo del docente.","LearningResource",BASE+ROUTE+"/studio-voce/"),1)
         voice_dest=target/"studio-voce"/"index.html"
         voice_dest.parent.mkdir(parents=True,exist_ok=True)
-        voice_dest.write_text(voice_html,encoding="utf-8")
+        voice_dest.write_text(accessible_studio(voice_html,"voice"),encoding="utf-8")
         if not VIDEO_STUDIO.is_file():raise RuntimeError("Missing standalone video studio source")
         video_html=VIDEO_STUDIO.read_text(encoding="utf-8")
         if '<meta name="robots" content="noindex,follow">' not in video_html:raise RuntimeError("Video studio prototype status missing")
         video_html=video_html.replace('<meta name="robots" content="noindex,follow">',seo("Studio video didattico | AI Teaching Lab | MANZO AI","Storyboard educativo, anteprima sequenziale, video silenzioso locale, sottotitoli e approvazione docente.","LearningResource",BASE+ROUTE+"/studio-video/"),1)
         video_dest=target/"studio-video"/"index.html"
         video_dest.parent.mkdir(parents=True,exist_ok=True)
-        video_dest.write_text(video_html,encoding="utf-8")
+        video_dest.write_text(accessible_studio(video_html,"video"),encoding="utf-8")
         if not MULTIMEDIA_WORKSPACE.is_file():raise RuntimeError("Missing multimedia workspace source")
         workspace_html=MULTIMEDIA_WORKSPACE.read_text(encoding="utf-8")
         if '<meta name="robots" content="noindex,follow">' not in workspace_html:
@@ -350,7 +385,7 @@ def publish(site,verify=False):
         workspace_html=workspace_html.replace('<meta name="robots" content="noindex,follow">',seo("Workspace multimediale docenti | AI Teaching Lab | MANZO AI","Importa progetti degli Studi immagini, voce e video, verifica provenienza e prepara un kit didattico approvato dal docente.","LearningResource",BASE+ROUTE+"/workspace-multimediale/"),1)
         workspace_dest=target/"workspace-multimediale"/"index.html"
         workspace_dest.parent.mkdir(parents=True,exist_ok=True)
-        workspace_dest.write_text(workspace_html,encoding="utf-8")
+        workspace_dest.write_text(accessible_studio(workspace_html,"workspace"),encoding="utf-8")
         # Publish Mission Studio as a standalone, browser-only teaching micro-app.
         if not LAUNCHPAD.is_file():raise RuntimeError("Missing Mission Studio source")
         launch_html=LAUNCHPAD.read_text(encoding="utf-8")
@@ -421,7 +456,11 @@ def publish(site,verify=False):
         slide_files=list((target/"media"/"slides").glob("slide-*.webp"))
         if len(slide_files)!=15:raise RuntimeError("Missing all original NotebookLM slide images")
         if not (target/"media"/"AI_per_Docenti.web.mp4").is_file():raise RuntimeError("Original video missing")
-    for asset in ["index.html","app.js","assets.css","lesson.css","feature.css","presentation.css","presentation.js","production-studio.css","production-studio.js"]:
+    for tool,path in [("image","studio-immagini"),("voice","studio-voce"),("video","studio-video"),("workspace","workspace-multimediale")]:
+        html=(target/path/"index.html").read_text(encoding="utf-8")
+        if 'data-atl-tool="'+tool+'"' not in html or 'href="../studio-accessibility.css"' not in html or 'href="#atl-studio-main"' not in html:
+            raise RuntimeError("Shared studio accessibility missing: "+tool)
+    for asset in ["index.html","app.js","assets.css","lesson.css","feature.css","presentation.css","presentation.js","production-studio.css","production-studio.js","studio-accessibility.css"]:
         if not (target/asset).is_file():raise RuntimeError("Missing asset "+asset)
     home=(target/"index.html").read_text(encoding="utf-8")
     if 'data-course-data-base="./data/"' not in home or 'content="noindex' in home:raise RuntimeError("Home not public")
