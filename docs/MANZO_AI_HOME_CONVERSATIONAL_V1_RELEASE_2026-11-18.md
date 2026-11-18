@@ -66,3 +66,7 @@ python3 theme/home-conversational-browser-smoke.py --base http://127.0.0.1:8000/
 
 ## Fuori ambito
 Non sono stati modificati Supabase, autenticazione, database, billing, chiavi API, pagamenti, contenuti dei cinque moduli o pagina iniziale di scelta lingua. L'eventuale chat con un vero modello sarà una futura funzione distinta, che richiede backend sicuro, consenso, governance dei dati, costi e limiti documentati.
+
+## Revisione di prodotto successiva — 18 novembre 2026
+
+Questa nota riguarda la **v1 storica**. La direzione v2 approvata dall'autore è una **home inclusiva aperta a tutti**, non centrata sui docenti: quattro obiettivi, quattro card tematiche e conservazione delle sei card originali Academy. Fa fede `docs/MANZO_AI_HOME_INCLUSIVA_V2_2026-11-18.md`. Non considerare la v1 la specifica corrente.
