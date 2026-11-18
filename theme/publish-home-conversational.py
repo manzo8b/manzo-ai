@@ -143,7 +143,7 @@ def render(site,locale):
   '<div class="ma-discovery-result">'
   f'<div><strong data-ma-discovery-title>{e(first[1])}</strong>'
   f'<p data-ma-discovery-summary>{e(first[2])}</p></div>'
-  f'<a data-ma-discovery-action href="{e(teacher)}">{e(copy["open"])}</a>'
+  f'<a data-ma-discovery-action href="{e(hrefs[0])}">{e(copy["open"])}</a>'
   '</div>'
   f'<p class="ma-discovery-foot">{e(copy["note"])}</p>'
   '<p data-ma-discovery-live class="sr-only" role="status" aria-live="polite"></p></div>'
@@ -174,8 +174,10 @@ def apply(site,verify_only=False):
     raise RuntimeError("Missing or duplicated conversational gateway "+locale)
    if f"home-conversational.js?v={digest}" not in html or f"home-conversational.css?v={digest}" not in html:
     raise RuntimeError("Stale conversational gateway assets "+locale)
-   for href in (BASE+"it/formazione/ia-per-la-didattica/inizia/",BASE+locale+"/"+PRODUCT[locale]+"/"):
-    if f'href="{href}"' not in html:raise RuntimeError("Missing goal destination "+href)
+   expected=(BASE+{"it":"it/impara/allucinazioni-ai-verificabilita/","en":"en/learn/ai-hallucinations-verification/","es":"es/aprende/alucinaciones-ia-verificacion/"}[locale],)
+   for href in expected:
+    if f'href="{href}"' not in html:raise RuntimeError("Missing core AI content "+href)
+   if html.count('data-ma-intent="')!=4:raise RuntimeError("Home must have four distinct learning goals "+locale)
    continue
   if MARKER in html or 'data-ma-home-discovery-asset=' in html:
    raise RuntimeError("Duplicate homepage gateway "+locale)
