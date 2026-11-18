@@ -82,6 +82,10 @@ function protectedConfig(wrangler, worker) {
   ];
   const checks = {
     flagsDefaultOff: requiredFalse.every(k => assignment(wrangler, k) === "false"),
+    syntheticBetaOnly: assignment(wrangler, "BETA_SYNTHETIC_ONLY") === "true" &&
+      worker.includes('env?.BETA_SYNTHETIC_ONLY !== "true"') &&
+      worker.includes("scenarioInput(JSON.parse(raw))") &&
+      worker.includes('"SYNTHETIC_CASE_REQUIRED"'),
     workersDevOff: assignment(wrangler, "workers_dev") === null &&
       /^\s*workers_dev\s*=\s*false\s*$/m.test(wrangler),
     noPublicRoute: !/^\s*(?:route|routes)\s*=/m.test(wrangler),
