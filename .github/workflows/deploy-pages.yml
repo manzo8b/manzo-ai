@@ -57,6 +57,7 @@ on:
       - theme/home-conversational.js
       - theme/publish-home-conversational.py
       - theme/tests/test_home_conversational.py
+      - theme/tests/test_home_conversational_js.cjs
       - theme/publish-academy-journeys.py
       - theme/academy-journeys.css
       - theme/academy-journeys.js
@@ -406,6 +407,7 @@ jobs:
           python3 -m py_compile theme/publish-home-conversational.py
           python3 -m unittest discover -s theme/tests -p 'test_home_conversational.py' -v
           node --check theme/home-conversational.js
+          node theme/tests/test_home_conversational_js.cjs
           python3 theme/publish-home-conversational.py --site _site
           python3 theme/publish-home-conversational.py --site _site --verify-only
           for lang in it en es; do
