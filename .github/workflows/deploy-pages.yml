@@ -56,6 +56,10 @@ on:
       - theme/home-conversational.css
       - theme/home-conversational.js
       - theme/publish-home-conversational.py
+      - theme/publish-home-curation.py
+      - theme/home-curation.css
+      - theme/publish-about.py
+      - theme/tests/test_home_curation.py
       - theme/tests/test_home_conversational.py
       - theme/tests/test_home_conversational_js.cjs
       - theme/publish-academy-journeys.py
@@ -379,6 +383,10 @@ jobs:
           done
           # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
           python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
+          # Independent creator/methodology pages must be indexed by the real sitemap.
+          python3 -m py_compile theme/publish-about.py
+          python3 theme/publish-about.py --site _site
+          python3 theme/publish-about.py --site _site --verify-only
           # Generate final SEO index ONLY after all published editorial pages exist.
           python3 theme/build-seo.py --site _site --base-url "https://${GITHUB_REPOSITORY_OWNER}.github.io/manzo-ai/"
           # Final enhancement on all rendered pages, including editorial media and language landing.
@@ -410,6 +418,21 @@ jobs:
           node theme/tests/test_home_conversational_js.cjs
           python3 theme/publish-home-conversational.py --site _site
           python3 theme/publish-home-conversational.py --site _site --verify-only
+          # Teacher-first public home: remove technical SaaS scene, curate paths
+          # and correct multilingual gateway button copy without replacing its design.
+          python3 -m py_compile theme/publish-home-curation.py
+          python3 -m unittest discover -s theme/tests -p 'test_home_curation.py' -v
+          python3 theme/publish-home-curation.py --site _site
+          python3 theme/publish-home-curation.py --site _site --verify-only
+          test -s _site/assets/home-curation.css
+          for lang in it en es; do
+            grep -q 'data-ma-home-curation="v2"' "_site/$lang/index.html"
+            grep -q 'data-ma-home-primary-nav="v2"' "_site/$lang/index.html"
+            ! grep -q 'data-ma-home-scene="1"' "_site/$lang/index.html"
+          done
+          test -s _site/it/chi-siamo/index.html
+          test -s _site/en/about/index.html
+          test -s _site/es/quienes-somos/index.html
           for lang in it en es; do
             grep -q 'data-ma-home-discovery="v1"' "_site/$lang/index.html"
           done
