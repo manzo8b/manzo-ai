@@ -66,3 +66,14 @@ Once separate safeguards exist: select a teaching objective in Mission Studio â†
 
 The existing application continues working without the preview and keeps local draft export/reimport; no online data is stored, transmitted or approved. Privacy checks are heuristic and are not a substitute for data-protection controls.
 
+
+## P3 â€” Account readiness, real billing and privacy (still OFF)
+
+- **Account is not connected or inspected**. The code cannot establish which Cloudflare plan, charges, card requirements or Neurons usage applies to the owner's account.
+- `zero-euro-preflight.mjs` is a **zero-network read-only source audit**. It checks config guards and produces a planning projection; `safeToEnablePublicInference=false` by design.
+- `zero-euro-preflight.test.mjs` tests cost assumptions, settings that must remain OFF, privacy gates and no network access.
+- `DATA_PROTECTION_CONFIRMED=false` is a new independent server-side blocker. The Worker rejects all inference without the explicit review of data-protection responsibilities and provider terms.
+- `[observability]` and invocation logging are disabled in the prospective Worker configuration. **Separate provider and account-level logging settings need inspection** before activation.
+- Full evidence, Cloudflare Free/Zero Trust onboarding payment-detail caveat and Italian school privacy requirements: [P3 report](../../docs/MANZO_AI_COPILOT_P3_PREFLIGHT_PRIVACY_COSTI_0EUR_2026-11-18.md).
+
+**No live model call, Worker deployment, API key or payment has been initiated.**
