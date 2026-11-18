@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Teacher-first MANZO AI home curation after the existing Academy publishers.
+"""Inclusive MANZO AI home curation after the existing Academy publishers.
 
-Remove the technical Product Lab scene, foreground actual training, introduce
-an identifiable curator and a concise side navigation. Existing Academy pages,
-other audiences and language gateway are preserved.
+Remove the technical Product Lab scene, showcase real AI learning topics for
+all audiences, and introduce a concise navigation. Preserve all existing
+Academy cards, creator attribution and the language gateway.
 """
 from __future__ import annotations
 import argparse
@@ -26,33 +26,61 @@ DISCOVERY_LINK=re.compile(r'<a class="ma-discovery-choice" href="([^"]+)" data-m
 ABOUT={"it":"chi-siamo","en":"about","es":"quienes-somos"}
 COPY={
  "it":{
-  "hero":"Impara a insegnare con l'IA",
-  "lead":"Formazione pratica per docenti e formatori: progetta attività didattiche, scrivi prompt più efficaci e verifica le risposte con metodo.",
-  "persona":"Per docenti e formatori",
-  "curator":"Progetto indipendente curato da",
-  "learn":"Scopri il metodo e l'autore",
-  "nav":"Percorsi principali",
-  "labels":("Home","Percorsi formativi","AI Teaching Lab","Prompt Engineering","Verifica le risposte","Chi cura MANZO AI"),
+  "hero":"Esplora il mondo dell'intelligenza artificiale",
+  "lead":"Dalle prime domande ai prompt, dalle allucinazioni ai progetti digitali: scopri l'IA, sperimenta e impara a valutare i risultati.",
+  "persona":"Per chi è curioso, studia, lavora o insegna",
+  "curator":"Un progetto indipendente curato da",
+  "learn":"Scopri chi siamo",
+  "nav":"Esplora MANZO AI",
+  "labels":("Home","AI Academy","Prompt Engineering","Allucinazioni dell'IA","AI Teaching Lab","Chi siamo"),
+  "featured":"Scegli un tema e comincia",
+  "featured_lead":"Quattro porte d'ingresso concrete. Nell'Academy trovi il catalogo completo dei percorsi.",
+  "featured_cards":[
+   ("Le basi dell'IA","Comprendi come funzionano i modelli e cosa possono — e non possono — fare","Esplora le basi"),
+   ("Prompt Engineering","Impara a scrivere istruzioni efficaci, migliorare le risposte e verificarle","Scopri i prompt"),
+   ("Allucinazioni dell'IA","Riconosci informazioni inventate, controlla fonti e misura l'incertezza","Impara a verificare"),
+   ("AI Teaching Lab","Dalla progettazione delle attività ai laboratori multimediali per docenti","Apri il laboratorio"),
+  ],
+  "academy":"Esplora tutta l'Academy",
  },
  "en":{
-  "hero":"Learn to teach with AI",
-  "lead":"Practical learning for educators and trainers: design activities, write better prompts and evaluate AI-generated answers critically.",
-  "persona":"For educators and trainers",
+  "hero":"Explore the world of artificial intelligence",
+  "lead":"From the basics to prompts, from hallucinations to digital projects: explore AI, experiment and learn how to evaluate results.",
+  "persona":"For curious people, learners, professionals and educators",
   "curator":"An independent project curated by",
-  "learn":"About the project and its creator",
-  "nav":"Main learning paths",
-  "labels":("Home","Learning paths","AI Teaching Lab (Italian)","Prompt Engineering","Check AI answers","About MANZO AI"),
+  "learn":"About the project",
+  "nav":"Explore MANZO AI",
+  "labels":("Home","AI Academy","Prompt Engineering","AI hallucinations","AI Teaching Lab","About"),
+  "featured":"Find a topic to explore",
+  "featured_lead":"Four concrete starting points. The complete learning catalog is available in the Academy.",
+  "featured_cards":[
+   ("AI fundamentals","Understand how models work and what they can and cannot do","Explore the basics"),
+   ("Prompt Engineering","Write clearer instructions, improve responses and check their quality","Explore prompts"),
+   ("AI hallucinations","Spot fabricated information, check sources and consider uncertainty","Learn to verify"),
+   ("AI Teaching Lab","From lesson design to multimedia workshops for educators","Open the lab (Italian)"),
+  ],
+  "academy":"Explore the full Academy",
  },
  "es":{
-  "hero":"Aprende a enseñar con IA",
-  "lead":"Formación práctica para docentes y formadores: diseña actividades, redacta mejores prompts y verifica las respuestas de IA con criterio.",
-  "persona":"Para docentes y formadores",
+  "hero":"Explora el mundo de la inteligencia artificial",
+  "lead":"Desde los fundamentos hasta los prompts, de las alucinaciones a los proyectos digitales: descubre la IA, experimenta y aprende a evaluar resultados.",
+  "persona":"Para quienes sienten curiosidad, estudian, trabajan o enseñan",
   "curator":"Proyecto independiente dirigido por",
-  "learn":"Conoce el método y a su creador",
-  "nav":"Itinerarios principales",
-  "labels":("Inicio","Formación","AI Teaching Lab (italiano)","Prompt Engineering","Verificar respuestas","Quiénes somos"),
+  "learn":"Conoce el proyecto",
+  "nav":"Explora MANZO AI",
+  "labels":("Inicio","Academia de IA","Prompt Engineering","Alucinaciones de la IA","AI Teaching Lab","Quiénes somos"),
+  "featured":"Elige un tema y empieza",
+  "featured_lead":"Cuatro puntos de entrada concretos. El catálogo completo está en la Academia.",
+  "featured_cards":[
+   ("Fundamentos de IA","Comprende cómo funcionan los modelos y qué pueden o no pueden hacer","Explora los fundamentos"),
+   ("Prompt Engineering","Aprende a formular instrucciones claras y a comprobar los resultados","Descubre los prompts"),
+   ("Alucinaciones de la IA","Reconoce información inventada, comprueba fuentes y evalúa incertidumbres","Aprende a verificar"),
+   ("AI Teaching Lab","Del diseño de clases a los laboratorios multimedia para docentes","Abre el laboratorio (italiano)"),
+  ],
+  "academy":"Explora toda la Academia",
  },
 }
+
 def esc(x):return escape(str(x),quote=True)
 
 def hero_bounds(doc):
@@ -65,17 +93,16 @@ def hero_bounds(doc):
  raise RuntimeError("Unbalanced home hero")
 
 def content_links(doc,lang):
- # Exactly three real routes were already rendered by the first publisher.
+ # Four public goal paths: foundations, prompts, hallucinations and creation.
  pairs=DISCOVERY_LINK.findall(doc)
- links={int(index):href for href,index in pairs}
- if set(links)!={0,1,2}:raise RuntimeError("Home must have exactly three learning goals "+lang)
- for href in links.values():
-  if not href.startswith(BASE) or not href.endswith("/"):raise RuntimeError("Invalid learning route")
+ intents={int(index):href for href,index in pairs}
+ if set(intents)!={0,1,2,3}:raise RuntimeError("Expected four real homepage topics "+lang)
  academy=BASE+lang+("/academia/" if lang=="es" else "/academy/")
  about=BASE+lang+"/"+ABOUT[lang]+"/"
- hrefs=(BASE+lang+"/",academy,links[0],links[1],links[2],about)
- if len(set(hrefs))!=len(hrefs):raise RuntimeError("Homepage menu has duplicate destinations "+lang)
- return hrefs
+ teacher=BASE+"it/formazione/ia-per-la-didattica/inizia/"
+ menu=(BASE+lang+"/",academy,intents[1],intents[2],teacher,about)
+ if len(set(menu))!=len(menu):raise RuntimeError("Homepage menu has duplicate destinations "+lang)
+ return menu,intents
 
 def portal_copy(root):
  # Preserve visual layout; fix multilingual title and repeated unlocalized CTAs.
@@ -110,7 +137,7 @@ def remove_old_duplicates(h):
 
 def curated(site,lang,html):
  copy=COPY[lang]
- links=content_links(html,lang)
+ links,intents=content_links(html,lang)
  for link in links:
   target=site/link.removeprefix(BASE)/"index.html"
   if not target.is_file():raise RuntimeError("Unpublished destination "+link)
@@ -148,7 +175,28 @@ def curated(site,lang,html):
  marker='<p data-ma-discovery-live class="sr-only" role="status" aria-live="polite"></p>'
  if hero.count(marker)!=1:raise RuntimeError("Discovery live note changed")
  hero=hero.replace(marker,marker+curator+nav,1)
- html=html[:begin]+hero+html[end:]
+ featured_links=(intents[0],intents[1],intents[2],links[4])
+ for href in featured_links:
+  target=site/href.removeprefix(BASE)/"index.html"
+  if not target.is_file():raise RuntimeError("Unpublished featured learning card "+href)
+ feature_cards=[]
+ for idx,((title,summary,action),href) in enumerate(zip(copy["featured_cards"],featured_links),1):
+  feature_cards.append(
+   f'<a class="ma-topic-card ma-topic-{idx}" href="{esc(href)}">'
+   f'<span class="ma-topic-num">{idx:02d} / 04</span>'
+   f'<strong>{esc(title)}</strong><span class="ma-topic-summary">{esc(summary)}</span>'
+   f'<span class="ma-topic-action">{esc(action)} <span aria-hidden="true">↗</span></span></a>'
+  )
+ feature_section=(
+  f'<section class="ma-topic-features" data-ma-home-featured="v1" aria-labelledby="ma-featured-{lang}">'
+  '<div class="ma-topic-heading">'
+  f'<div><p class="ma-topic-eyebrow">MANZO AI / ACADEMY</p>'
+  f'<h2 id="ma-featured-{lang}">{esc(copy["featured"])}</h2>'
+  f'<p>{esc(copy["featured_lead"])}</p></div>'
+  f'<a class="ma-topic-all" href="{esc(links[1])}">{esc(copy["academy"])} ↗</a>'
+  '</div><div class="ma-topic-grid">'+''.join(feature_cards)+'</div></section>'
+ )
+ html=html[:begin]+hero+feature_section+html[end:]
  html=remove_old_duplicates(html)
  if 'data-ma-home-scene="1"' in html:raise RuntimeError("Legacy technical scene survived")
  return html
@@ -169,7 +217,7 @@ def run(site,verify_only=False):
   if not path.is_file():raise RuntimeError("Home missing "+lang)
   html=path.read_text(encoding="utf-8")
   if verify_only:
-   for invariant in (MARKER,'data-ma-home-primary-nav="v2"',
+   for invariant in (MARKER,'data-ma-home-primary-nav="v2"','data-ma-home-featured="v1"',
        "ma-home-curator",esc(COPY[lang]["hero"]),f'home-curation.css?v={digest}'):
     if invariant not in html:raise RuntimeError("Curation missing "+invariant+" "+lang)
    if 'data-ma-home-scene="1"' in html:raise RuntimeError("Removed technical scene is still present")
@@ -188,7 +236,7 @@ def run(site,verify_only=False):
    raise RuntimeError("Multilingual language portal title missing")
  else:
   portal.write_text(portal_copy(html),encoding="utf-8")
- print("MANZO AI homepage: teacher-first / 3 goals / curated navigation / localized portal; verified="+str(verify_only))
+ print("MANZO AI homepage: all audiences / 4 goals / 4 topic cards / 6 Academy cards preserved; verified="+str(verify_only))
 
 if __name__=="__main__":
  parser=argparse.ArgumentParser()
