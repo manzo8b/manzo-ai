@@ -89,7 +89,7 @@ function protectedConfig(wrangler, worker) {
     workersDevOff: assignment(wrangler, "workers_dev") === null &&
       /^\s*workers_dev\s*=\s*false\s*$/m.test(wrangler),
     noPublicRoute: !/^\s*(?:route|routes)\s*=/m.test(wrangler),
-    noBillingSecrets: !/^\s*(?:ACCESS_AUD|QUOTA_HASH_SALT|PREVIEW_ACCESS_TOKEN|CLOUDFLARE_API_TOKEN)\s*=/m.test(wrangler),
+    noBillingSecrets: !/^\s*(?:ACCESS_AUD|QUOTA_HASH_SALT|PREVIEW_ACCESS_TOKEN|CLOUDFLARE_API_TOKEN|SUPABASE_PUBLISHABLE_KEY|SUPABASE_ALLOWED_TESTER_IDS)\s*=/m.test(wrangler),
     loggingDisabled: /^\s*\[observability\]\s*$/m.test(wrangler) &&
       /^\s*enabled\s*=\s*false\s*$/m.test(wrangler) &&
       /^\s*\[observability\.logs\]\s*$/m.test(wrangler) &&
@@ -99,6 +99,11 @@ function protectedConfig(wrangler, worker) {
       /new_sqlite_classes\s*=\s*\["CopilotQuota"\]/.test(wrangler),
     separatePrivacyGate: /DATA_PROTECTION_CONFIRMED\s*!==\s*"true"/.test(worker),
     gemmaThinkingDisabled: /chat_template_kwargs:\s*\{\s*enable_thinking:\s*false\s*\}/.test(worker),
+    supabaseAuthDefaultOff: assignment(wrangler, "AUTH_PROVIDER") === "access" &&
+      assignment(wrangler, "SUPABASE_AUTH_CONFIRMED") === "false" &&
+      worker.includes('env?.AUTH_PROVIDER || "access"') &&
+      worker.includes('env?.SUPABASE_AUTH_CONFIRMED !== "true"') &&
+      worker.includes("authenticatedSupabasePrincipal(request, env)"),
     quotaExpiryAlarm: worker.includes("await tx.setAlarm(") &&
       worker.includes("async alarm()") &&
       worker.includes("await this.ctx.storage.deleteAll()"),
@@ -131,10 +136,11 @@ export function inspectOfflineConfiguration(wrangler, worker, policy = BUDGET_BA
     budget,
     manualChecksRequired: [
       "Verify Cloudflare account is Workers Free and no paid billing is enabled",
-      "Verify Zero Trust Free onboarding and payment-method requirement with owner",
-      "Verify Access sign-in with a real restricted tester account",
+      "Confirm chosen identity path: Zero Trust requires payment details; Supabase needs allowlist and privacy review",
+      "Verify chosen provider with a real, restricted tester only after explicit authorization",
       "Reconfirm chosen model remains Free in the day of activation",
       "Inspect Cloudflare Workers AI dashboard for actual Neurons usage",
+      "If Supabase selected: confirm Free organization, no open registration, and pre-auth anti-abuse controls",
       "Review processor terms, transfers, privacy notices and school use with responsible parties",
       "Verify account-level logs, gateway logs, and observability are configured for no prompt/response retention",
       "Verify accessibility and consent notice before transmitting any real brief"

@@ -111,3 +111,15 @@ The existing application continues working without the preview and keeps local d
 - Without verified Access, the Worker must remain unreachable and disabled, and public Mission Studio must remain a local, non-generative preview.
 
 [Access readiness dossier](../../docs/MANZO_AI_COPILOT_P5_6_ACCESS_FREE_ONBOARDING_2026-11-18.md).
+
+## P5.7 — Alternative Supabase Free authentication (source-only, NOT activated)
+
+- Confirmed the existing MANZO AI Supabase organization is on the **Free** tier and its project is healthy. The repository's `product/auth-staging/config.json` remains `enabled: false`; no invitation, login, card or project was created.
+- `supabase-auth.mjs` validates a short-lived bearer session by contacting only the pinned MANZO AI Supabase `/auth/v1/user` endpoint. It requires server-side publishable credentials, a verified non-anonymous `authenticated` user, an explicit UUID allowlist (up to five testers) and a server-only HMAC secret. This does **not** rely on unverified frontend claims or a JWT decoded without signature verification.
+- Existing Cloudflare Access remains the Worker default, and the new server-side `AUTH_PROVIDER = "access"` and `SUPABASE_AUTH_CONFIRMED = "false"` switches prevent alternative authentication until a separate owner-controlled release.
+- All existing zero-euro, privacy and synthetic-only gates continue to block inference by default. No Worker, route, public CORS, user invite, signing-key migration or Supabase provider call has been deployed.
+- Before even a private live test, block pre-auth abuse against Supabase, review GitHub Pages CORS, user session expiration, DPA/retention, and the full Free-plan usage limits.
+
+[Complete P5.7 technical dossier](../../docs/MANZO_AI_COPILOT_P5_7_SUPABASE_AUTH_FREE_2026-11-18.md).
+
+**Release status: OFF. Offline tests with simulated users only.**

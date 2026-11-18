@@ -21,12 +21,17 @@ COPILOT_ENABLED = "false"
 FREE_PLAN_CONFIRMED = "false"
 MODEL_FREE_CONFIRMED = "false"
 DATA_PROTECTION_CONFIRMED = "false"
+# P5.7 experimental Supabase authentication remains OFF until separate approval.
+# Existing Cloudflare Access remains the sole default identity provider.
+AUTH_PROVIDER = "access"
+SUPABASE_AUTH_CONFIRMED = "false"
 # Hard safety gate: only 4 server-owned fictional scenario IDs are accepted.
 BETA_SYNTHETIC_ONLY = "true"
 
-# No ACCESS_AUD or QUOTA_HASH_SALT values here. They must be configured
-# by the owner only after selecting Cloudflare Access on the Free plan.
-# The Worker refuses inference unless Access authenticates the request.
+# No ACCESS_AUD, QUOTA_HASH_SALT, SUPABASE_PUBLISHABLE_KEY, or
+# SUPABASE_ALLOWED_TESTER_IDS values here. Future secrets/allowlists are
+# server-side only and require an explicit owner review before a private trial.
+# No auth-provider switch, route, endpoint or Worker deploy is authorized.
 
 [[durable_objects.bindings]]
 name = "GLOBAL_QUOTA"
