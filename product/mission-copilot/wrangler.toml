@@ -10,3 +10,18 @@ binding = "AI"
 
 [vars]
 COPILOT_ENABLED = "false"
+FREE_PLAN_CONFIRMED = "false"
+MODEL_FREE_CONFIRMED = "false"
+
+# No ACCESS_AUD or QUOTA_HASH_SALT values here. They must be configured
+# by the owner only after selecting Cloudflare Access on the Free plan.
+# The Worker refuses inference unless Access authenticates the request.
+
+[[durable_objects.bindings]]
+name = "GLOBAL_QUOTA"
+class_name = "CopilotQuota"
+
+# Workers Free supports SQLite-backed Durable Objects, not legacy KV backend.
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["CopilotQuota"]
