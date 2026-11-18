@@ -29,7 +29,7 @@ function request(body, headers = {}, method = "POST") {
   return new Request("https://preview.example.test/api/plan", {
     method,
     ...(method === "POST" ? { body: typeof betaBody === "string" ? betaBody : JSON.stringify(betaBody) } : {}),
-    headers: { "content-type": "application/json", ...headers }
+    headers: { "content-type": "application/json", origin: "https://manzo8b.github.io", ...headers }
   });
 }
 const ctx = (email = "teacher@example.test", aud = AUD) => ({
@@ -447,7 +447,8 @@ test("P5.7 alternative provider stays locked OFF until separate owner consent", 
       calls++;
       return { response: JSON.stringify(answer) };
     }),
-    PRE_AUTH_LIMITER: { limit: async () => ({ success: true }) }
+    PRE_AUTH_LIMITER: { limit: async () => ({ success: true }) },
+    BROWSER_CONNECTION_CONFIRMED: "true"
   };
   for (const [override, code] of [
     [{ AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "false" }, "SUPABASE_AUTH_DISABLED"],
@@ -478,7 +479,8 @@ test("P5.7 an unverified authorization header never enables Supabase inference",
       ...standard, AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "true",
       SUPABASE_PUBLISHABLE_KEY: "sb_publishable_mockkey__never_real_123",
       SUPABASE_ALLOWED_TESTER_IDS: JSON.stringify(["11111111-1111-4111-8111-111111111111"]),
-      PRE_AUTH_LIMITER: { limit: async () => ({ success: true }) }
+      PRE_AUTH_LIMITER: { limit: async () => ({ success: true }) },
+      BROWSER_CONNECTION_CONFIRMED: "true"
     },
     ctx()
   ));
@@ -506,7 +508,8 @@ test("P5.12 missing, failed and exhausted pre-auth limiter deny BEFORE Supabase 
     AUTH_PROVIDER: "supabase",
     SUPABASE_AUTH_CONFIRMED: "true",
     SUPABASE_PUBLISHABLE_KEY: "sb_publishable_mockkey__never_real_123",
-    SUPABASE_ALLOWED_TESTER_IDS: JSON.stringify(["11111111-1111-4111-8111-111111111111"])
+    SUPABASE_ALLOWED_TESTER_IDS: JSON.stringify(["11111111-1111-4111-8111-111111111111"]),
+    BROWSER_CONNECTION_CONFIRMED: "true"
   };
   try {
     const cases = [
@@ -557,6 +560,7 @@ test("P5.12 allowed limiter is checked before verified Supabase auth and strictl
     AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "true",
     SUPABASE_PUBLISHABLE_KEY: "sb_publishable_mockkey__never_real_123",
     SUPABASE_ALLOWED_TESTER_IDS: JSON.stringify(["11111111-1111-4111-8111-111111111111"]),
+    BROWSER_CONNECTION_CONFIRMED: "true",
     PRE_AUTH_LIMITER: {
       async limit({ key }) {
         rateCalls++;
@@ -580,4 +584,58 @@ test("P5.12 allowed limiter is checked before verified Supabase auth and strictl
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("P5.13 OPTIONS has no identity, rate limit, quota or AI work", async () => {
+  let rate = 0, ai = 0;
+  const setting = {
+    ...env(async () => { ai++; throw Error("AI should not execute"); }),
+    AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "true",
+    BROWSER_CONNECTION_CONFIRMED: "true",
+    PRE_AUTH_LIMITER: { limit: () => { rate++; throw Error("preflight should not rate limit"); } }
+  };
+  const response = await worker.fetch(new Request("https://preview.example.test/api/plan", {
+    method: "OPTIONS",
+    headers: {
+      origin: "https://manzo8b.github.io",
+      "access-control-request-method": "POST",
+      "access-control-request-headers": "authorization, content-type"
+    }
+  }), setting, {});
+  assert.equal(response.status, 204);
+  assert.equal(response.headers.get("access-control-allow-origin"), "https://manzo8b.github.io");
+  assert.equal(rate, 0);
+  assert.equal(ai, 0);
+});
+
+test("P5.13 rejects wrong origin and unset browser consent BEFORE Supabase validation", async () => {
+  let rate = 0, ai = 0;
+  const setting = {
+    ...env(async () => { ai++; throw Error("AI should not execute"); }),
+    AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "true",
+    BROWSER_CONNECTION_CONFIRMED: "true",
+    PRE_AUTH_LIMITER: { limit: () => { rate++; return { success: true }; } }
+  };
+  for (const [origin, expectedStatus, code] of [
+    ["https://not-approved.example", 403, "ORIGIN_NOT_ALLOWED"],
+    ["null", 403, "ORIGIN_NOT_ALLOWED"],
+    ["", 403, "ORIGIN_NOT_ALLOWED"]
+  ]) {
+    const response = await worker.fetch(
+      request({ scenarioId: "water_cycle" }, { origin, authorization: "Bearer a.b.c" }),
+      setting, {}
+    );
+    assert.equal(response.status, expectedStatus);
+    assert.equal((await response.json()).code, code);
+    assert.equal(response.headers.get("access-control-allow-origin"), null);
+  }
+  const disabled = await worker.fetch(
+    request({ scenarioId: "water_cycle" }, { authorization: "Bearer a.b.c" }),
+    { ...setting, BROWSER_CONNECTION_CONFIRMED: "false" }, {}
+  );
+  assert.equal(disabled.status, 503);
+  assert.equal((await disabled.json()).code, "BROWSER_CONNECTION_DISABLED");
+  assert.equal(disabled.headers.get("access-control-allow-origin"), null);
+  assert.equal(rate, 0);
+  assert.equal(ai, 0);
 });
