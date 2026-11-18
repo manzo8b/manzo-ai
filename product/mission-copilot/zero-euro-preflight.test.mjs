@@ -74,6 +74,14 @@ test("P4 first beta must be synthetic-only in both Worker source and Wrangler", 
     wrangler, worker.replace('scenarioInput(JSON.parse(raw))', 'JSON.parse(raw)')
   ).configSafe, false);
 });
+test("P4 private beta must automatically expire pseudonymous quota state", () => {
+  const normal=inspectOfflineConfiguration(wrangler,worker);
+  assert.equal(normal.checks.quotaExpiryAlarm,true);
+  const noAlarm=worker.replace("await tx.setAlarm(", "await expired.setAlarm(");
+  assert.equal(inspectOfflineConfiguration(wrangler,noAlarm).checks.quotaExpiryAlarm,false);
+  const noDeletion=worker.replace("await this.ctx.storage.deleteAll()", "return");
+  assert.equal(inspectOfflineConfiguration(wrangler,noDeletion).checks.quotaExpiryAlarm,false);
+});
 test("P3 fake public route, disabled quotas or logging on must fail preflight", () => {
   const broken = [
     wrangler + '\nroute = "example.com/*"',
