@@ -123,3 +123,13 @@ The existing application continues working without the preview and keeps local d
 [Complete P5.7 technical dossier](../../docs/MANZO_AI_COPILOT_P5_7_SUPABASE_AUTH_FREE_2026-11-18.md).
 
 **Release status: OFF. Offline tests with simulated users only.**
+
+## P5.12 — Anti-abuse gate BEFORE Supabase Auth (offline, OFF)
+
+- P5.12 adds a Cloudflare Workers Rate Limiting binding (`PRE_AUTH_LIMITER`) with **12 requests per 60 seconds per Cloudflare location**, checked *before* any attempt to validate a Supabase bearer token. A single fixed key shared by all preview requests avoids collecting IPs/tokens and limits traffic across different source IPs at the same location; it may also block a legitimate tester under attack.
+- The limiter is **approximate and per-location**; do not rely on it for global counting or billing. The existing SQLite Durable Object is still the strict authority for AI usage reservations (20/day globally, 3/day per tester, 60-second minimum separation).
+- Missing, throwing, or malformed limiter → **503** `PRE_AUTH_RATE_LIMIT_UNAVAILABLE`. Exhaustion → **429** `PRE_AUTH_RATE_LIMIT`. Neither reaches Supabase Auth or Workers AI.
+- New mocks validate denial paths and the permitted sequence `rate-limit → Supabase Auth → quota reservation → AI`, without external calls. Static preflight asserts the binding and invocation order.
+- The namespace `51218` is a **provisional account-local identifier**, to be checked for uniqueness before a live deploy. All flags remain disabled, `workers_dev=false`, no routes, no CORS, no credentials, no live inference and no merge.
+
+[Read the P5.12 audit](../../docs/MANZO_AI_COPILOT_P5_12_PREAUTH_ABUSE_PROTECTION_2026-11-18.md).

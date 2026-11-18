@@ -1,5 +1,6 @@
 import { scenarioInput } from "./beta-scenarios.mjs";
 import { authenticatedSupabasePrincipal } from "./supabase-auth.mjs";
+import { checkPreAuthRateLimit } from "./preauth-rate-limit.mjs";
 
 /**
  * MANZO AI Mission Copilot P4 — PRIVATE prototype, NOT deployed or public
@@ -246,6 +247,14 @@ export default {
       return fail(503, "AUTH_PROVIDER_UNSUPPORTED");
     if (authProvider === "supabase" && env?.SUPABASE_AUTH_CONFIRMED !== "true")
       return fail(503, "SUPABASE_AUTH_DISABLED");
+    // P5.12: refuse abusive/unverifiable traffic BEFORE sending its bearer
+    // token to Supabase. Global shared key, approximate per Cloudflare location;
+    // strict per-tester AI quotas remain in GLOBAL_QUOTA.
+    if (authProvider === "supabase") {
+      const preAuthError = await checkPreAuthRateLimit(env);
+      if (preAuthError)
+        return fail(preAuthError === "PRE_AUTH_RATE_LIMIT" ? 429 : 503, preAuthError);
+    }
     const principal = authProvider === "supabase"
       ? await authenticatedSupabasePrincipal(request, env)
       : await authenticatedPrincipal(context, env);

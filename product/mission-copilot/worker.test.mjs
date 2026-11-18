@@ -442,10 +442,13 @@ test("P5.6 Access unavailable, forged browser headers or broken identity fail wi
 
 test("P5.7 alternative provider stays locked OFF until separate owner consent", async () => {
   let calls = 0;
-  const standard = env(async () => {
-    calls++;
-    return { response: JSON.stringify(answer) };
-  });
+  const standard = {
+    ...env(async () => {
+      calls++;
+      return { response: JSON.stringify(answer) };
+    }),
+    PRE_AUTH_LIMITER: { limit: async () => ({ success: true }) }
+  };
   for (const [override, code] of [
     [{ AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "false" }, "SUPABASE_AUTH_DISABLED"],
     [{ AUTH_PROVIDER: "supabase" }, "SUPABASE_AUTH_DISABLED"],
@@ -474,7 +477,8 @@ test("P5.7 an unverified authorization header never enables Supabase inference",
     {
       ...standard, AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "true",
       SUPABASE_PUBLISHABLE_KEY: "sb_publishable_mockkey__never_real_123",
-      SUPABASE_ALLOWED_TESTER_IDS: JSON.stringify(["11111111-1111-4111-8111-111111111111"])
+      SUPABASE_ALLOWED_TESTER_IDS: JSON.stringify(["11111111-1111-4111-8111-111111111111"]),
+      PRE_AUTH_LIMITER: { limit: async () => ({ success: true }) }
     },
     ctx()
   ));
@@ -483,4 +487,97 @@ test("P5.7 an unverified authorization header never enables Supabase inference",
   assert.equal(out.status, 401);
   assert.equal(out.data.code, "SUPABASE_AUTH_REQUIRED");
   assert.equal(calls, 0);
+});
+
+test("P5.12 missing, failed and exhausted pre-auth limiter deny BEFORE Supabase or AI", async () => {
+  const originalFetch = globalThis.fetch;
+  let authCalls = 0, aiCalls = 0;
+  globalThis.fetch = async () => {
+    authCalls++;
+    throw Error("No remote Supabase calls allowed in offline test");
+  };
+  const authorizedRequest = request({ scenarioId: "water_cycle" },
+    { authorization: "Bearer testheader.testpayload.testsignature" });
+  const config = {
+    ...env(async () => {
+      aiCalls++;
+      return { response: JSON.stringify(answer) };
+    }),
+    AUTH_PROVIDER: "supabase",
+    SUPABASE_AUTH_CONFIRMED: "true",
+    SUPABASE_PUBLISHABLE_KEY: "sb_publishable_mockkey__never_real_123",
+    SUPABASE_ALLOWED_TESTER_IDS: JSON.stringify(["11111111-1111-4111-8111-111111111111"])
+  };
+  try {
+    const cases = [
+      [undefined, 503, "PRE_AUTH_RATE_LIMIT_UNAVAILABLE"],
+      [{ limit: async () => ({ success: false }) }, 429, "PRE_AUTH_RATE_LIMIT"],
+      [{ limit: async () => { throw Error("limiter unavailable"); } }, 503, "PRE_AUTH_RATE_LIMIT_UNAVAILABLE"],
+      [{ limit: async () => ({ success: undefined }) }, 503, "PRE_AUTH_RATE_LIMIT_UNAVAILABLE"]
+    ];
+    for (const [binding, status, code] of cases) {
+      const result = await read(await worker.fetch(
+        authorizedRequest, { ...config, PRE_AUTH_LIMITER: binding }, ctx()
+      ));
+      assert.equal(result.status, status);
+      assert.equal(result.data.code, code);
+      assert.equal(result.data.teacherApproval, undefined);
+    }
+    assert.equal(authCalls, 0);
+    assert.equal(aiCalls, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("P5.12 allowed limiter is checked before verified Supabase auth and strictly reserved AI quota", async () => {
+  const originalFetch = globalThis.fetch;
+  let rateCalls = 0, authCalls = 0, aiCalls = 0;
+  const order = [];
+  globalThis.fetch = async (url, options) => {
+    order.push("auth");
+    authCalls++;
+    assert.equal(url, "https://bjydnaejpxwubmxpnpnv.supabase.co/auth/v1/user");
+    assert.equal(options.redirect, "error");
+    assert.equal(options.headers.authorization, "Bearer a.b.c");
+    return new Response(JSON.stringify({
+      id: "11111111-1111-4111-8111-111111111111",
+      role: "authenticated", is_anonymous: false,
+      email_confirmed_at: "2026-11-18T11:00:00.000Z"
+    }), { status: 200 });
+  };
+  const config = {
+    ...env(async (model, payload) => {
+      order.push("ai");
+      aiCalls++;
+      assert.equal(model, MODEL);
+      assert.ok(!JSON.stringify(payload).includes("11111111-1111-4111-8111-111111111111"));
+      return { response: JSON.stringify(answer) };
+    }),
+    AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "true",
+    SUPABASE_PUBLISHABLE_KEY: "sb_publishable_mockkey__never_real_123",
+    SUPABASE_ALLOWED_TESTER_IDS: JSON.stringify(["11111111-1111-4111-8111-111111111111"]),
+    PRE_AUTH_LIMITER: {
+      async limit({ key }) {
+        rateCalls++;
+        order.push("rate");
+        assert.equal(key, "mission-copilot:preview:supabase:preauth:v1");
+        return { success: true };
+      }
+    }
+  };
+  try {
+    const result = await read(await worker.fetch(
+      request({ scenarioId: "water_cycle" }, { authorization: "Bearer a.b.c" }),
+      config, {}
+    ));
+    assert.equal(result.status, 200);
+    assert.equal(result.data.teacherApproval, false);
+    assert.equal(rateCalls, 1);
+    assert.equal(authCalls, 1);
+    assert.equal(aiCalls, 1);
+    assert.deepEqual(order, ["rate", "auth", "ai"]);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
