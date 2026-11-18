@@ -1,5 +1,7 @@
+import { scenarioInput } from "./beta-scenarios.mjs";
+
 /**
- * MANZO AI Mission Copilot P2 — PRIVATE prototype, NOT deployed or public
+ * MANZO AI Mission Copilot P4 — PRIVATE prototype, NOT deployed or public
  * Fail-closed. Requires verified Cloudflare Access identity, global atomic
  * quota, and two manual Free-plan gates. No public CORS or billing.
  * Stores only short-lived HMAC identifiers/counters, never lesson content.
@@ -208,6 +210,10 @@ export default {
     // content-logging behavior have been explicitly reviewed.
     if (env?.DATA_PROTECTION_CONFIRMED !== "true")
       return fail(503, "DATA_PROTECTION_NOT_CONFIRMED");
+    // P4: the first private test must use server-owned synthetic scenarios.
+    // Arbitrary user or student text remains prohibited even after consent.
+    if (env?.BETA_SYNTHETIC_ONLY !== "true")
+      return fail(503, "SYNTHETIC_BETA_REQUIRED");
     const principal = await authenticatedPrincipal(context, env);
     if (!principal) return fail(401, "CLOUDFLARE_ACCESS_REQUIRED");
     if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get("content-type") || ""))
@@ -219,7 +225,11 @@ export default {
       const raw = await request.text();
       if (new TextEncoder().encode(raw).length > MAX_BYTES)
         return fail(413, "INPUT_TOO_LARGE");
-      input = validateInput(JSON.parse(raw));
+      // Only a scenarioId is accepted from the client. All teaching content
+      // is copied from a server-maintained fictional allowlist.
+      const fixedScenario = scenarioInput(JSON.parse(raw));
+      if (!fixedScenario) return fail(400, "SYNTHETIC_CASE_REQUIRED");
+      input = validateInput(fixedScenario);
     } catch { return fail(400, "INVALID_JSON"); }
     if (!input) return fail(400, "INVALID_OR_PERSONAL_DATA");
     // Reserve global capacity BEFORE provider call. No refund after errors.
