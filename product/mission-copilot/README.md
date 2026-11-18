@@ -1,6 +1,6 @@
 # Mission Studio — AI Copilot · P0 private prototype
 
-**Status: source-only / not deployed / not connected to Mission Studio.**
+**Status: private Worker source only / not deployed / not connected to a real model.** The P1 browser-side adapter is wired to Mission Studio **only as a local, offline simulation behind `?copilot=preview`**; no API request is made.
 
 This is a security and architecture prototype, not a public chatbot or a feature to advertise on the website.
 
@@ -45,3 +45,14 @@ A secret shared with a browser cannot protect a public service. Before any opt-i
 ## Future pedagogical integration
 
 Once separate safeguards exist: select a teaching objective in Mission Studio → make a bounded, authorized request → receive a structured **unapproved** lesson draft → teacher edits and validates → save a local draft → export to the appropriate Studio. No raw student data, no automatic approval.
+
+## P1 — Local UI integration, still €0
+
+- `tools/ai-teaching-launchpad/mission-adapter.mjs` maps the existing unapproved `ai-teaching-lab-mission-v0.1` brief to the P0 Worker input: `tema`, `destinatari`, `durataMinuti`, `tipoRisorsa`, `obiettivo`. Only whitelisted fields can be passed.
+- `tools/ai-teaching-launchpad/copilot-preview.mjs` contains the **local demo controller**: structured sample, explicit provenance and opt-in application of *only* the suggested objective to the existing brief. A later edit invalidates the suggestion.
+- The public page only imports the demo module when a user opens `/it/formazione/ia-per-la-didattica/inizia/?copilot=preview`. Without this opt-in it remains hidden and does not load the modules.
+- Publisher copies both modules next to the Mission Studio page; GitHub Actions confirms their presence and runs `node --test tools/ai-teaching-launchpad/mission-adapter.test.mjs`.
+- The local simulation is **not an AI result**. In particular, tests use mocked/static data and no Cloudflare inference; the Worker remains disabled, without public route, credentials or browser-facing endpoint.
+
+The existing application continues working without the preview and keeps local draft export/reimport; no online data is stored, transmitted or approved. Privacy checks are heuristic and are not a substitute for data-protection controls.
+
