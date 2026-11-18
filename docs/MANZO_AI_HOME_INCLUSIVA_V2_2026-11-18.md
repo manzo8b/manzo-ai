@@ -39,3 +39,17 @@ La ricerca originaria non viene sostituita. I suggerimenti hanno destinazioni re
 - Rimangono da verificare GitHub Actions, rendering Chrome/Safari, tastiera/VoiceOver, overlay globali, ricerca e sitemap effettiva.
 
 **Nota:** non confondere "home aperta a tutti" con "tutti i contenuti per tutti". Ogni card ha livello, destinatari e limiti propri, ma la home non seleziona né esclude categorie di visitatori.
+
+## Consolidamento della pubblicazione — 18 novembre 2026
+
+### Controlli di build aggiornati
+- `publish-home-curation.py --verify-only` ora verifica i **quattro obiettivi**, la presenza delle **sei card originali Academy**, i **quattro collegamenti delle card tematiche**, i **sei collegamenti unici del menu**, l'assenza della scena tecnica blu e l'esistenza delle pagine di destinazione.
+- Nessuna modifica ai contenuti delle lezioni, ai corsi originali, al backend, ai dati o ai pagamenti.
+- Eliminati sulla homepage alcuni testi non più adatti a una pagina pubblica, tra cui il richiamo ripetuto a «non essere un chatbot», riferimenti a materiali «che selezioneremo insieme» e la versione editoriale `v0.6`. Gli stessi testi nelle eventuali lezioni originali non sono stati alterati.
+- Aggiunta pulizia delle etichette duplicate `Lezione / Lesson / Lección` **solo sulle copie delle card in homepage**.
+- Corretto il confronto delle vecchie scorciatoie con icone decorative: `◈ Studio`, `◈ Lavoro`, `◈ Vita quotidiana`. Il menu breve non dipende più dal confronto testuale letterale prima della normalizzazione.
+- Test JS isolato eseguito sul controller per menu e scorciatoie: **PASS**. Test di regressione `theme/tests/test_home_legacy_cleanup.cjs` incluso nel workflow GitHub Pages.
+- Test Python/Node dell'intera pipeline e ultimo deploy: **esito non osservabile dal controllo commit**, perché il connettore disponibile non espone l'elenco completo delle esecuzioni push su `main`. Controllare le Actions direttamente prima di presentare la versione come definitivamente pubblicata.
+
+### Controlli finali richiesti
+Confrontare i tre URL pubblici `/it/`, `/en/`, `/es/` e il gateway `/manzo-ai/`, preferibilmente con browser ricaricato senza cache. Verificare anche 320, 390 e 1440 px, che il menu non duplichi destinazioni, che le quattro card in evidenza e le sei dell'Academy siano tutte presenti, che la ricerca preesistente funzioni e che la pagina About abbia contenuti reali ma senza accreditamenti inventati.
