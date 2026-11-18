@@ -16,7 +16,7 @@ function element(extra={}){
   focus(){this.focused=true},
  },extra);
 }
-const choices=[0,1,2].map(i=>element({
+const choices=[0,1,2,3].map(i=>element({
  dataset:{maTitle:"Title "+i,maDescription:"Description "+i,maAction:"Open "+i},
  href:pathFor(i),
 }));
@@ -53,13 +53,13 @@ assert.equal(choices[2].attrs["aria-current"],"true");
 assert.equal(choices[0].attrs["aria-current"],"false");
 assert.equal(action.focused,true);
 assert.ok(announce.textContent.includes("Title 2"));
-search.value="verificare una fonte";
+search.value="creare un sito";
 search.handlers.input();
-assert.equal(action.href,pathFor(2),"Search should map to available verification learning resources");
+assert.equal(action.href,pathFor(3),"Search should map to practical creation learning resources");
 let modifiedClick=false;
 choices[1].handlers.click({button:0,metaKey:true,ctrlKey:false,shiftKey:false,altKey:false,preventDefault(){modifiedClick=true}});
 assert.equal(modifiedClick,false,"Meta-click must preserve native link opening");
-assert.equal(action.href,pathFor(2),"Modified click must not overwrite prior selected result");
+assert.equal(action.href,pathFor(3),"Modified click must not overwrite prior selected result");
 assert.ok(!/\bfetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage/.test(source),
   "Discovery must not transmit or store user input");
 console.log("PASS MANZO AI guided home discovery: initial, selection, search mapping, native link behavior");
