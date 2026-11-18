@@ -21,7 +21,7 @@ body[data-ma-surface="landing"] .home-hero:has([data-ma-home-discovery="v1"]) .s
   color:#111827!important;font-size:16px!important;
 }
 .ma-discovery{box-sizing:border-box;position:relative;z-index:2;margin-top:24px;text-align:left;color:#111827;
- width:min(100%,625px);max-width:61%;font-family:inherit;isolation:isolate}
+ width:min(100%,625px);max-width:100%;font-family:inherit;isolation:isolate}
 .ma-discovery *{box-sizing:border-box}
 .ma-discovery .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .ma-discovery-top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:13px}
