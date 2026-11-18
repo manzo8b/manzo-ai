@@ -49,6 +49,16 @@ STATO DA NON FALSIFICARE: cinque moduli in italiano; durata complessiva di 20 or
 5. Crea un backlog P0/P1/P2/P3 con file coinvolti, gravità, impatto pedagogico, rischio privacy, criterio di accettazione.
 6. Identifica fatti, simulazioni, esempi, funzionalità vere e meri placeholder.
 
+## AGGIORNAMENTO P4 · BETA PRIVATA SOLO CON ESEMPI FITTIZI (18/11/2026)
+
+- L'API generativa non è attiva e non è raggiungibile da GitHub Pages; il Worker Cloudflare **non è distribuito**. Budget autorizzato sempre 0 €.
+- Un primo test eventuale potrà accettare solo **quattro ID di scenari didattici fittizi** in product/mission-copilot/beta-scenarios.mjs; il backend rifiuta testi liberi e ogni parametro non atteso con BETA_SYNTHETIC_ONLY=true.
+- Contatori pseudonimi in Durable Object: limite globale + scadenza pianificata tramite alarm; l'eliminazione automatica non garantisce cancellazione delle copie di backup e dei dati gestiti da Cloudflare Access.
+- GitHub Actions 44307897878: backend 20/20, preflight 9/9, adapter Mission Studio 10/10, pubblicazione statica riuscita.
+- Documento di protocollo: docs/MANZO_AI_COPILOT_P4_BETA_PRIVATA_ZERO_EURO_2026-11-18.md.
+- Non chiamare il modello reale e non confermare privacy/Neurons/account senza risultati effettivi. La verifica del piano Cloudflare Free e dell'onboarding Zero Trust Free richiede il titolare; Cloudflare avverte che l'onboarding Zero Trust Free richiede dettagli di pagamento.
+- Il successivo gate richiede *esplicita autorizzazione* per collegare il servizio esterno, e qualsiasi hostname futuro deve essere protetto da Access. Nessuna chiave nel frontend.
+
 ## AGGIORNAMENTO P3 · COSTI E PRIVACY DA VERIFICARE (18/11/2026)
 
 - Disponibile `product/mission-copilot/zero-euro-preflight.mjs`: audit offline di sorgenti e proiezione conservativa Neurons; **non è un rilevatore di consumi reali**, né prova il piano Cloudflare dell'utente.
