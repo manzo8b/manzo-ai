@@ -39,6 +39,12 @@ class HomeCurationContracts(unittest.TestCase):
    ]
    page(self.site/lang/academy/"index.html","Real Academy")
    for route in urls:page(self.site/route.removeprefix("/manzo-ai/")/"index.html","Real course")
+   lang_badge={"it":"Lezione","en":"Lesson","es":"Lección"}[lang]
+   showcase_cards=''.join(
+    f'<article data-ma-course-card="1"><span>{lang_badge}</span>'
+    f'<span>{lang_badge}</span><h3>Course {i+1}</h3></article>'
+    for i in range(6)
+   )
    cards=''.join(
     f'<a class="ma-discovery-choice" href="{url}" data-ma-intent="{i}">Goal {i}</a>'
     for i,url in enumerate(urls)
@@ -51,7 +57,7 @@ class HomeCurationContracts(unittest.TestCase):
 <div data-ma-home-discovery="v1" class="ma-discovery">{cards}
 <p data-ma-discovery-live class="sr-only" role="status" aria-live="polite"></p></div>
 <aside data-ma-home-scene="1" class="ma-product-scene"><div>Unhelpful Product Lab</div></aside>
-</section><div class="ma-home-showcase">Six original cards</div></main></body></html>''')
+</section><div class="ma-home-showcase">Six original cards{showcase_cards}</div></main></body></html>''')
   about.apply(self.site)
  def tearDown(self):self.tmp.cleanup()
 
@@ -77,6 +83,10 @@ class HomeCurationContracts(unittest.TestCase):
    self.assertEqual(page_html.count('<a href="/manzo-ai/'),7)
    self.assertIn(f'href="/manzo-ai/{lang}/{route}/"',page_html)
    self.assertIn("Six original cards",page_html)
+   self.assertEqual(page_html.count('data-ma-course-card="1"'),6)
+   expected_badge={"it":"Lezione","en":"Lesson","es":"Lección"}[lang]
+   self.assertEqual(page_html.count("<span>"+expected_badge+"</span>"),6,
+                    "Copied Academy cards must have only one course-type badge each")
    self.assertIn("Allucinazioni" if lang=="it" else ("hallucinations" if lang=="en" else "Alucinaciones"),page_html)
    self.assertIn('class="searchbox"',page_html)
    self.assertIn("Marcelo Javier Fernandez Caballero",page_html)
