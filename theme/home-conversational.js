@@ -11,7 +11,7 @@
  const summary=root.querySelector('[data-ma-discovery-summary]');
  const action=root.querySelector('[data-ma-discovery-action]');
  const announce=root.querySelector('[data-ma-discovery-live]');
- if(!title||!summary||!action||goals.length!==3)return;
+ if(!title||!summary||!action||goals.length!==4)return;
  let active=null;
  function choose(choice,notify=true){
   if(!choice)return;
@@ -30,9 +30,10 @@
  }));
  const search=document.querySelector('.home-hero .searchbox input');
  const terms=[
-  /(?:lezion|docen|didatt|teach|lesson|aula|clase|profesor)/i,
-  /(?:prompt|istruzion|instruction|instrucci)/i,
-  /(?:verif|font|fact|claim|source|fuente|allucin|hallucin)/i
+  /(?:che cos|cosa (?:è|e) l|capir|imparar|fondament|basi|begin|basic|fundament|entender|comprend)/i,
+  /(?:prompt|istruzion|instrucci|instruction|redact)/i,
+  /(?:allucin|hallucin|alucin|fals|fak|invent|verif|fact|fuente|source|font)/i,
+  /(?:crea|progett|codic|coding|code|web|design|build|crear|desarroll)/i
  ];
  if(search){
   search.addEventListener('input',()=>{
