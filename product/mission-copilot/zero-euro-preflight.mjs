@@ -98,6 +98,9 @@ function protectedConfig(wrangler, worker) {
       /class_name\s*=\s*"CopilotQuota"/.test(wrangler) &&
       /new_sqlite_classes\s*=\s*\["CopilotQuota"\]/.test(wrangler),
     separatePrivacyGate: /DATA_PROTECTION_CONFIRMED\s*!==\s*"true"/.test(worker),
+    quotaExpiryAlarm: worker.includes("await tx.setAlarm(") &&
+      worker.includes("async alarm()") &&
+      worker.includes("await this.ctx.storage.deleteAll()"),
     usageReservationBeforeAI: worker.indexOf("reserveGlobalQuota(env, principal)") >= 0 &&
       worker.indexOf("reserveGlobalQuota(env, principal)") <
         worker.indexOf("await env.AI.run(MODEL,"),
