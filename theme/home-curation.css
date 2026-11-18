@@ -1,4 +1,4 @@
-/* MANZO AI / curated home v2 — educational primary audience
+/* MANZO AI / curated home v2 — accessible to all curious, learners, workers and educators
    Only three localized homepages. Language gateway and inner pages unchanged. */
 body[data-ma-surface="landing"] .home-hero:has([data-ma-home-discovery="v1"]){
   display:block!important;
@@ -43,7 +43,7 @@ body[data-ma-surface="landing"] .home-hero:has([data-ma-home-discovery="v1"]) .s
 .ma-discovery h2{font-size:clamp(1.25rem,2.1vw,1.72rem)!important;margin-bottom:15px!important}
 .ma-discovery-top{margin-bottom:9px!important}
 .ma-discovery-honesty{background:#edf4ff!important;border-color:#c3d8f5!important;color:#1b4da5!important}
-.ma-discovery-goals{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:11px!important}
+.ma-discovery-goals{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:11px!important}
 .ma-discovery-choice{
   padding:16px 14px!important;min-height:76px!important;align-items:center;
   border-radius:15px!important;font-size:.85rem!important;
@@ -77,7 +77,7 @@ body[data-ma-surface="landing"] .rail.ma-home-rail-curated .ma-home-primary-nav{
 .ma-home-primary-nav a[aria-current="page"]{background:#e4f2ed;color:#0b6153;border-left:3px solid #0e7363;font-weight:860}
 body[data-ma-surface="landing"] .home-hero .ma-product-scene,
 body[data-ma-surface="landing"] .home-hero [data-ma-home-scene]{display:none!important}
-@media(max-width:950px){.ma-discovery-goals{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:1040px){.ma-discovery-goals{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:760px){
  body[data-ma-surface="landing"] .home-hero:has([data-ma-home-discovery="v1"]){
    padding:23px 16px!important;border-radius:19px!important;margin-bottom:21px!important;
@@ -93,3 +93,48 @@ body[data-ma-surface="landing"] .home-hero [data-ma-home-scene]{display:none!imp
  .ma-home-curator span{font-size:.75rem}
 }
 @media(prefers-reduced-motion:reduce){.ma-home-primary-nav a,.ma-discovery-choice{transition:none!important;transform:none!important}}
+
+
+/* Real topic cards lead directly to existing lessons/labs. All six existing
+ * Academy cards remain in the following, full catalog section. */
+.ma-topic-features{
+ margin:12px auto 36px;padding:34px 0 38px;border-bottom:1px solid #dbe5f1;
+ color:#111827;
+}
+.ma-topic-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:22px}
+.ma-topic-eyebrow{font-size:.7rem;font-weight:900;color:#2455bd;letter-spacing:.12em;margin:0 0 8px}
+.ma-topic-heading h2{font-size:clamp(1.7rem,3vw,2.75rem);line-height:1.16;
+ letter-spacing:-.055em;color:#111827;margin:0 0 9px;font-weight:790}
+.ma-topic-heading p:not(.ma-topic-eyebrow){color:#3c4f68;line-height:1.5;
+ margin:0;max-width:62ch;font-size:.92rem}
+.ma-topic-all{display:inline-flex;white-space:nowrap;align-items:center;
+ min-height:44px;border:1.5px solid #bed1ed;border-radius:12px;
+ padding:11px 13px;color:#184cae!important;text-decoration:none;font-weight:820;
+ font-size:.79rem;background:white}
+.ma-topic-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.ma-topic-card{display:flex;flex-direction:column;align-items:flex-start;min-width:0;
+ min-height:211px;border:1.5px solid #c7d9ed;border-radius:20px;padding:20px;
+ background:#fff;text-decoration:none;color:#111827!important;
+ box-shadow:0 9px 30px rgba(24,51,99,.045);transition:transform .17s,box-shadow .17s}
+.ma-topic-card:hover{transform:translateY(-4px);box-shadow:0 18px 32px #1749a71b}
+.ma-topic-card:focus-visible,.ma-topic-all:focus-visible{outline:3px solid #e97e17;outline-offset:3px}
+.ma-topic-1{border-top:6px solid #205beb;background:linear-gradient(145deg,#f0f6ff,#fff 67%)}
+.ma-topic-2{border-top:6px solid #e97e17;background:linear-gradient(145deg,#fff4e5,#fff 67%)}
+.ma-topic-3{border-top:6px solid #df3d34;background:linear-gradient(145deg,#fff0ef,#fff 67%)}
+.ma-topic-4{border-top:6px solid #edb120;background:linear-gradient(145deg,#fff6d6,#fff 67%)}
+.ma-topic-num{font-size:.71rem;font-weight:880;letter-spacing:.07em;color:#49658d;margin-bottom:19px}
+.ma-topic-card strong{font-size:1.02rem;line-height:1.23;letter-spacing:-.018em;font-weight:850;display:block}
+.ma-topic-summary{font-size:.79rem;line-height:1.49;color:#38475f;display:block;margin:9px 0 18px}
+.ma-topic-action{margin-top:auto;color:#164eaf;font-size:.79rem;font-weight:850;display:flex;gap:7px;align-items:center}
+@media(max-width:1150px){.ma-topic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+ .ma-topic-features{padding:22px 0 29px;margin:7px auto 25px}
+ .ma-topic-heading{display:block}
+ .ma-topic-all{margin-top:15px}
+ .ma-topic-card{min-height:185px;padding:16px;border-radius:17px}
+ .ma-topic-grid{gap:10px}
+ .ma-topic-card strong{font-size:.92rem}
+ .ma-topic-summary{font-size:.76rem}
+}
+@media(max-width:380px){.ma-topic-grid{grid-template-columns:1fr}.ma-topic-card{min-height:143px}.ma-topic-num{margin-bottom:8px}}
+@media(prefers-reduced-motion:reduce){.ma-topic-card{transition:none!important}.ma-topic-card:hover{transform:none!important}}
