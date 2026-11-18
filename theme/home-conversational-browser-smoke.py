@@ -23,10 +23,10 @@ def inspect(page,base,locale,width,out=None):
  assert page.locator(".ma-product-scene").count()==0,"Technical product scene must not appear on the curated home"
  assert page.locator(".ma-home-showcase .ma-course-card").count()==6,"Real Academy catalog changed"
  choices=panel.locator("[data-ma-intent]")
- assert choices.count()==3,f"Expected three focused learning goals in {locale}"
+ assert choices.count()==4,f"Expected four general AI learning goals in {locale}"
  action=panel.locator("[data-ma-discovery-action]")
  initial=action.get_attribute("href")
- assert initial and "ia-per-la-didattica/inizia/" in initial,initial
+ assert initial and initial==choices.first.get_attribute("href"),initial
  expected=choices.nth(2).get_attribute("href")
  choices.nth(2).click()
  assert action.get_attribute("href")==expected,"Goal did not update the recommended route"
@@ -41,7 +41,7 @@ def inspect(page,base,locale,width,out=None):
  if out:
   Path(out).mkdir(parents=True,exist_ok=True)
   page.screenshot(path=str(Path(out)/f"home-{locale}-{width}.png"),full_page=True)
- print(f"PASS {locale} · {width}px · three goals, existing search, Academy, no overflow")
+ print(f"PASS {locale} · {width}px · four goals, existing search, Academy, no overflow")
 
 def main():
  parser=argparse.ArgumentParser()
