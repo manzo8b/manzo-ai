@@ -77,3 +77,14 @@ The existing application continues working without the preview and keeps local d
 - Full evidence, Cloudflare Free/Zero Trust onboarding payment-detail caveat and Italian school privacy requirements: [P3 report](../../docs/MANZO_AI_COPILOT_P3_PREFLIGHT_PRIVACY_COSTI_0EUR_2026-11-18.md).
 
 **No live model call, Worker deployment, API key or payment has been initiated.**
+
+## P4 — Private synthetic-only beta readiness (not deployed)
+
+- The first real private experiment is restricted to **four fixed fictional cases** in product/mission-copilot/beta-scenarios.mjs. Clients may send ONLY a scenarioId; no free-text lesson brief, student details or additional request fields may reach inference. All future expansions require new explicit review.
+- BETA_SYNTHETIC_ONLY=true is mandatory in Wrangler and the Worker. The CI preflight fails if either side stops enforcing it.
+- The Durable Object schedules a best-effort cleanup alarm shortly after UTC midnight to remove expired HMAC quota counters. Platform backup/point-in-time recovery and Access identity retention are separate Cloudflare matters.
+- 20 offline backend tests + 9 cost/privacy preflight tests + 10 Mission Studio adapter tests all passed in GitHub Pages run 44307897878. **Mock tests do not constitute a real model request.**
+- Privacy, Free-plan status, payment-method requirements and actual Neuron consumption of the owner's Cloudflare account are still **unverified**.
+- Complete decision protocol: [P4 private beta](../../docs/MANZO_AI_COPILOT_P4_BETA_PRIVATA_ZERO_EURO_2026-11-18.md).
+- Do not set flags to true, deploy to Cloudflare, create a public hostname, or edit Access/billing settings without the owner's separate approval.
+
