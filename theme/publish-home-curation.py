@@ -126,14 +126,35 @@ def portal_copy(root):
  return anchor.sub(translate,root)
 
 def remove_old_duplicates(h):
- # Editorial remnants in the generated homepage, not a rewrite of course content.
+ """Polish only rendered HOME language; original Academy and lessons untouched.
+
+ A duplicate 'Lezione' often exists as two separate adjacent badge elements,
+ rather than the literal string 'Lezione Lezione'. Only collapse adjacent
+ short, repeated badges inside copied HOME article cards.
+ """
  pairs=(
   ("Lezione Lezione","Lezione"),("Cerca Cerca","Cerca"),
   ("Lesson Lesson","Lesson"),("Search Search","Search"),
   ("Lección Lección","Lección"),("Buscar Buscar","Buscar"),
+  ("i video didattici che selezioneremo insieme","i video didattici disponibili"),
+  ("Nuovi materiali scaricabili saranno aggiunti dopo revisione.",""),
+  ("Un laboratorio di conoscenza, non un chatbot","Impara, sperimenta e verifica"),
+  ("Esplora lezioni, concetti ed esercizi verificati. Nessun chatbot: la ricerca mostra solo contenuti disponibili",
+   "Cerca lezioni, attività e risorse disponibili"),
+  ("MANZO AI · v0.6","MANZO AI"),
  )
  for old,new in pairs:h=h.replace(old,new)
- return h
+ card=re.compile(r'<article\b(?=[^>]*\bdata-ma-course-card=["\x27]1["\x27])[^>]*>.*?</article\s*>',re.I|re.S)
+ badge=re.compile(r'<(?P<tag>span|small|strong|b)\b(?P<attrs>[^>]*)>\s*(?P<label>Lezione|Lesson|Lección)\s*</(?P=tag)\s*>',re.I)
+ def clean_card(match):
+  seen=set()
+  def clean_badge(m):
+   key=m.group("label").casefold()
+   if key in seen:return ""
+   seen.add(key)
+   return m.group(0)
+  return badge.sub(clean_badge,match.group(0))
+ return card.sub(clean_card,h)
 
 def curated(site,lang,html):
  copy=COPY[lang]
