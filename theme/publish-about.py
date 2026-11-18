@@ -117,14 +117,13 @@ def apply(site,verify_only=False):
   if verify_only:
    if not file.is_file():raise RuntimeError("Missing about page: "+str(file))
    html=file.read_text(encoding="utf-8")
-   for text in (AUTHOR,'rel="canonical"',f'lang="{lang}"', "non una" if lang=="it" else ctext(lang)):
+   for text in (AUTHOR,'rel="canonical"',f'lang="{lang}"', {"it":"Non siamo una scuola","en":"We are not a school","es":"No somos una escuela"}[lang]):
     if text not in html:raise RuntimeError("Incomplete about page: "+str(file)+" => "+text)
    continue
   if file.is_file():raise RuntimeError("Refuse overwrite of existing about page "+str(file))
   file.parent.mkdir(parents=True,exist_ok=True)
   file.write_text(render(lang),encoding="utf-8")
  print("MANZO AI independent curator pages: IT/EN/ES; checked="+str(verify_only))
-def ctext(lang):return "not an" if lang=="en" else "no una"
 
 if __name__=="__main__":
  p=argparse.ArgumentParser()
