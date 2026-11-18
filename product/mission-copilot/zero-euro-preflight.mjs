@@ -100,6 +100,13 @@ function protectedConfig(wrangler, worker) {
     separatePrivacyGate: /DATA_PROTECTION_CONFIRMED\s*!==\s*"true"/.test(worker),
     gemmaThinkingDisabled: /chat_template_kwargs:\s*\{\s*enable_thinking:\s*false\s*\}/.test(worker),
     preAuthRateLimitConfigured: /\[\[ratelimits\]\][\s\S]*?name\s*=\s*"PRE_AUTH_LIMITER"[\s\S]*?namespace_id\s*=\s*"[0-9]+"[\s\S]*?\[ratelimits\.simple\][\s\S]*?limit\s*=\s*12[\s\S]*?period\s*=\s*60/.test(wrangler),
+    browserConnectionDefaultOff: assignment(wrangler, "BROWSER_CONNECTION_CONFIRMED") === "false" &&
+      worker.includes("preflightResponse(request, env)") &&
+      worker.includes("withApprovedCors(response, request, env)") &&
+      worker.includes('return fail(503, "BROWSER_CONNECTION_DISABLED")') &&
+      worker.includes('return fail(403, "ORIGIN_NOT_ALLOWED")') &&
+      worker.indexOf("!exactApprovedOrigin(request)") <
+        worker.indexOf("await checkPreAuthRateLimit(env)"),
     preAuthLimiterBeforeSupabase: worker.includes("checkPreAuthRateLimit(env)") &&
       worker.indexOf("await checkPreAuthRateLimit(env)") >= 0 &&
       worker.indexOf("await checkPreAuthRateLimit(env)") <
