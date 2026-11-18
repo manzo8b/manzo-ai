@@ -439,3 +439,48 @@ test("P5.6 Access unavailable, forged browser headers or broken identity fail wi
   }
   assert.equal(invoked, 0);
 });
+
+test("P5.7 alternative provider stays locked OFF until separate owner consent", async () => {
+  let calls = 0;
+  const standard = env(async () => {
+    calls++;
+    return { response: JSON.stringify(answer) };
+  });
+  for (const [override, code] of [
+    [{ AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "false" }, "SUPABASE_AUTH_DISABLED"],
+    [{ AUTH_PROVIDER: "supabase" }, "SUPABASE_AUTH_DISABLED"],
+    [{ AUTH_PROVIDER: "unsupported" }, "AUTH_PROVIDER_UNSUPPORTED"],
+    [{ AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "true" }, "SUPABASE_AUTH_REQUIRED"]
+  ]) {
+    const result = await read(await worker.fetch(request({ scenarioId: "water_cycle" }),
+      { ...standard, ...override }, ctx()));
+    assert.equal(result.status, code === "SUPABASE_AUTH_REQUIRED" ? 401 : 503);
+    assert.equal(result.data.code, code);
+  }
+  assert.equal(calls, 0);
+});
+
+test("P5.7 an unverified authorization header never enables Supabase inference", async () => {
+  let calls = 0;
+  const standard = env(async () => {
+    calls++;
+    return { response: JSON.stringify(answer) };
+  });
+  const out = await read(await worker.fetch(
+    request({ scenarioId: "water_cycle" }, {
+      authorization: "Bearer a.b.c",
+      "x-user-id": "11111111-1111-4111-8111-111111111111"
+    }),
+    {
+      ...standard, AUTH_PROVIDER: "supabase", SUPABASE_AUTH_CONFIRMED: "true",
+      SUPABASE_PUBLISHABLE_KEY: "sb_publishable_mockkey__never_real_123",
+      SUPABASE_ALLOWED_TESTER_IDS: JSON.stringify(["11111111-1111-4111-8111-111111111111"])
+    },
+    ctx()
+  ));
+  // This test does NOT call the actual Supabase endpoint: the token isn't
+  // a verified session, and no inference can occur on authentication failure.
+  assert.equal(out.status, 401);
+  assert.equal(out.data.code, "SUPABASE_AUTH_REQUIRED");
+  assert.equal(calls, 0);
+});
