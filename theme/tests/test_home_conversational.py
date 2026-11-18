@@ -69,6 +69,7 @@ class ConversationalHomeContracts(unittest.TestCase):
    self.assertIn("Original Academy remains",text)
    self.assertIn('class="searchbox"',text)
    self.assertIn("Legacy scene remains",text)
+   self.assertLess(text.index(module.MARKER),text.index('class="ma-product-scene"'),"Mobile must see the discovery before the decorative scene")
    self.assertEqual(text.count(module.MARKER),1)
    self.assertEqual(text.count('data-ma-home-discovery-asset="v1"'),2)
    self.assertEqual(text.count('data-ma-intent='),4)
