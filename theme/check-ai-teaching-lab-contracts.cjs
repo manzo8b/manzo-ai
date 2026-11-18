@@ -69,6 +69,26 @@ assert.ok(launch.includes("confirm(\"Ripristinare questa bozza?"),"Restoration m
 assert.ok(launch.includes(".hero-art{display:none}"),"Small-screen view must prioritize actions");
 assert.ok(launch.includes("prefers-reduced-motion"),"Missing reduced-motion accommodation");
 
+/* P1 prototype: only local simulation behind an explicit opt-in query string. */
+for(const marker of [
+ 'id="copilot-preview" hidden',
+ 'data-copilot-preview="offline-p1"',
+ 'pilotQuery==="preview"',
+ 'import("./copilot-preview.mjs")'
+]){
+ assert.ok(launch.includes(marker),"Missing optional P1 local Copilot marker "+marker);
+}
+for(const rel of [
+ "tools/ai-teaching-launchpad/mission-adapter.mjs",
+ "tools/ai-teaching-launchpad/copilot-preview.mjs"
+]){
+ const source=load(rel);
+ assert.ok(source.includes("export"),"Missing Copilot local module "+rel);
+ assert.ok(!/\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage/.test(source),
+   "Local Copilot preview must not fetch, transmit or persist data "+rel);
+}
+
+
 /* Visual-regression contract: a global heading rule once made the CTA title
  * nearly invisible on its dark background on iPhone. Protect local contrast. */
 assert.ok(launch.includes('class="mission-finish"'),"Mission end panel must be scoped");
