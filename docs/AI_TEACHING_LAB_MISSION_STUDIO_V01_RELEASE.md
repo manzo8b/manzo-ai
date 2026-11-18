@@ -62,3 +62,18 @@ Un prodotto formativo interattivo mobile-first che accompagna docenti senza espe
 **P3** solo dopo test con docenti: feedback contestuale più ricco, eventuale API IA protetta e funzionalità salvabili con consenso e policy adeguate.
 
 La home di selezione delle lingue MANZO AI non è stata modificata. Questo sprint riguarda l'applicazione formativa italiana del Teaching Lab.
+
+## Correzione contrasto mobile — 18 novembre 2026
+
+**Difetto documentato dagli screenshot iPhone:** nella CTA finale «Progettare bene è il vero superpotere», il testo dell'heading appariva scurissimo su un pannello antracite. Motivo: `theme/design-system.css` sovrascrive con `body[data-ma-surface] h2` il colore originario di `.end h2` (regola locale con specificità inferiore). Non è un errore del contenuto, ma una collisione di CSS tra micro-app e tema globale.
+
+**Interventi applicati in `tools/ai-teaching-launchpad/index.html`:**
+- classe univoca `.mission-finish` e pannello con gradiente `#14358C → #205BEB` anziché blocco nero;
+- heading bianco `#FFFFFF`, testo `#F2F6FF`, CTA bianca con testo `#15243D`, selettori `body[data-ma-surface] .mission-finish ...` e `!important` limitati al pannello;
+- la coppia bianco / `#205BEB` ha un rapporto di contrasto calcolato **5,59:1**; bianco / `#14358C` **10,95:1**, superiori alla soglia WCAG 4,5:1 per testo normale. È una verifica cromatica sui valori CSS, **non un audit WCAG dell'intera pagina**;
+- su mobile la seconda intestazione MANZO AI si trasforma in un breadcrumb breve (il menu globale resta invariato), il titolo iniziale è più compatto e la quinta card occupa l'intera riga;
+- la nota «Interattivo · sul dispositivo» non resta più in una colonna strettissima.
+
+**Regressione preventiva:** `theme/check-ai-teaching-lab-contracts.cjs` ora include controlli su classi, selettori resistenti agli override del tema, colori e rapporti di contrasto delle due estremità del gradiente.
+
+**Test effettuati:** compilazione sintattica JavaScript inline, verifica di identificatori statici unici e ispezione dei selettori CSS, calcolo dei rapporti di contrasto. **Non ancora effettuati:** test del rendering post-deploy su Safari iPhone e desktop, né conferma dello stato di GitHub Pages.
