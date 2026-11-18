@@ -33,6 +33,18 @@ BETA_SYNTHETIC_ONLY = "true"
 # server-side only and require an explicit owner review before a private trial.
 # No auth-provider switch, route, endpoint or Worker deploy is authorized.
 
+# P5.12: approximate per-location throttle BEFORE Supabase user validation.
+# A single fixed route key protects the initial one-tester beta; no IPs or
+# bearer tokens are used as rate-limit identifiers. Not a global exact quota.
+# Namespace id must be verified unique to this account before any deploy.
+[[ratelimits]]
+name = "PRE_AUTH_LIMITER"
+namespace_id = "51218"
+
+[ratelimits.simple]
+limit = 12
+period = 60
+
 [[durable_objects.bindings]]
 name = "GLOBAL_QUOTA"
 class_name = "CopilotQuota"
