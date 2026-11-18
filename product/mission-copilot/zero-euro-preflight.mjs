@@ -98,7 +98,8 @@ function protectedConfig(wrangler, worker) {
       worker.indexOf("reserveGlobalQuota(env, principal)") <
         worker.indexOf("await env.AI.run(MODEL,"),
     noCustomContentLogging: !/\bconsole\.(?:log|warn|info|error|debug)\s*\(/.test(worker),
-    noPublicAIProxy: !/access-control-allow-origin/i.test(worker)
+    noPublicAIProxy: !/[\x22\x27]access-control-allow-origin[\x22\x27]\s*:/i.test(worker) &&
+      !/headers\.set\s*\(\s*[\x22\x27]access-control-allow-origin/i.test(worker)
   };
   return checks;
 }
