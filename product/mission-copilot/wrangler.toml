@@ -5,6 +5,14 @@ main = "worker.mjs"
 compatibility_date = "2026-11-18"
 workers_dev = false
 
+# No Worker request/payload logging during the private trial.
+# Verify account-level settings independently before activation.
+[observability]
+enabled = false
+
+[observability.logs]
+invocation_logs = false
+
 [ai]
 binding = "AI"
 
@@ -12,6 +20,7 @@ binding = "AI"
 COPILOT_ENABLED = "false"
 FREE_PLAN_CONFIRMED = "false"
 MODEL_FREE_CONFIRMED = "false"
+DATA_PROTECTION_CONFIRMED = "false"
 
 # No ACCESS_AUD or QUOTA_HASH_SALT values here. They must be configured
 # by the owner only after selecting Cloudflare Access on the Free plan.
