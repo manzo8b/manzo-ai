@@ -49,6 +49,17 @@ STATO DA NON FALSIFICARE: cinque moduli in italiano; durata complessiva di 20 or
 5. Crea un backlog P0/P1/P2/P3 con file coinvolti, gravità, impatto pedagogico, rischio privacy, criterio di accettazione.
 6. Identifica fatti, simulazioni, esempi, funzionalità vere e meri placeholder.
 
+## AGGIORNAMENTO P2 · SICUREZZA E LIMITI GLOBALI 0 € (18/11/2026)
+
+- Il backend P2 è già implementato in `product/mission-copilot/worker.mjs` e `wrangler.toml`. Non duplicare i controlli esistenti e **non attivare il servizio**.
+- Cloudflare Access: accettare solo identità autenticate tramite `ctx.access` e audience verificata; mai fidarsi di un token copiato nel frontend.
+- Id pseudonimizzato tramite HMAC-SHA256 con sale segreto server; la quota atomica è gestita dall'unico Durable Object SQLite `CopilotQuota`.
+- Limiti per prove iniziali: massimo 20 richieste globali/giorno UTC, 3 per identità/giorno e almeno 60 secondi fra due richieste della stessa identità. Nessun rimborso della quota in caso di errore modello.
+- `COPILOT_ENABLED=false`, `FREE_PLAN_CONFIRMED=false`, `MODEL_FREE_CONFIRMED=false` sono **obbligatori** nel repository. Nessuna chiave o numero audience reale in `wrangler.toml`; `workers_dev=false`, nessuna route.
+- La pagina pubblica Mission Studio resta una simulazione editoriale locale dietro `?copilot=preview`; il Worker non viene distribuito da GitHub Actions.
+- Prima di qualsiasi attivazione verificare sul piano Cloudflare Workers Free / Zero Trust Free disponibilità effettiva, limiti, costi e privacy con il titolare. Se serve pagare, la funzione rimane OFF.
+- Specifica di riferimento: `docs/MANZO_AI_COPILOT_P2_AUTH_QUOTA_ZERO_EURO_2026-11-18.md`. Non dichiarare l'IA pubblica o realmente connessa.
+
 ## AGGIORNAMENTO P1 · INTERFACCIA COPILOTA LOCALE (18/11/2026)
 
 - Il bridge esiste: `tools/ai-teaching-launchpad/mission-adapter.mjs` converte il brief locale al contratto privato P0 del Worker. Non reinserire due volte gli stessi campi.
