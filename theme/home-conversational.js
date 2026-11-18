@@ -11,7 +11,7 @@
  const summary=root.querySelector('[data-ma-discovery-summary]');
  const action=root.querySelector('[data-ma-discovery-action]');
  const announce=root.querySelector('[data-ma-discovery-live]');
- if(!title||!summary||!action||goals.length!==4)return;
+ if(!title||!summary||!action||goals.length!==3)return;
  let active=null;
  function choose(choice,notify=true){
   if(!choice)return;
@@ -32,8 +32,7 @@
  const terms=[
   /(?:lezion|docen|didatt|teach|lesson|aula|clase|profesor)/i,
   /(?:prompt|istruzion|instruction|instrucci)/i,
-  /(?:verif|font|fact|claim|source|fuente|allucin|hallucin)/i,
-  /(?:sit[oi]|web|design|studio|progett|creat)/i
+  /(?:verif|font|fact|claim|source|fuente|allucin|hallucin)/i
  ];
  if(search){
   search.addEventListener('input',()=>{
@@ -43,5 +42,37 @@
    if(index>=0&&goals[index]!==active)choose(goals[index],false);
   });
  }
+
+ // Legacy sidebar groups 14+ mixed audiences and contained repeated destinations.
+ // Curated links are produced from verified, published course routes by the publisher.
+ const curated=root.querySelector('[data-ma-home-primary-nav="v2"]');
+ const rail=document.querySelector(".rail");
+ if(curated&&rail){
+  const bottom=rail.querySelector(".rail-bottom");
+  rail.querySelectorAll(".nav-title,.nav-link").forEach(el=>el.remove());
+  if(bottom)rail.insertBefore(curated,bottom);
+  else rail.append(curated);
+  rail.classList.add("ma-home-rail-curated");
+ }
+ // Old hero shortcuts mixed unrelated labels and sent distinct intents
+ // to the same lesson. Remove the duplicated shortcuts, not the search.
+ const hero=root.closest(".home-hero");
+ if(hero){
+  const redundant=new Set([
+   "studio","lavoro","vita quotidiana","aula del docente","prompt mastery",
+   "work","everyday life","teacher classroom","trabajo","vida cotidiana","aula del docente"
+  ]);
+  hero.querySelectorAll("a,button").forEach(el=>{
+   if(el.closest(".ma-discovery")||el.closest(".searchbox"))return;
+   const label=(el.textContent||"").trim().replace(/\s+/g," ").toLocaleLowerCase();
+   if(!redundant.has(label))return;
+   const parent=el.parentElement;
+   el.remove();
+   if(parent&&parent!==hero&&parent.childElementCount===0&&!parent.textContent.trim()){
+    parent.remove();
+   }
+  });
+ }
+
  choose(goals[0],false);
 })();
