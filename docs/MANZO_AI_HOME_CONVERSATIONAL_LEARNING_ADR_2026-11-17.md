@@ -1,5 +1,5 @@
 # ADR — MANZO AI Home: ingresso linguistico + discovery conversazionale + catalogo Learning
-**Stato:** decisione di prodotto raccomandata per l'implementazione, da validare con un prototipo e test utenti; non ancora applicata alla home pubblica
+**Stato (18 novembre 2026):** implementazione sorgente v1 completata per le homepage IT/EN/ES, collegata al publisher e ai test GitHub Pages; **ultima build, deploy e resa visiva reali non ancora verificati**. La pagina radice per scegliere la lingua non è modificata. La sperimentazione con utenti resta da svolgere.
 **Data:** 17 novembre 2026
 **Repository:** manzo8b/manzo-ai
 **Ambito:** root di selezione lingue e homepage IT/EN/ES, prima dei percorsi formativi.
@@ -91,3 +91,20 @@ L'audit SaaS del 16 novembre 2026 e il README distinguono portale statico pubbli
 - Release documentata con screenshot, test PASS/FAIL/NOT RUN, confronto prima/dopo e percorso di rollback.
 
 **Decisione di prodotto:** *Language gateway → Conversational discovery → Learning cards and tools*. La chat IA reale potrà essere una fase successiva quando siano pronti backend sicuro, privacy, limiti e costi.
+
+## Implementazione v1 — 18 novembre 2026
+
+**Source of truth:** `theme/publish-home-conversational.py` con `theme/home-conversational.css` e `theme/home-conversational.js`.
+
+- La ricerca già esistente nella `home-hero` resta utilizzabile; non viene sostituita con un chatbot simulato.
+- Quattro obiettivi cliccabili aggiornano una raccomandazione deterministica, il cui collegamento è una risorsa davvero presente nel sito di build. Senza JavaScript ogni opzione è comunque un collegamento utilizzabile.
+- I collegamenti a Prompt Engineering e verifica sono estratti dalle **sei card reali dell'Academy** della lingua scelta; il prodotto Studio punta alla demo prodotto della lingua scelta, non a un generatore IA attivo.
+- Il Teaching Lab e Mission Studio esistono **per ora in italiano**: i visitatori EN/ES sono avvertiti esplicitamente prima di aprire la risorsa italiana.
+- I nuovi suggerimenti sono inseriti **prima della scena decorativa** nella home hero, in modo che su iPhone le azioni siano prioritarie; conservati l'hero originale, la ricerca, le card Academy e i percorsi guidati.
+- La radice `/manzo-ai/` con selezione delle lingue rimane intatta.
+- Publisher chiamato dopo l'Academy, prima degli ultimi controlli di SEO e integrità.
+- Test inclusi: `python3 -m unittest discover -s theme/tests -p 'test_home_conversational.py' -v`, `node theme/tests/test_home_conversational_js.cjs`, verifica `--site _site --verify-only`, e gate nel workflow di deploy.
+
+**Stato dei controlli:** parser JavaScript, struttura delle dipendenze e presenza dei gate sono stati controllati staticamente. Il risultato effettivo dei test eseguiti su GitHub Actions, la pubblicazione e l'audit iPhone/desktop non sono confermati: non dichiarare `LIVE`, `WCAG AA` o efficacia didattica dimostrata.
+
+**Rilascio:** leggere `docs/MANZO_AI_HOME_CONVERSATIONAL_V1_RELEASE_2026-11-18.md` quando disponibile.
