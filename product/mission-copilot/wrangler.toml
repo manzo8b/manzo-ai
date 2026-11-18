@@ -1,0 +1,12 @@
+# Configuration reference for a PRIVATE, disabled-by-default prototype.
+# No GitHub Actions job deploys this Worker. Do not add public routes.
+name = "manzo-ai-mission-copilot-preview"
+main = "worker.mjs"
+compatibility_date = "2026-11-18"
+workers_dev = false
+
+[ai]
+binding = "AI"
+
+[vars]
+COPILOT_ENABLED = "false"
