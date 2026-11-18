@@ -74,10 +74,17 @@ class ConversationalHomeContracts(unittest.TestCase):
    self.assertEqual(text.count('data-ma-home-discovery-asset="v1"'),2)
    self.assertEqual(text.count('data-ma-intent='),4)
    self.assertIn(f'href="/manzo-ai/{HALLUCINATION[lang]}/"',text)
-   self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-4/"',text)
-   self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-1/"',text)
-   self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-3/"',text)
-   self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-2/"',text)
+   # Four goals are fundamentals (demo-3), prompts (demo-4),
+   # hallucinations (its specialist course), and coding (demo-2).
+   expected=[
+    f'/manzo-ai/{lang}/learn/demo-3/',
+    f'/manzo-ai/{lang}/learn/demo-4/',
+    f'/manzo-ai/{HALLUCINATION[lang]}/',
+    f'/manzo-ai/{lang}/learn/demo-2/'
+   ]
+   for route in expected:
+    self.assertIn(f'href="{route}"',text)
+   self.assertEqual(text.count('data-ma-intent="'),4)
    self.assertNotIn("Fake AI assistant",text)
   with self.assertRaisesRegex(RuntimeError,"Duplicate"):
    module.apply(self.root)
