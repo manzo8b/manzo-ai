@@ -65,7 +65,7 @@
   ]);
   hero.querySelectorAll("a,button").forEach(el=>{
    if(el.closest(".ma-discovery")||el.closest(".searchbox"))return;
-   const label=(el.textContent||"").trim().replace(/\s+/g," ").toLocaleLowerCase();
+   const label=(el.textContent||"").replace(/^[^\p{L}\p{N}]+/gu,"").trim().replace(/\s*[↗→]+\s*$/u,"").replace(/\s+/g," ").toLocaleLowerCase();
    if(!redundant.has(label))return;
    const parent=el.parentElement;
    el.remove();
