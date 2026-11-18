@@ -149,6 +149,11 @@ export class CopilotQuota {
           count: person.count + 1, lastAt: now
         };
         await tx.put("daily-ledger", ledger);
+        // Best-effort erasure shortly after UTC midnight, even if no other
+        // user makes a request. A broken alarm must prevent new inference.
+        // Use the transaction-scoped storage API so reservation and schedule
+        // succeed or fail together.
+        await tx.setAlarm(Date.parse(day + "T00:00:00.000Z") + 86460_000);
         return { ok: true };
       });
       return new Response(JSON.stringify(result), {
@@ -161,6 +166,20 @@ export class CopilotQuota {
         status: 503, headers: { "content-type": "application/json" }
       });
     }
+  }
+  async alarm() {
+    // No email or lesson is stored. Purge the pseudonymous per-day ledger
+    // after expiry, without needing another visitor to trigger cleanup.
+    const saved = await this.ctx.storage.get("daily-ledger");
+    const today = new Date(this.clock()).toISOString().slice(0, 10);
+    if (!saved || saved.day !== today) {
+      await this.ctx.storage.deleteAll();
+      return;
+    }
+    // An alarm can fire early or be retried; never delete current-day quotas.
+    await this.ctx.storage.setAlarm(
+      Date.parse(today + "T00:00:00.000Z") + 86460_000
+    );
   }
 }
 export async function reserveGlobalQuota(env, principal) {
