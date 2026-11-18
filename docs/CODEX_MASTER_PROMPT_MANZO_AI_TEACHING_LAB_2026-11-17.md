@@ -76,6 +76,7 @@ Valuta ogni modulo e studio come farebbe un insegnante di scuola secondaria di p
 - Testa uso con tastiera, Tab, Escape, focus visibile, etichette accessibili, aria-live senza rumore e preferenza reduced motion.
 - Mantieni input almeno 16px su Safari iPhone per ridurre zoom non voluto; tasti touch raggiungibili; nessun overflow.
 - Non introdurre animazioni fini a sé stesse che rallentino utenti o nascondano istruzioni.
+- In Mission Studio e negli altri componenti, verifica anche i **colori calcolati dopo l'iniezione del CSS globale**: un heading scuro su pannello scuro è già comparso per la collisione tra `body[data-ma-surface] h2` e `.end h2` (screenshot iPhone del 18/11/2026). Per superfici scure usa selettori locali robusti, rapporti cromatici almeno 4,5:1 per testo normale e test di rendering post-build; non dichiarare AA solo dal CSS sorgente.
 
 ## FASE 4 — PROVA END-TO-END CON DATI SINTETICI
 Implementa/automatizza il massimo di questo percorso:
