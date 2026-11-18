@@ -24,11 +24,14 @@ MANZO AI combina progettazione di workflow digitali, verificabilità degli outpu
 ---
 
 
-## Home conversazionale + Academy · 18 novembre 2026
+## HOME inclusiva + AI Academy · 18 novembre 2026
 
-Le tre homepage interne (IT/EN/ES) hanno una nuova **scoperta guidata per obiettivo** implementata nei sorgenti: quattro suggerimenti conversazionali, collegamenti derivati dalle card Academy effettive e accesso al Teaching Lab in italiano. La **pagina radice per scegliere la lingua è preservata**. Il campo di ricerca esistente rimane funzionante; **non esiste una chat IA generativa integrata** in questa esperienza.
+MANZO AI mantiene la selezione centrale delle lingue e propone un ingresso **per tutti**: persone curiose, studenti, professionisti, creatori e docenti. Le homepage IT/EN/ES presentano quattro obiettivi generali (fondamenti IA, prompt, allucinazioni, creazione), quattro card tematiche aggiuntive e **tutte le sei card Academy preesistenti**. AI Teaching Lab è un percorso specifico, non il pubblico principale del portale.
 
-**Stato:** publisher, CSS/JS e test di regressione inseriti nel workflow GitHub Pages; l'esito dell'ultimo deploy e il rendering fisico su iPhone restano **da verificare**. [Release e gate](docs/MANZO_AI_HOME_CONVERSATIONAL_V1_RELEASE_2026-11-18.md) · [Decisione di prodotto](docs/MANZO_AI_HOME_CONVERSATIONAL_LEARNING_ADR_2026-11-17.md).
+Il menu della homepage è sintetico e contiene sei destinazioni non duplicate. Le altre pagine tecniche e il Product Lab restano pubblicati senza essere la prima cosa proposta a ogni visitatore. [Decisione di prodotto](docs/MANZO_AI_HOME_INCLUSIVA_V2_2026-11-18.md).
+
+**Stato:** modifiche ai sorgenti e pipeline GitHub Pages predisposte; risultato dell'ultima esecuzione, pubblicazione effettiva e QA Safari/iPhone ancora da verificare. Non è una chat IA generativa.
+
 
 ## Ricerca ACR · Dossier scientifico
 
