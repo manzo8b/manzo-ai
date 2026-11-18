@@ -49,6 +49,15 @@ STATO DA NON FALSIFICARE: cinque moduli in italiano; durata complessiva di 20 or
 5. Crea un backlog P0/P1/P2/P3 con file coinvolti, gravità, impatto pedagogico, rischio privacy, criterio di accettazione.
 6. Identifica fatti, simulazioni, esempi, funzionalità vere e meri placeholder.
 
+## AGGIORNAMENTO P3 · COSTI E PRIVACY DA VERIFICARE (18/11/2026)
+
+- Disponibile `product/mission-copilot/zero-euro-preflight.mjs`: audit offline di sorgenti e proiezione conservativa Neurons; **non è un rilevatore di consumi reali**, né prova il piano Cloudflare dell'utente.
+- La funzionalità resta OFF con quattro flag nel `wrangler.toml`: `COPILOT_ENABLED=false`, `FREE_PLAN_CONFIRMED=false`, `MODEL_FREE_CONFIRMED=false`, `DATA_PROTECTION_CONFIRMED=false`.
+- Log del Worker esplicitamente disabilitati in configurazione. Nessun log contenente prompt o dati di studenti; verificare inoltre eventuali impostazioni a livello Cloudflare Account/Access/Gateway.
+- Cloudflare Zero Trust Free può richiedere dati di pagamento durante l'onboarding: non procedere a pagamenti, upgrades o creazione di account senza istruzioni esplicite dell'utente.
+- Fonte generale e checklist: `docs/MANZO_AI_COPILOT_P3_PREFLIGHT_PRIVACY_COSTI_0EUR_2026-11-18.md`.
+- Prima di usare materiali reali, verificare ruoli GDPR, informativa specifica, minimizzazione, eventuale DPIA e trasferimenti; solo esempi sintetici durante i test.
+
 ## AGGIORNAMENTO P2 · SICUREZZA E LIMITI GLOBALI 0 € (18/11/2026)
 
 - Il backend P2 è già implementato in `product/mission-copilot/worker.mjs` e `wrangler.toml`. Non duplicare i controlli esistenti e **non attivare il servizio**.
