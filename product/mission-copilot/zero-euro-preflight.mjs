@@ -99,7 +99,7 @@ function protectedConfig(wrangler, worker) {
       /new_sqlite_classes\s*=\s*\["CopilotQuota"\]/.test(wrangler),
     separatePrivacyGate: /DATA_PROTECTION_CONFIRMED\s*!==\s*"true"/.test(worker),
     gemmaThinkingDisabled: /chat_template_kwargs:\s*\{\s*enable_thinking:\s*false\s*\}/.test(worker),
-    preAuthRateLimitConfigured: /\\[\\[ratelimits\\]\\][\\s\\S]*?name\\s*=\\s*"PRE_AUTH_LIMITER"[\\s\\S]*?namespace_id\\s*=\\s*"[0-9]+"[\\s\\S]*?\\[ratelimits\\.simple\\][\\s\\S]*?limit\\s*=\\s*12[\\s\\S]*?period\\s*=\\s*60/.test(wrangler),
+    preAuthRateLimitConfigured: /\[\[ratelimits\]\][\s\S]*?name\s*=\s*"PRE_AUTH_LIMITER"[\s\S]*?namespace_id\s*=\s*"[0-9]+"[\s\S]*?\[ratelimits\.simple\][\s\S]*?limit\s*=\s*12[\s\S]*?period\s*=\s*60/.test(wrangler),
     preAuthLimiterBeforeSupabase: worker.includes("checkPreAuthRateLimit(env)") &&
       worker.indexOf("await checkPreAuthRateLimit(env)") >= 0 &&
       worker.indexOf("await checkPreAuthRateLimit(env)") <
