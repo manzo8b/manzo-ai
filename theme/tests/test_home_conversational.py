@@ -16,7 +16,7 @@ spec.loader.exec_module(module)
 
 CAT=("verify","coding","fundamentals","prompt","verify","workflow")
 LOCALES={"it":"academy","en":"academy","es":"academia"}
-PRODUCT={"it":"prodotto","en":"product","es":"producto"}
+HALLUCINATION={"it":"it/impara/allucinazioni-ai-verificabilita","en":"en/learn/ai-hallucinations-verification","es":"es/aprende/alucinaciones-ia-verificacion"}
 
 def make_site(root):
  (root/"index.html").write_text("<html><body>LANGUAGE GATEWAY IT EN ES</body></html>",encoding="utf-8")
@@ -36,6 +36,9 @@ def make_site(root):
   product=root/lang/PRODUCT[lang]/"index.html"
   product.parent.mkdir(parents=True,exist_ok=True)
   product.write_text("Real product preview",encoding="utf-8")
+  hallucination=root/HALLUCINATION[lang]/"index.html"
+  hallucination.parent.mkdir(parents=True,exist_ok=True)
+  hallucination.write_text("Real AI hallucinations course",encoding="utf-8")
   academy_cards=[]
   for i,category in enumerate(CAT):
    route=f"/manzo-ai/{lang}/learn/demo-{i+1}/"
@@ -72,15 +75,17 @@ class ConversationalHomeContracts(unittest.TestCase):
    self.assertLess(text.index(module.MARKER),text.index('class="ma-product-scene"'),"Mobile must see the discovery before the decorative scene")
    self.assertEqual(text.count(module.MARKER),1)
    self.assertEqual(text.count('data-ma-home-discovery-asset="v1"'),2)
-   self.assertEqual(text.count('data-ma-intent='),3)
-   self.assertIn('href="/manzo-ai/it/formazione/ia-per-la-didattica/inizia/"',text)
+   self.assertEqual(text.count('data-ma-intent='),4)
+   self.assertIn(f'href="/manzo-ai/{HALLUCINATION[lang]}/"',text)
    self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-4/"',text)
    self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-1/"',text)
+   self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-3/"',text)
+   self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-2/"',text)
    self.assertNotIn("Fake AI assistant",text)
   with self.assertRaisesRegex(RuntimeError,"Duplicate"):
    module.apply(self.root)
- def test_missing_real_teacher_app_blocks_release(self):
-  (self.root/"it/formazione/ia-per-la-didattica/inizia/index.html").unlink()
+ def test_missing_real_hallucinations_course_blocks_release(self):
+  (self.root/HALLUCINATION["it"]/'index.html').unlink()
   with self.assertRaisesRegex(RuntimeError,"Missing published destination"):
    module.apply(self.root)
  def test_missing_academy_category_blocks_release(self):
