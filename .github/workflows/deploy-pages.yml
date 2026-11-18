@@ -53,6 +53,10 @@ on:
       - theme/publish-home-scene.py
       - theme/publish-home-showcase.py
       - theme/home-showcase.css
+      - theme/home-conversational.css
+      - theme/home-conversational.js
+      - theme/publish-home-conversational.py
+      - theme/tests/test_home_conversational.py
       - theme/publish-academy-journeys.py
       - theme/academy-journeys.css
       - theme/academy-journeys.js
@@ -398,6 +402,17 @@ jobs:
           node --check theme/academy-journeys.js
           python3 theme/publish-academy-journeys.py --site _site
           python3 theme/publish-academy-journeys.py --site _site --verify-only
+          # Conversational learning on the localized home — preserve the language portal.
+          python3 -m py_compile theme/publish-home-conversational.py
+          python3 -m unittest discover -s theme/tests -p 'test_home_conversational.py' -v
+          node --check theme/home-conversational.js
+          python3 theme/publish-home-conversational.py --site _site
+          python3 theme/publish-home-conversational.py --site _site --verify-only
+          for lang in it en es; do
+            grep -q 'data-ma-home-discovery="v1"' "_site/$lang/index.html"
+          done
+          test -s _site/assets/home-conversational.css
+          test -s _site/assets/home-conversational.js
           # Every M02–M06 subheading must have one unique HTML anchor.
           python3 -m py_compile theme/fix-learning-anchors.py
           python3 theme/fix-learning-anchors.py --site _site
