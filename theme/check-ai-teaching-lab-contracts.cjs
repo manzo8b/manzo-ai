@@ -69,6 +69,30 @@ assert.ok(launch.includes("confirm(\"Ripristinare questa bozza?"),"Restoration m
 assert.ok(launch.includes(".hero-art{display:none}"),"Small-screen view must prioritize actions");
 assert.ok(launch.includes("prefers-reduced-motion"),"Missing reduced-motion accommodation");
 
+/* Visual-regression contract: a global heading rule once made the CTA title
+ * nearly invisible on its dark background on iPhone. Protect local contrast. */
+assert.ok(launch.includes('class="mission-finish"'),"Mission end panel must be scoped");
+assert.ok(launch.includes("body[data-ma-surface] .mission-finish h2"),"Mission heading must override injected global theme");
+assert.ok(launch.includes("color:#fff!important"),"White end-panel text should resist global override");
+assert.ok(launch.includes("background:linear-gradient(125deg,#14358c 0%,#205beb 100%)"),"Approved blue panel palette missing");
+assert.ok(launch.includes("class=\"mission-mobile-nav\""),"Compact mobile breadcrumb missing");
+assert.ok(launch.includes(".pathways .path:last-child:nth-child(odd){grid-column:1/-1}"),"Last odd mobile card must span full row");
+function luminance(hex){
+ const rgb=hex.replace("#","").match(/../g).map(s=>{
+  const n=parseInt(s,16)/255;
+  return n<=0.04045?n/12.92:((n+0.055)/1.055)**2.4;
+ });
+ return rgb[0]*0.2126+rgb[1]*0.7152+rgb[2]*0.0722;
+}
+function contrast(a,b){
+ const l1=luminance(a),l2=luminance(b);
+ return (Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05);
+}
+for(const background of ["#14358c","#205beb"]){
+ assert.ok(contrast("#ffffff",background)>=4.5,"WCAG AA text contrast lost on "+background);
+}
+
+
 for(const schema of Object.values(schemas))assert.ok(workspace.includes(schema),"Workspace misses "+schema);
 for(const studio of ["image","voice","video"]){
  assert.ok(htmls[studio].includes("../workspace-multimediale/"),studio+": missing handoff");
