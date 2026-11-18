@@ -101,7 +101,7 @@ Qui il partecipante sei **tu**. Le consegne spiegano cosa preparare, cosa scrive
 1. Definisci un obiettivo: far isolare l'incognita e controllare la soluzione, non consegnare soltanto il risultato
 2. Scrivi il prompt del tutor usando il modello qui sotto
 3. Prova sei richieste sintetiche: aiuto iniziale, soluzione completa, errore intenzionale, nome e voto inventati, stato emotivo, richiesta fuori tema
-4. Registra in una tabella risposta attesa, risposta osservata, problema e correzione
+4. Registra risposta attesa, risposta osservata, problema e correzione. Se lavori senza IA, analizza i casi come simulazioni e segna ogni esecuzione del modello NON ESEGUITA
 5. Decidi se il prototipo necessita di revisione, senza dichiararlo pronto all'uso con alunni reali
 
 **Prompt pronto da copiare e personalizzare**
@@ -119,11 +119,11 @@ Se non hai a disposizione un assistente IA autorizzato, **non sei bloccato**: es
 
 **Esempio di possibile risultato, scritto per questa esercitazione (non prodotto da un servizio interrogato in diretta)**
 
-> Esempio simulato: «Quale operazione puoi applicare a entrambi i membri per togliere +5? Dopo quel passaggio, come isoleresti x?». Non compare alcuna diagnosi o voto.
+> Esempio simulato, primo turno: «Quale operazione puoi applicare a entrambi i membri per togliere +5?». Il tutor attende la risposta; solo in un turno successivo può chiedere come isolare x. Non compaiono diagnosi o voti.
 
 **Controllo del risultato**
 
-Hai testato situazioni normali e difficili? Sai indicare almeno un comportamento che bloccherebbe l'uso reale?
+Hai distinto i test realmente eseguiti dai casi solo progettati o simulati? Il tutor attende una risposta dopo ogni domanda? Sai indicare almeno un comportamento che bloccherebbe l'uso reale?
 
 **Che cosa conservare nel tuo portfolio personale**
 
@@ -135,7 +135,7 @@ Specifiche del tutor, tabella dei sei test e decisione motivata
 
 **Situazione da affrontare:** In una chat scolastica interamente inventata compaiono messaggi umilianti e un riferimento a un compagno
 
-**Obiettivo:** Progettare una attività preventiva e un rinvio umano appropriato
+**Obiettivo:** Progettare un'attività preventiva e un rinvio umano appropriato
 
 **Prima di iniziare:** apri un documento e crea quattro sezioni: problema, prompt, risposta e revisione. Tutto ciò che userai deve essere inventato per l'esercizio, non riferito a persone reali.
 
@@ -261,7 +261,9 @@ Per non interrompere il racconto, abbiamo raccolto le fonti in questa sezione. S
 3. [Garante Privacy parere del 20 ottobre 2026 su schema MIM](https://www.garanteprivacy.it/web/guest/home/docweb/-/docweb-display/docweb/10315228)
 4. [AI Act Article 4](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-4)
 
-**Riferimento pedagogico:** Seymour Papert — [testo di riferimento](https://www.media.mit.edu/publications/constructionism-ethics-and-creativity/). Le idee riportate nel modulo sono parafrasi applicative e non citazioni letterali attribuite all'autore.
+**Riferimento pedagogico:** Seymour Papert e Idit Harel — [*Situating Constructionism* (1991), fonte primaria](https://www.papert.org/articles/SituatingConstructionism.html). Le idee riportate nel modulo sono parafrasi applicative, non citazioni letterali; le scelte per il nostro laboratorio sono proposte del corso.
+
+Per un'applicazione contemporanea all'educazione all'IA: [Ali, Williams, Payne, Park e Breazeal (2019), *Constructionism, Ethics, and Creativity*](https://www.media.mit.edu/publications/constructionism-ethics-and-creativity/). Questo articolo riprende il costruzionismo e non è un testo scritto da Papert.
 
 ### Fonti per approfondire la nuova attività
 

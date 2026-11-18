@@ -60,7 +60,7 @@ Ma scrivere una consegna migliore non conclude il lavoro. Il passaggio decisivo 
 
 ### 5. Dalla prima bozza alla lezione verificabile
 
-Proviamo una differenza. Prompt generico: 'Crea una lezione sulle migrazioni'. La risposta potrebbe contenere molte attività, date o generalizzazioni non adatte. Prompt mirato: 'Prepara 15 minuti per una seconda superiore; obiettivo: distinguere fatto e interpretazione attraverso due estratti fittizi; non aggiungere dati storici; crea due domande, una attività in coppia e un biglietto finale'. Qui sappiamo che cosa verificare. Il docente legge l'output, elimina affermazioni senza fonte, prova il tempo e controlla se le domande richiedono davvero di ragionare. Il sistema può essere utile anche se decidiamo di non usarlo: il confronto ci aiuta a migliorare la progettazione.
+Proviamo una differenza. Prompt generico: 'Crea una lezione sulle migrazioni'. La risposta potrebbe contenere molte attività, date o generalizzazioni non adatte. Prompt mirato: 'Prepara 15 minuti per una seconda superiore; obiettivo: distinguere fatto e interpretazione attraverso due estratti fittizi; non aggiungere dati storici; crea due domande, un'attività in coppia e un biglietto finale'. Qui sappiamo che cosa verificare. Il docente legge l'output, elimina affermazioni senza fonte, prova il tempo e controlla se le domande richiedono davvero di ragionare. Il sistema può essere utile anche se decidiamo di non usarlo: il confronto ci aiuta a migliorare la progettazione.
 
 Dalla bozza verificata siamo arrivati a un punto che precede la tecnologia: che cosa rende una scelta autenticamente educativa? Il riferimento a Dewey ci aiuta a ritrovare questa domanda, non a sostituirla con una formula.
 
