@@ -166,6 +166,8 @@ test("P2 one authorized request uses atomic quota before IA and remains unapprov
   assert.equal(out.data.status,"bozza_non_approvata");
   assert.equal(out.data.model,MODEL);
   assert.ok(invoked && invoked.options.max_completion_tokens<=650);
+  assert.deepEqual(invoked.options.chat_template_kwargs, { enable_thinking: false });
+  assert.equal(invoked.options.stream, false);
   assert.equal(response.headers.get("access-control-allow-origin"),null);
   assert.equal(response.headers.get("cache-control"),"no-store");
   assert.ok(!JSON.stringify(out).includes("teacher@example.test"));
@@ -358,4 +360,41 @@ test("P2 validators preserve only the five approved inputs",()=>{
     ["tema","destinatari","durataMinuti","tipoRisorsa","obiettivo"]);
   assert.deepEqual(validateModelOutput(JSON.stringify(answer)),answer);
   assert.equal(validateModelOutput("{not-json}"),null);
+});
+
+test("P5.5 Cloudflare Gemma 4 chat completion response is accepted only as an unapproved draft", async () => {
+  const fixture = {
+    choices: [{ index: 0, finish_reason: "stop",
+      message: { role: "assistant", content: JSON.stringify(answer), refusal: null } }]
+  };
+  const out = await read(await worker.fetch(
+    request({ scenarioId: "water_cycle" }),
+    env(async () => fixture),
+    ctx()
+  ));
+  assert.equal(out.status, 200);
+  assert.equal(out.data.teacherApproval, false);
+  assert.deepEqual(out.data.attivita, answer.attivita);
+});
+
+test("P5.5 truncated, refused, empty and malformed Gemma 4 outputs fail closed", async () => {
+  const cases = [
+    { choices: [{ finish_reason: "length", message: { content: JSON.stringify(answer) } }] },
+    { choices: [{ finish_reason: "content_filter", message: { content: JSON.stringify(answer) } }] },
+    { choices: [{ finish_reason: "stop", message: { content: JSON.stringify(answer), refusal: "blocked" } }] },
+    { choices: [{ finish_reason: "stop", message: { content: "```json\\n" + JSON.stringify(answer) + "\\n```" } }] },
+    { choices: [{ finish_reason: "stop", message: { content: null } }] },
+    { choices: [] },
+    {}
+  ];
+  for (const fixture of cases) {
+    const out = await read(await worker.fetch(
+      request({ scenarioId: "water_cycle" }),
+      env(async () => fixture),
+      ctx()
+    ));
+    assert.equal(out.status, 502, JSON.stringify(fixture));
+    assert.equal(out.data.code, "MODEL_OUTPUT_UNVERIFIED");
+    assert.equal(out.data.teacherApproval, undefined);
+  }
 });
