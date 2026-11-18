@@ -1,4 +1,4 @@
-# Mission Studio — AI Copilot · P0 private prototype
+# Mission Studio — AI Copilot · P2 private architecture
 
 **Status: private Worker source only / not deployed / not connected to a real model.** The P1 browser-side adapter is wired to Mission Studio **only as a local, offline simulation behind `?copilot=preview`**; no API request is made.
 
@@ -17,12 +17,12 @@ Sources: [Cloudflare Workers AI pricing](https://developers.cloudflare.com/worke
 
 ## Technical boundaries
 
-- `worker.mjs`: Cloudflare Workers module supporting `POST /api/plan`, strictly private preview.
-- `wrangler.toml`: AI binding present; `COPILOT_ENABLED=false` and `workers_dev=false`; no public routes.
-- `worker.test.mjs`: eight automated tests without actual IA or network. All model responses are local fixtures.
-- No environment or API keys are committed. `PREVIEW_ACCESS_TOKEN` would have to be set by an authorized person in Cloudflare as a **secret**, never in GitHub Pages or front-end code.
-- If disabled, missing an adequate secret, or missing the AI binding, the Worker refuses any generation. Even when enabled for a private test, an authorization token is required.
-- **No CORS header**, login system, user tracking, database or file storage. The GitHub Pages frontend is intentionally not connected.
+- `worker.mjs`: Cloudflare Workers module supporting `POST /api/plan` only after Cloudflare Access, Free-plan consent and atomic daily quota are verified. Not deployed.
+- `wrangler.toml`: AI binding, SQLite Durable Object `GLOBAL_QUOTA`; `COPILOT_ENABLED=false`, `FREE_PLAN_CONFIRMED=false`, `MODEL_FREE_CONFIRMED=false`, `workers_dev=false`; no public routes.
+- `worker.test.mjs`: offline tests for Access identity, HMAC, global/per-user limits, concurrency and failure handling. All model responses are local fixtures.
+- No environment or API keys are committed. Access credentials are **not** browser Bearer tokens. A trusted Access audience (`ACCESS_AUD`) and pseudonymization secret (`QUOTA_HASH_SALT`) must be supplied server-side by the owner before any opt-in activation.
+- If disabled, missing an Access-authenticated context, Free-plan confirmations, HMAC secret, AI binding or atomic Durable Object quota, the Worker refuses every generation. No request can bypass the quota.
+- **No CORS header, public frontend connection or login UI.** Future identity would come from Cloudflare Access; a single SQLite-backed Durable Object stores only hashed identity counters for the current UTC day. No educational text is persisted.
 - Limited JSON input (4 KiB), predictable audience/duration/resource fields, bounded output, explicit **teacherApproval: false**.
 - Heuristic exclusion of contact details; **not a proven PII filter**. Test with invented subjects, never student names or records.
 - Strict output checks fail closed. A generated suggestion is **not a verified scientific claim**.
@@ -45,6 +45,16 @@ A secret shared with a browser cannot protect a public service. Before any opt-i
 ## Future pedagogical integration
 
 Once separate safeguards exist: select a teaching objective in Mission Studio → make a bounded, authorized request → receive a structured **unapproved** lesson draft → teacher edits and validates → save a local draft → export to the appropriate Studio. No raw student data, no automatic approval.
+
+## P2 — Authenticated Free-only private backend (source only)
+
+- Cloudflare Access identity is required from the runtime (`ctx.access`) with an exact audience match; arbitrary request headers or browser tokens cannot forge it.
+- User identity is HMAC-SHA256 pseudonymized with a server-only salt before use as the quota key.
+- One SQLite-backed Durable Object provides **atomic shared limits**: 20 requests total/UTC day, 3/user/day, 60 seconds between requests. Failed provider calls still consume a reservation.
+- The backend fails closed whenever the quota store or authentication is missing. **Nothing is live or deployed to Cloudflare.**
+- This is a count-based safety ceiling, **not a precise Neurons billing cap**. Remaining on Workers Free is mandatory; Cloudflare will reject requests once its own free allowance runs out.
+- Local automated tests use mocked identities/storage/AI only: no live model calls and no real user data.
+- Authoritative technical scope: [P2 Access, quota and €0 release gates](../../docs/MANZO_AI_COPILOT_P2_AUTH_QUOTA_ZERO_EURO_2026-11-18.md).
 
 ## P1 — Local UI integration, still €0
 
