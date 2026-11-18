@@ -204,9 +204,14 @@ export async function reserveGlobalQuota(env, principal) {
 }
 
 function modelText(result) {
+  // Cloudflare Workers AI may return either legacy {response: string} or
+  // OpenAI-style chat completions. Do not accept incomplete/filtered output
+  // even if it accidentally parses as JSON.
   if (typeof result?.response === "string") return result.response;
-  return typeof result?.choices?.[0]?.message?.content === "string"
-    ? result.choices[0].message.content : null;
+  const choice = result?.choices?.[0];
+  if (!choice || (choice.finish_reason != null && choice.finish_reason !== "stop") ||
+      choice.message?.refusal) return null;
+  return typeof choice.message?.content === "string" ? choice.message.content : null;
 }
 export default {
   async fetch(request, env, context) {
@@ -264,6 +269,9 @@ export default {
             schema: SCHEMA, input
           }) }
         ],
+        // Official Cloudflare Gemma 4 worker example disables thinking.
+        // Conserve output tokens for a short pedagogical JSON draft.
+        chat_template_kwargs: { enable_thinking: false },
         max_completion_tokens: 650,
         temperature: 0.25,
         stream: false
