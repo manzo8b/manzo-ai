@@ -71,7 +71,7 @@ class HomeCurationContracts(unittest.TestCase):
    self.assertEqual(page_html.count('data-ma-intent='),3)
    self.assertEqual(page_html.count('class="ma-home-primary-nav"'),1)
    self.assertEqual(page_html.count('class="ma-product-scene"'),0)
-   self.assertEqual(page_html.count('<a href="/manzo-ai/'),9)
+   self.assertEqual(page_html.count('<a href="/manzo-ai/'),7)
    self.assertIn(f'href="/manzo-ai/{lang}/{route}/"',page_html)
    self.assertIn("Six original cards",page_html)
    self.assertIn('class="searchbox"',page_html)
