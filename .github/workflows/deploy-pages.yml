@@ -109,7 +109,13 @@ jobs:
           set -euo pipefail
           node --check product/mission-copilot/worker.mjs
           node --check product/mission-copilot/worker.test.mjs
+          node --check product/mission-copilot/zero-euro-preflight.mjs
+          node --check product/mission-copilot/zero-euro-preflight.test.mjs
           node --test product/mission-copilot/worker.test.mjs
+          node --test product/mission-copilot/zero-euro-preflight.test.mjs
+          node product/mission-copilot/zero-euro-preflight.mjs > /tmp/mission-copilot-preflight.json
+          grep -q '"status": "BLOCKED_NOT_CONNECTED"' /tmp/mission-copilot-preflight.json
+          grep -q '"configSafe": true' /tmp/mission-copilot-preflight.json
           # P1 is only a local simulation behind ?copilot=preview.
           # Never add Cloudflare credentials or an endpoint to GitHub Pages.
           node --check tools/ai-teaching-launchpad/mission-adapter.mjs
@@ -119,7 +125,11 @@ jobs:
           grep -q 'COPILOT_ENABLED = "false"' product/mission-copilot/wrangler.toml
           grep -q 'FREE_PLAN_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
           grep -q 'MODEL_FREE_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
+          grep -q 'DATA_PROTECTION_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
           grep -q 'workers_dev = false' product/mission-copilot/wrangler.toml
+          grep -q '^\[observability\]' product/mission-copilot/wrangler.toml
+          grep -q '^\[observability.logs\]' product/mission-copilot/wrangler.toml
+          grep -q '^invocation_logs = false' product/mission-copilot/wrangler.toml
           grep -q 'name = "GLOBAL_QUOTA"' product/mission-copilot/wrangler.toml
           grep -q 'class_name = "CopilotQuota"' product/mission-copilot/wrangler.toml
           grep -q 'new_sqlite_classes = \["CopilotQuota"\]' product/mission-copilot/wrangler.toml
