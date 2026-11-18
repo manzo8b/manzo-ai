@@ -154,3 +154,23 @@ test("P5.7 Auth adapter never ships secrets, content logging or a dynamic user U
   assert.doesNotMatch(source, /console\.(?:log|warn|info|error|debug)\s*\(/);
   assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY|SUPABASE_JWT_SECRET/);
 });
+
+test("P5.12 pre-auth limiter must remain configured and precede Supabase verification", () => {
+  const normal = inspectOfflineConfiguration(wrangler, worker);
+  assert.equal(normal.checks.preAuthRateLimitConfigured, true);
+  assert.equal(normal.checks.preAuthLimiterBeforeSupabase, true);
+  for (const altered of [
+    wrangler.replace('name = "PRE_AUTH_LIMITER"', 'name = "OTHER_LIMITER"'),
+    wrangler.replace('limit = 12', 'limit = 0'),
+    wrangler.replace('period = 60', 'period = 10'),
+    wrangler.replace('namespace_id = "51218"', 'namespace_id = "not-valid"')
+  ]) {
+    const unsafe = inspectOfflineConfiguration(altered, worker);
+    assert.equal(unsafe.checks.preAuthRateLimitConfigured, false);
+    assert.equal(unsafe.configSafe, false);
+  }
+  const bypass = worker.replace('await checkPreAuthRateLimit(env)', 'null');
+  const unsafe = inspectOfflineConfiguration(wrangler, bypass);
+  assert.equal(unsafe.checks.preAuthLimiterBeforeSupabase, false);
+  assert.equal(unsafe.configSafe, false);
+});
