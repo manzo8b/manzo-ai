@@ -31,6 +31,7 @@ COPY={
   "heading":"Da quale obiettivo vuoi cominciare?",
   "tag":"Ricerca guidata · Nessuna chat IA simulata",
   "open":"Apri il percorso",
+  "group":"Scegli un obiettivo",
   "note":"Scegli un obiettivo per vedere un percorso autentico. Il campo di ricerca sopra continua a funzionare come ricerca del sito.",
   "goals":[
    ("Preparare una lezione","AI Teaching Lab · Mission Studio","Inizia con un brief guidato e continua nei laboratori per docenti. Risorsa in italiano."),
@@ -44,6 +45,7 @@ COPY={
   "heading":"What would you like to achieve?",
   "tag":"Guided search · No simulated AI chat",
   "open":"Open this path",
+  "group":"Choose a goal",
   "note":"Choose a goal to see a real resource. The search field above remains the existing site search.",
   "goals":[
    ("Plan a teaching activity","AI Teaching Lab · Mission Studio (Italian)","Prepare an educational brief with the Italian teacher-training micro-app; English translation is not available yet."),
@@ -57,6 +59,7 @@ COPY={
   "heading":"¿Qué te gustaría conseguir?",
   "tag":"Búsqueda guiada · Sin chat IA simulado",
   "open":"Abrir este recorrido",
+  "group":"Elige un objetivo",
   "note":"Elige un objetivo para ver un recurso real. El campo de búsqueda anterior mantiene su función original.",
   "goals":[
    ("Preparar una actividad didáctica","AI Teaching Lab · Mission Studio (italiano)","Diseña una actividad con la micro-app italiana. La traducción al español aún no está disponible."),
@@ -136,7 +139,7 @@ def render(site,locale):
   f'<p class="ma-discovery-label">{e(copy["eyebrow"])}</p>'
   f'<span class="ma-discovery-honesty">{e(copy["tag"])}</span></div>'
   f'<h2 id="ma-discovery-title-{locale}">{e(copy["heading"])}</h2>'
-  '<div class="ma-discovery-goals" aria-label="Goal suggestions">'
+  f'<div class="ma-discovery-goals" role="group" aria-label="{e(copy["group"])}">'
   +''.join(choices)+'</div>'
   '<div class="ma-discovery-result">'
   f'<div><strong data-ma-discovery-title>{e(first[1])}</strong>'
