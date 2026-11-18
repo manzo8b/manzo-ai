@@ -27,46 +27,43 @@ CAT=re.compile(r'data-ma-category="([^"]+)"')
 TITLE=re.compile(r'<h3\b[^>]*>(.*?)</h3>',re.I|re.S)
 COPY={
  "it":{
-  "eyebrow":"MANZO AI / SCOPERTA GUIDATA",
-  "heading":"Da quale obiettivo vuoi cominciare?",
-  "tag":"Ricerca guidata · Nessuna chat IA simulata",
+  "eyebrow":"MANZO AI / PERCORSI FORMATIVI",
+  "heading":"Da dove vuoi iniziare?",
+  "tag":"Percorsi disponibili",
   "open":"Apri il percorso",
   "group":"Scegli un obiettivo",
-  "note":"Scegli un obiettivo per vedere un percorso autentico. Il campo di ricerca sopra continua a funzionare come ricerca del sito.",
+  "note":"Puoi cercare una lezione oppure scegliere un obiettivo. I suggerimenti utilizzano contenuti disponibili, senza generare risposte IA.",
   "goals":[
-   ("Preparare una lezione","AI Teaching Lab · Mission Studio","Inizia con un brief guidato e continua nei laboratori per docenti. Risorsa in italiano."),
-   ("Migliorare i miei prompt","Lezioni di Prompt Engineering","Impara a progettare richieste verificabili con un percorso già pubblicato nell'Academy."),
-   ("Verificare una risposta IA","Pensiero critico e verifica","Distingui affermazioni plausibili da prove, fonti e risultati effettivamente verificati."),
-   ("Progettare un sito o workflow","MANZO AI · Studio","Prepara un brief di progetto con gli strumenti dimostrativi esistenti, non un agente IA già attivo."),
-  ],
+   ("Progettare una lezione","AI Teaching Lab · Mission Studio","Crea un brief didattico e prosegui nei laboratori multimediali per docenti e formatori."),
+   ("Scrivere prompt efficaci","Prompt Engineering","Esercitati a scrivere istruzioni chiare e a verificare i risultati ottenuti."),
+   ("Verificare una risposta IA","Verifica e pensiero critico","Impara a confrontare affermazioni, evidenze e fonti originali."),
+     ],
  },
  "en":{
-  "eyebrow":"MANZO AI / GUIDED DISCOVERY",
-  "heading":"What would you like to achieve?",
-  "tag":"Guided search · No simulated AI chat",
+  "eyebrow":"MANZO AI / LEARNING PATHS",
+  "heading":"Where would you like to begin?",
+  "tag":"Available learning resources",
   "open":"Open this path",
   "group":"Choose a goal",
-  "note":"Choose a goal to see a real resource. The search field above remains the existing site search.",
+  "note":"Search the catalog or select a goal. Suggestions are based on available resources, not generated AI replies.",
   "goals":[
    ("Plan a teaching activity","AI Teaching Lab · Mission Studio (Italian)","Prepare an educational brief with the Italian teacher-training micro-app; English translation is not available yet."),
    ("Improve my prompts","Prompt Engineering lessons","Learn practical prompting from an existing Academy resource."),
    ("Check an AI response","Evidence and critical thinking","Examine claims and sources using real published educational resources."),
-   ("Design a site or workflow","MANZO AI · Studio","Explore a project brief demonstration, not a live AI website generator."),
-  ],
+     ],
  },
  "es":{
-  "eyebrow":"MANZO AI / DESCUBRIMIENTO GUIADO",
-  "heading":"¿Qué te gustaría conseguir?",
-  "tag":"Búsqueda guiada · Sin chat IA simulado",
+  "eyebrow":"MANZO AI / ITINERARIOS DE APRENDIZAJE",
+  "heading":"¿Por dónde quieres empezar?",
+  "tag":"Recursos disponibles",
   "open":"Abrir este recorrido",
   "group":"Elige un objetivo",
-  "note":"Elige un objetivo para ver un recurso real. El campo de búsqueda anterior mantiene su función original.",
+  "note":"Busca una lección o elige un objetivo. Las sugerencias proceden de contenidos disponibles, no de respuestas generadas por IA.",
   "goals":[
    ("Preparar una actividad didáctica","AI Teaching Lab · Mission Studio (italiano)","Diseña una actividad con la micro-app italiana. La traducción al español aún no está disponible."),
    ("Mejorar mis prompts","Lecciones de Prompt Engineering","Aprende a escribir instrucciones útiles mediante lecciones ya publicadas."),
    ("Verificar respuestas de IA","Evidencias y pensamiento crítico","Contrasta afirmaciones con fuentes en los recursos disponibles de la Academia."),
-   ("Diseñar una web o un flujo","MANZO AI · Studio","Prueba la demostración de un brief; no es un generador de sitios con IA en producción."),
-  ],
+     ],
  },
 }
 
@@ -121,7 +118,7 @@ def render(site,locale):
  catalog=cards_from_academy(site,locale)
  teacher=BASE+"it/formazione/ia-per-la-didattica/inizia/"
  product=BASE+locale+"/"+PRODUCT[locale]+"/"
- hrefs=(teacher,catalog["prompt"][0],catalog["verify"][0],product)
+ hrefs=(teacher,catalog["prompt"][0],catalog["verify"][0])
  for href in hrefs:destination(site,href)
  choices=[]
  for n,(label,title,description) in enumerate(copy["goals"]):
