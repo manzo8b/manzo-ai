@@ -398,6 +398,12 @@ def publish(site,verify=False):
         launch_dest=target/"inizia"/"index.html"
         launch_dest.parent.mkdir(parents=True,exist_ok=True)
         launch_dest.write_text(launch_html,encoding="utf-8")
+        # P1: ship local ES modules for an OFFLINE, explicitly opt-in preview.
+        # No Cloudflare endpoint, keys, IA calls or default visible UI.
+        for module in ("mission-adapter.mjs","copilot-preview.mjs"):
+            src=LAUNCHPAD.parent/module
+            if not src.is_file():raise RuntimeError("Missing Copilot offline module "+module)
+            (launch_dest.parent/module).write_bytes(src.read_bytes())
         for i,m in enumerate(course["modules"],1):
             text=(DATA/f"module-{i:02d}.md").read_text(encoding="utf-8")
             dest=target/f"modulo-{i:02d}"/"index.html"
@@ -450,6 +456,13 @@ def publish(site,verify=False):
     if any(key not in launchpad_html for key in ('id="generate"','id="export"','id="copy"','data-kind="image"','ai-teaching-lab-mission-v0.1')):
         raise RuntimeError("Incomplete Mission Studio actions or schema")
     if 'content="noindex,follow"' in launchpad_html:raise RuntimeError("Mission Studio published noindex")
+    if 'id="copilot-preview" hidden' not in launchpad_html or 'import("./copilot-preview.mjs")' not in launchpad_html:
+        raise RuntimeError("P1 optional Copilot preview must remain hidden and locally importable")
+    for module in ("mission-adapter.mjs","copilot-preview.mjs"):
+        artifact=target/"inizia"/module
+        source=LAUNCHPAD.parent/module
+        if not artifact.is_file() or artifact.read_bytes()!=source.read_bytes():
+            raise RuntimeError("Missing/stale offline Copilot module "+module)
     slides=(target/"presentazione"/"index.html")
     if not slides.is_file() or "15 slide" not in slides.read_text(encoding="utf-8"):raise RuntimeError("Slide reader missing")
     if (MEDIA/"AI_Teaching_Lab_Originali_Per_GitHub_e_Anteprima.zip").is_file():
