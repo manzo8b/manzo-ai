@@ -346,8 +346,9 @@ test("P4 every synthetic example is valid, contact-free and owned by the server"
 });
 test("P2 private only: no open API and health does not call model",async()=>{
   const info=await read(await worker.fetch(new Request("https://preview.example.test/health"),{}));
-  assert.equal(info.status,200);
-  assert.equal(info.data.enabled,false);
+  assert.equal(info.status,404);
+  assert.equal(info.data.code,"NOT_FOUND");
+  assert.equal(info.data.enabled,undefined);
   const missing=await read(await worker.fetch(new Request("https://preview.example.test/open"),{}));
   assert.equal(missing.status,404);
   const get=await read(await worker.fetch(new Request("https://preview.example.test/api/plan"),{}));
