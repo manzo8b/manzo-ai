@@ -58,7 +58,7 @@ def render(lang):
  intro=f'<p class="intro">{e(c["lead"])}</p>'
  links=''.join(f'<a href="{BASE}{l}/{ROUTES[l]}/" lang="{l}" {"aria-current=page" if lang==l else ""}>{e({"it":"Italiano","en":"English","es":"Español"}[l])}</a>' for l in ("it","en","es"))
  return f'''<!doctype html>
-<html lang="{lang}">
+<html lang="{lang}" data-manzo-about="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
