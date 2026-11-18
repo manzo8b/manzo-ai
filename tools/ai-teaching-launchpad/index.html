@@ -111,13 +111,13 @@ h1 .marker{position:relative;color:var(--blue);white-space:nowrap}h1 .marker:aft
 .path .num{font-size:2.2rem;letter-spacing:-.06em;font-weight:880;color:#c5d6f1}
 .path:nth-child(1){border-top:6px solid var(--blue)}.path:nth-child(2){border-top:6px solid var(--orange)}.path:nth-child(3){border-top:6px solid var(--yellow)}.path:nth-child(4){border-top:6px solid var(--blue)}.path:nth-child(5){border-top:6px solid var(--red)}
 .path b{font-size:.87rem;line-height:1.35}.path span:last-child{font-size:.75rem;line-height:1.5;color:#56667d;margin-top:auto}
-.end{background:#111827;color:#fff;border-radius:28px;padding:36px 42px;margin:40px 0 70px;display:flex;gap:28px;align-items:center;justify-content:space-between}
-.end h2{font-size:clamp(1.7rem,3vw,2.55rem);line-height:1.1;letter-spacing:-.05em;margin:0 0 8px;color:white}
-.end p{color:#d2dcec;font-size:.89rem;margin:0;line-height:1.6}.end .btn{background:#fff;color:#111827;flex:none}
+.mission-finish{background:linear-gradient(125deg,#14358c 0%,#205beb 100%);color:#fff;border-radius:28px;padding:36px 42px;margin:40px 0 55px;display:flex;gap:28px;align-items:center;justify-content:space-between;isolation:isolate}
+.mission-finish h2{font-size:clamp(1.7rem,3vw,2.55rem);line-height:1.1;letter-spacing:-.05em;margin:0 0 8px;color:#fff}
+.mission-finish p{color:#f2f6ff;font-size:.89rem;margin:0;line-height:1.6}.mission-finish .btn{background:#fff;color:#111827;flex:none}
 .fineprint{font-size:.76rem;color:#6b7688;line-height:1.6;padding-bottom:28px}
 .noscript{padding:16px;border:2px solid #df3d34;background:#fff0ec}
 @media(max-width:1050px){.pathways{grid-template-columns:repeat(3,1fr)}.hero{gap:17px}.hero-art{min-height:370px}.hero-display{width:82%}.orbit{width:265px;height:265px}.orbit.two{width:205px;height:205px}}
-@media(max-width:780px){.shell{width:min(100% - 30px,640px)}.top{min-height:64px}.top-links{gap:10px}.top-links a:nth-child(2){display:none}.top-note{display:none}.hero{grid-template-columns:1fr;padding:38px 0 32px}.hero-art{min-height:250px;margin-top:7px}.hero-display{width:66%;padding:12px;border-radius:16px;transform:rotate(-3deg)}.visual-title{font-size:1.02rem}.visual-seq .visual-step{min-height:66px;padding:8px;font-size:.64rem}.sticker{bottom:8%;right:6%;font-size:.7rem}.orbit{width:245px;height:245px}.orbit.two{width:175px;height:175px}h1{font-size:clamp(2.7rem,8vw,4.8rem)}.hero-copy{font-size:.96rem}.app-layout{grid-template-columns:1fr}.preview{position:static}.section{padding:32px 0 45px}.pathways{grid-template-columns:repeat(2,minmax(0,1fr))}.end{flex-direction:column;align-items:flex-start;padding:26px}.end .btn{width:100%}}
+@media(max-width:780px){.shell{width:min(100% - 30px,640px)}.top{min-height:64px}.top-links{gap:10px}.top-links a:nth-child(2){display:none}.top-note{display:none}.hero{grid-template-columns:1fr;padding:38px 0 32px}.hero-art{min-height:250px;margin-top:7px}.hero-display{width:66%;padding:12px;border-radius:16px;transform:rotate(-3deg)}.visual-title{font-size:1.02rem}.visual-seq .visual-step{min-height:66px;padding:8px;font-size:.64rem}.sticker{bottom:8%;right:6%;font-size:.7rem}.orbit{width:245px;height:245px}.orbit.two{width:175px;height:175px}h1{font-size:clamp(2.7rem,8vw,4.8rem)}.hero-copy{font-size:.96rem}.app-layout{grid-template-columns:1fr}.preview{position:static}.section{padding:32px 0 45px}.pathways{grid-template-columns:repeat(2,minmax(0,1fr))}.mission-finish{flex-direction:column;align-items:flex-start;padding:26px}.mission-finish .btn{width:100%}}
 @media(max-width:440px){.hero-art{display:none}.hero{padding:29px 0 24px}.hero-copy{line-height:1.5}.hero-actions{margin:18px 0 15px}.shell{width:calc(100% - 26px)}.top-links a:nth-child(1){display:none}.hero-art{min-height:228px}.hero-display{width:77%}.visual-step{font-size:.62rem!important}.sticker{right:3%}.missions{gap:8px}.mission{min-height:118px;padding:13px}.mission strong{font-size:.82rem}.mission small{font-size:.69rem}.two{grid-template-columns:1fr}.pad{padding:17px}.workspace-title{padding:16px 17px}.preview{padding:18px}.diagram article{padding:9px 8px}.path{padding:15px;min-height:180px}.path .num{font-size:1.7rem}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
@@ -126,22 +126,88 @@ h1 .marker{position:relative;color:var(--blue);white-space:nowrap}h1 .marker:aft
 .resume label{display:block;font-size:.75rem;font-weight:800;color:#263c5d;padding:7px 14px}
 .resume input{display:block;width:calc(100% - 28px);margin:6px 14px;padding:10px;background:#fff;border:1px solid #a9c4e6;border-radius:9px;font-size:.8rem}
 .resume p{margin:8px 14px 14px;font-size:.75rem;line-height:1.5;color:#536277}
+
+/* RELEASE FIX · contrast protection against global MANZO AI heading styles.
+   Scoped to Mission Studio: never change headings in the other 100+ pages. */
+.mission-finish,
+body[data-ma-surface] .mission-finish{
+ background:linear-gradient(125deg,#14358c 0%,#205beb 100%)!important;
+ color:#fff!important;
+}
+.mission-finish h2,
+body[data-ma-surface] .mission-finish h2{
+ color:#fff!important;
+ font-weight:760!important;
+ text-shadow:none!important;
+}
+.mission-finish p,
+body[data-ma-surface] .mission-finish p{color:#f2f6ff!important}
+.mission-finish .btn,
+body[data-ma-surface] .mission-finish .btn{
+ background:#fff!important;
+ color:#15243d!important;
+ border:2px solid #fff!important;
+ font-weight:850!important;
+ box-shadow:none!important;
+}
+.mission-finish .btn:hover,
+body[data-ma-surface] .mission-finish .btn:hover{
+ background:#fff3dc!important;
+ border-color:#fff3dc!important;
+ color:#15243d!important;
+}
+.mission-finish .btn:focus-visible{outline:3px solid #ffc66e;outline-offset:4px}
+/* The global site already has a full mobile navigation bar.
+   The in-app desktop header collapses to one short context breadcrumb. */
+.mission-mobile-nav{display:none}
+@media(max-width:780px){
+ .top{display:none!important}
+ .mission-mobile-nav{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 2px;margin:0 0 2px;
+  border-bottom:1px solid #d6e3f2;color:#2b4a74;
+  font-size:.76rem;letter-spacing:.035em;font-weight:840;
+ }
+ .mission-mobile-nav a{
+  color:#1549a9;font-size:.79rem;letter-spacing:0;
+  text-decoration:none;border-radius:10px;border:1px solid #c5d8f3;
+  min-height:42px;padding:9px 13px;display:inline-flex;align-items:center;
+ }
+ .mission-mobile-nav a:focus-visible{outline:3px solid #e97e17;outline-offset:3px}
+ .section-head{display:block!important}
+ .section-head .flow-label{
+  display:inline-flex!important;margin-top:14px;padding:7px 10px;
+  border-radius:10px;background:#e9f1ff;color:#1747a3;
+  font-size:.72rem!important;max-width:100%;
+ }
+ .pathways .path:last-child:nth-child(odd){grid-column:1/-1}
+ .mission-finish{margin:28px 0 34px!important;padding:26px 23px!important;border-radius:24px!important}
+ .mission-finish h2{font-size:clamp(1.7rem,7vw,2.2rem)!important;line-height:1.13!important}
+ .fineprint{padding-bottom:28px!important;font-size:.8rem!important;color:#3d4e66!important}
+}
+@media(max-width:440px){
+ .hero{padding-top:23px!important}
+ h1#hero-title{font-size:clamp(2.35rem,10.1vw,3.15rem)!important;line-height:1.08!important}
+ .hero-copy{font-size:.93rem!important}
+ .pathways .path:last-child:nth-child(odd){grid-column:1/-1}
+}
 </style>
 </head>
 <body>
 <a class="skip" href="#crea">Vai alla tua missione</a>
 <div class="shell">
-<header class="top">
+<header class="top" aria-label="Navigazione del laboratorio">
 <a class="brand" href="../" aria-label="AI Teaching Lab, torna al corso"><span class="mark" aria-hidden="true"><b>✦</b></span><span>MANZO AI <span style="color:#205beb">/ LAB</span></span></a>
 <nav class="top-links" aria-label="Navigazione">
 <a href="../">Il corso</a><a href="#percorsi">5 moduli</a><a href="../workspace-multimediale/">Workspace</a><span class="top-note">MICRO-APP · BETA</span>
 </nav>
 </header>
+<div class="mission-mobile-nav"><span>MISSION STUDIO</span><a href="../" aria-label="Torna al corso AI Teaching Lab">← Torna al corso</a></div>
 <main>
 <section class="hero" aria-labelledby="hero-title">
 <div>
 <div class="eyebrow">AI Teaching Lab / Mission Studio</div>
-<h1 id="hero-title">Il docente progetta.<br><span class="marker">L'IA assiste.</span></h1>
+<h1 id="hero-title">Il docente progetta<br><span class="marker">L'IA assiste</span></h1>
 <p class="hero-copy">Non un altro elenco di strumenti. Qui parti da una domanda didattica, costruisci un brief verificabile e scopri quale laboratorio usare per produrre una risorsa che abbia davvero uno scopo.</p>
 <div class="hero-actions"><a class="btn dark" href="#crea">Crea la tua prima missione <span aria-hidden="true">↗</span></a><a class="btn ghost" href="#percorsi">Esplora i cinque moduli <span aria-hidden="true">↗</span></a></div>
 <div class="proofline"><b>Zero account</b> <span aria-hidden="true">·</span> Nessuna API generativa <span aria-hidden="true">·</span> Dati solo in questa pagina finché non esporti</div>
@@ -204,7 +270,7 @@ h1 .marker{position:relative;color:var(--blue);white-space:nowrap}h1 .marker:aft
 <a class="path" href="../modulo-05/"><span class="num">05</span><b>Tutor intelligenti, persone responsabili</b><span>Supervisione, sicurezza e verifica ↗</span></a>
 </div>
 </section>
-<div class="end"><div><h2>Progettare bene è il vero superpotere</h2><p>Quando hai creato e controllato le tue risorse, puoi riunire le schede dei tre Studi in un kit da consegnare con responsabilità.</p></div><a class="btn" href="../workspace-multimediale/">Apri il Workspace <span aria-hidden="true">↗</span></a></div>
+<div class="mission-finish"><div><h2>Progettare bene è il vero superpotere</h2><p>Quando hai creato e controllato le tue risorse, puoi riunire le schede dei tre Studi in un kit da consegnare con responsabilità.</p></div><a class="btn" href="../workspace-multimediale/">Apri il Workspace <span aria-hidden="true">↗</span></a></div>
 </main>
 <footer class="fineprint">AI Teaching Lab · Mission Studio v0.1 · Nessuna IA generativa integrata · Nessun dato inviato a un server da questa micro-app · Esportazioni solo su azione dell'utente · Materiali ed esiti da verificare sempre con il docente. <a href="../">Torna al corso</a></footer>
 </div>
