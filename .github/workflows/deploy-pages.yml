@@ -418,8 +418,8 @@ jobs:
           node theme/tests/test_home_conversational_js.cjs
           python3 theme/publish-home-conversational.py --site _site
           python3 theme/publish-home-conversational.py --site _site --verify-only
-          # Teacher-first public home: remove technical SaaS scene, curate paths
-          # and correct multilingual gateway button copy without replacing its design.
+          # Public home for all audiences: keep Academy cards, add topic cards,
+          # remove the technical SaaS scene and preserve the language gateway.
           python3 -m py_compile theme/publish-home-curation.py
           python3 -m unittest discover -s theme/tests -p 'test_home_curation.py' -v
           python3 theme/publish-home-curation.py --site _site
@@ -428,6 +428,7 @@ jobs:
           for lang in it en es; do
             grep -q 'data-ma-home-curation="v2"' "_site/$lang/index.html"
             grep -q 'data-ma-home-primary-nav="v2"' "_site/$lang/index.html"
+            grep -q 'data-ma-home-featured="v1"' "_site/$lang/index.html"
             ! grep -q 'data-ma-home-scene="1"' "_site/$lang/index.html"
           done
           test -s _site/it/chi-siamo/index.html
