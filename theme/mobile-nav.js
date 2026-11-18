@@ -6,7 +6,8 @@
   if (
     document.querySelector('[data-acr-dossier]') ||
     document.documentElement.hasAttribute('data-product-preview') ||
-    document.documentElement.hasAttribute('data-learning-console')
+    document.documentElement.hasAttribute('data-learning-console') ||
+    document.documentElement.hasAttribute('data-manzo-about')
   ) return;
   const PREFIX = '/manzo-ai/';
   const lang = (location.pathname.match(/^\/manzo-ai\/(it|es|en)(?:\/|$)/) || [])[1] || 'it';
