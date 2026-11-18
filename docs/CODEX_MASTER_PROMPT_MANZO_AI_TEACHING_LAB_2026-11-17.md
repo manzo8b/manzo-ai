@@ -49,6 +49,15 @@ STATO DA NON FALSIFICARE: cinque moduli in italiano; durata complessiva di 20 or
 5. Crea un backlog P0/P1/P2/P3 con file coinvolti, gravità, impatto pedagogico, rischio privacy, criterio di accettazione.
 6. Identifica fatti, simulazioni, esempi, funzionalità vere e meri placeholder.
 
+## AGGIORNAMENTO P1 · INTERFACCIA COPILOTA LOCALE (18/11/2026)
+
+- Il bridge esiste: `tools/ai-teaching-launchpad/mission-adapter.mjs` converte il brief locale al contratto privato P0 del Worker. Non reinserire due volte gli stessi campi.
+- La demo opzionale in `tools/ai-teaching-launchpad/copilot-preview.mjs` si abilita solo con `?copilot=preview`; è una **simulazione deterministica offline**, non una risposta IA. Non aggiungere richieste HTTP o chiavi API nel browser.
+- La UI è volutamente nascosta nella visita ordinaria: `tools/ai-teaching-launchpad/index.html` usa un import dinamico sotto flag. Rimangono validi import/export originali e `approval:false`.
+- `tools/ai-teaching-launchpad/mission-adapter.test.mjs` copre mapping e frontend interaction, con finti risultati. GitHub Pages pubblica i moduli mediante `theme/publish-ai-teaching-lab.py`; verificare l'esito CI corrente prima di dichiarare live.
+- Documentazione vincolante: `docs/AI_TEACHING_LAB_COPILOT_P1_OFFLINE_UX_2026-11-18.md`.
+- Budget sempre massimo **0 €**. Non abilitare la funzione IA reale, non introdurre account/billing e non collegare Worker pubblici. Prima occorrono autorizzazione del titolare, protezioni antiabuso con limite globale, verifica privacy e QA dispositivi reali.
+
 ## AGGIORNAMENTO DI STATO · PRIMO TRAGUARDO VERIFICATO (18/11/2026)
 
 - GitHub Pages: deploy `44287800914` e QA AI Teaching Lab `44287800740` **success**. Non confondere il run verde con un audit Safari iPhone.
