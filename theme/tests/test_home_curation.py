@@ -1,4 +1,4 @@
-"""Offline fixtures for the teacher-first home, original language portal, and About pages."""
+"""Offline fixtures for inclusive homepage, four themes, full Academy and About pages."""
 from __future__ import annotations
 import importlib.util
 from pathlib import Path
@@ -33,11 +33,12 @@ class HomeCurationContracts(unittest.TestCase):
   for lang,academy in (("it","academy"),("en","academy"),("es","academia")):
    prefix=f"/manzo-ai/{lang}/"
    urls=[
-    "/manzo-ai/it/formazione/ia-per-la-didattica/inizia/",
-    prefix+"prompt/first/",prefix+"verify/first/"
+    prefix+"learn/fundamentals/",prefix+"prompt/first/",
+    "/manzo-ai/"+{"it":"it/impara/allucinazioni-ai-verificabilita/","en":"en/learn/ai-hallucinations-verification/","es":"es/aprende/alucinaciones-ia-verificacion/"}[lang],
+    prefix+"learn/coding/"
    ]
    page(self.site/lang/academy/"index.html","Real Academy")
-   for route in urls[1:]:page(self.site/route.removeprefix("/manzo-ai/")/"index.html","Real course")
+   for route in urls:page(self.site/route.removeprefix("/manzo-ai/")/"index.html","Real course")
    cards=''.join(
     f'<a class="ma-discovery-choice" href="{url}" data-ma-intent="{i}">Goal {i}</a>'
     for i,url in enumerate(urls)
@@ -68,12 +69,15 @@ class HomeCurationContracts(unittest.TestCase):
    self.assertIn(curate.COPY[lang]["hero"],page_html)
    self.assertIn('data-ma-home-curation="v2"',page_html)
    self.assertIn('data-ma-home-primary-nav="v2"',page_html)
-   self.assertEqual(page_html.count('data-ma-intent='),3)
+   self.assertEqual(page_html.count('data-ma-intent='),4)
    self.assertEqual(page_html.count('class="ma-home-primary-nav"'),1)
+   self.assertIn('data-ma-home-featured="v1"',page_html)
+   self.assertEqual(page_html.count('class="ma-topic-card '),4)
    self.assertEqual(page_html.count('class="ma-product-scene"'),0)
    self.assertEqual(page_html.count('<a href="/manzo-ai/'),7)
    self.assertIn(f'href="/manzo-ai/{lang}/{route}/"',page_html)
    self.assertIn("Six original cards",page_html)
+   self.assertIn("Allucinazioni" if lang=="it" else ("hallucinations" if lang=="en" else "Alucinaciones"),page_html)
    self.assertIn('class="searchbox"',page_html)
    self.assertIn("Marcelo Javier Fernandez Caballero",page_html)
    self.assertEqual(page_html.count("Unhelpful Product Lab"),0)
@@ -86,7 +90,7 @@ class HomeCurationContracts(unittest.TestCase):
  def test_duplicate_destination_blocks_publication(self):
   target=self.site/"en/index.html"
   doc=target.read_text(encoding="utf-8")
-  doc=doc.replace('/manzo-ai/en/verify/first/', '/manzo-ai/en/prompt/first/')
+  doc=doc.replace('/manzo-ai/en/learn/ai-hallucinations-verification/', '/manzo-ai/en/prompt/first/')
   target.write_text(doc,encoding="utf-8")
   with self.assertRaisesRegex(RuntimeError,"duplicate destinations"):
    curate.run(self.site)
