@@ -133,3 +133,13 @@ The existing application continues working without the preview and keeps local d
 - The namespace `51218` is a **provisional account-local identifier**, to be checked for uniqueness before a live deploy. All flags remain disabled, `workers_dev=false`, no routes, no CORS, no credentials, no live inference and no merge.
 
 [Read the P5.12 audit](../../docs/MANZO_AI_COPILOT_P5_12_PREAUTH_ABUSE_PROTECTION_2026-11-18.md).
+
+## P5.13 — Browser origin + dormant Supabase session bridge (source only)
+
+- Exact browser origin for later tests: `https://manzo8b.github.io`. CORS is **not authentication** and cannot distinguish different repositories sharing the same GitHub Pages host. Supabase verified identity, server UUID allowlist and durable atomic quota remain mandatory.
+- New `BROWSER_CONNECTION_CONFIRMED = "false"` gate is independent of Auth/plan/privacy flags. The Worker handles `OPTIONS` only with correct origin, method and requested headers, without calling Supabase, Durable Objects or AI. Authenticated `POST` retains explicit origin verification **before** rate-limiting and auth.
+- Candidate `private-browser-client.mjs` uses only synthetic scenario IDs and a Supabase SDK access token, validates unapproved replies and sanitizes error categories. **It is not imported by the public site**, contains no live API URL and defaults to `enabled:false`.
+- CI includes no-network browser/CORS tests and confirms browser approval stays OFF, with `workers_dev=false` and no routes.
+- Release remains **blocked** until manual account Free validation, approved endpoint and Rate Limiting namespace, exact tester allowlist, privacy/data-retention review, and a small real synthetic-only test.
+
+[Read P5.13 dossier](../../docs/MANZO_AI_COPILOT_P5_13_BROWSER_CORS_AUTH_OFFLINE_2026-11-18.md).
