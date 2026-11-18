@@ -2,6 +2,7 @@
 from __future__ import annotations
 import importlib.util
 from pathlib import Path
+from html import escape
 import tempfile
 import unittest
 
@@ -72,7 +73,7 @@ class HomeCurationContracts(unittest.TestCase):
   self.assertIn("<span>Explorar</span>",portal)
   for lang,route in about.ROUTES.items():
    page_html=(self.site/lang/"index.html").read_text(encoding="utf-8")
-   self.assertIn(curate.COPY[lang]["hero"],page_html)
+   self.assertIn(escape(curate.COPY[lang]["hero"],quote=True),page_html)
    self.assertIn('data-ma-home-curation="v2"',page_html)
    self.assertIn('data-ma-home-primary-nav="v2"',page_html)
    self.assertEqual(page_html.count('data-ma-intent='),4)
