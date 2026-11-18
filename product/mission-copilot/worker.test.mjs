@@ -61,6 +61,7 @@ const env = (mockAI = async () => ({ response: JSON.stringify(answer) }), q = qu
   COPILOT_ENABLED: "true",
   FREE_PLAN_CONFIRMED: "true",
   MODEL_FREE_CONFIRMED: "true",
+  DATA_PROTECTION_CONFIRMED: "true",
   ACCESS_AUD: AUD,
   QUOTA_HASH_SALT: SALT,
   GLOBAL_QUOTA: q.binding,
@@ -96,6 +97,20 @@ test("P2 zero-euro consent flags BOTH required and model binding mandatory", asy
     assert.equal(out.data.code,"ZERO_EURO_POLICY_NOT_CONFIRMED");
   }
   assert.equal(calls,0);
+});
+test("P3 privacy approval is independent of Free-plan approval and blocks all AI calls", async () => {
+  let calls = 0;
+  const fake = async () => { calls++; return { response: JSON.stringify(answer) }; };
+  for (const value of ["false", undefined, "", "approved"]) {
+    const out = await read(await worker.fetch(
+      request(payload),
+      { ...env(fake), DATA_PROTECTION_CONFIRMED: value },
+      ctx()
+    ));
+    assert.equal(out.status, 503);
+    assert.equal(out.data.code, "DATA_PROTECTION_NOT_CONFIRMED");
+  }
+  assert.equal(calls, 0);
 });
 test("P2 Cloudflare Access context is mandatory; browser headers cannot spoof it", async () => {
   let calls=0; const standard=env(async()=>{calls++;});
