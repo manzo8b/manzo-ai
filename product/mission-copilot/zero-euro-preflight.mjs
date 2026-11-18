@@ -105,6 +105,7 @@ function protectedConfig(wrangler, worker) {
       worker.includes("withApprovedCors(response, request, env)") &&
       worker.includes('return fail(503, "BROWSER_CONNECTION_DISABLED")') &&
       worker.includes('return fail(403, "ORIGIN_NOT_ALLOWED")') &&
+      worker.indexOf("!exactApprovedOrigin(request)") >= 0 &&
       worker.indexOf("!exactApprovedOrigin(request)") <
         worker.indexOf("await checkPreAuthRateLimit(env)"),
     preAuthLimiterBeforeSupabase: worker.includes("checkPreAuthRateLimit(env)") &&
