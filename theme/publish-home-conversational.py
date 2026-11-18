@@ -79,6 +79,17 @@ def hero_end(html):
   if depth==0:return m.start()
  raise RuntimeError("Unbalanced home hero")
 
+def discovery_position(html):
+ """Place the interactive gateway before the decorative product scene.
+
+ On mobile the product scene becomes a tall block; novice actions must precede it.
+ """
+ end=hero_end(html)
+ start=HERO.search(html)
+ if not start:raise RuntimeError("Missing home hero")
+ match=re.search(r'<aside\b[^>]*\bclass=["\'][^"\']*\bma-product-scene\b[^"\']*["\'][^>]*>',html[start.end():end],re.I|re.S)
+ return start.end()+match.start() if match else end
+
 def cards_from_academy(site,locale):
  path=site/locale/ACADEMY[locale]/"index.html"
  if not path.is_file():raise RuntimeError("Academy unavailable: "+str(path))
@@ -154,7 +165,7 @@ def apply(site,verify_only=False):
   page=site/locale/"index.html"
   if not page.is_file():raise RuntimeError("Missing localized homepage "+locale)
   html=page.read_text(encoding="utf-8")
-  if not HERO.search(html) or 'class="searchbox"' not in html:
+  if not HERO.search(html) or not re.search(r'class=["\'][^"\']*\bsearchbox\b',html,re.I):
    raise RuntimeError("Existing homepage hero/search not found "+locale)
   if verify_only:
    if html.count(MARKER)!=1 or html.count('data-ma-home-discovery-asset="v1"')!=2:
@@ -166,7 +177,7 @@ def apply(site,verify_only=False):
    continue
   if MARKER in html or 'data-ma-home-discovery-asset=' in html:
    raise RuntimeError("Duplicate homepage gateway "+locale)
-  insert_at=hero_end(html)
+  insert_at=discovery_position(html)
   html=html[:insert_at]+render(site,locale)+html[insert_at:]
   head=re.search(r"</head\s*>",html,re.I)
   if not head:raise RuntimeError("Missing head close "+locale)
