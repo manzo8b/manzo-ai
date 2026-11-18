@@ -203,6 +203,11 @@ export default {
     if (env?.FREE_PLAN_CONFIRMED !== "true" ||
         env?.MODEL_FREE_CONFIRMED !== "true" || !env?.AI?.run)
       return fail(503, "ZERO_EURO_POLICY_NOT_CONFIRMED");
+    // Privacy review is distinct from price/plan approval. Do not send lesson
+    // material to a model until legal basis, disclosures, processor terms and
+    // content-logging behavior have been explicitly reviewed.
+    if (env?.DATA_PROTECTION_CONFIRMED !== "true")
+      return fail(503, "DATA_PROTECTION_NOT_CONFIRMED");
     const principal = await authenticatedPrincipal(context, env);
     if (!principal) return fail(401, "CLOUDFLARE_ACCESS_REQUIRED");
     if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get("content-type") || ""))
