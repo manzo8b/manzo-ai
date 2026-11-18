@@ -398,3 +398,44 @@ test("P5.5 truncated, refused, empty and malformed Gemma 4 outputs fail closed",
     assert.equal(out.data.teacherApproval, undefined);
   }
 });
+
+test("P5.6 Access dev identity simulation: correct audience permits distinct pseudonyms", async () => {
+  const config = env();
+  const a = await authenticatedPrincipal(ctx("fictional-teacher-a@example.test"), config);
+  const b = await authenticatedPrincipal(ctx("fictional-teacher-b@example.test"), config);
+  assert.match(a, /^[a-f0-9]{64}$/);
+  assert.match(b, /^[a-f0-9]{64}$/);
+  assert.notEqual(a, b);
+  assert.equal(await authenticatedPrincipal(ctx("fictional-teacher-a@example.test", "wrong-aud"), config), null);
+});
+
+test("P5.6 Access unavailable, forged browser headers or broken identity fail without inference", async () => {
+  let invoked = 0;
+  const config = env(async () => {
+    invoked++;
+    return { response: JSON.stringify(answer) };
+  });
+  const failingContexts = [
+    undefined,
+    {},
+    { access: { aud: AUD } },
+    { access: { aud: AUD, getIdentity: async () => null } },
+    { access: { aud: AUD, getIdentity: async () => ({}) } },
+    { access: { aud: AUD, getIdentity: async () => ({ email: "invalid" }) } },
+    { access: { aud: AUD, getIdentity: async () => { throw Error("Access unavailable"); } } },
+    { access: { aud: "untrusted-audience", getIdentity: async () => ({ email: "fictional-teacher@example.test" }) } }
+  ];
+  for (const accessContext of failingContexts) {
+    const out = await read(await worker.fetch(
+      request({ scenarioId: "water_cycle" }, {
+        "Cf-Access-Jwt-Assertion": "forged-not-verified",
+        authorization: "Bearer not-a-real-token"
+      }),
+      config,
+      accessContext
+    ));
+    assert.equal(out.status, 401);
+    assert.equal(out.data.code, "CLOUDFLARE_ACCESS_REQUIRED");
+  }
+  assert.equal(invoked, 0);
+});
