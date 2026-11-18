@@ -86,56 +86,58 @@
 <section id="wk5" class="card workspace-section" data-tone="blue" hidden><div class="kicker">05 / Consegna professionale</div><h2>Esporta il progetto</h2><div class="help"><strong>Che cosa deve fare il docente?</strong><p>Il file JSON conserva i dati modificabili; la scheda HTML è leggibile offline. Consegna i media originali separatamente.</p></div><p>Esporta un manifest JSON e una scheda HTML consultabile offline. I file importati non vengono allegati né trasformati automaticamente in asset utilizzabili.</p><div class="actions"><button id="exportJSON" class="btn primary">Esporta manifest JSON</button><button id="exportHTML" class="btn">Esporta scheda HTML</button></div><p class="hint">Se il kit non è approvato, le esportazioni riportano esplicitamente «bozza non approvata».</p></section>
 </main><aside class="side"><section class="card" data-tone="blue"><div class="kicker">Stato della produzione</div><h2 style="margin-top:11px">Il tuo workspace</h2><dl class="summary"><dt>Immagini</dt><dd id="simage">Non importato</dd><dt>Voce</dt><dd id="svoice">Non importato</dd><dt>Video</dt><dd id="svideo">Non importato</dd><dt>Stato complessivo</dt><dd id="sstate">Bozza</dd></dl><p class="readout">Il docente progetta, l'IA assiste, il docente verifica e decide</p></section></aside></div><footer class="footer">AI Teaching Lab · Workspace multimediale v0.1 · Nessuna API generativa · Nessun caricamento remoto · Nessuna approvazione automatica</footer></div>
 <script>
-(()=>{"use strict";const $=id=>document.getElementById(id),types={"ai-teaching-lab-image-v0.1":"image","ai-teaching-lab-voice-v0.1":"voice","ai-teaching-lab-video-v0.1":"video"},names={image:"Immagini",voice:"Voce",video:"Video"},assets={image:null,voice:null,video:null},fields=["title","audience","objective","assessment","plan","access","rights","reviewer","date","notes"],checks=["c1","c2","c3","c4"];let approved=false,approvedAt=null,changed=false;
+(()=>{"use strict";const $=id=>document.getElementById(id),types={"ai-teaching-lab-image-v0.1":"image","ai-teaching-lab-voice-v0.1":"voice","ai-teaching-lab-video-v0.1":"video"},names={image:"Immagini",voice:"Voce",video:"Video"},assets={image:null,voice:null,video:null},fields=["title","audience","objective","assessment","plan","access","rights","reviewer","date","notes"],checks=["c1","c2","c3","c4"];let approved=false,approvedAt=null,changed=false,unsaved=false,studyRequest=0,kitRequest=0;
 function v(id){return $(id).value.trim()}
-function invalidate(){if(approved){approved=false;approvedAt=null;changed=true}render()}
-fields.forEach(id=>$(id).addEventListener("input",invalidate));checks.forEach(id=>$(id).addEventListener("change",invalidate));
-function safeValue(x){return typeof x==="string"?x.slice(0,5000):""}
-function clean(o){
-  const f=o&&typeof o==="object"&&!Array.isArray(o)?o:{};
-  const get=x=>safeValue(x);
-  const fields=f.fields&&typeof f.fields==="object"?f.fields:{};
-  const kind=types[f.schema];
-  const media=kind==="image"?
-    (f.image||f.media||null):
-    kind==="voice"?(f.audio||f.media||null):
-    (f.scenes||f.media?.scenes||[]);
-  const safeMedia=kind==="image"?(media?{name:get(media.name),type:get(media.type),size:Number(media.size)||0,width:Number(media.width)||0,height:Number(media.height)||0}:null):
-    kind==="voice"?(media?{name:get(media.name),mimeType:get(media.mimeType),size:Number(media.size)||0}:null):
-    {scenes:(Array.isArray(media)?media:[]).slice(0,12).map(s=>({title:get(s.title),goal:get(s.goal),caption:get(s.caption),origin:get(s.origin),source:get(s.source),imageName:get(s.imageName),seconds:Number(s.seconds)||5})),audioReference:get(f.audioReference||f.media?.audioReference)};
-  return {
-    schema:get(f.schema),
-    exportedAt:get(f.exportedAt),
-    fields:{
-      title:get(fields.title),subject:get(fields.subject),audience:get(fields.audience),
-      objective:get(fields.objective),transcript:get(fields.transcript),
-      alt:get(fields.alt),origin:get(fields.origin),source:get(fields.source)
-    },
-    approval:{approved:f.approval?.approved===true,approvedAt:get(f.approval?.approvedAt),reviewer:get(f.approval?.reviewer)},
-    review:typeof f.review==="number"?Math.max(0,Math.min(4,f.review)):(f.review&&typeof f.review==="object"&&!Array.isArray(f.review)?Object.values(f.review).filter(x=>x===true).length:0),
-    media:safeMedia,
-    importedAt:new Date().toISOString()
-  };
-}
-function validateStudyFile(raw){
-  if(!raw||typeof raw!=="object"||Array.isArray(raw)||!Object.hasOwn(types,raw.schema)
-    ||!raw.fields||typeof raw.fields!=="object"||Array.isArray(raw.fields)
-    ||!raw.approval||typeof raw.approval!=="object")
-    throw Error("Formato non riconosciuto. Esporta una scheda JSON da uno dei tre Studi.");
-  if(raw.approval.approved===true){
-    if(!raw.approval.reviewer||!raw.approval.approvedAt||!raw.fields.title||!raw.fields.objective)
-      throw Error("Scheda dichiarata approvata, ma con informazioni essenziali mancanti.");
-    const checks=raw.review&&typeof raw.review==="object"?Object.values(raw.review):[];
-    if(checks.length!==4||!checks.every(x=>x===true))
-      throw Error("La scheda dichiara approvazione senza i quattro controlli compilati.");
-    if(raw.schema==="ai-teaching-lab-image-v0.1"&&!raw.image?.name)
-      throw Error("Manca l'identificazione dell'immagine approvata.");
-    if(raw.schema==="ai-teaching-lab-voice-v0.1"&&!raw.audio?.name)
-      throw Error("Manca l'identificazione della traccia approvata.");
-    if(raw.schema==="ai-teaching-lab-video-v0.1"&&(!Array.isArray(raw.scenes)||raw.scenes.length===0))
-      throw Error("Mancano le scene del video approvato.");
+function invalidate(){unsaved=true;if(approved){approved=false;approvedAt=null;changed=true;checks.forEach(id=>$(id).checked=false)}render()}
+fields.forEach(id=>{for(const event of ["input","change"])$(id).addEventListener(event,invalidate)});checks.forEach(id=>$(id).addEventListener("change",invalidate));
+function safeValue(x){if(x==null)return "";if(typeof x!=="string"||x.length>50000)throw Error("Testo non valido o superiore a 50.000 caratteri; il progetto corrente è conservato.");return x}
+function record(x){return !!x&&typeof x==="object"&&!Array.isArray(x)}
+function mediaFor(f,kind){return kind==="image"?(f.image??f.media??null):kind==="voice"?(f.audio??f.media??null):(f.scenes??f.media?.scenes??[])}
+function reviewCount(f,allowNormalized){
+  if(typeof f.review==="number"){
+    if(!allowNormalized||!Number.isInteger(f.review)||f.review<0||f.review>4)throw Error("Conteggio dei controlli non valido.");
+    if(f.reviewChecks){const values=Object.values(f.reviewChecks);if(!record(f.reviewChecks)||values.length!==4||values.some(x=>typeof x!=="boolean")||values.filter(x=>x).length!==f.review)throw Error("Controlli e conteggio non coerenti.");}
+    return f.review;
   }
-  return types[raw.schema];
+  if(f.review==null)return 0;
+  if(!record(f.review))throw Error("Controlli di revisione non validi.");
+  const values=Object.values(f.review);
+  if(values.length!==4||values.some(x=>typeof x!=="boolean"))throw Error("Servono quattro controlli booleani, senza valori sostitutivi.");
+  return values.filter(x=>x).length;
+}
+function validateStudyFile(raw,{allowNormalized=false}={}){
+  if(!record(raw)||!Object.hasOwn(types,raw.schema)||!record(raw.fields)||!record(raw.approval)||typeof raw.approval.approved!=="boolean")throw Error("Formato non riconosciuto. Esporta una scheda JSON da uno dei tre Studi.");
+  for(const value of Object.values(raw.fields))safeValue(value);
+  const kind=types[raw.schema],media=mediaFor(raw,kind),count=reviewCount(raw,allowNormalized);
+  safeValue(raw.exportedAt);safeValue(raw.approval.approvedAt);safeValue(raw.approval.reviewer);safeValue(raw.disclosure);
+  if(kind==="video"){
+    if(!Array.isArray(media)||media.length>12)throw Error("Sequenza scene non valida: sono consentite al massimo 12 scene.");
+    for(const scene of media){
+      if(!record(scene))throw Error("Scena non valida.");
+      for(const key of ["id","title","goal","caption","origin","source","imageName"])safeValue(scene[key]);
+      if(typeof scene.seconds!=="number"||!Number.isFinite(scene.seconds)||scene.seconds<2||scene.seconds>30)throw Error("Durata scena non valida (2–30 secondi).");
+    }
+    safeValue(raw.audioReference??raw.media?.audioReference);
+  }else if(media!==null){
+    if(!record(media))throw Error("Identificazione del file multimediale non valida.");
+    for(const key of ["name","type","mimeType"])safeValue(media[key]);
+    for(const key of ["size","width","height"]){if(media[key]!=null&&(typeof media[key]!=="number"||!Number.isFinite(media[key])||media[key]<0))throw Error("Metadati numerici del file non validi.");}
+  }
+  if(raw.approval.approved){
+    if(!raw.approval.reviewer?.trim()||!raw.approval.approvedAt?.trim()||!raw.fields.title?.trim()||!raw.fields.objective?.trim())throw Error("Scheda dichiarata approvata, ma con informazioni essenziali mancanti.");
+    if(count!==4)throw Error("La scheda dichiara approvazione senza i quattro controlli compilati.");
+    if(kind==="image"&&(!media?.name?.trim()||!raw.fields.alt?.trim()||!raw.fields.origin?.trim()||(raw.fields.origin!=="local"&&!raw.fields.source?.trim())))throw Error("Mancano identificazione, accessibilità o provenienza dell'immagine approvata.");
+    if(kind==="voice"&&(!media?.name?.trim()||!raw.fields.transcript?.trim()||!raw.fields.origin?.trim()||(raw.fields.origin!=="recorded"&&!raw.fields.source?.trim())))throw Error("Mancano identificazione, trascrizione o provenienza della traccia approvata.");
+    if(kind==="video"&&(!media.length||media.some(scene=>!["title","goal","caption","imageName","origin"].every(key=>scene[key]?.trim())||(scene.origin!=="local"&&!scene.source?.trim()))))throw Error("Mancano scene complete, file o provenienza del video approvato.");
+  }
+  return kind;
+}
+function clean(f){
+  const kind=validateStudyFile(f,{allowNormalized:true}),get=x=>safeValue(x),media=mediaFor(f,kind);
+  const safeMedia=kind==="image"?(media?{name:get(media.name),type:get(media.type),size:media.size??0,width:media.width??0,height:media.height??0}:null):kind==="voice"?(media?{name:get(media.name),mimeType:get(media.mimeType??media.type),size:media.size??0}:null):{scenes:media.map(s=>({id:get(s.id),title:get(s.title),goal:get(s.goal),caption:get(s.caption),origin:get(s.origin),source:get(s.source),imageName:get(s.imageName),seconds:s.seconds})),audioReference:get(f.audioReference??f.media?.audioReference)};
+  const known=["title","subject","audience","objective","transcript","alt","origin","source"];
+  const fields=Object.fromEntries([...new Set([...known,...Object.keys(f.fields)])].map(key=>[key,get(f.fields[key])]));
+  return {schema:get(f.schema),exportedAt:get(f.exportedAt),fields,approval:{approved:f.approval.approved,approvedAt:get(f.approval.approvedAt),reviewer:get(f.approval.reviewer)},review:reviewCount(f,true),...(record(f.review)?{reviewChecks:{...f.review}}:record(f.reviewChecks)?{reviewChecks:{...f.reviewChecks}}:{}),media:safeMedia,disclosure:get(f.disclosure),importedAt:typeof f.importedAt==="string"?get(f.importedAt):new Date().toISOString()};
 }
 function provenanceLines(type,a){
   if(!a)return "Scheda non importata";
@@ -147,41 +149,38 @@ function provenanceLines(type,a){
   return "Origine: "+(a.fields.origin||"non dichiarata")+"; Fonte/modello/licenza: "+(a.fields.source||"da verificare")+"; File: "+(a.media?.name||"non indicato");
 }
 function render(){for(const type of ["image","voice","video"]){const a=assets[type];$("s"+type).textContent=a?(a.approval.approved?"Approvazione dichiarata":"Non approvato"):"Non importato"}$("sstate").textContent=approved?"Kit approvato":changed?"Modificato dopo la verifica":"Bozza";$("decision").textContent=approved?"Kit approvato dal docente · "+approvedAt:changed?"Approvazione revocata dopo le modifiche":"Progetto in bozza · non approvato";$("decision").className="readout "+(approved?"ok":"warn");const box=$("modules");box.replaceChildren();for(const type of ["image","voice","video"]){const a=assets[type];if(!a)continue;const card=document.createElement("div");card.className="module";const h=document.createElement("strong");h.textContent=names[type]+" · "+(a.fields.title||"Senza titolo");const p=document.createElement("p");p.textContent=(a.approval.approved?"Dichiarata approvata":"Non approvata")+" · "+(a.fields.objective||"Obiettivo non specificato").slice(0,200);const small=document.createElement("small");small.textContent="Provenienza: "+(a.fields.origin||"Da consultare nello studio")+" · Esportazione: "+(a.exportedAt||"non dichiarata");const b=document.createElement("button");b.className="btn";b.textContent="Rimuovi scheda";b.onclick=()=>{assets[type]=null;invalidate()};const details=document.createElement("details");details.className="provenance-details";const title=document.createElement("summary");title.textContent="Visualizza provenienza e file dichiarati";const lines=document.createElement("p");lines.textContent=provenanceLines(type,a);details.append(title,lines);card.append(h,p,small,details,b);box.append(card)}}
-$("jsonfile").addEventListener("change",async()=>{const file=$("jsonfile").files[0];if(!file)return;const status=$("importstatus");$("jsonfile").value="";if(file.size>2*1024*1024||file.size===0){status.textContent="File vuoto o superiore a 2 MB";return}try{const raw=JSON.parse(await file.text());const type=validateStudyFile(raw);if(assets[type]&&!confirm("Sostituire la scheda già importata per "+names[type]+"?"))return;assets[type]=clean(raw);status.textContent="Scheda "+names[type]+" importata localmente · verifica sempre l'originale";invalidate()}catch(err){status.textContent="Importazione non riuscita: "+(err.message||"file non valido")}});
-$("kitfile").addEventListener("change",async()=>{
-  const el=$("kitfile"),file=el.files[0],status=$("restorestatus");
-  if(!file)return;
-  el.value="";
-  if(!file.size||file.size>2*1024*1024){status.textContent="File vuoto o superiore a 2 MB";return;}
-  try{
-    const m=JSON.parse(await file.text());
-    if(!m||typeof m!=="object"||Array.isArray(m)||m.schema!=="ai-teaching-lab-multimedia-kit-v0.1")
-      throw Error("Questo non è un manifest del Workspace v0.1");
-    if(!m.assets||typeof m.assets!=="object"||Array.isArray(m.assets)||!m.review||typeof m.review!=="object")
-      throw Error("Il manifest non contiene una struttura di progetto valida.");
-    if(!confirm("Ripristinare questo progetto? I campi e le schede attualmente in memoria saranno sostituiti. L'approvazione finale verrà azzerata."))return;
-    const restored={};
-    for(const type of ["image","voice","video"]){
-      const item=m.assets[type];
-      if(item!=null){if(!Object.hasOwn(types,item.schema)||types[item.schema]!==type||!item.fields||!item.approval)throw Error("La scheda "+names[type]+" nel kit non è valida");restored[type]=clean(item);}
-      else restored[type]=null;
-    }
-    const data={title:m.title,audience:m.audience,objective:m.learningObjective,assessment:m.assessment,plan:m.teachingSequence,access:m.accessibility,rights:m.rightsAndPrivacy,reviewer:m.review.reviewer,date:m.review.reviewDate,notes:m.review.notes};
-    Object.entries(data).forEach(([id,value])=>{$(id).value=safeValue(value)});
-    for(const type of ["image","voice","video"])assets[type]=restored[type];
-    checks.forEach(id=>$(id).checked=false);
-    approved=false;approvedAt=null;changed=true;
-    render();
-    status.textContent="Bozza ripristinata localmente. Controlla i materiali originali, poi effettua di nuovo la verifica finale.";
-  }catch(error){status.textContent="Ripristino non riuscito: "+(error.message||"file non valido");}
+$("jsonfile").addEventListener("change",async()=>{
+  const request=++studyRequest,file=$("jsonfile").files[0],status=$("importstatus");if(!file)return;$("jsonfile").value="";
+  if(file.size>2*1024*1024||file.size===0){status.textContent="File vuoto o superiore a 2 MB";return}
+  try{const raw=JSON.parse(await file.text());if(request!==studyRequest)return;const type=validateStudyFile(raw),candidate=clean(raw);if(assets[type]&&!confirm("Sostituire la scheda già importata per "+names[type]+"? Esporta prima il manifest se vuoi conservarla."))return;assets[type]=candidate;status.textContent="Scheda "+names[type]+" importata localmente · verifica sempre l'originale";invalidate()}catch(err){if(request===studyRequest)status.textContent="Importazione non riuscita: "+(err.message||"file non valido")}
 });
-$("approve").onclick=()=>{const missing=[];if(!v("title")||!v("audience")||!v("objective")||!v("assessment"))missing.push("brief completo");if(!["image","voice","video"].every(t=>!!assets[t]))missing.push("tutte e tre le schede");if(!Object.values(assets).every(a=>a?.approval.approved))missing.push("approvazione dichiarata per ciascuno studio");if(!v("plan")||!v("access")||!v("rights"))missing.push("sequenza, accessibilità e diritti");if(!v("reviewer")||!v("date"))missing.push("responsabile e data");if(!checks.every(x=>$(x).checked))missing.push("tutti e quattro i controlli");if(missing.length){alert("Impossibile approvare: "+missing.join("; "));return}approved=true;approvedAt=new Date().toISOString();changed=false;render()};
-$("reopen").onclick=()=>{approved=false;approvedAt=null;changed=true;checks.forEach(x=>$(x).checked=false);render()};
+$("kitfile").addEventListener("change",async()=>{
+  const request=++kitRequest,el=$("kitfile"),file=el.files[0],status=$("restorestatus");if(!file)return;el.value="";
+  if(!file.size||file.size>2*1024*1024){status.textContent="File vuoto o superiore a 2 MB";return}
+  try{
+    const m=JSON.parse(await file.text());if(request!==kitRequest)return;
+    if(!record(m)||m.schema!=="ai-teaching-lab-multimedia-kit-v0.1")throw Error("Questo non è un manifest del Workspace v0.1");
+    if(!record(m.assets)||!record(m.review))throw Error("Il manifest non contiene una struttura di progetto valida.");
+    const restored={};
+    for(const type of ["image","voice","video"]){const item=m.assets[type];if(item==null){restored[type]=null;continue}if(validateStudyFile(item,{allowNormalized:true})!==type)throw Error("La scheda "+names[type]+" nel kit non corrisponde allo studio dichiarato");restored[type]=clean(item)}
+    const rawData={title:m.title,audience:m.audience,objective:m.learningObjective,assessment:m.assessment,plan:m.teachingSequence,access:m.accessibility,rights:m.rightsAndPrivacy,reviewer:m.review.reviewer,date:m.review.reviewDate,notes:m.review.notes};
+    const data=Object.fromEntries(Object.entries(rawData).map(([id,value])=>[id,safeValue(value)]));
+    if(!confirm("Ripristinare questo progetto? I campi e le schede attualmente in memoria saranno sostituiti. L'approvazione finale verrà azzerata. Esporta prima il manifest corrente se vuoi conservarlo."))return;
+    // Commit only after every field and every imported asset has been validated.
+    Object.entries(data).forEach(([id,value])=>{$(id).value=value});
+    for(const type of ["image","voice","video"])assets[type]=restored[type];
+    checks.forEach(id=>$(id).checked=false);approved=false;approvedAt=null;changed=true;unsaved=true;render();
+    status.textContent="Bozza ripristinata localmente. Controlla i materiali originali, poi effettua di nuovo la verifica finale.";
+  }catch(error){if(request===kitRequest)status.textContent="Ripristino non riuscito: "+(error.message||"file non valido")+". Il progetto corrente è conservato."}
+});
+$("approve").onclick=()=>{const missing=[];if(!v("title")||!v("audience")||!v("objective")||!v("assessment"))missing.push("brief completo");if(!["image","voice","video"].every(t=>!!assets[t]))missing.push("tutte e tre le schede");if(!Object.values(assets).every(a=>a?.approval.approved))missing.push("approvazione dichiarata per ciascuno studio");if(!v("plan")||!v("access")||!v("rights"))missing.push("sequenza, accessibilità e diritti");if(!v("reviewer")||!v("date"))missing.push("responsabile e data");if(!checks.every(x=>$(x).checked))missing.push("tutti e quattro i controlli");if(missing.length){alert("Impossibile approvare: "+missing.join("; "));return}unsaved=true;approved=true;approvedAt=new Date().toISOString();changed=false;render()};
+$("reopen").onclick=()=>{unsaved=true;approved=false;approvedAt=null;changed=true;checks.forEach(x=>$(x).checked=false);render()};
 function manifest(){return {schema:"ai-teaching-lab-multimedia-kit-v0.1",createdAt:new Date().toISOString(),title:v("title"),audience:v("audience"),learningObjective:v("objective"),assessment:v("assessment"),teachingSequence:v("plan"),accessibility:v("access"),rightsAndPrivacy:v("rights"),assets,review:{checks:Object.fromEntries(checks.map(x=>[x,$(x).checked])),reviewer:v("reviewer"),reviewDate:v("date"),notes:v("notes")},approval:{approved,approvedAt:approved?approvedAt:null},disclaimer:"Attestazioni autodichiarate, non verifiche indipendenti. Media binari esclusi; nessuna IA invocata."}}
 function download(content,type,name){const url=URL.createObjectURL(new Blob([content],{type})),a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),6000)}
-$("exportJSON").onclick=()=>download(JSON.stringify(manifest(),null,2),"application/json","ai-teaching-kit-manifest.json");
+$("exportJSON").onclick=()=>{download(JSON.stringify(manifest(),null,2),"application/json","ai-teaching-kit-manifest.json");unsaved=false};
 function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
 $("exportHTML").onclick=()=>{const m=manifest(),section=(label,value)=>"<section><h2>"+escapeHTML(label)+"</h2><p>"+escapeHTML(value||"Non compilato").replace(/\n/g,"<br>")+"</p></section>";let body=section("Destinatari",m.audience)+section("Obiettivo",m.learningObjective)+section("Verifica dell'apprendimento",m.assessment)+section("Sequenza didattica",m.teachingSequence)+section("Accessibilità",m.accessibility)+section("Fonti, diritti e privacy",m.rightsAndPrivacy);for(const type of ["image","voice","video"]){const a=m.assets[type];body+=section("Scheda "+names[type],a?(a.fields.title||"Senza titolo")+" — "+(a.approval.approved?"approvazione dichiarata":"non approvata")+" — "+(a.fields.objective||"obiettivo non indicato"):"Non importata");if(a)body+=section("Provenienza e file — "+names[type],provenanceLines(type,a))};body+=section("Responsabile e decisione",m.review.reviewer+" · "+(approved?"APPROVATO":"BOZZA NON APPROVATA"))+section("Nota di trasparenza",m.disclaimer);const doc='<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kit didattico</title><style>body{max-width:780px;margin:40px auto;padding:20px;font:17px/1.65 system-ui;color:#172a46}section{border-bottom:1px solid #dce5ef;padding:10px 0}h1{font-size:2.4rem}h2{font-size:1.25rem}p{white-space:normal;overflow-wrap:anywhere}</style></head><body><h1>'+escapeHTML(m.title||"Kit didattico senza titolo")+'</h1><p><strong>'+escapeHTML(approved?"Approvato dal docente":"BOZZA NON APPROVATA")+'</strong></p>'+body+'</body></html>';download(doc,"text/html","ai-teaching-kit-scheda.html")};
+window.addEventListener("beforeunload",event=>{if(unsaved){event.preventDefault();event.returnValue=""}});
 render();
 })();
 </script><script>(function(){

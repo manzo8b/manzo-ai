@@ -7,13 +7,20 @@ on:
       - feat/ai-teaching-lab-curriculum-20261117
     paths:
       - 'editorial/learning/ai-teaching-lab/**'
+      - 'tools/ai-teaching-*/**'
       - 'theme/publish-ai-teaching-lab.py'
+      - 'theme/check-ai-teaching-lab-contracts.cjs'
       - 'theme/build-seo.py'
       - '.github/workflows/deploy-pages.yml'
       - '.github/workflows/ai-teaching-lab-qa.yml'
   pull_request:
     paths:
       - 'editorial/learning/ai-teaching-lab/**'
+      - 'tools/ai-teaching-*/**'
+      - 'theme/publish-ai-teaching-lab.py'
+      - 'theme/check-ai-teaching-lab-contracts.cjs'
+      - 'theme/build-seo.py'
+      - '.github/workflows/deploy-pages.yml'
       - '.github/workflows/ai-teaching-lab-qa.yml'
   workflow_dispatch:
 
@@ -28,11 +35,18 @@ jobs:
       - uses: actions/checkout@v7
         with:
           persist-credentials: false
+      - name: Install the course publisher dependency
+        run: python3 -m pip install --disable-pip-version-check markdown==3.10
       - name: Verify all five modules, pedagogy, quiz and crosswords
         run: python3 -m unittest discover -s editorial/learning/ai-teaching-lab/tests -p 'test_*.py' -v
       - name: Validate JavaScript source syntax
         run: node --check editorial/learning/ai-teaching-lab/preview/app.js
           && node --check editorial/learning/ai-teaching-lab/preview/production-studio.js
+      - name: Verify studio contracts and approval state regressions
+        run: |
+          node theme/check-ai-teaching-lab-contracts.cjs
+          node editorial/learning/ai-teaching-lab/tests/studio-state.test.cjs
+          node editorial/learning/ai-teaching-lab/tests/mission-state.test.cjs
       - name: Validate editorial JSON syntax
         run: |
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/course.json > /dev/null
@@ -42,7 +56,6 @@ jobs:
           python3 -m json.tool editorial/learning/ai-teaching-lab/it/glossary.json > /dev/null
       - name: Prepare static build and publish five full teacher lessons
         run: |
-          python3 -m pip install --disable-pip-version-check markdown==3.10
           python3 -m py_compile theme/publish-ai-teaching-lab.py
           mkdir -p _teacher_staging
           unzip -q site-v0.7.zip -d _teacher_staging
@@ -50,6 +63,7 @@ jobs:
           cp theme/manzo-mark.svg _teacher_staging/assets/manzo-mark.svg
           python3 theme/publish-ai-teaching-lab.py --site _teacher_staging
           python3 theme/publish-ai-teaching-lab.py --site _teacher_staging --verify-only
+          node theme/check-ai-teaching-lab-contracts.cjs --site _teacher_staging
           python3 theme/build-seo.py --site _teacher_staging --base-url https://manzo8b.github.io/manzo-ai/
           python3 - <<'PY'
           import json
@@ -74,6 +88,15 @@ jobs:
               assert text.count('data-atl-feature="2026-11"')==1
           print('Five published beta modules and SEO sitemap: PASS')
           PY
+      - name: Apply the public navigation and theme before browser checks
+        run: |
+          python3 theme/publish-prompt-video.py --site _teacher_staging --edition editorial/video/prompt-engineering
+          python3 theme/publish-product-preview.py --site _teacher_staging
+          python3 theme/publish-learning-console.py --site _teacher_staging
+          python3 theme/publish-navigation.py --site _teacher_staging
+          python3 theme/publish-navigation.py --site _teacher_staging --verify-only
+          python3 theme/publish-design-system.py --site _teacher_staging
+          python3 theme/publish-design-system.py --site _teacher_staging --verify-only
       - name: Install Chromium for functional and mobile preview tests
         run: |
           python3 -m pip install playwright==1.55.0
@@ -91,6 +114,8 @@ jobs:
           python3 -m http.server 8767 --bind 127.0.0.1 --directory _teacher_webroot >/tmp/ai-teaching-public-http.log 2>&1 &
           sleep 1
           python3 editorial/learning/ai-teaching-lab/tests/published-browser-smoke.py
+          python3 editorial/learning/ai-teaching-lab/tests/studios-workspace-smoke.py
+          python3 editorial/learning/ai-teaching-lab/tests/mission-browser-smoke.py
       - name: Confirm non-public preview status
         run: |
           python3 - <<'PY'

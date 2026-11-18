@@ -499,8 +499,8 @@
         "pedagogical_reference": {
           "name": "Seymour Papert",
           "type": "parafrasi applicativa",
-          "insight": "Nel constructionism la comprensione si sviluppa anche creando e condividendo artefatti: un diagramma corretto insieme alla classe vale più di molte schermate da consumare passivamente.",
-          "source": "https://mitpress.mit.edu/9780262539845/designing-constructionist-futures/"
+          "insight": "Nel costruzionismo la comprensione si sviluppa anche creando e condividendo artefatti significativi. Nel nostro laboratorio, correggere e spiegare un diagramma può rendere osservabile il ragionamento: è una proposta applicativa, non una garanzia di efficacia.",
+          "source": "https://www.papert.org/articles/SituatingConstructionism.html"
         }
       },
       "urgent_teacher_challenge": "Produrre contenuti inclusivi rapidamente senza moltiplicare slide, errori visivi, video inutili e sovraccarico cognitivo",
@@ -952,7 +952,7 @@
           "name": "Seymour Papert",
           "type": "parafrasi applicativa",
           "insight": "Gli strumenti digitali dovrebbero sostenere l'esplorazione e la costruzione personale della conoscenza, non sostituirsi al pensiero dello studente.",
-          "source": "https://www.media.mit.edu/publications/constructionism-ethics-and-creativity/"
+          "source": "https://www.papert.org/articles/SituatingConstructionism.html"
         }
       },
       "urgent_teacher_challenge": "Gestire richiesta di tutor IA per minori e casi di cyberbullismo senza automatizzare giudizi, perdere la relazione o compromettere privacy",

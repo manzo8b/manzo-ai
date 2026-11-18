@@ -123,6 +123,8 @@ with sync_playwright() as playwright:
         assert "Hai individuato" in probe.locator(".result").inner_text()
         for index in range(5):
             page.locator("#module-nav button").nth(index).click()
+            unnamed=page.locator('input,select,textarea').evaluate_all("nodes=>nodes.filter(n=>n.type!=='hidden'&&!n.labels?.length&&!n.getAttribute('aria-label')&&!n.getAttribute('aria-labelledby')).map(n=>n.id||n.className)")
+            assert not unnamed, (index, unnamed)
             assert page.locator(".branch-choices button").count()==3
             reveal_step(page, ".branch-choices")
             page.locator(".branch-choices button").first.click()

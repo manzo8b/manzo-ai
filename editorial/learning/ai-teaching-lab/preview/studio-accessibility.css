@@ -1,0 +1,143 @@
+/* Shared accessibility corrections for the four local Teaching Lab tools.
+   Scoped by the publisher so unrelated MANZO AI pages retain their styles. */
+body[data-atl-tool] {
+  --atl-mobile-bar-height: 60px;
+  background: #fff;
+  color: #111827;
+}
+
+body[data-atl-tool] .layout > main,
+body[data-atl-tool] .layout > aside,
+body[data-atl-tool] .field,
+body[data-atl-tool] .check span {
+  min-width: 0;
+}
+
+body[data-atl-tool] input:not([type=checkbox]),
+body[data-atl-tool] select,
+body[data-atl-tool] textarea {
+  max-width: 100%;
+  min-width: 0;
+  font-size: 16px !important;
+}
+
+body[data-atl-tool] button,
+body[data-atl-tool] summary,
+body[data-atl-tool] .btn,
+body[data-atl-tool] .check {
+  min-height: 44px;
+}
+
+body[data-atl-tool] .summary dd,
+body[data-atl-tool] .readout,
+body[data-atl-tool] .status,
+body[data-atl-tool] .import,
+body[data-atl-tool] .scene {
+  overflow-wrap: anywhere;
+}
+
+/* Blue is 5.59:1 against white; orange remains the semantic example accent. */
+body[data-atl-tool] :is(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid #205beb !important;
+  outline-offset: 3px !important;
+}
+
+body[data-atl-tool] :is(.field-example, .example-detail, .provenance-details) > summary:focus-visible {
+  outline-offset: -3px !important;
+}
+
+body[data-atl-tool] .learn-demo button,
+body[data-atl-tool] .demo-brief button {
+  color: #111827 !important;
+}
+
+/* Keep phase labels readable instead of shrinking five pills into one row. */
+body[data-atl-tool] [role=tablist] {
+  display: flex !important;
+  overflow-x: auto;
+  gap: 8px;
+  scrollbar-width: thin;
+}
+
+body[data-atl-tool] [role=tablist] > [role=tab] {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: max-content;
+  white-space: nowrap;
+}
+
+body[data-atl-tool] .atl-studio-skip {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 1600;
+  padding: 12px 16px;
+  border: 2px solid #205beb;
+  border-radius: 8px;
+  background: #fff;
+  color: #111827;
+  font-weight: 750;
+  transform: translateY(-180%);
+}
+
+body[data-atl-tool] .atl-studio-skip:focus {
+  transform: none;
+}
+
+@media (max-width: 860px) {
+  /* The teacher's current task precedes the status summary on small screens. */
+  body[data-atl-tool] .layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body[data-atl-tool] .layout > main {
+    order: 0 !important;
+    width: 100%;
+  }
+
+  body[data-atl-tool] .layout > :is(.side, .sidebar) {
+    order: 1 !important;
+    position: static !important;
+    width: 100%;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Keep a single portal bar and the compact phase navigation reachable. */
+  body[data-atl-tool] .manzo-mobile-bar {
+    min-height: var(--atl-mobile-bar-height) !important;
+    padding-block: 7px !important;
+  }
+
+  body[data-atl-tool] :is(.manzo-mobile-toggle, .manzo-mobile-portal) {
+    min-height: 44px !important;
+  }
+
+  body[data-atl-tool] :is(.tabs, .steps, .workspace-step-nav) {
+    position: sticky;
+    top: var(--atl-mobile-bar-height) !important;
+    z-index: 20;
+    max-width: 100%;
+    padding: 8px 3px !important;
+    background: #fff;
+    scroll-margin-top: calc(var(--atl-mobile-bar-height) + 8px);
+  }
+
+  body[data-atl-tool] :is(.pane, .workspace-section, #atl-studio-main) {
+    scroll-margin-top: calc(var(--atl-mobile-bar-height) + 76px);
+  }
+
+  body[data-atl-tool] :is(input, select, textarea, button, summary, a) {
+    scroll-margin-block: calc(var(--atl-mobile-bar-height) + 76px) 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-atl-tool] *,
+  body[data-atl-tool] *::before,
+  body[data-atl-tool] *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}

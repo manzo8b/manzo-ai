@@ -245,7 +245,7 @@ body[data-ma-surface] .mission-finish .btn:hover{
 <label class="field" for="objective"><span>Che cosa sapranno fare gli studenti?</span><span class="help">Usa un verbo osservabile: spiegare, confrontare, distinguere, ordinare. Per personalizzare il suggerimento mostrato nella scheda accanto, scrivilo qui.</span><textarea id="objective" maxlength="600" placeholder="Es. Sapranno ordinare le fasi di un fenomeno e motivare le relazioni"></textarea></label>
 <div class="disclose"><strong>Prima regola: nessun dato reale di alunni.</strong> Il percorso è una simulazione formativa locale. Non accede a registri, non chiama un modello IA e non salva progressi in un account.</div>
 <div class="workspace-actions"><button class="btn blue" type="button" id="generate">Aggiorna il piano <span aria-hidden="true">↗</span></button><button class="btn ghost" type="button" id="reset">Ricomincia</button></div>
-<details class="resume"><summary>Hai già un brief? Riapri il file salvato</summary><label for="restore">Seleziona il file JSON esportato da Mission Studio</label><input id="restore" type="file" accept=".json,application/json"><p>Il ripristino riguarda soltanto questa micro-app: non importa immagini, audio o video e non approva il lavoro.</p></details><p class="feedback" id="form-status" role="status" aria-live="polite"></p>
+<details class="resume"><summary>Hai già un brief? Riapri il file salvato</summary><label for="restore">Seleziona il file JSON esportato da Mission Studio</label><input id="restore" type="file" accept=".json,application/json"><p>Il ripristino recupera tema, destinatari, durata, percorso e obiettivo di questa micro-app. Gli altri suggerimenti sono ricostruiti dalle regole editoriali correnti. Non importa immagini, audio o video e non approva il lavoro.</p></details><p class="feedback" id="form-status" role="status" aria-live="polite"></p>
 </div>
 </div>
 <aside class="preview" aria-labelledby="preview-title">
@@ -287,14 +287,28 @@ const missions={
  video:{name:"Studio video",path:"../studio-video/",label:"Sequenza audiovisiva",steps:["Anticipa","Segui","Ricostruisci"],defaultGoal:"Ordinare tre passaggi relativi al tema «{topic}», descrivere cosa cambia e motivare la sequenza.",evidence:"Lo studente riordina tre scene e spiega perché una fase precede la successiva.",tips:"Controlla le scene, i sottotitoli, la provenienza delle immagini e il ritmo; il WebM locale è silenzioso."},
  verify:{name:"Modulo 02",path:"../modulo-02/",label:"Verifica delle fonti",steps:["Formula","Controlla","Motiva"],defaultGoal:"Distinguere una spiegazione documentata da un'affermazione non verificata sul tema «{topic}».",evidence:"Lo studente individua una fonte primaria pertinente, segnala un limite e formula una conclusione proporzionata alle prove.",tips:"Non usare detector di IA come prova di paternità e non inventare bibliografie: confronta le fonti originali."}
 };
-let mission="image",minutes=30;
+let mission="image",minutes=30,unsaved=false,restoreRequest=0;
 const initialTopic="Il ciclo dell'acqua";
-function tidy(s,max){return String(s||"").trim().replace(/\s+/g," ").slice(0,max)}
+function boundedText(value,max,label){
+ if(typeof value!=="string"||value.length>max)throw Error(label+": usa un testo di massimo "+max+" caratteri. Il brief corrente è conservato.");
+ return value;
+}
+function validateDraft(data){
+ if(!data||typeof data!=="object"||Array.isArray(data)||data.schema!=="ai-teaching-lab-mission-v0.1"||!Object.hasOwn(missions,data.mission))throw Error("Formato non riconosciuto: seleziona un brief esportato da Mission Studio.");
+ const topic=boundedText(data.topic,110,"Tema"),objective=boundedText(data.objective,600,"Obiettivo");
+ if(!topic.trim()||!objective.trim()||/[\r\n\t]/.test(topic)||/\r/.test(objective))throw Error("Tema e obiettivo devono essere compilati; usa una sola riga per il tema e a capo standard per l'obiettivo. Il brief corrente è conservato.");
+ const audienceValues=Array.from($("audience").options).map(option=>option.value);
+ if(typeof data.audience!=="string"||!audienceValues.includes(data.audience))throw Error("Destinatari non riconosciuti. Il brief corrente è conservato.");
+ if(typeof data.minutes!=="number"||![15,30,45].includes(data.minutes))throw Error("Durata non riconosciuta: sono previsti 15, 30 o 45 minuti. Il brief corrente è conservato.");
+ if(data.approval!==false)throw Error("Un brief Mission Studio deve essere una bozza con approval:false; non è un'approvazione docente.");
+ return {mission:data.mission,minutes:data.minutes,topic,audience:data.audience,objective};
+}
+function changed(){unsaved=true;restoreRequest++}
 function state(){
- const topic=tidy($("topic").value,110)||"un tema scelto dal docente";
+ const rawTopic=boundedText($("topic").value,110,"Tema"),topic=rawTopic.trim()?rawTopic:"un tema scelto dal docente";
  const audience=$("audience").value;
  const spec=missions[mission];
- const goal=tidy($("objective").value,600)||spec.defaultGoal.replace("{topic}",topic);
+ const rawGoal=boundedText($("objective").value,600,"Obiettivo"),goal=rawGoal.trim()?rawGoal:spec.defaultGoal.replace("{topic}",topic);
  return {schema:"ai-teaching-lab-mission-v0.1",createdAt:new Date().toISOString(),topic,audience,minutes,mission,resource:spec.label,objective:goal,evidence:spec.evidence,steps:spec.steps.map((title,i)=>({number:i+1,title})),teacherReview:spec.tips,source:"Mission Studio / regole editoriali locali",approval:false,disclaimer:"Bozza di progettazione: nessun contenuto generato o approvato da IA. La verifica e l'approvazione competono al docente."};
 }
 function planText(s){
@@ -318,37 +332,32 @@ function render(){
  select("[data-minutes]").forEach(el=>el.setAttribute("aria-pressed",String(Number(el.dataset.minutes)===minutes)));
  select("[data-topic]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.topic===$("topic").value)));
 }
-function update(message){render();$("form-status").textContent=message||""}
+function update(message){changed();render();$("form-status").textContent=message||""}
 select("[data-kind]").forEach(el=>el.addEventListener("click",()=>{mission=el.dataset.kind;update("Percorso aggiornato: "+missions[mission].label+". Controlla l'obiettivo proposto e adattalo alla tua classe.")}));
 select("[data-topic]").forEach(el=>el.addEventListener("click",()=>{$("topic").value=el.dataset.topic;update("Tema di esempio caricato; puoi modificarlo.")}));
 select("[data-minutes]").forEach(el=>el.addEventListener("click",()=>{minutes=Number(el.dataset.minutes);update("Durata aggiornata: "+minutes+" minuti.")}));
-["topic","audience","objective"].forEach(id=>$(id).addEventListener("input",()=>{render();$("form-status").textContent=""}));
+["topic","audience","objective"].forEach(id=>{for(const event of ["input","change"])$(id).addEventListener(event,()=>{changed();render();$("form-status").textContent=""})});
 $("generate").addEventListener("click",()=>{render();$("form-status").textContent="Piano aggiornato. È una bozza da rivedere: puoi copiarla, scaricarla o aprire il laboratorio."; $("preview-title").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"nearest"});});
-$("reset").addEventListener("click",()=>{mission="image";minutes=30;$("topic").value=initialTopic;$("objective").value="";$("audience").selectedIndex=1;update("Tornato al percorso iniziale.")});
+$("reset").addEventListener("click",()=>{if(!confirm("Ricominciare? Il brief attuale verrà sostituito con quello iniziale. Scaricalo prima se vuoi conservarlo."))return;mission="image";minutes=30;$("topic").value=initialTopic;$("objective").value="";$("audience").selectedIndex=1;update("Tornato al percorso iniziale.")});
 
 $("restore").addEventListener("change",async(e)=>{
- const file=e.currentTarget.files[0];e.currentTarget.value="";
+ const request=++restoreRequest,file=e.currentTarget.files[0];e.currentTarget.value="";
  if(!file)return;
- if(!file.size||file.size>1024*1024){$("form-status").textContent="Il brief deve essere un file JSON non vuoto e inferiore a 1 MB.";return}
+ if(!file.size||file.size>1024*1024){$("form-status").textContent="Il brief deve essere un file JSON non vuoto e non superiore a 1 MB.";return}
  try{
-  const data=JSON.parse(await file.text());
-  if(!data||Array.isArray(data)||data.schema!=="ai-teaching-lab-mission-v0.1"||!Object.hasOwn(missions,data.mission)||typeof data.topic!=="string"||typeof data.objective!=="string"){
-   throw Error("Formato non riconosciuto: seleziona un brief esportato da Mission Studio.");
-  }
-  if(!confirm("Ripristinare questa bozza? Il brief attualmente compilato verrà sostituito, senza approvarlo."))return;
-  mission=data.mission;
-  minutes=[15,30,45].includes(Number(data.minutes))?Number(data.minutes):30;
-  $("topic").value=tidy(data.topic,110);
-  const audienceValues=Array.from($("audience").options).map(o=>o.value);
-  $("audience").value=audienceValues.includes(data.audience)?data.audience:audienceValues[1];
-  $("objective").value=String(data.objective).slice(0,600);
-  update("Bozza ripristinata. Rivedi obiettivi, fonti e verifiche prima di procedere.");
- }catch(error){$("form-status").textContent=error.message||"Impossibile importare la bozza."}
+  const data=JSON.parse(await file.text());if(request!==restoreRequest)return;
+  const draft=validateDraft(data);
+  if(!confirm("Ripristinare questa bozza? Il brief attualmente compilato verrà sostituito, senza approvarlo. Scarica prima il brief corrente se vuoi conservarlo."))return;
+  // All editable fields are checked before the current project is replaced.
+  mission=draft.mission;minutes=draft.minutes;
+  $("topic").value=draft.topic;$("audience").value=draft.audience;$("objective").value=draft.objective;
+  update("Bozza ripristinata senza approvazione. Tema, destinatari, durata, percorso e obiettivo sono recuperati; gli altri suggerimenti sono ricostruiti dalle regole editoriali correnti. Rivedi fonti e verifiche.");
+ }catch(error){if(request===restoreRequest)$("form-status").textContent=(error.message||"Impossibile importare la bozza.")+" Il brief corrente non è stato sostituito."}
 });
 $("export").addEventListener("click",()=>{
  const s=state(),blob=new Blob([JSON.stringify(s,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
  a.href=url;a.download="ai-teaching-mission-brief.json";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),8000);
- $("action-status").textContent="Brief JSON scaricato. Conserva il file e verifica il contenuto prima dell'uso.";
+ unsaved=false;$("action-status").textContent="Brief JSON scaricato. Conserva il file e verifica il contenuto prima dell'uso.";
 });
 $("copy").addEventListener("click",async()=>{
  const txt=planText(state());
@@ -361,6 +370,7 @@ $("copy").addEventListener("click",async()=>{
   $("action-status").textContent="Copia non disponibile nel browser: usa «Scarica il brief» per conservare il progetto.";
  }
 });
+window.addEventListener("beforeunload",event=>{if(unsaved){event.preventDefault();event.returnValue=""}});
 const params=new URLSearchParams(location.search),requested=params.get("mission");
 if(Object.hasOwn(missions,requested))mission=requested;
 render();

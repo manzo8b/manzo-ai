@@ -50,7 +50,7 @@ Ridurre il rumore visivo è il primo passo, non l'ultimo. Un materiale efficace 
 
 Se un diagramma contiene l'unica spiegazione importante, uno studente che non riesce a leggerlo rischia di essere escluso. Una descrizione testuale, una legenda chiara e un linguaggio comprensibile permettono percorsi equivalenti. I podcast richiedono una trascrizione, i video sottotitoli accurati, le immagini significative descrizioni e i grafici etichette complete. Le linee guida Universal Design for Learning di CAST suggeriscono di offrire alternative di rappresentazione e di azione. Non stiamo semplificando indiscriminatamente la disciplina: stiamo rimuovendo ostacoli non necessari all'apprendimento.
 
-Quando pensiamo a destinatari diversi non dobbiamo etichettare gli studenti come «visivi», «uditivi» o «cinestetici» fissi e associare una sola modalità a ogni persona: la cosiddetta ipotesi del matching degli stili di apprendimento non dispone di un supporto empirico solido. L'UDL invita piuttosto a offrire più possibilità di rappresentazione e di espressione, riducendo ostacoli concretamente osservabili. Un video ha bisogno di sottotitoli e di una trascrizione, una infografica di descrizioni comprensibili, un'attività interattiva di controlli raggiungibili da tastiera e di una via alternativa equivalente.
+Quando pensiamo a destinatari diversi non dobbiamo etichettare gli studenti come «visivi», «uditivi» o «cinestetici» fissi e associare una sola modalità a ogni persona: la cosiddetta ipotesi del matching degli stili di apprendimento non dispone di un supporto empirico solido. L'UDL invita piuttosto a offrire più possibilità di rappresentazione e di espressione, riducendo ostacoli concretamente osservabili. Un video ha bisogno di sottotitoli e di una trascrizione, un'infografica di descrizioni comprensibili, un'attività interattiva di controlli raggiungibili da tastiera e di una via alternativa equivalente.
 
 L'accessibilità ci costringe a scegliere che cosa è essenziale. A questo punto la revisione della bozza IA non è una correzione meccanica: diventa un vero atto di progettazione creativa.
 
@@ -356,7 +356,7 @@ Per non interrompere il racconto, abbiamo raccolto le fonti in questa sezione. S
 2. [CAST UDL Guidelines 3.0](https://udlguidelines.cast.org/)
 3. [CMU Learning Principles](https://www.cmu.edu/teaching/principles/learning.html)
 
-**Riferimento pedagogico:** Seymour Papert — [testo di riferimento](https://mitpress.mit.edu/9780262539845/designing-constructionist-futures/). Le idee riportate nel modulo sono parafrasi applicative e non citazioni letterali attribuite all'autore.
+**Riferimento pedagogico:** Seymour Papert e Idit Harel — [*Situating Constructionism* (1991), fonte primaria](https://www.papert.org/articles/SituatingConstructionism.html). Le idee riportate nel modulo sono parafrasi applicative, non citazioni letterali; le scelte per il nostro laboratorio sono proposte del corso.
 
 ### Fonti per approfondire la nuova attività
 
