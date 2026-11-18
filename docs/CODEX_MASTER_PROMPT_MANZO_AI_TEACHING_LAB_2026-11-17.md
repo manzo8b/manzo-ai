@@ -49,6 +49,14 @@ STATO DA NON FALSIFICARE: cinque moduli in italiano; durata complessiva di 20 or
 5. Crea un backlog P0/P1/P2/P3 con file coinvolti, gravità, impatto pedagogico, rischio privacy, criterio di accettazione.
 6. Identifica fatti, simulazioni, esempi, funzionalità vere e meri placeholder.
 
+## AGGIORNAMENTO DI STATO · PRIMO TRAGUARDO VERIFICATO (18/11/2026)
+
+- GitHub Pages: deploy `44287800914` e QA AI Teaching Lab `44287800740` **success**. Non confondere il run verde con un audit Safari iPhone.
+- Prototipo IA già presente in `product/mission-copilot/`: Cloudflare Worker privato, con flag disattivato, nessuna route pubblica, nessuna chiave in repository e **8/8 test mock PASS**. Non ricrearlo da zero.
+- Il budget massimo è **€0**: nessun servizio a pagamento, billing, upgrade, prepaid credits o chiamata reale senza approvazione esplicita. Non collegare il frontend alla funzione privata.
+- Leggi `docs/MANZO_AI_FIRST_MILESTONE_ZERO_EURO_2026-11-18.md`; nel prossimo audit valuta prima UX iPhone, backend hardening, limiti globali e privacy con prove riproducibili.
+- Ogni test di inferenza deve usare fake `env.AI.run` finché il titolare non autorizza una connessione reale gratuita.
+
 ## FASE 1 — HARDENING TECNICO AI TEACHING LAB
 - Correggi crash, errori JS/Python, dipendenze, link interrotti, mancati file e rotture nel publisher.
 - Testa i cinque schemi JSON (incluso ai-teaching-lab-mission-v0.1), import/export, reimportazione, sovrascrittura consapevole, errori su file non validi, stato di approvazione e invalidazione dopo modifiche.
