@@ -43,7 +43,7 @@ function quotaFixture() {
     }));
     queue = p.catch(() => {});
     return p;
-  }) } };
+  } } };
   const instance = new CopilotQuota(state);
   instance.clock = () => clock;
   const binding = {
