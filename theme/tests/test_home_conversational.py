@@ -33,9 +33,6 @@ def make_site(root):
    '<aside class="ma-product-scene">Legacy scene remains</aside></section>'
    '<section class="ma-home-showcase">Original Academy remains</section></main>'
    '</body></html>',encoding="utf-8")
-  product=root/lang/PRODUCT[lang]/"index.html"
-  product.parent.mkdir(parents=True,exist_ok=True)
-  product.write_text("Real product preview",encoding="utf-8")
   hallucination=root/HALLUCINATION[lang]/"index.html"
   hallucination.parent.mkdir(parents=True,exist_ok=True)
   hallucination.write_text("Real AI hallucinations course",encoding="utf-8")
