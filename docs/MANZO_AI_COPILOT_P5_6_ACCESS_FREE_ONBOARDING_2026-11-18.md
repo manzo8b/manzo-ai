@@ -37,7 +37,7 @@ aud = "access-audience-preview-test-v1"
 email = "fictional-teacher@example.test"
 ```
 
-Il blocco `access.dev` è simulato, **non è un controllo di accesso in produzione**. Il Worker in GitHub continua disattivato con tutti i flag di sicurezza sul valore `false`; pertanto, senza ulteriori fixture, il comportamento previsto dell'endpoint è `COPILOT_DISABLED`. Per verificare *anche* il percorso di inferenza senza chiamate esterne si usano i test Node con `AI.run` mock, quota mock e identità fittizie.
+Il blocco `access.dev` è simulato, **non è un controllo di accesso in produzione**. **Attenzione:** un vero binding Workers AI può consumare Neurons anche durante `wrangler dev`; il P5.6 non effettua invocazioni del modello e usa esclusivamente test Node con `AI.run` simulato. Il Worker in GitHub continua disattivato con tutti i flag di sicurezza sul valore `false`; pertanto, senza ulteriori fixture, il comportamento previsto dell'endpoint è `COPILOT_DISABLED`. Per verificare *anche* il percorso di inferenza senza chiamate esterne si usano i test Node con `AI.run` mock, quota mock e identità fittizie.
 
 Confermati dal codice:
 - `authenticatedPrincipal` verifica audience, ricava l'email da `ctx.access.getIdentity()` e la pseudonimizza con HMAC;
