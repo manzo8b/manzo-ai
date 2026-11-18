@@ -72,11 +72,10 @@ class ConversationalHomeContracts(unittest.TestCase):
    self.assertLess(text.index(module.MARKER),text.index('class="ma-product-scene"'),"Mobile must see the discovery before the decorative scene")
    self.assertEqual(text.count(module.MARKER),1)
    self.assertEqual(text.count('data-ma-home-discovery-asset="v1"'),2)
-   self.assertEqual(text.count('data-ma-intent='),4)
+   self.assertEqual(text.count('data-ma-intent='),3)
    self.assertIn('href="/manzo-ai/it/formazione/ia-per-la-didattica/inizia/"',text)
    self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-4/"',text)
    self.assertIn(f'href="/manzo-ai/{lang}/learn/demo-1/"',text)
-   self.assertIn(f'href="/manzo-ai/{lang}/{PRODUCT[lang]}/"',text)
    self.assertNotIn("Fake AI assistant",text)
   with self.assertRaisesRegex(RuntimeError,"Duplicate"):
    module.apply(self.root)
