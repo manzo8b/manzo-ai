@@ -128,3 +128,29 @@ test("P5.5 Gemma 4 non-reasoning must stay explicitly enabled in the source", ()
     assert.equal(altered.checks.gemmaThinkingDisabled, false);
   }
 });
+
+test("P5.7 Supabase authentication is disabled in the checked-in Worker configuration", () => {
+  const normal = inspectOfflineConfiguration(wrangler, worker);
+  assert.equal(normal.checks.supabaseAuthDefaultOff, true);
+  for (const bad of [
+    wrangler.replace('AUTH_PROVIDER = "access"', 'AUTH_PROVIDER = "supabase"'),
+    wrangler.replace('SUPABASE_AUTH_CONFIRMED = "false"', 'SUPABASE_AUTH_CONFIRMED = "true"'),
+    wrangler.replace('SUPABASE_AUTH_CONFIRMED = "false"', ''),
+    wrangler + '\nSUPABASE_ALLOWED_TESTER_IDS = "[\\"user-id\\"]"',
+    wrangler + '\nSUPABASE_PUBLISHABLE_KEY = "sb_publishable_must_not_commit"'
+  ]) {
+    const audit = inspectOfflineConfiguration(bad, worker);
+    assert.equal(audit.configSafe, false, JSON.stringify(audit.checks));
+  }
+  const bypass = worker.replace('env?.SUPABASE_AUTH_CONFIRMED !== "true"', 'false');
+  assert.equal(inspectOfflineConfiguration(wrangler, bypass).configSafe, false);
+});
+
+test("P5.7 Auth adapter never ships secrets, content logging or a dynamic user URL", () => {
+  const source = readFileSync(resolve(root, "supabase-auth.mjs"), "utf8");
+  assert.match(source, /https:\/\/bjydnaejpxwubmxpnpnv\.supabase\.co\/auth\/v1\/user/);
+  assert.match(source, /redirect: "error"/);
+  assert.match(source, /SUPABASE_ALLOWED_TESTER_IDS/);
+  assert.doesNotMatch(source, /console\.(?:log|warn|info|error|debug)\s*\(/);
+  assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY|SUPABASE_JWT_SECRET/);
+});
