@@ -53,3 +53,15 @@ La ricerca originaria non viene sostituita. I suggerimenti hanno destinazioni re
 
 ### Controlli finali richiesti
 Confrontare i tre URL pubblici `/it/`, `/en/`, `/es/` e il gateway `/manzo-ai/`, preferibilmente con browser ricaricato senza cache. Verificare anche 320, 390 e 1440 px, che il menu non duplichi destinazioni, che le quattro card in evidenza e le sei dell'Academy siano tutte presenti, che la ricerca preesistente funzioni e che la pagina About abbia contenuti reali ma senza accreditamenti inventati.
+
+## Diagnosi GitHub Pages — 18 novembre 2026 (verificata sui log Actions)
+
+**Problema reale:** più workflow `Deploy MANZO AI` sul branch `main` sono falliti prima del deploy GitHub Pages.
+
+- Esecuzione di riferimento: `https://github.com/manzo8b/manzo-ai/actions/runs/44277738505` (commit `115b347`).
+- Job `deploy`, step `Extract and inspect static site`: `NameError: name 'PRODUCT' is not defined` in `theme/tests/test_home_conversational.py:36`.
+- I quattro test in quel modulo fallivano nel `setUp`, prima di poter produrre e distribuire la nuova HOME.
+- **Correzione su `main`:** commit `197d709d7d9bc095322e469bcd4fb0a92fa58af8`, eliminato il vecchio fixture Product Lab non più necessario. La pipeline è configurata per attivarsi alle modifiche di quel file.
+- **Stato non ancora attestato:** esito della prima esecuzione GitHub Actions **successiva** al fix. Non dichiarare il sito aggiornato in produzione finché quel run non conclude `success` e i contenuti pubblici non siano verificati.
+
+**Lezione per il processo:** non sostituire i test di pubblicazione con un check visivo dei file su GitHub. Fare sempre triage dei log effettivi dei workflow falliti e correggere prima il primo errore bloccante.
