@@ -81,28 +81,49 @@
   const nav=node('nav','manzo-mobile-nav');nav.setAttribute('aria-label',copy.navigation);
 
   // Preserve the original site's sections when available; fallback supports editorial pages.
-  const originals=rail ? [...rail.querySelectorAll('.nav-title, .nav-link')]: [];
+  // Home uses a concise, verified set of learning routes. Other sections retain
+  // the complete legacy menu. This avoids the unrelated "Studio/Lavoro/Vita" links.
+  const curated=(location.pathname===base || location.pathname===base+"index.html")
+    ? document.querySelector('[data-ma-home-primary-nav="v2"]') : null;
   const groups=[];
-  let current={name:copy.sections,links:[]};
   const normalized=(p)=>p.replace(/\/index\.html$/,'/').replace(/\/?$/,'/');
   const seen=new Set();
-  for(const el of originals){
-    if(el.matches('.nav-title')){
-      if(current.links.length)groups.push(current);
-      current={name:el.textContent.trim()||copy.sections,links:[]};
-      continue;
+  if(curated){
+    const links=[...curated.querySelectorAll("a[href]")].filter(x=>sameSite(x.href))
+      .map(x=>{
+        const u=url(x.href);
+        return {href:u.pathname+u.search+u.hash,label:(x.textContent||"").trim(),
+          active:u.pathname===location.pathname&&!u.hash};
+      });
+    if(links.length!==6)throw Error("Curated homepage navigation has incomplete destinations");
+    for(const link of links){
+      const p=normalized(url(link.href).pathname);
+      if(seen.has(p))throw Error("Curated homepage destinations cannot repeat");
+      seen.add(p);
     }
-    const href=el.getAttribute('href'),label=(el.textContent||'').trim().replace(/\s+/g,' ');
-    if(!href || !label || !sameSite(href)) continue;
-    const link=url(href),path=normalized(link.pathname);
-    if(seen.has(path) || path===PREFIX)continue;
-    seen.add(path);
-    current.links.push({href:link.pathname+link.search+link.hash,label,active:normalized(location.pathname)===path});
-  }
-  if(current.links.length)groups.push(current);
-  if(groups.length===0){
-    const links=fallback.map(([label,route])=>({label,href:base+route,active:normalized(location.pathname)===normalized(base+route)}));
     groups.push({name:copy.sections,links});
+  }else{
+    const originals=rail ? [...rail.querySelectorAll('.nav-title, .nav-link')]: [];
+    let current={name:copy.sections,links:[]};
+    for(const el of originals){
+      if(el.matches('.nav-title')){
+        if(current.links.length)groups.push(current);
+        current={name:el.textContent.trim()||copy.sections,links:[]};
+        continue;
+      }
+      const href=el.getAttribute('href'),label=(el.textContent||'').trim().replace(/\s+/g,' ');
+      if(!href || !label || !sameSite(href))continue;
+      const link=url(href),path=normalized(link.pathname);
+      if(seen.has(path)||path===PREFIX)continue;
+      seen.add(path);
+      current.links.push({href:link.pathname+link.search+link.hash,label,active:normalized(location.pathname)===path});
+    }
+    if(current.links.length)groups.push(current);
+    if(groups.length===0){
+      const links=fallback.map(([label,route])=>({label,href:base+route,
+        active:normalized(location.pathname)===normalized(base+route)}));
+      groups.push({name:copy.sections,links});
+    }
   }
   // Accordion groups keep a complex educational catalog scannable on a small display.
   groups.forEach((group,index)=>{
@@ -120,7 +141,7 @@
   // ACR research is a first-class discoverable section on all legacy site pages.
   const researchRoute = {it:'ricerca/acr/',es:'investigacion/acr/',en:'research/acr/'}[lang];
   const researchLabel = {it:'Ricerca ACR · Dossier',es:'Investigación ACR · Dosier',en:'ACR Research · Dossier'}[lang];
-  if (researchRoute && !seen.has(normalized(base+researchRoute))) {
+  if (!curated && researchRoute && !seen.has(normalized(base+researchRoute))) {
     const group=node('details','manzo-mobile-group');
     group.open=normalized(location.pathname)===normalized(base+researchRoute);
     group.append(node('summary','manzo-mobile-group-title',researchLabel));
