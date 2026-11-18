@@ -566,6 +566,7 @@
       if(f.type==="decision_matrix"){
         add(demo,heading("h4","Quale soluzione sceglieresti?"));
         const sel=el("select","competency-select");
+        sel.setAttribute("aria-label","Soluzione scelta per l’attività didattica");
         ["Attività senza IA","Assistente generalista","Assistente su documenti","Editor multimediale"].forEach(s=>{const op=el("option","",s);add(sel,op)});
         const reason=el("textarea","competency-reason");reason.rows=3;reason.placeholder="Motiva la scelta con obiettivo, dati, limiti e una prova di apprendimento";
         reason.setAttribute("aria-label","Motivazione della scelta didattica");

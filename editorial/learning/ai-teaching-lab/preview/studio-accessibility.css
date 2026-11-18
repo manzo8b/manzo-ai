@@ -51,6 +51,21 @@ body[data-atl-tool] .demo-brief button {
   color: #111827 !important;
 }
 
+/* Keep phase labels readable instead of shrinking five pills into one row. */
+body[data-atl-tool] [role=tablist] {
+  display: flex !important;
+  overflow-x: auto;
+  gap: 8px;
+  scrollbar-width: thin;
+}
+
+body[data-atl-tool] [role=tablist] > [role=tab] {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: max-content;
+  white-space: nowrap;
+}
+
 body[data-atl-tool] .atl-studio-skip {
   position: fixed;
   top: 8px;

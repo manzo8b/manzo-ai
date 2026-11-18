@@ -558,3 +558,7 @@ body:not([data-module-base]) [data-atl-resource-glossary]{display:none!important
   .atl-feedback-badge{transition:none}
   .atl-feedback-badge:hover{transform:none}
 }
+@media(max-width:760px){
+  /* When the portal menu is mounted, keep one mobile masthead. */
+  body[data-course-data-base]:has(.manzo-mobile-bar) > .site-head{display:none}
+}
