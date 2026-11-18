@@ -1,6 +1,10 @@
 import { scenarioInput } from "./beta-scenarios.mjs";
 import { authenticatedSupabasePrincipal } from "./supabase-auth.mjs";
 import { checkPreAuthRateLimit } from "./preauth-rate-limit.mjs";
+import {
+  preflightResponse, browserBetaReady, exactApprovedOrigin,
+  withApprovedCors
+} from "./browser-origin.mjs";
 
 /**
  * MANZO AI Mission Copilot P4 — PRIVATE prototype, NOT deployed or public
@@ -215,14 +219,10 @@ function modelText(result) {
       choice.message?.refusal) return null;
   return typeof choice.message?.content === "string" ? choice.message.content : null;
 }
-export default {
-  async fetch(request, env, context) {
+async function handleRequest(request, env, context) {
     const path = new URL(request.url).pathname;
-    if (path === "/health" && request.method === "GET") {
-      return send(200, {
-        ok: true, status: "private_prototype", enabled: env?.COPILOT_ENABLED === "true"
-      });
-    }
+    // No unauthenticated diagnostic endpoint. Keep all non-API routes private
+    // (and indistinguishable) even if a Worker URL is later configured.
     if (path !== "/api/plan") return fail(404, "NOT_FOUND");
     if (request.method !== "POST") return fail(405, "METHOD_NOT_ALLOWED");
     if (env?.COPILOT_ENABLED !== "true") return fail(503, "COPILOT_DISABLED");
@@ -247,6 +247,14 @@ export default {
       return fail(503, "AUTH_PROVIDER_UNSUPPORTED");
     if (authProvider === "supabase" && env?.SUPABASE_AUTH_CONFIRMED !== "true")
       return fail(503, "SUPABASE_AUTH_DISABLED");
+    // Browser authorization is separate from Cloudflare Access and cannot
+    // be inferred from CORS headers. Default is OFF in Wrangler.
+    if (authProvider === "supabase") {
+      if (!browserBetaReady(env))
+        return fail(503, "BROWSER_CONNECTION_DISABLED");
+      if (!exactApprovedOrigin(request))
+        return fail(403, "ORIGIN_NOT_ALLOWED");
+    }
     // P5.12: refuse abusive/unverifiable traffic BEFORE sending its bearer
     // token to Supabase. Global shared key, approximate per Cloudflare location;
     // strict per-tester AI quotas remain in GLOBAL_QUOTA.
@@ -307,5 +315,17 @@ export default {
     } catch {
       return fail(503, "PROVIDER_UNAVAILABLE_OR_QUOTA_EXCEEDED");
     }
+}
+
+export default {
+  async fetch(request, env, context) {
+    // OPTIONS is unauthenticated browser negotiation only; never call
+    // Supabase, reserve a DO quota, or run AI during a preflight.
+    if (request.method === "OPTIONS") return preflightResponse(request, env);
+    const response = await handleRequest(request, env, context);
+    if (request.method === "POST" &&
+        new URL(request.url).pathname === "/api/plan")
+      return withApprovedCors(response, request, env);
+    return response;
   }
 };

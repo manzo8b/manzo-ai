@@ -25,6 +25,8 @@ DATA_PROTECTION_CONFIRMED = "false"
 # Existing Cloudflare Access remains the sole default identity provider.
 AUTH_PROVIDER = "access"
 SUPABASE_AUTH_CONFIRMED = "false"
+# P5.13 browser CORS requires independent owner review and remains disabled.
+BROWSER_CONNECTION_CONFIRMED = "false"
 # Hard safety gate: only 4 server-owned fictional scenario IDs are accepted.
 BETA_SYNTHETIC_ONLY = "true"
 
