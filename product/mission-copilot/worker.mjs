@@ -1,4 +1,5 @@
 import { scenarioInput } from "./beta-scenarios.mjs";
+import { authenticatedSupabasePrincipal } from "./supabase-auth.mjs";
 
 /**
  * MANZO AI Mission Copilot P4 — PRIVATE prototype, NOT deployed or public
@@ -238,8 +239,18 @@ export default {
     // Arbitrary user or student text remains prohibited even after consent.
     if (env?.BETA_SYNTHETIC_ONLY !== "true")
       return fail(503, "SYNTHETIC_BETA_REQUIRED");
-    const principal = await authenticatedPrincipal(context, env);
-    if (!principal) return fail(401, "CLOUDFLARE_ACCESS_REQUIRED");
+    // Default stays Cloudflare Access. Supabase is a separate, explicitly
+    // gated future option: never accept client-selected providers or claims.
+    const authProvider = env?.AUTH_PROVIDER || "access";
+    if (authProvider !== "access" && authProvider !== "supabase")
+      return fail(503, "AUTH_PROVIDER_UNSUPPORTED");
+    if (authProvider === "supabase" && env?.SUPABASE_AUTH_CONFIRMED !== "true")
+      return fail(503, "SUPABASE_AUTH_DISABLED");
+    const principal = authProvider === "supabase"
+      ? await authenticatedSupabasePrincipal(request, env)
+      : await authenticatedPrincipal(context, env);
+    if (!principal) return fail(401,
+      authProvider === "supabase" ? "SUPABASE_AUTH_REQUIRED" : "CLOUDFLARE_ACCESS_REQUIRED");
     if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get("content-type") || ""))
       return fail(415, "JSON_REQUIRED");
     if (Number(request.headers.get("content-length") || 0) > MAX_BYTES)
