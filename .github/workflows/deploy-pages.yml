@@ -62,6 +62,7 @@ on:
       - theme/tests/test_home_curation.py
       - theme/tests/test_home_conversational.py
       - theme/tests/test_home_conversational_js.cjs
+      - theme/tests/test_home_legacy_cleanup.cjs
       - theme/publish-academy-journeys.py
       - theme/academy-journeys.css
       - theme/academy-journeys.js
@@ -416,6 +417,7 @@ jobs:
           python3 -m unittest discover -s theme/tests -p 'test_home_conversational.py' -v
           node --check theme/home-conversational.js
           node theme/tests/test_home_conversational_js.cjs
+          node theme/tests/test_home_legacy_cleanup.cjs
           python3 theme/publish-home-conversational.py --site _site
           python3 theme/publish-home-conversational.py --site _site --verify-only
           # Public home for all audiences: keep Academy cards, add topic cards,
