@@ -126,6 +126,9 @@ jobs:
           grep -q 'FREE_PLAN_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
           grep -q 'MODEL_FREE_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
           grep -q 'DATA_PROTECTION_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
+          grep -q 'BETA_SYNTHETIC_ONLY = "true"' product/mission-copilot/wrangler.toml
+          test -s product/mission-copilot/beta-scenarios.mjs
+          node --check product/mission-copilot/beta-scenarios.mjs
           grep -q 'workers_dev = false' product/mission-copilot/wrangler.toml
           grep -q '^\[observability\]' product/mission-copilot/wrangler.toml
           grep -q '^\[observability.logs\]' product/mission-copilot/wrangler.toml
