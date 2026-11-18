@@ -41,6 +41,8 @@ jobs:
           node --check product/mission-copilot/preauth-rate-limit.test.mjs
           node --check product/mission-copilot/browser-origin.mjs
           node --check product/mission-copilot/browser-origin.test.mjs
+          node --check product/mission-copilot/private-browser-client.mjs
+          node --check product/mission-copilot/private-browser-client.test.mjs
       - name: Test safety gates and provider response handling using mocks only
         run: |
           node --test product/mission-copilot/worker.test.mjs
@@ -48,6 +50,7 @@ jobs:
           node --test product/mission-copilot/supabase-auth.test.mjs
           node --test product/mission-copilot/preauth-rate-limit.test.mjs
           node --test product/mission-copilot/browser-origin.test.mjs
+          node --test product/mission-copilot/private-browser-client.test.mjs
       - name: Assert disabled production configuration without Cloudflare network calls
         run: |
           node product/mission-copilot/zero-euro-preflight.mjs > /tmp/mission-copilot-preflight.json
