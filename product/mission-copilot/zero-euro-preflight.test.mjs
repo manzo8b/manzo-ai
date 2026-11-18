@@ -174,3 +174,27 @@ test("P5.12 pre-auth limiter must remain configured and precede Supabase verific
   assert.equal(unsafe.checks.preAuthLimiterBeforeSupabase, false);
   assert.equal(unsafe.configSafe, false);
 });
+
+test("P5.13 the private browser gate must remain disabled on production config", () => {
+  const valid = inspectOfflineConfiguration(wrangler, worker);
+  assert.equal(valid.checks.browserConnectionDefaultOff, true);
+  for (const bad of [
+    wrangler.replace('BROWSER_CONNECTION_CONFIRMED = "false"', 'BROWSER_CONNECTION_CONFIRMED = "true"'),
+    wrangler.replace('BROWSER_CONNECTION_CONFIRMED = "false"', "")
+  ]) {
+    const audit = inspectOfflineConfiguration(bad, worker);
+    assert.equal(audit.checks.browserConnectionDefaultOff, false);
+    assert.equal(audit.configSafe, false);
+  }
+  const bypass = worker.replace('if (!exactApprovedOrigin(request))', 'if (false)');
+  assert.equal(inspectOfflineConfiguration(wrangler, bypass).configSafe, false);
+});
+
+test("P5.13 browser-CORS helper is fixed to the GitHub Pages origin, not a wildcard", () => {
+  const module = readFileSync(resolve(root, "browser-origin.mjs"), "utf8");
+  assert.match(module, /https:\/\/manzo8b\.github\.io/);
+  assert.match(module, /BROWSER_CONNECTION_CONFIRMED/);
+  assert.match(module, /"access-control-allow-origin": MISSION_BROWSER_ORIGIN/);
+  assert.doesNotMatch(module, /"access-control-allow-origin"\s*:\s*"\*"/);
+  assert.doesNotMatch(module, /"access-control-allow-credentials"\s*:/);
+});
