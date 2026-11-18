@@ -242,6 +242,23 @@ def run(site,verify_only=False):
        "ma-home-curator",esc(COPY[lang]["hero"]),f'home-curation.css?v={digest}'):
     if invariant not in html:raise RuntimeError("Curation missing "+invariant+" "+lang)
    if 'data-ma-home-scene="1"' in html:raise RuntimeError("Removed technical scene is still present")
+   # Release gates: the homepage must genuinely offer four topics while retaining
+   # all six original Academy cards; neither source intent nor a CSS mock is enough.
+   if html.count('data-ma-intent="')!=4:raise RuntimeError("Home should offer exactly four goals "+lang)
+   if html.count('data-ma-course-card="1"')!=6:raise RuntimeError("Original six Academy cards were lost "+lang)
+   featured=re.findall(r'<a class="ma-topic-card ma-topic-[1-4]" href="([^"]+)"',html)
+   if len(featured)!=4 or len(set(featured))!=4:raise RuntimeError("Four distinct topic cards required "+lang)
+   menu=re.search(r'<nav class="ma-home-primary-nav"[^>]*>(.*?)</nav>',html,re.S)
+   if not menu:raise RuntimeError("Curated navigation is missing "+lang)
+   menu_links=re.findall(r'<a href="([^"]+)"',menu.group(1))
+   if len(menu_links)!=6 or len(set(menu_links))!=6:raise RuntimeError("Six unique homepage menu routes required "+lang)
+   for href in featured+menu_links:
+    if not href.startswith(BASE) or not href.endswith("/"):
+     raise RuntimeError("Unsafe internal link "+href)
+    target=site/href.removeprefix(BASE)/"index.html"
+    if not target.is_file():raise RuntimeError("Broken internal homepage link "+href)
+   stale=("Nuovi materiali scaricabili saranno aggiunti dopo revisione.","i video didattici che selezioneremo insieme","MANZO AI · v0.6")
+   if any(s in html for s in stale):raise RuntimeError("Outdated placeholder copy on homepage "+lang)
    continue
   if MARKER in html:raise RuntimeError("Repeated home curation "+lang)
   html=curated(site,lang,html)
