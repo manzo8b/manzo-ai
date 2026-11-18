@@ -88,3 +88,26 @@ The existing application continues working without the preview and keeps local d
 - Complete decision protocol: [P4 private beta](../../docs/MANZO_AI_COPILOT_P4_BETA_PRIVATA_ZERO_EURO_2026-11-18.md).
 - Do not set flags to true, deploy to Cloudflare, create a public hostname, or edit Access/billing settings without the owner's separate approval.
 
+
+## P5.5 — Offline reliability audit (branch only; still OFF)
+
+- Worker now asks Gemma 4 for `chat_template_kwargs: { enable_thinking: false }`, following Cloudflare's own model example while preserving the 650-token output cap.
+- Handles both text `response` and chat-completion `choices[0].message.content`, rejecting incomplete, filtered or refused chat results even if the body appears to contain valid JSON.
+- Regression tests and static preflight verify these rules; a dedicated offline GitHub Actions workflow checks a branch/pull request without Worker deployment, Cloudflare credentials or inference.
+- Do **not** assume Gemma 4 JSON Mode compatibility from the generic JSON Mode guide; preserve strict JSON parsing and validate support separately in the future.
+- P5.5 is source-only: real Access, model invocation, account Neurons and privacy/billing acceptance remain unverified.
+
+[Audit and release gates](../../docs/MANZO_AI_COPILOT_P5_5_AUDIT_RELIABILITY_2026-11-18.md).
+
+**No API has been connected to public Mission Studio and no paid service has been activated.**
+
+## P5.6 — Access Free onboarding and offline identity verification (still OFF)
+
+- The owner's screenshots confirm a Workers Free ($0) account, but the Cloudflare Zero Trust organization was not configured. **Workers Free and Zero Trust Free are separate plans.**
+- Cloudflare's current Zero Trust Free onboarding docs explicitly request payment details even though the plan itself is free. Do not submit card information, select a paid plan or change billing without separate owner authorization.
+- Cloudflare now supports protecting a single Worker by identity (rather than just one hostname). Once an Access organization is legitimately configured, prefer a Worker-wide, narrowly scoped account-member policy and test an authenticated direct invocation before any route is exposed.
+- **Local `wrangler dev` Access simulation is not production authentication.** Added P5.6 mock regression tests for audience matching, distinct pseudonymous identities, missing Access, forged browser headers, and identity service failures. No secrets, network inference or deploy are involved.
+- **Important:** Cloudflare Workers AI's actual model binding can still incur Neurons usage in local development. Mock tests are the approved cost-free method until the account and privacy gate are cleared.
+- Without verified Access, the Worker must remain unreachable and disabled, and public Mission Studio must remain a local, non-generative preview.
+
+[Access readiness dossier](../../docs/MANZO_AI_COPILOT_P5_6_ACCESS_FREE_ONBOARDING_2026-11-18.md).

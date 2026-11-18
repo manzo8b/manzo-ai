@@ -98,6 +98,7 @@ function protectedConfig(wrangler, worker) {
       /class_name\s*=\s*"CopilotQuota"/.test(wrangler) &&
       /new_sqlite_classes\s*=\s*\["CopilotQuota"\]/.test(wrangler),
     separatePrivacyGate: /DATA_PROTECTION_CONFIRMED\s*!==\s*"true"/.test(worker),
+    gemmaThinkingDisabled: /chat_template_kwargs:\s*\{\s*enable_thinking:\s*false\s*\}/.test(worker),
     quotaExpiryAlarm: worker.includes("await tx.setAlarm(") &&
       worker.includes("async alarm()") &&
       worker.includes("await this.ctx.storage.deleteAll()"),

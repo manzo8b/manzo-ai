@@ -114,3 +114,17 @@ test("P3 no inference API or paid provider is contacted by offline preflight", (
   assert.doesNotMatch(source, /CLOUDFLARE_API_TOKEN\s*=/);
   assert.doesNotMatch(wrangler, /^\s*(?:route|routes)\s*=/m);
 });
+
+test("P5.5 Gemma 4 non-reasoning must stay explicitly enabled in the source", () => {
+  const normal = inspectOfflineConfiguration(wrangler, worker);
+  assert.equal(normal.checks.gemmaThinkingDisabled, true);
+  for (const change of [
+    worker.replace('chat_template_kwargs: { enable_thinking: false }',
+      'chat_template_kwargs: { enable_thinking: true }'),
+    worker.replace('chat_template_kwargs: { enable_thinking: false }', '')
+  ]) {
+    const altered = inspectOfflineConfiguration(wrangler, change);
+    assert.equal(altered.configSafe, false);
+    assert.equal(altered.checks.gemmaThinkingDisabled, false);
+  }
+});

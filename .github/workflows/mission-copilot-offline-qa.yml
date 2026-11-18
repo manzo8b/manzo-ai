@@ -1,0 +1,44 @@
+name: Mission Copilot — P5 offline QA
+
+on:
+  pull_request:
+    paths:
+      - 'product/mission-copilot/**'
+      - '.github/workflows/mission-copilot-offline-qa.yml'
+  push:
+    branches:
+      - 'audit/mission-copilot-p5-5-20261118'
+    paths:
+      - 'product/mission-copilot/**'
+      - '.github/workflows/mission-copilot-offline-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-private-copilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check module syntax
+        run: |
+          node --check product/mission-copilot/worker.mjs
+          node --check product/mission-copilot/worker.test.mjs
+          node --check product/mission-copilot/beta-scenarios.mjs
+          node --check product/mission-copilot/zero-euro-preflight.mjs
+          node --check product/mission-copilot/zero-euro-preflight.test.mjs
+      - name: Test safety gates and provider response handling using mocks only
+        run: |
+          node --test product/mission-copilot/worker.test.mjs
+          node --test product/mission-copilot/zero-euro-preflight.test.mjs
+      - name: Assert disabled production configuration without Cloudflare network calls
+        run: |
+          node product/mission-copilot/zero-euro-preflight.mjs > /tmp/mission-copilot-preflight.json
+          grep -q '"status": "BLOCKED_NOT_CONNECTED"' /tmp/mission-copilot-preflight.json
+          grep -q '"configSafe": true' /tmp/mission-copilot-preflight.json
+          grep -q '"safeToEnablePublicInference": false' /tmp/mission-copilot-preflight.json
