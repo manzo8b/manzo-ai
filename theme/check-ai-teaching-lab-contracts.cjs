@@ -82,8 +82,11 @@ for(const rel of [
  "tools/ai-teaching-launchpad/mission-adapter.mjs",
  "tools/ai-teaching-launchpad/copilot-preview.mjs"
 ]){
- const source=load(rel);
- assert.ok(source.includes("export"),"Missing Copilot local module "+rel);
+ const full=path.join(root,rel);
+ assert.ok(fs.existsSync(full),"Missing Copilot local module "+rel);
+ const source=fs.readFileSync(full,"utf8");
+ assert.ok(source.length>1200,"Copilot local module unexpectedly short "+rel);
+ assert.ok(source.includes("export"),"Missing Copilot local module exports "+rel);
  assert.ok(!/\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage/.test(source),
    "Local Copilot preview must not fetch, transmit or persist data "+rel);
 }
