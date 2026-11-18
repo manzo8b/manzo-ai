@@ -73,7 +73,9 @@ def content_links(doc,lang):
   if not href.startswith(BASE) or not href.endswith("/"):raise RuntimeError("Invalid learning route")
  academy=BASE+lang+("/academia/" if lang=="es" else "/academy/")
  about=BASE+lang+"/"+ABOUT[lang]+"/"
- return (BASE+lang+"/",academy,links[0],links[1],links[2],about)
+ hrefs=(BASE+lang+"/",academy,links[0],links[1],links[2],about)
+ if len(set(hrefs))!=len(hrefs):raise RuntimeError("Homepage menu has duplicate destinations "+lang)
+ return hrefs
 
 def portal_copy(root):
  # Preserve visual layout; fix multilingual title and repeated unlocalized CTAs.
