@@ -136,10 +136,11 @@ export function inspectOfflineConfiguration(wrangler, worker, policy = BUDGET_BA
     budget,
     manualChecksRequired: [
       "Verify Cloudflare account is Workers Free and no paid billing is enabled",
-      "Verify Zero Trust Free onboarding and payment-method requirement with owner",
-      "Verify Access sign-in with a real restricted tester account",
+      "Confirm chosen identity path: Zero Trust requires payment details; Supabase needs allowlist and privacy review",
+      "Verify chosen provider with a real, restricted tester only after explicit authorization",
       "Reconfirm chosen model remains Free in the day of activation",
       "Inspect Cloudflare Workers AI dashboard for actual Neurons usage",
+      "If Supabase selected: confirm Free organization, no open registration, and pre-auth anti-abuse controls",
       "Review processor terms, transfers, privacy notices and school use with responsible parties",
       "Verify account-level logs, gateway logs, and observability are configured for no prompt/response retention",
       "Verify accessibility and consent notice before transmitting any real brief"
