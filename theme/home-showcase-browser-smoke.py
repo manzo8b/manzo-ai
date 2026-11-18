@@ -25,7 +25,7 @@ def assert_home(page, locale, academy_route, width):
     assert cards.count() == 6, f"{locale}: expected six Academy cards"
     assert page.locator(".home-hero").count() == 1
     assert page.locator(".home-hero input").count() >= 1, "Existing search lost"
-    assert page.locator(".ma-product-scene").count() == 1, "Existing product scene lost"
+    assert page.locator(".ma-product-scene").count() == 0, "Obsolete technical scene still present"
     assert page.locator(".ma-home-showcase .ma-course-card.ma-tone-blue").count() == 1
     assert page.locator(".ma-home-showcase .ma-course-card.ma-tone-navy").count() == 1
     assert page.locator(".ma-home-showcase .ma-course-art").count() == 6
