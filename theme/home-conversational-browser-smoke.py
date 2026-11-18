@@ -20,10 +20,10 @@ def inspect(page,base,locale,width,out=None):
  panel=page.locator('[data-ma-home-discovery="v1"]')
  assert hero.count()==1 and panel.count()==1,f"Home hero/discovery missing: {locale}"
  assert hero.locator(".searchbox input").count()>=1,"Existing search was displaced"
- assert page.locator(".ma-product-scene").count()==1,"Product scene unexpectedly missing"
+ assert page.locator(".ma-product-scene").count()==0,"Technical product scene must not appear on the curated home"
  assert page.locator(".ma-home-showcase .ma-course-card").count()==6,"Real Academy catalog changed"
  choices=panel.locator("[data-ma-intent]")
- assert choices.count()==4,f"Expected four real goals in {locale}"
+ assert choices.count()==3,f"Expected three focused learning goals in {locale}"
  action=panel.locator("[data-ma-discovery-action]")
  initial=action.get_attribute("href")
  assert initial and "ia-per-la-didattica/inizia/" in initial,initial
@@ -37,12 +37,11 @@ def inspect(page,base,locale,width,out=None):
  assert not errors,f"JavaScript errors {locale}: {errors}"
  if width<600:
   goal=choices.first.bounding_box()
-  scene=page.locator(".ma-product-scene").bounding_box()
-  assert goal and scene and goal["y"]<scene["y"],"Mobile goal must precede decorative scene"
+  assert goal and goal["width"]>130,"Focused learning choices are not usable on mobile"
  if out:
   Path(out).mkdir(parents=True,exist_ok=True)
   page.screenshot(path=str(Path(out)/f"home-{locale}-{width}.png"),full_page=True)
- print(f"PASS {locale} · {width}px · four goals, existing search, Academy, no overflow")
+ print(f"PASS {locale} · {width}px · three goals, existing search, Academy, no overflow")
 
 def main():
  parser=argparse.ArgumentParser()
