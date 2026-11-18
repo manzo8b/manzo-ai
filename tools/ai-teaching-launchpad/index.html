@@ -191,6 +191,36 @@ body[data-ma-surface] .mission-finish .btn:hover{
  .hero-copy{font-size:.93rem!important}
  .pathways .path:last-child:nth-child(odd){grid-column:1/-1}
 }
+
+/* Mission Copilot P1 · optional offline preview; hidden for ordinary visitors. */
+.copilot-preview[hidden],.copilot-preview [hidden]{display:none!important}
+.copilot-preview{
+ margin:8px 0 42px;padding:clamp(17px,3vw,27px);
+ border-radius:24px;background:#f5f9ff;border:1.5px solid #b6cdea;
+ box-shadow:0 16px 44px #1c4f9510;isolation:isolate;color:#111827;
+}
+.copilot-preview h2,body[data-ma-surface] .copilot-preview h2{color:#111827!important;font-size:clamp(1.35rem,3vw,2rem)!important;letter-spacing:-.04em!important;line-height:1.19!important}
+.copilot-preview p{color:#35465f;line-height:1.55}
+.copilot-preview .copilot-eyebrow{font-size:.72rem;color:#2055ad;font-weight:850;letter-spacing:.1em;margin:0 0 10px}
+.copilot-preview .copilot-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.copilot-preview .copilot-flag{display:inline-flex;background:#fff0d8;color:#7a4209;border:1px solid #edd1a6;padding:7px 11px;border-radius:30px;font-size:.74rem;font-weight:830}
+.copilot-preview .copilot-info{margin:10px 0 17px;max-width:77ch;font-size:.87rem}
+.copilot-preview .copilot-control{display:flex;flex-wrap:wrap;align-items:center;gap:13px}
+.copilot-preview .copilot-control .btn{min-height:45px}
+.copilot-preview .copilot-notice{font-size:.77rem;margin:0;color:#314b6d;flex:1;min-width:190px}
+.copilot-preview .copilot-result{margin-top:19px;padding:18px;border-radius:17px;background:#fff;border:1px solid #cbddf4}
+.copilot-preview .copilot-result h3{font-size:1rem;color:#111827;margin:0 0 12px}
+.copilot-preview .copilot-result h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:#2055a9;margin:16px 0 7px}
+.copilot-preview .copilot-result p,.copilot-preview .copilot-result li{font-size:.88rem;line-height:1.6;color:#26384f}
+.copilot-preview .copilot-result ol{padding-left:23px;margin:4px 0 13px}
+.copilot-preview .copilot-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:17px}
+.copilot-preview button:disabled{opacity:.55;cursor:not-allowed}
+.copilot-preview .copilot-status{font-size:.79rem;color:#234d87;margin:10px 0 0;min-height:21px}
+@media(max-width:600px){
+ .copilot-preview{padding:18px 15px;border-radius:18px}
+ .copilot-preview .copilot-control .btn,.copilot-preview .copilot-actions .btn{width:100%}
+ .copilot-preview .copilot-result{padding:15px}
+}
 </style>
 </head>
 <body>
@@ -259,6 +289,24 @@ body[data-ma-surface] .mission-finish .btn:hover{
 <p class="feedback" id="action-status" role="status" aria-live="polite"></p>
 </aside>
 </div>
+</section>
+<section class="copilot-preview" id="copilot-preview" hidden data-copilot-preview="offline-p1" aria-labelledby="copilot-title">
+ <div class="copilot-head"><div>
+  <p class="copilot-eyebrow">MISSION COPILOT / ANTEPRIMA TECNICA</p>
+  <h2 id="copilot-title">Dall'obiettivo a una proposta da rivedere</h2>
+ </div><span class="copilot-flag">Simulazione locale · Nessuna IA attiva</span></div>
+ <p class="copilot-info">Prova il collegamento tra il brief che stai compilando e il formato del futuro assistente. Gli esempi sono costruiti con regole fisse, non con un modello generativo. Non inserire dati personali degli studenti.</p>
+ <div class="copilot-control"><button class="btn blue" type="button" id="copilot-simulate">Prova la simulazione <span aria-hidden="true">↗</span></button>
+  <p class="copilot-notice" id="copilot-access">Questa è soltanto un'anteprima locale. Nessuna chiamata a servizi esterni.</p></div>
+ <div class="copilot-result" id="copilot-results" hidden aria-labelledby="copilot-result-title">
+  <h3 id="copilot-result-title">Proposta di esempio · non approvata</h3>
+  <h4>Obiettivo osservabile</h4><p id="copilot-goal"></p>
+  <h4>Attività suggerite</h4><ol id="copilot-activities"></ol>
+  <h4>Come valutare l'apprendimento</h4><p id="copilot-criteria"></p>
+  <div class="copilot-actions"><button class="btn dark" type="button" id="copilot-apply" disabled>Usa solo l'obiettivo nel brief</button>
+   <span class="copilot-flag">Revisione del docente obbligatoria</span></div>
+ </div>
+ <p class="copilot-status" id="copilot-status" role="status" aria-live="polite">Anteprima tecnica disattivata nel percorso ordinario.</p>
 </section>
 <section class="section" id="percorsi" aria-labelledby="courses-title">
 <div class="section-head"><div><div class="section-kicker">02 / Impara · Sperimenta · Verifica</div><h2 id="courses-title">Cinque moduli, nessuna scorciatoia</h2><p>La micro-app orienta la progettazione; i moduli forniscono teoria, casi e attività complete. Le 20 ore complessive sono una stima non ancora validata con docenti.</p></div></div>
@@ -374,6 +422,15 @@ window.addEventListener("beforeunload",event=>{if(unsaved){event.preventDefault(
 const params=new URLSearchParams(location.search),requested=params.get("mission");
 if(Object.hasOwn(missions,requested))mission=requested;
 render();
+const pilotQuery=new URLSearchParams(location.search).get("copilot");
+if(pilotQuery==="preview"){
+  // Explicit opt-in for P1 local simulation. No production AI endpoint.
+  import("./copilot-preview.mjs").then(module=>{
+    module.initializeCopilotPreview({getBrief:state,document:root,window});
+  }).catch(()=>{
+    const status=$("copilot-status");if(status)status.textContent="Anteprima non disponibile in questo browser.";
+  });
+}
 })();
 </script>
 </body>
