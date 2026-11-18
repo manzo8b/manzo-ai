@@ -88,12 +88,13 @@ permissions:
 
 concurrency:
   group: manzo-ai-pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -148,8 +149,9 @@ jobs:
         run: |
           set -euo pipefail
           if [ -s editorial/video/prompt-engineering/Prompt_Engineering.mp4 ] && ! command -v ffmpeg >/dev/null 2>&1; then
-            sudo apt-get update -qq
-            sudo apt-get install -y ffmpeg
+            # Time-bound external package operations; never hold the Pages lock indefinitely.
+            timeout 120s sudo apt-get update -qq
+            timeout 120s sudo apt-get install -y ffmpeg
           fi
       - name: Install Markdown renderer for the open teacher course
         run: python3 -m pip install --disable-pip-version-check markdown==3.10
