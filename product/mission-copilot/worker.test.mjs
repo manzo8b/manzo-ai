@@ -39,11 +39,17 @@ function quotaFixture() {
   const values = new Map();
   let clock = Date.now();
   let queue = Promise.resolve();
-  const state = { storage: { transaction(fn) {
+  let alarmAt = null;
+  const state = { storage: {
+    get: async key => structuredClone(values.get(key)),
+    setAlarm: async timestamp => { alarmAt = timestamp; },
+    deleteAll: async () => { values.clear(); alarmAt = null; },
+    transaction(fn) {
     // Emulate serialized/atomic SQLite Durable Object transactions.
     const p = queue.then(() => fn({
       get: async key => structuredClone(values.get(key)),
-      put: async (key, value) => { values.set(key, structuredClone(value)); }
+      put: async (key, value) => { values.set(key, structuredClone(value)); },
+      setAlarm: async timestamp => { alarmAt = timestamp; }
     }));
     queue = p.catch(() => {});
     return p;
@@ -58,7 +64,9 @@ function quotaFixture() {
     binding,
     values,
     setNow(value) { clock=value; },
-    advance(ms) { clock+=ms; }
+    advance(ms) { clock+=ms; },
+    getAlarm() { return alarmAt; },
+    fireAlarm() { return instance.alarm(); }
   };
 }
 const env = (mockAI = async () => ({ response: JSON.stringify(answer) }), q = quotaFixture()) => ({
@@ -232,6 +240,49 @@ test("P2 global counters reset at UTC day boundary, no historical email records"
   assert.equal(ledger.day,"2026-11-19");
   assert.equal(ledger.total,1);
   assert.deepEqual(Object.keys(ledger.people),["a".repeat(64)]);
+});
+test("P4 expired pseudonymous quota ledger is removed by midnight alarm",async()=>{
+  const q=quotaFixture();
+  q.setNow(Date.parse("2026-11-18T09:00:00.000Z"));
+  assert.equal((await reserve(q)).status,200);
+  assert.equal(q.getAlarm(),Date.parse("2026-11-19T00:01:00.000Z"));
+  assert.equal(q.values.size,1);
+  // At expiry, the alarm erases the counter without a future visitor.
+  q.setNow(Date.parse("2026-11-19T00:02:00.000Z"));
+  await q.fireAlarm();
+  assert.equal(q.values.size,0);
+  assert.equal(q.getAlarm(),null);
+});
+test("P4 early or duplicate quota cleanup alarm never erases today's ledger",async()=>{
+  const q=quotaFixture();
+  q.setNow(Date.parse("2026-11-18T09:00:00.000Z"));
+  assert.equal((await reserve(q)).status,200);
+  await q.fireAlarm();
+  assert.equal(q.values.get("daily-ledger")?.total,1);
+  assert.equal(q.getAlarm(),Date.parse("2026-11-19T00:01:00.000Z"));
+});
+test("P4 a missing alarm binding blocks the reservation and inference",async()=>{
+  const q=quotaFixture();
+  const raw=q.binding.get();
+  const corrupted={
+    idFromName:q.binding.idFromName,
+    get:()=>({
+      fetch: req => {
+        // A transaction storage that cannot schedule expiry must fail closed.
+        const badStore={ storage: {transaction: fn=>fn({
+          get:async()=>undefined,
+          put:async()=>undefined
+        })}};
+        return new CopilotQuota(badStore).fetch(req);
+      }
+    })
+  };
+  let modelCalls=0;
+  const standard={...env(async()=>{modelCalls++;},q),GLOBAL_QUOTA:corrupted};
+  const result=await read(await worker.fetch(request(payload),standard,ctx()));
+  assert.equal(result.status,503);
+  assert.equal(result.data.code,"QUOTA_UNAVAILABLE");
+  assert.equal(modelCalls,0);
 });
 test("P2 failed inference still consumes reservation, no bypass via retry",async()=>{
   const q=quotaFixture(); let calls=0;
