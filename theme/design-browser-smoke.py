@@ -49,7 +49,7 @@ def test(page,route,expected_kind,screen,width):
   actual=[features.nth(i).evaluate('(el)=>getComputedStyle(el).backgroundColor') for i in range(3)]
   assert actual==expected,(screen,width,'pastel home cards survived',actual)
   assert page.locator('.home-hero').evaluate('(el)=>getComputedStyle(el).backgroundColor')=='rgb(255, 255, 255)',(screen,'home hero not white')
-  assert page.locator('.home-hero .ma-product-scene').evaluate('(el)=>getComputedStyle(el).backgroundColor')=='rgb(33, 88, 237)',(screen,'product scene missing contrast')
+  assert page.locator('.home-hero .ma-product-scene').count()==0,(screen,'obsolete technical product scene still visible')
   assert all(features.nth(i).evaluate('(el)=>getComputedStyle(el).boxShadow')!='none' for i in range(3)),(screen,'feature depth missing')
   if width==1440:
    first_box=features.first.bounding_box()
@@ -60,8 +60,8 @@ def test(page,route,expected_kind,screen,width):
    assert features.first.evaluate('(el)=>getComputedStyle(el).transform')!='none',(screen,'interactive card effect missing')
   if width==390:
    assert page.evaluate('document.documentElement.scrollWidth-window.innerWidth')<=4,(screen,'horizontal overflow')
-  assert page.locator('[data-ma-home-scene="1"]').count()==1
-  assert page.locator('.ma-product-scene a[href*="/prodotto/"],.ma-product-scene a[href*="/product/"],.ma-product-scene a[href*="/producto/"]').count()==1
+  assert page.locator('[data-ma-home-curation="v2"]').count()==1
+  assert page.locator('[data-ma-home-primary-nav="v2"] a').count()==6
  if screen.endswith('product'):
   assert page.locator('.product-card').count()==3
   assert page.locator('.btn-primary').first.is_enabled()
