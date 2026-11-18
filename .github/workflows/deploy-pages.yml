@@ -23,7 +23,7 @@ on:
       - tools/ai-teaching-workspace/**
       - tools/ai-teaching-launchpad/**
       - product/mission-copilot/**
-      - tools/ai-teaching-launchpad/**
+
       - product/learning-experience/**
       - theme/publish-learning-experience.py
       - theme/publish-ai-teaching-lab.py
@@ -108,14 +108,25 @@ jobs:
         run: |
           set -euo pipefail
           node --check product/mission-copilot/worker.mjs
+          node --check product/mission-copilot/worker.test.mjs
           node --test product/mission-copilot/worker.test.mjs
           # P1 is only a local simulation behind ?copilot=preview.
           # Never add Cloudflare credentials or an endpoint to GitHub Pages.
           node --check tools/ai-teaching-launchpad/mission-adapter.mjs
           node --check tools/ai-teaching-launchpad/copilot-preview.mjs
           node --test tools/ai-teaching-launchpad/mission-adapter.test.mjs
+          # All three activation gates remain OFF without explicit owner approval.
           grep -q 'COPILOT_ENABLED = "false"' product/mission-copilot/wrangler.toml
+          grep -q 'FREE_PLAN_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
+          grep -q 'MODEL_FREE_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
           grep -q 'workers_dev = false' product/mission-copilot/wrangler.toml
+          grep -q 'name = "GLOBAL_QUOTA"' product/mission-copilot/wrangler.toml
+          grep -q 'class_name = "CopilotQuota"' product/mission-copilot/wrangler.toml
+          grep -q 'new_sqlite_classes = \["CopilotQuota"\]' product/mission-copilot/wrangler.toml
+          if grep -Eq '^\s*(ACCESS_AUD|QUOTA_HASH_SALT|PREVIEW_ACCESS_TOKEN)\s*=' product/mission-copilot/wrangler.toml; then
+            echo "::error::Never commit Access keys or identity secrets"
+            exit 1
+          fi
           if grep -Eq '^[[:space:]]*(route|routes)[[:space:]]*=' product/mission-copilot/wrangler.toml; then
             echo "::error::Private Copilot cannot expose a Cloudflare route"
             exit 1
