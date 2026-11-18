@@ -100,3 +100,14 @@ The existing application continues working without the preview and keeps local d
 [Audit and release gates](../../docs/MANZO_AI_COPILOT_P5_5_AUDIT_RELIABILITY_2026-11-18.md).
 
 **No API has been connected to public Mission Studio and no paid service has been activated.**
+
+## P5.6 — Access Free onboarding and offline identity verification (still OFF)
+
+- The owner's screenshots confirm a Workers Free ($0) account, but the Cloudflare Zero Trust organization was not configured. **Workers Free and Zero Trust Free are separate plans.**
+- Cloudflare's current Zero Trust Free onboarding docs explicitly request payment details even though the plan itself is free. Do not submit card information, select a paid plan or change billing without separate owner authorization.
+- Cloudflare now supports protecting a single Worker by identity (rather than just one hostname). Once an Access organization is legitimately configured, prefer a Worker-wide, narrowly scoped account-member policy and test an authenticated direct invocation before any route is exposed.
+- **Local `wrangler dev` Access simulation is not production authentication.** Added P5.6 mock regression tests for audience matching, distinct pseudonymous identities, missing Access, forged browser headers, and identity service failures. No secrets, network inference or deploy are involved.
+- **Important:** Cloudflare Workers AI's actual model binding can still incur Neurons usage in local development. Mock tests are the approved cost-free method until the account and privacy gate are cleared.
+- Without verified Access, the Worker must remain unreachable and disabled, and public Mission Studio must remain a local, non-generative preview.
+
+[Access readiness dossier](../../docs/MANZO_AI_COPILOT_P5_6_ACCESS_FREE_ONBOARDING_2026-11-18.md).
