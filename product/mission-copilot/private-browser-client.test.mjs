@@ -8,9 +8,12 @@ import {
 const URL = "https://private-beta.example.invalid/api/plan";
 const TOKEN = "header.payload.signature"; // deliberately NOT a valid session
 const config = Object.freeze({ enabled: true, endpoint: URL });
-const sessionClient = (token = TOKEN) => ({
-  auth: { async getSession() { return { data: { session: { access_token: token } }, error: null }; } }
-});
+const sessionClient = (...args) => {
+  const token = args.length ? args[0] : TOKEN;
+  return {
+    auth: { async getSession() { return { data: { session: { access_token: token } }, error: null }; } }
+  };
+};
 const validDraft = {
   schema: "mission-copilot-v0.1",
   status: "bozza_non_approvata",
