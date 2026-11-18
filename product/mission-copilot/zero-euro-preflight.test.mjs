@@ -58,6 +58,22 @@ test("P3 missing privacy gate or any activation OFF flag breaks security preflig
   );
   assert.equal(inspectOfflineConfiguration(wrangler, withoutGate).configSafe, false);
 });
+test("P4 first beta must be synthetic-only in both Worker source and Wrangler", () => {
+  const normal = inspectOfflineConfiguration(wrangler, worker);
+  assert.equal(normal.checks.syntheticBetaOnly, true);
+  assert.equal(normal.safeToEnablePublicInference, false);
+  for (const source of [
+    wrangler.replace('BETA_SYNTHETIC_ONLY = "true"', 'BETA_SYNTHETIC_ONLY = "false"'),
+    wrangler.replace('BETA_SYNTHETIC_ONLY = "true"', '')
+  ]) {
+    const result = inspectOfflineConfiguration(source, worker);
+    assert.equal(result.configSafe, false);
+    assert.equal(result.checks.syntheticBetaOnly, false);
+  }
+  assert.equal(inspectOfflineConfiguration(
+    wrangler, worker.replace('scenarioInput(JSON.parse(raw))', 'JSON.parse(raw)')
+  ).configSafe, false);
+});
 test("P3 fake public route, disabled quotas or logging on must fail preflight", () => {
   const broken = [
     wrangler + '\nroute = "example.com/*"',
