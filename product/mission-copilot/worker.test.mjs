@@ -468,7 +468,7 @@ test("P5.7 an unverified authorization header never enables Supabase inference",
   });
   const out = await read(await worker.fetch(
     request({ scenarioId: "water_cycle" }, {
-      authorization: "Bearer a.b.c",
+      authorization: "Bearer malformed",
       "x-user-id": "11111111-1111-4111-8111-111111111111"
     }),
     {
