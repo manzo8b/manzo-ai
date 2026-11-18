@@ -221,11 +221,8 @@ function modelText(result) {
 }
 async function handleRequest(request, env, context) {
     const path = new URL(request.url).pathname;
-    if (path === "/health" && request.method === "GET") {
-      return send(200, {
-        ok: true, status: "private_prototype", enabled: env?.COPILOT_ENABLED === "true"
-      });
-    }
+    // No unauthenticated diagnostic endpoint. Keep all non-API routes private
+    // (and indistinguishable) even if a Worker URL is later configured.
     if (path !== "/api/plan") return fail(404, "NOT_FOUND");
     if (request.method !== "POST") return fail(405, "METHOD_NOT_ALLOWED");
     if (env?.COPILOT_ENABLED !== "true") return fail(503, "COPILOT_DISABLED");
