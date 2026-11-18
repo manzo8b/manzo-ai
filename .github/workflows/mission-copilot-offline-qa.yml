@@ -10,6 +10,7 @@ on:
       - 'audit/mission-copilot-p5-5-20261118'
       - 'audit/mission-copilot-p5-7-supabase-20261118'
       - 'audit/mission-copilot-p5-12-preauth-20261118'
+      - 'audit/mission-copilot-p5-13-browser-20261118'
     paths:
       - 'product/mission-copilot/**'
       - '.github/workflows/mission-copilot-offline-qa.yml'
@@ -38,12 +39,15 @@ jobs:
           node --check product/mission-copilot/supabase-auth.test.mjs
           node --check product/mission-copilot/preauth-rate-limit.mjs
           node --check product/mission-copilot/preauth-rate-limit.test.mjs
+          node --check product/mission-copilot/browser-origin.mjs
+          node --check product/mission-copilot/browser-origin.test.mjs
       - name: Test safety gates and provider response handling using mocks only
         run: |
           node --test product/mission-copilot/worker.test.mjs
           node --test product/mission-copilot/zero-euro-preflight.test.mjs
           node --test product/mission-copilot/supabase-auth.test.mjs
           node --test product/mission-copilot/preauth-rate-limit.test.mjs
+          node --test product/mission-copilot/browser-origin.test.mjs
       - name: Assert disabled production configuration without Cloudflare network calls
         run: |
           node product/mission-copilot/zero-euro-preflight.mjs > /tmp/mission-copilot-preflight.json
