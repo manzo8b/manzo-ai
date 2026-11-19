@@ -17,6 +17,8 @@ on:
       - editorial/research/acr/**
       - editorial/learning/hallucinations/**
       - editorial/learning/ai-teaching-lab/**
+      - editorial/learning/prompt-vs-skill/**
+      - theme/publish-prompt-skill-course.py
       - tools/ai-teaching-image-studio/**
       - tools/ai-teaching-voice-studio/**
       - tools/ai-teaching-video-studio/**
