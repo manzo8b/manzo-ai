@@ -19,6 +19,7 @@ on:
       - editorial/learning/ai-teaching-lab/**
       - editorial/learning/prompt-vs-skill/**
       - theme/publish-prompt-skill-course.py
+      - theme/prompt_skill_visuals.py
       - tools/ai-teaching-image-studio/**
       - tools/ai-teaching-voice-studio/**
       - tools/ai-teaching-video-studio/**
@@ -442,6 +443,12 @@ jobs:
           python3 theme/publish-about.py --site _site --verify-only
           # Generate final SEO index ONLY after all published editorial pages exist.
           python3 theme/build-seo.py --site _site --base-url "https://${GITHUB_REPOSITORY_OWNER}.github.io/manzo-ai/"
+          # Prompt vs Skill diagrams, including the visible four-child family reasoning map.
+          python3 -m py_compile theme/prompt_skill_visuals.py theme/publish-prompt-skill-course.py
+          python3 theme/publish-prompt-skill-course.py --site _site --verify-only
+          for diagram in mappa-prompt mappa-salto mappa-skill mappa-famiglia; do
+            grep -q "id=\"$diagram\"" _site/it/formazione/prompt-vs-skill/index.html
+          done
           # Final enhancement on all rendered pages, including editorial media and language landing.
           node --check theme/mobile-nav.js
           python3 -m py_compile theme/publish-navigation.py
