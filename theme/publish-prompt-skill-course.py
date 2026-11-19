@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 import re
 import shutil
+from prompt_skill_visuals import decorate_reading, family_map
 
 try:
     import markdown
@@ -135,6 +136,7 @@ def build_page(site):
         slug="lettura-"+str(i)
         toc.append(f'<a class="ps-toc-card" href="#{slug}" data-open-reading="{slug}"><span class="ps-toc-count">Lettura di approfondimento</span><strong>{e(SHORT[i-1])}</strong><small>Apri la lettura <span aria-hidden="true">↗</span></small></a>')
         rendered=markdown.markdown(body,extensions=["fenced_code","tables","sane_lists"])
+        rendered=decorate_reading(i, rendered)
         blocks.append(f'<section class="ps-reading" id="{slug}"><details {"open" if i==1 else ""}><summary><span class="ps-reading-index">Lettura di approfondimento <em>{i} di 6</em></span><span class="ps-reading-title">{e(title)}</span><span class="ps-reading-toggle" aria-hidden="true">+</span></summary><div class="ps-reading-copy">{rendered}<label class="ps-completion"><input type="checkbox" class="ps-read-check"> Ho letto e riflettuto sul testo</label><a href="#indice-letture" class="ps-back">Torna all’indice delle letture ↑</a></div></details></section>')
     board,clues=crossword()
     canonical="https://manzo8b.github.io/"+SLUG+"/"
@@ -171,9 +173,18 @@ def build_page(site):
 <p>Ogni parte del corso è una <strong>lettura di approfondimento</strong>, non un capitolo numerato. Apri una lettura alla volta, sperimenta e torna all'indice quando desideri. Il percorso è gratuito, senza iscrizione e senza progressi salvati sul server.</p></div>
 </section>
 <section class="ps-shell ps-guide" id="indice-letture"><div class="ps-section-heading"><div><p class="ps-overline">CONTENUTI DEL CORSO</p><h2>Le letture di approfondimento</h2></div><p>Sei percorsi narrativi, dal primo prompt al metodo applicato nella vita quotidiana</p></div>
-<div class="ps-toc">{"".join(toc)}</div><p class="ps-counter" id="ps-progress" aria-live="polite">0 di 6 letture segnate come completate in questa sessione</p>
+<div class="ps-toc">{"".join(toc)}</div>
+<nav class="ps-viz-jumps" aria-label="Apri le mappe visive">
+<strong>Mappe visive del corso</strong>
+<a href="#lettura-2" data-open-reading="lettura-2">Architettura del prompt ↗</a>
+<a href="#lettura-3" data-open-reading="lettura-3">Il salto di qualità ↗</a>
+<a href="#lettura-4" data-open-reading="lettura-4">Struttura della skill ↗</a>
+<a href="#mappa-famiglia">Famiglia con quattro figli ↗</a>
+</nav>
+<p class="ps-counter" id="ps-progress" aria-live="polite">0 di 6 letture segnate come completate in questa sessione</p>
 </section>
 <div class="ps-shell ps-readings">{"".join(blocks)}</div>
+{family_map()}
 <section class="ps-shell ps-lab" id="laboratorio">
 <p class="ps-overline">LABORATORIO DI PROGETTAZIONE</p><h2>Un problema, tre architetture</h2>
 <p>Giulia ripete il ripasso ogni settimana. Confronta un prompt scritto una volta, un prompt template e una skill Agent Skills. La tua sfida non è costruire la soluzione più complessa, ma giustificare quando un metodo riutilizzabile produce un vantaggio concreto.</p>
@@ -222,6 +233,11 @@ def verify(site):
     if doc.count("class=\"ps-reading\"") != 6: raise RuntimeError("Expected six complete readings")
     if doc.count("Lettura di approfondimento") < 7: raise RuntimeError("Reading label missing")
     if "Capitolo 01" in doc or "Capitolo 02" in doc: raise RuntimeError("Incorrect chapter labels")
+    # All four teaching diagrams must render in the final HTML (not just the source).
+    for key in ('id="mappa-prompt"','id="mappa-salto"','id="mappa-skill"','id="mappa-famiglia"'):
+        if doc.count(key) != 1: raise RuntimeError("Missing or duplicated learning flowchart: "+key)
+    if "Uno dei figli si ammala" not in doc or "famiglia composta da due genitori e quattro figli" not in doc:
+        raise RuntimeError("Family scenario or its complete narrative is missing")
     for key in ("id=\"laboratorio\"","id=\"cruciverba\"","id=\"verifica\"","id=\"ps-quiz-data\""):
         if key not in doc: raise RuntimeError("Course activity missing: "+key)
     if len(json.loads(re.search(r'<script type="application/json" id="ps-quiz-data">(.+?)</script>',doc).group(1))) != 10:
@@ -231,7 +247,7 @@ def verify(site):
     for p in ("it/academy/index.html","it/risorse/index.html"):
         page=(site/p).read_text(encoding="utf-8")
         if page.count(MARKER)!=1 or f'{BASE}{SLUG}/' not in page: raise RuntimeError("Missing or duplicate course card "+p)
-    print("Prompt vs Skill: six deep readings, 10 quiz items, 8 crossword words, Academy and resources cards verified")
+    print("Prompt vs Skill: six deep readings, four visual flows, family narrative, 10 quiz items, 8 crossword words, Academy and resources cards verified")
 
 def publish(site):
     if not (site/"it/academy/index.html").is_file(): raise RuntimeError("Academy not found")
