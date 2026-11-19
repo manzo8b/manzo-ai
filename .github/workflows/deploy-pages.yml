@@ -18,6 +18,10 @@ on:
       - editorial/learning/hallucinations/**
       - editorial/learning/ai-teaching-lab/**
       - editorial/learning/prompt-vs-skill/**
+      - editorial/learning/mental-models-reliability/**
+      - theme/publish-reliability-course.py
+      - theme/reliability-course.css
+      - theme/reliability-course.js
       - theme/publish-prompt-skill-course.py
       - theme/prompt_skill_visuals.py
       - tools/ai-teaching-image-studio/**
@@ -446,6 +450,8 @@ jobs:
           # Prompt vs Skill diagrams, including the visible four-child family reasoning map.
           python3 -m py_compile theme/prompt_skill_visuals.py theme/publish-prompt-skill-course.py
           python3 theme/publish-prompt-skill-course.py --site _site --verify-only
+          python3 -m py_compile theme/publish-reliability-course.py
+          python3 theme/publish-reliability-course.py --site _site --verify-only
           for diagram in mappa-prompt mappa-salto mappa-skill mappa-famiglia; do
             grep -q "id=\"$diagram\"" _site/it/formazione/prompt-vs-skill/index.html
           done
@@ -493,6 +499,9 @@ jobs:
           python3 theme/publish-prompt-skill-home.py --site _site --verify-only
           test -s _site/assets/prompt-skill-home-card.css
           grep -q 'data-ma-home-course="prompt-vs-skill"' _site/it/index.html
+          grep -q 'data-ma-home-course="modelli-mentali-affidabilita"' _site/it/index.html
+          test -s _site/assets/reliability-course.css
+          test -s _site/assets/reliability-course.js
           for lang in it en es; do
             grep -q 'data-ma-home-curation="v2"' "_site/$lang/index.html"
             grep -q 'data-ma-home-primary-nav="v2"' "_site/$lang/index.html"
