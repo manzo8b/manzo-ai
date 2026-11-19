@@ -228,3 +228,15 @@
   .ma-home-showcase .ps-home-course-card{transition:none!important}
   .ma-home-showcase .ps-home-course-card:hover{transform:none!important}
 }
+
+/* Second new course / same reviewed layout geometry, distinct visual identity */
+.ma-home-showcase .mr-home-course-card .ma-course-art.ps-home-art{
+ background:linear-gradient(126deg,#087a71 0%,#147b96 52%,#245fbd 100%);
+}
+.ma-home-showcase .mr-home-course-card .ps-home-art-p{
+ background:#edffff;color:#0f6971;letter-spacing:-.09em;font-size:.83em;
+}
+.ma-home-showcase .mr-home-course-card .ps-home-art-s{
+ background:#d6f6a7;color:#17465c;
+}
+.ma-home-showcase .mr-home-course-card .ps-home-art-brand span{color:#d9fcae}
