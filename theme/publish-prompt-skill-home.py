@@ -25,7 +25,7 @@ def home_card()->str:
     url=BASE+ROUTE+"/"
     return f'''<article class="ma-course-card ps-home-course-card" {MARKER} data-ma-category="prompt" aria-labelledby="ps-home-course-title">
   <div class="ma-course-art ps-home-art" aria-hidden="true">
-    <span class="ps-home-art-label">CORSO / NUOVO</span>
+    <span class="ps-home-art-label">SKILL / 07</span>
     <div class="ps-home-art-diagram">
       <span class="ps-home-art-p">P</span>
       <span class="ps-home-art-arrow">→</span>
@@ -34,10 +34,10 @@ def home_card()->str:
     <strong class="ps-home-art-brand">MANZO<span>AI</span></strong>
   </div>
   <div class="ma-course-info ps-home-info">
-    <p class="ps-home-kind">Corso completo</p>
+    <p class="ps-home-kind">Corso</p>
     <h3 id="ps-home-course-title">Prompt vs Skill</h3>
-    <p class="ps-home-desc">Dalla scrittura di un prompt all’architettura di una skill. Scopri quando fare il salto, come usare gli strumenti e perché il metodo serve anche senza IA.</p>
-    <div class="ps-home-tags"><span>Prompt Engineering</span><span>Agent Skills</span><span>Laboratorio e quiz</span></div>
+    <p class="ps-home-desc">Impara a progettare prompt e skill, scegliere il metodo più adatto e verificarne i risultati.</p>
+    <div class="ps-home-tags"><span>Prompting</span><span>Agent Skills</span></div>
     <a href="{escape(url,quote=True)}" class="ma-course-link ps-home-link"><span>Apri il percorso</span><span class="ps-home-link-arrow" aria-hidden="true">↗</span></a>
   </div>
 </article>'''
@@ -59,10 +59,19 @@ def run(site:Path,verify_only:bool=False)->None:
         raise RuntimeError("Academy grid ended before six cards")
     if not CSS.is_file():
         raise RuntimeError("Home course CSS missing")
+    # Academy card design standard: 1 shared cover, 1 title, concise copy,
+    # at most two chips, and a single horizontal CTA row on all viewports.
+    if home_card().count('class="ps-home-tags"') != 1 or home_card().count('<span>Prompting</span><span>Agent Skills</span>') != 1:
+        raise RuntimeError("New course card does not follow the two-tag catalog standard")
     digest=hashlib.sha256(CSS.read_bytes()).hexdigest()[:12]
     asset=site/"assets/prompt-skill-home-card.css"
     if verify_only:
         if html.count(MARKER)!=1: raise RuntimeError("New course card missing or duplicated")
+        new=html.split(MARKER,1)[1].split("</article>",1)[0]
+        if "SKILL / 07" not in new or "Corso</p>" not in new:
+            raise RuntimeError("Academy cover or teaching format inconsistent")
+        if new.count('class="ps-home-link-arrow"') != 1 or new.count("ps-home-tags") != 1:
+            raise RuntimeError("Academy CTA and tag structure inconsistent")
         if html.count('data-ma-course-card="1"')!=6: raise RuntimeError("Original Academy cards changed")
         if html.count(f'href="{BASE}{ROUTE}/"')!=1: raise RuntimeError("Home course link missing")
         if f'prompt-skill-home-card.css?v={digest}' not in html:
