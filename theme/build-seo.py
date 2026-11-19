@@ -105,6 +105,10 @@ def publish(site: Path, base: str) -> int:
     base = base.rstrip('/')+'/'
     if urlparse(base).scheme != 'https' or not urlparse(base).path.endswith('/manzo-ai/'):
         raise ValueError('Provide the HTTPS GitHub Pages project root ending /manzo-ai/')
+    # Publish the complete learning course before canonical URL and sitemap assembly.
+    if (site/"it/academy/index.html").is_file():
+        import subprocess, sys
+        subprocess.run([sys.executable, str(Path(__file__).with_name("publish-prompt-skill-course.py")), "--site", str(site)], check=True)
     for locale in LOCALES:
         if not (site/locale/'index.html').is_file(): raise RuntimeError('Missing locale: '+locale)
         sitemap_page(site,base,locale)
