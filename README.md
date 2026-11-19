@@ -24,6 +24,10 @@ MANZO AI combina progettazione di workflow digitali, verificabilità degli outpu
 ---
 
 
+## Standard delle card Academy · 19 novembre 2026
+
+**Regola permanente di UI/UX per i nuovi corsi:** tutte le card nella Home devono essere uniformi per dimensioni, proporzioni delle copertine, padding, lunghezza dei testi, badge e CTA «Apri il percorso» su una sola riga. Colori e illustrazioni possono variare; struttura e comportamento responsivo devono rimanere coerenti. Prima della pubblicazione confrontare visivamente la nuova card con quelle esistenti su desktop e smartphone. **[Specifiche vincolanti](theme/ACADEMY_CARD_STANDARD.md).**
+
 ## HOME inclusiva + AI Academy · 18 novembre 2026
 
 MANZO AI mantiene la selezione centrale delle lingue e propone un ingresso **per tutti**: persone curiose, studenti, professionisti, creatori e docenti. Le homepage IT/EN/ES presentano quattro obiettivi generali (fondamenti IA, prompt, allucinazioni, creazione), quattro card tematiche aggiuntive e **tutte le sei card Academy preesistenti**. AI Teaching Lab è un percorso specifico, non il pubblico principale del portale.
