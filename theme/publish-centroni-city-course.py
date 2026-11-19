@@ -90,7 +90,7 @@ def read():
         parts.append((title,body))
     for url in SOURCES:
         if url not in doc:raise RuntimeError("Authoritative source missing: "+url)
-    for term in ("non riceve né conserva segnalazioni personali","nessun dato del segnalante","indipendente"):
+    for term in ("non riceve né conserva segnalazioni personali","non raccogliere alcun dato del segnalante","indipendente"):
         if term.lower() not in doc.lower():raise RuntimeError("Safety boundary absent: "+term)
     return parts
 
