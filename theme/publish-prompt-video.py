@@ -71,7 +71,9 @@ def video_page(has_subtitles:bool, has_cover:bool, upload_date: str | None = Non
     if upload_date:
         graph['uploadDate'] = upload_date
     subs = ('<track kind="captions" src="'+ASSETS+SUBTITLE+'" srclang="it" label="Italiano" default>' if has_subtitles else '')
-    poster = (' poster="'+ASSETS+'copertina.jpg"' if has_cover else '')
+    # Keep video playable even when FFmpeg is not installed on the Pages runner.
+    # Use an existing branded SVG poster instead of failing the whole release.
+    poster = (' poster="'+ASSETS+'copertina.jpg"' if has_cover else ' poster="/manzo-ai/logo.svg"')
     subtitle_download = (f'<a class="btn btn-alt" href="{ASSETS}{SUBTITLE_SRT}" download>Scarica sottotitoli italiani SRT</a>' if has_srt else '')
     return f'''<!doctype html>
 <html lang="it"><head>
