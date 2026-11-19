@@ -110,6 +110,7 @@ def publish(site: Path, base: str) -> int:
         import subprocess, sys
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-prompt-skill-course.py")), "--site", str(site)], check=True)
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-reliability-course.py")), "--site", str(site)], check=True)
+        subprocess.run([sys.executable, str(Path(__file__).with_name("publish-centroni-city-course.py")), "--site", str(site)], check=True)
     for locale in LOCALES:
         if not (site/locale/'index.html').is_file(): raise RuntimeError('Missing locale: '+locale)
         sitemap_page(site,base,locale)
