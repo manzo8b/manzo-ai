@@ -240,3 +240,15 @@
  background:#d6f6a7;color:#17465c;
 }
 .ma-home-showcase .mr-home-course-card .ps-home-art-brand span{color:#d9fcae}
+
+/* Centroni City: same card dimensions/spacing as all Academy courses, unique civic palette */
+.ma-home-showcase .cc-home-course-card .ma-course-art.ps-home-art{
+ background:linear-gradient(125deg,#007c82 0%,#146b9a 53%,#2657af 100%);
+}
+.ma-home-showcase .cc-home-course-card .ps-home-art-p{
+ background:#e7ffff;color:#0a6872;font-size:.89em;
+}
+.ma-home-showcase .cc-home-course-card .ps-home-art-s{
+ background:#ffe4ba;color:#8a4b1f;font-size:.89em;
+}
+.ma-home-showcase .cc-home-course-card .ps-home-art-brand span{color:#ffe7ba}
