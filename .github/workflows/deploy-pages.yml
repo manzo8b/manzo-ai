@@ -61,6 +61,8 @@ on:
       - theme/home-conversational.js
       - theme/publish-home-conversational.py
       - theme/publish-home-curation.py
+      - theme/publish-prompt-skill-home.py
+      - theme/prompt-skill-home-card.css
       - theme/home-curation.css
       - theme/publish-about.py
       - theme/tests/test_home_curation.py
@@ -477,6 +479,13 @@ jobs:
           python3 theme/publish-home-curation.py --site _site
           python3 theme/publish-home-curation.py --site _site --verify-only
           test -s _site/assets/home-curation.css
+          # Place the Italian Prompt vs Skill course as a seventh visual Academy card
+          # only after original six-card Home curation has passed verification.
+          python3 -m py_compile theme/publish-prompt-skill-home.py
+          python3 theme/publish-prompt-skill-home.py --site _site
+          python3 theme/publish-prompt-skill-home.py --site _site --verify-only
+          test -s _site/assets/prompt-skill-home-card.css
+          grep -q 'data-ma-home-course="prompt-vs-skill"' _site/it/index.html
           for lang in it en es; do
             grep -q 'data-ma-home-curation="v2"' "_site/$lang/index.html"
             grep -q 'data-ma-home-primary-nav="v2"' "_site/$lang/index.html"
