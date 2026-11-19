@@ -177,14 +177,14 @@ jobs:
           fi
           echo "SITE_ARCHIVE=$archive" >> "$GITHUB_ENV"
           unzip -t "$archive" >/dev/null
-      - name: Ensure FFmpeg for video lesson thumbnail
+      - name: Check video thumbnail availability without external dependencies
         shell: bash
         run: |
           set -euo pipefail
           if [ -s editorial/video/prompt-engineering/Prompt_Engineering.mp4 ] && ! command -v ffmpeg >/dev/null 2>&1; then
-            # Time-bound external package operations; never hold the Pages lock indefinitely.
-            timeout 120s sudo apt-get update -qq
-            timeout 120s sudo apt-get install -y ffmpeg
+            # Thumbnail extraction is optional; the video page uses a branded poster
+            # fallback. Network-dependent apt installs must not block educational releases.
+            echo "::warning::FFmpeg unavailable: retaining playable video with branded poster fallback."
           fi
       - name: Install Markdown renderer for the open teacher course
         run: python3 -m pip install --disable-pip-version-check markdown==3.10
@@ -340,8 +340,11 @@ jobs:
           python3 -m py_compile theme/publish-prompt-video.py
           python3 theme/publish-prompt-video.py --site _site --edition editorial/video/prompt-engineering
           if [ -s editorial/video/prompt-engineering/Prompt_Engineering.mp4 ]; then
-            test -s _site/assets/media/prompt-engineering/copertina.jpg
+            test -s _site/assets/media/prompt-engineering/Prompt_Engineering.mp4
             test -s _site/it/video-e-slide/prompt-engineering/index.html
+            # A frame-extracted JPG is optional when ffmpeg is unavailable.
+            # A valid branded fallback poster must always remain on the video page.
+            grep -Eq 'poster="/manzo-ai/(logo.svg|assets/media/prompt-engineering/copertina.jpg)"' _site/it/video-e-slide/prompt-engineering/index.html
           fi
           # Add the trilingual research dossier and hub links before canonical/SEO generation.
           python3 -m py_compile theme/publish-acr-dossier.py
