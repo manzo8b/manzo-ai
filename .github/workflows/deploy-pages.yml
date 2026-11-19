@@ -19,6 +19,10 @@ on:
       - editorial/learning/ai-teaching-lab/**
       - editorial/learning/prompt-vs-skill/**
       - editorial/learning/mental-models-reliability/**
+      - editorial/learning/centroni-city-builder/**
+      - theme/publish-centroni-city-course.py
+      - theme/centroni-city-course.css
+      - theme/centroni-city-course.js
       - theme/publish-reliability-course.py
       - theme/reliability-course.css
       - theme/reliability-course.js
@@ -455,6 +459,8 @@ jobs:
           python3 theme/publish-prompt-skill-course.py --site _site --verify-only
           python3 -m py_compile theme/publish-reliability-course.py
           python3 theme/publish-reliability-course.py --site _site --verify-only
+          python3 -m py_compile theme/publish-centroni-city-course.py
+          python3 theme/publish-centroni-city-course.py --site _site --verify-only
           for diagram in mappa-prompt mappa-salto mappa-skill mappa-famiglia; do
             grep -q "id=\"$diagram\"" _site/it/formazione/prompt-vs-skill/index.html
           done
@@ -503,6 +509,9 @@ jobs:
           test -s _site/assets/prompt-skill-home-card.css
           grep -q 'data-ma-home-course="prompt-vs-skill"' _site/it/index.html
           grep -q 'data-ma-home-course="modelli-mentali-affidabilita"' _site/it/index.html
+          grep -q 'data-ma-home-course="ai-product-builder-centroni-city"' _site/it/index.html
+          test -s _site/assets/centroni-city-course.css
+          test -s _site/assets/centroni-city-course.js
           test -s _site/assets/reliability-course.css
           test -s _site/assets/reliability-course.js
           for lang in it en es; do
