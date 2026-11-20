@@ -26,6 +26,12 @@ on:
       - editorial/learning/mental-models-reliability/**
       - editorial/learning/centroni-city-builder/**
       - editorial/learning/build-safely/**
+      - editorial/learning/governare-autonomia/**
+      - theme/govern_autonomy_i18n.py
+      - theme/govern-autonomy-course.css
+      - theme/govern-autonomy-course.js
+      - theme/publish-govern-autonomy-course.py
+      - theme/publish-govern-autonomy-home.py
       - theme/build_safely_*.py
       - theme/build-safely-course.css
       - theme/build-safely-course.js
@@ -479,6 +485,9 @@ jobs:
           python3 theme/publish-centroni-city-course.py --site _site --verify-only
           python3 -m py_compile theme/build_safely_i18n.py theme/build_safely_evaluations.py theme/publish-build-safely-course.py theme/publish-build-safely-home.py
           python3 theme/publish-build-safely-course.py --site _site --verify-only
+          python3 -m py_compile theme/govern_autonomy_i18n.py theme/publish-govern-autonomy-course.py theme/publish-govern-autonomy-home.py
+          node --check theme/govern-autonomy-course.js
+          python3 theme/publish-govern-autonomy-course.py --site _site --verify-only
           python3 theme/audit-academy-i18n.py
           for diagram in mappa-prompt mappa-salto mappa-skill mappa-famiglia; do
             grep -q "id=\"$diagram\"" _site/it/formazione/prompt-vs-skill/index.html
@@ -529,6 +538,8 @@ jobs:
           python3 theme/publish-build-safely-home.py --site _site --verify-only
           python3 theme/publish-prompt-skill-translated-home.py --site _site
           python3 theme/publish-prompt-skill-translated-home.py --site _site --verify-only
+          python3 theme/publish-govern-autonomy-home.py --site _site
+          python3 theme/publish-govern-autonomy-home.py --site _site --verify-only
           test -s _site/assets/prompt-skill-home-card.css
           grep -q 'data-ma-home-course="prompt-vs-skill"' _site/it/index.html
           for lang in en es; do
@@ -538,6 +549,12 @@ jobs:
           grep -q 'data-ma-home-course="ai-product-builder-centroni-city"' _site/it/index.html
           test -s _site/assets/centroni-city-course.css
           test -s _site/assets/centroni-city-course.js
+          test -s _site/assets/govern-autonomy-course.css
+          test -s _site/assets/govern-autonomy-course.js
+          for lang in it en es; do
+            grep -q 'data-ga-course="v1"' "_site/$(case "$lang" in it) echo 'it/formazione/governare-autonomia';; en) echo 'en/learning/governing-autonomy';; es) echo 'es/formacion/gobernar-la-autonomia';; esac)/index.html"
+            grep -q 'data-ma-home-course="governare-autonomia"' "_site/$lang/index.html"
+          done
           for locale_path in it/formazione/costruire-in-sicurezza en/learning/build-safely es/formacion/construir-con-seguridad; do
             test -s "_site/$locale_path/index.html"
             grep -q 'data-ma-safe="v1"' "_site/$locale_path/index.html"
