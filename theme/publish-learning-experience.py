@@ -174,7 +174,7 @@ def course_card(item, labels, index):
  </div>'''
  return f'''<article class="ma-course-card ma-tone-{esc(item['tone'])}"
    data-ma-course-card="1" data-ma-category="{esc(item['category'])}"
-   data-ma-search="{esc((item['title']+' '+item['description']+' '+' '.join(item['facts'])).lower())}">
+   data-ma-search="{esc((item['title']+' '+item['description']+' '+item['pathHint']+' '+' '.join(item['facts'])).lower())}">
  <a class="ma-course-link" href="/manzo-ai/{esc(item['route'])}/">
   {art}
   <div class="ma-course-info">
@@ -182,6 +182,7 @@ def course_card(item, labels, index):
     <span class="ma-course-series">{esc(label)}</span></div>
    <h3>{esc(item['title'].rstrip('. '))}</h3>
    <p>{esc(item['description'])}</p>
+   <span class="ma-course-orientation" data-ma-course-orientation="1"><strong>{esc(labels['orientationLabel'])}</strong> · {esc(item['pathHint'])}</span>
    <div class="ma-course-facts">{fact_list}</div>
    <span class="ma-course-cta">{esc(labels['open'])}<b aria-hidden="true">↗</b></span>
   </div></a></article>'''
@@ -195,7 +196,11 @@ def inject_hub(page,loc,d,routes,site):
  catalog=labels['catalog']
  if len(catalog)!=6 or len(set(item['route'] for item in catalog))!=6:
   raise RuntimeError('Academy catalog must list six distinct audited routes')
+ if not labels.get('orientationLabel') or labels['orientationLabel'].strip().endswith('.'):
+  raise RuntimeError('Missing course positioning label '+loc)
  for item in catalog:
+  if not item.get('pathHint') or item['pathHint'].strip().endswith('.'):
+   raise RuntimeError('Missing course positioning hint '+loc+' '+item['id'])
   if not (site/item['route']/'index.html').is_file():
    raise RuntimeError('Catalog advertises nonexistent learning resource: '+item['route'])
  filters=''.join(
@@ -292,6 +297,8 @@ def publish(site,verify_only=False):
    raise RuntimeError('Uninteractive Academy hub: missing search/filter JS '+loc)
   if hubhtml.count('data-ma-course-card="1"')!=6:
    raise RuntimeError('Academy did not render six course cards '+loc)
+  if hubhtml.count('data-ma-course-orientation="1"')!=6:
+   raise RuntimeError('Missing six course sequence cues '+loc)
   if len(re.findall(r'<h[1-6][^>]*>\s*[^<]*\.\s*</h[1-6]>',hubhtml,re.I)):
    raise RuntimeError('Unexpected terminal period in catalog heading '+loc)
   if '/manzo-ai/'+base+'/' not in hubhtml or '/manzo-ai/'+coding+'/' not in hubhtml:

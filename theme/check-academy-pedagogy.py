@@ -135,6 +135,13 @@ def validate(site: Path | None = None) -> None:
             ensure(ids == catalog_ids, f"{loc}: course taxonomy differs across languages")
         ensure(all(item.get("route", "").startswith(loc + "/") for item in catalog),
                f"{loc}: Academy card links cross language boundaries")
+        ensure(isinstance(d["hub"].get("orientationLabel"), str) and
+               bool(d["hub"]["orientationLabel"].strip()),
+               f"{loc}: missing positioning label")
+        ensure(all(isinstance(item.get("pathHint"), str) and
+                   len(item["pathHint"].strip()) >= 12 and
+                   not item["pathHint"].strip().endswith(".") for item in catalog),
+               f"{loc}: missing or period-terminated learning sequence hints")
 
         core = json.loads((CONTENT / f"{loc}.json").read_text(encoding="utf-8"))
         coding = json.loads((CONTENT / f"coding-{loc}.json").read_text(encoding="utf-8"))

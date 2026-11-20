@@ -933,6 +933,18 @@ body[data-ma-surface] .ma-course-info h3,
  font-size:.89rem;
  margin:0 0 19px;
 }
+/* Optional path guidance in the established catalog card, no extra CTA or new layout. */
+.ma-course-orientation{
+ display:block;
+ margin:-8px 0 15px;
+ color:#3d5d78;
+ font-size:.75rem;
+ line-height:1.45;
+}
+.ma-course-orientation strong{
+ color:#204d78;
+ font-weight:730;
+}
 .ma-course-facts{
  display:flex;flex-wrap:wrap;gap:6px;
  margin-top:auto;
