@@ -14,7 +14,7 @@ L'italiano rimane il riferimento strutturale. In `en/` e `es/` devono esistere q
 | B · Modulo 02 | `module-02.md` | Testo completo, esempi, attività, note pedagogiche e riferimenti |
 | C · Modulo 03 | `module-03.md` | Multimedialità, prompt, modelli e controlli accessibilità |
 | D · Moduli 04–05 | `module-04.md`, `module-05.md` | **Sorgenti EN/ES presenti**: verificare parità, inclusione, tutor e controllo umano, senza ritradurre |
-| E · Dati del corso | `course.json`, `narrative.json` | Tutte le sezioni e le narrazioni tradotte senza alterare ID, chiavi e logica |
+| E · Dati del corso | `course.json`, `narrative.json`, `scenarios.json`, `presentation.json` | Tutte le sezioni, narrazioni, scenari e presentazioni tradotte senza alterare ID, chiavi e logica |
 | F · Verifiche e glossario | `assessment-bank.json`, `glossary.json` | Quiz, feedback, cruciverba, esempi e 79 voci glossario tradotti |
 
 **Regola fondamentale:** creare una scheda o una Home in EN/ES non significa che il corso sia tradotto. Non pubblicare un corso che usa in silenzio contenuti italiani come fallback.
@@ -40,4 +40,4 @@ L'italiano rimane il riferimento strutturale. In `en/` e `es/` devono esistere q
 
 L'ultima pipeline ha confermato: `[NEEDS TRANSLATION] ai-teaching-lab: IT=source, EN=MISSING, ES=MISSING`. Fonte: [GitHub Actions](https://github.com/manzo8b/manzo-ai/actions/runs/44725699053).
 
-**Verifica del 20 novembre:** i cinque file narrativi EN e ES risultano tutti presenti. Rimangono non tradotti i quattro JSON strutturati per ciascuna lingua e la pubblicazione delle interazioni. **Non contrassegnare il corso come completato prima della verifica delle pagine native.**
+**Verifica del 20 novembre:** i cinque file narrativi EN e ES risultano tutti presenti. Rimangono non tradotti i sei JSON strutturati per ciascuna lingua e la pubblicazione delle interazioni. **Non contrassegnare il corso come completato prima della verifica delle pagine native.**
