@@ -248,7 +248,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  .ma-v2-magic-steps span{font-size:.58rem}
  #content .ma-v2-courses,#content .ma-v2-focus{padding-top:37px}
  
- .ma-v2-course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+
  .ma-v2-focus-grid{grid-template-columns:1fr}
  .ma-v2-focus-card{min-height:190px}
  #content .ma-v2-challenge{display:block;padding:24px 21px}
@@ -334,9 +334,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
 }
 #content .ma-v2-courses{padding-top:clamp(28px,3.6vw,52px)}
 #content .ma-v2-section-head h2{letter-spacing:-.048em!important}
-.ma-v2-course{
-  border-color:#d3e1ea;box-shadow:0 9px 26px rgba(31,77,118,.085);
-}
+
 
 
 
@@ -352,8 +350,8 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  .ma-v2-actions a{min-width:0;flex:1 1 100%;max-width:100%}
 }
 @media(max-width:800px) and (min-width:761px){
- .ma-v2-course-grid{grid-template-columns:1fr}
- .ma-v2-course{min-height:0}
+
+
 }
 @media(max-width:760px){
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-bar{
@@ -369,11 +367,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  #content .ma-v2-hero h1{font-size:clamp(2.15rem,8.6vw,3.5rem)!important;max-width:18ch}
  #content .ma-v2-hero::after{background-size:26px 26px;opacity:.5}
 }
-@media(max-width:540px){
- /* Override the earlier 1100px tablet rule: learning cards must be readable. */
- 
- 
-}
+
 @media(max-width:390px){
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-bar{gap:5px}
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-mark{width:23px;height:23px}
@@ -382,9 +376,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-portal{padding-inline:6px}
  #content .ma-v2-hero{padding-inline:17px}
 }
-@media(prefers-reduced-motion:reduce){
- 
-}
+
 @media print{
  #content .ma-v2-hero{background:#fff;box-shadow:none}
  #content .ma-v2-hero::after,.ma-v2-magic-stage::before{display:none}
