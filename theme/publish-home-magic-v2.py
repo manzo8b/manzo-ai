@@ -272,11 +272,7 @@ def magic_box(loc):
  <g class="ma-v2-orbit">
    <ellipse cx="278" cy="230" rx="200" ry="90" fill="none" stroke="#8cc5d2" stroke-dasharray="5 12" opacity=".46"/>
  </g>
- <g class="ma-v2-artifacts">
-   <g class="ma-v2-artifact ma-v2-a"><rect x="207" y="85" rx="12" width="82" height="72" fill="#fff" stroke="#3d88a1" stroke-width="2"/><path d="M225 113h46m-46 17h30" stroke="#3d88a1" stroke-width="4" stroke-linecap="round"/><circle cx="266" cy="132" r="4" fill="#cf9042"/></g>
-   <g class="ma-v2-artifact ma-v2-b"><rect x="306" y="77" rx="13" width="80" height="76" fill="#fffaf1" stroke="#bb8545" stroke-width="2"/><path d="m325 113 16 16 25-32" stroke="#ae762b" stroke-width="6" stroke-linecap="round" fill="none"/></g>
-   <g class="ma-v2-artifact ma-v2-c"><circle cx="170" cy="143" r="32" fill="#e8f7f3" stroke="#238875" stroke-width="2"/><path d="M170 122v22m0 10v2" stroke="#238875" stroke-width="6" stroke-linecap="round"/></g>
- </g>
+
  <g class="ma-v2-box">
    <path d="M115 242 277 160 438 243 276 326Z" fill="#153955" stroke="#2d687f" stroke-width="3"/>
    <path d="M115 242 276 326 276 415 115 331Z" fill="url(#v2-face-left)" stroke="#244e75" stroke-width="2"/>
@@ -289,6 +285,12 @@ def magic_box(loc):
      <path d="M278 321v20l173-90v-20Z" fill="#b6d8e2" stroke="#245570" stroke-width="2"/>
      <path d="m211 229 62 35 70-37" fill="none" stroke="#3d8192" stroke-width="3" stroke-linecap="round"/>
    </g>
+ </g>
+ <!-- These symbols render after the lid while it opens, so they remain visible.
+      They are faded out when the lid closes, preserving the closed-box silhouette. --> <g class="ma-v2-artifacts">
+   <g class="ma-v2-artifact ma-v2-a"><rect x="207" y="85" rx="12" width="82" height="72" fill="#fff" stroke="#3d88a1" stroke-width="2"/><path d="M225 113h46m-46 17h30" stroke="#3d88a1" stroke-width="4" stroke-linecap="round"/><circle cx="266" cy="132" r="4" fill="#cf9042"/></g>
+   <g class="ma-v2-artifact ma-v2-b"><rect x="306" y="77" rx="13" width="80" height="76" fill="#fffaf1" stroke="#bb8545" stroke-width="2"/><path d="m325 113 16 16 25-32" stroke="#ae762b" stroke-width="6" stroke-linecap="round" fill="none"/></g>
+   <g class="ma-v2-artifact ma-v2-c"><circle cx="170" cy="143" r="32" fill="#e8f7f3" stroke="#238875" stroke-width="2"/><path d="M170 122v22m0 10v2" stroke="#238875" stroke-width="6" stroke-linecap="round"/></g>
  </g></svg>'''
  return ('<figure class="ma-v2-magic" aria-label="'+e(d['magic_alt'])+'">'
          '<div class="ma-v2-magic-stage">'+scene+'</div>'
@@ -426,6 +428,11 @@ def publish(site,verify=False):
    if html.count(SECTION_TAG)!=5:raise RuntimeError("Five-section contract changed "+locale)
    if len(re.findall(r'<h1\b',html,re.I))!=1:raise RuntimeError("Home H1 count changed "+locale)
    if len(re.findall(r'data-ma-v2-card="[1-6]"',html))!=6:raise RuntimeError("Six featured cards missing "+locale)
+   # SVG painter order is significant: the lid must not obscure the emerging symbols.
+   box_start=html.find('<g class="ma-v2-box">')
+   symbols_start=html.find('<g class="ma-v2-artifacts">')
+   if box_start<0 or symbols_start<=box_start:
+    raise RuntimeError("Magic-box artwork must render emerging symbols above the lid "+locale)
    for file in (CSS.name,JS.name):
     if file not in html:raise RuntimeError("Asset not linked "+locale+" "+file)
    ai=file_for(site,academy_path(locale)).read_text(encoding="utf-8")
