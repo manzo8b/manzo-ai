@@ -19,6 +19,19 @@ CAT_LABEL={
  "governance":"Sicurezza e governance",
  "teaching":"Didattica e produzione",
 }
+ART_SHORT={
+ "foundations":"FONDAMENTI",
+ "prompt_build":"PROGETTAZIONE",
+ "reliability":"AFFIDABILITÀ",
+ "governance":"GOVERNANCE",
+ "teaching":"DIDATTICA",
+}
+ART_ICON={
+ "hallucinations":"◈","reliability":"◎","augmented":"✦",
+ "prompt-vs-skill":"⌘","centroni-city":"▱","build-safely":"⬡",
+ "govern-autonomy":"⌖","dynamic-compliance":"▣","ai-teaching-lab":"✳",
+ "m01":"◇","m02":"⌁","m03":"⤴","m04":"◉","m05":"↗","m06":"✧",
+}
 PRACTICE={
  "interactive":"Laboratorio interattivo",
  "guided":"Esercizio guidato",
@@ -122,7 +135,8 @@ def render_card(item):
       "teaching":("#6659a0","#455f99","✦"),
       "foundations":("#246b87","#1b4b77","◈"),
     }
-    bg1,bg2,symbol=tones[cat]
+    bg1,bg2,_=tones[cat]
+    symbol=ART_ICON[item["id"]]
     route={k:BASE+v+"/" if v else "" for k,v in item["route"].items()}
     available=" ".join(k for k,v in route.items() if v)
     href=route["it"]
@@ -139,7 +153,7 @@ def render_card(item):
       data-topic="{safe(cat)}" data-practice="{safe(" ".join(item["practice"]))}"
       data-languages="{safe(available)}" {attrs}>
       <div class="art" style="--tone:{bg1};--tone2:{bg2}"><span>MANZO AI / {safe(kind_name)}</span>
-        <span class="symbol" aria-hidden="true">{symbol}</span><span>{safe(item["id"].upper())}</span></div>
+        <span class="symbol" aria-hidden="true">{symbol}</span><span>{safe(ART_SHORT[cat])}</span></div>
       <div class="card-body"><span class="meta">{safe(kind_name+code)} · {safe(CAT_LABEL[cat])}</span>
       <h3>{safe(item["title_it"])}</h3>
       <p class="outcome"><strong>Risultato atteso</strong>{safe(item["outcome_it"])}</p>
