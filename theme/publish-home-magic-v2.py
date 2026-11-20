@@ -45,6 +45,7 @@ PAGES={
   "secondary":"Prova una sfida di pensiero critico",
   "magic_alt":"La scatola sembra una magia. Aprirla significa vedere il metodo: domanda, verifica e decisione.",
   "magic_note":"La magia incuriosisce. Il metodo ti rende autonomo.",
+  "pause":"Metti in pausa l’animazione","play":"Riprendi l’animazione",
   "magic_steps":["LA DOMANDA","IL METODO","LA PROVA"],
   "questions_title":"Da dove vuoi partire?",
   "questions_intro":"Una domanda può cambiare il modo in cui usi l'IA. Scegli quella che ti riguarda.",
@@ -99,6 +100,7 @@ PAGES={
   "secondary":"Try a critical-thinking challenge",
   "magic_alt":"The box looks like magic. Opening it reveals a method: question, verification and decision.",
   "magic_note":"Magic sparks curiosity. Method builds independence.",
+  "pause":"Pause the animation","play":"Resume the animation",
   "magic_steps":["THE QUESTION","THE METHOD","THE EVIDENCE"],
   "questions_title":"Where would you like to start?",
   "questions_intro":"One good question can change how you use AI. Choose the one that matters to you.",
@@ -153,6 +155,7 @@ PAGES={
   "secondary":"Prueba un reto de pensamiento crítico",
   "magic_alt":"La caja parece magia. Al abrirse muestra un método: pregunta, comprobación y decisión.",
   "magic_note":"La magia despierta curiosidad. El método te da autonomía.",
+  "pause":"Pausar la animación","play":"Reanudar la animación",
   "magic_steps":["LA PREGUNTA","EL MÉTODO","LA PRUEBA"],
   "questions_title":"¿Por dónde quieres empezar?",
   "questions_intro":"Una buena pregunta puede cambiar cómo utilizas la IA. Elige la que te resulte cercana.",
@@ -311,7 +314,10 @@ def magic_box(loc):
  return ('<figure class="ma-v2-magic" aria-label="'+e(d['magic_alt'])+'">'
          '<div class="ma-v2-magic-stage">'+scene+'</div>'
          '<div class="ma-v2-magic-steps">'+''.join('<span>'+e(t)+'</span>' for t in d['magic_steps'])+'</div>'
-         '<figcaption>'+e(d['magic_note'])+'</figcaption></figure>')
+         '<figcaption>'+e(d['magic_note'])+'</figcaption>'
+         '<button type="button" hidden class="ma-v2-motion-toggle" data-ma-v2-motion-control '
+         'aria-pressed="false" data-pause="'+e(d['pause'])+'" data-play="'+e(d['play'])+'">'
+         +e(d['pause'])+'</button></figure>')
 
 def render(loc,cards,brain):
  d=PAGES[loc]
