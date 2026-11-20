@@ -252,3 +252,16 @@
  background:#ffe4ba;color:#8a4b1f;font-size:.89em;
 }
 .ma-home-showcase .cc-home-course-card .ps-home-art-brand span{color:#ffe7ba}
+
+/* Build Safely · same reviewed Academy card geometry across IT / EN / ES */
+.ma-home-showcase .ma-home-course-grid:has([data-ma-home-course="build-safely"]){grid-auto-rows:1fr;align-items:stretch}
+.ma-home-showcase .safe-home-course-card .ma-course-art.ps-home-art{
+ background:linear-gradient(123deg,#0f7364 0%,#116e86 55%,#2757a3 100%);
+}
+.ma-home-showcase .safe-home-course-card .ps-home-art-p{
+ background:#f0fffc;color:#086456;font-size:.82em;
+}
+.ma-home-showcase .safe-home-course-card .ps-home-art-s{
+ background:#d8e6ff;color:#1e4f97;
+}
+.ma-home-showcase .safe-home-course-card .ps-home-art-brand span{color:#d0ffdb}
