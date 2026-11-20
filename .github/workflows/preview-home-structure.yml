@@ -28,10 +28,10 @@ jobs:
               if not files: continue
               s=files[0].read_text(encoding='utf-8')
               print('path',files[0],'length',len(s))
-              for m in list(re.finditer(r'<(?:main|header|aside|nav|footer|section)\\b[^>]*>',s,re.I))[:32]:
+              for m in list(re.finditer(r'<(?:main|header|aside|nav|footer|section)\b[^>]*>',s,re.I))[:32]:
                   print('TAG',m.group(0)[:240])
-              for m in list(re.finditer(r'</?main\\b[^>]*>',s,re.I)):
+              for m in list(re.finditer(r'</?main\b[^>]*>',s,re.I)):
                   print('MAIN',m.start(),m.group(0)[:120])
-              for m in list(re.finditer(r'</?footer\\b[^>]*>',s,re.I)):
+              for m in list(re.finditer(r'</?footer\b[^>]*>',s,re.I)):
                   print('FOOTER',m.start(),m.group(0)[:120])
           PY
