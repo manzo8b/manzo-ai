@@ -58,7 +58,7 @@ def test(page,lang,route,width):
  journey=(["it","en","es"].index(lang)+(1 if width<500 else 0))%3
  options.nth(journey).click()
  first_url=panels.nth(journey).locator("ol a.ma-journey-step-title").first.get_attribute("href")
- student=page.context.new_page()
+ student=page.context.browser.new_page()
  student.set_viewport_size({"width":width,"height":844 if width<500 else 900})
  student.goto("http://127.0.0.1:8765"+first_url,wait_until="load")
  foot=student.locator("[data-ma-journey-continuity]:visible")
