@@ -337,9 +337,9 @@ def render(loc,cards,brain,academy_cards):
  # to each source <article>. The same markup and CSS power both locations.
  cards_html=[]
  for i,source in enumerate(academy_cards,1):
-  if not re.match(r'<article\\b',source,re.I):
+  if not re.match(r'<article\b',source,re.I):
    raise RuntimeError("Academy source card is not an article")
-  cards_html.append(re.sub(r'<article\\b',
+  cards_html.append(re.sub(r'<article\b',
       '<article data-ma-v2-card="'+str(i)+'"',source,count=1,flags=re.I))
  featured=(
  '<section data-ma-v2-section="courses" class="ma-v2-courses" aria-labelledby="ma-v2-courses-title">'
@@ -444,7 +444,7 @@ def publish(site,verify=False):
       re.findall(r'class=["\\'][^"\\']+["\\']', ' '.join(home_articles))):
     raise RuntimeError("Home did not use six native Academy components "+locale)
    for i,(home_card,academy_card) in enumerate(zip(home_articles,original_articles),1):
-    expected=re.sub(r'<article\\b',
+    expected=re.sub(r'<article\b',
      '<article data-ma-v2-card="'+str(i)+'"',academy_card,count=1,flags=re.I)
     if home_card!=expected:
      raise RuntimeError(f"{locale}: Home Academy card {i} markup diverges from source")
