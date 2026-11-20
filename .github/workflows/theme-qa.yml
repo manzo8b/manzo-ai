@@ -52,6 +52,9 @@ jobs:
       - name: Verify offline SaaS entitlement contracts
         run: |
           python3 -m unittest discover -s product/core/tests -v
+      # Keep the visual QA build environment aligned with production Pages.
+      - name: Install the pinned Markdown renderer
+        run: python3 -m pip install --disable-pip-version-check markdown==3.10
       - name: Extract latest approved release and apply ONLY the visual overlay
         shell: bash
         run: |
