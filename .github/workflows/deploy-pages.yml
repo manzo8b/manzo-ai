@@ -101,6 +101,7 @@ on:
       - theme/design-browser-smoke.py
       - theme/check-shared-glass-navigation.py
       - theme/check-approved-visual-contracts.py
+      - theme/check-academy-pedagogy.py
       - theme/publish-home-scene.py
       - theme/publish-home-showcase.py
       - theme/home-showcase.css
@@ -758,6 +759,10 @@ jobs:
           # heading punctuation and accessible interaction styles after all publishers.
           python3 -m py_compile theme/check-approved-visual-contracts.py
           python3 theme/check-approved-visual-contracts.py --site _site
+          # Pedagogical gate: objectives, 6+6 sequential units, real practice and
+          # explained assessments in IT/EN/ES, checked against rendered course guides.
+          python3 -m py_compile theme/check-academy-pedagogy.py
+          python3 theme/check-academy-pedagogy.py --site _site
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
