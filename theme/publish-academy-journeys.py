@@ -84,6 +84,7 @@ LINK = re.compile(r'<a\b[^>]*\bhref="([^"]+)"',re.I)
 H3 = re.compile(r'<h3\b[^>]*>(.*?)</h3>',re.I|re.S)
 CAT = re.compile(r'data-ma-category="([^"]+)"')
 SECTION_OPEN = re.compile(r'<section\b(?=[^>]*\bdata-ma-pathways=["\']v1["\'])[^>]*>',re.I|re.S)
+FEATURE = re.compile(r'<section\b(?=[^>]*\bdata-atl-feature=["\']2026-11["\'])[^>]*>.*?</section\s*>',re.I|re.S)
 SECTIONS = re.compile(r'</?section\b[^>]*>',re.I|re.S)
 
 def e(text): return escape(str(text),quote=True)
@@ -196,13 +197,24 @@ def apply(site,verify_only=False):
     raise RuntimeError("Journey controls missing: "+lang)
    if doc.count('data-ma-journey-asset=')!=2:raise RuntimeError("Journey assets missing")
    if f'academy-journeys.css?v={version}' not in doc:raise RuntimeError("Version mismatch "+lang)
+   main=re.search(r'<main\b[^>]*>',doc,re.I)
+   catalog=SECTION_OPEN.search(doc)
+   journey=re.search(r'<section\b(?=[^>]*\bdata-ma-journeys=["\']v1["\'])',doc,re.I)
+   feature=FEATURE.search(doc)
+   if not (main and catalog and journey and feature and
+           main.end()<=catalog.start()<journey.start()<feature.start()):
+    raise RuntimeError("Academy catalog must precede guided paths and specialist feature "+lang)
    for route in SEQUENCES:
     for index in route:
      if f'href="{e(cards[index][0])}"' not in doc:raise RuntimeError("Broken journey route")
    continue
   if MARKER in doc or 'data-ma-journey-asset=' in doc:raise RuntimeError("Duplicate journey")
+  features=list(FEATURE.finditer(doc))
+  if len(features)!=1:raise RuntimeError("Expected exactly one Teaching Lab feature "+lang)
+  feature=features[0].group(0)
+  doc=doc[:features[0].start()]+doc[features[0].end():]
   offset=catalog_end(doc)
-  doc=doc[:offset]+render(lang,cards)+doc[offset:]
+  doc=doc[:offset]+render(lang,cards)+feature+doc[offset:]
   where=re.search(r'</head\s*>',doc,re.I)
   if not where:raise RuntimeError("Head missing: "+lang)
   doc=doc[:where.start()]+links+doc[where.start():]
