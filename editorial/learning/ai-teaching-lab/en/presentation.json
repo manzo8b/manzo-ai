@@ -1,0 +1,191 @@
+{
+  "version": "1.0",
+  "locale": "en",
+  "course": "Artificial intelligence and applied teaching",
+  "slides_count": 15,
+  "source": "IA_e_Progettazione_Didattica.pdf / .pptx · original author materials supplied on 17 November 2026",
+  "editorial_policy": "Accessible textual adaptation faithful to the original themes, not an exact graphical copy of the slides; unverified pedagogical quotations are identified as paraphrases",
+  "duration_podcast_seconds": 423.717732,
+  "slides": [
+    {
+      "title": "Artificial intelligence and applied teaching",
+      "eyebrow": "THE PRESENTATION",
+      "lead": "Turn AI from an automatic content generator into a tool for educational design",
+      "points": [
+        "The teacher sets and guides the learning objective",
+        "The system can draft materials, not certify that learning occurred"
+      ],
+      "takeaway": "Technology serves pedagogy, not the other way around"
+    },
+    {
+      "title": "The myth of instant productivity",
+      "eyebrow": "THE PROBLEM STARTS AT 7:43",
+      "lead": "The promise: 30 perfect slides in 20 seconds",
+      "points": [
+        "Quantity does not measure lesson quality",
+        "Time saved during generation must be compared with the time required for verification",
+        "Ask what evidence would show that students genuinely understood"
+      ],
+      "takeaway": "What evidence shows that the lesson actually works?"
+    },
+    {
+      "title": "The danger of a well-designed mistake",
+      "eyebrow": "A FICTIONAL CLASSROOM CASE",
+      "lead": "One slide places the first Industrial Revolution in 1925",
+      "points": [
+        "The example deliberately contains a historical anachronism",
+        "Polished design can make a false claim seem credible",
+        "The model does not automatically understand the class context"
+      ],
+      "takeaway": "AI produces drafts; the teacher remains responsible for checking sources"
+    },
+    {
+      "title": "From software to method",
+      "eyebrow": "SEVEN QUESTIONS TO ASK",
+      "lead": "The MANZO AI method as an organisational proposal",
+      "points": [
+        "1 · Listen — what problem are we addressing?",
+        "2 · Classify — which class and objective?",
+        "3 · Risks — errors, privacy, access barriers?",
+        "4 · Targeted questions — what is missing?",
+        "5 · Design — which activity or prompt?",
+        "6 · Verify — content and learning?",
+        "7 · Deliver — what do we offer, and within which limits?"
+      ],
+      "takeaway": "This method is an adaptable practical proposal, not a scientifically validated standard"
+    },
+    {
+      "title": "A prompt is not a magic formula",
+      "eyebrow": "A PROFESSIONAL BRIEF",
+      "lead": "From “create a beautiful lesson” to verifiable teaching instructions",
+      "points": [
+        "AI should not decide the learners' age, prerequisites and sources on its own",
+        "A better request makes priorities clear without necessarily being very long",
+        "The teacher retains control over educational variables"
+      ],
+      "takeaway": "A good prompt starts with instructional design"
+    },
+    {
+      "title": "Six elements of an educational prompt",
+      "eyebrow": "A REUSABLE STRUCTURE",
+      "lead": "A guide to producing drafts that can be checked",
+      "points": [
+        "Objective — what will learners be able to do?",
+        "Context — subject, level, duration, prerequisites",
+        "Permitted data — sources and materials that may be used",
+        "Constraints — safety, accessibility, accuracy",
+        "Output — the required form of the response",
+        "Verification — checks, limitations and claims that cannot be inferred"
+      ],
+      "takeaway": "An effective prompt is a brief whose output can be verified"
+    },
+    {
+      "title": "Objective and context",
+      "eyebrow": "THE FIRST STEP",
+      "lead": "Who is learning, and what should we be able to observe?",
+      "points": [
+        "Objective: distinguish fact and interpretation in a short document",
+        "Context: second-year upper-secondary class, 15 minutes, pair work, clear language",
+        "Observable performance: justify a distinction, not merely recall a definition"
+      ],
+      "takeaway": "First decide what learning should look like, then choose the material"
+    },
+    {
+      "title": "Permitted data and boundaries",
+      "eyebrow": "THE LIMITS OF THE REQUEST",
+      "lead": "Protect students and avoid inventing what we do not know",
+      "points": [
+        "Use sources already checked or examples clearly marked as fictional",
+        "Do not upload real names, grades, photographs or personal information to unauthorised tools",
+        "Do not add nonexistent statistics or historical citations",
+        "Plan legible materials and accessible alternatives"
+      ],
+      "takeaway": "Data minimisation is a design choice; it does not by itself certify GDPR compliance"
+    },
+    {
+      "title": "Output and verification",
+      "eyebrow": "CHECKING THE RESULT",
+      "lead": "Define both the format and the evidence of learning",
+      "points": [
+        "One guiding question",
+        "Three steps with suggested timings",
+        "Two questions for pair work",
+        "An exit ticket that checks understanding",
+        "A list of what cannot be inferred from the documents"
+      ],
+      "takeaway": "Verification comes before classroom use"
+    },
+    {
+      "title": "From a generic to a targeted request",
+      "eyebrow": "TWO BRIEFS COMPARED",
+      "lead": "“Create a lesson on migration” is not enough",
+      "points": [
+        "A generic request leaves purpose, sources, audience and criteria unspecified",
+        "A targeted request describes the six prompt elements",
+        "The targeted draft is easier to read, correct and adapt",
+        "No prompt automatically guarantees truth or safety"
+      ],
+      "takeaway": "The teacher evaluates the work rather than simply accepting it"
+    },
+    {
+      "title": "Authentic assessment beyond AI detectors",
+      "eyebrow": "OBSERVE THE PROCESS",
+      "lead": "Do not chase a percentage: ask learners to demonstrate their reasoning",
+      "points": [
+        "Selection and verification of sources",
+        "Argumentation and defence of claims",
+        "Reflection on revisions and next steps",
+        "A detector alone cannot conclusively establish the author of a text"
+      ],
+      "takeaway": "Assess competence; do not infer misconduct from the appearance of an assignment"
+    },
+    {
+      "title": "The pedagogical perspective",
+      "eyebrow": "INSPIRED BY DEWEY",
+      "lead": "A lived problem can generate hypotheses, inquiry and revision",
+      "points": [
+        "A meaningful problem encourages questions",
+        "Questions guide testable hypotheses",
+        "Evidence can confirm, change or challenge an initial view",
+        "The original slide's reference to Dewey is a pedagogical paraphrase, not a verified verbatim quotation"
+      ],
+      "takeaway": "Education as reflective inquiry, not entertainment"
+    },
+    {
+      "title": "The question always comes first",
+      "eyebrow": "THE CORE PRINCIPLE",
+      "lead": "The teacher's question comes before the machine's response",
+      "points": [
+        "The objective and context guide the activity",
+        "A system cannot replace educational judgment",
+        "Choosing not to use AI can be a well-reasoned educational decision"
+      ],
+      "takeaway": "One good question is worth more than thirty slides"
+    },
+    {
+      "title": "The teacher's professional toolkit",
+      "eyebrow": "SOURCES WORTH KNOWING",
+      "lead": "Rules, guidance and educational design",
+      "points": [
+        "Italy's Ministry of Education and Merit, 2025 — guidance on AI in schools",
+        "European Commission, 2026 — ethical guidance",
+        "UNESCO, 2024 — AI competencies for teachers",
+        "CAST UDL 3.0 — inclusion and accessibility",
+        "Always check whether a source is up to date and applicable"
+      ],
+      "takeaway": "Professional practice rests on accountability, not a race to adopt tools"
+    },
+    {
+      "title": "One question to carry forward",
+      "eyebrow": "YOUR NEXT WORKSHOP",
+      "lead": "If artificial intelligence suddenly stopped working tomorrow, would what you learned today still make you a better teacher?",
+      "points": [
+        "Keep the useful questions",
+        "Keep the capacity to verify",
+        "Keep the ability to design learning",
+        "Experiment intentionally, without delegating your judgment"
+      ],
+      "takeaway": "Start with the needs of the class"
+    }
+  ]
+}
