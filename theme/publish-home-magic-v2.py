@@ -408,7 +408,7 @@ def render(loc,cards,brain):
  )
  return hero+question_section+featured+focus+challenge_section+closing
 
-def add_academy_index(site,loc,extras):
+def add_academy_index(site,loc,extras,css_hash):
  target=file_for(site,academy_path(loc))
  html=target.read_text(encoding="utf-8")
  if 'data-ma-v2-academy="preview"' in html:
@@ -427,7 +427,9 @@ def add_academy_index(site,loc,extras):
  +'</div></section>'
  )
  pos=m[0].start()
- target.write_text(html[:pos]+markup+html[pos:],encoding="utf-8")
+ if html.count('</head>')!=1:raise RuntimeError("Academy missing unique head close "+loc)
+ html=html.replace('</head>',f'<link rel="stylesheet" data-ma-v2-academy-style="preview" href="{BASE}assets/{CSS.name}?v={css_hash}"></head>',1)
+ target.write_text(html.replace('</main>',markup+'</main>',1),encoding="utf-8")
 
 def patch_meta(html,d):
  title=re.compile(r'(<title\b[^>]*>).*?(</title>)',re.I|re.S)
@@ -501,7 +503,7 @@ def publish(site,verify=False):
   if '<aside class="rail" id="rail">' not in new or '<footer class="site-footer">' not in new:
    raise RuntimeError("Lost site chrome")
   path.write_text(new,encoding="utf-8")
-  add_academy_index(site,locale,extended)
+  add_academy_index(site,locale,extended,css_hash)
  if not verify:
   target=site/"assets"
   target.mkdir(exist_ok=True,parents=True)
