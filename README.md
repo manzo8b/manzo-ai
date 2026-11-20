@@ -12,7 +12,8 @@ MANZO AI combina progettazione di workflow digitali, verificabilità degli outpu
 | Product Lab | Studio brief JSON, Verify euristico e demo Learning, separati dal pilota Auth reale | Nessun modello AI produttivo, scoring B2B o checkout attivo |
 | Backend SaaS | Progetto Supabase MANZO AI attivo: 15 tabelle, 3 migrazioni applicate, Auth verificata, SMTP di prova | Nessuna Edge Function distribuita; zero organizzazioni, iscrizioni o dati Learning B2B |
 | Billing | Contratti locali di autorizzazione e verifica della firma dei webhook | Nessun incasso o abbonamento attivato |
-| My Learning | Nuovo workspace autenticato IT/EN/ES e letture API utente in codice, testati con mock isolati | Pagina pilota pubblicata con API disattivata; nessun corso o avanzamento inventato |\n| Clienti | Ricerca dei segmenti commerciali documentata | Nessun cliente, incasso o fatturato attestato |
+| My Learning | Nuovo workspace autenticato IT/EN/ES e letture API utente in codice, testati con mock isolati | Pagina pilota pubblicata con API disattivata; nessun corso o avanzamento inventato |
+| Clienti | Ricerca dei segmenti commerciali documentata | Nessun cliente, incasso o fatturato attestato |
 
 
 **Piano del prossimo salto:** [My Learning v0.1 e gate di attivazione](docs/MANZO_AI_MY_LEARNING_V01_RELEASE_GATE_2026-11-16.md) · [Audit commerciale](docs/MANZO_AI_SAAS_COMMERCIAL_PRODUCT_REVIEW_2026-11-16.md). Le note successive sono storiche e non sostituiscono lo stato verificato qui sopra.
@@ -28,7 +29,11 @@ MANZO AI combina progettazione di workflow digitali, verificabilità degli outpu
 
 Tutti i contenuti MANZO AI devono essere disponibili **integralmente in italiano, inglese e spagnolo**: lezioni, glossari, grafici, laboratori, quiz e feedback compresi, non soltanto titoli e navigazione. Consultare lo **[standard i18n Academy](theme/ACADEMY_I18N_STANDARD.md)** e l'[audit della copertura effettiva](theme/audit-academy-i18n.py).
 
-I corsi **Costruire in sicurezza / Build Safely / Construir con seguridad**, **Prompt vs Skill**, **Governare l'autonomia / Governing Autonomy / Gobernar la autonomía**, **Compliance dinamica e governance continua / Dynamic Compliance and Continuous Governance / Compliance dinámica y gobernanza continua** e **Intelligenza aumentata, non sostituita / Augmented, Not Replaced / Inteligencia aumentada, no sustituida** sono pubblicati con lezioni e attività native IT/EN/ES. L'audit dei sorgenti editoriali del 20 novembre 2026 registra **6 corsi su 9 completi nelle tre lingue** (incluso Allucinazioni dell'IA). Rimangono non completamente localizzati **Modelli mentali e affidabilità**, **AI Product Builder — Centroni City** e **AI Teaching Lab**. Il dato 6/9 misura solo il catalogo censito, non certifica l'intera piattaforma. **Fase di sviluppo di nuovi corsi chiusa dopo questi due moduli; il passo successivo concordato è l'audit globale MANZO AI con il metodo AI Web Production, seguito da ricerca di un prodotto originale.**
+**Stato dei corsi al 20 novembre 2026:** il controllo automatico dei sorgenti editoriali registra **8 percorsi su 9** con contenuti IT/EN/ES. Sono già pubblicati nelle tre lingue *Modelli mentali e affidabilità* e *AI Product Builder — Centroni City*, oltre a *Prompt vs Skill*, *Costruire in sicurezza*, *Governare l’autonomia*, *Compliance dinamica e governance continua*, *Intelligenza aumentata, non sostituita* e *Allucinazioni dell’AI*. I conteggi riguardano il catalogo verificato, **non una certificazione dell’intero sito**.
+
+**Unico percorso ancora incompleto nell’inventario:** *AI Teaching Lab*. Sono disponibili cinque moduli in italiano; i sorgenti inglesi e spagnoli comprendono i primi quattro moduli narrativi, ma mancano Modulo 05 e i relativi file strutturati (corso, narrazioni, quiz, glossario) e la pubblicazione nativa completa. Il sito indica correttamente che questo percorso è ancora in italiano. **Non ripetere le traduzioni dei corsi già completati.**
+
+**Fase corrente:** [Sprint 0 — stabilizzazione e copertura multilingue](docs/MANZO_AI_SPRINT_0_2026-11-20.md), in seguito all’[audit generale](docs/MANZO_AI_GLOBAL_AUDIT_2026-11-20.md). In questa fase si correggono messaggi editoriali, controlli e lacune di localizzazione; non si sviluppano nuovi corsi e non si attivano servizi a pagamento. L’ottimizzazione visiva AI Web Production è lo Sprint 1, successivo al completamento e alla verifica dello Sprint 0.
 
 ## Standard delle card Academy · 19 novembre 2026
 
