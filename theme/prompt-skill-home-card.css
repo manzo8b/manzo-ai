@@ -277,3 +277,25 @@
  background:#ffeac3;color:#916226;font-size:.86em;
 }
 .ma-home-showcase .ga-home-course-card .ps-home-art-brand span{color:#e4ffe7}
+
+/* Final two Academy courses · shared reviewed card geometry, distinct cover art */
+.ma-home-showcase .ft-home-course-card .ma-course-art.ps-home-art{display:flex;flex-direction:column;min-height:inherit}
+.ma-home-showcase .ft-home-compliance .ma-course-art.ps-home-art{
+ background:linear-gradient(128deg,#146b86 0%,#1a9aa0 52%,#5d65ae 100%);
+}
+.ma-home-showcase .ft-home-augmented .ma-course-art.ps-home-art{
+ background:linear-gradient(126deg,#4059b6 0%,#628bd0 48%,#3ba9a3 100%);
+}
+.ma-home-showcase .ft-home-compliance .ps-home-art-p{
+ background:#d9f7ff;color:#176581;font-size:.88em;
+}
+.ma-home-showcase .ft-home-compliance .ps-home-art-s{
+ background:#d9f4e4;color:#20754c;font-size:.83em;
+}
+.ma-home-showcase .ft-home-augmented .ps-home-art-p{
+ background:#e7eaff;color:#3d50ac;font-size:.88em;
+}
+.ma-home-showcase .ft-home-augmented .ps-home-art-s{
+ background:#dcfff2;color:#177d6a;font-size:.88em;
+}
+.ma-home-showcase .ft-home-course-card .ps-home-art-brand span{color:#dcfff0}
