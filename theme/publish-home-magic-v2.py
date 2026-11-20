@@ -324,7 +324,7 @@ def render(loc,cards,brain):
    f'data-ma-v2-card="{i+1}" aria-labelledby="ma-v2-title-{loc}-{i+1}">'
    '<span class="ma-v2-art" aria-hidden="true">'
    '<span class="ma-v2-art-code">'+e(code)+'</span>'+icon(i)
-   +'<span class="ma-v2-art-brand">MANZO AI</span></span>'
+   +'<span class="ma-v2-art-brand">MANZO AI</span><span class="ma-v2-art-shine"></span></span>'
    '<span class="ma-v2-card-body">'
    '<span class="ma-v2-kind">'+e(d['kind'][i])+'</span>'
    '<span class="ma-v2-hook">'+e(d['hooks'][i])+'</span>'
@@ -429,6 +429,8 @@ def publish(site,verify=False):
    if html.count(SECTION_TAG)!=5:raise RuntimeError("Five-section contract changed "+locale)
    if len(re.findall(r'<h1\b',html,re.I))!=1:raise RuntimeError("Home H1 count changed "+locale)
    if len(re.findall(r'data-ma-v2-card="[1-6]"',html))!=6:raise RuntimeError("Six featured cards missing "+locale)
+   if html.count('class="ma-v2-art-shine"')!=6:
+    raise RuntimeError("Six Academy parity shine layers required "+locale)
    # SVG painter order is significant: the lid must not obscure the emerging symbols.
    box_start=html.find('<g class="ma-v2-box">')
    symbols_start=html.find('<g class="ma-v2-artifacts">')
