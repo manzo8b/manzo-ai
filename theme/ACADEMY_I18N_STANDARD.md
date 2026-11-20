@@ -26,6 +26,8 @@ Ogni percorso formativo deve essere completo in tutte e tre le lingue. **La trad
 | AI Teaching Lab | Presente | Non presente nella struttura editoriale EN/ES | Non presente nella struttura editoriale EN/ES | Migrazione estesa: corso, 5 moduli, glossario, scenari, valutazioni, narrazioni |
 | Costruire in sicurezza | Nuovo corso | Nuovo corso | Nuovo corso | Pubblicazione simultanea nelle tre lingue |
 | Governare l'autonomia | Presente | Presente | Presente | Sei letture, Mission Control, quattro diagrammi, quiz e cruciverba; CI trilingue PASS |
+| Compliance dinamica e governance continua | Pubblicato | Pubblicato | Pubblicato | 6 letture per lingua, 4 diagrammi e Audit Express, registro, quiz e cruciverba; deploy CI PASS |
+| Intelligenza aumentata, non sostituita | Pubblicato | Pubblicato | Pubblicato | 6 letture per lingua, 4 diagrammi, laboratorio anti-workslop, Carta Uomo–AI, quiz e cruciverba; deploy CI PASS |
 | Altre pagine MANZO AI incluse nel pacchetto base | Da verificare | Da verificare | Da verificare | Audit puntuale prima della dichiarazione di copertura globale |
 
 **Regola operativa:** registrare lo stato reale del lavoro, non sostituire una traduzione mancante con un reindirizzamento silenzioso al testo italiano.
@@ -38,6 +40,9 @@ Ogni percorso formativo deve essere completo in tutte e tre le lingue. **La trad
 - Prompt injection: istruzione avversa incorporata in input o contenuti di fiducia inferiore; non garantire prevenzione tramite semplice prompt.
 
 ## Progressi verificati
+
+- **20 novembre 2026 — Ultimi due corsi completati:** *Compliance dinamica e governance continua* e *Intelligenza aumentata, non sostituita* pubblicati con contenuti IT/EN/ES equivalenti; 36 letture, 24 diagrammi, 6 laboratori e cruciverba, 60 domande spiegate; deploy GitHub Pages e test automatici superati. Collaudo visivo manuale specifico ancora da confermare.
+- **Copertura fonti editoriali Academy: 6/9 corsi** verificati trilingui nei sorgenti; l'intero sito non è ancora certificato trilingue. Non sviluppare ulteriori corsi prima dell'audit globale concordato.
 
 - **20 novembre 2026 — Governare l'autonomia:** sei letture IT/EN/ES, quattro mappe concettuali, simulatore Mission Control (otto azioni, quattro incidenti, regole di STOP), cruciverba e dieci quiz per lingua; pubblicazione GitHub Pages riuscita. Collaudo visivo manuale su dispositivi reali non ancora eseguito.
 
