@@ -106,6 +106,10 @@ on:
       - theme/home-conversational.js
       - theme/publish-home-conversational.py
       - theme/publish-home-curation.py
+      - theme/publish-home-magic-v2.py
+      - theme/home-magic-v2.css
+      - theme/home-magic-v2.js
+      - theme/home-magic-v2-browser-smoke.py
       - theme/publish-sprint1-home.py
       - theme/sprint1-home.css
       - theme/sprint1-home.js
@@ -718,6 +722,30 @@ jobs:
           ! grep -q 'learning-b2b/my-learning' _site/sitemap.xml
           ! grep -q 'learning-b2b/mio-percorso' _site/sitemap.xml
           echo "My Learning private pilot published; database API disabled pending E2E security gates."
+      # Product owner approved the redesigned, three-language Home on 2026-11-20.
+      # Apply AFTER the existing Home/Academy publishers, SEO, auth and My Learning.
+      # This is a deterministic overlay and does not modify the original language selector.
+      - name: Publish approved Home V2 in Italian, English and Spanish
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile theme/publish-home-magic-v2.py theme/home-magic-v2-browser-smoke.py
+          node --check theme/home-magic-v2.js
+          python3 theme/publish-home-magic-v2.py --site _site
+          python3 theme/publish-home-magic-v2.py --site _site --verify-only
+          for lang in it en es; do
+            test -s "_site/$lang/index.html"
+            grep -q 'data-ma-v2-section="hero"' "_site/$lang/index.html"
+            grep -q 'class="ma-v2-motion-toggle"' "_site/$lang/index.html"
+            test "$(grep -o 'data-ma-v2-section=' "_site/$lang/index.html" | wc -l)" -eq 5
+            test "$(grep -o 'data-ma-v2-card=' "_site/$lang/index.html" | wc -l)" -eq 6
+            if grep -q 'class="ma-v2-questions"' "_site/$lang/index.html"; then
+              echo "::error::Duplicated Home question section in $lang"
+              exit 1
+            fi
+          done
+          grep -q 'MANZO AI sidebar glass-pill release' _site/assets/home-magic-v2.css
+          python3 theme/site-integrity-audit.py --site _site
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
