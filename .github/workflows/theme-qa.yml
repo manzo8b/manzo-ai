@@ -31,6 +31,7 @@ on:
       - 'theme/design-motion.js'
       - 'theme/publish-design-system.py'
       - 'theme/design-browser-smoke.py'
+      - 'theme/browser-smoke.py'
       - 'theme/mobile-nav.css'
       - 'theme/publish-navigation.py'
       - 'theme/mobile-browser-smoke.py'
