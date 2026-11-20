@@ -36,17 +36,32 @@ def test_page(page,loc,width):
      (box.compareDocumentPosition(symbols)&Node.DOCUMENT_POSITION_FOLLOWING));
  }"""),(loc,"animated symbols incorrectly layered behind the lid")
 
- assert page.locator(".ma-v2-course").count()==6
- assert page.locator(".ma-v2-tone-rose").count()==1
- assert page.locator('.ma-v2-course > .ma-v2-art svg[aria-hidden="true"]').count()==6
- assert page.locator(".ma-v2-course .ma-v2-kind").count()==6
- assert page.locator(".ma-v2-course .ma-v2-tags span").count()==12
+ # Exact Academy components — not a similar Home-specific card template.
+ native=page.locator(".ma-v2-courses .ma-course-card")
+ assert native.count()==6,(loc,"six native Academy cards expected")
+ assert page.locator(".ma-v2-courses .ma-course-grid").count()==1
+ assert page.locator(".ma-v2-courses .ma-course-link").count()==6
+ assert page.locator(".ma-v2-courses .ma-course-art").count()==6
+ assert page.locator(".ma-v2-courses .ma-course-info h3").count()==6
+ assert page.locator(".ma-v2-courses .ma-course-cta b").count()==6
+ assert page.locator(".ma-v2-courses .ma-v2-course").count()==0,(loc,"old card system survived")
+ assert page.locator('link[href*="learning-experience/guide.css"]').count()>=1
+ home_cards=[(c.locator("h3").inner_text(),c.locator("a.ma-course-link").get_attribute("href")) for c in native.all()]
+ assert len(set(x[1] for x in home_cards))==6,(loc,"duplicate card destination")
+ # Academy provides the source of both actual HTML and interaction styles.
+ if width==1440:
+  first=native.first
+  first.hover()
+  page.wait_for_timeout(400)
+  assert first.evaluate("(el)=>getComputedStyle(el).transform")!="none",(loc,"Academy hover lift missing")
+  shine=first.locator(".ma-course-art")
+  assert shine.evaluate("(el)=>getComputedStyle(el,'::after').backgroundImage")!="none",(loc,"Academy shine missing")
  assert page.locator(".rail").count()==1 and page.locator(".topbar").count()==1
  assert page.locator("footer.site-footer").count()==1
  assert page.locator(".topbar .top-label").inner_text()==LABEL[loc]
  assert page.locator("h1").evaluate("(el)=>getComputedStyle(el).visibility")=="visible"
  assert page.evaluate("document.documentElement.scrollWidth<=window.innerWidth+2"),(loc,width,"horizontal overflow")
- assert page.locator(".ma-v2-course").first.evaluate("(el)=>getComputedStyle(el).display")!="none"
+ assert page.locator(".ma-v2-courses .ma-course-card").first.evaluate("(el)=>getComputedStyle(el).display")!="none"
  links=page.locator('[data-ma-v2-section] a[href^="/manzo-ai/"]')
  assert links.count()>=14,(loc,"too few working links")
  for link in links.all():
@@ -89,6 +104,10 @@ def test_page(page,loc,width):
  assert academy and academy.status==200
  assert page.locator('[data-ma-v2-academy="preview"] .ma-v2-extra-link').count()==7
  assert page.locator('[data-ma-course-card="1"]').count()==6
+ if width==1440:
+  academy_cards=[(c.locator("h3").inner_text(),c.locator("a.ma-course-link").get_attribute("href"))
+    for c in page.locator('[data-ma-course-card="1"]').all()]
+  assert academy_cards==home_cards,(loc,"Home and Academy no longer share the same six titles and routes")
 
 def main():
  with sync_playwright() as p:
@@ -107,7 +126,7 @@ def main():
    page.goto(BASE+"/"+lang+"/",wait_until="domcontentloaded")
    assert page.locator('[data-ma-v2-section]').count()==5
    assert page.locator(".ma-v2-motion-toggle").is_hidden()
-   assert page.locator(".ma-v2-course").count()==6
+   assert page.locator(".ma-v2-courses .ma-course-card").count()==6
    page.close()
   browser.close()
  print("PASS staged Home V2: five sections x three locales x three widths, tablet/mobile, motion and no-JS")

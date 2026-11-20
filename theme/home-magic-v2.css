@@ -147,58 +147,15 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  color:#567487!important;line-height:1.62!important;
  font-size:.99rem!important;max-width:64ch;margin:0!important;
 }
-.ma-v2-course-grid{
- display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
- gap:clamp(12px,1.55vw,19px);align-items:stretch;
+/* The six featured cards are the actual Academy component with the same
+ * HTML/CSS. No duplicated hover, glow, cover, or CTA implementation here.
+ * Only the grid adapts to the available space next to the preserved sidebar. */
+#content .ma-v2-courses .ma-course-grid{
+  margin:0;
+  width:100%;
+  align-items:stretch;
 }
-.ma-v2-course{
- --v2-card-tone:#2867a9;--v2-card-dark:#204775;
- min-width:0;min-height:435px;display:flex;flex-direction:column;
- text-decoration:none!important;border:1px solid #d7e3e8;border-radius:17px;
- overflow:hidden;background:#fff;box-shadow:0 10px 27px #1644610b;
- transition:transform .22s cubic-bezier(.2,.7,.2,1),box-shadow .22s,border-color .22s;
-}
-.ma-v2-course:hover{transform:translateY(-4px);box-shadow:0 18px 34px #1644611a;border-color:#a4c5d3}
-.ma-v2-tone-midnight{--v2-card-tone:#243e62;--v2-card-dark:#192f4d}
-.ma-v2-tone-teal{--v2-card-tone:#217c80;--v2-card-dark:#195d66}
-.ma-v2-tone-amber{--v2-card-tone:#a96531;--v2-card-dark:#7a4b2b}
-.ma-v2-tone-violet{--v2-card-tone:#7364a9;--v2-card-dark:#514879}
-.ma-v2-tone-rose{--v2-card-tone:#9a4a64;--v2-card-dark:#71364d}
-.ma-v2-art{
- display:block;position:relative;min-height:142px;aspect-ratio:16/7;
- padding:15px 20px;overflow:hidden;
- background:linear-gradient(128deg,var(--v2-card-tone),var(--v2-card-dark));
- color:#fff;
-}
-.ma-v2-art::before{
- content:"";position:absolute;width:210px;height:210px;right:-20px;top:-90px;
- border:1px solid #ffffff30;border-radius:50%;box-shadow:0 0 0 27px #ffffff09,0 0 0 60px #ffffff09;
-}
-.ma-v2-art-code{position:relative;z-index:1;font-size:.72rem;color:#fff;
- letter-spacing:.14em;font-weight:850}
-.ma-v2-art svg{position:absolute;right:16%;top:17%;width:70px;height:70px;color:#fff;
- filter:drop-shadow(0 5px 8px #0000001c);opacity:.93}
-.ma-v2-art-brand{
- position:absolute;left:20px;bottom:15px;letter-spacing:.15em;
- font-size:.64rem;font-weight:850;color:#e5f6ff;
-}
-.ma-v2-card-body{display:flex;flex:1;flex-direction:column;gap:0;min-width:0;padding:19px 21px 18px}
-.ma-v2-kind{font-size:.69rem;font-weight:840;letter-spacing:.08em;text-transform:uppercase;color:#337a88;margin-bottom:11px}
-.ma-v2-hook{font-size:.85rem;font-weight:500;font-style:italic;line-height:1.45;
- color:#668294;min-height:2.5em;margin-bottom:10px}
-.ma-v2-course h3{
- color:#204962!important;font-weight:680!important;
- font-size:clamp(1.21rem,1.75vw,1.47rem)!important;
- line-height:1.27!important;letter-spacing:-.035em!important;
- margin:0 0 16px!important;text-wrap:balance;
-}
-.ma-v2-tags{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 20px}
-.ma-v2-tags span{font-size:.66rem;color:#517386;background:#f1f7f9;
- border:1px solid #d6e4e9;border-radius:7px;padding:5px 7px;font-weight:720}
-.ma-v2-open{display:flex;align-items:center;justify-content:space-between;
- color:#1c6786;font-size:.82rem;font-weight:810;line-height:1.4;
- margin-top:auto;border-top:1px solid #e0e9ed;padding-top:14px}
-.ma-v2-open>span{font-size:1.2rem}
+#content .ma-v2-courses .ma-course-card{min-width:0}
 .ma-v2-academy-link{
  display:inline-flex;align-items:center;gap:15px;
  color:#196e85!important;text-decoration:none;font-weight:800;font-size:.92rem;
@@ -247,7 +204,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
 .ma-v2-closing-links a{color:#1a6e84!important;font-size:.82rem;font-weight:780;
  white-space:nowrap;text-decoration:none;border:1px solid #c7dbe2;border-radius:9px;padding:10px 12px}
 .ma-v2-closing-links a:hover{background:#eaf7f8}
-.ma-v2-hero a:focus-visible,.ma-v2-course:focus-visible,
+.ma-v2-hero a:focus-visible,
 .ma-v2-academy-link:focus-visible,.ma-v2-focus-card:focus-visible,
 .ma-v2-challenge>a:focus-visible,.ma-v2-closing-links a:focus-visible,
 .ma-v2-motion-toggle:focus-visible,.ma-v2-extra-link:focus-visible{
@@ -277,7 +234,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  .ma-v2-actions a{flex:1 1 220px;min-width:min(100%,220px)}
  .ma-v2-magic{max-width:400px;width:100%;margin-inline:auto!important}
  .ma-v2-magic-stage{max-width:335px}
- .ma-v2-course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ 
  #content .ma-v2-closing{flex-wrap:wrap}
  .ma-v2-closing-links{min-width:0;justify-content:flex-start}
  .ma-v2-closing-links a{white-space:normal}
@@ -290,16 +247,16 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  .ma-v2-magic-stage{max-width:340px;aspect-ratio:560/400}
  .ma-v2-magic-steps span{font-size:.58rem}
  #content .ma-v2-courses,#content .ma-v2-focus{padding-top:37px}
- .ma-v2-course{min-height:400px}
- .ma-v2-course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ 
+
  .ma-v2-focus-grid{grid-template-columns:1fr}
  .ma-v2-focus-card{min-height:190px}
  #content .ma-v2-challenge{display:block;padding:24px 21px}
  .ma-v2-challenge>a{margin-top:18px}
  #content .ma-v2-closing{display:block}
  .ma-v2-closing-links{margin-top:16px}
- .ma-v2-art{min-height:125px}
- .ma-v2-art svg{height:60px;width:60px}
+ 
+ 
 }
 /* Home-only mobile-bar dimensions; language controls and drawer remain unchanged. */
 @media(max-width:760px){
@@ -312,10 +269,10 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  #content .ma-v2-hero{scroll-margin-top:76px}
 }
 @media(max-width:540px){
- .ma-v2-course-grid,.ma-v2-extra-grid{grid-template-columns:1fr}
- .ma-v2-course{min-height:370px}
+ 
+ 
  #content .ma-v2-hero h1{font-size:clamp(2.36rem,10.1vw,3.5rem)!important}
- .ma-v2-art{min-height:130px;aspect-ratio:18/7}
+ 
  .ma-v2-magic-stage{max-width:280px;aspect-ratio:560/380}
  .ma-v2-closing-links a{width:100%;white-space:normal}
 }
@@ -377,22 +334,11 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
 }
 #content .ma-v2-courses{padding-top:clamp(28px,3.6vw,52px)}
 #content .ma-v2-section-head h2{letter-spacing:-.048em!important}
-.ma-v2-course{
-  border-color:#d3e1ea;box-shadow:0 9px 26px rgba(31,77,118,.085);
-}
-.ma-v2-course:hover{
-  transform:translateY(-5px);
-  border-color:#9bbfd4;box-shadow:0 16px 35px rgba(29,74,120,.135);
-}
-.ma-v2-art::after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.48;
-  background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.2),transparent 30%),
-    linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px),
-    linear-gradient(0deg,rgba(255,255,255,.09) 1px,transparent 1px);
-  background-size:auto,26px 26px,26px 26px;
-}
-.ma-v2-course .ma-v2-art svg{z-index:1}
-.ma-v2-open{border-top-color:#dbe8ee}
+
+
+
+
+
 .ma-v2-motion-toggle{opacity:.88;box-shadow:none}
 .ma-v2-motion-toggle:hover,.ma-v2-motion-toggle:focus-visible{opacity:1}
 @media(max-width:1100px){
@@ -404,8 +350,8 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  .ma-v2-actions a{min-width:0;flex:1 1 100%;max-width:100%}
 }
 @media(max-width:800px) and (min-width:761px){
- .ma-v2-course-grid{grid-template-columns:1fr}
- .ma-v2-course{min-height:0}
+
+
 }
 @media(max-width:760px){
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-bar{
@@ -421,11 +367,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  #content .ma-v2-hero h1{font-size:clamp(2.15rem,8.6vw,3.5rem)!important;max-width:18ch}
  #content .ma-v2-hero::after{background-size:26px 26px;opacity:.5}
 }
-@media(max-width:540px){
- /* Override the earlier 1100px tablet rule: learning cards must be readable. */
- .ma-v2-course-grid,.ma-v2-extra-grid{grid-template-columns:minmax(0,1fr)}
- .ma-v2-course{min-height:350px}
-}
+
 @media(max-width:390px){
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-bar{gap:5px}
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-mark{width:23px;height:23px}
@@ -434,20 +376,18 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-portal{padding-inline:6px}
  #content .ma-v2-hero{padding-inline:17px}
 }
-@media(prefers-reduced-motion:reduce){
- .ma-v2-course:hover{transform:none}
-}
+
 @media print{
  #content .ma-v2-hero{background:#fff;box-shadow:none}
  #content .ma-v2-hero::after,.ma-v2-magic-stage::before{display:none}
 }
 
 @media(hover:none){
- .ma-v2-course:hover,.ma-v2-focus-card:hover,
+ .ma-v2-focus-card:hover,
  .ma-v2-actions a:hover,.ma-v2-challenge>a:hover{transform:none}
 }
 @media(prefers-reduced-motion:reduce){
- .ma-v2-hero *, .ma-v2-magic *,.ma-v2-course,
+ .ma-v2-hero *, .ma-v2-magic *,
  .ma-v2-focus-card,.ma-v2-extra-link,.ma-v2-actions a,
  .ma-v2-challenge>a{transition:none!important;animation:none!important}
  .ma-v2-box-svg{transform:translateY(0)!important}
@@ -460,7 +400,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
 @media print{
  #content .ma-v2-hero{box-shadow:none}
  .ma-v2-magic{display:none}
- .ma-v2-course,.ma-v2-focus-card{box-shadow:none;break-inside:avoid}
+ .ma-v2-focus-card{box-shadow:none;break-inside:avoid}
  .ma-v2-motion-toggle{display:none!important}
 }
 
@@ -529,4 +469,20 @@ body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link[aria-curren
     border-color:#34617e!important;
     box-shadow:none!important;
   }
+}
+
+/* Academy-native layout adaptation on the approved Home.
+ * The card treatment itself is unchanged and comes from guide.css. */
+@media(max-width:1200px){
+  #content .ma-v2-courses .ma-course-card{grid-column:span 6}
+}
+@media(max-width:860px){
+  #content .ma-v2-courses .ma-course-card{grid-column:span 12}
+}
+@media(max-width:700px){
+  #content .ma-v2-courses .ma-course-grid{grid-template-columns:minmax(0,1fr)}
+  #content .ma-v2-courses .ma-course-card{grid-column:1}
+}
+@media(prefers-reduced-motion:reduce){
+  #content .ma-v2-courses .ma-course-card{transition:none}
 }

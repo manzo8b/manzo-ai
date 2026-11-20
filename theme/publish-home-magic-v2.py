@@ -212,17 +212,35 @@ def file_for(site,href):
  return page
 
 def academy_path(loc):return link(loc,ACADEMY[loc])
-def target_cards(site,loc):
+def academy_card_markup(site,loc):
+ """Use exactly the six approved Academy card components from the generated catalog.
+
+ No alternate HTML, duplicated metadata, static mockups or cloned interaction CSS.
+ The existing Academy stylesheet remains the single visual source of truth.
+ """
  academy=file_for(site,academy_path(loc)).read_text(encoding="utf-8")
  cards=CARD.findall(academy)
- if len(cards)!=6:raise RuntimeError(f"{loc}: expected six canonical Academy cards; got {len(cards)}")
+ if len(cards)!=6:raise RuntimeError(f"{loc}: expected six Academy components; got {len(cards)}")
+ seen=set()
+ for index,raw in enumerate(cards,1):
+  links=ANCHOR.findall(raw)
+  titles=HEADING.findall(raw)
+  if len(links)!=1 or len(titles)!=1:
+   raise RuntimeError(f"{loc}: card {index} must contain one real link and heading")
+  href=unescape(links[0])
+  if not href.startswith(BASE+loc+"/"):
+   raise RuntimeError(f"{loc}: card links to another language: {href}")
+  file_for(site,href)
+  if href in seen:raise RuntimeError(f"{loc}: duplicate Academy destination {href}")
+  if not strip(titles[0]):raise RuntimeError(f"{loc}: blank Academy title {index}")
+  seen.add(href)
+ return cards
+
+def target_cards(site,loc):
  result=[]
- for n,raw in enumerate(cards):
-  m=ANCHOR.search(raw);t=HEADING.search(raw)
-  if not m or not t:raise RuntimeError("Invalid reviewed Academy card "+str(n))
-  href=unescape(m.group(1));file_for(site,href)
-  result.append((href,strip(t.group(1))))
- if len(set(a for a,_ in result))!=6:raise RuntimeError("Duplicate canonical card target")
+ for raw in academy_card_markup(site,loc):
+  result.append((unescape(ANCHOR.search(raw).group(1)),
+                 strip(HEADING.search(raw).group(1))))
  return result
 
 def extra_cards(site,loc,home):
@@ -303,7 +321,7 @@ def magic_box(loc):
          'data-pause-short="'+e(d['pause_short'])+'" data-play-short="'+e(d['play_short'])+'">'
          +e(d['pause_short'])+'</button></figure>')
 
-def render(loc,cards,brain):
+def render(loc,cards,brain,academy_cards):
  d=PAGES[loc]
  hero=(
  '<section data-ma-v2-section="hero" class="ma-v2-hero" aria-labelledby="ma-v2-heading">'
@@ -315,29 +333,19 @@ def render(loc,cards,brain):
  '<a class="ma-v2-secondary" href="'+e(brain)+'">'+e(d["secondary"])+' <span aria-hidden="true">↗</span></a>'
  '</div></div>'+magic_box(loc)+'</section>'
  )
+ # Transfer the native Academy HTML verbatim; add only a stable test marker
+ # to each source <article>. The same markup and CSS power both locations.
  cards_html=[]
- for i,(href,title) in enumerate(cards):
-  code=d['codes'][i];tags=d['tags'][i]
-  # One link owns the whole card, with decorative SVG in its colour header.
-  cards_html.append(
-   f'<a class="ma-v2-course ma-v2-tone-{COLORS[i]}" href="{e(href)}" '
-   f'data-ma-v2-card="{i+1}" aria-labelledby="ma-v2-title-{loc}-{i+1}">'
-   '<span class="ma-v2-art" aria-hidden="true">'
-   '<span class="ma-v2-art-code">'+e(code)+'</span>'+icon(i)
-   +'<span class="ma-v2-art-brand">MANZO AI</span></span>'
-   '<span class="ma-v2-card-body">'
-   '<span class="ma-v2-kind">'+e(d['kind'][i])+'</span>'
-   '<span class="ma-v2-hook">'+e(d['hooks'][i])+'</span>'
-   f'<h3 id="ma-v2-title-{loc}-{i+1}">{e(title)}</h3>'
-   '<span class="ma-v2-tags"><span>'+e(tags[0])+'</span><span>'+e(tags[1])+'</span></span>'
-   '<span class="ma-v2-open">'+e(d['open'])+' <span aria-hidden="true">↗</span></span>'
-   '</span></a>'
-  )
+ for i,source in enumerate(academy_cards,1):
+  if not re.match(r'<article\b',source,re.I):
+   raise RuntimeError("Academy source card is not an article")
+  cards_html.append(re.sub(r'<article\b',
+      '<article data-ma-v2-card="'+str(i)+'"',source,count=1,flags=re.I))
  featured=(
  '<section data-ma-v2-section="courses" class="ma-v2-courses" aria-labelledby="ma-v2-courses-title">'
  '<div class="ma-v2-section-head"><span class="ma-v2-section-id">01 / ACADEMY</span>'
  '<h2 id="ma-v2-courses-title">'+e(d["featured"])+'</h2><p>'+e(d["featured_lead"])+'</p></div>'
- '<div class="ma-v2-course-grid">'+''.join(cards_html)+'</div>'
+ '<div class="ma-course-grid ma-v2-native-grid">'+''.join(cards_html)+'</div>'
  '<a class="ma-v2-academy-link" href="'+e(academy_path(loc))+'">'+e(d["academy"])+' <span aria-hidden="true">↗</span></a></section>'
  )
  teacher=link('it',TEACHING_IT.split('it/',1)[1])
@@ -429,6 +437,20 @@ def publish(site,verify=False):
    if html.count(SECTION_TAG)!=5:raise RuntimeError("Five-section contract changed "+locale)
    if len(re.findall(r'<h1\b',html,re.I))!=1:raise RuntimeError("Home H1 count changed "+locale)
    if len(re.findall(r'data-ma-v2-card="[1-6]"',html))!=6:raise RuntimeError("Six featured cards missing "+locale)
+   # Confirm the Home contains the actual Academy component, not the retired mock.
+   home_articles=CARD.findall(html)
+   original_articles=academy_card_markup(site,locale)
+    if len(home_articles)!=6 or any('class="ma-v2-course' in card for card in home_articles):
+     raise RuntimeError("Home did not use six native Academy components "+locale)
+   for i,(home_card,academy_card) in enumerate(zip(home_articles,original_articles),1):
+    expected=re.sub(r'<article\b',
+     '<article data-ma-v2-card="'+str(i)+'"',academy_card,count=1,flags=re.I)
+    if home_card!=expected:
+     raise RuntimeError(f"{locale}: Home Academy card {i} markup diverges from source")
+   if html.count('ma-course-grid ma-v2-native-grid')!=1:
+    raise RuntimeError("Native Academy card grid is missing "+locale)
+   if f'{BASE}assets/learning-experience/guide.css' not in html:
+    raise RuntimeError("Native Academy styling absent from Home "+locale)
    # SVG painter order is significant: the lid must not obscure the emerging symbols.
    box_start=html.find('<g class="ma-v2-box">')
    symbols_start=html.find('<g class="ma-v2-artifacts">')
@@ -445,6 +467,9 @@ def publish(site,verify=False):
    continue
   if MARKER in html:raise RuntimeError("Home magic overlay already exists "+locale)
   canonical=target_cards(site,locale)
+  # The Academy card CSS must be shared, not recreated with Home-only effects.
+  if not (site/"assets/learning-experience/guide.css").is_file():
+   raise RuntimeError("Approved Academy stylesheet not staged "+locale)
   extended=extra_cards(site,locale,html)
   if {href for href,_ in canonical}&{href for href,_ in extended}:
    raise RuntimeError("Duplicate existing Academy and extra course route "+locale)
@@ -465,7 +490,7 @@ def publish(site,verify=False):
   original_label='<span class="top-label">Knowledge & Prompt Lab</span>'
   if before.count(original_label)!=1:raise RuntimeError("Unexpected topbar descriptor "+locale)
   before=before.replace(original_label,'<span class="top-label">'+e(PAGES[locale]["lab_label"])+'</span>',1)
-  inner=render(locale,canonical,brain)
+  inner=render(locale,canonical,brain,academy_card_markup(site,locale))
   new=before+inner+after
   new=patch_meta(new,PAGES[locale])
   assets=(
@@ -491,7 +516,7 @@ def publish(site,verify=False):
   for source in (CSS,JS):
    if (site/"assets"/source.name).read_bytes()!=source.read_bytes():
     raise RuntimeError("Staged asset does not match tested source "+source.name)
-  print("PASS Home Magic preview: IT/EN/ES, five sections, six canonical learning cards, 7 more discoverable from Academy, original language menu/sidebar/footer untouched.")
+  print("PASS Home: IT/EN/ES, five sections, six EXACT native Academy components + shared stylesheet, seven further Academy paths; original language menu/sidebar/footer untouched.")
 
 if __name__=="__main__":
  parser=argparse.ArgumentParser()
