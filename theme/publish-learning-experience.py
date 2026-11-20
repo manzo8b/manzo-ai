@@ -28,12 +28,30 @@ HUBS={'it':'it/academy','en':'en/academy','es':'es/academia'}
 HUB_MARKER='data-ma-pathways="v1"'
 CSS='/manzo-ai/assets/learning-experience/guide.css'
 JS='/manzo-ai/assets/learning-experience/guide.js'
+CORE_EVIDENCE=SOURCE/'core-unit-evidence.json'
 
 def esc(x): return escape(str(x),quote=True)
 def json_script(x):
  return json.dumps(x,ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
 
-def roadmap(d,modules,kind,lang,main_route):
+def core_evidence_details(mapping,item,index):
+ # These existing anchors open sections, NOT a specific case or quiz question.
+ case=int(item['case'])
+ quiz=int(item['quiz'])
+ return (
+  f'<details class="ma-unit-evidence" data-ma-core-evidence="{index}" '
+  f'data-ma-core-case="{case}" data-ma-core-quiz="{quiz}">'
+  f'<summary>{esc(mapping["expand"])}</summary>'
+  '<div class="ma-unit-evidence-content">'
+  f'<p><strong>{esc(mapping["ability"])}</strong> {esc(item["outcome"])}</p>'
+  '<div class="ma-unit-evidence-links">'
+  f'<a href="#hx-lab">{esc(mapping["case"])} {case:02d} · {esc(mapping["openCases"])}</a>'
+  f'<a href="#hx-quiz">{esc(mapping["quiz"])} {quiz:02d} · {esc(mapping["openQuiz"])}</a>'
+  '</div><p class="ma-unit-evidence-note">'+esc(mapping['note'])+'</p>'
+  '</div></details>'
+ )
+
+def roadmap(d,modules,kind,lang,main_route,core_map=None):
  label=d['moduleLabel'] if kind=='core' else d['codingLabel']
  result=[]
  for i,item in enumerate(modules,1):
@@ -41,17 +59,21 @@ def roadmap(d,modules,kind,lang,main_route):
   title=item['title']
   duration=item.get('duration','')
   badge=f'<span class="ma-unit-time">{esc(duration)}</span>' if duration else ''
+  details=core_evidence_details(core_map,core_map['units'][i-1],i) if kind=='core' else ''
+  wrap_start='<div class="ma-unit-main">' if kind=='core' else ''
+  wrap_end='</div>' if kind=='core' else ''
+  item_cls='ma-unit ma-unit-with-evidence' if kind=='core' else 'ma-unit'
   result.append(
-    f'<li class="ma-unit" data-ma-unit="{i}"><a href="#{anchor}" class="ma-unit-link">'
+    f'<li class="{item_cls}" data-ma-unit="{i}">{wrap_start}<a href="#{anchor}" class="ma-unit-link">'
     f'<span class="ma-unit-num">{i:02}</span><span class="ma-unit-copy">'
     f'<strong>{esc(title)}</strong>{badge}</span><span class="ma-unit-arrow" aria-hidden="true">↗</span></a>'
-    f'<button type="button" class="ma-mark" data-ma-mark="{i}" aria-pressed="false"'
+    f'{details}{wrap_end}<button type="button" class="ma-mark" data-ma-mark="{i}" aria-pressed="false"'
     f' aria-label="{esc(d["mark"])}: {esc(title)}"><span aria-hidden="true">○</span>{esc(d["mark"])}</button>'
     f'</li>'
   )
  return ''.join(result)
 
-def guide(d,modules,kind,locale,main_route):
+def guide(d,modules,kind,locale,main_route,core_map=None):
  count=len(modules)
  outcomes=d['coreOutcomes'] if kind=='core' else d['codingOutcomes']
  navigation=(
@@ -66,7 +88,7 @@ def guide(d,modules,kind,locale,main_route):
   for anchor,title in navigation
  )
  goals=''.join(f'<li>{esc(outcome)}</li>' for outcome in outcomes)
- content=roadmap(d,modules,kind,locale,main_route)
+ content=roadmap(d,modules,kind,locale,main_route,core_map)
  back=(f'<a class="ma-guide-back" href="/manzo-ai/{esc(main_route)}/">'
        f'{esc(d["previous"])} <span aria-hidden="true">↗</span></a>') if kind=='coding' else ''
  return f'''<section {MARKER} class="ma-guidance" id="ma-guide" data-ma-guide-kind="{kind}">
@@ -106,7 +128,7 @@ def guide(d,modules,kind,locale,main_route):
  <script type="application/json" id="ma-learning-labels">{json_script(d)}</script>
  </section>'''
 
-def inject(page,kind,loc,d,modules,main_route):
+def inject(page,kind,loc,d,modules,main_route,core_map=None):
  original=page.read_text(encoding='utf-8')
  if MARKER in original:
   raise RuntimeError('Guidance already injected in '+str(page))
@@ -125,7 +147,7 @@ def inject(page,kind,loc,d,modules,main_route):
    if f'id="hc-section-{i:02}"' not in html:raise RuntimeError('Missing coding chapter '+str(i))
   target='<div class="hc-body" id="hc-lesson">'
   if target not in html:raise RuntimeError('No coding lesson target '+str(page))
- html=html.replace(target,guide(d,modules,kind,loc,main_route)+target,1)
+ html=html.replace(target,guide(d,modules,kind,loc,main_route,core_map)+target,1)
  # Existing pages have a single </head>, so add assets using a reversible marker.
  head=re.search(r'</head\s*>',html,re.I)
  if head is None:raise RuntimeError('No html head')
@@ -220,7 +242,18 @@ def inject_hub(page,loc,d,routes,site):
 
 def publish(site,verify_only=False):
  locales=json.loads((SOURCE/'labels.json').read_text(encoding='utf-8'))
- if set(locales)!=set(ROUTES):raise RuntimeError('Incomplete translation dictionaries')
+ evidence=json.loads(CORE_EVIDENCE.read_text(encoding='utf-8'))
+ if set(locales)!=set(ROUTES) or set(evidence)!=set(ROUTES):
+  raise RuntimeError('Incomplete translation dictionaries or competency evidence map')
+ for loc,mapping in evidence.items():
+  if len(mapping.get('units',[]))!=6:raise RuntimeError('Missing six core competencies '+loc)
+  for i,item in enumerate(mapping['units'],1):
+   if not str(item.get('outcome','')).strip() or str(item['outcome']).strip().endswith('.'):
+    raise RuntimeError('Missing/invalid terminal punctuation in competency '+loc+' '+str(i))
+   if not isinstance(item.get('case'),int) or not 1<=item['case']<=10:
+    raise RuntimeError('Evidence maps to nonexistent practice case '+loc+' '+str(i))
+   if not isinstance(item.get('quiz'),int) or not 1<=item['quiz']<=10:
+    raise RuntimeError('Evidence maps to nonexistent quiz item '+loc+' '+str(i))
  assets=site/'assets'/'learning-experience'
  if not verify_only:
   assets.mkdir(parents=True,exist_ok=True)
@@ -254,10 +287,21 @@ def publish(site,verify_only=False):
    page=site/route/'index.html'
    if not page.is_file():raise RuntimeError('Missing course '+route)
    if len(modules)!=6:raise RuntimeError('Unexpected six-course outline '+route)
-   if not verify_only:inject(page,kind,loc,d,modules,base)
+   if not verify_only:inject(page,kind,loc,d,modules,base,evidence[loc] if kind=='core' else None)
    html=page.read_text(encoding='utf-8')
    if html.count(MARKER)!=1 or html.count('data-ma-unit=')!=6:
     raise RuntimeError('Missing/duplicate guidance '+route)
+   if kind=='core':
+    if html.count('data-ma-core-evidence=')!=6:
+     raise RuntimeError('Missing six mapped competencies '+loc)
+    for i,item in enumerate(evidence[loc]['units'],1):
+     if (f'data-ma-core-evidence="{i}"' not in html or
+         f'data-ma-core-case="{item["case"]}"' not in html or
+         f'data-ma-core-quiz="{item["quiz"]}"' not in html or
+         esc(item['outcome']) not in html):
+      raise RuntimeError('Competency/case/quiz map mismatch '+loc+' '+str(i))
+   elif 'data-ma-core-evidence=' in html:
+    raise RuntimeError('Core-only competency block leaked into coding course '+loc)
    if html.count('data-ma-mark=')!=6:raise RuntimeError('Incomplete check buttons '+route)
    if 'id="hx-quiz-data"' not in html and kind=='core':raise RuntimeError('Existing quiz vanished')
    if 'id="hc-quiz-data"' not in html and kind=='coding':raise RuntimeError('Existing coding quiz vanished')

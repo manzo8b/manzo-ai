@@ -1,0 +1,125 @@
+{
+  "it": {
+    "expand": "Obiettivo e prova",
+    "ability": "Competenza osservabile",
+    "case": "Caso",
+    "quiz": "Domanda",
+    "openCases": "Apri gli esercizi",
+    "openQuiz": "Apri il quiz",
+    "note": "Gli esercizi sono nella sezione pratica; le domande del quiz si svolgono in sequenza",
+    "units": [
+      {
+        "outcome": "Classificare un errore e motivare quando una cifra resta non verificata",
+        "case": 2,
+        "quiz": 1
+      },
+      {
+        "outcome": "Riconoscere una generalizzazione non sostenuta dai dati della fonte",
+        "case": 9,
+        "quiz": 2
+      },
+      {
+        "outcome": "Definire i controlli necessari per autenticare una citazione prima di usarla",
+        "case": 5,
+        "quiz": 3
+      },
+      {
+        "outcome": "Distinguere indicatori economici diversi e documentare le discrepanze",
+        "case": 3,
+        "quiz": 7
+      },
+      {
+        "outcome": "Separare un segnale AML da un fatto accertato e proporre un’escalation umana",
+        "case": 4,
+        "quiz": 4
+      },
+      {
+        "outcome": "Documentare una decisione di blocco o rilascio motivata da prove verificabili",
+        "case": 10,
+        "quiz": 10
+      }
+    ]
+  },
+  "en": {
+    "expand": "Outcome and evidence",
+    "ability": "Observable skill",
+    "case": "Case",
+    "quiz": "Question",
+    "openCases": "Open practice cases",
+    "openQuiz": "Open quiz",
+    "note": "Practice cases appear in the exercises section; quiz questions are answered in sequence",
+    "units": [
+      {
+        "outcome": "Classify an error and explain why a financial claim remains unverified",
+        "case": 2,
+        "quiz": 1
+      },
+      {
+        "outcome": "Identify a generalization not supported by the original source data",
+        "case": 9,
+        "quiz": 2
+      },
+      {
+        "outcome": "Specify the checks needed to authenticate a citation before relying on it",
+        "case": 5,
+        "quiz": 3
+      },
+      {
+        "outcome": "Distinguish financial metrics and document discrepancies",
+        "case": 3,
+        "quiz": 7
+      },
+      {
+        "outcome": "Separate an AML risk indicator from an established fact and propose human escalation",
+        "case": 4,
+        "quiz": 4
+      },
+      {
+        "outcome": "Document a hold or release decision supported by verifiable evidence",
+        "case": 10,
+        "quiz": 10
+      }
+    ]
+  },
+  "es": {
+    "expand": "Objetivo y evidencia",
+    "ability": "Competencia observable",
+    "case": "Caso",
+    "quiz": "Pregunta",
+    "openCases": "Abrir casos prácticos",
+    "openQuiz": "Abrir cuestionario",
+    "note": "Los casos están en la sección práctica; las preguntas del cuestionario se responden en secuencia",
+    "units": [
+      {
+        "outcome": "Clasificar un error y justificar por qué una cifra sigue sin verificar",
+        "case": 2,
+        "quiz": 1
+      },
+      {
+        "outcome": "Detectar una generalización que los datos de la fuente no respaldan",
+        "case": 9,
+        "quiz": 2
+      },
+      {
+        "outcome": "Definir las comprobaciones necesarias para autenticar una cita antes de utilizarla",
+        "case": 5,
+        "quiz": 3
+      },
+      {
+        "outcome": "Distinguir indicadores financieros y documentar las discrepancias",
+        "case": 3,
+        "quiz": 7
+      },
+      {
+        "outcome": "Separar una alerta AML de un hecho acreditado y proponer una revisión humana",
+        "case": 4,
+        "quiz": 4
+      },
+      {
+        "outcome": "Documentar una decisión de bloqueo o publicación basada en pruebas verificables",
+        "case": 10,
+        "quiz": 10
+      }
+    ]
+  }
+}
