@@ -44,10 +44,10 @@ def core_evidence_details(mapping,item,index):
   f'<summary>{esc(mapping["expand"])}</summary>'
   '<div class="ma-unit-evidence-content">'
   f'<p><strong>{esc(mapping["ability"])}</strong> {esc(item["outcome"])}</p>'
-  '<nav class="ma-unit-evidence-links" aria-label="'+esc(mapping['expand'])+'">'
+  '<div class="ma-unit-evidence-links">'
   f'<a href="#hx-lab">{esc(mapping["case"])} {case:02d} · {esc(mapping["openCases"])}</a>'
   f'<a href="#hx-quiz">{esc(mapping["quiz"])} {quiz:02d} · {esc(mapping["openQuiz"])}</a>'
-  '</nav><p class="ma-unit-evidence-note">'+esc(mapping['note'])+'</p>'
+  '</div><p class="ma-unit-evidence-note">'+esc(mapping['note'])+'</p>'
   '</div></details>'
  )
 
