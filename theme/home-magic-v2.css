@@ -73,7 +73,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  display:flex;align-items:center;justify-content:center;
 }
 .ma-v2-box-svg{width:100%;height:auto;display:block;overflow:visible;
- animation:ma-v2-box-breathe 9.6s ease-in-out infinite;
+ animation:ma-v2-box-breathe 11.6s ease-in-out infinite;
 }
 /* Glass-box choreography: 11.6 s loop, 2 hinged flaps and 3 independent icons.
  * Flaps clear the center before the symbols emerge, and close after they fade.
