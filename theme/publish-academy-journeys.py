@@ -74,6 +74,85 @@ COPY = {
  }
 }
 
+NAV_COPY = {
+ "it":{
+  "label":"Navigazione del percorso guidato","route":"PERCORSO GUIDATO",
+  "step":"Tappa","of":"di","next":"Prossima lezione","previous":"Lezione precedente",
+  "back":"Torna al percorso","last":"Ultima tappa di questo itinerario"
+ },
+ "en":{
+  "label":"Guided learning route navigation","route":"GUIDED LEARNING",
+  "step":"Step","of":"of","next":"Next lesson","previous":"Previous lesson",
+  "back":"Back to learning path","last":"Final step of this learning path"
+ },
+ "es":{
+  "label":"Navegación del itinerario guiado","route":"ITINERARIO GUIADO",
+  "step":"Etapa","of":"de","next":"Siguiente lección","previous":"Lección anterior",
+  "back":"Volver al itinerario","last":"Última etapa de este itinerario"
+ }
+}
+
+CONTINUITY='data-ma-journey-continuity='
+FOLLOW_ASSET='data-ma-journey-follow-assets='
+
+def route_url(target,index):
+ return f"{target}?journey={index}"
+
+def lesson_continuity(lang,index,sequence,cards,position):
+ """Optional next/previous navigation for users following a specific route."""
+ d=NAV_COPY[lang]
+ current=cards[sequence[position]][1]
+ heading=COPY[lang]["goals"][index][0]
+ previous=(f'<a class="ma-journey-follow-previous" href="{e(route_url(cards[sequence[position-1]][0],index))}">'
+           f'{e(d["previous"])} <span aria-hidden="true">↖</span></a>') if position>0 else ''
+ next_step=(f'<a class="ma-journey-follow-next" href="{e(route_url(cards[sequence[position+1]][0],index))}">'
+            f'{e(d["next"])} <span aria-hidden="true">↗</span></a>') if position<len(sequence)-1 else ''
+ academy=f'{BASE}{lang}/{ROUTES[lang]}/?journey={index}#ma-journey-title-{lang}'
+ return (f'<nav class="ma-journey-continuation" {CONTINUITY}"{index}" hidden '
+         f'aria-label="{e(d["label"])}">'
+         f'<span class="ma-journey-follow-kicker">{e(d["route"])} · {e(d["step"])} '
+         f'{position+1} {e(d["of"])} {len(sequence)}</span>'
+         f'<h2>{e(heading)}</h2>'
+         f'<p>{e(current) if position<len(sequence)-1 else e(d["last"])}</p>'
+         '<div class="ma-journey-follow-links">'
+         f'<a class="ma-journey-follow-back" href="{e(academy)}">{e(d["back"])}</a>'
+         +previous+next_step+'</div></nav>')
+
+def add_lesson_continuity(site,lang,cards,links,verify_only=False):
+ """One small footer per active path; no modification of course lessons/content."""
+ destinations={}
+ for index,sequence in enumerate(SEQUENCES):
+  for pos,card_index in enumerate(sequence):
+   destinations.setdefault(cards[card_index][0],[]).append(
+     lesson_continuity(lang,index,sequence,cards,pos))
+ css_url=links[0]
+ js_url=links[1]
+ for target,navs in destinations.items():
+  page=site/target[len(BASE):]/"index.html"
+  if not page.is_file():raise RuntimeError("Guided lesson missing "+str(page))
+  doc=page.read_text(encoding="utf-8")
+  if verify_only:
+   if doc.count(CONTINUITY)!=len(navs):
+    raise RuntimeError("Guided lesson continuity missing or duplicated "+str(page))
+   if doc.count(FOLLOW_ASSET)!=2:
+    raise RuntimeError("Guided lesson continuity assets missing "+str(page))
+   for nav in navs:
+    if nav not in doc:raise RuntimeError("Incorrect guided next/prev navigation "+str(page))
+   continue
+  if CONTINUITY in doc or FOLLOW_ASSET in doc:
+   raise RuntimeError("Guided navigation injection is not idempotent "+str(page))
+  closing=list(re.finditer(r'</main\\s*>',doc,re.I))
+  if len(closing)!=1:
+   raise RuntimeError("One main closing tag expected in guided lesson "+str(page))
+  at=closing[0].start()
+  doc=doc[:at]+''.join(navs)+doc[at:]
+  where=re.search(r'</head\\s*>',doc,re.I)
+  if not where:raise RuntimeError("Missing document head "+str(page))
+  tag=(css_url.replace('data-ma-journey-asset="css"', 'data-ma-journey-follow-assets="css"')+
+       js_url.replace('data-ma-journey-asset="js"', 'data-ma-journey-follow-assets="js"'))
+  doc=doc[:where.start()]+tag+doc[where.start():]
+  page.write_text(doc,encoding="utf-8")
+
 # Three deliberately curated educational sequences. Indices refer exclusively to
 # the existing six Academy cards, whose destinations are verified at build time.
 SEQUENCES = ((2,3,5), (2,4,0), (3,4,1))
@@ -143,7 +222,7 @@ def render(lang,cards):
     f'<span class="ma-journey-step-order">{i+1:02d}</span>'
     '<div class="ma-journey-step-body">'
     f'<span class="ma-journey-step-caption">{e(d["start"] if i==0 else d["step"])}</span>'
-    f'<a href="{e(href)}" class="ma-journey-step-title">{e(label)}'
+    f'<a href="{e(route_url(href,n))}" class="ma-journey-step-title">{e(label)}'
     '<span aria-hidden="true">↗</span></a>'
     '</div></li>'
    )
@@ -153,7 +232,7 @@ def render(lang,cards):
    '<div class="ma-journey-panel-copy">'
    f'<span class="ma-journey-panel-index">MANZO AI / 0{n+1}</span>'
    f'<h3>{e(heading)}</h3><p>{e(subtitle)}</p>'
-   f'<a class="ma-journey-start" href="{e(first)}">{e(d["cta"])}'
+   f'<a class="ma-journey-start" href="{e(route_url(first,n))}">{e(d["cta"])}'
    '<span aria-hidden="true">↗</span></a>'
    '</div>'
    '<ol class="ma-journey-steps">'+''.join(steps)+'</ol>'
@@ -219,7 +298,8 @@ def apply(site,verify_only=False):
   if not where:raise RuntimeError("Head missing: "+lang)
   doc=doc[:where.start()]+links+doc[where.start():]
   p.write_text(doc,encoding="utf-8")
- print("MANZO AI Academy guided learning: 3 paths × 3 languages; verified="+str(verify_only))
+  add_lesson_continuity(site,lang,cards,(links[:links.index('<script')],links[links.index('<script'):]),verify_only)
+ print("MANZO AI Academy guided learning: 3 paths × 3 languages, contextual next/previous lesson links; verified="+str(verify_only))
 
 if __name__=="__main__":
  parser=argparse.ArgumentParser()
