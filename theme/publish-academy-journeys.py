@@ -142,12 +142,12 @@ def add_lesson_continuity(site,lang,cards,links,verify_only=False):
    continue
   if CONTINUITY in doc or FOLLOW_ASSET in doc:
    raise RuntimeError("Guided navigation injection is not idempotent "+str(page))
-  closing=list(re.finditer(r'</main\\s*>',doc,re.I))
+  closing=list(re.finditer(r'</main\s*>',doc,re.I))
   if len(closing)!=1:
    raise RuntimeError("One main closing tag expected in guided lesson "+str(page))
   at=closing[0].start()
   doc=doc[:at]+''.join(navs)+doc[at:]
-  where=re.search(r'</head\\s*>',doc,re.I)
+  where=re.search(r'</head\s*>',doc,re.I)
   if not where:raise RuntimeError("Missing document head "+str(page))
   tag=(css_url.replace('data-ma-journey-asset="css"', 'data-ma-journey-follow-assets="css"')+
        js_url.replace('data-ma-journey-asset="js"', 'data-ma-journey-follow-assets="js"'))
