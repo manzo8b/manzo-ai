@@ -124,6 +124,8 @@ with sync_playwright() as pw:
    assert page.locator('script[data-ma-pathways-js]').count()==1,(locale,'missing search JS')
    cards=block.locator('[data-ma-course-card]')
    assert cards.count()==6,(locale,'catalog item count')
+   assert cards.locator('[data-ma-course-orientation="1"]').count()==6,(locale,'missing positioning cues')
+   assert all(len(hint.inner_text().strip())>18 for hint in cards.locator('.ma-course-orientation').all()),(locale,'empty path guidance')
    assert block.locator('[data-ma-count]').inner_text()=='6'
    color=block.locator('.ma-catalog-hero').evaluate('(el)=>getComputedStyle(el).backgroundColor')
    assert color=='rgb(29, 80, 221)',(locale,'weak/unloaded Academy design',color)
