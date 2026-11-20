@@ -1054,3 +1054,39 @@ body[data-ma-surface] .ma-course-info h3,
  .ma-guidance .ma-unit:hover,.ma-guidance .ma-unit:focus-within{transform:none}
  .ma-course-card .ma-course-art:after{display:none}
 }
+
+/* Core learning outcome → existing evidence. Collapsed by default on mobile.
+   Only core units gain this disclosure; original coding map and Academy cards stay unchanged. */
+.ma-guidance .ma-unit-with-evidence{align-items:flex-start}
+.ma-guidance .ma-unit-main{display:grid;gap:6px;flex:1;min-width:0}
+.ma-guidance .ma-unit-evidence{min-width:0;margin:0 0 0 clamp(27px,3.6vw,43px);color:#274b6c}
+.ma-guidance .ma-unit-evidence>summary{
+ cursor:pointer;display:list-item;list-style:revert;
+ font-size:.79rem;font-weight:690;line-height:1.45;color:#1f5ab1;
+ padding:4px 2px;min-height:28px;
+}
+.ma-guidance .ma-unit-evidence>summary:hover{color:#154482}
+.ma-guidance .ma-unit-evidence>summary:focus-visible{
+ outline:3px solid #ff714c;outline-offset:2px;border-radius:4px
+}
+.ma-guidance .ma-unit-evidence-content{
+ margin:5px 0 8px;padding:12px 13px;background:#f5f9ff;
+ border:1px solid #dbe8f7;border-radius:11px;
+ font-size:.79rem;line-height:1.6;
+}
+.ma-guidance .ma-unit-evidence-content p{margin:0;color:#304e6c}
+.ma-guidance .ma-unit-evidence-content strong{display:block;color:#214b77;font-weight:760;margin-bottom:2px}
+.ma-guidance .ma-unit-evidence-links{display:flex;flex-wrap:wrap;gap:7px;margin:9px 0}
+.ma-guidance .ma-unit-evidence-links a{
+ display:inline-flex;align-items:center;min-height:35px;
+ font-weight:700;font-size:.77rem;line-height:1.35;
+ padding:7px 9px;color:#2251a1!important;text-decoration:none!important;
+ border-radius:7px;border:1px solid #bed4f1;background:#fff;
+}
+.ma-guidance .ma-unit-evidence-links a:hover{border-color:#6793d7;background:#eff5ff}
+.ma-guidance .ma-unit-evidence-note{font-size:.72rem;color:#597087!important;line-height:1.55!important}
+@media(max-width:450px){
+ .ma-guidance .ma-unit-evidence{margin-left:0}
+ .ma-guidance .ma-unit-evidence-content{padding:10px}
+ .ma-guidance .ma-unit-evidence-links{display:grid;grid-template-columns:1fr}
+}
