@@ -47,6 +47,10 @@ def validate(site:Path|None=None):
             raise ValueError("Undefined category "+item["id"])
         if not item.get("title_it") or not item.get("source"):
             raise ValueError("Missing title/source "+item["id"])
+        if not item.get("outcome_it") or not item.get("audience_it"):
+            raise ValueError("Missing learner outcome or audience "+item["id"])
+        if item.get("copy_status")!="editorial_proposal_pending_course_review":
+            raise ValueError("Unreviewed outcome copy represented as approved "+item["id"])
         if item["title_it"].strip().endswith("."):
             raise ValueError("Heading ends in a full stop "+item["id"])
         if item["duration_minutes"] is not None or item["level"] is not None:
