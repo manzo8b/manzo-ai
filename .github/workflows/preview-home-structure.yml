@@ -1,0 +1,37 @@
+name: MANZO AI Home V2 — Inspect Staging Structure
+on:
+  push:
+    branches: [preview/home-magic-trilingual-v2]
+    paths:
+      - .github/workflows/preview-home-structure.yml
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect unmodified Home wrappers in historical release
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/manzo-home-base
+          unzip -oq site-v0.7.zip -d /tmp/manzo-home-base
+          python3 - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import re
+          root=Path('/tmp/manzo-home-base')
+          for loc in ('it','en','es'):
+              files=list(root.glob(f'**/{loc}/index.html'))
+              print(f'===== {loc} base: {len(files)} matches')
+              if not files: continue
+              s=files[0].read_text(encoding='utf-8')
+              print('path',files[0],'length',len(s))
+              for m in list(re.finditer(r'<(?:main|header|aside|nav|footer|section)\\b[^>]*>',s,re.I))[:32]:
+                  print('TAG',m.group(0)[:240])
+              for m in list(re.finditer(r'</?main\\b[^>]*>',s,re.I)):
+                  print('MAIN',m.start(),m.group(0)[:120])
+              for m in list(re.finditer(r'</?footer\\b[^>]*>',s,re.I)):
+                  print('FOOTER',m.start(),m.group(0)[:120])
+          PY
