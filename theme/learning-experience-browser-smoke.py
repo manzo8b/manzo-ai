@@ -65,7 +65,7 @@ with sync_playwright() as pw:
      assert first_check.get_attribute('open') is not None,(locale,width,'details cannot be opened')
      assert first_check.get_attribute('data-ma-core-case')=='2'
      assert first_check.get_attribute('data-ma-core-quiz')=='1'
-     assert [a.get_attribute('href') for a in first_check.locator('nav a').all()]==['#hx-lab','#hx-quiz']
+     assert [a.get_attribute('href') for a in first_check.locator('.ma-unit-evidence-links a').all()]==['#hx-lab','#hx-quiz']
      first_check.locator('summary').click()
      assert first_check.get_attribute('open') is None
      assert page.locator('.hx-module').count()==6
