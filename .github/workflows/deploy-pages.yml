@@ -52,6 +52,7 @@ on:
       - theme/publish-build-safely-course.py
       - theme/publish-build-safely-home.py
       - theme/audit-academy-i18n.py
+      - theme/check-teaching-presentation-i18n.py
       - theme/check-sprint0-consistency.py
       - README.md
       - theme/ACADEMY_I18N_STANDARD.md
@@ -511,6 +512,7 @@ jobs:
           node --check theme/final-two-courses.js
           python3 theme/publish-final-two-courses.py --site _site --verify-only
           python3 theme/audit-academy-i18n.py
+          python3 theme/check-teaching-presentation-i18n.py
           for diagram in mappa-prompt mappa-salto mappa-skill mappa-famiglia; do
             grep -q "id=\"$diagram\"" _site/it/formazione/prompt-vs-skill/index.html
           done
