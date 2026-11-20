@@ -216,7 +216,7 @@ CONTENT_UI={
  "hint":"Un registro sin actualizaciones, responsables ni pruebas es una fotografía, no una gobernanza continua.",
  "copyTitle":"Registro sintético y plan antideriva","homeDescription":"Registro AI vivo, AI Act, ISO 42001, casos simulados y vigilancia de deriva.","homeTags":["EU AI Act","Gobernanza continua"],
  "sourcesLead":"Comprueba siempre las normas consolidadas y su aplicación concreta. Las referencias son primarias.",
- "cross":[["REGISTRO","Inventario vivo de sistemas y finalidades"],["TRIGGER","Evento que obliga a revisar"],["OWNER","Responsable de un sistema"],["RIESGO","Posible consecuencia dañina"],["BASELINE","Conjunto de pruebas de referencia"],["DERIVA","Cambio de comportamiento o finalidad"],["ROL","Proveedor o deployer"],["AUDIT","Revisión basada en evidencias"]],
+ "cross":[["REGISTRO","Inventario vivo de sistemas y finalidades"],["TRIGGER","Evento que obliga a revisar"],["OWNER","Responsable de un sistema"],["RIESGO","Posible consecuencia dañina"],["BASELINE","Conjunto de pruebas de referencia"],["DERIVA","Cambio de comportamiento o finalidad"],["ROLES","Funciones jurídicas de proveedor y deployer"],["AUDIT","Revisión basada en evidencias"]],
 }
 },
 };
