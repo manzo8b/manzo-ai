@@ -40,4 +40,4 @@ L'italiano rimane il riferimento strutturale. In `en/` e `es/` devono esistere q
 
 L'ultima pipeline ha confermato: `[NEEDS TRANSLATION] ai-teaching-lab: IT=source, EN=MISSING, ES=MISSING`. Fonte: [GitHub Actions](https://github.com/manzo8b/manzo-ai/actions/runs/44725699053).
 
-**Verifica del 20 novembre:** i cinque file narrativi EN e ES risultano tutti presenti. Rimangono non tradotti i sei JSON strutturati per ciascuna lingua e la pubblicazione delle interazioni. **Non contrassegnare il corso come completato prima della verifica delle pagine native.**
+**Verifica del 20 novembre (Sprint 0):** i cinque moduli narrativi EN/ES e le 15 slide testuali in entrambe le lingue risultano presenti. Mancano cinque JSON per lingua (course, narrative, assessment-bank, glossary, scenarios), interfacce localizzate e pubblicazione nativa delle interazioni. **Non contrassegnare il corso come completato prima della verifica delle pagine native.**
