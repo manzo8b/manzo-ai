@@ -8,7 +8,8 @@
     "Routes are evidenced by publishers or deployment scripts, not independently re-crawled live",
     "Published EN/ES course routes do not certify site-wide translation parity",
     "Do not show unverified route or duration in UI",
-    "AI Teaching Lab native EN/ES course remains in preparation"
+    "AI Teaching Lab native EN/ES course remains in preparation",
+    "Learning outcome and audience copy are proposed editorial summaries and must be checked against each published syllabus before release"
   ],
   "categories": {
     "foundations": {
@@ -60,7 +61,10 @@
       "lab_relation": "integrated",
       "duration_minutes": null,
       "level": null,
-      "source": "theme/publish-learning-experience.py"
+      "source": "theme/publish-learning-experience.py",
+      "outcome_it": "Verificare una risposta generata, distinguendo affermazioni, fonti ed evidenze",
+      "audience_it": "Studenti, professionisti e persone curiose",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "reliability",
@@ -84,7 +88,10 @@
       "lab_relation": "integrated",
       "duration_minutes": null,
       "level": null,
-      "source": "theme/legacy_learning_i18n.py"
+      "source": "theme/legacy_learning_i18n.py",
+      "outcome_it": "Sottoporre un risultato a stress test e documentare i limiti delle conclusioni",
+      "audience_it": "Chi valuta risposte e processi supportati dall’IA",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "augmented",
@@ -108,7 +115,10 @@
       "lab_relation": "integrated",
       "duration_minutes": null,
       "level": null,
-      "source": "theme/final_two_i18n_base.py"
+      "source": "theme/final_two_i18n_base.py",
+      "outcome_it": "Valutare quando l’IA aiuta una decisione senza sostituire il giudizio umano",
+      "audience_it": "Chi integra l’IA nel lavoro e nella vita quotidiana",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "prompt-vs-skill",
@@ -133,7 +143,10 @@
       "lab_relation": "integrated",
       "duration_minutes": null,
       "level": null,
-      "source": "theme/prompt_skill_i18n.py"
+      "source": "theme/prompt_skill_i18n.py",
+      "outcome_it": "Passare da una richiesta isolata a istruzioni verificabili e a un metodo riutilizzabile",
+      "audience_it": "Chi progetta prompt e attività ripetibili",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "centroni-city",
@@ -157,7 +170,10 @@
       "lab_relation": "integrated",
       "duration_minutes": null,
       "level": null,
-      "source": "theme/legacy_learning_i18n.py"
+      "source": "theme/legacy_learning_i18n.py",
+      "outcome_it": "Definire un blueprint di prodotto con decisioni, verifiche e controlli",
+      "audience_it": "Chi progetta prodotti o servizi digitali",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "build-safely",
@@ -181,7 +197,10 @@
       "lab_relation": "integrated",
       "duration_minutes": null,
       "level": null,
-      "source": "theme/build_safely_i18n.py"
+      "source": "theme/build_safely_i18n.py",
+      "outcome_it": "Classificare dati e individuare controlli e autorizzazioni prima dell’uso dell’IA",
+      "audience_it": "Chi usa strumenti IA in contesti operativi",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "govern-autonomy",
@@ -205,7 +224,10 @@
       "lab_relation": "integrated",
       "duration_minutes": null,
       "level": null,
-      "source": "theme/govern_autonomy_i18n.py"
+      "source": "theme/govern_autonomy_i18n.py",
+      "outcome_it": "Definire limiti, permessi e approvazioni per agenti con autonomia controllata",
+      "audience_it": "Team, sviluppatori e professionisti",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "dynamic-compliance",
@@ -229,7 +251,10 @@
       "lab_relation": "integrated",
       "duration_minutes": null,
       "level": null,
-      "source": "theme/final_two_i18n_base.py"
+      "source": "theme/final_two_i18n_base.py",
+      "outcome_it": "Esaminare casi simulati per distinguere rischi, controlli ed evidenze di conformità",
+      "audience_it": "Professionisti e responsabili di processo",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "ai-teaching-lab",
@@ -254,7 +279,10 @@
       "lab_relation": "separate_internal_studios",
       "duration_minutes": null,
       "level": null,
-      "source": "theme/publish-ai-teaching-lab.py"
+      "source": "theme/publish-ai-teaching-lab.py",
+      "outcome_it": "Progettare attività, materiali e verifiche didattiche con supervisione umana",
+      "audience_it": "Docenti e formatori",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "m01",
@@ -279,7 +307,10 @@
       "lab_relation": "linked_in_lesson_target_to_confirm",
       "duration_minutes": null,
       "level": null,
-      "source": ".github/workflows/deploy-pages.yml"
+      "source": ".github/workflows/deploy-pages.yml",
+      "outcome_it": "Distinguere IA e automazione in esempi concreti",
+      "audience_it": "Chi inizia da zero",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "m02",
@@ -304,7 +335,10 @@
       "lab_relation": "no_dedicated_interactive_lab",
       "duration_minutes": null,
       "level": null,
-      "source": ".github/workflows/deploy-pages.yml"
+      "source": ".github/workflows/deploy-pages.yml",
+      "outcome_it": "Spiegare come un modello linguistico genera risposte e perché può sbagliare",
+      "audience_it": "Chi vuole capire il funzionamento dei modelli",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "m03",
@@ -329,7 +363,10 @@
       "lab_relation": "linked_in_lesson_target_to_confirm",
       "duration_minutes": null,
       "level": null,
-      "source": ".github/workflows/deploy-pages.yml"
+      "source": ".github/workflows/deploy-pages.yml",
+      "outcome_it": "Scrivere e confrontare prompt con obiettivi e vincoli espliciti",
+      "audience_it": "Chi utilizza strumenti generativi per attività pratiche",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "m04",
@@ -354,7 +391,10 @@
       "lab_relation": "no_dedicated_interactive_lab",
       "duration_minutes": null,
       "level": null,
-      "source": ".github/workflows/deploy-pages.yml"
+      "source": ".github/workflows/deploy-pages.yml",
+      "outcome_it": "Controllare risposte, fonti e segnali di incertezza",
+      "audience_it": "Chi deve verificare informazioni",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "m05",
@@ -379,7 +419,10 @@
       "lab_relation": "no_dedicated_interactive_lab",
       "duration_minutes": null,
       "level": null,
-      "source": ".github/workflows/deploy-pages.yml"
+      "source": ".github/workflows/deploy-pages.yml",
+      "outcome_it": "Disegnare un flusso di lavoro con passaggi verificabili e controllo umano",
+      "audience_it": "Chi organizza attività supportate dall’IA",
+      "copy_status": "editorial_proposal_pending_course_review"
     },
     {
       "id": "m06",
@@ -404,7 +447,10 @@
       "lab_relation": "no_dedicated_interactive_lab",
       "duration_minutes": null,
       "level": null,
-      "source": ".github/workflows/deploy-pages.yml"
+      "source": ".github/workflows/deploy-pages.yml",
+      "outcome_it": "Discutere opportunità e rischi sociali e lavorativi dell’IA con argomenti verificabili",
+      "audience_it": "Chi vuole orientarsi nelle conseguenze dell’IA",
+      "copy_status": "editorial_proposal_pending_course_review"
     }
   ]
 }
