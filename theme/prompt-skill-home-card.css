@@ -265,3 +265,15 @@
  background:#d8e6ff;color:#1e4f97;
 }
 .ma-home-showcase .safe-home-course-card .ps-home-art-brand span{color:#d0ffdb}
+
+/* Governing Autonomy · reviewed Academy card size shared in IT / EN / ES */
+.ma-home-showcase .ga-home-course-card .ma-course-art.ps-home-art{
+ background:linear-gradient(124deg,#155b83 0%,#158fa5 50%,#5b65aa 100%);
+}
+.ma-home-showcase .ga-home-course-card .ps-home-art-p{
+ background:#e5f8ff;color:#175779;font-size:.87em;
+}
+.ma-home-showcase .ga-home-course-card .ps-home-art-s{
+ background:#ffeac3;color:#916226;font-size:.86em;
+}
+.ma-home-showcase .ga-home-course-card .ps-home-art-brand span{color:#e4ffe7}
