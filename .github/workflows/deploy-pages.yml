@@ -21,7 +21,7 @@ on:
       - editorial/learning/mental-models-reliability/**
       - editorial/learning/centroni-city-builder/**
       - editorial/learning/build-safely/**
-      - theme/build-safely-*.py
+      - theme/build_safely_*.py
       - theme/build-safely-course.css
       - theme/build-safely-course.js
       - theme/publish-build-safely-course.py
@@ -467,7 +467,7 @@ jobs:
           python3 theme/publish-reliability-course.py --site _site --verify-only
           python3 -m py_compile theme/publish-centroni-city-course.py
           python3 theme/publish-centroni-city-course.py --site _site --verify-only
-          python3 -m py_compile theme/build-safely-i18n.py theme/build-safely-evaluations.py theme/publish-build-safely-course.py theme/publish-build-safely-home.py
+          python3 -m py_compile theme/build_safely_i18n.py theme/build_safely_evaluations.py theme/publish-build-safely-course.py theme/publish-build-safely-home.py
           python3 theme/publish-build-safely-course.py --site _site --verify-only
           for diagram in mappa-prompt mappa-salto mappa-skill mappa-famiglia; do
             grep -q "id=\"$diagram\"" _site/it/formazione/prompt-vs-skill/index.html
