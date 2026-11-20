@@ -15,15 +15,15 @@ Ogni percorso formativo deve essere completo in tutte e tre le lingue. **La trad
 7. Le pagine IT esistenti restano disponibili durante la migrazione. Non dichiarare il prodotto interamente trilingue finché l'audit di tutte le sezioni e i corsi non è superato.
 8. Le varianti devono essere sottoposte almeno a controlli di navigazione, contenuto, accessibilità, layout e usabilità su smartphone.
 
-## Inventario iniziale · 20 novembre 2026
+## Inventario aggiornato · 20 novembre 2026
 
 | Contenuto | Italiano | Inglese | Spagnolo | Intervento |
 |---|---|---|---|---|
 | Corso Allucinazioni (base e Coding) | Presente | Presente | Presente | Controllare parità e UI |
 | Prompt vs Skill | Presente | Presente | Presente | 6 letture, quattro grafici, quiz, cruciverba e navigazione trilingue: CI PASS, verifica visiva finale da completare |
-| Modelli mentali e affidabilità | Presente | Non presente nel sorgente editoriale | Non presente nel sorgente editoriale | Traduzione integrale + link |
-| AI Product Builder — Centroni City | Presente | Non presente nel sorgente editoriale | Non presente nel sorgente editoriale | Traduzione integrale + link |
-| AI Teaching Lab | Presente | Non presente nella struttura editoriale EN/ES | Non presente nella struttura editoriale EN/ES | Migrazione estesa: corso, 5 moduli, glossario, scenari, valutazioni, narrazioni |
+| Modelli mentali e affidabilità | Pubblicato | Pubblicato | Pubblicato | Sorgenti e percorso nativo IT/EN/ES verificati nella pipeline; QA visiva finale separata |
+| AI Product Builder — Centroni City | Pubblicato | Pubblicato | Pubblicato | Sorgenti e percorso nativo IT/EN/ES verificati nella pipeline; QA visiva finale separata |
+| AI Teaching Lab | 5 moduli e dati strutturati pubblicati | 4/5 moduli narrativi nei sorgenti, non pubblicati come corso nativo | 4/5 moduli narrativi nei sorgenti, non pubblicati come corso nativo | Mancano Modulo 05 e file JSON di corso, narrazioni, valutazioni e glossario EN/ES; test e pubblicazione nativi da completare |
 | Costruire in sicurezza | Nuovo corso | Nuovo corso | Nuovo corso | Pubblicazione simultanea nelle tre lingue |
 | Governare l'autonomia | Presente | Presente | Presente | Sei letture, Mission Control, quattro diagrammi, quiz e cruciverba; CI trilingue PASS |
 | Compliance dinamica e governance continua | Pubblicato | Pubblicato | Pubblicato | 6 letture per lingua, 4 diagrammi e Audit Express, registro, quiz e cruciverba; deploy CI PASS |
@@ -42,12 +42,12 @@ Ogni percorso formativo deve essere completo in tutte e tre le lingue. **La trad
 ## Progressi verificati
 
 - **20 novembre 2026 — Ultimi due corsi completati:** *Compliance dinamica e governance continua* e *Intelligenza aumentata, non sostituita* pubblicati con contenuti IT/EN/ES equivalenti; 36 letture, 24 diagrammi, 6 laboratori e cruciverba, 60 domande spiegate; deploy GitHub Pages e test automatici superati. Collaudo visivo manuale specifico ancora da confermare.
-- **Copertura fonti editoriali Academy: 6/9 corsi** verificati trilingui nei sorgenti; l'intero sito non è ancora certificato trilingue. Non sviluppare ulteriori corsi prima dell'audit globale concordato.
+- **Copertura fonti editoriali Academy aggiornata: 8/9 corsi** con sorgenti IT/EN/ES presenti secondo la pipeline [GitHub Pages #44725699053](https://github.com/manzo8b/manzo-ai/actions/runs/44725699053). La parità dei sorgenti non certifica né la qualità redazionale né l'intero sito; AI Teaching Lab resta incompleto. Sprint 0: stabilizzazione, nessun nuovo corso.
 
 - **20 novembre 2026 — Governare l'autonomia:** sei letture IT/EN/ES, quattro mappe concettuali, simulatore Mission Control (otto azioni, quattro incidenti, regole di STOP), cruciverba e dieci quiz per lingua; pubblicazione GitHub Pages riuscita. Collaudo visivo manuale su dispositivi reali non ancora eseguito.
 
 - **20 novembre 2026 — Prompt vs Skill:** versioni IT/EN/ES pubblicate; QA GitHub Pages superato (letture 6/6, mappe 4/4, cruciverba 8 termini, quiz 10/10, collegamenti Home EN/ES). Controllo visivo su dispositivi reali da completare.
-- **Restano da tradurre integralmente:** Modelli mentali e affidabilità, AI Product Builder — Centroni City e AI Teaching Lab (più gli altri contenuti del prodotto non ancora certificati).
+- **Traduzioni arretrate da completare:** soltanto AI Teaching Lab tra i nove percorsi censiti; altre pagine e strumenti della piattaforma richiedono ancora un audit di copertura integrale. *Modelli mentali* e *Centroni City* sono già localizzati e pubblicati: non ripetere il lavoro.
 
 ## Collaudo prima del rilascio
-Verificare il conteggio delle sei letture nelle tre lingue, tutti gli URL, le attività, le domande con feedback, la mancanza di testi italiani residui nelle UI EN/ES, i tag canonici e hreflang e l'uniformità delle card.
+Per ogni corso, verificare il numero effettivo di letture e moduli previsto dalla sua struttura (non assumere sei per tutti), tutti gli URL, attività, rubriche e risposte spiegate, assenza di residui italiani nelle UI EN/ES, canonical/hreflang, selettore della lingua sul medesimo percorso e uniformità delle card. Lo script `theme/audit-academy-i18n.py` misura solo la presenza dei sorgenti editoriali; le pagine native pubblicate vanno testate separatamente.
