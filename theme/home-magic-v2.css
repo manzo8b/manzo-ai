@@ -539,6 +539,12 @@ body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link[aria-curren
   29%,68%{transform:translate(94px,-78px) rotate(7deg)}
   81%{transform:translate(48px,-38px) rotate(4deg)}
 }
+/* The reveal begins before the lid fully opens, and stays legible longer. */
+@keyframes ma-v2-reveal{
+  0%,12%,87%,100%{opacity:0}
+  22%,70%{opacity:1}
+  79%{opacity:.6}
+}
 @keyframes ma-v2-artifact-rise{
   0%,16%,90%,100%{transform:translateY(78px) scale(.79)}
   34%,67%{transform:translateY(-43px) scale(1.13)}
