@@ -13,7 +13,7 @@ L'italiano rimane il riferimento strutturale. In `en/` e `es/` devono esistere q
 | A · Modulo 01 | `module-01.md` | Testo completo, esempi, attività, note pedagogiche e riferimenti |
 | B · Modulo 02 | `module-02.md` | Testo completo, esempi, attività, note pedagogiche e riferimenti |
 | C · Modulo 03 | `module-03.md` | Multimedialità, prompt, modelli e controlli accessibilità |
-| D · Moduli 04–05 | `module-04.md`, `module-05.md` | Inclusione, valutazione, tutor e controllo umano |
+| D · Moduli 04–05 | `module-04.md`, `module-05.md` | **Sorgenti EN/ES presenti**: verificare parità, inclusione, tutor e controllo umano, senza ritradurre |
 | E · Dati del corso | `course.json`, `narrative.json` | Tutte le sezioni e le narrazioni tradotte senza alterare ID, chiavi e logica |
 | F · Verifiche e glossario | `assessment-bank.json`, `glossary.json` | Quiz, feedback, cruciverba, esempi e 79 voci glossario tradotti |
 
@@ -40,4 +40,4 @@ L'italiano rimane il riferimento strutturale. In `en/` e `es/` devono esistere q
 
 L'ultima pipeline ha confermato: `[NEEDS TRANSLATION] ai-teaching-lab: IT=source, EN=MISSING, ES=MISSING`. Fonte: [GitHub Actions](https://github.com/manzo8b/manzo-ai/actions/runs/44725699053).
 
-**Non contrassegnare alcuna consegna come completata prima dell'esistenza e della verifica dei relativi file.**
+**Verifica del 20 novembre:** i cinque file narrativi EN e ES risultano tutti presenti. Rimangono non tradotti i quattro JSON strutturati per ciascuna lingua e la pubblicazione delle interazioni. **Non contrassegnare il corso come completato prima della verifica delle pagine native.**
