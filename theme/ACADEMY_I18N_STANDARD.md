@@ -20,7 +20,7 @@ Ogni percorso formativo deve essere completo in tutte e tre le lingue. **La trad
 | Contenuto | Italiano | Inglese | Spagnolo | Intervento |
 |---|---|---|---|---|
 | Corso Allucinazioni (base e Coding) | Presente | Presente | Presente | Controllare parità e UI |
-| Prompt vs Skill | Presente | Non presente nel sorgente editoriale | Non presente nel sorgente editoriale | Traduzione integrale + link |
+| Prompt vs Skill | Presente | Presente | Presente | 6 letture, quattro grafici, quiz, cruciverba e navigazione trilingue: CI PASS, verifica visiva finale da completare |
 | Modelli mentali e affidabilità | Presente | Non presente nel sorgente editoriale | Non presente nel sorgente editoriale | Traduzione integrale + link |
 | AI Product Builder — Centroni City | Presente | Non presente nel sorgente editoriale | Non presente nel sorgente editoriale | Traduzione integrale + link |
 | AI Teaching Lab | Presente | Non presente nella struttura editoriale EN/ES | Non presente nella struttura editoriale EN/ES | Migrazione estesa: corso, 5 moduli, glossario, scenari, valutazioni, narrazioni |
@@ -35,6 +35,11 @@ Ogni percorso formativo deve essere completo in tutte e tre le lingue. **La trad
 - Anonimizzazione / anonymisation / anonimización: dati non più riferibili a interessati secondo l'analisi contestuale del rischio di reidentificazione.
 - Pseudonimizzazione / pseudonymisation / seudonimización: riduzione del collegamento diretto con l'identità, ma il dato resta personale.
 - Prompt injection: istruzione avversa incorporata in input o contenuti di fiducia inferiore; non garantire prevenzione tramite semplice prompt.
+
+## Progressi verificati
+
+- **20 novembre 2026 — Prompt vs Skill:** versioni IT/EN/ES pubblicate; QA GitHub Pages superato (letture 6/6, mappe 4/4, cruciverba 8 termini, quiz 10/10, collegamenti Home EN/ES). Controllo visivo su dispositivi reali da completare.
+- **Restano da tradurre integralmente:** Modelli mentali e affidabilità, AI Product Builder — Centroni City e AI Teaching Lab (più gli altri contenuti del prodotto non ancora certificati).
 
 ## Collaudo prima del rilascio
 Verificare il conteggio delle sei letture nelle tre lingue, tutti gli URL, le attività, le domande con feedback, la mancanza di testi italiani residui nelle UI EN/ES, i tag canonici e hreflang e l'uniformità delle card.
