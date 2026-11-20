@@ -92,7 +92,7 @@ JS=r'''
        (state.language==="all"||terms.languages.split(" ").includes(state.language));
      card.hidden=!ok;if(ok)shown++;
      const target=state.language==="all"?"it":state.language;
-     const href=terms["url"+target.toUpperCase()];
+     const href=terms["url"+target.charAt(0).toUpperCase()+target.slice(1)];
      const link=card.querySelector(".go");
      if(ok&&href)link.href=href;
    }
