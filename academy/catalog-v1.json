@@ -1,0 +1,410 @@
+{
+  "schema_version": "1.0-draft",
+  "updated_at": "2026-11-20",
+  "status": "design_branch_not_live_catalog",
+  "base_url": "/manzo-ai/",
+  "notes": [
+    "Counts exclude internal course modules and independent resources to avoid double counting",
+    "Routes are evidenced by publishers or deployment scripts, not independently re-crawled live",
+    "Published EN/ES course routes do not certify site-wide translation parity",
+    "Do not show unverified route or duration in UI",
+    "AI Teaching Lab native EN/ES course remains in preparation"
+  ],
+  "categories": {
+    "foundations": {
+      "it": "Fondamenti e alfabetizzazione",
+      "en": "AI foundations",
+      "es": "Fundamentos de IA"
+    },
+    "prompt_build": {
+      "it": "Prompt e progettazione",
+      "en": "Prompting and building",
+      "es": "Prompts y creación"
+    },
+    "reliability": {
+      "it": "Affidabilità e pensiero critico",
+      "en": "Reliability and critical thinking",
+      "es": "Fiabilidad y pensamiento crítico"
+    },
+    "governance": {
+      "it": "Sicurezza e governance",
+      "en": "Safety and governance",
+      "es": "Seguridad y gobernanza"
+    },
+    "teaching": {
+      "it": "Didattica e produzione",
+      "en": "Teaching and production",
+      "es": "Docencia y producción"
+    }
+  },
+  "items": [
+    {
+      "id": "hallucinations",
+      "kind": "course",
+      "title_it": "Allucinazioni IA e verificabilità",
+      "category": "reliability",
+      "route": {
+        "it": "it/impara/allucinazioni-ai-verificabilita",
+        "en": "en/learn/ai-hallucinations-verification",
+        "es": "es/aprende/alucinaciones-ia-verificacion"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "published",
+        "es": "published"
+      },
+      "practice": [
+        "interactive",
+        "assessment"
+      ],
+      "lab_relation": "integrated",
+      "duration_minutes": null,
+      "level": null,
+      "source": "theme/publish-learning-experience.py"
+    },
+    {
+      "id": "reliability",
+      "kind": "course",
+      "title_it": "Modelli mentali e affidabilità dell’IA",
+      "category": "reliability",
+      "route": {
+        "it": "it/formazione/modelli-mentali-affidabilita-ai",
+        "en": "en/learning/mental-models-reliability",
+        "es": "es/formacion/modelos-mentales-fiabilidad-ia"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "published",
+        "es": "published"
+      },
+      "practice": [
+        "interactive",
+        "assessment"
+      ],
+      "lab_relation": "integrated",
+      "duration_minutes": null,
+      "level": null,
+      "source": "theme/legacy_learning_i18n.py"
+    },
+    {
+      "id": "augmented",
+      "kind": "course",
+      "title_it": "Intelligenza aumentata, non sostituita",
+      "category": "reliability",
+      "route": {
+        "it": "it/formazione/intelligenza-aumentata-non-sostituita",
+        "en": "en/learning/augmented-not-replaced",
+        "es": "es/formacion/inteligencia-aumentada-no-sustituida"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "published",
+        "es": "published"
+      },
+      "practice": [
+        "interactive",
+        "assessment"
+      ],
+      "lab_relation": "integrated",
+      "duration_minutes": null,
+      "level": null,
+      "source": "theme/final_two_i18n_base.py"
+    },
+    {
+      "id": "prompt-vs-skill",
+      "kind": "course",
+      "title_it": "Prompt vs Skill",
+      "category": "prompt_build",
+      "route": {
+        "it": "it/formazione/prompt-vs-skill",
+        "en": "en/learning/prompt-vs-skill",
+        "es": "es/formacion/prompt-vs-skill"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "published",
+        "es": "published"
+      },
+      "practice": [
+        "interactive",
+        "guided",
+        "assessment"
+      ],
+      "lab_relation": "integrated",
+      "duration_minutes": null,
+      "level": null,
+      "source": "theme/prompt_skill_i18n.py"
+    },
+    {
+      "id": "centroni-city",
+      "kind": "course",
+      "title_it": "AI Product Builder — Centroni City",
+      "category": "prompt_build",
+      "route": {
+        "it": "it/formazione/ai-product-builder-centroni-city",
+        "en": "en/learning/ai-product-builder-centroni-city",
+        "es": "es/formacion/ai-product-builder-centroni-city"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "published",
+        "es": "published"
+      },
+      "practice": [
+        "interactive",
+        "assessment"
+      ],
+      "lab_relation": "integrated",
+      "duration_minutes": null,
+      "level": null,
+      "source": "theme/legacy_learning_i18n.py"
+    },
+    {
+      "id": "build-safely",
+      "kind": "course",
+      "title_it": "Costruire in sicurezza",
+      "category": "governance",
+      "route": {
+        "it": "it/formazione/costruire-in-sicurezza",
+        "en": "en/learning/build-safely",
+        "es": "es/formacion/construir-con-seguridad"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "published",
+        "es": "published"
+      },
+      "practice": [
+        "interactive",
+        "assessment"
+      ],
+      "lab_relation": "integrated",
+      "duration_minutes": null,
+      "level": null,
+      "source": "theme/build_safely_i18n.py"
+    },
+    {
+      "id": "govern-autonomy",
+      "kind": "course",
+      "title_it": "Governare l’autonomia",
+      "category": "governance",
+      "route": {
+        "it": "it/formazione/governare-autonomia",
+        "en": "en/learning/governing-autonomy",
+        "es": "es/formacion/gobernar-la-autonomia"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "published",
+        "es": "published"
+      },
+      "practice": [
+        "interactive",
+        "assessment"
+      ],
+      "lab_relation": "integrated",
+      "duration_minutes": null,
+      "level": null,
+      "source": "theme/govern_autonomy_i18n.py"
+    },
+    {
+      "id": "dynamic-compliance",
+      "kind": "course",
+      "title_it": "Compliance dinamica e governance continua",
+      "category": "governance",
+      "route": {
+        "it": "it/formazione/compliance-dinamica-governance-continua",
+        "en": "en/learning/dynamic-ai-compliance",
+        "es": "es/formacion/compliance-dinamica-gobernanza-continua"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "published",
+        "es": "published"
+      },
+      "practice": [
+        "interactive",
+        "assessment"
+      ],
+      "lab_relation": "integrated",
+      "duration_minutes": null,
+      "level": null,
+      "source": "theme/final_two_i18n_base.py"
+    },
+    {
+      "id": "ai-teaching-lab",
+      "kind": "course",
+      "title_it": "AI Teaching Lab",
+      "category": "teaching",
+      "route": {
+        "it": "it/formazione/ia-per-la-didattica",
+        "en": null,
+        "es": null
+      },
+      "language_status": {
+        "it": "published",
+        "en": "in_preparation",
+        "es": "in_preparation"
+      },
+      "practice": [
+        "guided",
+        "separate_studio",
+        "assessment"
+      ],
+      "lab_relation": "separate_internal_studios",
+      "duration_minutes": null,
+      "level": null,
+      "source": "theme/publish-ai-teaching-lab.py"
+    },
+    {
+      "id": "m01",
+      "kind": "foundation_module",
+      "code": "M01",
+      "title_it": "Che cos’è davvero l’intelligenza artificiale",
+      "category": "foundations",
+      "route": {
+        "it": "it/impara/che-cos-e-l-intelligenza-artificiale",
+        "en": null,
+        "es": null
+      },
+      "language_status": {
+        "it": "published",
+        "en": "not_verified",
+        "es": "not_verified"
+      },
+      "practice": [
+        "static_activity",
+        "assessment"
+      ],
+      "lab_relation": "linked_in_lesson_target_to_confirm",
+      "duration_minutes": null,
+      "level": null,
+      "source": ".github/workflows/deploy-pages.yml"
+    },
+    {
+      "id": "m02",
+      "kind": "foundation_module",
+      "code": "M02",
+      "title_it": "Come funziona un modello linguistico",
+      "category": "foundations",
+      "route": {
+        "it": "it/impara/come-funziona-un-modello-linguistico",
+        "en": "en/learn/how-a-language-model-works",
+        "es": "es/aprende/como-funciona-un-modelo-de-lenguaje"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "route_in_build_tests",
+        "es": "route_in_build_tests"
+      },
+      "practice": [
+        "static_activity",
+        "assessment"
+      ],
+      "lab_relation": "no_dedicated_interactive_lab",
+      "duration_minutes": null,
+      "level": null,
+      "source": ".github/workflows/deploy-pages.yml"
+    },
+    {
+      "id": "m03",
+      "kind": "foundation_module",
+      "code": "M03",
+      "title_it": "Come costruire un prompt efficace",
+      "category": "foundations",
+      "route": {
+        "it": "it/impara/come-costruire-un-prompt-efficace",
+        "en": "en/learn/how-to-build-an-effective-prompt",
+        "es": "es/aprende/como-construir-un-prompt-eficaz"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "route_in_build_tests",
+        "es": "route_in_build_tests"
+      },
+      "practice": [
+        "static_activity",
+        "assessment"
+      ],
+      "lab_relation": "linked_in_lesson_target_to_confirm",
+      "duration_minutes": null,
+      "level": null,
+      "source": ".github/workflows/deploy-pages.yml"
+    },
+    {
+      "id": "m04",
+      "kind": "foundation_module",
+      "code": "M04",
+      "title_it": "Come verificare le risposte AI",
+      "category": "foundations",
+      "route": {
+        "it": "it/impara/come-verificare-le-risposte-ai",
+        "en": "en/learn/how-to-verify-ai-answers",
+        "es": "es/aprende/como-verificar-las-respuestas-de-ia"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "route_in_build_tests",
+        "es": "route_in_build_tests"
+      },
+      "practice": [
+        "static_activity",
+        "assessment"
+      ],
+      "lab_relation": "no_dedicated_interactive_lab",
+      "duration_minutes": null,
+      "level": null,
+      "source": ".github/workflows/deploy-pages.yml"
+    },
+    {
+      "id": "m05",
+      "kind": "foundation_module",
+      "code": "M05",
+      "title_it": "Progettare e valutare un workflow AI",
+      "category": "foundations",
+      "route": {
+        "it": "it/impara/progettare-un-workflow-ai",
+        "en": "en/learn/designing-an-ai-workflow",
+        "es": "es/aprende/disenar-un-flujo-de-trabajo-con-ia"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "route_in_build_tests",
+        "es": "route_in_build_tests"
+      },
+      "practice": [
+        "static_activity",
+        "assessment"
+      ],
+      "lab_relation": "no_dedicated_interactive_lab",
+      "duration_minutes": null,
+      "level": null,
+      "source": ".github/workflows/deploy-pages.yml"
+    },
+    {
+      "id": "m06",
+      "kind": "foundation_module",
+      "code": "M06",
+      "title_it": "IA nella storia, nel lavoro e nella società",
+      "category": "foundations",
+      "route": {
+        "it": "it/impara/ai-storia-lavoro-societa",
+        "en": "en/learn/ai-history-work-and-society",
+        "es": "es/aprende/ia-historia-trabajo-sociedad"
+      },
+      "language_status": {
+        "it": "published",
+        "en": "route_in_build_tests",
+        "es": "route_in_build_tests"
+      },
+      "practice": [
+        "static_activity",
+        "assessment"
+      ],
+      "lab_relation": "no_dedicated_interactive_lab",
+      "duration_minutes": null,
+      "level": null,
+      "source": ".github/workflows/deploy-pages.yml"
+    }
+  ]
+}
