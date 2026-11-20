@@ -267,7 +267,9 @@ body[data-ma-surface="landing"] .ma-home-course-grid > article[hidden]{display:n
  .ma-s1-hero-actions a,.ma-s1-step,.ma-s1-catalog-toggle,.ma-s1-step *{
   transition:none!important;animation:none!important;scroll-behavior:auto!important;
  }
- .ma-s1-step:hover,.ma-s1-catalog-toggle:hover,.ma-s1-hero-actions a:hover{transform:none!important}
+ body[data-ma-surface="landing"] .ma-s1-step:hover,
+ body[data-ma-surface="landing"] .ma-s1-step:focus-within,
+ .ma-s1-catalog-toggle:hover,.ma-s1-hero-actions a:hover{transform:none!important}
 }
 @media(prefers-contrast:more){
  .ma-s1-step{border-width:2px!important;background:#fff!important}
