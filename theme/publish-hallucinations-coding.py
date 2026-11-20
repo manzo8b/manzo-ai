@@ -5,6 +5,7 @@ The ZIP remains immutable. No client data or analytics.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 from html import escape
 import json
 from pathlib import Path
@@ -14,6 +15,7 @@ import shutil
 ROOT=Path(__file__).resolve().parent.parent
 SRC=ROOT/'editorial'/'learning'/'hallucinations'
 BASE='/manzo-ai/'
+CSS_REV=hashlib.sha256((SRC/'coding.css').read_bytes()).hexdigest()[:12]
 ROUTES={
  'it':'it/impara/allucinazioni-ai-verificabilita/coding',
  'en':'en/learn/ai-hallucinations-verification/coding',
@@ -76,7 +78,7 @@ def html_page(loc,d):
   <link rel="canonical" href="{e(canonical)}">{alters}
   <link rel="alternate" hreflang="x-default" href="https://manzo8b.github.io{BASE}{ROUTES['it']}/">
   <link rel="stylesheet" href="{BASE}assets/learning/hallucinations/course.css">
-  <link rel="stylesheet" href="{BASE}assets/learning/hallucinations/coding.css">
+  <link rel="stylesheet" href="{BASE}assets/learning/hallucinations/coding.css?v={CSS_REV}">
   <script src="{BASE}assets/learning/hallucinations/coding.js" defer></script>
   <script type="application/ld+json">{safe_json(schema)}</script>
   </head><body class="hx-page hc-page" data-hc-module="v1">
@@ -204,6 +206,7 @@ def publish(site,verify_only=False):
   page=site/ROUTES[loc]/'index.html'
   assert page.is_file()
   html=page.read_text(encoding='utf-8')
+  assert f'coding.css?v={CSS_REV}' in html,f'{loc} CSS revision missing'
   for token in ('data-hc-module','hc-quiz-data','data-hc-gate','data-hc-case','hc-sources','hreflang'):
    assert token in html,f'{loc} missing {token}'
   assert html.count('class="hc-section"')==6
