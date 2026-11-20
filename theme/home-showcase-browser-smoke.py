@@ -28,7 +28,9 @@ def assert_home(page, locale, academy_route, width):
     assert page.locator(".ma-product-scene").count() == 0, "Obsolete technical scene still present"
     assert page.locator(".ma-home-showcase .ma-course-card.ma-tone-blue").count() == 1
     assert page.locator(".ma-home-showcase .ma-course-card.ma-tone-navy").count() == 1
-    assert page.locator(".ma-home-showcase .ma-course-art").count() == 6
+    # The original six remain unchanged; seven newer course covers share the same showcase.
+    assert page.locator(".ma-home-showcase [data-ma-course-card='1'] .ma-course-art").count() == 6
+    assert page.locator(".ma-home-showcase [data-ma-home-course]").count() >= 7
     assert root.locator(f'a[href="/manzo-ai/{locale}/{academy_route}/"]').count() == 1
 
     for card in cards.all():
