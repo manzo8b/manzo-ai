@@ -35,6 +35,46 @@ def test_page(page,loc,width):
    return Boolean(box&&lid&&symbols&&box.contains(lid)&&
      (box.compareDocumentPosition(symbols)&Node.DOCUMENT_POSITION_FOLLOWING));
  }"""),(loc,"animated symbols incorrectly layered behind the lid")
+ # The closed pose is only the start of the animation. Freeze all keyframes
+ # in the OPEN phase and prove that the two flaps move outward while the three
+ # distinct learning symbols rise above the rim and remain fully opaque.
+ assert page.locator(".ma-v2-flap").count()==2,(loc,"missing left/right flaps")
+ assert page.locator(".ma-v2-artifact").count()==3,(loc,"three symbols expected")
+ assert page.locator(".ma-v2-beam").count()==1,(loc,"missing luminous inner beam")
+ page.evaluate("""()=>{
+   const selectors=['.ma-v2-box-svg','.ma-v2-lid','.ma-v2-orbit',
+     '.ma-v2-beam','.ma-v2-flap','.ma-v2-artifacts','.ma-v2-artifact'];
+   for(const selector of selectors){
+     for(const el of document.querySelectorAll(selector)){
+       for(const animation of el.getAnimations({subtree:false})){
+         const timing=animation.effect.getTiming();
+         if(timing.duration && typeof timing.duration==='number' && timing.duration<15000){
+           animation.pause();
+           animation.currentTime=6200;
+         }
+       }
+     }
+   }
+ }""")
+ assert page.locator(".ma-v2-artifacts").evaluate(
+  "(e)=>Number(getComputedStyle(e).opacity)>.95"),(loc,"symbols invisible in open pose")
+ assert page.locator(".ma-v2-flap-left").evaluate(
+  "(e)=>new DOMMatrix(getComputedStyle(e).transform).m41 < -85"),(loc,"left flap fails to clear opening")
+ assert page.locator(".ma-v2-flap-right").evaluate(
+  "(e)=>new DOMMatrix(getComputedStyle(e).transform).m41 > 85"),(loc,"right flap fails to clear opening")
+ assert page.locator(".ma-v2-artifact.ma-v2-b").evaluate(
+  "(e)=>new DOMMatrix(getComputedStyle(e).transform).m42 < -45"),(loc,"central symbol fails to rise")
+ assert page.locator(".ma-v2-artifact.ma-v2-a").evaluate(
+  "(e)=>new DOMMatrix(getComputedStyle(e).transform).m42 < -28"),(loc,"question symbol fails to rise")
+ if width==1440 and loc=="it":
+  OUT.mkdir(exist_ok=True)
+  page.locator(".ma-v2-magic-stage").screenshot(path=str(OUT/"magic-box-open-3d-it.png"))
+ # Resume CSS animations for subsequent interaction checks.
+ page.evaluate("""()=>{
+   for(const el of document.querySelectorAll(
+      '.ma-v2-box-svg,.ma-v2-orbit,.ma-v2-beam,.ma-v2-flap,.ma-v2-artifacts,.ma-v2-artifact'))
+     for(const animation of el.getAnimations({subtree:false}))animation.play();
+ }""")
 
  # Exact Academy components — not a similar Home-specific card template.
  native=page.locator(".ma-v2-courses .ma-course-card")
@@ -121,6 +161,12 @@ def main():
    page.goto(BASE+"/"+lang+"/",wait_until="domcontentloaded")
    assert page.locator('[data-ma-v2-motion-control]').is_hidden()
    assert page.locator(".ma-v2-lid").evaluate("(el)=>getComputedStyle(el).animationName")=="none"
+   assert page.locator(".ma-v2-flap-left").evaluate(
+    "(e)=>getComputedStyle(e).animationName")=="none"
+   assert page.locator(".ma-v2-artifacts").evaluate(
+    "(e)=>Number(getComputedStyle(e).opacity)>.95"),(lang,"reduced-motion symbols must remain visible")
+   assert page.locator(".ma-v2-flap-left").evaluate(
+    "(e)=>new DOMMatrix(getComputedStyle(e).transform).m41 < -85"),(lang,"reduced-motion lid not open")
    page.close()
    page=browser.new_page(viewport={"width":375,"height":812},java_script_enabled=False)
    page.goto(BASE+"/"+lang+"/",wait_until="domcontentloaded")
