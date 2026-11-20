@@ -33,6 +33,16 @@ def assert_home(page, locale, academy_route, width):
     assert page.locator(".ma-home-showcase [data-ma-home-course]").count() >= 7
     assert root.locator(f'a[href="/manzo-ai/{locale}/{academy_route}/"]').count() == 1
 
+    # Sprint 1: Home starts with four real courses and can reveal all thirteen.
+    toggle = root.locator('[data-ma-s1-toggle="v1"]')
+    assert toggle.count() == 1 and toggle.is_visible(), f"{locale}: accessible catalogue toggle missing"
+    assert toggle.get_attribute("aria-expanded") == "false"
+    assert cards.nth(4).is_hidden(), f"{locale}: extended selection was not collapsed"
+    toggle.click()
+    assert toggle.get_attribute("aria-expanded") == "true"
+    assert cards.nth(4).is_visible(), f"{locale}: hidden Academy card not restored"
+    assert root.locator(".ma-home-course-grid > article:visible").count() == 13
+
     for card in cards.all():
         heading = card.locator("h3")
         assert heading.count() == 1 and heading.inner_text().strip()
