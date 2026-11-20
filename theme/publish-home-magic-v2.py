@@ -273,44 +273,120 @@ def icon(i):
 
 def magic_box(loc):
  d=PAGES[loc]
- # A decorative SVG; narrative is available as text in the figcaption.
+ # Original vector construction, no external animation runtime or image files.
+ # Isometric translucent walls and independently articulated flaps.
+ # Emerging icons render AFTER all flaps: no capping or painter overlap.
  scene='''<svg class="ma-v2-box-svg" viewBox="0 0 560 500" aria-hidden="true" focusable="false">
  <defs>
-   <linearGradient id="v2-face-left" x1="0" y1="0" x2="1" y2="1">
-     <stop offset="0" stop-color="#255c8a"/><stop offset="1" stop-color="#1c4773"/>
+   <linearGradient id="ma-v3-left" x1="0" y1="0" x2="1" y2="1">
+     <stop offset="0" stop-color="#e2fbff" stop-opacity=".82"/>
+     <stop offset=".54" stop-color="#5fbed9" stop-opacity=".52"/>
+     <stop offset="1" stop-color="#1e7fac" stop-opacity=".68"/>
    </linearGradient>
-   <linearGradient id="v2-face-right" x1="0" y1="0" x2="1" y2="1">
-     <stop offset="0" stop-color="#196f7a"/><stop offset="1" stop-color="#14495b"/>
+   <linearGradient id="ma-v3-right" x1="0" y1="0" x2="1" y2="1">
+     <stop offset="0" stop-color="#d7f8ff" stop-opacity=".78"/>
+     <stop offset=".55" stop-color="#4aa5c6" stop-opacity=".58"/>
+     <stop offset="1" stop-color="#22648f" stop-opacity=".72"/>
    </linearGradient>
-   <linearGradient id="v2-lid" x1="0" y1="0" x2="1" y2="1">
-     <stop offset="0" stop-color="#f7fbff"/><stop offset="1" stop-color="#c9e5ef"/>
+   <linearGradient id="ma-v3-left-flap" x1="0" y1="0" x2="1" y2="1">
+     <stop offset="0" stop-color="#f5ffff" stop-opacity=".96"/>
+     <stop offset="1" stop-color="#64c9e1" stop-opacity=".77"/>
+   </linearGradient>
+   <linearGradient id="ma-v3-right-flap" x1="0" y1="0" x2="1" y2="1">
+     <stop offset="0" stop-color="#eafcff" stop-opacity=".93"/>
+     <stop offset="1" stop-color="#68b2db" stop-opacity=".8"/>
+   </linearGradient>
+   <linearGradient id="ma-v3-opening" x1="0" y1="0" x2="0" y2="1">
+     <stop offset="0" stop-color="#125e89"/><stop offset="1" stop-color="#0b3a6b"/>
+   </linearGradient>
+   <radialGradient id="ma-v3-light">
+     <stop offset="0" stop-color="#bdfaff" stop-opacity=".88"/>
+     <stop offset=".7" stop-color="#84d9fa" stop-opacity=".2"/>
+     <stop offset="1" stop-color="#7cccf7" stop-opacity="0"/>
+   </radialGradient>
+   <linearGradient id="ma-v3-card" x1="0" y1="0" x2="1" y2="1">
+     <stop offset="0" stop-color="#ffffff" stop-opacity=".96"/>
+     <stop offset="1" stop-color="#c9eefa" stop-opacity=".91"/>
    </linearGradient>
  </defs>
- <ellipse cx="280" cy="431" rx="170" ry="26" fill="#224d70" opacity=".10"/>
- <g class="ma-v2-orbit">
-   <ellipse cx="278" cy="230" rx="200" ry="90" fill="none" stroke="#8cc5d2" stroke-dasharray="5 12" opacity=".46"/>
+ <ellipse cx="278" cy="437" rx="158" ry="25" fill="#23668c" opacity=".10"/>
+ <ellipse cx="279" cy="412" rx="137" ry="48" fill="url(#ma-v3-light)" opacity=".64"/>
+ <g class="ma-v2-orbit" fill="none" stroke="#80c5d6" opacity=".36">
+   <ellipse cx="278" cy="284" rx="198" ry="98" stroke-dasharray="3 12"/>
+   <ellipse cx="280" cy="286" rx="164" ry="80" stroke-dasharray="2 16"/>
  </g>
-
+ <g class="ma-v2-beam" aria-hidden="true">
+   <path d="M280 315 195 122Q280 65 365 122Z" fill="url(#ma-v3-light)" opacity=".66"/>
+   <path d="M280 328V132" stroke="#70dbea" stroke-width="3" opacity=".4"/>
+   <circle cx="280" cy="245" r="116" fill="url(#ma-v3-light)" opacity=".38"/>
+ </g>
  <g class="ma-v2-box">
-   <path d="M115 242 277 160 438 243 276 326Z" fill="#153955" stroke="#2d687f" stroke-width="3"/>
-   <path d="M115 242 276 326 276 415 115 331Z" fill="url(#v2-face-left)" stroke="#244e75" stroke-width="2"/>
-   <path d="M276 326 438 243 438 329 276 415Z" fill="url(#v2-face-right)" stroke="#164d62" stroke-width="2"/>
-   <path d="M132 270 265 336M290 337 422 269" stroke="#ffffff" opacity=".28" stroke-width="2" fill="none"/>
-   <path d="M229 361l23 13v-22l27 15v22l23-13" stroke="#d2eaf0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".86"/>
+   <!-- Dark opening establishes genuine depth behind transparent prism walls. -->
+   <path class="ma-v2-cavity" d="M140 289 280 212 420 289 280 364Z"
+         fill="url(#ma-v3-opening)" stroke="#4ab5d2" stroke-width="5"/>
+   <path d="M158 290 280 226 401 291 280 351Z" fill="none"
+         stroke="#98e7f2" stroke-width="1.5" opacity=".65"/>
+   <!-- Perspective left and right walls; geometric lines are low-opacity wireframe. -->
+   <path d="M140 289 280 364 280 427 140 354Z"
+         fill="url(#ma-v3-left)" stroke="#46bedc" stroke-width="3"/>
+   <path d="M280 364 420 289 420 354 280 427Z"
+         fill="url(#ma-v3-right)" stroke="#4bb5d7" stroke-width="3"/>
+   <g fill="none" stroke="#b4f6ff" stroke-width="1.35" opacity=".58">
+     <path d="M140 289 208 394 280 364 140 354 208 323 280 427 140 289"/>
+     <path d="M280 364 353 394 420 289 353 323 280 427 420 354 280 364"/>
+     <path d="M140 319 280 396 420 319M176 309 176 373M244 345 244 408M315 346 315 407M386 308 386 372"/>
+   </g>
+   <g fill="#d9ffff" opacity=".72">
+     <circle cx="140" cy="289" r="3.5"/><circle cx="280" cy="364" r="3.5"/>
+     <circle cx="420" cy="289" r="3.5"/><circle cx="280" cy="427" r="3.5"/>
+     <circle cx="140" cy="354" r="3"/><circle cx="420" cy="354" r="3"/>
+   </g>
+   <!-- Two independent hinged wings, not an opaque cap passing over the icons. -->
    <g class="ma-v2-lid">
-     <path d="M105 231 277 142 451 231 278 321Z" fill="url(#v2-lid)" stroke="#245570" stroke-width="3"/>
-     <path d="M105 231v20l173 90v-20Z" fill="#d4eaf0" stroke="#245570" stroke-width="2"/>
-     <path d="M278 321v20l173-90v-20Z" fill="#b6d8e2" stroke="#245570" stroke-width="2"/>
-     <path d="m211 229 62 35 70-37" fill="none" stroke="#3d8192" stroke-width="3" stroke-linecap="round"/>
+     <g class="ma-v2-flap ma-v2-flap-left">
+       <path d="M140 287 280 210 280 362Z" fill="url(#ma-v3-left-flap)"
+             stroke="#3ca8c8" stroke-width="3" stroke-linejoin="round"/>
+       <path d="M140 287 280 362 280 373 140 299Z"
+             fill="#67b6d1" fill-opacity=".58" stroke="#50b0c8" stroke-width="1.5"/>
+       <path d="M160 287 268 225 268 338" stroke="#fff" stroke-width="1.8"
+             opacity=".55" fill="none"/>
+     </g>
+     <g class="ma-v2-flap ma-v2-flap-right">
+       <path d="M280 210 420 287 280 362Z" fill="url(#ma-v3-right-flap)"
+             stroke="#3596bc" stroke-width="3" stroke-linejoin="round"/>
+       <path d="M280 362 420 287 420 299 280 373Z"
+             fill="#4b9cc4" fill-opacity=".62" stroke="#50b0c8" stroke-width="1.5"/>
+       <path d="M293 228 401 287 293 340" stroke="#fff" stroke-width="1.8"
+             opacity=".48" fill="none"/>
+     </g>
    </g>
  </g>
- <!-- These symbols render after the lid while it opens, so they remain visible.
-      They are faded out when the lid closes, preserving the closed-box silhouette. -->
+ <!-- Painter order + rise position keep all learning symbols above the flaps. -->
  <g class="ma-v2-artifacts">
-   <g class="ma-v2-artifact ma-v2-a"><rect x="207" y="85" rx="12" width="82" height="72" fill="#fff" stroke="#3d88a1" stroke-width="2"/><path d="M225 113h46m-46 17h30" stroke="#3d88a1" stroke-width="4" stroke-linecap="round"/><circle cx="266" cy="132" r="4" fill="#cf9042"/></g>
-   <g class="ma-v2-artifact ma-v2-b"><rect x="306" y="77" rx="13" width="80" height="76" fill="#fffaf1" stroke="#bb8545" stroke-width="2"/><path d="m325 113 16 16 25-32" stroke="#ae762b" stroke-width="6" stroke-linecap="round" fill="none"/></g>
-   <g class="ma-v2-artifact ma-v2-c"><circle cx="170" cy="143" r="32" fill="#e8f7f3" stroke="#238875" stroke-width="2"/><path d="M170 122v22m0 10v2" stroke="#238875" stroke-width="6" stroke-linecap="round"/></g>
- </g></svg>'''
+   <g class="ma-v2-artifact ma-v2-a">
+     <rect x="143" y="193" width="76" height="75" rx="17"
+           fill="url(#ma-v3-card)" stroke="#44add2" stroke-width="2.5"/>
+     <path d="M166 220c1-10 12-17 23-11 10 6 9 17-1 24-5 4-6 6-6 11"
+           fill="none" stroke="#267fa9" stroke-width="5" stroke-linecap="round"/>
+     <circle cx="181" cy="254" r="3.5" fill="#267fa9"/>
+   </g>
+   <g class="ma-v2-artifact ma-v2-b">
+     <rect x="243" y="145" width="77" height="75" rx="17"
+           fill="url(#ma-v3-card)" stroke="#4a9bd3" stroke-width="2.5"/>
+     <rect x="261" y="166" width="12" height="12" rx="3" fill="#2f86ae"/>
+     <rect x="283" y="166" width="17" height="12" rx="3" fill="#81d3df"/>
+     <path d="M261 190h39M261 202h28" fill="none"
+           stroke="#3787b1" stroke-width="4" stroke-linecap="round"/>
+   </g>
+   <g class="ma-v2-artifact ma-v2-c">
+     <rect x="343" y="193" width="76" height="75" rx="17"
+           fill="url(#ma-v3-card)" stroke="#3baea6" stroke-width="2.5"/>
+     <circle cx="381" cy="230" r="21" fill="#e1faf1" stroke="#60bcb4" stroke-width="2"/>
+     <path d="m369 230 8 9 16-19" fill="none"
+           stroke="#168a7e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+   </g>
+ </g>
+ </svg>'''
  return ('<figure class="ma-v2-magic" aria-label="'+e(d['magic_alt'])+'">'
          '<div class="ma-v2-magic-stage">'+scene+'</div>'
          '<div class="ma-v2-magic-steps">'+''.join('<span>'+e(t)+'</span>' for t in d['magic_steps'])+'</div>'
@@ -451,6 +527,12 @@ def publish(site,verify=False):
     raise RuntimeError("Native Academy card grid is missing "+locale)
    if f'{BASE}assets/learning-experience/guide.css' not in html:
     raise RuntimeError("Native Academy styling absent from Home "+locale)
+   if html.count('class="ma-v2-flap ma-v2-flap-left"')!=1 or html.count('class="ma-v2-flap ma-v2-flap-right"')!=1:
+    raise RuntimeError("3D glass-box must have two independently articulated flaps "+locale)
+   if html.count('class="ma-v2-artifact ma-v2-')!=3:
+    raise RuntimeError("3D glass-box must expose three emerging learning symbols "+locale)
+   if html.count('class="ma-v2-beam"')!=1 or 'ma-v3-left' not in html:
+    raise RuntimeError("3D translucent body and light beam missing "+locale)
    # SVG painter order is significant: the lid must not obscure the emerging symbols.
    box_start=html.find('<g class="ma-v2-box">')
    symbols_start=html.find('<g class="ma-v2-artifacts">')
