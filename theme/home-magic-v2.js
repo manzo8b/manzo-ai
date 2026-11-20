@@ -14,7 +14,8 @@
   function update(paused){
     root.classList.toggle('ma-v2-motion-paused',paused);
     pause.setAttribute('aria-pressed',String(paused));
-    pause.textContent=paused?pause.dataset.play:pause.dataset.pause;
+    pause.textContent=paused?pause.dataset.playShort:pause.dataset.pauseShort;
+    pause.setAttribute('aria-label',paused?pause.dataset.play:pause.dataset.pause);
   }
   pause.addEventListener('click',()=>update(!root.classList.contains('ma-v2-motion-paused')));
   // Pause offscreen animations to avoid unnecessary animation work.
