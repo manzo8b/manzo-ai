@@ -57,8 +57,8 @@ def languages(loc):
         for l in HOMES)+'</nav>'
 
 def alternatives():
-    return ''.join(f'<link rel="alternate" hreflang="{loc}" href="{e(url(loc))}">' for loc in HOMES)+
-    '<link rel="alternate" hreflang="x-default" href="'+e(url("it"))+'">'
+    return (''.join(f'<link rel="alternate" hreflang="{loc}" href="{e(url(loc))}">' for loc in HOMES)
+            + '<link rel="alternate" hreflang="x-default" href="'+e(url("it"))+'">')
 
 def steps(nodes,klass):
     return '<ol class="'+klass+'">'+''.join(
