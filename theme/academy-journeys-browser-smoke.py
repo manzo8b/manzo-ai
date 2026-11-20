@@ -15,6 +15,12 @@ def test(page,lang,route,width):
  assert resp and resp.status==200
  section=page.locator('[data-ma-journeys="v1"]')
  assert section.count()==1
+ # Course discovery must be the first Academy section, not a specialist promotion.
+ order=page.locator("main#content").evaluate("""main=>Array.from(main.children)
+   .filter(el=>el.matches('.ma-academy-catalog,.ma-learning-journey,.atl-academy-feature'))
+   .map(el=>el.classList.contains('ma-academy-catalog')?'catalog':
+     el.classList.contains('ma-learning-journey')?'journeys':'teaching')""")
+ assert order==["catalog","journeys","teaching"],(lang,width,"Academy content order",order)
  assert section.locator("h2").count()==1
  assert not section.locator("h2").inner_text().strip().endswith(".")
  options=section.locator("[data-ma-journey-choice]")
