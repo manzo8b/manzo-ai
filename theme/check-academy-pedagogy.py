@@ -17,6 +17,7 @@ import re
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "editorial/learning/hallucinations"
 LABELS = ROOT / "product/learning-experience/labels.json"
+CORE_MAP = ROOT / "product/learning-experience/core-unit-evidence.json"
 PATHS = {
     "it": ("it/academy", "it/impara/allucinazioni-ai-verificabilita",
            "it/impara/allucinazioni-ai-verificabilita/coding"),
@@ -108,6 +109,9 @@ def check_coding(data: dict, locale: str) -> None:
 
 def validate(site: Path | None = None) -> None:
     labels = json.loads(LABELS.read_text(encoding="utf-8"))
+    maps = json.loads(CORE_MAP.read_text(encoding="utf-8"))
+    ensure(set(maps) == set(PATHS), "Competency map requires IT/EN/ES")
+    expected_links = None
     ensure(set(labels) == set(PATHS), "Academy requires all 3 languages")
     catalog_ids = None
     for loc, paths in PATHS.items():
@@ -132,6 +136,27 @@ def validate(site: Path | None = None) -> None:
         coding = json.loads((CONTENT / f"coding-{loc}.json").read_text(encoding="utf-8"))
         check_core(core, loc)
         check_coding(coding, loc)
+        mapping = maps[loc]
+        units = mapping.get("units", [])
+        ensure(len(units) == len(core["modules"]) == 6,
+               f"{loc}: one observable competency per core unit")
+        for key in ("expand", "ability", "case", "quiz", "openCases", "openQuiz", "note"):
+            words(mapping.get(key), f"{loc}: missing learner-facing evidence label {key}")
+        links = []
+        for i, entry in enumerate(units, 1):
+            words(entry.get("outcome"), f"{loc}: unit {i} missing observable skill")
+            ensure(not entry["outcome"].strip().endswith("."),
+                   f"{loc}: unit {i} contains a terminal title period")
+            case, quiz = entry.get("case"), entry.get("quiz")
+            ensure(type(case) is int and 1 <= case <= len(core["cases"]) and
+                   type(quiz) is int and 1 <= quiz <= len(core["quiz"]),
+                   f"{loc}: unit {i} references a nonexistent case or question")
+            links.append((case, quiz))
+        if expected_links is None:
+            expected_links = links
+        else:
+            ensure(links == expected_links,
+                   f"{loc}: evidence numbering must be identical across languages")
         if site is None:
             continue
         academy, core_route, coding_route = paths
@@ -145,6 +170,17 @@ def validate(site: Path | None = None) -> None:
             page = site / route / "index.html"
             ensure(page.is_file(), f"{loc}: {name} page absent")
             html = page.read_text(encoding="utf-8")
+            if name == "core":
+                ensure(html.count('data-ma-core-evidence=') == 6,
+                       f"{loc}: rendered core unit map missing")
+                for index, item in enumerate(units, 1):
+                    ensure(f'data-ma-core-evidence="{index}"' in html and
+                           f'data-ma-core-case="{item["case"]}"' in html and
+                           f'data-ma-core-quiz="{item["quiz"]}"' in html,
+                           f"{loc}: rendered mapping for unit {index} inconsistent")
+            else:
+                ensure('data-ma-core-evidence=' not in html,
+                       f"{loc}: pilot mapping leaked into specialist coding course")
             ensure(html.count('data-ma-learning-guide="v1"') == 1,
                    f"{loc}: {name} learning guide missing/duplicated")
             ensure(len(re.findall(r'data-ma-unit="[1-6]"', html)) == 6,
@@ -156,7 +192,7 @@ def validate(site: Path | None = None) -> None:
 
     print("PASS Academy pedagogical contract: 2 verified pathways × 3 locales, "
           "36 sourced units, 42 practice cases, 42 explained quiz items, "
-          "explicit outcomes, consistent course taxonomy"
+          "explicit outcomes, six observable skills per locale, real-case/quiz evidence, consistent course taxonomy"
           + (", rendered guides and activities" if site else " (source only)"))
 
 
