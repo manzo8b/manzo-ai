@@ -28,7 +28,7 @@ MANZO AI combina progettazione di workflow digitali, verificabilità degli outpu
 
 Tutti i contenuti MANZO AI devono essere disponibili **integralmente in italiano, inglese e spagnolo**: lezioni, glossari, grafici, laboratori, quiz e feedback compresi, non soltanto titoli e navigazione. Consultare lo **[standard i18n Academy](theme/ACADEMY_I18N_STANDARD.md)** e l'[audit della copertura effettiva](theme/audit-academy-i18n.py).
 
-Il nuovo corso **Build Safely / Costruire in sicurezza / Construir con seguridad** è pubblicato in tutte e tre le lingue. La traduzione del catalogo precedente è in fase di migrazione; la Home tradotta non deve essere scambiata per certificazione di completezza dei corsi.
+I corsi **Build Safely / Costruire in sicurezza / Construir con seguridad** e **Prompt vs Skill** sono pubblicati integralmente in IT/EN/ES. L'audit del 20 novembre 2026 rileva **3 corsi su 6 con tutti i sorgenti linguistici** (Allucinazioni dell'IA, Build Safely e Prompt vs Skill). Le traduzioni integrali di **Modelli mentali e affidabilità**, **AI Product Builder — Centroni City** e **AI Teaching Lab** sono ancora da completare. La Home tradotta non certifica da sola la completezza del prodotto.
 
 ## Standard delle card Academy · 19 novembre 2026
 
