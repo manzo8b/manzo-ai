@@ -26,6 +26,16 @@ def test_page(page,loc,width):
  assert page.locator("[data-ma-v2-section]").count()==5
  assert page.locator('.ma-v2-questions').count()==0,(loc,"duplicate questions still visible")
  assert page.locator('[data-ma-v2-section="hero"] .ma-v2-magic').count()==1
+ # SVG uses painter order: symbols must be after the box/lid so the rising
+ # question/method/evidence cards cannot disappear behind the open lid.
+ assert page.locator(".ma-v2-box-svg").evaluate("""svg=>{
+   const box=svg.querySelector('.ma-v2-box');
+   const lid=svg.querySelector('.ma-v2-lid');
+   const symbols=svg.querySelector('.ma-v2-artifacts');
+   return Boolean(box&&lid&&symbols&&box.contains(lid)&&
+     (box.compareDocumentPosition(symbols)&Node.DOCUMENT_POSITION_FOLLOWING));
+ }"""),(loc,"animated symbols incorrectly layered behind the lid")
+
  assert page.locator(".ma-v2-course").count()==6
  assert page.locator(".ma-v2-tone-rose").count()==1
  assert page.locator('.ma-v2-course > .ma-v2-art svg[aria-hidden="true"]').count()==6
