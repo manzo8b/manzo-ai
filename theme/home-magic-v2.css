@@ -319,6 +319,124 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  .ma-v2-magic-stage{max-width:280px;aspect-ratio:560/380}
  .ma-v2-closing-links a{width:100%;white-space:normal}
 }
+/* MANZO AI / luminous editorial layer — original CSS-only, no image assets. */
+#content .ma-v2-hero{
+  isolation:isolate;
+  border-color:#cddfec;
+  background:
+    radial-gradient(circle at 92% 12%,rgba(146,177,252,.28),transparent 38%),
+    radial-gradient(circle at 10% 92%,rgba(122,221,207,.21),transparent 43%),
+    radial-gradient(circle at 72% 79%,rgba(235,202,246,.19),transparent 38%),
+    linear-gradient(125deg,#fff 2%,#fbfdff 45%,#f4f9ff 100%);
+  box-shadow:0 20px 70px rgba(29,71,116,.075),0 2px 8px rgba(29,71,116,.035);
+}
+#content .ma-v2-hero::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(to right,rgba(59,113,157,.075) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(59,113,157,.075) 1px,transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:linear-gradient(105deg,transparent 31%,rgba(0,0,0,.38) 100%);
+  mask-image:linear-gradient(105deg,transparent 31%,rgba(0,0,0,.38) 100%);
+}
+#content .ma-v2-hero .ma-v2-hero-copy,
+#content .ma-v2-hero .ma-v2-magic{position:relative;z-index:1}
+#content .ma-v2-hero .ma-v2-kicker{
+  display:inline-block;padding:7px 11px;margin-bottom:19px!important;
+  border-radius:999px;border:1px solid rgba(26,129,147,.18);
+  background:rgba(241,253,253,.78);color:#246c83!important;
+  font-size:.64rem!important;letter-spacing:.105em!important;
+}
+#content .ma-v2-hero h1{color:#173b5a!important;letter-spacing:-.057em!important}
+#content .ma-v2-hero .ma-v2-primary{
+  background:linear-gradient(118deg,#205c9b,#2f67bd);color:#fff!important;
+  box-shadow:0 9px 20px rgba(25,82,151,.19);
+}
+#content .ma-v2-hero .ma-v2-primary:hover{
+  background:linear-gradient(118deg,#194c84,#26559c);
+  box-shadow:0 12px 26px rgba(25,82,151,.25);
+}
+#content .ma-v2-hero .ma-v2-secondary{
+  background:rgba(255,255,255,.84);border-color:#b2d0e1;
+  box-shadow:0 4px 14px rgba(37,87,135,.055);
+}
+.ma-v2-magic-stage{
+  background:
+    radial-gradient(ellipse at 52% 72%,rgba(174,218,233,.53),transparent 61%),
+    radial-gradient(circle at 51% 48%,rgba(245,251,255,.92),transparent 64%);
+}
+.ma-v2-magic-stage::before{
+  content:"";position:absolute;inset:12% 8% 14%;z-index:-1;
+  border:1px solid rgba(101,155,195,.22);border-radius:50%;
+  box-shadow:0 0 0 20px rgba(223,237,249,.13),0 0 0 45px rgba(216,235,247,.07);
+  pointer-events:none;
+}
+.ma-v2-magic-steps span{
+  background:rgba(255,255,255,.77);border-color:rgba(155,195,218,.6);
+  box-shadow:0 4px 16px rgba(38,91,139,.045);
+}
+#content .ma-v2-courses{padding-top:clamp(28px,3.6vw,52px)}
+#content .ma-v2-section-head h2{letter-spacing:-.048em!important}
+.ma-v2-course{
+  border-color:#d3e1ea;box-shadow:0 9px 26px rgba(31,77,118,.085);
+}
+.ma-v2-course:hover{
+  transform:translateY(-5px);
+  border-color:#9bbfd4;box-shadow:0 16px 35px rgba(29,74,120,.135);
+}
+.ma-v2-art::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.48;
+  background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.2),transparent 30%),
+    linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px),
+    linear-gradient(0deg,rgba(255,255,255,.09) 1px,transparent 1px);
+  background-size:auto,26px 26px,26px 26px;
+}
+.ma-v2-course .ma-v2-art svg{z-index:1}
+.ma-v2-open{border-top-color:#dbe8ee}
+.ma-v2-motion-toggle{opacity:.88;box-shadow:none}
+.ma-v2-motion-toggle:hover,.ma-v2-motion-toggle:focus-visible{opacity:1}
+@media(max-width:1100px){
+ #content .ma-v2-hero{gap:17px}
+ #content .ma-v2-hero h1{
+   font-size:clamp(2.05rem,4.4vw,3.5rem)!important;
+   line-height:1.09!important;max-width:24ch;
+ }
+ .ma-v2-actions a{min-width:0;flex:1 1 100%;max-width:100%}
+}
+@media(max-width:800px) and (min-width:761px){
+ .ma-v2-course-grid{grid-template-columns:1fr}
+ .ma-v2-course{min-height:0}
+}
+@media(max-width:760px){
+ body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-bar{
+   padding-right:max(10px,env(safe-area-inset-right));
+   padding-left:max(10px,env(safe-area-inset-left));
+   overflow:visible;
+ }
+ body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-portal{
+   font-size:11px;min-width:0;max-width:40vw;
+ }
+ body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-menu-label{font-size:11px}
+ #content .ma-v2-hero{padding:27px 20px}
+ #content .ma-v2-hero h1{font-size:clamp(2.15rem,8.6vw,3.5rem)!important;max-width:18ch}
+ #content .ma-v2-hero::after{background-size:26px 26px;opacity:.5}
+}
+@media(max-width:390px){
+ body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-bar{gap:5px}
+ body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-mark{width:23px;height:23px}
+ body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-brand{font-size:11px;gap:4px}
+ body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-toggle{min-width:59px;gap:4px}
+ body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-portal{padding-inline:6px}
+ #content .ma-v2-hero{padding-inline:17px}
+}
+@media(prefers-reduced-motion:reduce){
+ .ma-v2-course:hover{transform:none}
+}
+@media print{
+ #content .ma-v2-hero{background:#fff;box-shadow:none}
+ #content .ma-v2-hero::after,.ma-v2-magic-stage::before{display:none}
+}
+
 @media(hover:none){
  .ma-v2-course:hover,.ma-v2-focus-card:hover,
  .ma-v2-actions a:hover,.ma-v2-challenge>a:hover{transform:none}
