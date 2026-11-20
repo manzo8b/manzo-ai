@@ -23,7 +23,7 @@ Ogni percorso formativo deve essere completo in tutte e tre le lingue. **La trad
 | Prompt vs Skill | Presente | Presente | Presente | 6 letture, quattro grafici, quiz, cruciverba e navigazione trilingue: CI PASS, verifica visiva finale da completare |
 | Modelli mentali e affidabilità | Pubblicato | Pubblicato | Pubblicato | Sorgenti e percorso nativo IT/EN/ES verificati nella pipeline; QA visiva finale separata |
 | AI Product Builder — Centroni City | Pubblicato | Pubblicato | Pubblicato | Sorgenti e percorso nativo IT/EN/ES verificati nella pipeline; QA visiva finale separata |
-| AI Teaching Lab | 5 moduli e dati strutturati pubblicati | 5/5 moduli narrativi nei sorgenti, non pubblicati come corso nativo | 5/5 moduli narrativi nei sorgenti, non pubblicati come corso nativo | Mancano i file JSON di corso, narrazioni, valutazioni e glossario EN/ES; test e pubblicazione nativi da completare |
+| AI Teaching Lab | 5 moduli e dati strutturati pubblicati | 5/5 moduli narrativi nei sorgenti, non pubblicati come corso nativo | 5/5 moduli narrativi nei sorgenti, non pubblicati come corso nativo | Mancano i file JSON di corso, narrazioni, valutazioni, glossario, scenari e presentazione EN/ES; test e pubblicazione nativi da completare |
 | Costruire in sicurezza | Nuovo corso | Nuovo corso | Nuovo corso | Pubblicazione simultanea nelle tre lingue |
 | Governare l'autonomia | Presente | Presente | Presente | Sei letture, Mission Control, quattro diagrammi, quiz e cruciverba; CI trilingue PASS |
 | Compliance dinamica e governance continua | Pubblicato | Pubblicato | Pubblicato | 6 letture per lingua, 4 diagrammi e Audit Express, registro, quiz e cruciverba; deploy CI PASS |
