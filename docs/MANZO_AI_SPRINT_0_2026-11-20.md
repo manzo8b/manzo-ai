@@ -11,7 +11,7 @@
 | S0.1 | Home IT/EN/ES: sostituire il vecchio contatore «6 risorse» con testo accurato senza numeri fissi | Sorgente corretto; pubblicazione da verificare |
 | S0.2 | Aggiornare README e politica trilingue da 6/9 a 8/9 e non indicare più Modelli mentali e Centroni City come mancanti | Sorgenti aggiornati |
 | S0.3 | Test automatico per Home finale e coerenza con l'audit i18n | Aggiunto al workflow; verifica da confermare |
-| S0.4 | Completare AI Teaching Lab in EN e ES | Aperto |
+| S0.4 | Completare AI Teaching Lab in EN e ES | In corso: 15 slide testuali tradotte in EN/ES, altre strutture mancanti |
 | S0.5 | QA finale e controllo manuale desktop/iPhone delle sezioni modificate | Aperto |
 
 ## Cosa manca realmente in AI Teaching Lab
@@ -20,7 +20,7 @@
 
 **Consegna A:** verificare la parità dei cinque moduli narrativi già presenti in inglese e spagnolo rispetto all'italiano, senza ritradurli.
 
-**Consegna B:** aggiungere in entrambe le lingue i sei file JSON strutturati mancanti del corso, delle narrazioni, delle verifiche, del glossario, degli scenari e della presentazione. Preservare le chiavi, gli identificatori, le risposte corrette e le 79 voci del glossario italiano.
+**Consegna B:** il testo delle 15 slide è già disponibile in entrambe le lingue e controllato da uno script dedicato. Restano da tradurre cinque JSON strutturati per lingua: corso, narrazioni, verifiche, glossario e scenari. Le slide grafiche originarie sono italiane; la pubblicazione nativa EN/ES rimane da eseguire. Preservare le chiavi, gli identificatori, le risposte corrette e le 79 voci del glossario italiano.
 
 **Consegna C:** pubblicare percorsi nativi EN/ES con pagina, contenuti interattivi, selettori che mantengano il contesto, canonical/hreflang e QA. La sola presenza delle traduzioni non significa che siano disponibili online.
 
