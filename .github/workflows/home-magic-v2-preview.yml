@@ -5,6 +5,7 @@ on:
       - preview/home-magic-trilingual-v2
       - feat/magic-box-glass-3d-reveal
       - fix/home-v3-deployment-gate
+      - copy/home-three-moves-hero-20261120
       - fix/home-exact-academy-cards
     paths:
       - theme/publish-home-magic-v2.py
