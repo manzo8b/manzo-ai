@@ -182,7 +182,7 @@ def course_card(item, labels, index):
     <span class="ma-course-series">{esc(label)}</span></div>
    <h3>{esc(item['title'].rstrip('. '))}</h3>
    <p>{esc(item['description'])}</p>
-   <span class="ma-course-orientation" data-ma-course-orientation="1"><strong>{esc(labels['orientationLabel'])}</strong> {esc(item['pathHint'])}</span>
+   <span class="ma-course-orientation" data-ma-course-orientation="1"><strong>{esc(labels['orientationLabel'])}</strong> · {esc(item['pathHint'])}</span>
    <div class="ma-course-facts">{fact_list}</div>
    <span class="ma-course-cta">{esc(labels['open'])}<b aria-hidden="true">↗</b></span>
   </div></a></article>'''
