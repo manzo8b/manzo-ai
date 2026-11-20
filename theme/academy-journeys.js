@@ -33,6 +33,21 @@
    window.print();
   });
   window.addEventListener("afterprint",()=>document.body.classList.remove("ma-print-journey-mode"));
-  select(0);
+  const requested=new URLSearchParams(window.location.search).get("journey");
+  const initial=["0","1","2"].includes(requested)?Number(requested):0;
+  select(initial);
  }
+})();
+
+/* Only disclose continuation when a user has chosen a guided route.
+   No cookies, storage, analytics or network access. Direct lesson visits
+   continue to display precisely the original learning experience. */
+(()=>{
+ "use strict";
+ const items=[...document.querySelectorAll("[data-ma-journey-continuity]")];
+ if(!items.length)return;
+ const selected=new URLSearchParams(window.location.search).get("journey");
+ if(!["0","1","2"].includes(selected))return;
+ const target=items.find(el=>el.dataset.maJourneyContinuity===selected);
+ if(target)target.hidden=false;
 })();
