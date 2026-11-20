@@ -297,6 +297,8 @@ def publish(site,verify_only=False):
    raise RuntimeError('Uninteractive Academy hub: missing search/filter JS '+loc)
   if hubhtml.count('data-ma-course-card="1"')!=6:
    raise RuntimeError('Academy did not render six course cards '+loc)
+  if hubhtml.count('data-ma-course-orientation="1"')!=6:
+   raise RuntimeError('Missing six course sequence cues '+loc)
   if len(re.findall(r'<h[1-6][^>]*>\s*[^<]*\.\s*</h[1-6]>',hubhtml,re.I)):
    raise RuntimeError('Unexpected terminal period in catalog heading '+loc)
   if '/manzo-ai/'+base+'/' not in hubhtml or '/manzo-ai/'+coding+'/' not in hubhtml:
