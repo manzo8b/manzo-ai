@@ -128,6 +128,11 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
 .ma-v2-motion-paused .ma-v2-lid,
 .ma-v2-motion-paused .ma-v2-artifacts,
 .ma-v2-motion-paused .ma-v2-artifact{animation-play-state:paused!important}
+.ma-v2-magic[data-offscreen="1"] .ma-v2-box-svg,
+.ma-v2-magic[data-offscreen="1"] .ma-v2-orbit,
+.ma-v2-magic[data-offscreen="1"] .ma-v2-lid,
+.ma-v2-magic[data-offscreen="1"] .ma-v2-artifacts,
+.ma-v2-magic[data-offscreen="1"] .ma-v2-artifact{animation-play-state:paused!important}
 #content .ma-v2-questions,#content .ma-v2-courses,
 #content .ma-v2-focus{
  padding-top:clamp(37px,4.8vw,66px);
