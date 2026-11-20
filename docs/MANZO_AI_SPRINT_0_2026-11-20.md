@@ -20,7 +20,7 @@
 
 **Consegna A:** verificare la parità dei cinque moduli narrativi già presenti in inglese e spagnolo rispetto all'italiano, senza ritradurli.
 
-**Consegna B:** aggiungere in entrambe le lingue i file strutturati mancanti del corso, delle narrazioni, delle verifiche e del glossario. Preservare le chiavi, gli identificatori, le risposte corrette e le 79 voci del glossario italiano.
+**Consegna B:** aggiungere in entrambe le lingue i sei file JSON strutturati mancanti del corso, delle narrazioni, delle verifiche, del glossario, degli scenari e della presentazione. Preservare le chiavi, gli identificatori, le risposte corrette e le 79 voci del glossario italiano.
 
 **Consegna C:** pubblicare percorsi nativi EN/ES con pagina, contenuti interattivi, selettori che mantengano il contesto, canonical/hreflang e QA. La sola presenza delle traduzioni non significa che siano disponibili online.
 
