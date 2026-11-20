@@ -217,7 +217,7 @@ UI={
 ],
 },
 "es":{
-"title":"AI Product Builder — Centroni City","subtitle":"De una comunidad de Facebook a un producto vecinal útil",
+"title":"AI Product Builder — Construir Centroni City","subtitle":"De una comunidad de Facebook a un producto vecinal útil",
 "hero":"Construye algo que <em>se necesita</em>",
 "lead":"Convierte comentarios dispersos en información verificable y orientación oficial, sin recopilar denuncias ni datos personales.",
 "intro":"Marta, Karim y Lucía acompañan el proceso desde una necesidad real hasta una demostración segura y medible.",
