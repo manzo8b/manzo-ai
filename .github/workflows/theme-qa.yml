@@ -11,6 +11,10 @@ on:
       - 'theme/learning-experience-browser-smoke.py'
       - 'theme/publish-title-cleanup.py'
       - 'theme/publish-home-showcase.py'
+      - 'theme/publish-home-conversational.py'
+      - 'theme/publish-home-curation.py'
+      - 'theme/publish-ai-teaching-lab.py'
+      - 'theme/check-sprint0-consistency.py'
       - 'theme/home-showcase.css'
       - 'theme/publish-academy-journeys.py'
       - 'theme/academy-journeys.css'
@@ -87,6 +91,9 @@ jobs:
           node --check product/learning-experience/guide.js
           python3 theme/publish-learning-experience.py --site _site
           python3 theme/publish-learning-experience.py --site _site --verify-only
+          # Rebuild the Italian Teaching Lab, which current Home curation links to.
+          python3 theme/publish-ai-teaching-lab.py --site _site
+          python3 theme/publish-ai-teaching-lab.py --site _site --verify-only
           python3 -m py_compile theme/publish-product-preview.py theme/product-preview-browser-smoke.py
           node --check product/preview/preview.js
           python3 theme/publish-product-preview.py --site _site
@@ -95,6 +102,9 @@ jobs:
           node --check product/learning-console/console.js
           python3 theme/publish-learning-console.py --site _site
           python3 theme/publish-learning-console.py --site _site --verify-only
+          # About pages exist before the Home links and final canonical index are generated.
+          python3 theme/publish-about.py --site _site
+          python3 theme/publish-about.py --site _site --verify-only
           python3 theme/build-seo.py --site _site --base-url "https://manzo8b.github.io/manzo-ai/"
           node --check theme/mobile-nav.js
           python3 theme/publish-navigation.py --site _site
@@ -113,6 +123,18 @@ jobs:
           node --check theme/academy-journeys.js
           python3 theme/publish-academy-journeys.py --site _site
           python3 theme/publish-academy-journeys.py --site _site --verify-only
+          # Exactly match the approved inclusive production Home before visual screenshots.
+          python3 theme/publish-home-conversational.py --site _site
+          python3 theme/publish-home-conversational.py --site _site --verify-only
+          python3 theme/publish-home-curation.py --site _site
+          python3 theme/publish-home-curation.py --site _site --verify-only
+          python3 theme/publish-prompt-skill-home.py --site _site
+          python3 theme/publish-build-safely-home.py --site _site
+          python3 theme/publish-prompt-skill-translated-home.py --site _site
+          python3 theme/publish-govern-autonomy-home.py --site _site
+          python3 theme/publish-final-two-home.py --site _site
+          python3 theme/publish-legacy-course-home.py --site _site
+          python3 theme/check-sprint0-consistency.py --site _site
           # Every M02–M06 subheading must have one unique HTML anchor.
           python3 -m py_compile theme/fix-learning-anchors.py
           python3 theme/fix-learning-anchors.py --site _site
