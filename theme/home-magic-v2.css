@@ -73,35 +73,74 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  display:flex;align-items:center;justify-content:center;
 }
 .ma-v2-box-svg{width:100%;height:auto;display:block;overflow:visible;
- animation:ma-v2-box-breathe 9.6s ease-in-out infinite;
+ animation:ma-v2-box-breathe 11.6s ease-in-out infinite;
 }
-.ma-v2-orbit{transform-origin:50% 50%;animation:ma-v2-orbit 24s linear infinite}
-.ma-v2-lid{transform-box:fill-box;transform-origin:15% 8%;
- animation:ma-v2-lid 9.6s cubic-bezier(.3,.7,.25,1) infinite}
-.ma-v2-artifacts{opacity:0;animation:ma-v2-reveal 9.6s ease-in-out infinite}
-.ma-v2-artifact{transform-box:fill-box;transform-origin:center;
- animation:ma-v2-artifact-rise 9.6s ease-in-out infinite}
-.ma-v2-b{animation-delay:.13s}
-.ma-v2-c{animation-delay:.22s}
+/* Glass-box choreography: 11.6 s loop, 2 hinged flaps and 3 independent icons.
+ * Flaps clear the center before the symbols emerge, and close after they fade.
+ * SVG painter order guarantees symbols stay above the cover at every phase. */
+.ma-v2-orbit{transform-origin:50% 50%;animation:ma-v2-orbit 34s linear infinite}
+.ma-v2-lid{transform:none;animation:none}
+.ma-v2-flap{
+  transform-box:fill-box;
+  will-change:transform;
+}
+.ma-v2-flap-left{
+  transform-origin:92% 85%;
+  animation:ma-v3-flap-left 11.6s cubic-bezier(.24,.72,.28,1) infinite;
+}
+.ma-v2-flap-right{
+  transform-origin:8% 85%;
+  animation:ma-v3-flap-right 11.6s cubic-bezier(.24,.72,.28,1) infinite;
+}
+.ma-v2-beam{opacity:0;animation:ma-v3-beam 11.6s ease-in-out infinite}
+.ma-v2-artifacts{opacity:0;animation:ma-v3-reveal 11.6s ease-in-out infinite}
+.ma-v2-artifact{
+  transform-box:fill-box;transform-origin:50% 50%;
+  will-change:transform;
+  filter:drop-shadow(0 10px 9px rgba(21,79,120,.18));
+}
+.ma-v2-a{animation:ma-v3-rise-a 11.6s ease-in-out infinite}
+.ma-v2-b{animation:ma-v3-rise-b 11.6s ease-in-out infinite}
+.ma-v2-c{animation:ma-v3-rise-c 11.6s ease-in-out infinite}
+.ma-v2-box-svg{filter:drop-shadow(0 12px 18px rgba(43,124,165,.13))}
 @keyframes ma-v2-box-breathe{
- 0%,100%{transform:translateY(3px)}
- 25%,75%{transform:translateY(-4px)}
- 52%{transform:translateY(0)}
+  0%,100%{transform:translateY(3px)}
+  35%,74%{transform:translateY(-4px)}
 }
-@keyframes ma-v2-lid{
- 0%,11%,93%,100%{transform:translate(0,0) rotate(0deg)}
- 29%,68%{transform:translate(-22px,-88px) rotate(-8deg)}
- 81%{transform:translate(-13px,-45px) rotate(-5deg)}
+@keyframes ma-v3-flap-left{
+  0%,10%,94%,100%{transform:translate(0,0) rotate(0deg)}
+  28%,73%{transform:translate(-101px,-56px) rotate(-13deg)}
+  85%{transform:translate(-70px,-35px) rotate(-8deg)}
 }
-@keyframes ma-v2-reveal{
- 0%,19%,88%,100%{opacity:0}
- 32%,68%{opacity:1}
- 78%{opacity:.55}
+@keyframes ma-v3-flap-right{
+  0%,10%,94%,100%{transform:translate(0,0) rotate(0deg)}
+  28%,73%{transform:translate(101px,-56px) rotate(13deg)}
+  85%{transform:translate(70px,-35px) rotate(8deg)}
 }
-@keyframes ma-v2-artifact-rise{
- 0%,16%,90%,100%{transform:translateY(50px) scale(.89)}
- 34%,67%{transform:translateY(-7px) scale(1)}
- 80%{transform:translateY(25px) scale(.96)}
+@keyframes ma-v3-beam{
+  0%,12%,89%,100%{opacity:0}
+  28%,74%{opacity:.84}
+  83%{opacity:.4}
+}
+@keyframes ma-v3-reveal{
+  0%,22%,88%,100%{opacity:0}
+  34%,75%{opacity:1}
+  82%{opacity:.64}
+}
+@keyframes ma-v3-rise-a{
+  0%,22%,89%,100%{transform:translateY(107px) scale(.72)}
+  38%,72%{transform:translate(-7px,-41px) scale(1.06)}
+  82%{transform:translateY(43px) scale(.86)}
+}
+@keyframes ma-v3-rise-b{
+  0%,22%,89%,100%{transform:translateY(140px) scale(.7)}
+  41%,72%{transform:translateY(-61px) scale(1.08)}
+  82%{transform:translateY(61px) scale(.87)}
+}
+@keyframes ma-v3-rise-c{
+  0%,22%,89%,100%{transform:translateY(109px) scale(.72)}
+  44%,72%{transform:translate(8px,-39px) scale(1.06)}
+  82%{transform:translateY(44px) scale(.86)}
 }
 @keyframes ma-v2-orbit{to{transform:rotate(360deg)}}
 .ma-v2-magic-steps{
@@ -123,16 +162,10 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
 }
 .ma-v2-motion-toggle[hidden]{display:none}
 .ma-v2-motion-toggle:hover{background:#eaf3f6;color:#25536d}
-.ma-v2-motion-paused .ma-v2-box-svg,
-.ma-v2-motion-paused .ma-v2-orbit,
-.ma-v2-motion-paused .ma-v2-lid,
-.ma-v2-motion-paused .ma-v2-artifacts,
-.ma-v2-motion-paused .ma-v2-artifact{animation-play-state:paused!important}
-.ma-v2-magic[data-offscreen="1"] .ma-v2-box-svg,
-.ma-v2-magic[data-offscreen="1"] .ma-v2-orbit,
-.ma-v2-magic[data-offscreen="1"] .ma-v2-lid,
-.ma-v2-magic[data-offscreen="1"] .ma-v2-artifacts,
-.ma-v2-magic[data-offscreen="1"] .ma-v2-artifact{animation-play-state:paused!important}
+.ma-v2-motion-paused :is(.ma-v2-box-svg,.ma-v2-orbit,.ma-v2-beam,.ma-v2-flap,.ma-v2-artifacts,.ma-v2-artifact),
+.ma-v2-magic[data-offscreen="1"] :is(.ma-v2-box-svg,.ma-v2-orbit,.ma-v2-beam,.ma-v2-flap,.ma-v2-artifacts,.ma-v2-artifact){
+  animation-play-state:paused!important;
+}
 #content .ma-v2-courses,
 #content .ma-v2-focus{
  padding-top:clamp(37px,4.8vw,66px);
@@ -390,10 +423,15 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  .ma-v2-hero *, .ma-v2-magic *,
  .ma-v2-focus-card,.ma-v2-extra-link,.ma-v2-actions a,
  .ma-v2-challenge>a{transition:none!important;animation:none!important}
- .ma-v2-box-svg{transform:translateY(0)!important}
- .ma-v2-lid{transform:translate(-22px,-80px) rotate(-8deg)!important}
+ .ma-v2-box-svg{transform:none!important}
+ .ma-v2-lid{transform:none!important}
+ .ma-v2-flap-left{transform:translate(-101px,-56px) rotate(-13deg)!important}
+ .ma-v2-flap-right{transform:translate(101px,-56px) rotate(13deg)!important}
+ .ma-v2-beam{opacity:.84!important}
  .ma-v2-artifacts{opacity:1!important}
- .ma-v2-artifact{transform:translateY(-5px)!important}
+ .ma-v2-a{transform:translate(-7px,-41px) scale(1.06)!important}
+ .ma-v2-b{transform:translateY(-61px) scale(1.08)!important}
+ .ma-v2-c{transform:translate(8px,-39px) scale(1.06)!important}
  .ma-v2-orbit{transform:none!important}
  .ma-v2-motion-toggle{display:none!important}
 }
