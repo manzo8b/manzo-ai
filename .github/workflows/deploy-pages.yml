@@ -25,6 +25,11 @@ on:
       - theme/publish-prompt-skill-translated-home.py
       - editorial/learning/mental-models-reliability/**
       - editorial/learning/centroni-city-builder/**
+      - theme/legacy_learning_i18n.py
+      - theme/legacy-learning-i18n.css
+      - theme/legacy-learning-i18n.js
+      - theme/publish-legacy-course-translations.py
+      - theme/publish-legacy-course-home.py
       - editorial/learning/build-safely/**
       - editorial/learning/governare-autonomia/**
       - editorial/learning/compliance-dinamica-governance-continua/**
@@ -492,6 +497,9 @@ jobs:
           python3 theme/publish-reliability-course.py --site _site --verify-only
           python3 -m py_compile theme/publish-centroni-city-course.py
           python3 theme/publish-centroni-city-course.py --site _site --verify-only
+          python3 -m py_compile theme/legacy_learning_i18n.py theme/publish-legacy-course-translations.py theme/publish-legacy-course-home.py
+          node --check theme/legacy-learning-i18n.js
+          python3 theme/publish-legacy-course-translations.py --site _site --verify-only
           python3 -m py_compile theme/build_safely_i18n.py theme/build_safely_evaluations.py theme/publish-build-safely-course.py theme/publish-build-safely-home.py
           python3 theme/publish-build-safely-course.py --site _site --verify-only
           python3 -m py_compile theme/govern_autonomy_i18n.py theme/publish-govern-autonomy-course.py theme/publish-govern-autonomy-home.py
@@ -554,6 +562,8 @@ jobs:
           python3 theme/publish-govern-autonomy-home.py --site _site --verify-only
           python3 theme/publish-final-two-home.py --site _site
           python3 theme/publish-final-two-home.py --site _site --verify-only
+          python3 theme/publish-legacy-course-home.py --site _site
+          python3 theme/publish-legacy-course-home.py --site _site --verify-only
           test -s _site/assets/prompt-skill-home-card.css
           grep -q 'data-ma-home-course="prompt-vs-skill"' _site/it/index.html
           for lang in en es; do
@@ -567,6 +577,16 @@ jobs:
           test -s _site/assets/govern-autonomy-course.js
           test -s _site/assets/final-two-courses.css
           test -s _site/assets/final-two-courses.js
+          test -s _site/assets/legacy-learning-i18n.css
+          test -s _site/assets/legacy-learning-i18n.js
+          for page in en/learning/mental-models-reliability es/formacion/modelos-mentales-fiabilidad-ia en/learning/ai-product-builder-centroni-city es/formacion/ai-product-builder-centroni-city; do
+            test -s "_site/$page/index.html"
+            grep -q 'data-lgi-version="v1"' "_site/$page/index.html"
+          done
+          for lang in en es; do
+            grep -q 'data-ma-home-course="reliability-i18n"' "_site/$lang/index.html"
+            grep -q 'data-ma-home-course="centroni-i18n"' "_site/$lang/index.html"
+          done
           for locale_path in it/formazione/compliance-dinamica-governance-continua en/learning/dynamic-ai-compliance es/formacion/compliance-dinamica-gobernanza-continua it/formazione/intelligenza-aumentata-non-sostituita en/learning/augmented-not-replaced es/formacion/inteligencia-aumentada-no-sustituida; do
             test -s "_site/$locale_path/index.html"
             grep -q 'data-ft-version="v1"' "_site/$locale_path/index.html"
