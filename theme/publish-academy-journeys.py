@@ -102,6 +102,7 @@ def lesson_continuity(lang,index,sequence,cards,position):
  """Optional next/previous navigation for users following a specific route."""
  d=NAV_COPY[lang]
  current=cards[sequence[position]][1]
+ next_title=cards[sequence[position+1]][1] if position<len(sequence)-1 else ''
  heading=COPY[lang]["goals"][index][0]
  previous=(f'<a class="ma-journey-follow-previous" href="{e(route_url(cards[sequence[position-1]][0],index))}">'
            f'{e(d["previous"])} <span aria-hidden="true">↖</span></a>') if position>0 else ''
@@ -113,7 +114,7 @@ def lesson_continuity(lang,index,sequence,cards,position):
          f'<span class="ma-journey-follow-kicker">{e(d["route"])} · {e(d["step"])} '
          f'{position+1} {e(d["of"])} {len(sequence)}</span>'
          f'<h2>{e(heading)}</h2>'
-         f'<p>{e(current) if position<len(sequence)-1 else e(d["last"])}</p>'
+         f'<p>{e(d["next"]+": "+next_title) if next_title else e(d["last"])}</p>'
          '<div class="ma-journey-follow-links">'
          f'<a class="ma-journey-follow-back" href="{e(academy)}">{e(d["back"])}</a>'
          +previous+next_step+'</div></nav>')
@@ -283,9 +284,12 @@ def apply(site,verify_only=False):
    if not (main and catalog and journey and feature and
            main.end()<=catalog.start()<journey.start()<feature.start()):
     raise RuntimeError("Academy catalog must precede guided paths and specialist feature "+lang)
-   for route in SEQUENCES:
+   for journey,route in enumerate(SEQUENCES):
     for index in route:
-     if f'href="{e(cards[index][0])}"' not in doc:raise RuntimeError("Broken journey route")
+     if f'href="{e(route_url(cards[index][0],journey))}"' not in doc:
+      raise RuntimeError("Broken contextual journey route "+lang)
+   add_lesson_continuity(site,lang,cards,
+     (links[:links.index('<script')],links[links.index('<script'):]),True)
    continue
   if MARKER in doc or 'data-ma-journey-asset=' in doc:raise RuntimeError("Duplicate journey")
   features=list(FEATURE.finditer(doc))
