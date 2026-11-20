@@ -463,3 +463,70 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  .ma-v2-course,.ma-v2-focus-card{box-shadow:none;break-inside:avoid}
  .ma-v2-motion-toggle{display:none!important}
 }
+
+/* MANZO AI sidebar glass-pill release — active, hover and keyboard focus.
+ * Scoped to the redesigned Home; does not alter languages, routes or layout.
+ * A translucent colour layer + thin highlight keeps the selection legible.
+ */
+body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link {
+  border:1px solid transparent!important;
+  border-radius:999px!important;
+  padding:10px 14px!important;
+  background:transparent;
+  color:#365671;
+  box-shadow:none;
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  transition:transform 220ms cubic-bezier(.2,.75,.25,1),
+    background 220ms ease,border-color 220ms ease,
+    box-shadow 220ms ease,color 220ms ease;
+}
+body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link[aria-current="page"] {
+  border-color:rgba(112,165,194,.58)!important;
+  background:linear-gradient(120deg,rgba(255,255,255,.88),rgba(206,234,246,.74))!important;
+  color:#154d67!important;
+  font-weight:750;
+  box-shadow:0 6px 22px rgba(40,93,132,.12),
+    inset 0 1px 0 rgba(255,255,255,.98),
+    inset 0 -1px 0 rgba(120,178,205,.15)!important;
+  -webkit-backdrop-filter:blur(11px) saturate(140%);
+  backdrop-filter:blur(11px) saturate(140%);
+}
+body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link:hover,
+body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link:focus-visible {
+  border-color:rgba(132,187,215,.72)!important;
+  background:linear-gradient(115deg,rgba(255,255,255,.9),rgba(216,239,251,.65))!important;
+  color:#12546f!important;
+  box-shadow:0 8px 24px rgba(37,93,135,.15),
+    inset 0 1px 0 rgba(255,255,255,.98)!important;
+  -webkit-backdrop-filter:blur(12px) saturate(145%);
+  backdrop-filter:blur(12px) saturate(145%);
+  transform:translateX(3px) translateY(-1px);
+}
+body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link[aria-current="page"]:hover {
+  background:linear-gradient(115deg,rgba(247,253,255,.94),rgba(184,224,243,.78))!important;
+}
+@media(prefers-reduced-motion:reduce) {
+  body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link {
+    transition:none!important;
+  }
+  body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link:hover,
+  body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link:focus-visible {
+    transform:none!important;
+  }
+}
+@media(prefers-reduced-transparency:reduce) {
+  body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link:is([aria-current="page"],:hover,:focus-visible) {
+    background:#e0eff6!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
+@media(prefers-contrast:more) {
+  body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link:is([aria-current="page"],:hover,:focus-visible) {
+    background:#e5f4ff!important;
+    color:#06394e!important;
+    border-color:#34617e!important;
+    box-shadow:none!important;
+  }
+}
