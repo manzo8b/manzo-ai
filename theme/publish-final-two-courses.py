@@ -90,7 +90,7 @@ def diagram(number,title,description,steps,variant="flow",note=None):
     if variant=="quadrant":
         for i,(name,detail) in enumerate(steps,1):
             children.append(f'<article><span>{i:02d}</span><strong>{e(name)}</strong><p>{e(detail)}</p></article>')
-        content='<div class="ft-quadrants">'=>""
+        content='<div class="ft-quadrants">'+"".join(children)+"</div>"
     else:
         for i,(name,detail) in enumerate(steps,1):
             children.append(f'<li><span class="ft-stage-n">{i:02d}</span><strong>{e(name)}</strong><small>{e(detail)}</small></li>')
