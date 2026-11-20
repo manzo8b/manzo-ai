@@ -25,6 +25,7 @@ Ogni percorso formativo deve essere completo in tutte e tre le lingue. **La trad
 | AI Product Builder — Centroni City | Presente | Non presente nel sorgente editoriale | Non presente nel sorgente editoriale | Traduzione integrale + link |
 | AI Teaching Lab | Presente | Non presente nella struttura editoriale EN/ES | Non presente nella struttura editoriale EN/ES | Migrazione estesa: corso, 5 moduli, glossario, scenari, valutazioni, narrazioni |
 | Costruire in sicurezza | Nuovo corso | Nuovo corso | Nuovo corso | Pubblicazione simultanea nelle tre lingue |
+| Governare l'autonomia | Presente | Presente | Presente | Sei letture, Mission Control, quattro diagrammi, quiz e cruciverba; CI trilingue PASS |
 | Altre pagine MANZO AI incluse nel pacchetto base | Da verificare | Da verificare | Da verificare | Audit puntuale prima della dichiarazione di copertura globale |
 
 **Regola operativa:** registrare lo stato reale del lavoro, non sostituire una traduzione mancante con un reindirizzamento silenzioso al testo italiano.
@@ -37,6 +38,8 @@ Ogni percorso formativo deve essere completo in tutte e tre le lingue. **La trad
 - Prompt injection: istruzione avversa incorporata in input o contenuti di fiducia inferiore; non garantire prevenzione tramite semplice prompt.
 
 ## Progressi verificati
+
+- **20 novembre 2026 — Governare l'autonomia:** sei letture IT/EN/ES, quattro mappe concettuali, simulatore Mission Control (otto azioni, quattro incidenti, regole di STOP), cruciverba e dieci quiz per lingua; pubblicazione GitHub Pages riuscita. Collaudo visivo manuale su dispositivi reali non ancora eseguito.
 
 - **20 novembre 2026 — Prompt vs Skill:** versioni IT/EN/ES pubblicate; QA GitHub Pages superato (letture 6/6, mappe 4/4, cruciverba 8 termini, quiz 10/10, collegamenti Home EN/ES). Controllo visivo su dispositivi reali da completare.
 - **Restano da tradurre integralmente:** Modelli mentali e affidabilità, AI Product Builder — Centroni City e AI Teaching Lab (più gli altri contenuti del prodotto non ancora certificati).
