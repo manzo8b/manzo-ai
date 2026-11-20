@@ -109,6 +109,7 @@ def publish(site: Path, base: str) -> int:
     if (site/"it/academy/index.html").is_file():
         import subprocess, sys
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-prompt-skill-course.py")), "--site", str(site)], check=True)
+        subprocess.run([sys.executable, str(Path(__file__).with_name("publish-prompt-skill-translations.py")), "--site", str(site)], check=True)
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-reliability-course.py")), "--site", str(site)], check=True)
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-centroni-city-course.py")), "--site", str(site)], check=True)
         # New full-language courses are generated together; missing translations fail the release.
