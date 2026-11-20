@@ -23,7 +23,9 @@ with sync_playwright() as p:
             assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ma-blue').trim()") == "#2158ed", path
             assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--ma-ink').trim()") == "#142841", path
         page.goto(f"{origin}/it/")
-        assert page.locator(".home-hero").evaluate("(e)=>getComputedStyle(e).backgroundImage") == "none"
+        # Sprint 1 editorial blueprint uses a restrained gradient: check for an intentional readable field.
+        hero_bg = page.locator(".home-hero").evaluate("(e)=>getComputedStyle(e).backgroundImage")
+        assert "gradient(" in hero_bg, "Expected the reviewed learning-first hero gradient"
         feature_colors = page.locator(".grid-3>.feature").evaluate_all("(xs)=>xs.map(x=>getComputedStyle(x).backgroundColor)")
         assert len(set(feature_colors)) >= 3, feature_colors  # varied, flat-color field composition
         page.goto(f"{origin}/it/pensiero-critico/")
