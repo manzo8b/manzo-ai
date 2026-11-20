@@ -16,11 +16,11 @@
 
 ## Cosa manca realmente in AI Teaching Lab
 
-**Già presenti:** cinque moduli completi e dati strutturati in italiano; moduli 01–04 narrativi in inglese e spagnolo. Nessuno di questi file deve essere rifatto.
+**Già presenti:** cinque moduli completi e dati strutturati in italiano; tutti i moduli narrativi 01–05 in inglese e spagnolo. Nessuno di questi file deve essere rifatto.
 
-**Consegna A:** aggiungere il Modulo 05 in inglese e spagnolo mantenendo attività, approfondimenti e supervisione umana.
+**Consegna A:** verificare la parità dei cinque moduli narrativi già presenti in inglese e spagnolo rispetto all'italiano, senza ritradurli.
 
-**Consegna B:** aggiungere in entrambe le lingue i file strutturati del corso, delle narrazioni, delle verifiche e del glossario. Preservare le chiavi, gli identificatori, le risposte corrette e le 79 voci del glossario italiano.
+**Consegna B:** aggiungere in entrambe le lingue i file strutturati mancanti del corso, delle narrazioni, delle verifiche e del glossario. Preservare le chiavi, gli identificatori, le risposte corrette e le 79 voci del glossario italiano.
 
 **Consegna C:** pubblicare percorsi nativi EN/ES con pagina, contenuti interattivi, selettori che mantengano il contesto, canonical/hreflang e QA. La sola presenza delle traduzioni non significa che siano disponibili online.
 
