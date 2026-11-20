@@ -74,7 +74,19 @@ with sync_playwright() as pw:
      assert page.locator('#hx-quiz-check').is_enabled()
      assert page.locator('#hx-cross-grid').count()==1
     else:
-     assert root.locator('.ma-unit-evidence').count()==0,(locale,width,'core map leaked into coding')
+     checks=root.locator('.ma-unit-evidence')
+     assert checks.count()==6,(locale,width,'six coding competency disclosures missing')
+     assert checks.locator('summary').count()==6
+     assert all(not box.get_attribute('open') for box in checks.all())
+     first_check=checks.first
+     first_check.locator('summary').click()
+     assert first_check.get_attribute('open') is not None,(locale,width,'coding disclosure cannot open')
+     assert first_check.get_attribute('data-ma-coding-case')=='2'
+     assert first_check.get_attribute('data-ma-coding-quiz')=='2'
+     assert [a.get_attribute('href') for a in first_check.locator('.ma-unit-evidence-links a').all()]==['#hc-lab','#hc-quiz']
+     first_check.locator('summary').click()
+     assert first_check.get_attribute('open') is None
+     assert checks.last.locator('.ma-unit-evidence-limit').count()==1,(locale,width,'business-value evidence limit absent')
      assert page.locator('.hc-section').count()==6
      assert page.locator('[data-hc-case]').count()==4
      assert page.locator('#hc-quiz-data').count()==1

@@ -1055,8 +1055,8 @@ body[data-ma-surface] .ma-course-info h3,
  .ma-course-card .ma-course-art:after{display:none}
 }
 
-/* Core learning outcome → existing evidence. Collapsed by default on mobile.
-   Only core units gain this disclosure; original coding map and Academy cards stay unchanged. */
+/* Learning outcomes → existing evidence for core and coding modules.
+   Collapsed by default on mobile; Academy cards and their geometry stay unchanged. */
 .ma-guidance .ma-unit-with-evidence{align-items:flex-start}
 .ma-guidance .ma-unit-main{display:grid;gap:6px;flex:1;min-width:0}
 .ma-guidance .ma-unit-evidence{min-width:0;margin:0 0 0 clamp(27px,3.6vw,43px);color:#274b6c}

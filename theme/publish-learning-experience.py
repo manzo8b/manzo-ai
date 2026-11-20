@@ -29,26 +29,32 @@ HUB_MARKER='data-ma-pathways="v1"'
 CSS='/manzo-ai/assets/learning-experience/guide.css'
 JS='/manzo-ai/assets/learning-experience/guide.js'
 CORE_EVIDENCE=SOURCE/'core-unit-evidence.json'
+CODING_EVIDENCE=SOURCE/'coding-unit-evidence.json'
 
 def esc(x): return escape(str(x),quote=True)
 def json_script(x):
  return json.dumps(x,ensure_ascii=False).replace('<','\\u003c').replace('>','\\u003e').replace('&','\\u0026')
 
-def core_evidence_details(mapping,item,index):
+def unit_evidence_details(mapping,item,index,kind):
  # These existing anchors open sections, NOT a specific case or quiz question.
  case=int(item['case'])
  quiz=int(item['quiz'])
+ prefix='core' if kind=='core' else 'coding'
+ case_anchor='hx-lab' if kind=='core' else 'hc-lab'
+ quiz_anchor='hx-quiz' if kind=='core' else 'hc-quiz'
+ limitation=(f'<p class="ma-unit-evidence-note ma-unit-evidence-limit">{esc(item["limitation"])}</p>'
+             if item.get('limitation') else '')
  return (
-  f'<details class="ma-unit-evidence" data-ma-core-evidence="{index}" '
-  f'data-ma-core-case="{case}" data-ma-core-quiz="{quiz}">'
+  f'<details class="ma-unit-evidence" data-ma-{prefix}-evidence="{index}" '
+  f'data-ma-{prefix}-case="{case}" data-ma-{prefix}-quiz="{quiz}">'
   f'<summary>{esc(mapping["expand"])}</summary>'
   '<div class="ma-unit-evidence-content">'
   f'<p><strong>{esc(mapping["ability"])}</strong> {esc(item["outcome"])}</p>'
   '<div class="ma-unit-evidence-links">'
-  f'<a href="#hx-lab">{esc(mapping["case"])} {case:02d} · {esc(mapping["openCases"])}</a>'
-  f'<a href="#hx-quiz">{esc(mapping["quiz"])} {quiz:02d} · {esc(mapping["openQuiz"])}</a>'
+  f'<a href="#{case_anchor}">{esc(mapping["case"])} {case:02d} · {esc(mapping["openCases"])}</a>'
+  f'<a href="#{quiz_anchor}">{esc(mapping["quiz"])} {quiz:02d} · {esc(mapping["openQuiz"])}</a>'
   '</div><p class="ma-unit-evidence-note">'+esc(mapping['note'])+'</p>'
-  '</div></details>'
+  +limitation+'</div></details>'
  )
 
 def roadmap(d,modules,kind,lang,main_route,core_map=None):
@@ -59,10 +65,10 @@ def roadmap(d,modules,kind,lang,main_route,core_map=None):
   title=item['title']
   duration=item.get('duration','')
   badge=f'<span class="ma-unit-time">{esc(duration)}</span>' if duration else ''
-  details=core_evidence_details(core_map,core_map['units'][i-1],i) if kind=='core' else ''
-  wrap_start='<div class="ma-unit-main">' if kind=='core' else ''
-  wrap_end='</div>' if kind=='core' else ''
-  item_cls='ma-unit ma-unit-with-evidence' if kind=='core' else 'ma-unit'
+  details=unit_evidence_details(core_map,core_map['units'][i-1],i,kind) if core_map else ''
+  wrap_start='<div class="ma-unit-main">' if core_map else ''
+  wrap_end='</div>' if core_map else ''
+  item_cls='ma-unit ma-unit-with-evidence' if core_map else 'ma-unit'
   result.append(
     f'<li class="{item_cls}" data-ma-unit="{i}">{wrap_start}<a href="#{anchor}" class="ma-unit-link">'
     f'<span class="ma-unit-num">{i:02}</span><span class="ma-unit-copy">'
@@ -243,8 +249,9 @@ def inject_hub(page,loc,d,routes,site):
 def publish(site,verify_only=False):
  locales=json.loads((SOURCE/'labels.json').read_text(encoding='utf-8'))
  evidence=json.loads(CORE_EVIDENCE.read_text(encoding='utf-8'))
- if set(locales)!=set(ROUTES) or set(evidence)!=set(ROUTES):
-  raise RuntimeError('Incomplete translation dictionaries or competency evidence map')
+ coding_evidence=json.loads(CODING_EVIDENCE.read_text(encoding='utf-8'))
+ if set(locales)!=set(ROUTES) or set(evidence)!=set(ROUTES) or set(coding_evidence)!=set(ROUTES):
+  raise RuntimeError('Incomplete translation dictionaries or competency evidence maps')
  for loc,mapping in evidence.items():
   if len(mapping.get('units',[]))!=6:raise RuntimeError('Missing six core competencies '+loc)
   for i,item in enumerate(mapping['units'],1):
@@ -254,6 +261,16 @@ def publish(site,verify_only=False):
     raise RuntimeError('Evidence maps to nonexistent practice case '+loc+' '+str(i))
    if not isinstance(item.get('quiz'),int) or not 1<=item['quiz']<=10:
     raise RuntimeError('Evidence maps to nonexistent quiz item '+loc+' '+str(i))
+ for loc,mapping in coding_evidence.items():
+  if len(mapping.get('units',[]))!=6:
+   raise RuntimeError('Missing six coding competencies '+loc)
+  for i,item in enumerate(mapping['units'],1):
+   if not str(item.get('outcome','')).strip() or str(item['outcome']).strip().endswith('.'):
+    raise RuntimeError('Missing/invalid coding competency '+loc+' '+str(i))
+   if type(item.get('case')) is not int or not 1<=item['case']<=4:
+    raise RuntimeError('Coding evidence references nonexistent case '+loc+' '+str(i))
+   if type(item.get('quiz')) is not int or not 1<=item['quiz']<=4:
+    raise RuntimeError('Coding evidence references nonexistent quiz '+loc+' '+str(i))
  assets=site/'assets'/'learning-experience'
  if not verify_only:
   assets.mkdir(parents=True,exist_ok=True)
@@ -287,7 +304,7 @@ def publish(site,verify_only=False):
    page=site/route/'index.html'
    if not page.is_file():raise RuntimeError('Missing course '+route)
    if len(modules)!=6:raise RuntimeError('Unexpected six-course outline '+route)
-   if not verify_only:inject(page,kind,loc,d,modules,base,evidence[loc] if kind=='core' else None)
+   if not verify_only:inject(page,kind,loc,d,modules,base,evidence[loc] if kind=='core' else coding_evidence[loc])
    html=page.read_text(encoding='utf-8')
    if html.count(MARKER)!=1 or html.count('data-ma-unit=')!=6:
     raise RuntimeError('Missing/duplicate guidance '+route)
@@ -300,8 +317,19 @@ def publish(site,verify_only=False):
          f'data-ma-core-quiz="{item["quiz"]}"' not in html or
          esc(item['outcome']) not in html):
       raise RuntimeError('Competency/case/quiz map mismatch '+loc+' '+str(i))
-   elif 'data-ma-core-evidence=' in html:
-    raise RuntimeError('Core-only competency block leaked into coding course '+loc)
+   else:
+    if html.count('data-ma-coding-evidence=')!=6:
+     raise RuntimeError('Missing six mapped coding competencies '+loc)
+    for i,item in enumerate(coding_evidence[loc]['units'],1):
+     if (f'data-ma-coding-evidence="{i}"' not in html or
+         f'data-ma-coding-case="{item["case"]}"' not in html or
+         f'data-ma-coding-quiz="{item["quiz"]}"' not in html or
+         esc(item['outcome']) not in html):
+      raise RuntimeError('Coding competency/case/quiz map mismatch '+loc+' '+str(i))
+   if kind=='coding' and 'data-ma-core-evidence=' in html:
+    raise RuntimeError('Core competency block leaked into coding course '+loc)
+   if kind=='core' and 'data-ma-coding-evidence=' in html:
+    raise RuntimeError('Coding competency block leaked into core course '+loc)
    if html.count('data-ma-mark=')!=6:raise RuntimeError('Incomplete check buttons '+route)
    if 'id="hx-quiz-data"' not in html and kind=='core':raise RuntimeError('Existing quiz vanished')
    if 'id="hc-quiz-data"' not in html and kind=='coding':raise RuntimeError('Existing coding quiz vanished')

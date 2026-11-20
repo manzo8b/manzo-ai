@@ -1,0 +1,128 @@
+{
+  "it": {
+    "expand": "Obiettivo e prova",
+    "ability": "Competenza osservabile",
+    "case": "Caso",
+    "quiz": "Domanda",
+    "openCases": "Apri gli scenari",
+    "openQuiz": "Apri il quiz",
+    "note": "Gli scenari si trovano nella sezione pratica; le domande del quiz si svolgono in sequenza",
+    "units": [
+      {
+        "outcome": "Individuare un difetto che una demo convincente non rende accettabile per la consegna",
+        "case": 2,
+        "quiz": 2
+      },
+      {
+        "outcome": "Riconoscere un metodo SDK inventato e indicare le fonti tecniche necessarie per verificarlo",
+        "case": 1,
+        "quiz": 1
+      },
+      {
+        "outcome": "Valutare il rischio di una dipendenza suggerita senza verifiche e le conseguenze del suo utilizzo",
+        "case": 3,
+        "quiz": 2
+      },
+      {
+        "outcome": "Motivare una decisione professionale senza accettare affermazioni di test non dimostrate",
+        "case": 4,
+        "quiz": 3
+      },
+      {
+        "outcome": "Definire le evidenze minime di un quality gate prima di autorizzare il rilascio",
+        "case": 4,
+        "quiz": 4
+      },
+      {
+        "outcome": "Argomentare le conseguenze operative ed economiche di un rilascio non verificato",
+        "case": 4,
+        "quiz": 4,
+        "limitation": "Questa prova valuta la decisione di rilascio ma non misura direttamente il costo economico della verifica"
+      }
+    ]
+  },
+  "en": {
+    "expand": "Outcome and evidence",
+    "ability": "Observable skill",
+    "case": "Case",
+    "quiz": "Question",
+    "openCases": "Open scenarios",
+    "openQuiz": "Open quiz",
+    "note": "Scenarios are in the practice section; quiz questions are presented in sequence",
+    "units": [
+      {
+        "outcome": "Identify a defect that a convincing demo does not make safe for delivery",
+        "case": 2,
+        "quiz": 2
+      },
+      {
+        "outcome": "Recognize an invented SDK method and identify the technical sources needed to verify it",
+        "case": 1,
+        "quiz": 1
+      },
+      {
+        "outcome": "Evaluate the risk of using an unverified AI-suggested dependency and its consequences",
+        "case": 3,
+        "quiz": 2
+      },
+      {
+        "outcome": "Justify a professional decision without accepting unsupported claims that tests passed",
+        "case": 4,
+        "quiz": 3
+      },
+      {
+        "outcome": "Define the minimum evidence required by a release quality gate",
+        "case": 4,
+        "quiz": 4
+      },
+      {
+        "outcome": "Explain the operational and business consequences of releasing unverified software",
+        "case": 4,
+        "quiz": 4,
+        "limitation": "This evidence assesses the release decision but does not directly measure the financial cost of verification"
+      }
+    ]
+  },
+  "es": {
+    "expand": "Objetivo y evidencia",
+    "ability": "Competencia observable",
+    "case": "Caso",
+    "quiz": "Pregunta",
+    "openCases": "Abrir escenarios",
+    "openQuiz": "Abrir cuestionario",
+    "note": "Los escenarios están en la sección práctica; las preguntas del cuestionario se responden en secuencia",
+    "units": [
+      {
+        "outcome": "Detectar un defecto que una demo convincente no convierte en seguro para su entrega",
+        "case": 2,
+        "quiz": 2
+      },
+      {
+        "outcome": "Reconocer un método SDK inventado e identificar las fuentes técnicas para comprobarlo",
+        "case": 1,
+        "quiz": 1
+      },
+      {
+        "outcome": "Evaluar el riesgo y las consecuencias de usar una dependencia sugerida sin verificar",
+        "case": 3,
+        "quiz": 2
+      },
+      {
+        "outcome": "Justificar una decisión profesional sin aceptar pruebas declaradas pero no ejecutadas",
+        "case": 4,
+        "quiz": 3
+      },
+      {
+        "outcome": "Definir las evidencias mínimas de un control de calidad previo al lanzamiento",
+        "case": 4,
+        "quiz": 4
+      },
+      {
+        "outcome": "Explicar las consecuencias operativas y económicas de lanzar software sin verificar",
+        "case": 4,
+        "quiz": 4,
+        "limitation": "Esta prueba evalúa la decisión de lanzamiento, pero no mide directamente el coste económico de la verificación"
+      }
+    ]
+  }
+}

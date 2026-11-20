@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "editorial/learning/hallucinations"
 LABELS = ROOT / "product/learning-experience/labels.json"
 CORE_MAP = ROOT / "product/learning-experience/core-unit-evidence.json"
+CODING_MAP = ROOT / "product/learning-experience/coding-unit-evidence.json"
 PATHS = {
     "it": ("it/academy", "it/impara/allucinazioni-ai-verificabilita",
            "it/impara/allucinazioni-ai-verificabilita/coding"),
@@ -110,8 +111,11 @@ def check_coding(data: dict, locale: str) -> None:
 def validate(site: Path | None = None) -> None:
     labels = json.loads(LABELS.read_text(encoding="utf-8"))
     maps = json.loads(CORE_MAP.read_text(encoding="utf-8"))
-    ensure(set(maps) == set(PATHS), "Competency map requires IT/EN/ES")
+    coding_maps = json.loads(CODING_MAP.read_text(encoding="utf-8"))
+    ensure(set(maps) == set(PATHS) and set(coding_maps) == set(PATHS),
+           "Competency maps require IT/EN/ES")
     expected_links = None
+    expected_coding_links = None
     ensure(set(labels) == set(PATHS), "Academy requires all 3 languages")
     catalog_ids = None
     for loc, paths in PATHS.items():
@@ -158,6 +162,33 @@ def validate(site: Path | None = None) -> None:
         else:
             ensure(links == expected_links,
                    f"{loc}: evidence numbering must be identical across languages")
+        coding_mapping = coding_maps[loc]
+        coding_units = coding_mapping.get("units", [])
+        ensure(len(coding_units) == len(coding["chapters"]) == 6,
+               f"{loc}: one observable skill per Engineering Assurance chapter")
+        for key in ("expand", "ability", "case", "quiz", "openCases", "openQuiz", "note"):
+            ensure(isinstance(coding_mapping.get(key), str) and
+                   bool(coding_mapping[key].strip()),
+                   f"{loc}: missing coding learner-facing label {key}")
+        coding_links = []
+        for index, entry in enumerate(coding_units, 1):
+            words(entry.get("outcome"),
+                  f"{loc}: coding chapter {index} missing observable skill")
+            ensure(not entry["outcome"].strip().endswith("."),
+                   f"{loc}: coding chapter {index} has terminal heading period")
+            case, question = entry.get("case"), entry.get("quiz")
+            ensure(type(case) is int and 1 <= case <= len(coding["cases"]) and
+                   type(question) is int and 1 <= question <= len(coding["quiz"]),
+                   f"{loc}: coding chapter {index} links to nonexistent evidence")
+            coding_links.append((case, question))
+        ensure(isinstance(coding_units[5].get("limitation"), str) and
+               bool(coding_units[5]["limitation"].strip()),
+               f"{loc}: business-value outcome must disclose evidence limitation")
+        if expected_coding_links is None:
+            expected_coding_links = coding_links
+        else:
+            ensure(coding_links == expected_coding_links,
+                   f"{loc}: coding evidence numbering differs across languages")
         if site is None:
             continue
         academy, core_route, coding_route = paths
@@ -180,8 +211,17 @@ def validate(site: Path | None = None) -> None:
                            f'data-ma-core-quiz="{item["quiz"]}"' in html,
                            f"{loc}: rendered mapping for unit {index} inconsistent")
             else:
+                ensure(html.count('data-ma-coding-evidence=') == 6,
+                       f"{loc}: six Engineering Assurance competency panels missing")
+                for index, entry in enumerate(coding_units, 1):
+                    ensure(f'data-ma-coding-evidence="{index}"' in html and
+                           f'data-ma-coding-case="{entry["case"]}"' in html and
+                           f'data-ma-coding-quiz="{entry["quiz"]}"' in html,
+                           f"{loc}: coding evidence mapping for chapter {index} inconsistent")
                 ensure('data-ma-core-evidence=' not in html,
-                       f"{loc}: pilot mapping leaked into specialist coding course")
+                       f"{loc}: core evidence leaked into specialist coding course")
+                ensure(coding_units[5]["limitation"] in html,
+                       f"{loc}: evidence limitation not disclosed to learners")
             ensure(html.count('data-ma-learning-guide="v1"') == 1,
                    f"{loc}: {name} learning guide missing/duplicated")
             ensure(len(re.findall(r'data-ma-unit="[1-6]"', html)) == 6,
@@ -193,7 +233,7 @@ def validate(site: Path | None = None) -> None:
 
     print("PASS Academy pedagogical contract: 2 verified pathways × 3 locales, "
           "36 sourced units, 42 practice cases, 42 explained quiz items, "
-          "explicit outcomes, six observable skills per locale, real-case/quiz evidence, consistent course taxonomy"
+          "explicit outcomes, 12 observable skills per locale, real-case/quiz evidence, consistent course taxonomy"
           + (", rendered guides and activities" if site else " (source only)"))
 
 
