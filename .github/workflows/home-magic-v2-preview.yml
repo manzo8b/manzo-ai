@@ -609,6 +609,13 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 --directory _preview >/tmp/manzo-home-v2-http.log 2>&1 &
           sleep 3
           python3 theme/home-magic-v2-browser-smoke.py
+      - name: Compact screenshots for review on desktop and mobile
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: manzo-home-v2-screens-${{ github.sha }}
+          path: home-magic-v2-qa/
+          retention-days: 7
       - name: Downloadable candidate — NO public deployment
         uses: actions/upload-artifact@v4
         if: always()
