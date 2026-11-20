@@ -530,3 +530,92 @@ body[data-ma-surface="landing"]:has(.ma-v2-hero) .rail nav .nav-link[aria-curren
     box-shadow:none!important;
   }
 }
+
+/* Academy visual parity + visible magic-box choreography · V3 */
+/* The lid moves to the right. Symbols rise higher and stay visually separate:
+   changing SVG painter order alone did not communicate the emergence. */
+@keyframes ma-v2-lid{
+  0%,11%,93%,100%{transform:translate(0,0) rotate(0deg)}
+  29%,68%{transform:translate(94px,-78px) rotate(7deg)}
+  81%{transform:translate(48px,-38px) rotate(4deg)}
+}
+/* The reveal begins before the lid fully opens, and stays legible longer. */
+@keyframes ma-v2-reveal{
+  0%,12%,87%,100%{opacity:0}
+  22%,70%{opacity:1}
+  79%{opacity:.6}
+}
+@keyframes ma-v2-artifact-rise{
+  0%,16%,90%,100%{transform:translateY(78px) scale(.79)}
+  34%,67%{transform:translateY(-43px) scale(1.13)}
+  80%{transform:translateY(24px) scale(.91)}
+}
+.ma-v2-artifacts{
+  filter:drop-shadow(0 9px 11px rgba(24,75,118,.20));
+}
+@media(prefers-reduced-motion:reduce){
+  .ma-v2-lid{transform:translate(94px,-78px) rotate(7deg)!important}
+  .ma-v2-artifact{transform:translateY(-43px) scale(1.13)!important}
+  .ma-v2-artifacts{opacity:1!important}
+}
+/* Align the curated Home card experience with the existing Academy catalog:
+   elevation, moving circular geometry, light sweep and round arrow CTA.
+   Do not change card routes, order, metadata, size or responsive grid. */
+.ma-v2-course{
+  transition:transform .28s cubic-bezier(.2,.7,.2,1),
+    box-shadow .28s cubic-bezier(.2,.7,.2,1),border-color .2s ease;
+}
+.ma-v2-course:is(:hover,:focus-visible){
+  transform:translateY(-7px);
+  border-color:#8ca9e6;
+  box-shadow:0 23px 53px rgba(24,59,101,.19);
+}
+.ma-v2-art::before{
+  transition:transform .4s ease,box-shadow .4s ease;
+}
+.ma-v2-course:is(:hover,:focus-visible) .ma-v2-art::before{
+  transform:translate(-18px,13px) rotate(7deg);
+  box-shadow:0 0 0 30px rgba(255,255,255,.11),
+    0 0 0 63px rgba(255,255,255,.055);
+}
+.ma-v2-art-shine{
+  position:absolute;left:0;top:-65%;bottom:-65%;width:48%;
+  z-index:2;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.24),transparent);
+  transform:translateX(-135%) skewX(-22deg);
+  transition:transform .66s cubic-bezier(.2,.7,.2,1);
+}
+.ma-v2-course:is(:hover,:focus-visible) .ma-v2-art-shine{
+  transform:translateX(440%) skewX(-22deg);
+}
+.ma-v2-art svg{
+  transition:transform .3s cubic-bezier(.2,.7,.2,1);
+}
+.ma-v2-course:is(:hover,:focus-visible) .ma-v2-art svg{
+  transform:rotate(6deg) scale(1.075);
+}
+.ma-v2-open>span{
+  display:grid;place-items:center;
+  flex:0 0 32px;width:32px;height:32px;border-radius:50%;
+  background:#eaf0ff;color:#1c52da;
+  font-size:1.1rem;line-height:1;
+  transition:transform .2s ease,background .2s ease,color .2s ease;
+}
+.ma-v2-course:is(:hover,:focus-visible) .ma-v2-open>span{
+  transform:translate(3px,-3px);
+  background:#2158ed;color:#fff;
+}
+@media(hover:none){
+  .ma-v2-course:hover{transform:none;box-shadow:0 9px 26px rgba(31,77,118,.085)}
+  .ma-v2-course:hover .ma-v2-art-shine{transform:translateX(-135%) skewX(-22deg)}
+  .ma-v2-course:hover .ma-v2-art svg{transform:none}
+  .ma-v2-course:hover .ma-v2-open>span{transform:none;background:#eaf0ff;color:#1c52da}
+}
+@media(prefers-reduced-motion:reduce){
+  .ma-v2-course,.ma-v2-art::before,.ma-v2-art svg,
+  .ma-v2-art-shine,.ma-v2-open>span{transition:none!important}
+  .ma-v2-course:is(:hover,:focus-visible),
+  .ma-v2-course:is(:hover,:focus-visible) .ma-v2-art svg,
+  .ma-v2-course:is(:hover,:focus-visible) .ma-v2-open>span{transform:none!important}
+  .ma-v2-course:is(:hover,:focus-visible) .ma-v2-art-shine{display:none}
+}

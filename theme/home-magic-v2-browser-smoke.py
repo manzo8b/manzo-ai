@@ -38,6 +38,25 @@ def test_page(page,loc,width):
 
  assert page.locator(".ma-v2-course").count()==6
  assert page.locator(".ma-v2-tone-rose").count()==1
+ assert page.locator(".ma-v2-art-shine").count()==6,(loc,"Academy shine missing")
+ assert page.locator(".ma-v2-artifacts").count()==1
+ # Seek deterministic reveal at 3.8s of the 9.6s timeline.
+ # Painter order alone was insufficient: the lid has to move aside and
+ # the emerging symbols have to rise with visible opacity.
+ page.locator(".ma-v2-magic").scroll_into_view_if_needed()
+ page.evaluate("""()=>{
+   for(const selector of ['.ma-v2-lid','.ma-v2-artifacts','.ma-v2-artifact']){
+     for(const el of document.querySelectorAll(selector))
+       for(const animation of el.getAnimations())animation.currentTime=3800;
+   }
+ }""")
+ assert page.locator(".ma-v2-artifacts").evaluate(
+  "(e)=>Number(getComputedStyle(e).opacity)>=0.95"),(loc,"symbols not visible")
+ assert page.locator(".ma-v2-lid").evaluate(
+  "(e)=>new DOMMatrix(getComputedStyle(e).transform).m41>75"),(loc,"lid not moved aside")
+ assert page.locator(".ma-v2-artifact").first.evaluate(
+  "(e)=>new DOMMatrix(getComputedStyle(e).transform).m42<-28"),(loc,"symbols not rising")
+
  assert page.locator('.ma-v2-course > .ma-v2-art svg[aria-hidden="true"]').count()==6
  assert page.locator(".ma-v2-course .ma-v2-kind").count()==6
  assert page.locator(".ma-v2-course .ma-v2-tags span").count()==12
@@ -72,6 +91,13 @@ def test_page(page,loc,width):
     return el.contains(document.elementFromPoint(x,y));
   }""")
   assert visible,(loc,"primary hero CTA obscured at initial scroll")
+ if width==1440:
+  card=page.locator('.ma-v2-course').first
+  card.hover()
+  page.wait_for_timeout(730)
+  assert card.evaluate("(e)=>getComputedStyle(e).transform")!="none",(loc,"missing Academy lift")
+  arrow=card.locator(".ma-v2-open>span")
+  assert arrow.evaluate("(e)=>getComputedStyle(e).borderRadius")=="50%",(loc,"missing round arrow")
  toggle=page.locator("[data-ma-v2-motion-control]")
  assert toggle.count()==1 and toggle.is_visible()
  assert toggle.get_attribute("aria-pressed")=="false"
