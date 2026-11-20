@@ -22,6 +22,27 @@ def inspect(page,loc,mobile=False):
  assert page.locator('[data-hc-gate]').count()==8,loc
  assert page.locator('.hc-ref').count()==4,loc
  assert page.locator('pre code').count()==2,loc
+ assert page.locator('link[href*="coding.css?v="]').count()==1,(loc,'cache-safe stylesheet missing')
+ # Compute the real browser colors, not merely CSS source declarations.
+ ratios=page.evaluate("""() => {
+   const rgb=value=>(value.match(/\\d+/g)||[]).slice(0,3).map(Number);
+   const lum=value=>{
+     const c=rgb(value).map(n=>n/255).map(v=>v<=0.04045?v/12.92:Math.pow((v+0.055)/1.055,2.4));
+     return c[0]*0.2126+c[1]*0.7152+c[2]*0.0722;
+   };
+   const ratio=(fg,bg)=>{const a=lum(fg),b=lum(bg);return (Math.max(a,b)+0.05)/(Math.min(a,b)+0.05)};
+   const color=sel=>getComputedStyle(document.querySelector(sel)).color;
+   const bg=sel=>getComputedStyle(document.querySelector(sel)).backgroundColor;
+   return {
+     title:ratio(color('.hc-banner h2'),bg('.hc-banner')),
+     introduction:ratio(color('.hc-banner > p:not(.hc-eyebrow)'),bg('.hc-banner')),
+     stageTitle:ratio(color('.hc-banner .hc-stage strong'),bg('.hc-banner .hc-stage')),
+     stageBody:ratio(color('.hc-banner .hc-stage p'),bg('.hc-banner .hc-stage')),
+     stageIndex:ratio(color('.hc-banner .hc-stage small'),bg('.hc-banner .hc-stage'))
+   };
+ }""")
+ assert all(value>=4.5 for value in ratios.values()),(loc,mobile,'Engineering banner WCAG AA contrast failure',ratios)
+ assert ratios['title']>=7.0 and ratios['stageBody']>=7.0,(loc,mobile,'Core contrast under AAA',ratios)
  assert page.locator('.hc-quiz-options label').count()==4,loc
  assert page.locator('[data-hc-position]').inner_text().strip()=='1 / 4',loc
  assert page.locator('.hc-section p').count()>=24,loc
