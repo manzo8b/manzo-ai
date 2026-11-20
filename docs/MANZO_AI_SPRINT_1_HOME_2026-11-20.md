@@ -60,9 +60,11 @@ Le quattro schede hanno destinazioni reali, valide per ciascuna lingua e verific
 - [x] Publisher incluso nel processo di deploy
 - [x] Primo errore di verifica da HTML escape corretto
 - [x] Deployment principale GitHub Pages riuscito sul commit \`c2a9a55576\`
-- [ ] Browser QA finale 1440/390 px nelle tre lingue — **controllo in corso al momento della redazione**
+- [x] Browser QA IT/EN/ES 1440/390 px con Playwright/Chromium, espansione 4→13, fallback senza JS e controllo reduced-motion: **PASS** ([GitHub Actions #44740016081](https://github.com/manzo8b/manzo-ai/actions/runs/44740016081))
 - [ ] Ispezione visiva umana del rendering su iPhone Safari e desktop reale (distinta da test Chromium)
 - [ ] Feedback dell'utente sulla nuova architettura dopo visione pubblica
+
+**Rilascio confermato:** [GitHub Pages #44740016048](https://github.com/manzo8b/manzo-ai/actions/runs/44740016048), concluso con successo sulla revisione che corregge anche il comportamento in modalità riduzione movimento.
 
 Il successo CI non equivale a prova di accessibilità WCAG completa, efficacia pedagogica misurata o qualità estetica approvata dall'utente.
 
