@@ -421,6 +421,11 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  #content .ma-v2-hero h1{font-size:clamp(2.15rem,8.6vw,3.5rem)!important;max-width:18ch}
  #content .ma-v2-hero::after{background-size:26px 26px;opacity:.5}
 }
+@media(max-width:540px){
+ /* Override the earlier 1100px tablet rule: learning cards must be readable. */
+ .ma-v2-course-grid,.ma-v2-extra-grid{grid-template-columns:minmax(0,1fr)}
+ .ma-v2-course{min-height:350px}
+}
 @media(max-width:390px){
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-bar{gap:5px}
  body[data-ma-surface="landing"]:has(.ma-v2-hero) .manzo-mobile-mark{width:23px;height:23px}
