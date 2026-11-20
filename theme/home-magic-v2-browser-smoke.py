@@ -7,9 +7,14 @@ from playwright.sync_api import sync_playwright
 BASE="http://127.0.0.1:8765/manzo-ai"
 OUT=Path("home-magic-v2-qa")
 TITLE={
- "it":"L’IA ti ha risposto con sicurezza. Ma è vero?",
- "en":"AI answered confidently. But is it true?",
- "es":"La IA respondió con seguridad. ¿Pero es verdad?"
+ "it":"Chiedi meglio. Controlla sempre. Decidi tu.",
+ "en":"Ask better. Check everything. Decide for yourself.",
+ "es":"Pregunta mejor. Comprueba siempre. Decide tú."
+}
+LEAD={
+ "it":"Il percorso per usare l’IA con metodo: dalla domanda giusta alla prova che la risposta regge.",
+ "en":"A practical path to using AI with a method: from the right question to evidence that supports the answer.",
+ "es":"Un recorrido para usar la IA con método: de la pregunta adecuada a las pruebas que respaldan la respuesta."
 }
 LABEL={
  "it":"Conoscenza e prompt",
@@ -23,6 +28,14 @@ def test_page(page,loc,width):
  assert response and response.status==200,(loc,width,response.status if response else None)
  assert page.locator("html").get_attribute("lang").lower().startswith(loc)
  assert page.locator("h1").count()==1 and page.locator("h1").inner_text()==TITLE[loc]
+ assert page.locator(".ma-v2-hero .ma-v2-lead").inner_text()==LEAD[loc],(loc,"new promise subtitle differs")
+ assert TITLE[loc] in page.title(),(loc,"SEO page title not synchronized")
+ assert page.locator(".ma-v2-hero h1").evaluate("""el=>{
+   const cs=getComputedStyle(el),size=parseFloat(cs.fontSize),
+   tracking=parseFloat(cs.letterSpacing),leading=parseFloat(cs.lineHeight);
+   return Number.isFinite(tracking)&&tracking/size>=-.04&&leading/size>=1.095;
+ }"""),(loc,"hero title is still too compressed")
+
  assert page.locator("[data-ma-v2-section]").count()==5
  assert page.locator('.ma-v2-questions').count()==0,(loc,"duplicate questions still visible")
  assert page.locator('[data-ma-v2-section="hero"] .ma-v2-magic').count()==1
