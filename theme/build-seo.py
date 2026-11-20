@@ -114,6 +114,8 @@ def publish(site: Path, base: str) -> int:
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-centroni-city-course.py")), "--site", str(site)], check=True)
         # New full-language courses are generated together; missing translations fail the release.
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-build-safely-course.py")), "--site", str(site)], check=True)
+        # Follow-up course: agent autonomy, least privilege and Mission Control in IT/EN/ES.
+        subprocess.run([sys.executable, str(Path(__file__).with_name("publish-govern-autonomy-course.py")), "--site", str(site)], check=True)
     for locale in LOCALES:
         if not (site/locale/'index.html').is_file(): raise RuntimeError('Missing locale: '+locale)
         sitemap_page(site,base,locale)
