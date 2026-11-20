@@ -125,3 +125,48 @@
 @media print{
  .manzo-mobile-bar,.manzo-mobile-drawer,.manzo-mobile-scrim,.manzo-global-home{display:none!important}
 }
+
+/* MANZO AI · mobile drawer glass-pill companion */
+/* The desktop rail is hidden on small screens; use the same selection
+ * appearance for its drawer links, without translating clipped list items. */
+@media(max-width:760px){
+  .manzo-mobile-drawer .manzo-mobile-navlink{
+    border:1px solid transparent!important;
+    border-radius:999px!important;
+    padding:10px 13px!important;
+    background:transparent;
+    transition:background 200ms ease,border-color 200ms ease,
+      box-shadow 200ms ease,color 200ms ease;
+  }
+  .manzo-mobile-drawer .manzo-mobile-navlink[aria-current="page"]{
+    background:linear-gradient(120deg,rgba(255,255,255,.88),rgba(206,234,246,.8))!important;
+    border-color:rgba(112,165,194,.58)!important;
+    color:#154d67!important;
+    font-weight:750;
+    box-shadow:0 5px 16px rgba(40,93,132,.11),
+      inset 0 1px 0 rgba(255,255,255,.98);
+    -webkit-backdrop-filter:blur(9px) saturate(135%);
+    backdrop-filter:blur(9px) saturate(135%);
+  }
+  .manzo-mobile-drawer .manzo-mobile-navlink:is(:hover,:focus-visible){
+    background:linear-gradient(115deg,rgba(255,255,255,.91),rgba(216,239,251,.7))!important;
+    border-color:rgba(132,187,215,.72)!important;
+    color:#12546f!important;
+    box-shadow:0 7px 17px rgba(37,93,135,.12);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .manzo-mobile-drawer .manzo-mobile-navlink{transition:none!important}
+}
+@media(prefers-reduced-transparency:reduce){
+  .manzo-mobile-drawer .manzo-mobile-navlink:is([aria-current="page"],:hover,:focus-visible){
+    -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+    background:#e0eff6!important;
+  }
+}
+@media(prefers-contrast:more){
+  .manzo-mobile-drawer .manzo-mobile-navlink:is([aria-current="page"],:hover,:focus-visible){
+    color:#06394e!important;background:#e5f4ff!important;
+    border-color:#34617e!important;box-shadow:none!important;
+  }
+}
