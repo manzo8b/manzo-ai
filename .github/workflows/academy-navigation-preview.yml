@@ -1,0 +1,75 @@
+name: MANZO AI Academy IA — Prototype QA
+
+on:
+  push:
+    branches:
+      - design/academy-navigation-v1
+    paths:
+      - academy/catalog-v1.json
+      - theme/check-academy-catalog-v1.py
+      - theme/build-academy-catalog-prototype.py
+      - docs/ACADEMY_GLOSSARIO_UI_IT_EN_ES_V1.md
+      - docs/ACADEMY_WIREFRAME_CATALOGO_E_CORSO_V1.md
+      - docs/ACADEMY_LINK_LEZIONI_LABORATORI_V1.md
+      - .github/workflows/academy-navigation-preview.yml
+  pull_request:
+    paths:
+      - academy/catalog-v1.json
+      - theme/check-academy-catalog-v1.py
+      - theme/build-academy-catalog-prototype.py
+      - .github/workflows/academy-navigation-preview.yml
+
+permissions:
+  contents: read
+
+jobs:
+  catalog-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate taxonomy and URLs from canonical source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile theme/check-academy-catalog-v1.py theme/build-academy-catalog-prototype.py
+          python theme/check-academy-catalog-v1.py
+      - name: Build standalone catalog prototype
+        run: python theme/build-academy-catalog-prototype.py --output academy-preview/it/index.html
+      - name: Inspect prototype controls and privacy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          class Survey(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.cards=[];self.filters=0;self.noindex=False;self.lang=None
+              def handle_starttag(self,tag,attrs):
+                  a=dict(attrs)
+                  if tag=="html":self.lang=a.get("lang")
+                  if tag=="article" and "data-card" in a:self.cards.append(a["data-card"])
+                  if tag=="select" and "data-filter" in a:self.filters+=1
+                  if tag=="meta" and a.get("name")=="robots" and "noindex" in a.get("content",""):self.noindex=True
+          p=Path("academy-preview/it/index.html")
+          html=p.read_text(encoding="utf-8")
+          s=Survey();s.feed(html)
+          assert s.lang=="it"
+          assert len(s.cards)==15 and len(set(s.cards))==15
+          assert s.filters==4 and s.noindex
+          assert 'aria-live="polite"' in html and 'prefers-reduced-motion' in html
+          assert '8 corsi' not in html and '15 corsi' not in html
+          print("PASS catalog prototype: 15 unique cards, 4 filters, aria-live, reduced motion, noindex")
+          PY
+      - name: Upload HTML preview — no GitHub Pages deployment
+        uses: actions/upload-artifact@v4
+        with:
+          name: manzo-academy-catalog-ia-preview
+          path: academy-preview/
+          retention-days: 7
