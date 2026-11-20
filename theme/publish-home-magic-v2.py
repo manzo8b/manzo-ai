@@ -516,8 +516,8 @@ def publish(site,verify=False):
    # Confirm the Home contains the actual Academy component, not the retired mock.
    home_articles=CARD.findall(html)
    original_articles=academy_card_markup(site,locale)
-    if len(home_articles)!=6 or any('class="ma-v2-course' in card for card in home_articles):
-     raise RuntimeError("Home did not use six native Academy components "+locale)
+   if len(home_articles)!=6 or any('class="ma-v2-course' in card for card in home_articles):
+    raise RuntimeError("Home did not use six native Academy components "+locale)
    for i,(home_card,academy_card) in enumerate(zip(home_articles,original_articles),1):
     expected=re.sub(r'<article\b',
      '<article data-ma-v2-card="'+str(i)+'"',academy_card,count=1,flags=re.I)
