@@ -29,6 +29,8 @@ CATALOGUE={
        f"ai-teaching-lab/{locale}/narrative.json",
        f"ai-teaching-lab/{locale}/glossary.json",
        f"ai-teaching-lab/{locale}/assessment-bank.json",
+       f"ai-teaching-lab/{locale}/scenarios.json",
+       f"ai-teaching-lab/{locale}/presentation.json",
        *[f"ai-teaching-lab/{locale}/module-{i:02}.md" for i in range(1,6)],
    ] for locale in LOCALES},
    "minimum_bytes":1500,
