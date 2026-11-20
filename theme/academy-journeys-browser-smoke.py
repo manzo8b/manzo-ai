@@ -37,6 +37,7 @@ def test(page,lang,route,width):
   for link in links.all():
    url=link.get_attribute("href")
    assert url and url.startswith(f"/manzo-ai/{lang}/")
+   assert f"?journey={i}" in url,(lang,width,"selected path context missing",url)
    assert link.is_visible()
  assert page.evaluate("document.documentElement.scrollWidth <= innerWidth + 3"),f"Overflow {lang}/{width}"
  options.first.click()
@@ -52,6 +53,31 @@ def test(page,lang,route,width):
  assert page.evaluate("document.body.classList.contains(\"ma-print-journey-mode\")")
  page.evaluate("window.dispatchEvent(new Event(\"afterprint\"))")
  assert not page.evaluate("document.body.classList.contains(\"ma-print-journey-mode\")")
+ # Follow a real learning path into a lesson, its next lesson, and back.
+ # All three routes are exercised across the 3 locales × 2 viewport sizes.
+ journey=(["it","en","es"].index(lang)+(1 if width<500 else 0))%3
+ options.nth(journey).click()
+ first_url=panels.nth(journey).locator("ol a.ma-journey-step-title").first.get_attribute("href")
+ student=page.context.new_page()
+ student.set_viewport_size({"width":width,"height":844 if width<500 else 900})
+ student.goto("http://127.0.0.1:8765"+first_url,wait_until="load")
+ foot=student.locator("[data-ma-journey-continuity]:visible")
+ assert foot.count()==1,(lang,width,"guided path footer is not visible")
+ assert foot.get_attribute("data-ma-journey-continuity")==str(journey)
+ assert foot.locator(".ma-journey-follow-previous").count()==0
+ next_url=foot.locator(".ma-journey-follow-next").get_attribute("href")
+ assert f"?journey={journey}" in next_url,(lang,width,next_url)
+ student.goto("http://127.0.0.1:8765"+next_url,wait_until="load")
+ foot=student.locator("[data-ma-journey-continuity]:visible")
+ assert foot.count()==1 and foot.locator(".ma-journey-follow-previous").count()==1
+ return_url=foot.locator(".ma-journey-follow-back").get_attribute("href")
+ student.goto("http://127.0.0.1:8765"+return_url,wait_until="load")
+ assert student.locator(f'[data-ma-journey-choice="{journey}"]').get_attribute("aria-pressed")=="true"
+ assert student.locator(f'[data-ma-journey-panel="{journey}"]').is_visible()
+ # A direct course visit must never display optional guided continuation
+ student.goto("http://127.0.0.1:8765"+first_url.split("?")[0],wait_until="load")
+ assert student.locator("[data-ma-journey-continuity]:visible").count()==0
+ student.close()
  assert not errors,errors
  DEST.mkdir(parents=True,exist_ok=True)
  page.screenshot(path=str(DEST/f"academy-journeys-{lang}-{width}.png"),full_page=True)
