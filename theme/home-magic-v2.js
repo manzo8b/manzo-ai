@@ -22,10 +22,8 @@
     const observer=new IntersectionObserver(entries=>{
       if(!entries[0]?.isIntersecting){
         root.dataset.offscreen="1";
-        root.style.setProperty('--ma-box-running','paused');
       } else {
         delete root.dataset.offscreen;
-        root.style.removeProperty('--ma-box-running');
       }
     },{threshold:0.05});
     observer.observe(root);
