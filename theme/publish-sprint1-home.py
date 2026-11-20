@@ -230,7 +230,7 @@ def check(site,cssver,jsver):
    raise RuntimeError("Course covers altered "+loc)
   if len(re.findall(r'data-ma-s1-step="[1-4]"',html))!=4:
    raise RuntimeError("Incomplete 4 step educational method "+loc)
-  if d["hero"] not in html or d["lead"] not in html:
+  if e(d["hero"]) not in html or e(d["lead"]) not in html:
    raise RuntimeError("New intro absent "+loc)
   for dest in links(site,loc,html):
    if f'href="{e(dest)}"' not in html:raise RuntimeError("Learning destination missing "+dest)
