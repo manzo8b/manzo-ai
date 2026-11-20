@@ -18,6 +18,11 @@ on:
       - editorial/learning/hallucinations/**
       - editorial/learning/ai-teaching-lab/**
       - editorial/learning/prompt-vs-skill/**
+      - theme/prompt_skill_i18n.py
+      - theme/prompt-skill-translated.js
+      - theme/prompt-skill-i18n.css
+      - theme/publish-prompt-skill-translations.py
+      - theme/publish-prompt-skill-translated-home.py
       - editorial/learning/mental-models-reliability/**
       - editorial/learning/centroni-city-builder/**
       - editorial/learning/build-safely/**
@@ -465,6 +470,9 @@ jobs:
           # Prompt vs Skill diagrams, including the visible four-child family reasoning map.
           python3 -m py_compile theme/prompt_skill_visuals.py theme/publish-prompt-skill-course.py
           python3 theme/publish-prompt-skill-course.py --site _site --verify-only
+          python3 -m py_compile theme/prompt_skill_i18n.py theme/publish-prompt-skill-translations.py theme/publish-prompt-skill-translated-home.py
+          python3 theme/publish-prompt-skill-translations.py --site _site --verify-only
+          node --check theme/prompt-skill-translated.js
           python3 -m py_compile theme/publish-reliability-course.py
           python3 theme/publish-reliability-course.py --site _site --verify-only
           python3 -m py_compile theme/publish-centroni-city-course.py
@@ -519,8 +527,13 @@ jobs:
           python3 theme/publish-prompt-skill-home.py --site _site --verify-only
           python3 theme/publish-build-safely-home.py --site _site
           python3 theme/publish-build-safely-home.py --site _site --verify-only
+          python3 theme/publish-prompt-skill-translated-home.py --site _site
+          python3 theme/publish-prompt-skill-translated-home.py --site _site --verify-only
           test -s _site/assets/prompt-skill-home-card.css
           grep -q 'data-ma-home-course="prompt-vs-skill"' _site/it/index.html
+          for lang in en es; do
+            grep -q 'data-ma-home-course="prompt-vs-skill"' "_site/$lang/index.html"
+          done
           grep -q 'data-ma-home-course="modelli-mentali-affidabilita"' _site/it/index.html
           grep -q 'data-ma-home-course="ai-product-builder-centroni-city"' _site/it/index.html
           test -s _site/assets/centroni-city-course.css
