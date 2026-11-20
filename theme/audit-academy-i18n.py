@@ -64,6 +64,16 @@ CATALOGUE={
    "files":{locale:[f"governare-autonomia/{locale}.md"] for locale in LOCALES},
    "minimum_bytes":19000,
  },
+ "dynamic-compliance":{
+   "display":"Dynamic Compliance and Continuous Governance",
+   "files":{locale:[f"compliance-dinamica-governance-continua/{locale}.md"] for locale in LOCALES},
+   "minimum_bytes":29000,
+ },
+ "augmented-intelligence":{
+   "display":"Augmented, Not Replaced — AI Literacy and Critical Thinking",
+   "files":{locale:[f"intelligenza-aumentata-non-sostituita/{locale}.md"] for locale in LOCALES},
+   "minimum_bytes":29000,
+ },
 }
 INTERACTIONS={
  "hallucinations":{loc:[f"hallucinations/{loc}.json",f"hallucinations/coding-{loc}.json"] for loc in LOCALES},
