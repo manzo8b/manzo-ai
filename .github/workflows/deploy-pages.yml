@@ -52,6 +52,8 @@ on:
       - theme/publish-build-safely-course.py
       - theme/publish-build-safely-home.py
       - theme/audit-academy-i18n.py
+      - theme/check-sprint0-consistency.py
+      - README.md
       - theme/ACADEMY_I18N_STANDARD.md
       - theme/publish-centroni-city-course.py
       - theme/centroni-city-course.css
@@ -614,6 +616,9 @@ jobs:
             grep -q 'data-ma-home-featured="v1"' "_site/$lang/index.html"
             ! grep -q 'data-ma-home-scene="1"' "_site/$lang/index.html"
           done
+          # Sprint 0: the final trilingual home and editorial release claims must match the source inventory.
+          python3 -m py_compile theme/check-sprint0-consistency.py
+          python3 theme/check-sprint0-consistency.py --site _site
           test -s _site/it/chi-siamo/index.html
           test -s _site/en/about/index.html
           test -s _site/es/quienes-somos/index.html
