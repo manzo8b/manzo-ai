@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """MANZO AI Home v2 — QUESTION > EVIDENCE > DECISION, IT/EN/ES.
 
-DRAFT / BRANCH-ONLY until owner approves. No published URLs, sidebar, footer,
+DRAFT / BRANCH-ONLY until owner approves. No public deployment, sidebar, footer,
 root language gateway, its styling or switcher behaviour are modified.
 Reads exact destinations and titles from existing Academy and the 7 real Home
 course cards; appends a minimal, unstyled-by-default index to each Academy
@@ -13,7 +13,7 @@ Usage:
 
 This script must run AFTER all existing Home card publishers and SEO polish
 in the preview build. It replaces the main content inside <main id="content">
-but preserves the original main wrapper, sidebar, topbar, footer and root page.
+and preserves the main wrapper, sidebar, language controls, footer and root page.
 """
 from __future__ import annotations
 
@@ -46,15 +46,8 @@ PAGES={
   "magic_alt":"La scatola sembra una magia. Aprirla significa vedere il metodo: domanda, verifica e decisione.",
   "magic_note":"La magia incuriosisce. Il metodo ti rende autonomo.",
   "pause":"Metti in pausa l’animazione","play":"Riprendi l’animazione",
+  "pause_short":"Pausa","play_short":"Riprendi","lab_label":"Conoscenza e prompt",
   "magic_steps":["LA DOMANDA","IL METODO","LA PROVA"],
-  "questions_title":"Da dove vuoi partire?",
-  "questions_intro":"Una domanda può cambiare il modo in cui usi l'IA. Scegli quella che ti riguarda.",
-  "questions":[
-   ("Come ragiona davvero un’IA?","Capisci cosa fa un modello"),
-   ("Perché la stessa domanda dà risposte diverse?","Scopri il ruolo delle istruzioni"),
-   ("Come riconosco un errore che sembra perfetto?","Impara a verificare le fonti"),
-   ("Posso fidarmi del codice generato dall’IA?","Controlla prima di usare"),
-  ],
   "featured":"Percorsi in evidenza",
   "featured_lead":"Sei ingressi, un obiettivo: passare dalla risposta plausibile a una scelta consapevole.",
   "academy":"Esplora tutta l’Academy",
@@ -80,7 +73,7 @@ PAGES={
   "professional_text":"Dati, sicurezza e supervisione umana: costruisci flussi che puoi controllare.",
   "professional_cta":"Impara a costruire in sicurezza",
   "challenge_eyebrow":"IL PENSIERO CRITICO SI ALLENA",
-  "challenge":"Sei sicuro di saper distinguere un’intuizione da una prova?",
+  "challenge":"Sai distinguere un’intuizione da una prova?",
   "challenge_text":"Metti alla prova le tue certezze. Non serve conoscere tutte le risposte: serve sapere cosa controllare.",
   "challenge_cta":"Accetta la sfida",
   "closing":"Un progetto indipendente, costruito sulle fonti",
@@ -101,15 +94,8 @@ PAGES={
   "magic_alt":"The box looks like magic. Opening it reveals a method: question, verification and decision.",
   "magic_note":"Magic sparks curiosity. Method builds independence.",
   "pause":"Pause the animation","play":"Resume the animation",
+  "pause_short":"Pause","play_short":"Resume","lab_label":"Knowledge & Prompt Lab",
   "magic_steps":["THE QUESTION","THE METHOD","THE EVIDENCE"],
-  "questions_title":"Where would you like to start?",
-  "questions_intro":"One good question can change how you use AI. Choose the one that matters to you.",
-  "questions":[
-   ("How does AI actually reason?","Understand what a model does"),
-   ("Why does the same question produce different answers?","Explore the role of prompts"),
-   ("How can an error look so convincing?","Learn to verify sources"),
-   ("Can I trust AI-generated code?","Check before you ship"),
-  ],
   "featured":"Featured learning paths",
   "featured_lead":"Six entry points, one goal: move beyond plausible answers towards informed decisions.",
   "academy":"Explore the full Academy",
@@ -150,21 +136,14 @@ PAGES={
   "desc":"Aprende a formular preguntas, comprobar las respuestas de la IA y decidir con criterio mediante itinerarios prácticos de MANZO AI.",
   "eyebrow":"MANZO AI / APRENDE A PENSAR, NO SOLO A PREGUNTAR",
   "h1":"La IA respondió con seguridad. ¿Pero es verdad?",
-  "lead":"Aprende a formular buenas preguntas, comprobar las respuestas y decidir por ti mismo.",
+  "lead":"Aprende a formular buenas preguntas, comprobar las respuestas y decidir por tu cuenta.",
   "primary":"Empieza por lo básico",
   "secondary":"Prueba un reto de pensamiento crítico",
   "magic_alt":"La caja parece magia. Al abrirse muestra un método: pregunta, comprobación y decisión.",
   "magic_note":"La magia despierta curiosidad. El método te da autonomía.",
   "pause":"Pausar la animación","play":"Reanudar la animación",
+  "pause_short":"Pausar","play_short":"Reanudar","lab_label":"Conocimiento y prompts",
   "magic_steps":["LA PREGUNTA","EL MÉTODO","LA PRUEBA"],
-  "questions_title":"¿Por dónde quieres empezar?",
-  "questions_intro":"Una buena pregunta puede cambiar cómo utilizas la IA. Elige la que te resulte cercana.",
-  "questions":[
-   ("¿Cómo razona realmente la IA?","Comprende qué hace un modelo"),
-   ("¿Por qué la misma pregunta produce respuestas diferentes?","Explora el papel de los prompts"),
-   ("¿Cómo reconozco un error que parece perfecto?","Aprende a comprobar fuentes"),
-   ("¿Puedo confiar en el código generado por IA?","Comprueba antes de publicar"),
-  ],
   "featured":"Itinerarios destacados",
   "featured_lead":"Seis puertas de entrada, un objetivo: pasar de respuestas plausibles a decisiones informadas.",
   "academy":"Explora toda la Academia",
@@ -212,7 +191,7 @@ END_HEAD=re.compile(r'</head\s*>',re.I)
 SECTION_CHALLENGE=re.compile(r'<section\b[^>]*class=["\'][^"\']*\bchallenge-home\b[^"\']*["\'][^>]*>.*?</section\s*>',re.I|re.S)
 BODY_LOCALE=re.compile(r'<html\b[^>]*lang=["\']([^"\']+)["\']',re.I)
 SECTION_TAG='<section data-ma-v2-section='
-COLORS=["blue","midnight","teal","amber","violet","green"]
+COLORS=["blue","midnight","teal","amber","violet","rose"]
 ICONS=[
 '<path d="M12 28h17m8 0h13M31 9v12m0 14v11"/><circle cx="31" cy="28" r="9"/><circle cx="31" cy="28" r="2" fill="currentColor" stroke="none"/>',
 '<path d="m23 16-11 13 11 13m17-26 11 13-11 13M36 10l-10 39"/><path d="m37 50 5 5 9-10"/>',
@@ -316,12 +295,13 @@ def magic_box(loc):
          '<div class="ma-v2-magic-steps">'+''.join('<span>'+e(t)+'</span>' for t in d['magic_steps'])+'</div>'
          '<figcaption>'+e(d['magic_note'])+'</figcaption>'
          '<button type="button" hidden class="ma-v2-motion-toggle" data-ma-v2-motion-control '
-         'aria-pressed="false" data-pause="'+e(d['pause'])+'" data-play="'+e(d['play'])+'">'
-         +e(d['pause'])+'</button></figure>')
+         'aria-pressed="false" aria-label="'+e(d['pause'])+'" '
+         'data-pause="'+e(d['pause'])+'" data-play="'+e(d['play'])+'" '
+         'data-pause-short="'+e(d['pause_short'])+'" data-play-short="'+e(d['play_short'])+'">'
+         +e(d['pause_short'])+'</button></figure>')
 
 def render(loc,cards,brain):
  d=PAGES[loc]
- questions=[cards[2][0],cards[3][0],cards[0][0],cards[1][0]]
  hero=(
  '<section data-ma-v2-section="hero" class="ma-v2-hero" aria-labelledby="ma-v2-heading">'
  '<div class="ma-v2-hero-copy"><p class="ma-v2-kicker">'+e(d["eyebrow"])+'</p>'
@@ -331,21 +311,6 @@ def render(loc,cards,brain):
  '<a class="ma-v2-primary" href="'+e(cards[2][0])+'">'+e(d["primary"])+' <span aria-hidden="true">↗</span></a>'
  '<a class="ma-v2-secondary" href="'+e(brain)+'">'+e(d["secondary"])+' <span aria-hidden="true">↗</span></a>'
  '</div></div>'+magic_box(loc)+'</section>'
- )
- question_cards=''.join(
-  f'<a class="ma-v2-question" href="{e(href)}" data-ma-v2-q="{i+1}">'
-  f'<span class="ma-v2-question-number">0{i+1}</span>'
-  f'<strong>{e(q)}</strong>'
-  f'<span class="ma-v2-q-sub">{e(summary)}</span>'
-  '<span aria-hidden="true" class="ma-v2-question-arrow">↗</span></a>'
-  for i,((q,summary),href) in enumerate(zip(d["questions"],questions))
- )
- question_section=(
- '<section data-ma-v2-section="questions" class="ma-v2-questions" aria-labelledby="ma-v2-questions-title">'
- '<div class="ma-v2-section-head"><span class="ma-v2-section-id">01 / '+e(d["questions_title"])+'</span>'
- '<h2 id="ma-v2-questions-title">'+e(d["questions_title"])+'</h2>'
- '<p>'+e(d["questions_intro"])+'</p></div>'
- '<div class="ma-v2-question-grid">'+question_cards+'</div></section>'
  )
  cards_html=[]
  for i,(href,title) in enumerate(cards):
@@ -367,7 +332,7 @@ def render(loc,cards,brain):
   )
  featured=(
  '<section data-ma-v2-section="courses" class="ma-v2-courses" aria-labelledby="ma-v2-courses-title">'
- '<div class="ma-v2-section-head"><span class="ma-v2-section-id">02 / ACADEMY</span>'
+ '<div class="ma-v2-section-head"><span class="ma-v2-section-id">01 / ACADEMY</span>'
  '<h2 id="ma-v2-courses-title">'+e(d["featured"])+'</h2><p>'+e(d["featured_lead"])+'</p></div>'
  '<div class="ma-v2-course-grid">'+''.join(cards_html)+'</div>'
  '<a class="ma-v2-academy-link" href="'+e(academy_path(loc))+'">'+e(d["academy"])+' <span aria-hidden="true">↗</span></a></section>'
@@ -377,7 +342,7 @@ def render(loc,cards,brain):
  filepaths=[(teacher,"Teaching Lab"),(professional,"Professional safety")]
  focus=(
  '<section data-ma-v2-section="audiences" class="ma-v2-focus" aria-labelledby="ma-v2-focus-title">'
- '<div class="ma-v2-section-head"><span class="ma-v2-section-id">03 / MANZO AI</span>'
+ '<div class="ma-v2-section-head"><span class="ma-v2-section-id">02 / MANZO AI</span>'
  '<h2 id="ma-v2-focus-title">'+e(d["focus_title"])+'</h2><p>'+e(d["focus_intro"])+'</p></div>'
  '<div class="ma-v2-focus-grid">'
  '<a class="ma-v2-focus-card ma-v2-focus-teacher" href="'+e(teacher)+'">'
@@ -406,7 +371,7 @@ def render(loc,cards,brain):
  '<a href="'+e(link(loc,ABOUT[loc]))+'">'+e(d["about"])+' ↗</a>'
  '<a href="'+e(academy_path(loc))+'">'+e(d["academy"])+' ↗</a></div></section>'
  )
- return hero+question_section+featured+focus+challenge_section+closing
+ return hero+featured+focus+challenge_section+closing
 
 def add_academy_index(site,loc,extras,css_hash):
  target=file_for(site,academy_path(loc))
@@ -458,7 +423,7 @@ def publish(site,verify=False):
   html=path.read_text(encoding="utf-8")
   if verify:
    if html.count(MARKER)!=1:raise RuntimeError("Missing preview marker "+locale)
-   if html.count(SECTION_TAG)!=6:raise RuntimeError("Six-section contract changed "+locale)
+   if html.count(SECTION_TAG)!=5:raise RuntimeError("Five-section contract changed "+locale)
    if len(re.findall(r'<h1\b',html,re.I))!=1:raise RuntimeError("Home H1 count changed "+locale)
    if len(re.findall(r'data-ma-v2-card="[1-6]"',html))!=6:raise RuntimeError("Six featured cards missing "+locale)
    for file in (CSS.name,JS.name):
@@ -488,6 +453,10 @@ def publish(site,verify=False):
    raise RuntimeError("Site's sidebar/topbar layout changed; refusing to replace "+locale)
   if '<footer class="site-footer">' not in after:
    raise RuntimeError("The original footer was not preserved "+locale)
+  # Only the generic topbar descriptor changes per locale; language UI is immutable.
+  original_label='<span class="top-label">Knowledge & Prompt Lab</span>'
+  if before.count(original_label)!=1:raise RuntimeError("Unexpected topbar descriptor "+locale)
+  before=before.replace(original_label,'<span class="top-label">'+e(PAGES[locale]["lab_label"])+'</span>',1)
   inner=render(locale,canonical,brain)
   new=before+inner+after
   new=patch_meta(new,PAGES[locale])
@@ -499,7 +468,7 @@ def publish(site,verify=False):
   )
   new,num=END_HEAD.subn(assets+'</head>',new,count=1)
   if num!=1:raise RuntimeError("Missing head close "+locale)
-  # Verify wrapper text (including the language UI) is bit-for-bit unchanged.
+  # Sidebar, language controls and footer remain untouched.
   if '<aside class="rail" id="rail">' not in new or '<footer class="site-footer">' not in new:
    raise RuntimeError("Lost site chrome")
   path.write_text(new,encoding="utf-8")
@@ -514,7 +483,7 @@ def publish(site,verify=False):
   for source in (CSS,JS):
    if (site/"assets"/source.name).read_bytes()!=source.read_bytes():
     raise RuntimeError("Staged asset does not match tested source "+source.name)
-  print("PASS Home Magic preview: IT/EN/ES, six sections, six canonical learning cards, 7 more discoverable from Academy, six live routes, original language menu/sidebar/footer untouched.")
+  print("PASS Home Magic preview: IT/EN/ES, five sections, six canonical learning cards, 7 more discoverable from Academy, original language menu/sidebar/footer untouched.")
 
 if __name__=="__main__":
  parser=argparse.ArgumentParser()
