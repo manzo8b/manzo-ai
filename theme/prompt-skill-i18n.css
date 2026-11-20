@@ -1,0 +1,23 @@
+/* Prompt vs Skill: complete EN/ES Academy course, same visual system as IT. */
+.ps-i18n-languages{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 27px}
+.ps-i18n-languages a{display:inline-flex;align-items:center;justify-content:center;min-width:47px;min-height:34px;padding:7px 12px;text-decoration:none;background:#fff;color:#264e6c;border:1px solid #d4e4f4;border-radius:10px;font-weight:790;font-size:.84rem;box-shadow:0 3px 8px #244c7a10}
+.ps-i18n-languages a[aria-current="page"]{background:#205cbe;border-color:#205cbe;color:#fff}
+.ps-i18n-languages a:focus-visible{outline:3px solid #f8a66f;outline-offset:3px}
+.ps-viz .ps-i18n-skill-items{margin:19px 0 22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ps-i18n-skill-item{background:#f7fbff;border:1px solid #cdddea;border-radius:13px;padding:15px 17px;display:flex;flex-direction:column;gap:9px;min-width:0;min-height:124px}
+.ps-i18n-skill-item>span{color:#2759ac;font-size:.74rem;font-weight:830;letter-spacing:.1em}
+.ps-i18n-skill-item strong{font-size:1.02rem;line-height:1.25;color:#173d6c;overflow-wrap:anywhere}
+.ps-i18n-skill-item small{font-size:.83rem;line-height:1.5;color:#506983}
+.ps-viz-decision-row .ps-viz-decision-answer{min-width:0}
+.ps-family-map .ps-family-revision{display:block;line-height:1.65}
+.ps-family-map .ps-family-alert>div{min-width:0}
+.ps-family-outcome{line-height:1.6}
+.ps-viz-footnote{line-height:1.65}
+body[data-ma-prompt-skill-i18n="v1"] h1,body[data-ma-prompt-skill-i18n="v1"] h2,body[data-ma-prompt-skill-i18n="v1"] h3{overflow-wrap:break-word}
+body[data-ma-prompt-skill-i18n="v1"] .ps-reading-copy pre{white-space:pre-wrap;overflow-wrap:anywhere}
+body[data-ma-prompt-skill-i18n="v1"] .ps-reading-copy table{display:block;overflow-x:auto;max-width:100%}
+body[data-ma-prompt-skill-i18n="v1"] .ps-family-domains{grid-template-columns:repeat(5,minmax(0,1fr))}
+body[data-ma-prompt-skill-i18n="v1"] .ps-crossboard{max-width:100%;margin-inline:auto}
+@media(max-width:880px){.ps-viz .ps-i18n-skill-items{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.ps-viz .ps-i18n-skill-items{grid-template-columns:1fr}.ps-i18n-skill-item{min-height:0}.ps-i18n-languages{margin-bottom:19px}body[data-ma-prompt-skill-i18n="v1"] .ps-family-domains{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.ps-i18n-languages *,body[data-ma-prompt-skill-i18n="v1"] *{scroll-behavior:auto!important}}
