@@ -141,7 +141,8 @@ def validate(site: Path | None = None) -> None:
         ensure(len(units) == len(core["modules"]) == 6,
                f"{loc}: one observable competency per core unit")
         for key in ("expand", "ability", "case", "quiz", "openCases", "openQuiz", "note"):
-            words(mapping.get(key), f"{loc}: missing learner-facing evidence label {key}")
+            ensure(isinstance(mapping.get(key), str) and bool(mapping[key].strip()),
+                   f"{loc}: missing learner-facing evidence label {key}")
         links = []
         for i, entry in enumerate(units, 1):
             words(entry.get("outcome"), f"{loc}: unit {i} missing observable skill")
