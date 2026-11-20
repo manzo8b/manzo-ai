@@ -1,0 +1,619 @@
+name: MANZO AI Home Magic V2 — Trilingual Staging QA
+on:
+  push:
+    branches:
+      - preview/home-magic-trilingual-v2
+    paths:
+      - theme/publish-home-magic-v2.py
+      - theme/home-magic-v2.css
+      - theme/home-magic-v2.js
+      - theme/home-magic-v2-browser-smoke.py
+      - .github/workflows/home-magic-v2-preview.yml
+permissions:
+  contents: read
+concurrency:
+  group: manzo-ai-home-v2-preview
+  cancel-in-progress: true
+jobs:
+  preview:
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Keep original media commit timestamp for VideoObject.uploadDate
+      - name: Validate zero-cost private Mission Copilot prototype
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check product/mission-copilot/worker.mjs
+          node --check product/mission-copilot/worker.test.mjs
+          node --check product/mission-copilot/zero-euro-preflight.mjs
+          node --check product/mission-copilot/zero-euro-preflight.test.mjs
+          node --test product/mission-copilot/worker.test.mjs
+          node --test product/mission-copilot/zero-euro-preflight.test.mjs
+          node product/mission-copilot/zero-euro-preflight.mjs > /tmp/mission-copilot-preflight.json
+          grep -q '"status": "BLOCKED_NOT_CONNECTED"' /tmp/mission-copilot-preflight.json
+          grep -q '"configSafe": true' /tmp/mission-copilot-preflight.json
+          # P1 is only a local simulation behind ?copilot=preview.
+          # Never add Cloudflare credentials or an endpoint to GitHub Pages.
+          node --check tools/ai-teaching-launchpad/mission-adapter.mjs
+          node --check tools/ai-teaching-launchpad/copilot-preview.mjs
+          node --test tools/ai-teaching-launchpad/mission-adapter.test.mjs
+          # All three activation gates remain OFF without explicit owner approval.
+          grep -q 'COPILOT_ENABLED = "false"' product/mission-copilot/wrangler.toml
+          grep -q 'FREE_PLAN_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
+          grep -q 'MODEL_FREE_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
+          grep -q 'DATA_PROTECTION_CONFIRMED = "false"' product/mission-copilot/wrangler.toml
+          grep -q 'BETA_SYNTHETIC_ONLY = "true"' product/mission-copilot/wrangler.toml
+          test -s product/mission-copilot/beta-scenarios.mjs
+          node --check product/mission-copilot/beta-scenarios.mjs
+          grep -q 'workers_dev = false' product/mission-copilot/wrangler.toml
+          grep -q '^\[observability\]' product/mission-copilot/wrangler.toml
+          grep -q '^\[observability.logs\]' product/mission-copilot/wrangler.toml
+          grep -q '^invocation_logs = false' product/mission-copilot/wrangler.toml
+          grep -q 'name = "GLOBAL_QUOTA"' product/mission-copilot/wrangler.toml
+          grep -q 'class_name = "CopilotQuota"' product/mission-copilot/wrangler.toml
+          grep -q 'new_sqlite_classes = \["CopilotQuota"\]' product/mission-copilot/wrangler.toml
+          if grep -Eq '^\s*(ACCESS_AUD|QUOTA_HASH_SALT|PREVIEW_ACCESS_TOKEN)\s*=' product/mission-copilot/wrangler.toml; then
+            echo "::error::Never commit Access keys or identity secrets"
+            exit 1
+          fi
+          if grep -Eq '^[[:space:]]*(route|routes)[[:space:]]*=' product/mission-copilot/wrangler.toml; then
+            echo "::error::Private Copilot cannot expose a Cloudflare route"
+            exit 1
+          fi
+      - name: Check publication package
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f site-v0.7.zip ]; then
+            archive=site-v0.7.zip
+          elif [ -f site-v0.6.zip ]; then
+            archive=site-v0.6.zip
+          elif [ -f site-v0.5.zip ]; then
+            archive=site-v0.5.zip
+          elif [ -f site-v0.4.zip ]; then
+            archive=site-v0.4.zip
+          elif [ -f site-v0.3.zip ]; then
+            archive=site-v0.3.zip
+          elif [ -f site-v0.2.zip ]; then
+            archive=site-v0.2.zip
+          elif [ -f site-v0.1.zip ]; then
+            archive=site-v0.1.zip
+          else
+            echo "::error::No MANZO AI release archive found."
+            exit 1
+          fi
+          echo "SITE_ARCHIVE=$archive" >> "$GITHUB_ENV"
+          unzip -t "$archive" >/dev/null
+      - name: Check video thumbnail availability without external dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -s editorial/video/prompt-engineering/Prompt_Engineering.mp4 ] && ! command -v ffmpeg >/dev/null 2>&1; then
+            # Thumbnail extraction is optional; the video page uses a branded poster
+            # fallback. Network-dependent apt installs must not block educational releases.
+            echo "::warning::FFmpeg unavailable: retaining playable video with branded poster fallback."
+          fi
+      - name: Install Markdown renderer for the open teacher course
+        run: python3 -m pip install --disable-pip-version-check markdown==3.10
+      - name: Extract and inspect static site
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          unzip -q "$SITE_ARCHIVE" -d _site
+          # Visual-only patch over the established v0.7 package.
+          # The archive remains the authoritative source for all 82 pages and assets.
+          if [ "$SITE_ARCHIVE" = "site-v0.7.zip" ]; then
+            test -s theme/learning-colors.css
+            test -s theme/check-theme.py
+            printf '\n' >> _site/style.css
+            cat theme/learning-colors.css >> _site/style.css
+            python3 theme/check-theme.py --site _site --archive "$SITE_ARCHIVE" --theme theme/learning-colors.css
+            mkdir -p _site/assets
+            cp theme/manzo-mark.svg _site/assets/manzo-mark.svg
+            cat theme/footer-signature.css >> _site/style.css
+            python3 theme/inject-signature.py --site _site
+            python3 theme/inject-signature.py --site _site --verify-only
+          fi
+          if [ "$SITE_ARCHIVE" = "site-v0.2.zip" ]; then
+            for locale_path in it/academy es/academia en/academy it/risorse es/recursos en/resources it/video-e-slide es/videos-y-diapositivas en/videos-and-slides; do
+              test -s "_site/$locale_path/index.html"
+            done
+          fi
+          if [ "$SITE_ARCHIVE" = "site-v0.3.zip" ]; then
+            for new_page in it/prompt-mastery/che-cos-e-un-prompt es/prompt-mastery/que-es-un-prompt en/prompt-mastery/what-is-a-prompt; do
+              test -s "_site/$new_page/index.html"
+            done
+            for lang in it es en; do
+              test -s "_site/$lang/index.html"
+            done
+          fi
+          if [ "$SITE_ARCHIVE" = "site-v0.4.zip" ]; then
+            for slide_page in it/slides/che-cos-e-davvero-l-intelligenza-artificiale es/diapositivas/que-es-la-inteligencia-artificial en/slides/what-is-artificial-intelligence; do
+              test -s "_site/$slide_page/index.html"
+            done
+            for n in 01-copertina 02-definizione-ai 03-machine-learning 04-ai-generativa 05-addestramento-e-risposta 06-vita-e-lavoro 07-esercizio 08-conclusioni; do
+              test -s "_site/assets/slides/m01-it/$n.webp"
+            done
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pdf
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pptx
+          fi
+          if [ "$SITE_ARCHIVE" = "site-v0.5.zip" ]; then
+            for course in \
+              it/impara/come-funziona-un-modello-linguistico \
+              it/impara/come-costruire-un-prompt-efficace \
+              it/impara/come-verificare-le-risposte-ai \
+              it/impara/progettare-un-workflow-ai \
+              it/impara/ai-storia-lavoro-societa \
+              es/aprende/como-funciona-un-modelo-de-lenguaje \
+              es/aprende/como-construir-un-prompt-eficaz \
+              es/aprende/como-verificar-las-respuestas-de-ia \
+              es/aprende/disenar-un-flujo-de-trabajo-con-ia \
+              es/aprende/ia-historia-trabajo-sociedad \
+              en/learn/how-a-language-model-works \
+              en/learn/how-to-build-an-effective-prompt \
+              en/learn/how-to-verify-ai-answers \
+              en/learn/designing-an-ai-workflow \
+              en/learn/ai-history-work-and-society; do
+              test -s "_site/$course/index.html"
+              grep -q 'answer-reveal' "_site/$course/index.html"
+            done
+            for slide_page in it/slides/che-cos-e-davvero-l-intelligenza-artificiale es/diapositivas/que-es-la-inteligencia-artificial en/slides/what-is-artificial-intelligence; do
+              test -s "_site/$slide_page/index.html"
+            done
+            for n in 01-copertina 02-definizione-ai 03-machine-learning 04-ai-generativa 05-addestramento-e-risposta 06-vita-e-lavoro 07-esercizio 08-conclusioni; do
+              test -s "_site/assets/slides/m01-it/$n.webp"
+            done
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pdf
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pptx
+            test "$(find _site -name index.html | wc -l)" -eq 52
+          fi
+          if [ "$SITE_ARCHIVE" = "site-v0.6.zip" ]; then
+            for path in it/pensiero-critico es/pensamiento-critico en/critical-thinking; do
+              test -s "_site/$path/index.html"
+            done
+            for path in \
+              it/pensiero-critico/cruciverba-affidabilita \
+              it/pensiero-critico/cruciverba-fonti \
+              it/pensiero-critico/cruciverba-governance \
+              es/pensamiento-critico/crucigrama-fiabilidad \
+              es/pensamiento-critico/crucigrama-fuentes \
+              es/pensamiento-critico/crucigrama-gobernanza \
+              en/critical-thinking/crossword-reliability \
+              en/critical-thinking/crossword-sources \
+              en/critical-thinking/crossword-governance; do
+              test -s "_site/$path/index.html"
+              grep -q 'id="cross-data"' "_site/$path/index.html"
+            done
+            for path in \
+              it/pensiero-critico/notizie/ai-act \
+              it/pensiero-critico/notizie/ai-istruzione \
+              it/pensiero-critico/notizie/competenze-docenti \
+              es/pensamiento-critico/noticias/ley-ia \
+              es/pensamiento-critico/noticias/ia-educacion \
+              es/pensamiento-critico/noticias/competencias-docentes \
+              en/critical-thinking/news/ai-act \
+              en/critical-thinking/news/ai-education \
+              en/critical-thinking/news/teacher-skills; do
+              test -s "_site/$path/index.html"
+            done
+            for path in \
+              it/pensiero-critico/dilemmi/selezione-personale \
+              it/pensiero-critico/dilemmi/apprendimento \
+              es/pensamiento-critico/dilemas/seleccion-personal \
+              es/pensamiento-critico/dilemas/aprendizaje \
+              en/critical-thinking/dilemmas/recruitment \
+              en/critical-thinking/dilemmas/learning; do
+              test -s "_site/$path/index.html"
+              grep -q 'id="dilemma-data"' "_site/$path/index.html"
+            done
+            for slide_page in it/slides/che-cos-e-davvero-l-intelligenza-artificiale es/diapositivas/que-es-la-inteligencia-artificial en/slides/what-is-artificial-intelligence; do
+              test -s "_site/$slide_page/index.html"
+            done
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pdf
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pptx
+            test "$(find _site -name index.html | wc -l)" -eq 79
+            test -s _site/app.js
+          fi
+          if [ "$SITE_ARCHIVE" = "site-v0.7.zip" ]; then
+            for path in it/prompt-mastery/laboratorio-tecnico es/prompt-mastery/laboratorio-tecnico en/prompt-mastery/technical-lab; do
+              test -s "_site/$path/index.html"
+              grep -q 'technical-article' "_site/$path/index.html"
+              grep -q 'ysPbXH0LpIE' "_site/$path/index.html"
+            done
+            for document in golden_cases.json predictions_example.json check_outputs.py; do
+              test -s "_site/assets/prompting101/$document"
+            done
+            python3 "_site/assets/prompting101/check_outputs.py" "_site/assets/prompting101/golden_cases.json" "_site/assets/prompting101/predictions_example.json"
+            for old_resource in it/pensiero-critico es/pensamiento-critico en/critical-thinking it/impara/come-costruire-un-prompt-efficace es/aprende/como-construir-un-prompt-eficaz en/learn/how-to-build-an-effective-prompt; do
+              test -s "_site/$old_resource/index.html"
+            done
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pdf
+            test -s _site/assets/slides/m01-it/MANZO_AI_M01_Slide_IT_v1.0.pptx
+            test "$(find _site -name index.html | wc -l)" -eq 82
+          fi
+          test -s _site/index.html
+          test -s _site/it/index.html
+          test -s _site/es/index.html
+          test -s _site/en/index.html
+          test -s _site/it/impara/che-cos-e-l-intelligenza-artificiale/index.html
+          test -s _site/style.css
+          test -s _site/app.js
+          test -s _site/logo.svg
+          test -s _site/sitemap.xml
+          test -f _site/.nojekyll
+          python3 theme/publish-oracle-city.py --site _site --edition editorial/oracle-city/numero-01
+          python3 theme/publish-podcast.py --site _site --edition editorial/podcast/ep00
+          python3 -m py_compile theme/publish-prompt-video.py
+          python3 theme/publish-prompt-video.py --site _site --edition editorial/video/prompt-engineering
+          if [ -s editorial/video/prompt-engineering/Prompt_Engineering.mp4 ]; then
+            test -s _site/assets/media/prompt-engineering/Prompt_Engineering.mp4
+            test -s _site/it/video-e-slide/prompt-engineering/index.html
+            # A frame-extracted JPG is optional when ffmpeg is unavailable.
+            # A valid branded fallback poster must always remain on the video page.
+            grep -Eq 'poster="/manzo-ai/(logo.svg|assets/media/prompt-engineering/copertina.jpg)"' _site/it/video-e-slide/prompt-engineering/index.html
+          fi
+          # Add the trilingual research dossier and hub links before canonical/SEO generation.
+          python3 -m py_compile theme/publish-acr-dossier.py
+          python3 theme/publish-acr-dossier.py --site _site
+          for research_page in it/ricerca/acr en/research/acr es/investigacion/acr; do
+            test -s "_site/$research_page/index.html"
+            grep -q 'data-acr-dossier' "_site/$research_page/index.html"
+          done
+          test -s _site/assets/research/acr/dossier.css
+          test -s _site/assets/research/acr/dossier.js
+          # Deploy the professional course in all three portal languages.
+          python3 -m py_compile theme/publish-hallucinations.py
+          node --check editorial/learning/hallucinations/course.js
+          python3 theme/publish-hallucinations.py --site _site
+          python3 theme/publish-hallucinations.py --site _site --verify-only
+          # Editorial Engineering Assurance module: publish after the base course.
+          python3 -m py_compile theme/publish-hallucinations-coding.py
+          node --check editorial/learning/hallucinations/coding.js
+          python3 theme/publish-hallucinations-coding.py --site _site
+          python3 theme/publish-hallucinations-coding.py --site _site --verify-only
+          # New learning scaffolding uses only the already published content.
+          python3 -m py_compile theme/publish-learning-experience.py
+          node --check product/learning-experience/guide.js
+          python3 theme/publish-learning-experience.py --site _site
+          python3 theme/publish-learning-experience.py --site _site --verify-only
+          for coding_page in it/impara/allucinazioni-ai-verificabilita/coding en/learn/ai-hallucinations-verification/coding es/aprende/alucinaciones-ia-verificacion/coding; do
+            test -s "_site/$coding_page/index.html"
+            grep -q 'data-hc-module' "_site/$coding_page/index.html"
+          done
+          for course_page in it/impara/allucinazioni-ai-verificabilita en/learn/ai-hallucinations-verification es/aprende/alucinaciones-ia-verificacion; do
+            test -s "_site/$course_page/index.html"
+            grep -q 'hx-quiz-data' "_site/$course_page/index.html"
+            grep -q 'hx-cross-grid' "_site/$course_page/index.html"
+          done
+          # Publish the full Italian teacher course beta before SEO, without DB or certificates.
+          python3 -m py_compile theme/publish-ai-teaching-lab.py
+          node --check editorial/learning/ai-teaching-lab/preview/app.js
+          python3 theme/publish-ai-teaching-lab.py --site _site
+          python3 theme/publish-ai-teaching-lab.py --site _site --verify-only
+          for n in 01 02 03 04 05; do
+            test -s "_site/it/formazione/ia-per-la-didattica/modulo-$n/index.html"
+          done
+          test -s _site/it/formazione/ia-per-la-didattica/data/scenarios.json
+          test -s _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
+          test -s _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
+          test -s _site/it/formazione/ia-per-la-didattica/studio-video/index.html
+          test -s _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          test -s _site/it/formazione/ia-per-la-didattica/inizia/index.html
+          test -s _site/it/formazione/ia-per-la-didattica/inizia/mission-adapter.mjs
+          test -s _site/it/formazione/ia-per-la-didattica/inizia/copilot-preview.mjs
+          grep -q 'id="copilot-preview" hidden' _site/it/formazione/ia-per-la-didattica/inizia/index.html
+          grep -q 'data-atl-launchpad="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
+          grep -q 'ai-teaching-lab-mission-v0.1' _site/it/formazione/ia-per-la-didattica/inizia/index.html
+          grep -q 'data-atl-workspace="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
+          grep -q 'id="exportJSON"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          # Beginner-first pedagogy and guided navigation are release gates.
+          grep -q 'id="guided-demo"' _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
+          grep -q 'id="guided-demo"' _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
+          grep -q 'id="guided-demo"' _site/it/formazione/ia-per-la-didattica/studio-video/index.html
+          grep -q 'id="sample-brief"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          grep -q 'id="wk-all"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          # Mobile first: content before status, concise disclosure and assisted inputs.
+          grep -q 'data-atl-workspace="1"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          grep -q 'class="mobile-guide"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          grep -q 'class="example-detail"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          grep -q 'class="card workspace-section"' _site/it/formazione/ia-per-la-didattica/workspace-multimediale/index.html
+          node --check theme/check-ai-teaching-lab-contracts.cjs
+          node theme/check-ai-teaching-lab-contracts.cjs --site _site
+          grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
+          grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
+          grep -q 'class="field-guide"' _site/it/formazione/ia-per-la-didattica/studio-video/index.html
+          grep -q 'data-atl-video-studio="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
+          grep -q 'id="captions"' _site/it/formazione/ia-per-la-didattica/studio-video/index.html
+          grep -q 'data-atl-voice-studio="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
+          grep -q 'id="transcript"' _site/it/formazione/ia-per-la-didattica/studio-voce/index.html
+          grep -q 'data-atl-image-studio="v0.1"' _site/it/formazione/ia-per-la-didattica/index.html
+          grep -q 'id="approve"' _site/it/formazione/ia-per-la-didattica/studio-immagini/index.html
+          # Product preview is deliberately nontransactional and noindex.
+          python3 -m py_compile theme/publish-product-preview.py
+          node --check product/preview/preview.js
+          python3 theme/publish-product-preview.py --site _site
+          python3 theme/publish-product-preview.py --site _site --verify-only
+          for preview_page in it/prodotto en/product es/producto; do
+            test -s "_site/$preview_page/index.html"
+            grep -q 'noindex,follow' "_site/$preview_page/index.html"
+            grep -q 'data-product-preview' "_site/$preview_page/index.html"
+          done
+          # Learning B2B dashboard is a nontransactional, noindex simulation.
+          python3 -m py_compile theme/publish-learning-console.py
+          node --check product/learning-console/console.js
+          python3 theme/publish-learning-console.py --site _site
+          python3 theme/publish-learning-console.py --site _site --verify-only
+          for learning_page in it/prodotto/learning-b2b en/product/learning-b2b es/producto/learning-b2b; do
+            test -s "_site/$learning_page/index.html"
+            grep -q 'noindex,follow' "_site/$learning_page/index.html"
+            grep -q 'data-learning-console' "_site/$learning_page/index.html"
+          done
+          # Once the account is renamed, update built HTML/SEO URLs without changing the source ZIP.
+          python3 theme/rewrite-owner-urls.py --site _site --old-owner manzo8b --new-owner "$GITHUB_REPOSITORY_OWNER"
+          # Independent creator/methodology pages must be indexed by the real sitemap.
+          python3 -m py_compile theme/publish-about.py
+          python3 theme/publish-about.py --site _site
+          python3 theme/publish-about.py --site _site --verify-only
+          # Generate final SEO index ONLY after all published editorial pages exist.
+          python3 theme/build-seo.py --site _site --base-url "https://${GITHUB_REPOSITORY_OWNER}.github.io/manzo-ai/"
+          # Prompt vs Skill diagrams, including the visible four-child family reasoning map.
+          python3 -m py_compile theme/prompt_skill_visuals.py theme/publish-prompt-skill-course.py
+          python3 theme/publish-prompt-skill-course.py --site _site --verify-only
+          python3 -m py_compile theme/prompt_skill_i18n.py theme/publish-prompt-skill-translations.py theme/publish-prompt-skill-translated-home.py
+          python3 theme/publish-prompt-skill-translations.py --site _site --verify-only
+          node --check theme/prompt-skill-translated.js
+          python3 -m py_compile theme/publish-reliability-course.py
+          python3 theme/publish-reliability-course.py --site _site --verify-only
+          python3 -m py_compile theme/publish-centroni-city-course.py
+          python3 theme/publish-centroni-city-course.py --site _site --verify-only
+          python3 -m py_compile theme/legacy_learning_i18n.py theme/publish-legacy-course-translations.py theme/publish-legacy-course-home.py
+          node --check theme/legacy-learning-i18n.js
+          python3 theme/publish-legacy-course-translations.py --site _site --verify-only
+          python3 -m py_compile theme/build_safely_i18n.py theme/build_safely_evaluations.py theme/publish-build-safely-course.py theme/publish-build-safely-home.py
+          python3 theme/publish-build-safely-course.py --site _site --verify-only
+          python3 -m py_compile theme/govern_autonomy_i18n.py theme/publish-govern-autonomy-course.py theme/publish-govern-autonomy-home.py
+          node --check theme/govern-autonomy-course.js
+          python3 theme/publish-govern-autonomy-course.py --site _site --verify-only
+          python3 -m py_compile theme/final_two_i18n_base.py theme/final_two_i18n_aug.py theme/final_two_quiz.py theme/publish-final-two-courses.py theme/publish-final-two-home.py
+          node --check theme/final-two-courses.js
+          python3 theme/publish-final-two-courses.py --site _site --verify-only
+          python3 theme/audit-academy-i18n.py
+          python3 theme/check-teaching-presentation-i18n.py
+          for diagram in mappa-prompt mappa-salto mappa-skill mappa-famiglia; do
+            grep -q "id=\"$diagram\"" _site/it/formazione/prompt-vs-skill/index.html
+          done
+          # Final enhancement on all rendered pages, including editorial media and language landing.
+          node --check theme/mobile-nav.js
+          python3 -m py_compile theme/publish-navigation.py
+          python3 theme/publish-navigation.py --site _site
+          python3 theme/publish-navigation.py --site _site --verify-only
+          # Final visual skin for ALL generated pages. Content, routes and functions unchanged.
+          python3 -m py_compile theme/publish-design-system.py
+          node --check theme/design-motion.js
+          python3 theme/publish-design-system.py --site _site
+          python3 theme/publish-design-system.py --site _site --verify-only
+          python3 -m py_compile theme/publish-home-scene.py
+          python3 theme/publish-home-scene.py --site _site
+          python3 theme/publish-home-scene.py --site _site --verify-only
+          # Approved Academy card language is reused on the public home from real lesson destinations.
+          python3 -m py_compile theme/publish-home-showcase.py
+          python3 theme/publish-home-showcase.py --site _site
+          python3 theme/publish-home-showcase.py --site _site --verify-only
+          # Guided public study routes drawn from the live Academy inventory.
+          python3 -m py_compile theme/publish-academy-journeys.py
+          node --check theme/academy-journeys.js
+          python3 theme/publish-academy-journeys.py --site _site
+          python3 theme/publish-academy-journeys.py --site _site --verify-only
+          # Conversational learning on the localized home — preserve the language portal.
+          python3 -m py_compile theme/publish-home-conversational.py
+          python3 -m unittest discover -s theme/tests -p 'test_home_conversational.py' -v
+          node --check theme/home-conversational.js
+          node theme/tests/test_home_conversational_js.cjs
+          node theme/tests/test_home_legacy_cleanup.cjs
+          python3 theme/publish-home-conversational.py --site _site
+          python3 theme/publish-home-conversational.py --site _site --verify-only
+          # Public home for all audiences: keep Academy cards, add topic cards,
+          # remove the technical SaaS scene and preserve the language gateway.
+          python3 -m py_compile theme/publish-home-curation.py
+          python3 -m unittest discover -s theme/tests -p 'test_home_curation.py' -v
+          python3 theme/publish-home-curation.py --site _site
+          python3 theme/publish-home-curation.py --site _site --verify-only
+          test -s _site/assets/home-curation.css
+          # Place the Italian Prompt vs Skill course as a seventh visual Academy card
+          # only after original six-card Home curation has passed verification.
+          python3 -m py_compile theme/publish-prompt-skill-home.py
+          python3 theme/publish-prompt-skill-home.py --site _site
+          python3 theme/publish-prompt-skill-home.py --site _site --verify-only
+          python3 theme/publish-build-safely-home.py --site _site
+          python3 theme/publish-build-safely-home.py --site _site --verify-only
+          python3 theme/publish-prompt-skill-translated-home.py --site _site
+          python3 theme/publish-prompt-skill-translated-home.py --site _site --verify-only
+          python3 theme/publish-govern-autonomy-home.py --site _site
+          python3 theme/publish-govern-autonomy-home.py --site _site --verify-only
+          python3 theme/publish-final-two-home.py --site _site
+          python3 theme/publish-final-two-home.py --site _site --verify-only
+          python3 theme/publish-legacy-course-home.py --site _site
+          python3 theme/publish-legacy-course-home.py --site _site --verify-only
+          # Sprint 1: learning-first editorial Home in all three languages.
+          # This overlay does NOT touch the root language gateway or its animations.
+          python3 -m py_compile theme/publish-sprint1-home.py
+          node --check theme/sprint1-home.js
+          python3 theme/publish-sprint1-home.py --site _site
+          python3 theme/publish-sprint1-home.py --site _site --verify-only
+          test -s _site/assets/prompt-skill-home-card.css
+          grep -q 'data-ma-home-course="prompt-vs-skill"' _site/it/index.html
+          for lang in en es; do
+            grep -q 'data-ma-home-course="prompt-vs-skill"' "_site/$lang/index.html"
+          done
+          grep -q 'data-ma-home-course="modelli-mentali-affidabilita"' _site/it/index.html
+          grep -q 'data-ma-home-course="ai-product-builder-centroni-city"' _site/it/index.html
+          test -s _site/assets/centroni-city-course.css
+          test -s _site/assets/centroni-city-course.js
+          test -s _site/assets/govern-autonomy-course.css
+          test -s _site/assets/govern-autonomy-course.js
+          test -s _site/assets/final-two-courses.css
+          test -s _site/assets/final-two-courses.js
+          test -s _site/assets/legacy-learning-i18n.css
+          test -s _site/assets/legacy-learning-i18n.js
+          for page in en/learning/mental-models-reliability es/formacion/modelos-mentales-fiabilidad-ia en/learning/ai-product-builder-centroni-city es/formacion/ai-product-builder-centroni-city; do
+            test -s "_site/$page/index.html"
+            grep -q 'data-lgi-version="v1"' "_site/$page/index.html"
+          done
+          for lang in en es; do
+            grep -q 'data-ma-home-course="reliability-i18n"' "_site/$lang/index.html"
+            grep -q 'data-ma-home-course="centroni-i18n"' "_site/$lang/index.html"
+          done
+          for locale_path in it/formazione/compliance-dinamica-governance-continua en/learning/dynamic-ai-compliance es/formacion/compliance-dinamica-gobernanza-continua it/formazione/intelligenza-aumentata-non-sostituita en/learning/augmented-not-replaced es/formacion/inteligencia-aumentada-no-sustituida; do
+            test -s "_site/$locale_path/index.html"
+            grep -q 'data-ft-version="v1"' "_site/$locale_path/index.html"
+          done
+          for lang in it en es; do
+            grep -q 'data-ma-home-course="dynamic-compliance"' "_site/$lang/index.html"
+            grep -q 'data-ma-home-course="augmented-intelligence"' "_site/$lang/index.html"
+          done
+          for lang in it en es; do
+            grep -q 'data-ga-course="v1"' "_site/$(case "$lang" in it) echo 'it/formazione/governare-autonomia';; en) echo 'en/learning/governing-autonomy';; es) echo 'es/formacion/gobernar-la-autonomia';; esac)/index.html"
+            grep -q 'data-ma-home-course="governare-autonomia"' "_site/$lang/index.html"
+          done
+          for locale_path in it/formazione/costruire-in-sicurezza en/learning/build-safely es/formacion/construir-con-seguridad; do
+            test -s "_site/$locale_path/index.html"
+            grep -q 'data-ma-safe="v1"' "_site/$locale_path/index.html"
+          done
+          for lang in it en es; do
+            grep -q 'data-ma-home-course="build-safely"' "_site/$lang/index.html"
+          done
+          test -s _site/assets/reliability-course.css
+          test -s _site/assets/reliability-course.js
+          for lang in it en es; do
+            grep -q 'data-ma-home-curation="v2"' "_site/$lang/index.html"
+            grep -q 'data-ma-home-primary-nav="v2"' "_site/$lang/index.html"
+            grep -q 'data-ma-home-featured="v1"' "_site/$lang/index.html"
+            ! grep -q 'data-ma-home-scene="1"' "_site/$lang/index.html"
+          done
+          # Sprint 0: the final trilingual home and editorial release claims must match the source inventory.
+          python3 -m py_compile theme/check-sprint0-consistency.py
+          python3 theme/check-sprint0-consistency.py --site _site
+          test -s _site/it/chi-siamo/index.html
+          test -s _site/en/about/index.html
+          test -s _site/es/quienes-somos/index.html
+          for lang in it en es; do
+            grep -q 'data-ma-home-discovery="v1"' "_site/$lang/index.html"
+          done
+          test -s _site/assets/home-conversational.css
+          test -s _site/assets/home-conversational.js
+          # Every M02–M06 subheading must have one unique HTML anchor.
+          python3 -m py_compile theme/fix-learning-anchors.py
+          python3 theme/fix-learning-anchors.py --site _site
+          python3 theme/fix-learning-anchors.py --site _site --verify-only
+          test -s _site/assets/home-showcase.css
+          # Editorial invariant on ALL generated pages: no full stop at end of H1–H6.
+          python3 -m py_compile theme/publish-title-cleanup.py
+          python3 theme/publish-title-cleanup.py --site _site
+          python3 theme/publish-title-cleanup.py --site _site --verify-only
+          # Final editorial SEO polish after all public pages are generated.
+          python3 -m py_compile theme/seo-final-polish.py
+          python3 theme/seo-final-polish.py --site _site
+          python3 theme/seo-final-polish.py --site _site --verify-only
+          # Cross-site audit: broken links, HTML IDs, in-page anchors and language.
+          python3 -m py_compile theme/site-integrity-audit.py
+          python3 theme/site-integrity-audit.py --site _site
+          test -s _site/assets/design-system.css
+          test -s _site/assets/design-motion.js
+          test -s _site/assets/mobile-nav.js
+          test -s _site/assets/mobile-nav.css
+          test -s _site/sitemap.xml
+          test -s _site/it/mappa-del-sito/index.html
+          test -s _site/es/mapa-del-sitio/index.html
+          test -s _site/en/site-map/index.html
+          # Ownership verification belongs at the root of the MANZO AI URL-prefix property.
+          # Keep Google-provided filename and content exact across future deployments.
+          test "$(cat googlee8540704606dd6ec.html)" = "google-site-verification: googlee8540704606dd6ec.html"
+          cp googlee8540704606dd6ec.html _site/googlee8540704606dd6ec.html
+          cmp googlee8540704606dd6ec.html _site/googlee8540704606dd6ec.html
+          echo "Static files, SEO sitemap and Google verification validated."
+      # Live login URLs are reserved for internal invited users only.
+      # The source config remains disabled; release requires an explicit flag.
+      # This step runs after SEO, navigation, visual and heading smoke to avoid
+      # changing the approved Home/Academy or including auth in public sitemap.
+      - name: Install Node 22 for audited auth bundle
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Publish invite-only Learning B2B pilot and privacy notices
+        shell: bash
+        env:
+          MANZO_AUTH_PILOT_RELEASE: restricted-invite-only
+        run: |
+          set -euo pipefail
+          npm install --prefix product/auth-staging --no-audit --no-fund
+          npm run test --prefix product/auth-staging
+          npm run build --prefix product/auth-staging
+          node --check product/auth-staging/dist/auth-app.js
+          python3 -m py_compile theme/publish-auth-staging.py
+          python3 theme/publish-auth-staging.py --site _site --enable --live-auth
+          python3 theme/publish-auth-staging.py --site _site --enable --live-auth --verify-only
+          test -f _site/it/prodotto/learning-b2b/accesso/index.html
+          test -f _site/en/product/learning-b2b/sign-in/index.html
+          test -f _site/es/producto/learning-b2b/acceso/index.html
+          test -f _site/it/prodotto/learning-b2b/privacy/index.html
+          test -f _site/en/product/learning-b2b/privacy/index.html
+          test -f _site/es/producto/learning-b2b/privacidad/index.html
+          ! grep -q 'learning-b2b/accesso' _site/sitemap.xml
+          ! grep -q 'learning-b2b/sign-in' _site/sitemap.xml
+          ! grep -q 'learning-b2b/privacidad' _site/sitemap.xml
+          echo "Auth pilot release gated, unlinked, noindex and privacy-noticed."
+      - name: Publish protected My Learning read-only shell (Edge API OFF)
+        shell: bash
+        env:
+          MANZO_AUTH_PILOT_RELEASE: restricted-invite-only
+        run: |
+          set -euo pipefail
+          node --check product/auth-staging/dist/workspace.js
+          python3 -m py_compile theme/publish-my-learning.py
+          python3 theme/publish-my-learning.py --site _site --live-auth
+          python3 theme/publish-my-learning.py --site _site --live-auth --verify-only
+          for page in it/prodotto/learning-b2b/mio-percorso en/product/learning-b2b/my-learning es/producto/learning-b2b/mi-aprendizaje; do
+            test -s "_site/$page/index.html"
+            grep -q '"workspaceApiEnabled":false' "_site/$page/index.html"
+            grep -q 'noindex,nofollow,noarchive' "_site/$page/index.html"
+          done
+          ! grep -q 'workspace-qa@example.invalid' _site/assets/auth/workspace.js
+          ! grep -q 'learning-b2b/my-learning' _site/sitemap.xml
+          ! grep -q 'learning-b2b/mio-percorso' _site/sitemap.xml
+          echo "My Learning private pilot published; database API disabled pending E2E security gates."
+
+      - name: Create staged IT EN ES Home without touching GitHub Pages
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile theme/publish-home-magic-v2.py theme/home-magic-v2-browser-smoke.py
+          node --check theme/home-magic-v2.js
+          python3 theme/publish-home-magic-v2.py --site _site
+          python3 theme/publish-home-magic-v2.py --site _site --verify-only
+          python3 theme/site-integrity-audit.py --site _site
+      - name: Browser QA on the staged bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check playwright==1.55.0
+          python3 -m playwright install chromium
+          mkdir -p _preview
+          ln -s "$GITHUB_WORKSPACE/_site" _preview/manzo-ai
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory _preview >/tmp/manzo-home-v2-http.log 2>&1 &
+          sleep 3
+          python3 theme/home-magic-v2-browser-smoke.py
+      - name: Downloadable candidate — NO public deployment
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: manzo-home-v2-review-${{ github.sha }}
+          path: |
+            _site/
+            home-magic-v2-qa/
+          retention-days: 7
