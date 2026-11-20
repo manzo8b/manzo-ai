@@ -27,6 +27,15 @@ on:
       - editorial/learning/centroni-city-builder/**
       - editorial/learning/build-safely/**
       - editorial/learning/governare-autonomia/**
+      - editorial/learning/compliance-dinamica-governance-continua/**
+      - editorial/learning/intelligenza-aumentata-non-sostituita/**
+      - theme/final_two_i18n_base.py
+      - theme/final_two_i18n_aug.py
+      - theme/final_two_quiz.py
+      - theme/final-two-courses.css
+      - theme/final-two-courses.js
+      - theme/publish-final-two-courses.py
+      - theme/publish-final-two-home.py
       - theme/govern_autonomy_i18n.py
       - theme/govern-autonomy-course.css
       - theme/govern-autonomy-course.js
@@ -488,6 +497,9 @@ jobs:
           python3 -m py_compile theme/govern_autonomy_i18n.py theme/publish-govern-autonomy-course.py theme/publish-govern-autonomy-home.py
           node --check theme/govern-autonomy-course.js
           python3 theme/publish-govern-autonomy-course.py --site _site --verify-only
+          python3 -m py_compile theme/final_two_i18n_base.py theme/final_two_i18n_aug.py theme/final_two_quiz.py theme/publish-final-two-courses.py theme/publish-final-two-home.py
+          node --check theme/final-two-courses.js
+          python3 theme/publish-final-two-courses.py --site _site --verify-only
           python3 theme/audit-academy-i18n.py
           for diagram in mappa-prompt mappa-salto mappa-skill mappa-famiglia; do
             grep -q "id=\"$diagram\"" _site/it/formazione/prompt-vs-skill/index.html
@@ -540,6 +552,8 @@ jobs:
           python3 theme/publish-prompt-skill-translated-home.py --site _site --verify-only
           python3 theme/publish-govern-autonomy-home.py --site _site
           python3 theme/publish-govern-autonomy-home.py --site _site --verify-only
+          python3 theme/publish-final-two-home.py --site _site
+          python3 theme/publish-final-two-home.py --site _site --verify-only
           test -s _site/assets/prompt-skill-home-card.css
           grep -q 'data-ma-home-course="prompt-vs-skill"' _site/it/index.html
           for lang in en es; do
@@ -551,6 +565,16 @@ jobs:
           test -s _site/assets/centroni-city-course.js
           test -s _site/assets/govern-autonomy-course.css
           test -s _site/assets/govern-autonomy-course.js
+          test -s _site/assets/final-two-courses.css
+          test -s _site/assets/final-two-courses.js
+          for locale_path in it/formazione/compliance-dinamica-governance-continua en/learning/dynamic-ai-compliance es/formacion/compliance-dinamica-gobernanza-continua it/formazione/intelligenza-aumentata-non-sostituita en/learning/augmented-not-replaced es/formacion/inteligencia-aumentada-no-sustituida; do
+            test -s "_site/$locale_path/index.html"
+            grep -q 'data-ft-version="v1"' "_site/$locale_path/index.html"
+          done
+          for lang in it en es; do
+            grep -q 'data-ma-home-course="dynamic-compliance"' "_site/$lang/index.html"
+            grep -q 'data-ma-home-course="augmented-intelligence"' "_site/$lang/index.html"
+          done
           for lang in it en es; do
             grep -q 'data-ga-course="v1"' "_site/$(case "$lang" in it) echo 'it/formazione/governare-autonomia';; en) echo 'en/learning/governing-autonomy';; es) echo 'es/formacion/gobernar-la-autonomia';; esac)/index.html"
             grep -q 'data-ma-home-course="governare-autonomia"' "_site/$lang/index.html"
