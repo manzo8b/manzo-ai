@@ -154,7 +154,7 @@ def make_page(site,locale,cfg):
     schema={"@context":"https://schema.org","@type":"Course","name":cfg["title"]+" — "+cfg["subtitle"],"description":cfg["lead"],"inLanguage":locale,"isAccessibleForFree":True,"url":canonical,"provider":{"@type":"Organization","name":"MANZO AI"},"datePublished":"2026-11-20","citation":SOURCE_URLS}
     alternates=''.join(f'<link rel="alternate" hreflang="{code}" href="https://manzo8b.github.io/manzo-ai/{route}/">' for code,route in ROUTES.items())
     alternates+='<link rel="alternate" hreflang="x-default" href="https://manzo8b.github.io/manzo-ai/'+ROUTES["it"]+'/">'
-    language_nav=''.join(f'<a href="{BASE}{route}/" hreflang="{code}" lang="{code}" {"aria-current=\\"page\\"" if code==locale else ""}>{code.upper()}</a>' for code,route in ROUTES.items())
+    language_nav=''.join('<a href="'+BASE+route+'/" hreflang="'+code+'" lang="'+code+'" '+('aria-current="page"' if code==locale else '')+'>'+code.upper()+'</a>' for code,route in ROUTES.items())
     flow=''.join(f'<li><strong>{e(name)}</strong><span>{e(description)}</span></li>' for name,description in cfg["flow"])
     lights=''.join(f'<article><strong>{e(title)}</strong><p>{e(description)}</p><small>{e(action)}</small></article>' for title,description,action in cfg["lights"])
     data=translated(locale)
