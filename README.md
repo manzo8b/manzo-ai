@@ -24,6 +24,12 @@ MANZO AI combina progettazione di workflow digitali, verificabilità degli outpu
 ---
 
 
+## Tre lingue obbligatorie · 20 novembre 2026
+
+Tutti i contenuti MANZO AI devono essere disponibili **integralmente in italiano, inglese e spagnolo**: lezioni, glossari, grafici, laboratori, quiz e feedback compresi, non soltanto titoli e navigazione. Consultare lo **[standard i18n Academy](theme/ACADEMY_I18N_STANDARD.md)** e l'[audit della copertura effettiva](theme/audit-academy-i18n.py).
+
+Il nuovo corso **Build Safely / Costruire in sicurezza / Construir con seguridad** è pubblicato in tutte e tre le lingue. La traduzione del catalogo precedente è in fase di migrazione; la Home tradotta non deve essere scambiata per certificazione di completezza dei corsi.
+
 ## Standard delle card Academy · 19 novembre 2026
 
 **Regola permanente di UI/UX per i nuovi corsi:** tutte le card nella Home devono essere uniformi per dimensioni, proporzioni delle copertine, padding, lunghezza dei testi, badge e CTA «Apri il percorso» su una sola riga. Colori e illustrazioni possono variare; struttura e comportamento responsivo devono rimanere coerenti. Prima della pubblicazione confrontare visivamente la nuova card con quelle esistenti su desktop e smartphone. **[Specifiche vincolanti](theme/ACADEMY_CARD_STANDARD.md).**
