@@ -100,6 +100,7 @@ on:
       - theme/publish-design-system.py
       - theme/design-browser-smoke.py
       - theme/check-shared-glass-navigation.py
+      - theme/check-approved-visual-contracts.py
       - theme/publish-home-scene.py
       - theme/publish-home-showcase.py
       - theme/home-showcase.css
@@ -753,6 +754,10 @@ jobs:
           done
           grep -q 'MANZO AI sidebar glass-pill release' _site/assets/home-magic-v2.css
           python3 theme/site-integrity-audit.py --site _site
+          # Sprint 2: freeze approved Home/Academy cards, localization, mobile discovery,
+          # heading punctuation and accessible interaction styles after all publishers.
+          python3 -m py_compile theme/check-approved-visual-contracts.py
+          python3 theme/check-approved-visual-contracts.py --site _site
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
