@@ -287,7 +287,8 @@ def magic_box(loc):
    </g>
  </g>
  <!-- These symbols render after the lid while it opens, so they remain visible.
-      They are faded out when the lid closes, preserving the closed-box silhouette. --> <g class="ma-v2-artifacts">
+      They are faded out when the lid closes, preserving the closed-box silhouette. -->
+ <g class="ma-v2-artifacts">
    <g class="ma-v2-artifact ma-v2-a"><rect x="207" y="85" rx="12" width="82" height="72" fill="#fff" stroke="#3d88a1" stroke-width="2"/><path d="M225 113h46m-46 17h30" stroke="#3d88a1" stroke-width="4" stroke-linecap="round"/><circle cx="266" cy="132" r="4" fill="#cf9042"/></g>
    <g class="ma-v2-artifact ma-v2-b"><rect x="306" y="77" rx="13" width="80" height="76" fill="#fffaf1" stroke="#bb8545" stroke-width="2"/><path d="m325 113 16 16 25-32" stroke="#ae762b" stroke-width="6" stroke-linecap="round" fill="none"/></g>
    <g class="ma-v2-artifact ma-v2-c"><circle cx="170" cy="143" r="32" fill="#e8f7f3" stroke="#238875" stroke-width="2"/><path d="M170 122v22m0 10v2" stroke="#238875" stroke-width="6" stroke-linecap="round"/></g>
