@@ -41,10 +41,10 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  font-weight:850!important;margin:0 0 20px!important;
 }
 #content .ma-v2-hero h1{
- font-size:clamp(2.65rem,4.9vw,5.15rem)!important;
+ font-size:clamp(2.5rem,4.45vw,4.7rem)!important;
  line-height:1.12!important;letter-spacing:-.028em!important;
  font-weight:690!important;color:#173b5a!important;
- text-wrap:balance;max-width:15ch;margin:0 0 22px!important;
+ text-wrap:balance;max-width:22ch;margin:0 0 22px!important;
 }
 #content .ma-v2-lead{
  color:#3e6278!important;max-width:43ch;font-size:clamp(1.02rem,1.43vw,1.22rem)!important;
@@ -378,7 +378,7 @@ body[data-ma-surface="landing"] #content:has(.ma-v2-hero){
  #content .ma-v2-hero{gap:17px}
  #content .ma-v2-hero h1{
    font-size:clamp(2.05rem,4.4vw,3.5rem)!important;
-   line-height:1.09!important;max-width:24ch;
+   line-height:1.12!important;max-width:24ch;
  }
  .ma-v2-actions a{min-width:0;flex:1 1 100%;max-width:100%}
 }
