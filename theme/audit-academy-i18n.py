@@ -59,6 +59,11 @@ CATALOGUE={
    "files":{locale:[f"build-safely/{locale}.md"] for locale in LOCALES},
    "minimum_bytes":18000,
  },
+ "governing-autonomy":{
+   "display":"Governing Autonomy — AI Agents and Human Oversight",
+   "files":{locale:[f"governare-autonomia/{locale}.md"] for locale in LOCALES},
+   "minimum_bytes":19000,
+ },
 }
 INTERACTIONS={
  "hallucinations":{loc:[f"hallucinations/{loc}.json",f"hallucinations/coding-{loc}.json"] for loc in LOCALES},
