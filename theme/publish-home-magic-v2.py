@@ -36,10 +36,10 @@ PROF={"it":"it/formazione/costruire-in-sicurezza","en":"en/learning/build-safely
 TEACHING_IT="it/formazione/ia-per-la-didattica/inizia"
 PAGES={
  "it":{
-  "title":"Chiedi meglio. Controlla sempre. Decidi tu. | MANZO AI",
+  "title":"Chiedi meglio. Controlla sempre. Decidi tu | MANZO AI",
   "desc":"Impara a usare l’IA con metodo: formula domande migliori, verifica le risposte e decidi in autonomia con i percorsi pratici di MANZO AI.",
   "eyebrow":"MANZO AI / IMPARA A PENSARE, NON SOLO A CHIEDERE",
-  "h1":"Chiedi meglio. Controlla sempre. Decidi tu.",
+  "h1":"Chiedi meglio. Controlla sempre. Decidi tu",
   "lead":"Il percorso per usare l’IA con metodo: dalla domanda giusta alla prova che la risposta regge.",
   "primary":"Inizia dalle basi",
   "secondary":"Prova una sfida di pensiero critico",
@@ -84,10 +84,10 @@ PAGES={
   "note":"Risorse formative aperte · Senza attestati inventati",
  },
  "en":{
-  "title":"Ask better. Check everything. Decide for yourself. | MANZO AI",
+  "title":"Ask better. Check everything. Decide for yourself | MANZO AI",
   "desc":"Learn to use AI with a clear method: ask better questions, verify evidence and make informed decisions through MANZO AI learning paths.",
   "eyebrow":"MANZO AI / LEARN TO THINK, NOT JUST TO PROMPT",
-  "h1":"Ask better. Check everything. Decide for yourself.",
+  "h1":"Ask better. Check everything. Decide for yourself",
   "lead":"A practical path to using AI with a method: from the right question to evidence that supports the answer.",
   "primary":"Start with the basics",
   "secondary":"Try a critical-thinking challenge",
@@ -132,10 +132,10 @@ PAGES={
   "note":"Open learning resources · No unearned certificates",
  },
  "es":{
-  "title":"Pregunta mejor. Comprueba siempre. Decide tú. | MANZO AI",
+  "title":"Pregunta mejor. Comprueba siempre. Decide tú | MANZO AI",
   "desc":"Aprende a usar la IA con método: formula mejores preguntas, comprueba las respuestas y decide con criterio mediante los itinerarios de MANZO AI.",
   "eyebrow":"MANZO AI / APRENDE A PENSAR, NO SOLO A PREGUNTAR",
-  "h1":"Pregunta mejor. Comprueba siempre. Decide tú.",
+  "h1":"Pregunta mejor. Comprueba siempre. Decide tú",
   "lead":"Un recorrido para usar la IA con método: de la pregunta adecuada a las pruebas que respaldan la respuesta.",
   "primary":"Empieza por lo básico",
   "secondary":"Prueba un reto de pensamiento crítico",
@@ -399,6 +399,12 @@ def magic_box(loc):
 
 def render(loc,cards,brain,academy_cards):
  d=PAGES[loc]
+ # Editorial invariant: no terminal full stop in any heading.
+ # Interior full stops delimit the three intended imperative clauses.
+ if d["h1"].rstrip().endswith("."):
+  raise RuntimeError("Terminal dot forbidden in Home H1 "+loc)
+ if d["title"].split("|",1)[0].rstrip().endswith("."):
+  raise RuntimeError("Terminal dot forbidden in Home SEO title "+loc)
  hero=(
  '<section data-ma-v2-section="hero" class="ma-v2-hero" aria-labelledby="ma-v2-heading">'
  '<div class="ma-v2-hero-copy"><p class="ma-v2-kicker">'+e(d["eyebrow"])+'</p>'
@@ -512,6 +518,13 @@ def publish(site,verify=False):
    if html.count(MARKER)!=1:raise RuntimeError("Missing preview marker "+locale)
    if html.count(SECTION_TAG)!=5:raise RuntimeError("Five-section contract changed "+locale)
    if len(re.findall(r'<h1\b',html,re.I))!=1:raise RuntimeError("Home H1 count changed "+locale)
+   actual_h1=re.search(r'<h1\b[^>]*>(.*?)</h1>',html,re.I|re.S)
+   if actual_h1 is None or strip(actual_h1.group(1))!=PAGES[locale]["h1"]:
+    raise RuntimeError("Home H1 text does not match the approved headline "+locale)
+   if strip(actual_h1.group(1)).rstrip().endswith("."):
+    raise RuntimeError("Home heading terminates with a forbidden full stop "+locale)
+   if PAGES[locale]["title"] not in unescape(html):
+    raise RuntimeError("Home SEO title not synchronized with approved punctuation "+locale)
    if len(re.findall(r'data-ma-v2-card="[1-6]"',html))!=6:raise RuntimeError("Six featured cards missing "+locale)
    # Confirm the Home contains the actual Academy component, not the retired mock.
    home_articles=CARD.findall(html)

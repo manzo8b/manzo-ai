@@ -7,9 +7,9 @@ from playwright.sync_api import sync_playwright
 BASE="http://127.0.0.1:8765/manzo-ai"
 OUT=Path("home-magic-v2-qa")
 TITLE={
- "it":"Chiedi meglio. Controlla sempre. Decidi tu.",
- "en":"Ask better. Check everything. Decide for yourself.",
- "es":"Pregunta mejor. Comprueba siempre. Decide tú."
+ "it":"Chiedi meglio. Controlla sempre. Decidi tu",
+ "en":"Ask better. Check everything. Decide for yourself",
+ "es":"Pregunta mejor. Comprueba siempre. Decide tú"
 }
 LEAD={
  "it":"Il percorso per usare l’IA con metodo: dalla domanda giusta alla prova che la risposta regge.",
@@ -28,6 +28,8 @@ def test_page(page,loc,width):
  assert response and response.status==200,(loc,width,response.status if response else None)
  assert page.locator("html").get_attribute("lang").lower().startswith(loc)
  assert page.locator("h1").count()==1 and page.locator("h1").inner_text()==TITLE[loc]
+ assert all(not text.rstrip().endswith(".") for text in
+  page.locator("h1,h2,h3,h4,h5,h6").all_inner_texts()),(loc,"forbidden terminal full stop in visible heading")
  assert page.locator(".ma-v2-hero .ma-v2-lead").inner_text()==LEAD[loc],(loc,"new promise subtitle differs")
  assert TITLE[loc] in page.title(),(loc,"SEO page title not synchronized")
  assert page.locator(".ma-v2-hero h1").evaluate("""el=>{

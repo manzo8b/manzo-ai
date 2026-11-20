@@ -737,6 +737,9 @@ jobs:
           node --check theme/home-magic-v2.js
           python3 theme/publish-home-magic-v2.py --site _site
           python3 theme/publish-home-magic-v2.py --site _site --verify-only
+          # Final editorial gate: Home is generated AFTER the earlier title cleanup.
+          # Never let a full stop return at the end of H1–H6.
+          python3 theme/publish-title-cleanup.py --site _site --verify-only
           for lang in it en es; do
             test -s "_site/$lang/index.html"
             grep -q 'data-ma-v2-section="hero"' "_site/$lang/index.html"
