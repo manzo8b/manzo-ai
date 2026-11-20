@@ -2,7 +2,7 @@
 
 **Data:** 20 novembre 2026
 **Branch:** preview/home-magic-trilingual-v2
-**Stato:** candidata completa su branch separato, **non distribuita sul sito pubblico**. Nessuna modifica al branch main né al menù delle lingue.
+**Stato release:** approvata dall'autore il 20 novembre 2026 e integrata nel branch `main` tramite [PR #51](https://github.com/manzo8b/manzo-ai/pull/51), commit `a946802d625dccd2ff72a22d665dad60cf763d4f`. Il workflow GitHub Pages è configurato per applicarla alla build; **l'esito remoto del deploy non è stato verificato direttamente**. Menù delle lingue, relativi effetti e routing invariati.
 
 ## Idea editoriale
 
@@ -57,9 +57,9 @@ Il QA automatizzato non equivale a WCAG 2.2 AA certificato né a verifica Safari
 
 ## Gate di pubblicazione
 
-**Attendere la convalida dell'autore della versione completa trilingue**. Solo allora integrare il publisher nel workflow Pages di main, correggere i vecchi test Home che contano le 13 card, rieseguire la build, ispezionare desktop/iPhone e distribuire. L'eventuale approvazione della grafica non equivale alla conclusione della localizzazione di AI Teaching Lab.
+**Convalida ricevuta e integrazione effettuata.** Il publisher è stato inserito nel workflow Pages di `main`, dopo i generatori precedenti e i controlli editoriali. Verificare conclusione effettiva della pipeline e collaudo Safari/iPhone prima di chiudere il release gate. I vecchi test Home girano prima del nuovo publisher; la verifica finale richiede 5 sezioni e 6 card. L'eventuale approvazione della grafica non equivale alla conclusione della localizzazione di AI Teaching Lab.
 
-**Nessuna pubblicazione pubblica è stata autorizzata o effettuata in questa fase.**
+**Pubblicazione autorizzata e avviata mediante il merge su `main`.** Il risultato live non può essere dichiarato confermato finché GitHub Actions non completa con successo il job `Deploy to GitHub Pages`.
 
 
 ## Iterazione estetica — ispirazione Pinterest, senza clonazione
@@ -77,3 +77,11 @@ Brief approvato in chat: superfici chiare, sfumature luminose azzurro/turchese/l
 - Test automatici aggiornati: 5 sezioni, 6 card, 7 ulteriori destinazioni Academy, impilamento tablet, navigazione mobile, no-JS e reduced motion
 
 **Release gate:** modifiche committate sul solo branch di anteprima. Lo stato dei precedenti run CI riguarda commit antecedenti a questa revisione: non attribuire automaticamente il loro PASS all'ultima variante. Verificare nuova pipeline, schermate reali Safari/iPhone, contenuti nelle tre lingue e autorizzazione esplicita prima di pubblicare.
+
+## Changelog rilascio · 20 novembre 2026
+
+- PR #51 integrata in `main`, con autorizzazione esplicita alla produzione
+- Menu laterale Home: pill ovale effetto vetro, hover lift/luminosità, supporto `prefers-reduced-motion`, `prefers-reduced-transparency`, `prefers-contrast`
+- Verifica locale di rendering: 3 lingue × 1440/768/375 px = 9 combinazioni senza overflow orizzontale, con Hero impilato su tablet e card singola su smartphone. Le risorse esterne e la navigazione mobile dinamica non erano caricabili nel renderer inline; non è un collaudo end-to-end del dominio pubblico
+- Workflow `.github/workflows/deploy-pages.yml` aggiornato per generare IT/EN/ES, verificare 5 sezioni e 6 card, controllare asset CSS/JS e integrità del sito prima dell'upload Pages
+- Attesa di conferma del deployment remoto da GitHub Actions; non affermare che il sito è online con la V2 finché il job non è riuscito
