@@ -13,6 +13,10 @@ on:
       - 'theme/publish-home-showcase.py'
       - 'theme/publish-home-conversational.py'
       - 'theme/publish-home-curation.py'
+      - 'theme/publish-sprint1-home.py'
+      - 'theme/sprint1-home.css'
+      - 'theme/sprint1-home.js'
+      - 'theme/sprint1-home-browser-smoke.py'
       - 'theme/publish-ai-teaching-lab.py'
       - 'theme/check-sprint0-consistency.py'
       - 'theme/home-showcase.css'
@@ -135,6 +139,11 @@ jobs:
           python3 theme/publish-final-two-home.py --site _site
           python3 theme/publish-legacy-course-home.py --site _site
           python3 theme/check-sprint0-consistency.py --site _site
+          # Final production Home: content paths, learning method and Academy reveal.
+          python3 -m py_compile theme/publish-sprint1-home.py
+          node --check theme/sprint1-home.js
+          python3 theme/publish-sprint1-home.py --site _site
+          python3 theme/publish-sprint1-home.py --site _site --verify-only
           # Every M02–M06 subheading must have one unique HTML anchor.
           python3 -m py_compile theme/fix-learning-anchors.py
           python3 theme/fix-learning-anchors.py --site _site
@@ -170,6 +179,7 @@ jobs:
           python3 theme/learning-console-browser-smoke.py
           python3 theme/design-browser-smoke.py
           python3 theme/home-showcase-browser-smoke.py
+          python3 theme/sprint1-home-browser-smoke.py
           python3 theme/academy-journeys-browser-smoke.py
       - name: Upload screenshot evidence for the design review
         if: always()
