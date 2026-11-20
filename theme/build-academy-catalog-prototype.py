@@ -59,7 +59,11 @@ a{color:inherit}button,select{font:inherit}button:focus-visible,select:focus-vis
 .meta{font-size:.68rem;color:#39718c;font-weight:810;text-transform:uppercase;letter-spacing:.075em}
 .card h3{font-size:1.24rem;line-height:1.26;letter-spacing:-.027em;margin:0;font-weight:720}
 .tags{display:flex;flex-wrap:wrap;gap:6px}.tags span{border:1px solid #d7e5f0;background:#f2f7fc;border-radius:7px;padding:5px 7px;color:#3f617a;font-weight:700;font-size:.69rem}
-.note{font-size:.79rem;line-height:1.5;color:#5a7187;margin:0}.go{margin-top:auto;text-decoration:none;border-top:1px solid #e2eaf2;padding-top:12px;font-size:.83rem;font-weight:780;display:flex;align-items:center;justify-content:space-between;color:#245da4}
+.outcome{font-size:.85rem;line-height:1.5;color:#385b74;margin:0}
+.outcome strong{display:block;font-size:.67rem;color:#2d6590;letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}
+.audience{font-size:.76rem;line-height:1.5;color:#5a7187;margin:0}
+.audience strong{font-weight:760;color:#365977}
+.note{font-size:.76rem;line-height:1.45;color:#5a7187;margin:0}.go{margin-top:auto;text-decoration:none;border-top:1px solid #e2eaf2;padding-top:12px;font-size:.83rem;font-weight:780;display:flex;align-items:center;justify-content:space-between;color:#245da4}
 .go span{border-radius:50%;background:#eaf0ff;color:#2456c3;width:29px;height:29px;display:grid;place-items:center}
 .card:hover .go span{background:#255ce0;color:#fff}
 .no-results{display:none;padding:30px;border:1px solid #cfdcec;border-radius:16px;text-align:center;color:#456980}
@@ -137,7 +141,10 @@ def render_card(item):
       <div class="art" style="--tone:{bg1};--tone2:{bg2}"><span>MANZO AI / {safe(kind_name)}</span>
         <span class="symbol" aria-hidden="true">{symbol}</span><span>{safe(item["id"].upper())}</span></div>
       <div class="card-body"><span class="meta">{safe(kind_name+code)} · {safe(CAT_LABEL[cat])}</span>
-      <h3>{safe(item["title_it"])}</h3><div class="tags">{tags}</div>
+      <h3>{safe(item["title_it"])}</h3>
+      <p class="outcome"><strong>Risultato atteso</strong>{safe(item["outcome_it"])}</p>
+      <p class="audience"><strong>A chi serve</strong> · {safe(item["audience_it"])}</p>
+      <div class="tags">{tags}</div>
       <p class="note">Lingue con rotta documentata: {safe(lang_display)}</p>
       <a class="go" href="{safe(href)}">{safe(open_label)}<span aria-hidden="true">↗</span></a>
       </div></article>'''
@@ -183,6 +190,7 @@ def make():
  <a href="/manzo-ai/it/risorse/">Apri le risorse ↗</a></aside>
  </main><footer class="foot">Anteprima UX non pubblicata · 9 corsi editoriali + 6 moduli fondativi.
  Le rotte provengono dai publisher e dai test di deploy; disponibilità finale da verificare.
+ Gli obiettivi sintetici delle card sono proposte editoriali da validare contro i programmi.
  Nessuna iscrizione, avanzamento o attestato simulato.</footer></div>
  <script>{JS}</script></body></html>'''
     return html
