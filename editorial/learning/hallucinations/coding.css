@@ -42,6 +42,14 @@
 .hc-page .hc-banner{background:#143d65;border-radius:28px;padding:50px clamp(24px,5vw,65px);color:#fff;margin:55px 0 0}
 .hc-page .hc-banner h2{font-size:clamp(2rem,4vw,3.1rem);font-weight:630;max-width:780px;margin-bottom:15px}
 .hc-page .hc-banner p{font-size:1.03rem;color:#d5e4ef;line-height:1.76;max-width:790px}
+/* Contrast repair: the banner's pale paragraph rule must not bleed into its light stage cards.
+   All pairs meet WCAG AA for normal text; no dimension, spacing or breakpoint changes. */
+.hc-page .hc-banner h2{color:#fff!important}
+.hc-page .hc-banner>p:not(.hc-eyebrow){color:#e5f2fb}
+.hc-page .hc-banner .hc-stage{background:#f3f8fc}
+.hc-page .hc-banner .hc-stage small{color:#41699b}
+.hc-page .hc-banner .hc-stage strong{color:#173a5d}
+.hc-page .hc-banner .hc-stage p{color:#37546e}
 .hc-page .hc-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
 .hc-page .hc-gate{display:flex;gap:12px;align-items:flex-start;padding:22px;background:#fff;border:1px solid #d9e6ed;border-radius:17px;cursor:pointer}
 .hc-page .hc-gate:has(input:checked){background:#eef8f5;border-color:#75bbad}
