@@ -106,6 +106,9 @@ on:
       - theme/home-conversational.js
       - theme/publish-home-conversational.py
       - theme/publish-home-curation.py
+      - theme/publish-sprint1-home.py
+      - theme/sprint1-home.css
+      - theme/sprint1-home.js
       - theme/publish-prompt-skill-home.py
       - theme/prompt-skill-home-card.css
       - theme/home-curation.css
@@ -568,6 +571,12 @@ jobs:
           python3 theme/publish-final-two-home.py --site _site --verify-only
           python3 theme/publish-legacy-course-home.py --site _site
           python3 theme/publish-legacy-course-home.py --site _site --verify-only
+          # Sprint 1: learning-first editorial Home in all three languages.
+          # This overlay does NOT touch the root language gateway or its animations.
+          python3 -m py_compile theme/publish-sprint1-home.py
+          node --check theme/sprint1-home.js
+          python3 theme/publish-sprint1-home.py --site _site
+          python3 theme/publish-sprint1-home.py --site _site --verify-only
           test -s _site/assets/prompt-skill-home-card.css
           grep -q 'data-ma-home-course="prompt-vs-skill"' _site/it/index.html
           for lang in en es; do
