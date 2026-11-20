@@ -299,3 +299,15 @@
  background:#dcfff2;color:#177d6a;font-size:.88em;
 }
 .ma-home-showcase .ft-home-course-card .ps-home-art-brand span{color:#dcfff0}
+
+/* Native EN ES Legacy Academy · exact shared card geometry, distinct covers */
+.ma-home-showcase .lgi-home-card .ma-course-art.ps-home-art{display:flex;flex-direction:column;min-height:inherit}
+.ma-home-showcase .lgi-home-reliability .ma-course-art.ps-home-art{
+ background:linear-gradient(130deg,#1b789b 0%,#5d8cc7 53%,#6459ac 100%)}
+.ma-home-showcase .lgi-home-centroni .ma-course-art.ps-home-art{
+ background:linear-gradient(129deg,#217c72 0%,#39a49a 49%,#6d92c7 100%)}
+.ma-home-showcase .lgi-home-reliability .ps-home-art-p{background:#e2f2ff;color:#24668d;font-size:.88em}
+.ma-home-showcase .lgi-home-reliability .ps-home-art-s{background:#f0e9ff;color:#6155a4;font-size:.84em}
+.ma-home-showcase .lgi-home-centroni .ps-home-art-p{background:#e2fff0;color:#23795f;font-size:.86em}
+.ma-home-showcase .lgi-home-centroni .ps-home-art-s{background:#f2f6ff;color:#326d95;font-size:.86em}
+.ma-home-showcase .lgi-home-card .ps-home-art-brand span{color:#e0fff1}
