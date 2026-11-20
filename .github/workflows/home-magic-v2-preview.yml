@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - preview/home-magic-trilingual-v2
+      - feat/magic-box-glass-3d-reveal
       - fix/home-exact-academy-cards
     paths:
       - theme/publish-home-magic-v2.py
