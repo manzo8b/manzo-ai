@@ -35,6 +35,8 @@
 
 La Home italiana presenta **6 card curate originarie più 7 corsi aggiunti**, ossia 13 card sotto la medesima selezione Academy, a fronte dell'etichetta testuale visibile «6 risorse pubblicate». La differenza è osservabile nel contenuto della Home. I corsi possono inoltre apparire in altre sezioni: questo non equivale a 13 corsi editoriali distinti dal resto del catalogo.
 
+**Aggiornamento correttivo Sprint 0:** il quinto modulo narrativo EN/ES era già presente nel repository e non va ritradotto. È stato anche corretto il contatore della Home; lo storico del rilievo F02 resta riportato come problema verificato al momento dell'audit. La completezza del corso resta sospesa fino alla pubblicazione delle risorse native e alla loro verifica.
+
 ## C · Esiti per area
 
 | Area | Stato del risultato | Giudizio |
@@ -54,7 +56,7 @@ La Home italiana presenta **6 card curate originarie più 7 corsi aggiunti**, os
 
 ### F01 — P0 · Dichiarazione di disponibilità trilingue non equivalente al catalogo
 
-**Evidenza:** `theme/audit-academy-i18n.py`, log del run #44725699053, `editorial/learning/ai-teaching-lab/`. L'audit riferisce **8/9** corsi con sorgenti completi. Per AI Teaching Lab l'italiano ha cinque moduli e fonti JSON, mentre per `en/` e `es/` risultano soltanto **module-01.md–module-04.md**: `module-05.md`, `course.json`, `narrative.json`, `assessment-bank.json`, `glossary.json` non sono ancora presenti. Il glossario italiano include **79 voci**. Il publisher `theme/publish-ai-teaching-lab.py` continua a leggere i file da `DATA=SRC/"it"`.
+**Evidenza:** `theme/audit-academy-i18n.py`, log del run #44725699053, `editorial/learning/ai-teaching-lab/`. L'audit riferisce **8/9** corsi con sorgenti completi. Per AI Teaching Lab l'italiano ha cinque moduli e dati JSON completi; un controllo successivo dei commit ha confermato che **anche module-05.md esiste già in EN ed ES**, insieme ai moduli 01–04. Il blocco non ancora localizzato riguarda **course.json, narrative.json, assessment-bank.json, glossary.json e scenarios.json**. I testi accessibili delle 15 slide in EN/ES sono stati poi aggiunti durante lo Sprint 0, ma non sono ancora pubblicati come esperienza nativa. Il glossario italiano include **79 voci**. Il publisher `theme/publish-ai-teaching-lab.py` continua a leggere i file da `DATA=SRC/"it"`.
 
 **Impatto:** un visitatore potrebbe interpretare il messaggio generico IT/EN/ES come promessa di equivalenza funzionale. Le pagine Academy EN ed ES segnalano correttamente che AI Teaching Lab è per ora in italiano; mantenere questa trasparenza.
 
@@ -179,7 +181,7 @@ La Home italiana presenta **6 card curate originarie più 7 corsi aggiunti**, os
 | Priorità | Intervento | Dipendenze | Costo diretto previsto |
 | --- | --- | --- | --- |
 | **P0 — chiarezza pubblica** | Correggere il contatore fisso «6 risorse» e l'eventuale promessa troppo ampia IT/EN/ES | Aggiornamento copy + test locale | **0 €** |
-| **P0 — prodotto formativo** | Concludere AI Teaching Lab EN/ES e distinguere origine delle risorse tradotte da vera pubblicazione | Modulo 05, corso/narrative/assessment/glossary JSON, renderer e QA | **0 €** di hosting aggiuntivo sulla base attuale |
+| **P0 — prodotto formativo** | Concludere AI Teaching Lab EN/ES e distinguere origine delle risorse tradotte da vera pubblicazione | Cinque file JSON per lingua (corso, narrazioni, valutazioni, glossario, scenari), renderer e QA | **0 €** di hosting aggiuntivo sulla base attuale |
 | **P1 — esperienza** | Ridurre duplicazioni Home, mostrare catalogo completo nell'Academy, affinare filtri e navigazione | Revisione UX di una schermata campione per lingua | **0 €** |
 | **P1 — coerenza UI** | Unificare renderer delle card e tassonomia, verificare 390/768/1440 e iPhone Safari | Standard card, screenshot/click/keyboard | **0 €** con strumenti disponibili |
 | **P1 — misure** | Lighthouse, accessibilità, contenuti delle nuove pagine e video | Browser/device, audit assistivo | **0 €** con misure locali/strumenti gratuiti se disponibili |
