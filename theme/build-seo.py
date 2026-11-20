@@ -112,6 +112,8 @@ def publish(site: Path, base: str) -> int:
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-prompt-skill-translations.py")), "--site", str(site)], check=True)
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-reliability-course.py")), "--site", str(site)], check=True)
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-centroni-city-course.py")), "--site", str(site)], check=True)
+        # Full translated native pages and activities for both older standalone courses.
+        subprocess.run([sys.executable, str(Path(__file__).with_name("publish-legacy-course-translations.py")), "--site", str(site)], check=True)
         # New full-language courses are generated together; missing translations fail the release.
         subprocess.run([sys.executable, str(Path(__file__).with_name("publish-build-safely-course.py")), "--site", str(site)], check=True)
         # Follow-up course: agent autonomy, least privilege and Mission Control in IT/EN/ES.
