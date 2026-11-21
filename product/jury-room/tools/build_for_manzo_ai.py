@@ -111,11 +111,23 @@ HOME_CSS='''/* Feature-first preview for the approved MANZO AI Italian Home v2.
  }
 }
 @media(max-width:760px){
- #content .ma-jury-hero-feature{min-height:455px;margin-left:-20px;margin-right:-20px;}
- #content .ma-jury-feature-image{object-position:center 42%}
+ #content .ma-jury-hero-feature{
+  min-height:510px;margin-left:-20px;margin-right:-20px;display:block
+ }
+ /* Show the COMPLETE palace image on mobile. Neither MANZO banner is cropped. */
+ #content .ma-jury-feature-image{
+  top:0;left:0;width:100%;height:auto;aspect-ratio:1672/941;
+  object-fit:contain;object-position:center top;
+ }
+ #content .ma-jury-hero-feature:before{
+  background:linear-gradient(180deg,
+   transparent 0%,transparent 38%,
+   rgba(10,27,53,.82) 46%,#0a1b35 54%,#0a1b35 100%)
+ }
  #content .ma-jury-feature-content{
   flex-direction:column;align-items:stretch;justify-content:flex-end;
-  gap:17px;padding:145px 21px 24px;
+  min-height:510px;gap:17px;
+  padding:clamp(200px,58vw,270px) 21px 24px
  }
  #content .ma-jury-feature-title{font-size:clamp(1.8rem,7.8vw,2.5rem)!important}
  #content .ma-jury-feature-action{min-width:0;width:100%}
@@ -123,7 +135,6 @@ HOME_CSS='''/* Feature-first preview for the approved MANZO AI Italian Home v2.
 }
 @media(max-width:540px){
  #content .ma-jury-top-notice{font-size:.69rem;padding:9px 12px}
- #content .ma-jury-hero-feature{min-height:480px}
  #content .ma-jury-feature-description{font-size:.89rem!important}
 }
 @media(prefers-reduced-motion:reduce){
