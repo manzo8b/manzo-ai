@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Isolated, never-deployed Home novelty badge smoke tests (IT Home v2 only)."""
+"""Staging-only test: cinematic, full-width jury-room showcase in Home IT Hero."""
 from __future__ import annotations
+import base64
 import runpy
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -12,11 +13,20 @@ mod=runpy.run_path(str(ROOT/'product/jury-room/tools/build_for_manzo_ai.py'))
 insert=mod['insert_home_preview']
 route=mod['ROUTE']
 main_css=(ROOT/'theme/home-magic-v2.css').read_text(encoding='utf-8')
+original_image=ROOT/'product/jury-room/assets/palazzo-stendardi-manzo.webp'
+assert original_image.is_file(), 'Approved palace artwork required'
 
 mock='''<!DOCTYPE html><html lang="it"><head><meta charset="utf-8">
 <title>Home MANZO AI preview</title></head><body data-ma-surface="landing">
 <header id="nav">MANZO AI</header><main id="content">
-<section data-ma-v2-section="hero"><h1>Chiedi, controlla, decidi</h1></section>
+<section data-ma-v2-section="hero" class="ma-v2-hero" aria-labelledby="ma-v2-heading">
+<div class="ma-v2-hero-copy"><p class="ma-v2-kicker">MANZO AI / IMPARA A PENSARE</p>
+<h1 id="ma-v2-heading">Chiedi meglio. Controlla sempre. Decidi tu</h1>
+<p class="ma-v2-lead">Dalla domanda alla prova.</p>
+<div class="ma-v2-actions"><a class="ma-v2-primary" href="/manzo-ai/it/academy/">Inizia dalle basi</a></div>
+</div>
+<figure class="ma-v2-magic"><div class="ma-v2-magic-stage">La scatola magica</div></figure>
+</section>
 <section data-ma-v2-section="courses" class="ma-v2-courses">
 ''' + ''.join(f'<article data-ma-v2-card="{n}">Corso {n}</article>' for n in range(1,7)) + '''
 </section><section data-ma-v2-section="audiences"></section>
@@ -36,8 +46,8 @@ def ratio(a,b):
   return sum(x*y for x,y in zip(v,(.2126,.7152,.0722)))
  la,lb=lum(a),lum(b)
  return (max(la,lb)+.05)/(min(la,lb)+.05)
-assert ratio('#135c64','#e4f5f4')>=4.5
-assert ratio('#ffffff','#164f78')>=4.5
+assert ratio('#ffffff','#a7233b')>=4.5
+assert ratio('#124366','#ffffff')>=4.5
 
 with TemporaryDirectory() as tmp:
  site=Path(tmp); (site/'it').mkdir()
@@ -50,36 +60,48 @@ with TemporaryDirectory() as tmp:
  assert len(result.select('section[data-ma-v2-section]'))==5
  assert len(result.select('article[data-ma-v2-card]'))==6
  assert len(result.select('h1'))==1
- teaser=result.select('aside[data-ma-jury-home-preview="v2"]')
- assert len(teaser)==1
- assert teaser[0].select_one('.ma-jury-preview-badge').get_text(strip=True)=='Nuovo esperimento'
- assert teaser[0].select_one('.ma-jury-preview-title').get_text(strip=True)=='La stanza dei giurati'
- assert teaser[0].select_one('.ma-jury-preview-note').get_text(strip=True).endswith('In italiano')
- assert teaser[0].select_one('a.ma-jury-preview-action')['href']==route
  assert result.select_one('section[data-ma-v2-section="challenge"] > a')['href']=='/manzo-ai/it/sfida/'
- assert not result.select('[data-ma-jury-home-preview] + [data-ma-jury-home-preview]')
+ assert len(result.select('section[data-ma-v2-section="hero"] [data-ma-jury-home-preview="v3"]'))==1
+ assert not result.select('aside[data-ma-jury-home-preview]')
+ assert result.select_one('.ma-jury-top-notice')['href']=='#ma-jury-hero-feature'
+ assert result.select_one('.ma-jury-feature-title').get_text(strip=True)=='La stanza dei giurati'
+ assert result.select_one('.ma-jury-feature-meta').get_text(strip=True).endswith('italiano')
+ assert result.select_one('a.ma-jury-feature-action')['href']==route
+ assert 'palazzo-stendardi-manzo.webp' in result.select_one('.ma-jury-feature-image')['src']
+ assert result.select_one('.ma-jury-feature-image')['alt'].count('MANZO')==1
  assert (site/'assets/jury-home-preview.css').is_file()
  try:
   insert(site)
  except RuntimeError as err:
   assert 'already injected' in str(err)
- else:raise AssertionError('Duplicate injection should fail')
+ else:raise AssertionError('Repeated showcase insertion must fail')
+
+ injected=home.read_text(encoding='utf-8')
+ hero_data='data:image/webp;base64,'+base64.b64encode(original_image.read_bytes()).decode('ascii')
+ doc=BeautifulSoup(injected,'html.parser')
+ doc.select_one('.ma-jury-feature-image')['src']=hero_data
+ screen_html=str(doc)
  with sync_playwright() as pw:
   browser=pw.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox','--disable-dev-shm-usage'])
   for width in (375,768,1440):
    page=browser.new_page(viewport={'width':width,'height':900},reduced_motion='reduce')
-   page.set_content(home.read_text(encoding='utf-8'),wait_until='domcontentloaded')
+   page.set_content(screen_html,wait_until='domcontentloaded')
    page.add_style_tag(content=main_css)
    page.add_style_tag(content=(site/'assets/jury-home-preview.css').read_text(encoding='utf-8'))
-   badge=page.locator('.ma-jury-preview-badge')
-   assert badge.is_visible(),f'Badge hidden at {width}px'
-   assert page.locator('.ma-jury-preview-action').is_visible()
-   assert page.locator('.ma-jury-preview-action').get_attribute('href')==route
+   assert page.locator('.ma-jury-top-notice').is_visible(),f'Top notification hidden at {width}px'
+   assert page.locator('.ma-jury-hero-feature').is_visible(),f'Cinematic feature hidden at {width}px'
+   assert page.locator('a.ma-jury-feature-action').is_visible(),f'CTA hidden at {width}px'
+   assert page.locator('a.ma-jury-feature-action').get_attribute('href')==route
    assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 2'),f'Horizontal overflow at {width}px'
    assert page.locator('[data-ma-v2-card]').count()==6
    assert page.locator('section[data-ma-v2-section]').count()==5
-   page.locator('.ma-jury-preview-action').focus()
-   assert page.evaluate("document.activeElement.classList.contains('ma-jury-preview-action')")
+   assert page.locator('h1').count()==1
+   assert page.locator('.ma-jury-feature-image').evaluate('(el)=>el.complete && el.naturalWidth>0')
+   feature=page.locator('.ma-jury-hero-feature').bounding_box()
+   container=page.locator('section[data-ma-v2-section="hero"]').bounding_box()
+   assert feature['width'] > .8 * container['width'],f'Feature must be full width at {width}px'
+   page.locator('a.ma-jury-feature-action').focus()
+   assert page.evaluate("document.activeElement.classList.contains('ma-jury-feature-action')")
    page.close()
   browser.close()
-print('PASS Home novelty teaser: 5 sections, 6 cards, Italian-only link, contrast, keyboard, 375/768/1440')
+print('PASS cinematic Home Hero: full-width palace, intro badge, 5 sections/6 cards, contrast, focus, 375/768/1440')
