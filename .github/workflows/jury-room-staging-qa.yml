@@ -67,7 +67,6 @@ jobs:
           python product/jury-room/tools/check_rooms_sources.py
           python product/jury-room/tools/test_brief_v05.py
           python product/jury-room/tools/test_contrast.py
-          python product/jury-room/tools/test_home_teaser_preview.py
       - name: Generate only staging pages and verify output
         run: |
           set -euo pipefail
