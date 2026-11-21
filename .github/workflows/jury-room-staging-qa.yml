@@ -1,0 +1,81 @@
+name: Jury room v0.5 · staging QA only
+
+on:
+  pull_request:
+    paths:
+      - 'product/jury-room/**'
+      - 'theme/publish-jury-room.py'
+      - '.github/workflows/jury-room-staging-qa.yml'
+  push:
+    branches:
+      - 'feat/jury-room-*'
+    paths:
+      - 'product/jury-room/**'
+      - 'theme/publish-jury-room.py'
+      - '.github/workflows/jury-room-staging-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jury-room-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-approved-content:
+    name: v0.5 source, interactions and no-deploy staging build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Require full staging sources and approved visuals
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f product/jury-room/index.html
+          test -f product/jury-room/banco-di-prova.html
+          test -f product/jury-room/officina-locale.html
+          test -f product/jury-room/sala-dei-confini.html
+          test -f product/jury-room/assets/palazzo-stendardi-manzo.webp
+          test -f product/jury-room/assets/filmato-concept.mp4
+          test -f product/jury-room/tools/test_brief_v05.py
+          echo 'All required runtime/source files exist'
+      - name: Install isolated test requirements
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install beautifulsoup4 mistune playwright
+          python -m playwright install --with-deps chromium
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              with open('/tmp/jury-chromium-path', 'w') as f:
+                  f.write(p.chromium.executable_path)
+          PY
+          # A GitHub-hosted runner may already have /usr/bin/chromium.
+          # Replace its link only inside this ephemeral QA runner to select the
+          # Playwright-tested Chromium binary; do not fail if it already exists.
+          sudo ln -sfn "$(cat /tmp/jury-chromium-path)" /usr/bin/chromium
+          test -x /usr/bin/chromium
+      - name: Verify source fidelity and experiment behavior
+        run: |
+          set -euo pipefail
+          python product/jury-room/tools/check_source_content.py
+          python product/jury-room/tools/check_rooms_sources.py
+          python product/jury-room/tools/test_brief_v05.py
+          python product/jury-room/tools/test_contrast.py
+      - name: Generate only staging pages and verify output
+        run: |
+          set -euo pipefail
+          SITE="$(mktemp -d)"
+          python theme/publish-jury-room.py --site "$SITE"
+          python theme/publish-jury-room.py --site "$SITE" --verify-only
+          test -f "$SITE/it/laboratorio/stanza-dei-giurati/index.html"
+          test -f "$SITE/it/laboratorio/stanza-dei-giurati/banco-di-prova/index.html"
+          test -f "$SITE/it/laboratorio/stanza-dei-giurati/officina-locale/index.html"
+          test -f "$SITE/it/laboratorio/stanza-dei-giurati/sala-dei-confini/index.html"
+          ! grep -R -q 'name="robots" content="index' "$SITE/it/laboratorio/stanza-dei-giurati"
+          echo 'PASS staging only: no publish, no Home mutation'
