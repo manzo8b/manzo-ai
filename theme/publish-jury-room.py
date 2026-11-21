@@ -30,7 +30,7 @@ MARKER='content="noindex,nofollow"'
 def transform(filename:str)->str:
     doc=(SOURCE/filename).read_text(encoding="utf-8")
     if MARKER not in doc:raise ValueError(f"Noindex missing in {filename}")
-    if len(re.findall(r"<h1(?:\\s|>)",doc,re.I))!=1:
+    if doc.lower().count("<h1")!=1:
         raise ValueError(f"Expected one H1 in {filename}")
     def rewrite(m:re.Match)->str:
         key,value=m.group(1),m.group(2)
