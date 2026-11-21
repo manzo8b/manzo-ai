@@ -21,126 +21,13 @@ PAGES={
  'sala-dei-confini.html':ROUTE+'sala-dei-confini/',
 }
 
-HOME_CSS='''/* Feature-first preview for the approved MANZO AI Italian Home v2.
-   The original hero message, magic illustration and five-page-section contract remain.
-   No new sidebar, card grid item or independent banner section is introduced. */
-#content .ma-v2-hero:has(.ma-jury-hero-feature){
- padding-bottom:0!important;align-content:start;
-}
-#content .ma-jury-top-notice{
- display:inline-flex;align-items:center;gap:10px;
- margin:2px 0 18px;padding:9px 15px;max-width:100%;
- color:#fff!important;background:#a7233b;border:1px solid #a7233b;
- border-radius:100px;text-decoration:none!important;
- font-size:.73rem;font-weight:800;line-height:1.35;
- letter-spacing:.025em;transition:background-color .2s,transform .2s;
-}
-#content .ma-jury-top-notice:hover{background:#75152b;transform:translateY(-2px)}
-#content .ma-jury-top-notice:focus-visible,
-#content .ma-jury-feature-action:focus-visible{
- outline:3px solid #f7b34b!important;outline-offset:4px!important;
-}
-#content .ma-jury-top-notice svg{width:14px;height:14px;flex:none}
-#content .ma-jury-hero-feature{
- grid-column:1/-1;position:relative;isolation:isolate;min-width:0;
- display:flex;align-items:flex-end;justify-content:stretch;
- min-height:clamp(300px,28vw,398px);overflow:hidden;
- margin:clamp(22px,2.8vw,38px) calc(-1 * clamp(22px,4vw,62px)) 0;
- color:#fff!important;scroll-margin-top:80px;
- background:#14395f;
-}
-#content .ma-jury-feature-image{
- position:absolute;z-index:-2;inset:0;width:100%;height:100%;
- object-fit:cover;object-position:center 47%;
- filter:saturate(1.06);transform:scale(1.005);
- transition:transform .7s cubic-bezier(.2,.7,.2,1);
-}
-#content .ma-jury-hero-feature:hover .ma-jury-feature-image{transform:scale(1.045)}
-#content .ma-jury-hero-feature:before{
- content:"";position:absolute;z-index:-1;inset:0;
- background:linear-gradient(180deg,rgba(9,25,51,.08) 0%,rgba(10,28,54,.07) 40%,rgba(10,27,53,.65) 67%,rgba(10,27,53,.98) 100%);
- pointer-events:none;
-}
-#content .ma-jury-feature-content{
- position:relative;display:flex;align-items:flex-end;justify-content:space-between;
- gap:30px;max-width:1180px;width:100%;margin:auto auto 0;
- padding:clamp(92px,11vw,140px) clamp(24px,4.4vw,60px) clamp(25px,3vw,37px);
- box-sizing:border-box;
-}
-#content .ma-jury-feature-copy{min-width:0;max-width:650px}
-#content .ma-jury-feature-eyebrow{
- display:inline-flex;align-items:center;gap:8px;
- margin:0 0 10px!important;color:#dbf5ff!important;
- font-weight:820;font-size:.72rem!important;letter-spacing:.12em;line-height:1.4;
- text-transform:uppercase;
-}
-#content .ma-jury-feature-eyebrow:before{
- content:"";flex:none;width:8px;height:8px;border-radius:50%;background:#ff536c;
- box-shadow:0 0 0 4px rgba(255,83,108,.20);
-}
-#content .ma-jury-feature-title{
- color:#fff!important;font-size:clamp(1.9rem,3.8vw,3.35rem)!important;
- font-weight:790!important;letter-spacing:-.035em!important;
- line-height:1.05!important;max-width:20ch!important;
- margin:0 0 10px!important;text-shadow:0 2px 20px rgba(6,26,52,.22);
-}
-#content .ma-jury-feature-description{
- color:#fff!important;font-size:clamp(.9rem,1.25vw,1rem)!important;
- line-height:1.5!important;margin:0 0 11px!important;max-width:56ch;
-}
-#content .ma-jury-feature-meta{
- color:#dcecf7!important;font-size:.75rem!important;line-height:1.4!important;
- margin:0!important;
-}
-#content .ma-jury-feature-action{
- flex:none;display:inline-flex;align-items:center;justify-content:center;
- gap:11px;min-height:52px;padding:13px 22px;min-width:204px;
- box-sizing:border-box;border-radius:11px;border:1px solid #e0f3ff;
- background:#fff;color:#124366!important;text-decoration:none!important;
- font-size:.93rem!important;font-weight:790;line-height:1.4;white-space:normal;
- box-shadow:0 6px 28px rgba(8,28,56,.2);
- transition:background-color .2s,transform .2s;
-}
-#content .ma-jury-feature-action:hover{
- background:#e1f4ff;transform:translateY(-3px);
-}
-@media(max-width:1100px){
- #content .ma-jury-hero-feature{
-  margin-left:calc(-1 * clamp(22px,4vw,62px));
-  margin-right:calc(-1 * clamp(22px,4vw,62px));
- }
-}
-@media(max-width:760px){
- #content .ma-jury-hero-feature{
-  min-height:0;margin-left:-20px;margin-right:-20px;display:block
- }
- /* Show the COMPLETE palace image on mobile. Neither MANZO banner is cropped. */
- #content .ma-jury-feature-image{
-  top:0;left:0;width:100%;height:auto;aspect-ratio:1672/941;
-  object-fit:contain;object-position:center top;
- }
- #content .ma-jury-hero-feature:before{
-  background:linear-gradient(180deg,
-   transparent 0%,transparent 38%,
-   rgba(10,27,53,.82) 46%,#0a1b35 54%,#0a1b35 100%)
- }
- #content .ma-jury-feature-content{
-  flex-direction:column;align-items:stretch;justify-content:flex-start;
-  min-height:0;gap:17px;
-  padding:calc(56.3vw + 10px) 21px 24px
- }
- #content .ma-jury-feature-title{font-size:clamp(1.8rem,7.8vw,2.5rem)!important}
- #content .ma-jury-feature-action{min-width:0;width:100%}
- #content .ma-jury-top-notice{margin-top:0}
-}
-@media(max-width:540px){
- #content .ma-jury-top-notice{font-size:.69rem;padding:9px 12px}
- #content .ma-jury-feature-description{font-size:.89rem!important}
-}
-@media(prefers-reduced-motion:reduce){
- #content .ma-jury-feature-image,#content .ma-jury-top-notice,
- #content .ma-jury-feature-action{transition:none!important;transform:none!important}
-}
+HOME_CSS='''/* Staging concept only: preserve the existing approved Home challenge */
+.ma-jury-home-bridge{display:inline-flex;align-items:center;gap:12px;min-height:44px;
+ margin-top:10px;padding:10px 14px;border:1px solid #8ab3df;border-radius:11px;
+ color:#154575!important;background:#f3f9ff;text-decoration:none!important;
+ font-size:.85rem;font-weight:750;line-height:1.5}
+.ma-jury-home-bridge:hover{background:#e7f4ff;border-color:#2265b5}
+.ma-jury-home-bridge:focus-visible{outline:3px solid #dd7127;outline-offset:3px}
 '''
 
 def transformed_html(source:Path):
@@ -174,70 +61,24 @@ def transformed_html(source:Path):
  return '<!DOCTYPE html>\n'+str(doc.html)
 
 def insert_home_preview(site:Path):
- """Render a cinematic full-width experiment preview *inside* the Italian Home Hero.
-
- Only when --home-preview is explicitly selected. Preserves original Hero
- content and animation, the five sections, six Academy cards, and navigation.
- """
+ """Only runs when explicitly selected in a staging build, never by default."""
  home=site/'it'/'index.html'
  if not home.is_file():raise RuntimeError('Home V2 not found at '+str(home))
  doc=BeautifulSoup(home.read_text(encoding='utf-8'),'html.parser')
- hero=doc.select_one('section[data-ma-v2-section="hero"]')
- copy=hero.select_one('.ma-v2-hero-copy') if hero else None
- kicker=copy.select_one('.ma-v2-kicker') if copy else None
- if not hero or not kicker:raise RuntimeError('Approved Home Hero and kicker absent')
+ sec=doc.select_one('section[data-ma-v2-section="challenge"]')
+ if not sec:raise RuntimeError('Approved Home challenge slot absent')
  if doc.select_one('[data-ma-jury-home-preview]'):
   raise RuntimeError('Home staging preview already injected')
- before_sections=len(doc.select('section[data-ma-v2-section]'))
- before_cards=len(doc.select('[data-ma-v2-card]'))
- if before_sections!=5 or before_cards!=6:
-  raise RuntimeError('Approved Home V2 contract missing (5 sections and 6 cards)')
- image=ASSETS/'palazzo-stendardi-manzo.webp'
- if not image.is_file():raise RuntimeError('Missing approved jury-room artwork')
- digest=hashlib.sha256(image.read_bytes()).hexdigest()[:12]
- src=BASE+'assets/jury-room/palazzo-stendardi-manzo.webp?v='+digest
-
- quick=doc.new_tag('a',attrs={'class':'ma-jury-top-notice',
-   'href':'#ma-jury-hero-feature','data-ma-jury-top-badge':'v3'})
- quick.string='NUOVO ESPERIMENTO · LA STANZA DEI GIURATI ↓'
- kicker.insert_after(quick)
-
- feature=doc.new_tag('div',attrs={'class':'ma-jury-hero-feature',
-   'id':'ma-jury-hero-feature','data-ma-jury-home-preview':'v3',
-   'role':'group','aria-labelledby':'ma-jury-preview-title'})
- preview_image=doc.new_tag('img',attrs={
-   'class':'ma-jury-feature-image','src':src,
-   'alt':'La stanza dei giurati, con tre porte illuminate e due stendardi MANZO',
-   'width':'1672','height':'941','fetchpriority':'high','decoding':'async',
- })
- feature.append(preview_image)
- content=doc.new_tag('div',attrs={'class':'ma-jury-feature-content'})
- block=doc.new_tag('div',attrs={'class':'ma-jury-feature-copy'})
- eyebrow=doc.new_tag('p',attrs={'class':'ma-jury-feature-eyebrow'})
- eyebrow.string='ANTEPRIMA DEL LABORATORIO INTERATTIVO'
- block.append(eyebrow)
- title=doc.new_tag('h2',attrs={'class':'ma-jury-feature-title','id':'ma-jury-preview-title'})
- title.string='La stanza dei giurati'
- block.append(title)
- description=doc.new_tag('p',attrs={'class':'ma-jury-feature-description'})
- description.string='Tre stanze. Tre scelte. Una domanda: sai distinguere una risposta convincente da una prova?'
- block.append(description)
- meta=doc.new_tag('p',attrs={'class':'ma-jury-feature-meta'})
- meta.string='Scenari fittizi · Nessuna IA collegata · Disponibile in italiano'
- block.append(meta)
- content.append(block)
- action=doc.new_tag('a',attrs={'class':'ma-jury-feature-action','href':ROUTE})
- action.string='Entra nell’esperimento ↗'
- content.append(action)
- feature.append(content)
- hero.append(feature)
-
- if len(doc.select('section[data-ma-v2-section]'))!=before_sections or len(doc.select('[data-ma-v2-card]'))!=before_cards:
-  raise RuntimeError('Home structure changed during Hero preview')
+ entry=doc.new_tag('a',href=ROUTE)
+ entry['class']='ma-jury-home-bridge'
+ entry['data-ma-jury-home-preview']='v1'
+ entry.string='Entra nella stanza dei giurati · Esperimenti  ↗'
+ sec.append(entry)
  css=site/'assets'/'jury-home-preview.css'
  css.parent.mkdir(parents=True,exist_ok=True)
  css.write_text(HOME_CSS,encoding='utf-8')
- doc.head.append(doc.new_tag('link',href=BASE+'assets/jury-home-preview.css',rel='stylesheet'))
+ head=doc.head
+ head.append(doc.new_tag('link',href=BASE+'assets/jury-home-preview.css',rel='stylesheet'))
  home.write_text('<!DOCTYPE html>\n'+str(doc.html),encoding='utf-8')
 
 def build(site:Path,verify_only:bool=False,home_preview:bool=False):
@@ -275,20 +116,9 @@ def build(site:Path,verify_only:bool=False,home_preview:bool=False):
  if home_preview and not verify_only:
   insert_home_preview(site)
  if home_preview and verify_only:
-  h=BeautifulSoup((site/'it/index.html').read_text(encoding='utf-8'),'html.parser')
-  hero=h.select_one('section[data-ma-v2-section="hero"]')
-  promo=hero.select('[data-ma-jury-home-preview="v3"]') if hero else []
-  if len(promo)!=1 or len(hero.select('[data-ma-jury-top-badge="v3"]'))!=1:
-   raise RuntimeError('Cinematic Hero experiment preview missing or duplicated')
-  if len(h.select('section[data-ma-v2-section]'))!=5 or len(h.select('[data-ma-v2-card]'))!=6:
-   raise RuntimeError('Home section/card count changed in Hero preview')
-  if promo[0].select_one('a.ma-jury-feature-action')['href']!=ROUTE:
-   raise RuntimeError('Cinematic Hero preview CTA destination incorrect')
-  if not (site/'assets/jury-home-preview.css').is_file():
-   raise RuntimeError('Missing cinematic Hero preview CSS')
-  if not (asset_out/'palazzo-stendardi-manzo.webp').is_file():
-   raise RuntimeError('Approved jury art missing from staging assets')
-
+  home=(site/'it/index.html').read_text(encoding='utf-8')
+  if home.count('data-ma-jury-home-preview="v1"')!=1:
+   raise RuntimeError('Home preview entry missing or duplicate')
  if verify_only:
   print('PASS: 4 staging pages, all referenced assets, noindex, canonical and absolute URLs')
 
