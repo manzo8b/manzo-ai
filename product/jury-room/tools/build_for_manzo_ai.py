@@ -112,7 +112,7 @@ HOME_CSS='''/* Feature-first preview for the approved MANZO AI Italian Home v2.
 }
 @media(max-width:760px){
  #content .ma-jury-hero-feature{
-  min-height:510px;margin-left:-20px;margin-right:-20px;display:block
+  min-height:0;margin-left:-20px;margin-right:-20px;display:block
  }
  /* Show the COMPLETE palace image on mobile. Neither MANZO banner is cropped. */
  #content .ma-jury-feature-image{
@@ -125,9 +125,9 @@ HOME_CSS='''/* Feature-first preview for the approved MANZO AI Italian Home v2.
    rgba(10,27,53,.82) 46%,#0a1b35 54%,#0a1b35 100%)
  }
  #content .ma-jury-feature-content{
-  flex-direction:column;align-items:stretch;justify-content:flex-end;
-  min-height:510px;gap:17px;
-  padding:clamp(200px,58vw,270px) 21px 24px
+  flex-direction:column;align-items:stretch;justify-content:flex-start;
+  min-height:0;gap:17px;
+  padding:calc(56.3vw + 10px) 21px 24px
  }
  #content .ma-jury-feature-title{font-size:clamp(1.8rem,7.8vw,2.5rem)!important}
  #content .ma-jury-feature-action{min-width:0;width:100%}
