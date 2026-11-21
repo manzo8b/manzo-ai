@@ -65,3 +65,19 @@ python3 product/jury-room/tools/test_brief_v05.py
 L'installatore convalida lo SHA-256 esatto `0d74c2832cb296a22d15aaa6aef0791d7f60536bfefc3b7d37d47a427e52ace7`, impedisce sovrascritture e rifiuta i rami di produzione. Non effettua push o deploy.
 
 La preview della Home è facoltativa ed esclusa dalla prima integrazione. `deploy-pages.yml` resta invariato; mantenere questa PR in stato draft e non unirla a `main` senza autorizzazione esplicita al rilascio.
+
+
+## Anteprima Home v3 — copertina immersiva (21 novembre 2026)
+
+A seguito della revisione progettuale, il precedente piccolo riquadro nella sezione "pensiero critico" è **sostituito** da una proposta più visibile nella Hero della Home italiana:
+
+- Badge-link «NUOVO ESPERIMENTO · LA STANZA DEI GIURATI» subito dopo il kicker principale, visibile nella parte iniziale della Home
+- Anteprima fotografica panoramica **a tutta larghezza della Hero**, basata su `assets/palazzo-stendardi-manzo.webp` approvato, con entrambi gli stendardi MANZO
+- Titolo «La stanza dei giurati», teaser narrativo e CTA «Entra nell’esperimento»
+- Contrasto elevato sul testo in sovrimpressione, focus visibile e movimento disabilitato quando richiesto con reduced-motion
+- **Nessuna sidebar, nessuna settima card, nessuna sezione aggiuntiva**; 5 sezioni principali, 6 card formative e l'animazione già approvata restano intatti
+- Solo Home italiana, senza traduzioni finte EN/ES
+
+Questa variante vive esclusivamente nello staging ed è generata solo con `--home-preview` nella build di anteprima. Non è disponibile nella Home pubblica, non abilita il deployment né autorizza il merge.
+
+Collaudo automatico: https://github.com/manzo8b/manzo-ai/actions/runs/44903368580
