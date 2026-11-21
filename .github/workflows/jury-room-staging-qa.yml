@@ -55,7 +55,11 @@ jobs:
               with open('/tmp/jury-chromium-path', 'w') as f:
                   f.write(p.chromium.executable_path)
           PY
-          sudo ln -s "$(cat /tmp/jury-chromium-path)" /usr/bin/chromium
+          # A GitHub-hosted runner may already have /usr/bin/chromium.
+          # Replace its link only inside this ephemeral QA runner to select the
+          # Playwright-tested Chromium binary; do not fail if it already exists.
+          sudo ln -sfn "$(cat /tmp/jury-chromium-path)" /usr/bin/chromium
+          test -x /usr/bin/chromium
       - name: Verify source fidelity and experiment behavior
         run: |
           set -euo pipefail
