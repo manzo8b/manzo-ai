@@ -602,10 +602,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          python3 -m pip install --disable-pip-version-check beautifulsoup4==4.14.2
           sha256sum _site/en/index.html _site/es/index.html > /tmp/jury-home-unchanged.sha256
           python3 theme/publish-jury-room.py --site _site --home-preview
           python3 theme/publish-jury-room.py --site _site --verify-only --home-preview
-          (cd / && sha256sum -c /tmp/jury-home-unchanged.sha256 >/dev/null) || (cd "$GITHUB_WORKSPACE" && sha256sum -c /tmp/jury-home-unchanged.sha256)
+          sha256sum --check /tmp/jury-home-unchanged.sha256
           test -s _site/assets/jury-room/palazzo-stendardi-manzo.webp
           test -s _site/assets/jury-room/filmato-concept.mp4
           test -s _site/assets/jury-home-preview.css
